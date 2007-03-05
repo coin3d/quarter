@@ -20,6 +20,11 @@
  *
 \**************************************************************************/
 
+#include <QList>
+#include <QUrl>
+#include <QFileInfo>
+#include <QStringList>
+
 #include <Quarter/CoinWidget.h>
 #include <Quarter/CoinApplication.h>
 
@@ -49,6 +54,7 @@ public:
     this->mousebutton = new SoMouseButtonEvent;
     this->root = NULL;
     this->navigationsystem = NULL;
+    this->suffixes << "iv" << "wrl";
   }
 
   ~CoinWidgetP() {
@@ -67,6 +73,7 @@ public:
   SoMouseButtonEvent * mousebutton;
   SoKeyboardEvent * keyboard;
   SoSeparator * root;
+  QStringList suffixes;
 };
 
 #define PRIVATE(obj) obj->pimpl
@@ -119,6 +126,17 @@ static const char * superscene[] = {
 SbBool 
 CoinWidget::setSceneGraph(SoNode * node)
 {
+  if (node == NULL) {
+    if (PRIVATE(this)->root) {
+      PRIVATE(this)->root->unref();
+      PRIVATE(this)->root = NULL;
+      PRIVATE(this)->scenemanager->setSceneGraph(NULL);
+    }
+    return TRUE;
+  } else {
+    this->setSceneGraph(NULL);
+  }
+
   SoInput in;
   in.setStringArray(superscene);
   SoNode * scene = NULL;
@@ -364,6 +382,40 @@ CoinWidget::keyReleaseEvent(QKeyEvent * event)
   setKey(PRIVATE(this)->keyboard, event);
 
   PRIVATE(this)->scenemanager->processEvent(PRIVATE(this)->keyboard);
+}
+
+void 
+CoinWidget::dragEnterEvent(QDragEnterEvent * event)
+{
+  const QMimeData * mimedata = event->mimeData();
+  if (!mimedata->hasUrls()) { return; }
+
+  QFileInfo fileinfo(mimedata->urls().takeFirst().path());
+  QString suffix = fileinfo.suffix().toLower();
+  if (!(PRIVATE(this)->suffixes.contains(suffix))) { return; }
+  
+  event->acceptProposedAction();
+}
+
+void 
+CoinWidget::dropEvent(QDropEvent * event)
+{
+  const QMimeData * mimedata = event->mimeData();
+  if (!mimedata->hasUrls()) { return; }
+  
+  QString path = mimedata->urls().takeFirst().path();
+  
+  // attempt to open file
+  SoInput in;
+  SbBool ok = in.openFile(path.toLatin1().constData());
+  if (!ok) { return; }
+  
+  // attempt to import it
+  SoSeparator * root = SoDB::readAll(&in);
+  if (root == NULL) { return; }
+  
+  this->setSceneGraph(root);
+  PRIVATE(this)->scenemanager->scheduleRedraw();
 }
 
 #undef PRIVATE

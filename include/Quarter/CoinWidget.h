@@ -30,6 +30,8 @@
 class QKeyEvent;
 class QGLContext;
 class QMouseEvent;
+class QDropEvent;
+class QDragEnterEvent;
 
 class SoNode;
 class SoSceneManager;
@@ -57,6 +59,9 @@ protected:
   virtual void keyReleaseEvent(QKeyEvent * event);
   
   static void renderCB(void * closure, SoSceneManager * manager);
+
+  virtual void dragEnterEvent(QDragEnterEvent * event);
+  virtual void dropEvent(QDropEvent * event);
 
 private:
   void constructor(void);
