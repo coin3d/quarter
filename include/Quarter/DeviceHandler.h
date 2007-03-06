@@ -1,5 +1,5 @@
-#ifndef QUARTER_COINWIDGET_H
-#define QUARTER_COINWIDGET_H
+#ifndef QUARTER_DEVICEHANDLER_H
+#define QUARTER_DEVICEHANDLER_H
 
 /**************************************************************************\
  *
@@ -23,45 +23,12 @@
  *
 \**************************************************************************/
 
-#include <QGLWidget>
-#include <QtDesigner/QDesignerExportWidget>
-#include <Inventor/SbBasic.h>
+class QEvent;
+class SoEvent;
 
-class QKeyEvent;
-class QGLContext;
-class QMouseEvent;
-class QDropEvent;
-class QDragEnterEvent;
-
-class SoNode;
-class SoSceneManager;
-
-class QDESIGNER_WIDGET_EXPORT CoinWidget : public QGLWidget {
-  typedef QGLWidget inherited;
-  Q_OBJECT
-
+class DeviceHandler {
 public:
-  CoinWidget(QWidget * parent = 0);
-  CoinWidget(QGLContext * context, QWidget * parent = 0);
-  ~CoinWidget();
-
-  virtual SbBool setSceneGraph(SoNode * root);
-
-protected:
-  virtual void resizeGL(int width, int height);
-  virtual void initializeGL(void);
-  virtual void paintGL(void);
-  virtual bool event(QEvent * event);
-  
-  static void renderCB(void * closure, SoSceneManager * manager);
-
-  virtual void dragEnterEvent(QDragEnterEvent * event);
-  virtual void dropEvent(QDropEvent * event);
-
-private:
-  void constructor(void);
-  friend class CoinWidgetP;
-  class CoinWidgetP * pimpl;
+  virtual const SoEvent * translateEvent(QEvent * event) = 0;
 };
 
-#endif // QUARTER_COINWIDGET_H
+#endif // QUARTER_DEVICEHANDLER_H

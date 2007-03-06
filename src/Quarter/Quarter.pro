@@ -10,12 +10,19 @@ INCLUDEPATH += $(COINDIR)/include
 HEADERS = ../../include/Quarter/CoinWidget.h \
           ../../include/Quarter/CoinApplication.h \
           ../../include/Quarter/Quarter.h \
-          SensorManager.h
+          ../../include/Quarter/DeviceHandler.h \
+          ../../include/Quarter/MouseHandler.h \
+          ../../include/Quarter/KeyboardHandler.h \
+          SensorManager.h \
+          DeviceManager.h
 
 SOURCES = CoinWidget.cpp \
           CoinApplication.cpp \
           Quarter.cpp \
-          SensorManager.cpp
+          SensorManager.cpp \
+          DeviceManager.cpp \
+          MouseHandler.cpp \
+          KeyboardHandler.cpp
 
 LIBS += -L$(COINDIR)/lib -lCoin -lNutsnBolts
 

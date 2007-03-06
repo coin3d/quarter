@@ -1,6 +1,3 @@
-#ifndef QUARTER_COINWIDGET_H
-#define QUARTER_COINWIDGET_H
-
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
@@ -23,45 +20,29 @@
  *
 \**************************************************************************/
 
-#include <QGLWidget>
-#include <QtDesigner/QDesignerExportWidget>
-#include <Inventor/SbBasic.h>
+#include "DeviceManager.h"
+#include <Quarter/MouseHandler.h>
+#include <Quarter/KeyboardHandler.h>
 
-class QKeyEvent;
-class QGLContext;
-class QMouseEvent;
-class QDropEvent;
-class QDragEnterEvent;
+DeviceManager::DeviceManager(void)
+{
+  this->devices += new MouseHandler;
+  this->devices += new KeyboardHandler;
+}
 
-class SoNode;
-class SoSceneManager;
+DeviceManager::~DeviceManager()
+{
+  qDeleteAll(this->devices);
+}
 
-class QDESIGNER_WIDGET_EXPORT CoinWidget : public QGLWidget {
-  typedef QGLWidget inherited;
-  Q_OBJECT
-
-public:
-  CoinWidget(QWidget * parent = 0);
-  CoinWidget(QGLContext * context, QWidget * parent = 0);
-  ~CoinWidget();
-
-  virtual SbBool setSceneGraph(SoNode * root);
-
-protected:
-  virtual void resizeGL(int width, int height);
-  virtual void initializeGL(void);
-  virtual void paintGL(void);
-  virtual bool event(QEvent * event);
-  
-  static void renderCB(void * closure, SoSceneManager * manager);
-
-  virtual void dragEnterEvent(QDragEnterEvent * event);
-  virtual void dropEvent(QDropEvent * event);
-
-private:
-  void constructor(void);
-  friend class CoinWidgetP;
-  class CoinWidgetP * pimpl;
-};
-
-#endif // QUARTER_COINWIDGET_H
+const SoEvent * 
+DeviceManager::translateEvent(QEvent * qevent)
+{
+  DeviceHandler * device;
+  foreach(device, this->devices) {
+    if (const SoEvent * soevent = device->translateEvent(qevent)) {
+      return soevent;
+    }
+  }
+  return NULL;
+}
