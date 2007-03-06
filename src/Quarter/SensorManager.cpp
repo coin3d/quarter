@@ -9,7 +9,7 @@
  *  at the root directory of this source distribution for additional
  *  information about the GNU GPL.
  *
- *  For using SIM Nuts'n'Bolts with software that can not be combined with
+ *  For using SIM Quarter with software that can not be combined with
  *  the GNU GPL, and for taking advantage of the additional benefits of
  *  our support services, please contact Systems in Motion about acquiring
  *  a Coin Professional Edition License.
