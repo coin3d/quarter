@@ -23,7 +23,6 @@
 #include <Quarter/devices/DragDropHandler.h>
 
 #include <QUrl>
-#include <QList>
 #include <QFileInfo>
 #include <QDragEnterEvent>
 #include <QDropEvent>
@@ -65,11 +64,13 @@ void
 DragDropHandler::dragEnterEvent(QDragEnterEvent * event)
 {
   const QMimeData * mimedata = event->mimeData();
-  if (!mimedata->hasUrls()) { return; }
-   
- QFileInfo fileinfo(mimedata->urls().takeFirst().path());
-  QString suffix = fileinfo.suffix().toLower();
-  if (!this->suffixes.contains(suffix)) { return; }
+  if (!mimedata->hasUrls() & !mimedata->hasText()) return;
+
+  if (mimedata->hasUrls()) { 
+    QFileInfo fileinfo(mimedata->urls().takeFirst().path());
+    QString suffix = fileinfo.suffix().toLower();
+    if (!this->suffixes.contains(suffix)) { return; }
+  }
   
   event->acceptProposedAction();
 }
@@ -78,20 +79,26 @@ void
 DragDropHandler::dropEvent(QDropEvent * event)
 {
   const QMimeData * mimedata = event->mimeData();
-  if (!mimedata->hasUrls()) { return; }
   
-  QString path = mimedata->urls().takeFirst().path();
-  
-  // attempt to open file
+  SoSeparator * root;
   SoInput in;
-  SbBool ok = in.openFile(path.toLatin1().constData());
-  if (!ok) { return; }
   
-  // attempt to import it
-  SoSeparator * root = SoDB::readAll(&in);
-  if (root == NULL) { return; }
+  if (mimedata->hasUrls()) { 
+    QString path = mimedata->urls().takeFirst().path();
+    // attempt to open file
+    if (!in.openFile(path.toLatin1().constData())) return;
 
-  // get CoinWidget
+  } else if (mimedata->hasText()) {
+    QByteArray bytes = mimedata->text().toUtf8();
+    in.setBuffer((void *) bytes.constData(), bytes.size());
+    if (!in.isValidBuffer()) return;
+  }
+
+  // attempt to import it
+  root = SoDB::readAll(&in);
+  if (root == NULL) return;
+  
+  // get CoinWidget and set new scenegraph
   CoinWidget * coinwidget = (CoinWidget *) this->manager->getWidget();
   coinwidget->setSceneGraph(root);
   coinwidget->updateGL();
