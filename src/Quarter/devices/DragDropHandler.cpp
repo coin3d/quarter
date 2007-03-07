@@ -116,9 +116,9 @@ DragDropHandlerP::dropEvent(QDropEvent * event)
   if (root == NULL) return;
   
   // get QuarterWidget and set new scenegraph
-  QuarterWidget * coinwidget = (QuarterWidget *) PUBLIC(this)->manager->getWidget();
-  coinwidget->setSceneGraph(root);
-  coinwidget->updateGL();
+  QuarterWidget * quarterwidget = (QuarterWidget *) PUBLIC(this)->manager->getWidget();
+  quarterwidget->setSceneGraph(root);
+  quarterwidget->updateGL();
 }
 
 #undef PRIVATE

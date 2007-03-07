@@ -33,7 +33,7 @@ class QuarterWidget;
 
 class QUARTER_DLL_API DeviceManager {
 public:
-  DeviceManager(QuarterWidget * coinwidget);
+  DeviceManager(QuarterWidget * quarterwidget);
   ~DeviceManager();
 
   const SoEvent * translateEvent(QEvent * event);
@@ -44,7 +44,7 @@ public:
 
 private:
   QList<DeviceHandler *> devices;
-  QuarterWidget * coinwidget;
+  QuarterWidget * quarterwidget;
 };
 
 #endif // QUARTER_DEVICEMANAGER_H
