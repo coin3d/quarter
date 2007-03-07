@@ -23,9 +23,9 @@
 #include <assert.h>
 #include <Quarter/devices/DeviceManager.h>
 #include <Quarter/devices/DeviceHandler.h>
-#include <Quarter/CoinWidget.h>
+#include <Quarter/QuarterWidget.h>
 
-DeviceManager::DeviceManager(CoinWidget * coinwidget)
+DeviceManager::DeviceManager(QuarterWidget * coinwidget)
 {
   assert(coinwidget);
   this->coinwidget = coinwidget;
@@ -48,7 +48,7 @@ DeviceManager::translateEvent(QEvent * qevent)
   return NULL;
 }
 
-const CoinWidget * 
+const QuarterWidget * 
 DeviceManager::getWidget(void) const
 {
   return this->coinwidget;

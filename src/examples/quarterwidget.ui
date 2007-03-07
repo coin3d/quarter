@@ -5,9 +5,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>536</width>
-    <height>362</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
+  </property>
+  <property name="focusPolicy" >
+   <enum>Qt::StrongFocus</enum>
+  </property>
+  <property name="acceptDrops" >
+   <bool>true</bool>
   </property>
   <property name="windowTitle" >
    <string>Form</string>
@@ -20,18 +26,12 @@
     <number>6</number>
    </property>
    <item row="0" column="0" >
-    <widget class="CoinWidget" name="CoinWidget" >
-     <property name="focusPolicy" >
-      <enum>Qt::StrongFocus</enum>
-     </property>
-     <property name="acceptDrops" >
-      <bool>true</bool>
-     </property>
+    <widget class="QuarterWidget" name="QuarterWidget" >
      <property name="toolTip" >
-      <string>CoinWidget</string>
+      <string>QuarterWidget</string>
      </property>
      <property name="whatsThis" >
-      <string>The CoinWidget displays Open Inventor scene graphs.</string>
+      <string>The QuarterWidget displays Open Inventor scene graphs.</string>
      </property>
     </widget>
    </item>
@@ -39,9 +39,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CoinWidget</class>
+   <class>QuarterWidget</class>
    <extends>QWidget</extends>
-   <header>CoinWidget.h</header>
+   <header>QuarterWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

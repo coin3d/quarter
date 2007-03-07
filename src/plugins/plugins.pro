@@ -1,4 +1,4 @@
-TARGET = coinwidget
+TARGET = quarterwidget
 TEMPLATE = lib
 
 QT += opengl
@@ -7,8 +7,8 @@ CONFIG += designer plugin debug
 INCLUDEPATH += ../../include
 INCLUDEPATH += $(COINDIR)/include
 
-HEADERS = CoinWidgetPlugin.h
-SOURCES = CoinWidgetPlugin.cpp
+HEADERS = QuarterWidgetPlugin.h
+SOURCES = QuarterWidgetPlugin.cpp
 
 LIBS += -L$(COINDIR)/lib -lCoin -lQuarter
 

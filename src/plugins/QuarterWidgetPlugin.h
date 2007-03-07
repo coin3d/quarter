@@ -1,3 +1,6 @@
+#ifndef QUARTER_COINWIDGETPLUGIN_H
+#define QUARTER_COINWIDGETPLUGIN_H
+
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
@@ -20,37 +23,31 @@
  *
 \**************************************************************************/
 
-#include <Quarter/devices/KeyboardHandler.h>
+#include <QDesignerCustomWidgetInterface>
 
-#include <QEvent>
-#include <QKeyEvent>
-#include <Inventor/events/SoEvents.h>
-#include <Inventor/events/SoKeyboardEvent.h>
+class QuarterWidgetPlugin : public QObject, 
+                            public QDesignerCustomWidgetInterface {
+  Q_OBJECT
+  Q_INTERFACES(QDesignerCustomWidgetInterface)
+    
+public:
+  QuarterWidgetPlugin(QObject * parent = 0);
+  ~QuarterWidgetPlugin();
 
-#include "KeyboardHandlerP.h"
+  bool isContainer(void) const;
+  bool isInitialized(void) const;
+  QIcon icon(void) const;
+  QString domXml(void) const;
+  QString group(void) const;
+  QString includeFile(void) const;
+  QString name(void) const;
+  QString toolTip(void) const;
+  QString whatsThis(void) const;
+  QWidget * createWidget(QWidget * parent);
+  void initialize(QDesignerFormEditorInterface * core);
+  
+private:
+  class QuarterWidgetPluginP * pimpl;
+};
 
-#define PRIVATE(obj) obj->pimpl
-
-KeyboardHandler::KeyboardHandler(void)
-{
-  PRIVATE(this) = new KeyboardHandlerP;
-}
-
-KeyboardHandler::~KeyboardHandler()
-{
-  delete PRIVATE(this);
-}
-
-const SoEvent * 
-KeyboardHandler::translateEvent(QEvent * event)
-{
-  switch (event->type()) {
-  case QEvent::KeyPress:
-  case QEvent::KeyRelease:
-    return PRIVATE(this)->keyEvent((QKeyEvent *) event);
-  default:
-    return NULL;
-  }
-}
-
-#undef PRIVATE
+#endif // QUARTER_COINWIDGETPLUGIN_H

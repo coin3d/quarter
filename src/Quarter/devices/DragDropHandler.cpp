@@ -24,24 +24,41 @@
 
 #include <QUrl>
 #include <QFileInfo>
+#include <QStringList>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 
 #include <Inventor/SoInput.h>
 #include <Inventor/nodes/SoSeparator.h>
 
-#include <Quarter/CoinWidget.h>
+#include <Quarter/QuarterWidget.h>
 #include <Quarter/devices/DeviceManager.h>
 #include <stdlib.h>
 
+class DragDropHandlerP {
+public:
+  DragDropHandlerP(DragDropHandler * master) {
+    this->master = master;
+  }
+  void dragEnterEvent(QDragEnterEvent * event);
+  void dropEvent(QDropEvent * event);
+  
+  QStringList suffixes;
+  DragDropHandler * master;
+};
+
+#define PRIVATE(obj) obj->pimpl
+#define PUBLIC(obj) obj->master
+
 DragDropHandler::DragDropHandler(void)
 {
-  this->suffixes << "iv" << "wrl";
+  PRIVATE(this) = new DragDropHandlerP(this);
+  PRIVATE(this)->suffixes << "iv" << "wrl";
 }
 
 DragDropHandler::~DragDropHandler()
 {
-  
+  delete PRIVATE(this);
 }
 
 const SoEvent * 
@@ -49,10 +66,10 @@ DragDropHandler::translateEvent(QEvent * event)
 {
   switch (event->type()) {
   case QEvent::DragEnter:
-    this->dragEnterEvent((QDragEnterEvent *) event);
+    PRIVATE(this)->dragEnterEvent((QDragEnterEvent *) event);
     break;
   case QEvent::Drop:
-    this->dropEvent((QDropEvent *) event);
+    PRIVATE(this)->dropEvent((QDropEvent *) event);
     break;
   default:
     break;
@@ -61,7 +78,7 @@ DragDropHandler::translateEvent(QEvent * event)
 }
   
 void 
-DragDropHandler::dragEnterEvent(QDragEnterEvent * event)
+DragDropHandlerP::dragEnterEvent(QDragEnterEvent * event)
 {
   const QMimeData * mimedata = event->mimeData();
   if (!mimedata->hasUrls() & !mimedata->hasText()) return;
@@ -76,7 +93,7 @@ DragDropHandler::dragEnterEvent(QDragEnterEvent * event)
 }
 
 void 
-DragDropHandler::dropEvent(QDropEvent * event)
+DragDropHandlerP::dropEvent(QDropEvent * event)
 {
   const QMimeData * mimedata = event->mimeData();
   
@@ -98,8 +115,11 @@ DragDropHandler::dropEvent(QDropEvent * event)
   root = SoDB::readAll(&in);
   if (root == NULL) return;
   
-  // get CoinWidget and set new scenegraph
-  CoinWidget * coinwidget = (CoinWidget *) this->manager->getWidget();
+  // get QuarterWidget and set new scenegraph
+  QuarterWidget * coinwidget = (QuarterWidget *) PUBLIC(this)->manager->getWidget();
   coinwidget->setSceneGraph(root);
   coinwidget->updateGL();
 }
+
+#undef PRIVATE
+#undef PUBLIC

@@ -1,5 +1,5 @@
-#ifndef QUARTER_COINAPPLICTION_H
-#define QUARTER_COINAPPLICTION_H
+#ifndef QUARTER_COINWIDGET_H
+#define QUARTER_COINWIDGET_H
 
 /**************************************************************************\
  *
@@ -23,14 +23,45 @@
  *
 \**************************************************************************/
 
-#include <QApplication>
+#include <QGLWidget>
+#include <QtDesigner/QDesignerExportWidget>
+#include <Inventor/SbBasic.h>
 #include <Quarter/Basic.h>
 
-class QUARTER_DLL_API CoinApplication : public QApplication {
-  typedef QApplication inherited;
+class QKeyEvent;
+class QGLContext;
+class QMouseEvent;
+class QDropEvent;
+class QDragEnterEvent;
+
+class SoNode;
+class SoSceneManager;
+class DeviceManager;
+
+class QUARTER_DLL_API QuarterWidget : public QGLWidget {
+  typedef QGLWidget inherited;
+  Q_OBJECT
+
 public:
-  CoinApplication(int & argc, char ** argv);
-  ~CoinApplication();
+  QuarterWidget(QWidget * parent = 0);
+  QuarterWidget(QGLContext * context, QWidget * parent = 0);
+  ~QuarterWidget();
+
+  virtual SbBool setSceneGraph(SoNode * root);
+  DeviceManager * getDeviceManager(void) const;
+
+protected:
+  virtual void resizeGL(int width, int height);
+  virtual void initializeGL(void);
+  virtual void paintGL(void);
+  virtual bool event(QEvent * event);
+  
+  static void renderCB(void * closure, SoSceneManager * manager);
+
+private:
+  void constructor(void);
+  friend class QuarterWidgetP;
+  class QuarterWidgetP * pimpl;
 };
 
-#endif // QUARTER_COINAPPLICTION_H
+#endif // QUARTER_COINWIDGET_H

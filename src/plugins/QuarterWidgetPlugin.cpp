@@ -20,35 +20,35 @@
  *
 \**************************************************************************/
 
-#include "CoinWidgetPlugin.h"
+#include "QuarterWidgetPlugin.h"
 
 #include <QtPlugin>
 #include <Inventor/nodes/SoCube.h>
 #include <Quarter/Quarter.h>
-#include <Quarter/CoinWidget.h>
+#include <Quarter/QuarterWidget.h>
 
-class CoinWidgetPluginP {
+class QuarterWidgetPluginP {
 public:
-  CoinWidgetPluginP(void) {}
+  QuarterWidgetPluginP(void) {}
   bool initialized;
 };
 
 #define PRIVATE(obj) obj->pimpl
 
-CoinWidgetPlugin::CoinWidgetPlugin(QObject * parent)
+QuarterWidgetPlugin::QuarterWidgetPlugin(QObject * parent)
   : QObject(parent)
 {
-  PRIVATE(this) = new CoinWidgetPluginP;
+  PRIVATE(this) = new QuarterWidgetPluginP;
   PRIVATE(this)->initialized = false;
 }
 
-CoinWidgetPlugin::~CoinWidgetPlugin()
+QuarterWidgetPlugin::~QuarterWidgetPlugin()
 {
   delete PRIVATE(this);
 }
 
 void 
-CoinWidgetPlugin::initialize(QDesignerFormEditorInterface *)
+QuarterWidgetPlugin::initialize(QDesignerFormEditorInterface *)
 {
   if (PRIVATE(this)->initialized) {
     return;
@@ -59,59 +59,59 @@ CoinWidgetPlugin::initialize(QDesignerFormEditorInterface *)
 }
 
 bool 
-CoinWidgetPlugin::isInitialized(void) const
+QuarterWidgetPlugin::isInitialized(void) const
 {
   return PRIVATE(this)->initialized;
 }
 
 QWidget *
-CoinWidgetPlugin::createWidget(QWidget * parent)
+QuarterWidgetPlugin::createWidget(QWidget * parent)
 {
-  CoinWidget * widget = new CoinWidget(parent);
+  QuarterWidget * widget = new QuarterWidget(parent);
   widget->setSceneGraph(new SoCube);
   return widget;
 }
 
 QString 
-CoinWidgetPlugin::name(void) const
+QuarterWidgetPlugin::name(void) const
 {
-  return "CoinWidget";
+  return "QuarterWidget";
 }
 
 QString 
-CoinWidgetPlugin::group(void) const
+QuarterWidgetPlugin::group(void) const
 {
   return "Display Widgets [Coin3D]";
 }
 
 QIcon
-CoinWidgetPlugin::icon(void) const
+QuarterWidgetPlugin::icon(void) const
 {
   return QIcon();
 }
 
 QString 
-CoinWidgetPlugin::toolTip(void) const
+QuarterWidgetPlugin::toolTip(void) const
 {
   return "";
 }
 
 QString 
-CoinWidgetPlugin::whatsThis(void) const
+QuarterWidgetPlugin::whatsThis(void) const
 {
   return "";
 }
 
 bool 
-CoinWidgetPlugin::isContainer(void) const
+QuarterWidgetPlugin::isContainer(void) const
 {
   return false;
 }
 
 QString 
-CoinWidgetPlugin::domXml(void) const
+QuarterWidgetPlugin::domXml(void) const
 {
-  return "<widget class=\"CoinWidget\" name=\"CoinWidget\">\n"
+  return "<widget class=\"QuarterWidget\" name=\"QuarterWidget\">\n"
     " <property name=\"geometry\">\n"
     "  <rect>\n"
     "   <x>0</x>\n"
@@ -121,20 +121,20 @@ CoinWidgetPlugin::domXml(void) const
     "  </rect>\n"
     " </property>\n"
     " <property name=\"toolTip\" >\n"
-    "  <string>CoinWidget</string>\n"
+    "  <string>QuarterWidget</string>\n"
     " </property>\n"
     " <property name=\"whatsThis\" >\n"
-    "  <string>The CoinWidget displays Open Inventor scene graphs.</string>\n"
+    "  <string>The QuarterWidget displays Open Inventor scene graphs.</string>\n"
     " </property>\n"
     "</widget>\n";
 }
 
 QString 
-CoinWidgetPlugin::includeFile(void) const
+QuarterWidgetPlugin::includeFile(void) const
 {
-  return "CoinWidget.h";
+  return "QuarterWidget.h";
 }
 
-Q_EXPORT_PLUGIN2(coinwidget, CoinWidgetPlugin)
+Q_EXPORT_PLUGIN2(quarterwidget, QuarterWidgetPlugin)
 
 #undef PRIVATE

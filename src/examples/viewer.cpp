@@ -26,16 +26,16 @@
 #include <Inventor/nodes/SoCube.h>
 #include <Inventor/nodes/SoCone.h>
 
-#include <Quarter/CoinWidget.h>
-#include <Quarter/CoinApplication.h>
+#include <Quarter/QuarterWidget.h>
+#include <Quarter/QuarterApplication.h>
 #include <Quarter/devices/DragDropHandler.h>
 #include <Quarter/devices/DeviceManager.h>
 
 int main(int argc, char *argv[])
 {
-  CoinApplication app(argc, argv);
+  QuarterApplication app(argc, argv);
 
-  QFile file("coinwidget.ui");
+  QFile file("quarterwidget.ui");
   if (!file.open(QFile::ReadOnly)) {
     assert(0 && "could not open ui file");
   }
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
   assert(widget);
   file.close();
 
-  CoinWidget * viewer = qFindChild<CoinWidget *>(widget, "CoinWidget");
+  QuarterWidget * viewer = qFindChild<QuarterWidget *>(widget, "QuarterWidget");
   assert(viewer);
   viewer->getDeviceManager()->registerDevice(new DragDropHandler);
   viewer->setSceneGraph(new SoCone);

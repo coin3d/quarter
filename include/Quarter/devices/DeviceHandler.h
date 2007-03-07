@@ -23,11 +23,13 @@
  *
 \**************************************************************************/
 
+#include <Quarter/Basic.h>
+
 class QEvent;
 class SoEvent;
 class DeviceManager;
 
-class DeviceHandler {
+class QUARTER_DLL_API DeviceHandler {
 public:
   DeviceHandler(void) {}
   virtual ~DeviceHandler() {}

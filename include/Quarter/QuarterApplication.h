@@ -1,5 +1,5 @@
-#ifndef QUARTER_COINWIDGETPLUGIN_H
-#define QUARTER_COINWIDGETPLUGIN_H
+#ifndef QUARTER_QUARTERAPPLICATION_H
+#define QUARTER_QUARTERAPPLICATION_H
 
 /**************************************************************************\
  *
@@ -23,31 +23,14 @@
  *
 \**************************************************************************/
 
-#include <QDesignerCustomWidgetInterface>
+#include <QApplication>
+#include <Quarter/Basic.h>
 
-class CoinWidgetPlugin : public QObject, 
-                         public QDesignerCustomWidgetInterface {
-  Q_OBJECT
-  Q_INTERFACES(QDesignerCustomWidgetInterface)
-    
+class QUARTER_DLL_API QuarterApplication : public QApplication {
+  typedef QApplication inherited;
 public:
-  CoinWidgetPlugin(QObject * parent = 0);
-  ~CoinWidgetPlugin();
-
-  bool isContainer(void) const;
-  bool isInitialized(void) const;
-  QIcon icon(void) const;
-  QString domXml(void) const;
-  QString group(void) const;
-  QString includeFile(void) const;
-  QString name(void) const;
-  QString toolTip(void) const;
-  QString whatsThis(void) const;
-  QWidget * createWidget(QWidget * parent);
-  void initialize(QDesignerFormEditorInterface * core);
-  
-private:
-  class CoinWidgetPluginP * pimpl;
+  QuarterApplication(int & argc, char ** argv);
+  ~QuarterApplication();
 };
 
-#endif // QUARTER_COINWIDGETPLUGIN_H
+#endif // QUARTER_QUARTERAPPLICATION_H

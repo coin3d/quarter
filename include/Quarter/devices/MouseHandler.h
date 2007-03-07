@@ -25,31 +25,20 @@
 
 #include <Quarter/Basic.h>
 #include <Quarter/devices/DeviceHandler.h>
-#include <Inventor/SbVec2s.h>
 
 class QEvent;
 class SoEvent;
-class QMouseEvent;
-class QWheelEvent;
-class QResizeEvent;
 
 class QUARTER_DLL_API MouseHandler : public DeviceHandler {
 public:
   MouseHandler(void);
   virtual ~MouseHandler();
-
+  
   virtual const SoEvent * translateEvent(QEvent * event);
 
 private:
-  const SoEvent * mouseMoveEvent(QMouseEvent * event);
-  const SoEvent * mouseWheelEvent(QWheelEvent * event);
-  const SoEvent * mouseButtonEvent(QMouseEvent * event);
-
-  void resizeEvent(QResizeEvent * event);
-
-  class SoLocation2Event * location2;
-  class SoMouseButtonEvent * mousebutton;
-  SbVec2s windowsize;
+  friend class MouseHandlerP;
+  class MouseHandlerP * pimpl;
 };
 
 #endif // QUARTER_MOUSEHANDLER_H

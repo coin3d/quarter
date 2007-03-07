@@ -7,8 +7,8 @@ CONFIG += debug designer
 INCLUDEPATH += ../../include
 INCLUDEPATH += $(COINDIR)/include
 
-HEADERS = ../../include/Quarter/CoinWidget.h \
-          ../../include/Quarter/CoinApplication.h \
+HEADERS = ../../include/Quarter/QuarterWidget.h \
+          ../../include/Quarter/QuarterApplication.h \
           ../../include/Quarter/Quarter.h \
           ../../include/Quarter/devices/DeviceHandler.h \
           ../../include/Quarter/devices/MouseHandler.h \
@@ -17,14 +17,15 @@ HEADERS = ../../include/Quarter/CoinWidget.h \
           ../../include/Quarter/devices/DragDropHandler.h \
           SensorManager.h
 
-SOURCES = CoinWidget.cpp \
-          CoinApplication.cpp \
+SOURCES = QuarterWidget.cpp \
+          QuarterApplication.cpp \
           Quarter.cpp \
           SensorManager.cpp \
           devices/DeviceManager.cpp \
           devices/DeviceHandler.cpp \
           devices/MouseHandler.cpp \
           devices/KeyboardHandler.cpp \
+          devices/KeyboardHandlerP.cpp \
           devices/DragDropHandler.cpp
 
 LIBS += -L$(COINDIR)/lib -lCoin -lNutsnBolts

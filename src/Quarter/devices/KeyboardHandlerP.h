@@ -1,3 +1,6 @@
+#ifndef QUARTER_KEYBOARDHANDLERP_H
+#define QUARTER_KEYBOARDHANDLERP_H
+
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
@@ -20,17 +23,25 @@
  *
 \**************************************************************************/
 
-#include <Quarter/CoinApplication.h>
-#include <Quarter/Quarter.h>
+#include <QKeyEvent>
+#include <Inventor/events/SoKeyboardEvent.h>
 
+class SoEvent;
+template <class Key, class T> class QMap;
 
-CoinApplication::CoinApplication(int & argc, char ** argv)
-  : inherited(argc, argv)
-{
-  Quarter::init();
-}
+class KeyboardHandlerP {
+public:
+  KeyboardHandlerP(void);
+  ~KeyboardHandlerP();
+  
+  const SoEvent * keyEvent(QKeyEvent * event);
+  void initKeyMap(void);
+  
+  typedef QMap<Qt::Key, SoKeyboardEvent::Key> KeyMap;
+  static KeyMap * keyboardmap;
+  static KeyMap * keypadmap;
 
-CoinApplication::~CoinApplication()
-{
-  Quarter::clean();
-}
+  SoKeyboardEvent * keyboard;
+};
+
+#endif // QUARTER_KEYBOARDHANDLERP_H

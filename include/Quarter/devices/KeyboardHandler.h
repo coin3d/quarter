@@ -28,18 +28,17 @@
 
 class QEvent;
 class SoEvent;
-class QKeyEvent;
 
 class QUARTER_DLL_API KeyboardHandler : public DeviceHandler {
 public:
   KeyboardHandler(void);
   virtual ~KeyboardHandler();
-
+  
   virtual const SoEvent * translateEvent(QEvent * event);
-
+  
 private:
-  const SoEvent * keyEvent(QKeyEvent * event);
-  class SoKeyboardEvent * keyboard;
+  friend class KeyboardHandlerP;
+  class KeyboardHandlerP * pimpl;
 };
 
 #endif // QUARTER_KEYBOARDHANDLER_H

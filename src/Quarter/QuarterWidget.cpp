@@ -34,25 +34,24 @@
 #include <NutsnBolts/NbSceneManager.h>
 #include <NutsnBolts/navigation/NbNavigationSystem.h>
 
-#include <Quarter/CoinWidget.h>
-#include <Quarter/CoinApplication.h>
+#include <Quarter/QuarterWidget.h>
+#include <Quarter/QuarterApplication.h>
 #include <Quarter/devices/DeviceManager.h>
 #include <Quarter/devices/MouseHandler.h>
 #include <Quarter/devices/KeyboardHandler.h>
 
-#include <QMouseEvent>
 #include <assert.h>
 
-class CoinWidgetP {
+class QuarterWidgetP {
 public:
-  CoinWidgetP(CoinWidget * master) {
+  QuarterWidgetP(QuarterWidget * master) {
     this->scenemanager = new NbSceneManager;
     this->devicemanager = new DeviceManager(master);
     this->root = NULL;
     this->navigationsystem = NULL;
   }
 
-  ~CoinWidgetP() {
+  ~QuarterWidgetP() {
     delete this->scenemanager;
     delete this->devicemanager;
     delete this->navigationsystem;
@@ -70,26 +69,26 @@ public:
 #define PRIVATE(obj) obj->pimpl
 
 
-CoinWidget::CoinWidget(QWidget * parent)
+QuarterWidget::QuarterWidget(QWidget * parent)
   : inherited(parent) 
 {
   this->constructor();
 }
 
-CoinWidget::CoinWidget(QGLContext * context, QWidget * parent)
+QuarterWidget::QuarterWidget(QGLContext * context, QWidget * parent)
   : inherited(context, parent)
 {
   this->constructor();
 }
 
 void
-CoinWidget::constructor(void)
+QuarterWidget::constructor(void)
 {
-  PRIVATE(this) = new CoinWidgetP(this);
+  PRIVATE(this) = new QuarterWidgetP(this);
   PRIVATE(this)->navigationsystem = NbNavigationSystem::createByName(NB_EXAMINER_SYSTEM);
   PRIVATE(this)->scenemanager->setNavigationSystem(PRIVATE(this)->navigationsystem);
   PRIVATE(this)->scenemanager->setNavigationState(NbSceneManager::MIXED_NAVIGATION);
-  PRIVATE(this)->scenemanager->setRenderCallback(CoinWidget::renderCB, this);
+  PRIVATE(this)->scenemanager->setRenderCallback(QuarterWidget::renderCB, this);
   PRIVATE(this)->scenemanager->activate();
 
   PRIVATE(this)->devicemanager->registerDevice(new MouseHandler);
@@ -98,7 +97,7 @@ CoinWidget::constructor(void)
   this->setMouseTracking(TRUE);
 }
 
-CoinWidget::~CoinWidget()
+QuarterWidget::~QuarterWidget()
 {
   delete PRIVATE(this);
 }
@@ -118,7 +117,7 @@ static const char * superscene[] = {
 };
 
 SbBool 
-CoinWidget::setSceneGraph(SoNode * node)
+QuarterWidget::setSceneGraph(SoNode * node)
 {
   if (node == NULL) {
     if (PRIVATE(this)->root) {
@@ -185,34 +184,34 @@ CoinWidget::setSceneGraph(SoNode * node)
 }
 
 DeviceManager * 
-CoinWidget::getDeviceManager(void) const
+QuarterWidget::getDeviceManager(void) const
 {
   return PRIVATE(this)->devicemanager;
 }
 
 void
-CoinWidget::initializeGL(void)
+QuarterWidget::initializeGL(void)
 {
   glEnable(GL_DEPTH_TEST);
 }
 
 void
-CoinWidget::resizeGL(int width, int height)
+QuarterWidget::resizeGL(int width, int height)
 {
   PRIVATE(this)->scenemanager->setViewportRegion(SbViewportRegion(width, height));
 }
 
 void
-CoinWidget::paintGL(void)
+QuarterWidget::paintGL(void)
 {
   PRIVATE(this)->scenemanager->render(TRUE, TRUE);
 }
 
 void 
-CoinWidget::renderCB(void * closure, SoSceneManager * manager)
+QuarterWidget::renderCB(void * closure, SoSceneManager * manager)
 {
   assert(closure);
-  CoinWidget * thisp = (CoinWidget *) closure;
+  QuarterWidget * thisp = (QuarterWidget *) closure;
   assert(manager == PRIVATE(thisp)->scenemanager);
   
   thisp->makeCurrent();
@@ -223,7 +222,7 @@ CoinWidget::renderCB(void * closure, SoSceneManager * manager)
 }
 
 bool 
-CoinWidget::event(QEvent * event)
+QuarterWidget::event(QEvent * event)
 {
   const SoEvent * soevent = PRIVATE(this)->devicemanager->translateEvent(event);
   if (soevent) {

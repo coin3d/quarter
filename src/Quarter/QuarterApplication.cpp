@@ -1,6 +1,3 @@
-#ifndef QUARTER_COINWIDGET_H
-#define QUARTER_COINWIDGET_H
-
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
@@ -23,45 +20,17 @@
  *
 \**************************************************************************/
 
-#include <QGLWidget>
-#include <QtDesigner/QDesignerExportWidget>
-#include <Inventor/SbBasic.h>
-#include <Quarter/Basic.h>
+#include <Quarter/QuarterApplication.h>
+#include <Quarter/Quarter.h>
 
-class QKeyEvent;
-class QGLContext;
-class QMouseEvent;
-class QDropEvent;
-class QDragEnterEvent;
 
-class SoNode;
-class SoSceneManager;
-class DeviceManager;
+QuarterApplication::QuarterApplication(int & argc, char ** argv)
+  : inherited(argc, argv)
+{
+  Quarter::init();
+}
 
-class QUARTER_DLL_API CoinWidget : public QGLWidget {
-  typedef QGLWidget inherited;
-  Q_OBJECT
-
-public:
-  CoinWidget(QWidget * parent = 0);
-  CoinWidget(QGLContext * context, QWidget * parent = 0);
-  ~CoinWidget();
-
-  virtual SbBool setSceneGraph(SoNode * root);
-  DeviceManager * getDeviceManager(void) const;
-
-protected:
-  virtual void resizeGL(int width, int height);
-  virtual void initializeGL(void);
-  virtual void paintGL(void);
-  virtual bool event(QEvent * event);
-  
-  static void renderCB(void * closure, SoSceneManager * manager);
-
-private:
-  void constructor(void);
-  friend class CoinWidgetP;
-  class CoinWidgetP * pimpl;
-};
-
-#endif // QUARTER_COINWIDGET_H
+QuarterApplication::~QuarterApplication()
+{
+  Quarter::clean();
+}

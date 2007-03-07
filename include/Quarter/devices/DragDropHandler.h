@@ -25,26 +25,19 @@
 
 #include <Quarter/Basic.h>
 #include <Quarter/devices/DeviceHandler.h>
-#include <QStringList>
 
 class QEvent;
 class SoEvent;
-class QDragEnterEvent;
-class QDropEvent;
-class CoinWidget;
 
 class QUARTER_DLL_API DragDropHandler : public DeviceHandler {
 public:
   DragDropHandler(void);
   virtual ~DragDropHandler();
-  
   virtual const SoEvent * translateEvent(QEvent * event);
   
 private:
-  void dragEnterEvent(QDragEnterEvent * event);
-  void dropEvent(QDropEvent * event);
-
-  QStringList suffixes;
+  friend class DragDropHandlerP;
+  class DragDropHandlerP * pimpl;
 };
 
 #endif // QUARTER_DRAGDROPHANDLER_H
