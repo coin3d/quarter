@@ -1,5 +1,5 @@
-#ifndef QUARTER_COINWIDGETPLUGIN_H
-#define QUARTER_COINWIDGETPLUGIN_H
+#ifndef QUARTER_QUARTERWIDGETPLUGIN_H
+#define QUARTER_QUARTERWIDGETPLUGIN_H
 
 /**************************************************************************\
  *
@@ -50,4 +50,4 @@ private:
   class QuarterWidgetPluginP * pimpl;
 };
 
-#endif // QUARTER_COINWIDGETPLUGIN_H
+#endif // QUARTER_QUARTERWIDGETPLUGIN_H
