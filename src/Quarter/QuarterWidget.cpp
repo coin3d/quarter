@@ -221,8 +221,8 @@ bool
 QuarterWidget::event(QEvent * event)
 {
   const SoEvent * soevent = PRIVATE(this)->devicemanager->translateEvent(event);
-  if (soevent) {
-    return PRIVATE(this)->scenemanager->processEvent(soevent);
+  if (soevent && PRIVATE(this)->scenemanager->processEvent(soevent)) {
+    return true;
   }
   return inherited::event(event);
 }
