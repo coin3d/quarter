@@ -20,12 +20,15 @@
  *
 \**************************************************************************/
 
+#include <assert.h>
 #include <Quarter/devices/DeviceManager.h>
 #include <Quarter/devices/DeviceHandler.h>
+#include <Quarter/CoinWidget.h>
 
-DeviceManager::DeviceManager(void)
+DeviceManager::DeviceManager(CoinWidget * coinwidget)
 {
-
+  assert(coinwidget);
+  this->coinwidget = coinwidget;
 }
 
 DeviceManager::~DeviceManager()
@@ -45,11 +48,17 @@ DeviceManager::translateEvent(QEvent * qevent)
   return NULL;
 }
 
+const CoinWidget * 
+DeviceManager::getWidget(void) const
+{
+  return this->coinwidget;
+}
 
 void 
 DeviceManager::registerDevice(DeviceHandler * device)
 {
   if (!this->devices.contains(device)) {
+    device->setManager(this);
     this->devices += device;
   }
 }

@@ -20,11 +20,6 @@
  *
 \**************************************************************************/
 
-#include <QList>
-#include <QUrl>
-#include <QFileInfo>
-#include <QStringList>
-
 #include <Inventor/SoSceneManager.h>
 #include <Inventor/SbViewportRegion.h>
 #include <Inventor/SbTime.h>
@@ -50,12 +45,11 @@
 
 class CoinWidgetP {
 public:
-  CoinWidgetP(void) {
+  CoinWidgetP(CoinWidget * master) {
     this->scenemanager = new NbSceneManager;
-    this->devicemanager = new DeviceManager;
+    this->devicemanager = new DeviceManager(master);
     this->root = NULL;
     this->navigationsystem = NULL;
-    this->suffixes << "iv" << "wrl";
   }
 
   ~CoinWidgetP() {
@@ -70,7 +64,6 @@ public:
   NbSceneManager * scenemanager;
   NbNavigationSystem * navigationsystem;
   SoSeparator * root;
-  QStringList suffixes;
   DeviceManager * devicemanager;
 };
 
@@ -92,7 +85,7 @@ CoinWidget::CoinWidget(QGLContext * context, QWidget * parent)
 void
 CoinWidget::constructor(void)
 {
-  PRIVATE(this) = new CoinWidgetP;
+  PRIVATE(this) = new CoinWidgetP(this);
   PRIVATE(this)->navigationsystem = NbNavigationSystem::createByName(NB_EXAMINER_SYSTEM);
   PRIVATE(this)->scenemanager->setNavigationSystem(PRIVATE(this)->navigationsystem);
   PRIVATE(this)->scenemanager->setNavigationState(NbSceneManager::MIXED_NAVIGATION);
@@ -237,40 +230,6 @@ CoinWidget::event(QEvent * event)
     return PRIVATE(this)->scenemanager->processEvent(soevent);
   }
   return inherited::event(event);
-}
-
-void 
-CoinWidget::dragEnterEvent(QDragEnterEvent * event)
-{
-  const QMimeData * mimedata = event->mimeData();
-  if (!mimedata->hasUrls()) { return; }
-
-  QFileInfo fileinfo(mimedata->urls().takeFirst().path());
-  QString suffix = fileinfo.suffix().toLower();
-  if (!(PRIVATE(this)->suffixes.contains(suffix))) { return; }
-  
-  event->acceptProposedAction();
-}
-
-void 
-CoinWidget::dropEvent(QDropEvent * event)
-{
-  const QMimeData * mimedata = event->mimeData();
-  if (!mimedata->hasUrls()) { return; }
-  
-  QString path = mimedata->urls().takeFirst().path();
-  
-  // attempt to open file
-  SoInput in;
-  SbBool ok = in.openFile(path.toLatin1().constData());
-  if (!ok) { return; }
-  
-  // attempt to import it
-  SoSeparator * root = SoDB::readAll(&in);
-  if (root == NULL) { return; }
-  
-  this->setSceneGraph(root);
-  PRIVATE(this)->scenemanager->scheduleRedraw();
 }
 
 #undef PRIVATE

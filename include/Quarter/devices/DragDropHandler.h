@@ -1,5 +1,5 @@
-#ifndef QUARTER_DEVICEHANDLER_H
-#define QUARTER_DEVICEHANDLER_H
+#ifndef QUARTER_DRAGDROPHANDLER_H
+#define QUARTER_DRAGDROPHANDLER_H
 
 /**************************************************************************\
  *
@@ -23,21 +23,28 @@
  *
 \**************************************************************************/
 
+#include <Quarter/Basic.h>
+#include <Quarter/devices/DeviceHandler.h>
+#include <QStringList>
+
 class QEvent;
 class SoEvent;
-class DeviceManager;
+class QDragEnterEvent;
+class QDropEvent;
+class CoinWidget;
 
-class DeviceHandler {
+class QUARTER_DLL_API DragDropHandler : public DeviceHandler {
 public:
-  DeviceHandler(void) {}
-  virtual ~DeviceHandler() {}
+  DragDropHandler(void);
+  virtual ~DragDropHandler();
   
-  virtual const SoEvent * translateEvent(QEvent * event) = 0;
-  void setManager(DeviceManager * manager);
+  virtual const SoEvent * translateEvent(QEvent * event);
   
-protected:  
-  friend class DeviceManager;
-  DeviceManager * manager;
+private:
+  void dragEnterEvent(QDragEnterEvent * event);
+  void dropEvent(QDropEvent * event);
+
+  QStringList suffixes;
 };
 
-#endif // QUARTER_DEVICEHANDLER_H
+#endif // QUARTER_DRAGDROPHANDLER_H

@@ -29,19 +29,22 @@
 class QEvent;
 class SoEvent;
 class DeviceHandler;
+class CoinWidget;
 
 class QUARTER_DLL_API DeviceManager {
 public:
-  DeviceManager(void);
+  DeviceManager(CoinWidget * coinwidget);
   ~DeviceManager();
 
   const SoEvent * translateEvent(QEvent * event);
+  const CoinWidget * getWidget(void) const;
   
   void registerDevice(DeviceHandler * device);
   void unregisterDevice(DeviceHandler * device);
 
 private:
   QList<DeviceHandler *> devices;
+  CoinWidget * coinwidget;
 };
 
 #endif // QUARTER_DEVICEMANAGER_H

@@ -22,10 +22,14 @@
 
 #include <QUiLoader>
 #include <QFile>
-#include <Quarter/CoinWidget.h>
-#include <Quarter/CoinApplication.h>
+
 #include <Inventor/nodes/SoCube.h>
 #include <Inventor/nodes/SoCone.h>
+
+#include <Quarter/CoinWidget.h>
+#include <Quarter/CoinApplication.h>
+#include <Quarter/devices/DragDropHandler.h>
+#include <Quarter/devices/DeviceManager.h>
 
 int main(int argc, char *argv[])
 {
@@ -42,6 +46,7 @@ int main(int argc, char *argv[])
 
   CoinWidget * viewer = qFindChild<CoinWidget *>(widget, "CoinWidget");
   assert(viewer);
+  viewer->getDeviceManager()->registerDevice(new DragDropHandler);
   viewer->setSceneGraph(new SoCone);
 
   widget->show();  

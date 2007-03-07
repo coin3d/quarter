@@ -48,7 +48,6 @@ public:
   ~CoinWidget();
 
   virtual SbBool setSceneGraph(SoNode * root);
-
   DeviceManager * getDeviceManager(void) const;
 
 protected:
@@ -58,9 +57,6 @@ protected:
   virtual bool event(QEvent * event);
   
   static void renderCB(void * closure, SoSceneManager * manager);
-
-  virtual void dragEnterEvent(QDragEnterEvent * event);
-  virtual void dropEvent(QDropEvent * event);
 
 private:
   void constructor(void);

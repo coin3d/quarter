@@ -1,6 +1,3 @@
-#ifndef QUARTER_DEVICEHANDLER_H
-#define QUARTER_DEVICEHANDLER_H
-
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
@@ -23,21 +20,10 @@
  *
 \**************************************************************************/
 
-class QEvent;
-class SoEvent;
-class DeviceManager;
+#include <Quarter/devices/DeviceHandler.h>
 
-class DeviceHandler {
-public:
-  DeviceHandler(void) {}
-  virtual ~DeviceHandler() {}
-  
-  virtual const SoEvent * translateEvent(QEvent * event) = 0;
-  void setManager(DeviceManager * manager);
-  
-protected:  
-  friend class DeviceManager;
-  DeviceManager * manager;
-};
-
-#endif // QUARTER_DEVICEHANDLER_H
+void 
+DeviceHandler::setManager(DeviceManager * manager)
+{
+  this->manager = manager;
+}

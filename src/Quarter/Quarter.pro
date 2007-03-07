@@ -14,6 +14,7 @@ HEADERS = ../../include/Quarter/CoinWidget.h \
           ../../include/Quarter/devices/MouseHandler.h \
           ../../include/Quarter/devices/KeyboardHandler.h \
           ../../include/Quarter/devices/DeviceManager.h \
+          ../../include/Quarter/devices/DragDropHandler.h \
           SensorManager.h
 
 SOURCES = CoinWidget.cpp \
@@ -21,8 +22,10 @@ SOURCES = CoinWidget.cpp \
           Quarter.cpp \
           SensorManager.cpp \
           devices/DeviceManager.cpp \
+          devices/DeviceHandler.cpp \
           devices/MouseHandler.cpp \
-          devices/KeyboardHandler.cpp
+          devices/KeyboardHandler.cpp \
+          devices/DragDropHandler.cpp
 
 LIBS += -L$(COINDIR)/lib -lCoin -lNutsnBolts
 
