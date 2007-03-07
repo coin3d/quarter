@@ -20,7 +20,7 @@
  *
 \**************************************************************************/
 
-#include <Quarter/MouseHandler.h>
+#include <Quarter/devices/MouseHandler.h>
 
 #include <QEvent>
 #include <QSize>

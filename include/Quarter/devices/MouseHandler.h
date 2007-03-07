@@ -1,5 +1,5 @@
-#ifndef QUARTER_KEYBOARDHANDLER_H
-#define QUARTER_KEYBOARDHANDLER_H
+#ifndef QUARTER_MOUSEHANDLER_H
+#define QUARTER_MOUSEHANDLER_H
 
 /**************************************************************************\
  *
@@ -24,22 +24,32 @@
 \**************************************************************************/
 
 #include <Quarter/Basic.h>
-#include <Quarter/DeviceHandler.h>
+#include <Quarter/devices/DeviceHandler.h>
+#include <Inventor/SbVec2s.h>
 
 class QEvent;
 class SoEvent;
-class QKeyEvent;
+class QMouseEvent;
+class QWheelEvent;
+class QResizeEvent;
 
-class QUARTER_DLL_API KeyboardHandler : public DeviceHandler {
+class QUARTER_DLL_API MouseHandler : public DeviceHandler {
 public:
-  KeyboardHandler(void);
-  virtual ~KeyboardHandler();
+  MouseHandler(void);
+  virtual ~MouseHandler();
 
   virtual const SoEvent * translateEvent(QEvent * event);
 
 private:
-  const SoEvent * keyEvent(QKeyEvent * event);
-  class SoKeyboardEvent * keyboard;
+  const SoEvent * mouseMoveEvent(QMouseEvent * event);
+  const SoEvent * mouseWheelEvent(QWheelEvent * event);
+  const SoEvent * mouseButtonEvent(QMouseEvent * event);
+
+  void resizeEvent(QResizeEvent * event);
+
+  class SoLocation2Event * location2;
+  class SoMouseButtonEvent * mousebutton;
+  SbVec2s windowsize;
 };
 
-#endif // QUARTER_KEYBOARDHANDLER_H
+#endif // QUARTER_MOUSEHANDLER_H

@@ -20,8 +20,8 @@
  *
 \**************************************************************************/
 
-#include <Quarter/DeviceManager.h>
-#include <Quarter/DeviceHandler.h>
+#include <Quarter/devices/DeviceManager.h>
+#include <Quarter/devices/DeviceHandler.h>
 
 DeviceManager::DeviceManager(void)
 {

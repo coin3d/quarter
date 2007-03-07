@@ -41,9 +41,9 @@
 
 #include <Quarter/CoinWidget.h>
 #include <Quarter/CoinApplication.h>
-#include <Quarter/DeviceManager.h>
-#include <Quarter/MouseHandler.h>
-#include <Quarter/KeyboardHandler.h>
+#include <Quarter/devices/DeviceManager.h>
+#include <Quarter/devices/MouseHandler.h>
+#include <Quarter/devices/KeyboardHandler.h>
 
 #include <QMouseEvent>
 #include <assert.h>

@@ -20,7 +20,7 @@
  *
 \**************************************************************************/
 
-#include <Quarter/KeyboardHandler.h>
+#include <Quarter/devices/KeyboardHandler.h>
 
 #include <QMap>
 #include <QEvent>
