@@ -20,14 +20,12 @@
  *
 \**************************************************************************/
 
-#include "DeviceManager.h"
-#include <Quarter/MouseHandler.h>
-#include <Quarter/KeyboardHandler.h>
+#include <Quarter/DeviceManager.h>
+#include <Quarter/DeviceHandler.h>
 
 DeviceManager::DeviceManager(void)
 {
-  this->devices += new MouseHandler;
-  this->devices += new KeyboardHandler;
+
 }
 
 DeviceManager::~DeviceManager()
@@ -45,4 +43,21 @@ DeviceManager::translateEvent(QEvent * qevent)
     }
   }
   return NULL;
+}
+
+
+void 
+DeviceManager::registerDevice(DeviceHandler * device)
+{
+  if (!this->devices.contains(device)) {
+    this->devices += device;
+  }
+}
+
+void 
+DeviceManager::unregisterDevice(DeviceHandler * device)
+{
+  if (this->devices.contains(device)) {
+    this->devices.removeAt(this->devices.indexOf(device));
+  }
 }

@@ -24,17 +24,21 @@
 \**************************************************************************/
 
 #include <QList>
+#include <Quarter/Basic.h>
 
 class QEvent;
 class SoEvent;
 class DeviceHandler;
 
-class DeviceManager {
+class QUARTER_DLL_API DeviceManager {
 public:
   DeviceManager(void);
   ~DeviceManager();
 
   const SoEvent * translateEvent(QEvent * event);
+  
+  void registerDevice(DeviceHandler * device);
+  void unregisterDevice(DeviceHandler * device);
 
 private:
   QList<DeviceHandler *> devices;

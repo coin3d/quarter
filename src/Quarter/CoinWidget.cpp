@@ -41,7 +41,9 @@
 
 #include <Quarter/CoinWidget.h>
 #include <Quarter/CoinApplication.h>
-#include "DeviceManager.h"
+#include <Quarter/DeviceManager.h>
+#include <Quarter/MouseHandler.h>
+#include <Quarter/KeyboardHandler.h>
 
 #include <QMouseEvent>
 #include <assert.h>
@@ -96,6 +98,9 @@ CoinWidget::constructor(void)
   PRIVATE(this)->scenemanager->setNavigationState(NbSceneManager::MIXED_NAVIGATION);
   PRIVATE(this)->scenemanager->setRenderCallback(CoinWidget::renderCB, this);
   PRIVATE(this)->scenemanager->activate();
+
+  PRIVATE(this)->devicemanager->registerDevice(new MouseHandler);
+  PRIVATE(this)->devicemanager->registerDevice(new KeyboardHandler);
   
   this->setMouseTracking(TRUE);
 }
@@ -184,6 +189,12 @@ CoinWidget::setSceneGraph(SoNode * node)
   PRIVATE(this)->scenemanager->setSceneGraph(PRIVATE(this)->root);
 
   return TRUE;
+}
+
+DeviceManager * 
+CoinWidget::getDeviceManager(void) const
+{
+  return PRIVATE(this)->devicemanager;
 }
 
 void

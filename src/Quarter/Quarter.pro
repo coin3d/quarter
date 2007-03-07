@@ -13,8 +13,8 @@ HEADERS = ../../include/Quarter/CoinWidget.h \
           ../../include/Quarter/DeviceHandler.h \
           ../../include/Quarter/MouseHandler.h \
           ../../include/Quarter/KeyboardHandler.h \
-          SensorManager.h \
-          DeviceManager.h
+          ../../include/Quarter/DeviceManager.h \
+          SensorManager.h
 
 SOURCES = CoinWidget.cpp \
           CoinApplication.cpp \

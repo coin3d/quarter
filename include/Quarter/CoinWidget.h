@@ -26,6 +26,7 @@
 #include <QGLWidget>
 #include <QtDesigner/QDesignerExportWidget>
 #include <Inventor/SbBasic.h>
+#include <Quarter/Basic.h>
 
 class QKeyEvent;
 class QGLContext;
@@ -35,8 +36,9 @@ class QDragEnterEvent;
 
 class SoNode;
 class SoSceneManager;
+class DeviceManager;
 
-class QDESIGNER_WIDGET_EXPORT CoinWidget : public QGLWidget {
+class QUARTER_DLL_API CoinWidget : public QGLWidget {
   typedef QGLWidget inherited;
   Q_OBJECT
 
@@ -46,6 +48,8 @@ public:
   ~CoinWidget();
 
   virtual SbBool setSceneGraph(SoNode * root);
+
+  DeviceManager * getDeviceManager(void) const;
 
 protected:
   virtual void resizeGL(int width, int height);
