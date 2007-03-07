@@ -20,11 +20,8 @@
  *
 \**************************************************************************/
 
-#include <Inventor/SoSceneManager.h>
 #include <Inventor/SbViewportRegion.h>
-#include <Inventor/SbTime.h>
 #include <Inventor/system/gl.h>
-#include <Inventor/errors/SoDebugError.h>
 #include <Inventor/events/SoEvents.h>
 #include <Inventor/nodes/SoNode.h>
 #include <Inventor/nodes/SoCamera.h>
@@ -35,7 +32,6 @@
 #include <NutsnBolts/navigation/NbNavigationSystem.h>
 
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/QuarterApplication.h>
 #include <Quarter/devices/DeviceManager.h>
 #include <Quarter/devices/MouseHandler.h>
 #include <Quarter/devices/KeyboardHandler.h>
