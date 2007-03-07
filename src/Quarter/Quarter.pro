@@ -20,9 +20,9 @@ SOURCES = CoinWidget.cpp \
           CoinApplication.cpp \
           Quarter.cpp \
           SensorManager.cpp \
-          DeviceManager.cpp \
-          MouseHandler.cpp \
-          KeyboardHandler.cpp
+          devices/DeviceManager.cpp \
+          devices/MouseHandler.cpp \
+          devices/KeyboardHandler.cpp
 
 LIBS += -L$(COINDIR)/lib -lCoin -lNutsnBolts
 
