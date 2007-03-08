@@ -10,7 +10,7 @@ INCLUDEPATH += $(COINDIR)/include
 HEADERS = QuarterWidgetPlugin.h
 SOURCES = QuarterWidgetPlugin.cpp
 
-LIBS += -L$(COINDIR)/lib -lCoin -lQuarter
+LIBS += -L../Quarter -L$(COINDIR)/lib -lCoin -lQuarter
 
 target.path = $$[QT_INSTALL_PLUGINS]/designer
 INSTALLS += target
