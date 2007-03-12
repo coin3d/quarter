@@ -24,17 +24,13 @@
 \**************************************************************************/
 
 #include <QGLWidget>
-#include <QtDesigner/QDesignerExportWidget>
 #include <Inventor/SbBasic.h>
 #include <Quarter/Basic.h>
 
-class QKeyEvent;
 class QGLContext;
-class QMouseEvent;
-class QDropEvent;
-class QDragEnterEvent;
 
 class SoNode;
+class SoEvent;
 class SoSceneManager;
 class DeviceManager;
 
