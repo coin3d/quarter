@@ -56,7 +56,7 @@ KeyboardHandlerP::keyEvent(QKeyEvent * qevent)
     this->keyboard->setState(SoButtonEvent::UP);
   
   Qt::Key qkey = (Qt::Key) qevent->key();
-  
+
   SoKeyboardEvent::Key sokey = (modifiers & Qt::KeypadModifier) ?
     keypadmap->value(qkey, SoKeyboardEvent::ANY) :
     keyboardmap->value(qkey, SoKeyboardEvent::ANY);
@@ -75,7 +75,6 @@ void
 KeyboardHandlerP::initKeyMap(void)
 {  
   // keyboard
-  keyboardmap->insert(Qt::Key_unknown, SoKeyboardEvent::UNDEFINED);
   keyboardmap->insert(Qt::Key_Shift,   SoKeyboardEvent::LEFT_SHIFT);
   keyboardmap->insert(Qt::Key_Alt,     SoKeyboardEvent::LEFT_ALT);
   keyboardmap->insert(Qt::Key_Control, SoKeyboardEvent::LEFT_CONTROL);
