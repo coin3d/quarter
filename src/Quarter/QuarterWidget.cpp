@@ -20,13 +20,14 @@
  *
 \**************************************************************************/
 
+#include <assert.h>
+
 #include <Inventor/SbViewportRegion.h>
 #include <Inventor/system/gl.h>
 #include <Inventor/events/SoEvents.h>
 #include <Inventor/nodes/SoNode.h>
 #include <Inventor/nodes/SoCamera.h>
 #include <Inventor/nodes/SoSeparator.h>
-#include <Inventor/actions/SoSearchAction.h>
 
 #include <NutsnBolts/NbSceneManager.h>
 #include <NutsnBolts/navigation/NbNavigationSystem.h>
@@ -36,31 +37,7 @@
 #include <Quarter/devices/MouseHandler.h>
 #include <Quarter/devices/KeyboardHandler.h>
 
-#include <assert.h>
-
-class QuarterWidgetP {
-public:
-  QuarterWidgetP(QuarterWidget * master) {
-    this->scenemanager = new NbSceneManager;
-    this->devicemanager = new DeviceManager(master);
-    this->root = NULL;
-    this->navigationsystem = NULL;
-  }
-
-  ~QuarterWidgetP() {
-    delete this->scenemanager;
-    delete this->devicemanager;
-    delete this->navigationsystem;
-    if (this->root) {
-      this->root->unref();
-    }
-  }
-
-  NbSceneManager * scenemanager;
-  NbNavigationSystem * navigationsystem;
-  SoSeparator * root;
-  DeviceManager * devicemanager;
-};
+#include "QuarterWidgetP.h"
 
 #define PRIVATE(obj) obj->pimpl
 
@@ -81,12 +58,13 @@ void
 QuarterWidget::constructor(void)
 {
   PRIVATE(this) = new QuarterWidgetP(this);
+
   PRIVATE(this)->navigationsystem = NbNavigationSystem::createByName(NB_EXAMINER_SYSTEM);
   PRIVATE(this)->scenemanager->setNavigationSystem(PRIVATE(this)->navigationsystem);
   PRIVATE(this)->scenemanager->setNavigationState(NbSceneManager::MIXED_NAVIGATION);
   PRIVATE(this)->scenemanager->setRenderCallback(QuarterWidget::renderCB, this);
   PRIVATE(this)->scenemanager->activate();
-
+  
   PRIVATE(this)->devicemanager->registerDevice(new MouseHandler);
   PRIVATE(this)->devicemanager->registerDevice(new KeyboardHandler);
   
@@ -98,91 +76,41 @@ QuarterWidget::~QuarterWidget()
   delete PRIVATE(this);
 }
 
-static const char * superscene[] = {
-  "#Inventor V2.1 ascii\n",
-  "\n",
-  "DEF root Separator {\n",
-  "  DEF light DirectionalLight {\n",
-  "    direction 0 0 -1\n",
-  "    intensity 1.0\n",
-  "  }\n",
-  "  DEF camera PerspectiveCamera {\n",
-  "  }\n",
-  "}\n",
-  NULL
-};
-
-SbBool 
+void
 QuarterWidget::setSceneGraph(SoNode * node)
 {
-  if (node == NULL) {
-    if (PRIVATE(this)->root) {
-      PRIVATE(this)->root->unref();
-      PRIVATE(this)->root = NULL;
-      PRIVATE(this)->scenemanager->setSceneGraph(NULL);
-    }
-    return TRUE;
-  } else {
-    this->setSceneGraph(NULL);
-  }
+  SoCamera * camera = NULL;
+  SoSeparator * superscene = NULL;
 
-  SoInput in;
-  in.setStringArray(superscene);
-  SoNode * scene = NULL;
-  if (!SoDB::read(&in, scene)) {
-    assert(0);
-    return FALSE;
-  }
-  scene->ref(); // actions are applied later
-  
-  SoSearchAction sa;
-  
-  // get desired root node
-  sa.setInterest(SoSearchAction::FIRST);
-  sa.setName(SbName("root"));
-  sa.apply(scene);
-  if (!sa.getPath()) {
-    assert(0 && "no root");
-    return FALSE;
-  }
-  
-  SoNode * root = sa.getPath()->getTail();
-  if (!root->isOfType(SoSeparator::getClassTypeId())) {
-    assert(0 && "invalid root type");
-    return FALSE;
-  }
-  
-  PRIVATE(this)->root = (SoSeparator *) root;
-  PRIVATE(this)->root->ref();
-  root = NULL;
-  
-  sa.reset();
-  sa.setInterest(SoSearchAction::FIRST);
-  sa.setType(SoCamera::getClassTypeId());
-  sa.apply(PRIVATE(this)->root);
-  if (!sa.getPath()) {
-    assert(0 && "no camera");
-    return FALSE;
-  }
+  if (node) {
+    superscene = PRIVATE(this)->createSuperScene();
+    camera = PRIVATE(this)->getCamera(superscene);
 
-  assert(sa.getPath()->getTail()->isOfType(SoCamera::getClassTypeId()));
-  SoCamera * camera = (SoCamera *) sa.getPath()->getTail();
+    superscene->addChild(node);
+  }
+  
+  PRIVATE(this)->scenemanager->setSceneGraph(superscene);
   PRIVATE(this)->navigationsystem->setCamera(camera);
   
-  PRIVATE(this)->root->addChild(node);
-  
-  camera->viewAll(PRIVATE(this)->root, 
-                  PRIVATE(this)->scenemanager->getViewportRegion());
-  
-  PRIVATE(this)->scenemanager->setSceneGraph(PRIVATE(this)->root);
+  PRIVATE(this)->navigationsystem->viewAll();
+}
 
-  return TRUE;
+void 
+QuarterWidget::setCamera(SoCamera * camera)
+{
+  PRIVATE(this)->navigationsystem->setCamera(camera);
 }
 
 DeviceManager * 
 QuarterWidget::getDeviceManager(void) const
 {
   return PRIVATE(this)->devicemanager;
+}
+
+void 
+QuarterWidget::viewAll(void)
+{
+  PRIVATE(this)->navigationsystem->viewAll();
 }
 
 void

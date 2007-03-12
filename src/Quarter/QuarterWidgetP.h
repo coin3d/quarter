@@ -1,5 +1,5 @@
-#ifndef QUARTER_QUARTERWIDGET_H
-#define QUARTER_QUARTERWIDGET_H
+#ifndef QUARTER_QUARTERWIDGETP_H
+#define QUARTER_QUARTERWIDGETP_H
 
 /**************************************************************************\
  *
@@ -23,44 +23,24 @@
  *
 \**************************************************************************/
 
-#include <QGLWidget>
-#include <Inventor/SbBasic.h>
-#include <Quarter/Basic.h>
-
-class SoNode;
-class SoEvent;
 class SoCamera;
-class SoSceneManager;
+class SoSeparator;
+
 class DeviceManager;
+class NbSceneManager;
+class NbNavigationSystem;
 
-class QUARTER_DLL_API QuarterWidget : public QGLWidget {
-  typedef QGLWidget inherited;
-  Q_OBJECT
-
+class QuarterWidgetP {
 public:
-  QuarterWidget(QWidget * parent = 0);
-  QuarterWidget(QGLContext * context, QWidget * parent = 0);
-  ~QuarterWidget();
+  QuarterWidgetP(class QuarterWidget * master);
+  ~QuarterWidgetP();
 
-  virtual void setSceneGraph(SoNode * root);
-  virtual void setCamera(SoCamera * camera);
-  DeviceManager * getDeviceManager(void) const;
+  SoSeparator * createSuperScene(void);
+  SoCamera * getCamera(SoSeparator * root);
 
-public slots:
-  virtual void viewAll(void);
-
-protected:
-  virtual void resizeGL(int width, int height);
-  virtual void initializeGL(void);
-  virtual void paintGL(void);
-  virtual bool event(QEvent * event);
-  
-  static void renderCB(void * closure, SoSceneManager * manager);
-
-private:
-  void constructor(void);
-  friend class QuarterWidgetP;
-  class QuarterWidgetP * pimpl;
+  NbNavigationSystem * navigationsystem;  
+  NbSceneManager * scenemanager;
+  DeviceManager * devicemanager;
 };
 
-#endif // QUARTER_QUARTERWIDGET_H
+#endif // QUARTER_QUARTERWIDGETP_H

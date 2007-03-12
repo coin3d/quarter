@@ -15,9 +15,11 @@ HEADERS = ../../include/Quarter/QuarterWidget.h \
           ../../include/Quarter/devices/KeyboardHandler.h \
           ../../include/Quarter/devices/DeviceManager.h \
           ../../include/Quarter/devices/DragDropHandler.h \
-          SensorManager.h
+          SensorManager.h \
+          QuarterWidgetP.h
 
 SOURCES = QuarterWidget.cpp \
+          QuarterWidgetP.cpp \
           QuarterApplication.cpp \
           Quarter.cpp \
           SensorManager.cpp \
