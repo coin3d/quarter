@@ -35,6 +35,8 @@
 #include <Quarter/devices/DeviceManager.h>
 #include <stdlib.h>
 
+namespace SIM { namespace Coin3D { namespace Quarter {
+
 class DragDropHandlerP {
 public:
   DragDropHandlerP(DragDropHandler * master) {
@@ -47,8 +49,12 @@ public:
   DragDropHandler * master;
 };
 
+}}} // namespace
+
 #define PRIVATE(obj) obj->pimpl
 #define PUBLIC(obj) obj->master
+
+using namespace SIM::Coin3D::Quarter;
 
 DragDropHandler::DragDropHandler(void)
 {

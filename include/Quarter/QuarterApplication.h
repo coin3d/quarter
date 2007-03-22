@@ -26,11 +26,15 @@
 #include <QApplication>
 #include <Quarter/Basic.h>
 
+namespace SIM { namespace Coin3D { namespace Quarter {
+
 class QUARTER_DLL_API QuarterApplication : public QApplication {
   typedef QApplication inherited;
 public:
   QuarterApplication(int & argc, char ** argv);
   ~QuarterApplication();
 };
+
+}}} // namespace
 
 #endif // QUARTER_QUARTERAPPLICATION_H

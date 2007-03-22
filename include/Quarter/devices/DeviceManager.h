@@ -28,6 +28,9 @@
 
 class QEvent;
 class SoEvent;
+
+namespace SIM { namespace Coin3D { namespace Quarter {
+
 class DeviceHandler;
 class QuarterWidget;
 
@@ -46,5 +49,7 @@ private:
   QList<DeviceHandler *> devices;
   QuarterWidget * quarterwidget;
 };
+
+}}} // namespace
 
 #endif // QUARTER_DEVICEMANAGER_H

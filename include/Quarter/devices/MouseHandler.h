@@ -29,6 +29,8 @@
 class QEvent;
 class SoEvent;
 
+namespace SIM { namespace Coin3D { namespace Quarter {
+
 class QUARTER_DLL_API MouseHandler : public DeviceHandler {
 public:
   MouseHandler(void);
@@ -40,5 +42,7 @@ private:
   friend class MouseHandlerP;
   class MouseHandlerP * pimpl;
 };
+
+}}} // namespace
 
 #endif // QUARTER_MOUSEHANDLER_H

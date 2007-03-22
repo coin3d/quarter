@@ -31,6 +31,10 @@ class SoNode;
 class SoEvent;
 class SoCamera;
 class SoSceneManager;
+class NbSceneManager;
+
+namespace SIM { namespace Coin3D { namespace Quarter {
+
 class DeviceManager;
 
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
@@ -45,7 +49,8 @@ public:
   virtual void setSceneGraph(SoNode * root);
   virtual void setCamera(SoCamera * camera);
   DeviceManager * getDeviceManager(void) const;
-
+  NbSceneManager * getSceneManager(void) const;
+                                                   
 public slots:
   virtual void viewAll(void);
 
@@ -54,13 +59,16 @@ protected:
   virtual void initializeGL(void);
   virtual void paintGL(void);
   virtual bool event(QEvent * event);
-  
-  static void renderCB(void * closure, SoSceneManager * manager);
+  virtual void actualRedraw(void);
+
+  static void renderCB(void * closure, SoSceneManager *);
 
 private:
   void constructor(void);
   friend class QuarterWidgetP;
   class QuarterWidgetP * pimpl;
 };
+
+}}} // namespace
 
 #endif // QUARTER_QUARTERWIDGET_H

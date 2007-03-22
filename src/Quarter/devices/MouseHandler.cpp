@@ -32,6 +32,8 @@
 #include <Inventor/events/SoEvents.h>
 #include <Inventor/errors/SoDebugError.h>
 
+namespace SIM { namespace Coin3D { namespace Quarter {
+
 class MouseHandlerP {
 public:
   MouseHandlerP(void) {
@@ -56,6 +58,10 @@ public:
   class SoMouseButtonEvent * mousebutton;
   SbVec2s windowsize;
 };
+
+}}} // namespace
+
+using namespace SIM::Coin3D::Quarter;
 
 #define PRIVATE(obj) obj->pimpl
 

@@ -39,8 +39,9 @@
 
 #include "QuarterWidgetP.h"
 
-#define PRIVATE(obj) obj->pimpl
+using namespace SIM::Coin3D::Quarter;
 
+#define PRIVATE(obj) obj->pimpl
 
 QuarterWidget::QuarterWidget(QWidget * parent)
   : inherited(parent) 
@@ -88,9 +89,9 @@ QuarterWidget::setSceneGraph(SoNode * node)
 
     superscene->addChild(node);
   }
-  
+
+  PRIVATE(this)->navigationsystem->setCamera(camera);  
   PRIVATE(this)->scenemanager->setSceneGraph(superscene);
-  PRIVATE(this)->navigationsystem->setCamera(camera);
   
   PRIVATE(this)->navigationsystem->viewAll();
 }
@@ -105,6 +106,12 @@ DeviceManager *
 QuarterWidget::getDeviceManager(void) const
 {
   return PRIVATE(this)->devicemanager;
+}
+
+NbSceneManager * 
+QuarterWidget::getSceneManager(void) const
+{
+  return PRIVATE(this)->scenemanager;
 }
 
 void 
@@ -132,14 +139,19 @@ QuarterWidget::paintGL(void)
 }
 
 void 
-QuarterWidget::renderCB(void * closure, SoSceneManager * manager)
+QuarterWidget::actualRedraw(void)
+{
+  PRIVATE(this)->scenemanager->render(TRUE, TRUE);
+}
+
+void 
+QuarterWidget::renderCB(void * closure, SoSceneManager *)
 {
   assert(closure);
   QuarterWidget * thisp = (QuarterWidget *) closure;
-  assert(manager == PRIVATE(thisp)->scenemanager);
   
   thisp->makeCurrent();
-  PRIVATE(thisp)->scenemanager->render(TRUE, TRUE);
+  thisp->actualRedraw();
   if (thisp->doubleBuffer()) {
     thisp->swapBuffers();
   }

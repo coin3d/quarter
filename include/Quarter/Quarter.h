@@ -25,6 +25,8 @@
 
 #include <Quarter/Basic.h>
 
+namespace SIM { namespace Coin3D { namespace Quarter {
+
 class QUARTER_DLL_API Quarter {
 public:
   static void init(void);
@@ -36,5 +38,7 @@ private:
   
   class SensorManager * sensormanager;
 };
+
+}}} // namespace
 
 #endif // QUARTER_QUARTER_H

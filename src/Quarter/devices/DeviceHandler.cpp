@@ -22,8 +22,11 @@
 
 #include <Quarter/devices/DeviceHandler.h>
 
+using namespace SIM::Coin3D::Quarter;
+
 void 
 DeviceHandler::setManager(DeviceManager * manager)
 {
   this->manager = manager;
 }
+

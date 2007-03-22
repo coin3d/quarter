@@ -25,6 +25,8 @@
 
 #include <QDesignerCustomWidgetInterface>
 
+namespace SIM { namespace Coin3D { namespace Quarter {
+
 class QuarterWidgetPlugin : public QObject, 
                             public QDesignerCustomWidgetInterface {
   Q_OBJECT
@@ -49,5 +51,7 @@ public:
 private:
   class QuarterWidgetPluginP * pimpl;
 };
+
+}}} // namespace
 
 #endif // QUARTER_QUARTERWIDGETPLUGIN_H

@@ -24,6 +24,8 @@
 #include <QMap>
 #include <Inventor/errors/SoDebugError.h>
 
+using namespace SIM::Coin3D::Quarter;
+
 KeyboardHandlerP::KeyboardHandlerP(void) 
 {
   this->keyboard = new SoKeyboardEvent;

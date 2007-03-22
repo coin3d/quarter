@@ -27,11 +27,17 @@
 #include <Quarter/Quarter.h>
 #include <Quarter/QuarterWidget.h>
 
+namespace SIM { namespace Coin3D { namespace Quarter {
+
 class QuarterWidgetPluginP {
 public:
   QuarterWidgetPluginP(void) {}
   bool initialized;
 };
+
+}}} // namespace
+
+using namespace SIM::Coin3D::Quarter;
 
 #define PRIVATE(obj) obj->pimpl
 

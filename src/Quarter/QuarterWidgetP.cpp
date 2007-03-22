@@ -33,6 +33,8 @@
 
 #include <stdlib.h>
 
+using namespace SIM::Coin3D::Quarter;
+
 QuarterWidgetP::QuarterWidgetP(QuarterWidget * master) 
 {
   this->scenemanager = new NbSceneManager;

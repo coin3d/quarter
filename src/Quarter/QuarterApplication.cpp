@@ -23,6 +23,7 @@
 #include <Quarter/QuarterApplication.h>
 #include <Quarter/Quarter.h>
 
+using namespace SIM::Coin3D::Quarter;
 
 QuarterApplication::QuarterApplication(int & argc, char ** argv)
   : inherited(argc, argv)

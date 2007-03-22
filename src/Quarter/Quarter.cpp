@@ -7,6 +7,8 @@
 
 #include "SensorManager.h"
 
+using namespace SIM::Coin3D::Quarter;
+
 static Quarter * self = NULL;
 
 Quarter::Quarter(void)

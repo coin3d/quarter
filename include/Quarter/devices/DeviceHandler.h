@@ -27,6 +27,9 @@
 
 class QEvent;
 class SoEvent;
+
+namespace SIM { namespace Coin3D { namespace Quarter {
+
 class DeviceManager;
 
 class QUARTER_DLL_API DeviceHandler {
@@ -37,9 +40,11 @@ public:
   virtual const SoEvent * translateEvent(QEvent * event) = 0;
   void setManager(DeviceManager * manager);
   
-protected:  
+protected:
   friend class DeviceManager;
   DeviceManager * manager;
 };
+
+}}} // namespace
 
 #endif // QUARTER_DEVICEHANDLER_H

@@ -29,6 +29,8 @@
 
 #include "KeyboardHandlerP.h"
 
+using namespace SIM::Coin3D::Quarter;
+
 #define PRIVATE(obj) obj->pimpl
 
 KeyboardHandler::KeyboardHandler(void)

@@ -27,6 +27,8 @@
 
 class QTimer;
 
+namespace SIM { namespace Coin3D { namespace Quarter {
+
 class SensorManager : public QObject {
   Q_OBJECT
   typedef QObject inherited;
@@ -45,5 +47,7 @@ private:
   QTimer * delaytimer;
   QTimer * timerqueuetimer;
 };
+
+}}} // namespace
 
 #endif // QUARTER_SENSORMANAGER_H

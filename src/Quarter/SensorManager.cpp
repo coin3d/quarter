@@ -30,6 +30,8 @@
 #include <Inventor/nodekits/SoNodeKit.h>
 #include <NutsnBolts/NutsnBolts.h>
 
+using namespace SIM::Coin3D::Quarter;
+
 SensorManager::SensorManager(void)
   : inherited()
 {
@@ -121,5 +123,3 @@ SensorManager::delayTimeout(void)
   SoDB::getSensorManager()->processDelayQueue(TRUE);
   SensorManager::sensorQueueChanged(this);  
 }
-
-

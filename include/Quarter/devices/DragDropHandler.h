@@ -29,6 +29,8 @@
 class QEvent;
 class SoEvent;
 
+namespace SIM { namespace Coin3D { namespace Quarter {
+
 class QUARTER_DLL_API DragDropHandler : public DeviceHandler {
 public:
   DragDropHandler(void);
@@ -39,5 +41,7 @@ private:
   friend class DragDropHandlerP;
   class DragDropHandlerP * pimpl;
 };
+
+}}} // namespace
 
 #endif // QUARTER_DRAGDROPHANDLER_H

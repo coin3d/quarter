@@ -25,6 +25,8 @@
 #include <Quarter/devices/DeviceHandler.h>
 #include <Quarter/QuarterWidget.h>
 
+using namespace SIM::Coin3D::Quarter;
+
 DeviceManager::DeviceManager(QuarterWidget * quarterwidget)
 {
   assert(quarterwidget);

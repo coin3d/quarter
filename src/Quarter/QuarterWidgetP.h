@@ -23,12 +23,18 @@
  *
 \**************************************************************************/
 
+#include <Inventor/SbBasic.h>
+
+class SoNode;
 class SoCamera;
 class SoSeparator;
 
-class DeviceManager;
 class NbSceneManager;
 class NbNavigationSystem;
+
+namespace SIM { namespace Coin3D { namespace Quarter {
+
+class DeviceManager;
 
 class QuarterWidgetP {
 public:
@@ -44,3 +50,5 @@ public:
 };
 
 #endif // QUARTER_QUARTERWIDGETP_H
+
+}}} // namespace
