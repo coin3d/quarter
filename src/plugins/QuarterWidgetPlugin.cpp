@@ -27,7 +27,7 @@
 #include <Quarter/Quarter.h>
 #include <Quarter/QuarterWidget.h>
 
-namespace SIM { namespace Coin3D { namespace Quarter {
+namespace SIM { namespace Coin3D { namespace Quarter { namespace QtDesigner {
 
 class QuarterWidgetPluginP {
 public:
@@ -35,9 +35,10 @@ public:
   bool initialized;
 };
 
-}}} // namespace
+}}}} // namespace
 
 using namespace SIM::Coin3D::Quarter;
+using namespace SIM::Coin3D::Quarter::QtDesigner;
 
 #define PRIVATE(obj) obj->pimpl
 
@@ -81,7 +82,7 @@ QuarterWidgetPlugin::createWidget(QWidget * parent)
 QString 
 QuarterWidgetPlugin::name(void) const
 {
-  return "QuarterWidget";
+  return "SIM::Coin3D::Quarter::QuarterWidget";
 }
 
 QString 
@@ -117,7 +118,9 @@ QuarterWidgetPlugin::isContainer(void) const
 QString 
 QuarterWidgetPlugin::domXml(void) const
 {
-  return "<widget class=\"QuarterWidget\" name=\"QuarterWidget\">\n"
+  return 
+    "<widget class=\"SIM::Coin3D::Quarter::QuarterWidget\" \
+             name=\"SIM::Coin3D::Quarter::QuarterWidget\">\n"
     " <property name=\"geometry\">\n"
     "  <rect>\n"
     "   <x>0</x>\n"

@@ -19,13 +19,24 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" >
-   <property name="margin" >
-    <number>9</number>
-   </property>
-   <property name="spacing" >
-    <number>6</number>
-   </property>
-   <item row="1" column="1" >
+   <item row="0" column="0" colspan="2" >
+    <widget class="SIM::Coin3D::Quarter::QuarterWidget" name="QuarterWidget" >
+     <property name="toolTip" >
+      <string>QuarterWidget</string>
+     </property>
+     <property name="whatsThis" >
+      <string>The QuarterWidget displays Open Inventor scene graphs.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" >
+    <widget class="QPushButton" name="pushButton" >
+     <property name="text" >
+      <string>View All</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" >
     <spacer>
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
@@ -38,29 +49,6 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="0" >
-    <widget class="QPushButton" name="pushButton" >
-     <property name="text" >
-      <string>View All</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" colspan="2" >
-    <widget class="QuarterWidget" name="QuarterWidget" >
-     <property name="contextMenuPolicy" >
-      <enum>Qt::CustomContextMenu</enum>
-     </property>
-     <property name="acceptDrops" >
-      <bool>true</bool>
-     </property>
-     <property name="toolTip" >
-      <string>QuarterWidget</string>
-     </property>
-     <property name="whatsThis" >
-      <string>The QuarterWidget displays Open Inventor scene graphs.</string>
-     </property>
-    </widget>
-   </item>
   </layout>
   <action name="actionViewAll" >
    <property name="text" >
@@ -70,28 +58,11 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QuarterWidget</class>
+   <class>SIM::Coin3D::Quarter::QuarterWidget</class>
    <extends>QWidget</extends>
    <header>QuarterWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>pushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>QuarterWidget</receiver>
-   <slot>viewAll()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>389</x>
-     <y>43</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>149</x>
-     <y>188</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
