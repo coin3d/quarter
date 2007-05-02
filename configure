@@ -20321,6 +20321,9 @@ fi;
 
 
 
+QUARTER_RELEASE=
+
+if $BUILD_WITH_MSVC; then
 
 if test x"${sim_ac_configuration_settings+set}" = x"set"; then
   sim_ac_configuration_settings="$sim_ac_configuration_settings|C library type:$sim_ac_msvcrt"
@@ -20328,10 +20331,6 @@ else
   sim_ac_configuration_settings="C library type:$sim_ac_msvcrt"
 fi
 
-
-QUARTER_RELEASE=
-
-if $BUILD_WITH_MSVC; then
   case $enable_symbols in
   no | false)
 
@@ -20401,6 +20400,7 @@ fi
 
 
 if $BUILD_WITH_MSVC; then
+  PLUGIN_BUILD_CPPFLAGS="-DQT_PLUGIN -DQDESIGNER_EXPORT_WIDGETS $PLUGIN_BUILD_CPPFLAGS"
   PLUGIN_BUILD_CPPFLAGS="$PLUGIN_BUILD_CPPFLAGS $sim_ac_msvcrt_CPPFLAGS"
   PLUGIN_BUILD_CXXFLAGS="$PLUGIN_BUILD_CPPFLAGS $sim_ac_msvcrt_CXXFLAGS"
   PLUGIN_BUILD_CFLAGS="$PLUGIN_BUILD_CPPFLAGS $sim_ac_msvcrt_CFLAGS"

@@ -26,7 +26,7 @@ lib_LTLIBRARIES = libQuarterWidgetPlugin.la
 endif
 
 libQuarterWidgetPlugin_la_LIBADD = \
-        $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner -lQtOpenGL
+        $(QUARTER_USE_LDFLAGS) $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner -lQtOpenGL
 
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_LIBADD = \
         $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner4 -lQtOpenGL4
@@ -64,12 +64,14 @@ QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib: Makefile \
           $(PLUGIN_BUILD_LIBFLAGS) \
 	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \
 	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_LIBADD) \
+          $(QUARTER_USE_LDFLAGS) \
           $(COIN_USE_LDFLAGS) \
           $(QT_USE_LDFLAGS)
 	$(CC) $(LDFLAGS) \
           $(PLUGIN_BUILD_LIBFLAGS) \
 	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \
 	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_LIBADD) \
+          $(QUARTER_USE_LDFLAGS) \
           $(COIN_USE_LDFLAGS) \
           $(QT_USE_LDFLAGS)
 
