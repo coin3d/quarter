@@ -52,7 +52,13 @@ libQuarterWidgetPlugin_la_lib_CFLAGS = \
 libdir = $(QTDIR)/plugins/designer
 bindir = $(QTDIR)/plugins/designer
 
-CLEANFILES = $(BuiltSources) .\#* *.bak *~ *.lst *.exp *.pdb *.manifest
+CLEANFILES = \
+        $(BuiltSources) \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.dll \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.exp \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.pdb \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.dll.manifest
 
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib: Makefile \
 	$(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \

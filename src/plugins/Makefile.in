@@ -227,7 +227,14 @@ libQuarterWidgetPlugin_la_lib_CFLAGS = \
         $(PLUGIN_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
 
 
-CLEANFILES = $(BuiltSources) .\#* *.bak *~ *.lst *.exp *.pdb *.manifest
+CLEANFILES = \
+        $(BuiltSources) \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.dll \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.exp \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.pdb \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.dll.manifest
+
 subdir = src/plugins
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs

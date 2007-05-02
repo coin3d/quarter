@@ -14,6 +14,12 @@ bin_PROGRAMS = viewer
 
 viewer_SOURCES = viewer.cpp
 
+CLEANFILES = \
+        viewer.exe \
+        viewer.pdb \
+        viewer.exe.manifest
+
+
 if BUILD_WITH_MSVC
 viewer_LDADD = \
         $(QUARTER_USE_LIBS) \

@@ -185,6 +185,12 @@ bin_PROGRAMS = viewer
 
 viewer_SOURCES = viewer.cpp
 
+CLEANFILES = \
+        viewer.exe \
+        viewer.pdb \
+        viewer.exe.manifest
+
+
 @BUILD_WITH_MSVC_TRUE@viewer_LDADD = \
 @BUILD_WITH_MSVC_TRUE@        $(QUARTER_USE_LIBS) \
 @BUILD_WITH_MSVC_TRUE@        $(COIN_USE_LIBS) \
@@ -474,6 +480,7 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-rm -f Makefile $(CONFIG_CLEAN_FILES)

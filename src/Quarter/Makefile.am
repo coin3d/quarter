@@ -66,7 +66,14 @@ Quarter@QUARTER_MAJOR_VERSION@_lib_LIBADD = \
         devices/devices.lst -lNutsnBolts0 $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL4
 
 
-CLEANFILES = $(BuiltSources) .\#* *.bak *~ *.lst
+CLEANFILES = \
+        $(BuiltSources) \
+        Quarter@QUARTER_MAJOR_VERSION@.lib \
+        Quarter@QUARTER_MAJOR_VERSION@.exp \
+        Quarter@QUARTER_MAJOR_VERSION@.dll \
+        Quarter@QUARTER_MAJOR_VERSION@.pdb \
+        Quarter@QUARTER_MAJOR_VERSION@.dll.manifest
+
 
 Quarter@QUARTER_MAJOR_VERSION@.lib: Makefile \
 	$(Quarter@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \
