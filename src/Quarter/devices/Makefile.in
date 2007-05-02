@@ -45,9 +45,16 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BUILD_WITH_MSVC = @BUILD_WITH_MSVC@
+BUILD_WITH_MSVC_FALSE = @BUILD_WITH_MSVC_FALSE@
+BUILD_WITH_MSVC_TRUE = @BUILD_WITH_MSVC_TRUE@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+COIN_USE_CPPFLAGS = @COIN_USE_CPPFLAGS@
+COIN_USE_CXXFLAGS = @COIN_USE_CXXFLAGS@
+COIN_USE_LDFLAGS = @COIN_USE_LDFLAGS@
+COIN_USE_LIBS = @COIN_USE_LIBS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CXX = @CXX@
@@ -88,11 +95,37 @@ PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PLUGIN_BUILD_CFLAGS = @PLUGIN_BUILD_CFLAGS@
+PLUGIN_BUILD_CPPFLAGS = @PLUGIN_BUILD_CPPFLAGS@
+PLUGIN_BUILD_CXXFLAGS = @PLUGIN_BUILD_CXXFLAGS@
+PLUGIN_BUILD_LIBFLAGS = @PLUGIN_BUILD_LIBFLAGS@
+QT_USE_CPPFLAGS = @QT_USE_CPPFLAGS@
+QT_USE_CXXFLAGS = @QT_USE_CXXFLAGS@
+QT_USE_LDFLAGS = @QT_USE_LDFLAGS@
+QT_USE_LIBS = @QT_USE_LIBS@
+QUARTER_BETA_VERSION = @QUARTER_BETA_VERSION@
+QUARTER_BUILD_CFLAGS = @QUARTER_BUILD_CFLAGS@
+QUARTER_BUILD_CPPFLAGS = @QUARTER_BUILD_CPPFLAGS@
+QUARTER_BUILD_CXXFLAGS = @QUARTER_BUILD_CXXFLAGS@
+QUARTER_LIBFLAGS = @QUARTER_LIBFLAGS@
+QUARTER_MAJOR_VERSION = @QUARTER_MAJOR_VERSION@
+QUARTER_MICRO_VERSION = @QUARTER_MICRO_VERSION@
+QUARTER_MINOR_VERSION = @QUARTER_MINOR_VERSION@
+QUARTER_USE_CPPFLAGS = @QUARTER_USE_CPPFLAGS@
+QUARTER_USE_LDFLAGS = @QUARTER_USE_LDFLAGS@
+QUARTER_USE_LIBS = @QUARTER_USE_LIBS@
+QUARTER_VERSION = @QUARTER_VERSION@
 RANLIB = @RANLIB@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
+SUFFIX = @SUFFIX@
 VERSION = @VERSION@
+VIEWER_BUILD_CFLAGS = @VIEWER_BUILD_CFLAGS@
+VIEWER_BUILD_CPPFLAGS = @VIEWER_BUILD_CPPFLAGS@
+VIEWER_BUILD_CXXFLAGS = @VIEWER_BUILD_CXXFLAGS@
+VIEWER_BUILD_LDFLAGS = @VIEWER_BUILD_LDFLAGS@
+VIEWER_BUILD_LIBFLAGS = @VIEWER_BUILD_LIBFLAGS@
 ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
@@ -137,12 +170,15 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
 DEFAULT_INCLUDES = \
+        -I$(QTDIR)/include \
         -I$(QTDIR)/include/QtOpenGL \
         -I$(QTDIR)/include/QtGui \
         -I$(QTDIR)/include/QtCore \
         -I$(top_srcdir)/include \
         -I$(top_srcdir)/src/Quarter
 
+
+CLEANFILES = .\#* *.bak *~ *.lst
 
 PrivateHeaders = \
         KeyboardHandlerP.h
@@ -161,29 +197,78 @@ libdevices_la_SOURCES = \
         $(RegularSources) $(PrivateHeaders)
 
 
-noinst_LTLIBRARIES = libdevices.la
+devices_lst_SOURCES = \
+        $(RegularSources) $(PrivateHeaders)
+
+
+devices_lst_CPPFLAGS = \
+        $(QUARTER_BUILD_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
+
+
+devices_lst_CXXFLAGS = \
+        $(QUARTER_BUILD_CXXFLAGS) $(COIN_USE_CXXFLAGS) $(QT_USE_CXXFLAGS)
+
+
+devices_lst_CFLAGS = \
+        $(QUARTER_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
+
+
+libdevices_la_CPPFLAGS = \
+        $(QUARTER_BUILD_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
+
+
+libdevices_la_CXXFLAGS = \
+        $(QUARTER_BUILD_CXXFLAGS) $(COIN_USE_CXXFLAGS) $(QT_USE_CXXFLAGS)
+
+
+libdevices_la_CFLAGS = \
+        $(QUARTER_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
+
+
+@BUILD_WITH_MSVC_TRUE@noinst_LIBRARIES = devices.lst
+@BUILD_WITH_MSVC_FALSE@noinst_LTLIBRARIES = libdevices.la
 subdir = src/Quarter/devices
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
+LIBRARIES = $(noinst_LIBRARIES)
+
+devices_lst_AR = $(AR) cru
+devices_lst_LIBADD =
+am__objects_1 = devices_lst-DeviceManager.$(OBJEXT) \
+	devices_lst-MouseHandler.$(OBJEXT) \
+	devices_lst-KeyboardHandler.$(OBJEXT) \
+	devices_lst-DragDropHandler.$(OBJEXT) \
+	devices_lst-DeviceHandler.$(OBJEXT) \
+	devices_lst-KeyboardHandlerP.$(OBJEXT)
+am__objects_2 =
+am_devices_lst_OBJECTS = $(am__objects_1) $(am__objects_2)
+devices_lst_OBJECTS = $(am_devices_lst_OBJECTS)
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 
 libdevices_la_LDFLAGS =
 libdevices_la_LIBADD =
-am__objects_1 = DeviceManager.lo MouseHandler.lo KeyboardHandler.lo \
-	DragDropHandler.lo DeviceHandler.lo KeyboardHandlerP.lo
-am__objects_2 =
-am_libdevices_la_OBJECTS = $(am__objects_1) $(am__objects_2)
+am__objects_3 = libdevices_la-DeviceManager.lo \
+	libdevices_la-MouseHandler.lo libdevices_la-KeyboardHandler.lo \
+	libdevices_la-DragDropHandler.lo libdevices_la-DeviceHandler.lo \
+	libdevices_la-KeyboardHandlerP.lo
+am_libdevices_la_OBJECTS = $(am__objects_3) $(am__objects_2)
 libdevices_la_OBJECTS = $(am_libdevices_la_OBJECTS)
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/DeviceHandler.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/DeviceManager.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/DragDropHandler.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/KeyboardHandler.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/KeyboardHandlerP.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/MouseHandler.Plo
+@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/devices_lst-DeviceHandler.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/devices_lst-DeviceManager.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/devices_lst-DragDropHandler.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/devices_lst-KeyboardHandler.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/devices_lst-KeyboardHandlerP.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/devices_lst-MouseHandler.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-DeviceHandler.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-DeviceManager.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-DragDropHandler.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-KeyboardHandler.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-KeyboardHandlerP.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-MouseHandler.Plo
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) \
@@ -199,9 +284,9 @@ LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES = $(libdevices_la_SOURCES)
+DIST_SOURCES = $(devices_lst_SOURCES) $(libdevices_la_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(libdevices_la_SOURCES)
+SOURCES = $(devices_lst_SOURCES) $(libdevices_la_SOURCES)
 
 all: all-am
 
@@ -212,6 +297,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configu
 	  $(AUTOMAKE) --gnu  src/Quarter/devices/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
+
+clean-noinstLIBRARIES:
+	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
 
 clean-noinstLTLIBRARIES:
 	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
@@ -230,12 +318,18 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DeviceHandler.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DeviceManager.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/DragDropHandler.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/KeyboardHandler.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/KeyboardHandlerP.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MouseHandler.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-DeviceHandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-DeviceManager.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-DragDropHandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-KeyboardHandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-KeyboardHandlerP.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-MouseHandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-DeviceHandler.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-DeviceManager.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-DragDropHandler.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-KeyboardHandler.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-KeyboardHandlerP.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-MouseHandler.Plo@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -272,6 +366,402 @@ distclean-depend:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/$*.Plo' tmpdepfile='$(DEPDIR)/$*.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
+
+devices_lst-DeviceManager.o: DeviceManager.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DeviceManager.o -MD -MP -MF "$(DEPDIR)/devices_lst-DeviceManager.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-DeviceManager.o `test -f 'DeviceManager.cpp' || echo '$(srcdir)/'`DeviceManager.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-DeviceManager.Tpo" "$(DEPDIR)/devices_lst-DeviceManager.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-DeviceManager.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DeviceManager.cpp' object='devices_lst-DeviceManager.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-DeviceManager.Po' tmpdepfile='$(DEPDIR)/devices_lst-DeviceManager.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-DeviceManager.o `test -f 'DeviceManager.cpp' || echo '$(srcdir)/'`DeviceManager.cpp
+
+devices_lst-DeviceManager.obj: DeviceManager.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DeviceManager.obj -MD -MP -MF "$(DEPDIR)/devices_lst-DeviceManager.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-DeviceManager.obj `if test -f 'DeviceManager.cpp'; then $(CYGPATH_W) 'DeviceManager.cpp'; else $(CYGPATH_W) '$(srcdir)/DeviceManager.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-DeviceManager.Tpo" "$(DEPDIR)/devices_lst-DeviceManager.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-DeviceManager.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DeviceManager.cpp' object='devices_lst-DeviceManager.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-DeviceManager.Po' tmpdepfile='$(DEPDIR)/devices_lst-DeviceManager.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-DeviceManager.obj `if test -f 'DeviceManager.cpp'; then $(CYGPATH_W) 'DeviceManager.cpp'; else $(CYGPATH_W) '$(srcdir)/DeviceManager.cpp'; fi`
+
+devices_lst-DeviceManager.lo: DeviceManager.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DeviceManager.lo -MD -MP -MF "$(DEPDIR)/devices_lst-DeviceManager.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-DeviceManager.lo `test -f 'DeviceManager.cpp' || echo '$(srcdir)/'`DeviceManager.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-DeviceManager.Tpo" "$(DEPDIR)/devices_lst-DeviceManager.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-DeviceManager.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DeviceManager.cpp' object='devices_lst-DeviceManager.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-DeviceManager.Plo' tmpdepfile='$(DEPDIR)/devices_lst-DeviceManager.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-DeviceManager.lo `test -f 'DeviceManager.cpp' || echo '$(srcdir)/'`DeviceManager.cpp
+
+devices_lst-MouseHandler.o: MouseHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-MouseHandler.o -MD -MP -MF "$(DEPDIR)/devices_lst-MouseHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-MouseHandler.o `test -f 'MouseHandler.cpp' || echo '$(srcdir)/'`MouseHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-MouseHandler.Tpo" "$(DEPDIR)/devices_lst-MouseHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-MouseHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='MouseHandler.cpp' object='devices_lst-MouseHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-MouseHandler.Po' tmpdepfile='$(DEPDIR)/devices_lst-MouseHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-MouseHandler.o `test -f 'MouseHandler.cpp' || echo '$(srcdir)/'`MouseHandler.cpp
+
+devices_lst-MouseHandler.obj: MouseHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-MouseHandler.obj -MD -MP -MF "$(DEPDIR)/devices_lst-MouseHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-MouseHandler.obj `if test -f 'MouseHandler.cpp'; then $(CYGPATH_W) 'MouseHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/MouseHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-MouseHandler.Tpo" "$(DEPDIR)/devices_lst-MouseHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-MouseHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='MouseHandler.cpp' object='devices_lst-MouseHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-MouseHandler.Po' tmpdepfile='$(DEPDIR)/devices_lst-MouseHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-MouseHandler.obj `if test -f 'MouseHandler.cpp'; then $(CYGPATH_W) 'MouseHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/MouseHandler.cpp'; fi`
+
+devices_lst-MouseHandler.lo: MouseHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-MouseHandler.lo -MD -MP -MF "$(DEPDIR)/devices_lst-MouseHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-MouseHandler.lo `test -f 'MouseHandler.cpp' || echo '$(srcdir)/'`MouseHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-MouseHandler.Tpo" "$(DEPDIR)/devices_lst-MouseHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-MouseHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='MouseHandler.cpp' object='devices_lst-MouseHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-MouseHandler.Plo' tmpdepfile='$(DEPDIR)/devices_lst-MouseHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-MouseHandler.lo `test -f 'MouseHandler.cpp' || echo '$(srcdir)/'`MouseHandler.cpp
+
+devices_lst-KeyboardHandler.o: KeyboardHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-KeyboardHandler.o -MD -MP -MF "$(DEPDIR)/devices_lst-KeyboardHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-KeyboardHandler.o `test -f 'KeyboardHandler.cpp' || echo '$(srcdir)/'`KeyboardHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-KeyboardHandler.Tpo" "$(DEPDIR)/devices_lst-KeyboardHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-KeyboardHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='KeyboardHandler.cpp' object='devices_lst-KeyboardHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-KeyboardHandler.Po' tmpdepfile='$(DEPDIR)/devices_lst-KeyboardHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-KeyboardHandler.o `test -f 'KeyboardHandler.cpp' || echo '$(srcdir)/'`KeyboardHandler.cpp
+
+devices_lst-KeyboardHandler.obj: KeyboardHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-KeyboardHandler.obj -MD -MP -MF "$(DEPDIR)/devices_lst-KeyboardHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-KeyboardHandler.obj `if test -f 'KeyboardHandler.cpp'; then $(CYGPATH_W) 'KeyboardHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/KeyboardHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-KeyboardHandler.Tpo" "$(DEPDIR)/devices_lst-KeyboardHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-KeyboardHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='KeyboardHandler.cpp' object='devices_lst-KeyboardHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-KeyboardHandler.Po' tmpdepfile='$(DEPDIR)/devices_lst-KeyboardHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-KeyboardHandler.obj `if test -f 'KeyboardHandler.cpp'; then $(CYGPATH_W) 'KeyboardHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/KeyboardHandler.cpp'; fi`
+
+devices_lst-KeyboardHandler.lo: KeyboardHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-KeyboardHandler.lo -MD -MP -MF "$(DEPDIR)/devices_lst-KeyboardHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-KeyboardHandler.lo `test -f 'KeyboardHandler.cpp' || echo '$(srcdir)/'`KeyboardHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-KeyboardHandler.Tpo" "$(DEPDIR)/devices_lst-KeyboardHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-KeyboardHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='KeyboardHandler.cpp' object='devices_lst-KeyboardHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-KeyboardHandler.Plo' tmpdepfile='$(DEPDIR)/devices_lst-KeyboardHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-KeyboardHandler.lo `test -f 'KeyboardHandler.cpp' || echo '$(srcdir)/'`KeyboardHandler.cpp
+
+devices_lst-DragDropHandler.o: DragDropHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DragDropHandler.o -MD -MP -MF "$(DEPDIR)/devices_lst-DragDropHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-DragDropHandler.o `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-DragDropHandler.Tpo" "$(DEPDIR)/devices_lst-DragDropHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-DragDropHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DragDropHandler.cpp' object='devices_lst-DragDropHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-DragDropHandler.Po' tmpdepfile='$(DEPDIR)/devices_lst-DragDropHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-DragDropHandler.o `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp
+
+devices_lst-DragDropHandler.obj: DragDropHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DragDropHandler.obj -MD -MP -MF "$(DEPDIR)/devices_lst-DragDropHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-DragDropHandler.obj `if test -f 'DragDropHandler.cpp'; then $(CYGPATH_W) 'DragDropHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/DragDropHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-DragDropHandler.Tpo" "$(DEPDIR)/devices_lst-DragDropHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-DragDropHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DragDropHandler.cpp' object='devices_lst-DragDropHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-DragDropHandler.Po' tmpdepfile='$(DEPDIR)/devices_lst-DragDropHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-DragDropHandler.obj `if test -f 'DragDropHandler.cpp'; then $(CYGPATH_W) 'DragDropHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/DragDropHandler.cpp'; fi`
+
+devices_lst-DragDropHandler.lo: DragDropHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DragDropHandler.lo -MD -MP -MF "$(DEPDIR)/devices_lst-DragDropHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-DragDropHandler.lo `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-DragDropHandler.Tpo" "$(DEPDIR)/devices_lst-DragDropHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-DragDropHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DragDropHandler.cpp' object='devices_lst-DragDropHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-DragDropHandler.Plo' tmpdepfile='$(DEPDIR)/devices_lst-DragDropHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-DragDropHandler.lo `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp
+
+devices_lst-DeviceHandler.o: DeviceHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DeviceHandler.o -MD -MP -MF "$(DEPDIR)/devices_lst-DeviceHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-DeviceHandler.o `test -f 'DeviceHandler.cpp' || echo '$(srcdir)/'`DeviceHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-DeviceHandler.Tpo" "$(DEPDIR)/devices_lst-DeviceHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-DeviceHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DeviceHandler.cpp' object='devices_lst-DeviceHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-DeviceHandler.Po' tmpdepfile='$(DEPDIR)/devices_lst-DeviceHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-DeviceHandler.o `test -f 'DeviceHandler.cpp' || echo '$(srcdir)/'`DeviceHandler.cpp
+
+devices_lst-DeviceHandler.obj: DeviceHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DeviceHandler.obj -MD -MP -MF "$(DEPDIR)/devices_lst-DeviceHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-DeviceHandler.obj `if test -f 'DeviceHandler.cpp'; then $(CYGPATH_W) 'DeviceHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/DeviceHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-DeviceHandler.Tpo" "$(DEPDIR)/devices_lst-DeviceHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-DeviceHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DeviceHandler.cpp' object='devices_lst-DeviceHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-DeviceHandler.Po' tmpdepfile='$(DEPDIR)/devices_lst-DeviceHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-DeviceHandler.obj `if test -f 'DeviceHandler.cpp'; then $(CYGPATH_W) 'DeviceHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/DeviceHandler.cpp'; fi`
+
+devices_lst-DeviceHandler.lo: DeviceHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DeviceHandler.lo -MD -MP -MF "$(DEPDIR)/devices_lst-DeviceHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-DeviceHandler.lo `test -f 'DeviceHandler.cpp' || echo '$(srcdir)/'`DeviceHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-DeviceHandler.Tpo" "$(DEPDIR)/devices_lst-DeviceHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-DeviceHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DeviceHandler.cpp' object='devices_lst-DeviceHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-DeviceHandler.Plo' tmpdepfile='$(DEPDIR)/devices_lst-DeviceHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-DeviceHandler.lo `test -f 'DeviceHandler.cpp' || echo '$(srcdir)/'`DeviceHandler.cpp
+
+devices_lst-KeyboardHandlerP.o: KeyboardHandlerP.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-KeyboardHandlerP.o -MD -MP -MF "$(DEPDIR)/devices_lst-KeyboardHandlerP.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-KeyboardHandlerP.o `test -f 'KeyboardHandlerP.cpp' || echo '$(srcdir)/'`KeyboardHandlerP.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-KeyboardHandlerP.Tpo" "$(DEPDIR)/devices_lst-KeyboardHandlerP.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-KeyboardHandlerP.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='KeyboardHandlerP.cpp' object='devices_lst-KeyboardHandlerP.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-KeyboardHandlerP.Po' tmpdepfile='$(DEPDIR)/devices_lst-KeyboardHandlerP.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-KeyboardHandlerP.o `test -f 'KeyboardHandlerP.cpp' || echo '$(srcdir)/'`KeyboardHandlerP.cpp
+
+devices_lst-KeyboardHandlerP.obj: KeyboardHandlerP.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-KeyboardHandlerP.obj -MD -MP -MF "$(DEPDIR)/devices_lst-KeyboardHandlerP.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-KeyboardHandlerP.obj `if test -f 'KeyboardHandlerP.cpp'; then $(CYGPATH_W) 'KeyboardHandlerP.cpp'; else $(CYGPATH_W) '$(srcdir)/KeyboardHandlerP.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-KeyboardHandlerP.Tpo" "$(DEPDIR)/devices_lst-KeyboardHandlerP.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-KeyboardHandlerP.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='KeyboardHandlerP.cpp' object='devices_lst-KeyboardHandlerP.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-KeyboardHandlerP.Po' tmpdepfile='$(DEPDIR)/devices_lst-KeyboardHandlerP.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-KeyboardHandlerP.obj `if test -f 'KeyboardHandlerP.cpp'; then $(CYGPATH_W) 'KeyboardHandlerP.cpp'; else $(CYGPATH_W) '$(srcdir)/KeyboardHandlerP.cpp'; fi`
+
+devices_lst-KeyboardHandlerP.lo: KeyboardHandlerP.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-KeyboardHandlerP.lo -MD -MP -MF "$(DEPDIR)/devices_lst-KeyboardHandlerP.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o devices_lst-KeyboardHandlerP.lo `test -f 'KeyboardHandlerP.cpp' || echo '$(srcdir)/'`KeyboardHandlerP.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-KeyboardHandlerP.Tpo" "$(DEPDIR)/devices_lst-KeyboardHandlerP.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-KeyboardHandlerP.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='KeyboardHandlerP.cpp' object='devices_lst-KeyboardHandlerP.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-KeyboardHandlerP.Plo' tmpdepfile='$(DEPDIR)/devices_lst-KeyboardHandlerP.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-KeyboardHandlerP.lo `test -f 'KeyboardHandlerP.cpp' || echo '$(srcdir)/'`KeyboardHandlerP.cpp
+
+libdevices_la-DeviceManager.o: DeviceManager.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DeviceManager.o -MD -MP -MF "$(DEPDIR)/libdevices_la-DeviceManager.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-DeviceManager.o `test -f 'DeviceManager.cpp' || echo '$(srcdir)/'`DeviceManager.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-DeviceManager.Tpo" "$(DEPDIR)/libdevices_la-DeviceManager.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-DeviceManager.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DeviceManager.cpp' object='libdevices_la-DeviceManager.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-DeviceManager.Po' tmpdepfile='$(DEPDIR)/libdevices_la-DeviceManager.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-DeviceManager.o `test -f 'DeviceManager.cpp' || echo '$(srcdir)/'`DeviceManager.cpp
+
+libdevices_la-DeviceManager.obj: DeviceManager.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DeviceManager.obj -MD -MP -MF "$(DEPDIR)/libdevices_la-DeviceManager.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-DeviceManager.obj `if test -f 'DeviceManager.cpp'; then $(CYGPATH_W) 'DeviceManager.cpp'; else $(CYGPATH_W) '$(srcdir)/DeviceManager.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-DeviceManager.Tpo" "$(DEPDIR)/libdevices_la-DeviceManager.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-DeviceManager.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DeviceManager.cpp' object='libdevices_la-DeviceManager.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-DeviceManager.Po' tmpdepfile='$(DEPDIR)/libdevices_la-DeviceManager.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-DeviceManager.obj `if test -f 'DeviceManager.cpp'; then $(CYGPATH_W) 'DeviceManager.cpp'; else $(CYGPATH_W) '$(srcdir)/DeviceManager.cpp'; fi`
+
+libdevices_la-DeviceManager.lo: DeviceManager.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DeviceManager.lo -MD -MP -MF "$(DEPDIR)/libdevices_la-DeviceManager.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-DeviceManager.lo `test -f 'DeviceManager.cpp' || echo '$(srcdir)/'`DeviceManager.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-DeviceManager.Tpo" "$(DEPDIR)/libdevices_la-DeviceManager.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-DeviceManager.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DeviceManager.cpp' object='libdevices_la-DeviceManager.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-DeviceManager.Plo' tmpdepfile='$(DEPDIR)/libdevices_la-DeviceManager.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-DeviceManager.lo `test -f 'DeviceManager.cpp' || echo '$(srcdir)/'`DeviceManager.cpp
+
+libdevices_la-MouseHandler.o: MouseHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-MouseHandler.o -MD -MP -MF "$(DEPDIR)/libdevices_la-MouseHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-MouseHandler.o `test -f 'MouseHandler.cpp' || echo '$(srcdir)/'`MouseHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-MouseHandler.Tpo" "$(DEPDIR)/libdevices_la-MouseHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-MouseHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='MouseHandler.cpp' object='libdevices_la-MouseHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-MouseHandler.Po' tmpdepfile='$(DEPDIR)/libdevices_la-MouseHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-MouseHandler.o `test -f 'MouseHandler.cpp' || echo '$(srcdir)/'`MouseHandler.cpp
+
+libdevices_la-MouseHandler.obj: MouseHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-MouseHandler.obj -MD -MP -MF "$(DEPDIR)/libdevices_la-MouseHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-MouseHandler.obj `if test -f 'MouseHandler.cpp'; then $(CYGPATH_W) 'MouseHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/MouseHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-MouseHandler.Tpo" "$(DEPDIR)/libdevices_la-MouseHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-MouseHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='MouseHandler.cpp' object='libdevices_la-MouseHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-MouseHandler.Po' tmpdepfile='$(DEPDIR)/libdevices_la-MouseHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-MouseHandler.obj `if test -f 'MouseHandler.cpp'; then $(CYGPATH_W) 'MouseHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/MouseHandler.cpp'; fi`
+
+libdevices_la-MouseHandler.lo: MouseHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-MouseHandler.lo -MD -MP -MF "$(DEPDIR)/libdevices_la-MouseHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-MouseHandler.lo `test -f 'MouseHandler.cpp' || echo '$(srcdir)/'`MouseHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-MouseHandler.Tpo" "$(DEPDIR)/libdevices_la-MouseHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-MouseHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='MouseHandler.cpp' object='libdevices_la-MouseHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-MouseHandler.Plo' tmpdepfile='$(DEPDIR)/libdevices_la-MouseHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-MouseHandler.lo `test -f 'MouseHandler.cpp' || echo '$(srcdir)/'`MouseHandler.cpp
+
+libdevices_la-KeyboardHandler.o: KeyboardHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-KeyboardHandler.o -MD -MP -MF "$(DEPDIR)/libdevices_la-KeyboardHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-KeyboardHandler.o `test -f 'KeyboardHandler.cpp' || echo '$(srcdir)/'`KeyboardHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-KeyboardHandler.Tpo" "$(DEPDIR)/libdevices_la-KeyboardHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-KeyboardHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='KeyboardHandler.cpp' object='libdevices_la-KeyboardHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-KeyboardHandler.Po' tmpdepfile='$(DEPDIR)/libdevices_la-KeyboardHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-KeyboardHandler.o `test -f 'KeyboardHandler.cpp' || echo '$(srcdir)/'`KeyboardHandler.cpp
+
+libdevices_la-KeyboardHandler.obj: KeyboardHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-KeyboardHandler.obj -MD -MP -MF "$(DEPDIR)/libdevices_la-KeyboardHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-KeyboardHandler.obj `if test -f 'KeyboardHandler.cpp'; then $(CYGPATH_W) 'KeyboardHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/KeyboardHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-KeyboardHandler.Tpo" "$(DEPDIR)/libdevices_la-KeyboardHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-KeyboardHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='KeyboardHandler.cpp' object='libdevices_la-KeyboardHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-KeyboardHandler.Po' tmpdepfile='$(DEPDIR)/libdevices_la-KeyboardHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-KeyboardHandler.obj `if test -f 'KeyboardHandler.cpp'; then $(CYGPATH_W) 'KeyboardHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/KeyboardHandler.cpp'; fi`
+
+libdevices_la-KeyboardHandler.lo: KeyboardHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-KeyboardHandler.lo -MD -MP -MF "$(DEPDIR)/libdevices_la-KeyboardHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-KeyboardHandler.lo `test -f 'KeyboardHandler.cpp' || echo '$(srcdir)/'`KeyboardHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-KeyboardHandler.Tpo" "$(DEPDIR)/libdevices_la-KeyboardHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-KeyboardHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='KeyboardHandler.cpp' object='libdevices_la-KeyboardHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-KeyboardHandler.Plo' tmpdepfile='$(DEPDIR)/libdevices_la-KeyboardHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-KeyboardHandler.lo `test -f 'KeyboardHandler.cpp' || echo '$(srcdir)/'`KeyboardHandler.cpp
+
+libdevices_la-DragDropHandler.o: DragDropHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DragDropHandler.o -MD -MP -MF "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-DragDropHandler.o `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo" "$(DEPDIR)/libdevices_la-DragDropHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DragDropHandler.cpp' object='libdevices_la-DragDropHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-DragDropHandler.Po' tmpdepfile='$(DEPDIR)/libdevices_la-DragDropHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-DragDropHandler.o `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp
+
+libdevices_la-DragDropHandler.obj: DragDropHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DragDropHandler.obj -MD -MP -MF "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-DragDropHandler.obj `if test -f 'DragDropHandler.cpp'; then $(CYGPATH_W) 'DragDropHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/DragDropHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo" "$(DEPDIR)/libdevices_la-DragDropHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DragDropHandler.cpp' object='libdevices_la-DragDropHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-DragDropHandler.Po' tmpdepfile='$(DEPDIR)/libdevices_la-DragDropHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-DragDropHandler.obj `if test -f 'DragDropHandler.cpp'; then $(CYGPATH_W) 'DragDropHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/DragDropHandler.cpp'; fi`
+
+libdevices_la-DragDropHandler.lo: DragDropHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DragDropHandler.lo -MD -MP -MF "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-DragDropHandler.lo `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo" "$(DEPDIR)/libdevices_la-DragDropHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DragDropHandler.cpp' object='libdevices_la-DragDropHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-DragDropHandler.Plo' tmpdepfile='$(DEPDIR)/libdevices_la-DragDropHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-DragDropHandler.lo `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp
+
+libdevices_la-DeviceHandler.o: DeviceHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DeviceHandler.o -MD -MP -MF "$(DEPDIR)/libdevices_la-DeviceHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-DeviceHandler.o `test -f 'DeviceHandler.cpp' || echo '$(srcdir)/'`DeviceHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-DeviceHandler.Tpo" "$(DEPDIR)/libdevices_la-DeviceHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-DeviceHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DeviceHandler.cpp' object='libdevices_la-DeviceHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-DeviceHandler.Po' tmpdepfile='$(DEPDIR)/libdevices_la-DeviceHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-DeviceHandler.o `test -f 'DeviceHandler.cpp' || echo '$(srcdir)/'`DeviceHandler.cpp
+
+libdevices_la-DeviceHandler.obj: DeviceHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DeviceHandler.obj -MD -MP -MF "$(DEPDIR)/libdevices_la-DeviceHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-DeviceHandler.obj `if test -f 'DeviceHandler.cpp'; then $(CYGPATH_W) 'DeviceHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/DeviceHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-DeviceHandler.Tpo" "$(DEPDIR)/libdevices_la-DeviceHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-DeviceHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DeviceHandler.cpp' object='libdevices_la-DeviceHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-DeviceHandler.Po' tmpdepfile='$(DEPDIR)/libdevices_la-DeviceHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-DeviceHandler.obj `if test -f 'DeviceHandler.cpp'; then $(CYGPATH_W) 'DeviceHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/DeviceHandler.cpp'; fi`
+
+libdevices_la-DeviceHandler.lo: DeviceHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DeviceHandler.lo -MD -MP -MF "$(DEPDIR)/libdevices_la-DeviceHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-DeviceHandler.lo `test -f 'DeviceHandler.cpp' || echo '$(srcdir)/'`DeviceHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-DeviceHandler.Tpo" "$(DEPDIR)/libdevices_la-DeviceHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-DeviceHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DeviceHandler.cpp' object='libdevices_la-DeviceHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-DeviceHandler.Plo' tmpdepfile='$(DEPDIR)/libdevices_la-DeviceHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-DeviceHandler.lo `test -f 'DeviceHandler.cpp' || echo '$(srcdir)/'`DeviceHandler.cpp
+
+libdevices_la-KeyboardHandlerP.o: KeyboardHandlerP.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-KeyboardHandlerP.o -MD -MP -MF "$(DEPDIR)/libdevices_la-KeyboardHandlerP.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-KeyboardHandlerP.o `test -f 'KeyboardHandlerP.cpp' || echo '$(srcdir)/'`KeyboardHandlerP.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-KeyboardHandlerP.Tpo" "$(DEPDIR)/libdevices_la-KeyboardHandlerP.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-KeyboardHandlerP.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='KeyboardHandlerP.cpp' object='libdevices_la-KeyboardHandlerP.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-KeyboardHandlerP.Po' tmpdepfile='$(DEPDIR)/libdevices_la-KeyboardHandlerP.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-KeyboardHandlerP.o `test -f 'KeyboardHandlerP.cpp' || echo '$(srcdir)/'`KeyboardHandlerP.cpp
+
+libdevices_la-KeyboardHandlerP.obj: KeyboardHandlerP.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-KeyboardHandlerP.obj -MD -MP -MF "$(DEPDIR)/libdevices_la-KeyboardHandlerP.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-KeyboardHandlerP.obj `if test -f 'KeyboardHandlerP.cpp'; then $(CYGPATH_W) 'KeyboardHandlerP.cpp'; else $(CYGPATH_W) '$(srcdir)/KeyboardHandlerP.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-KeyboardHandlerP.Tpo" "$(DEPDIR)/libdevices_la-KeyboardHandlerP.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-KeyboardHandlerP.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='KeyboardHandlerP.cpp' object='libdevices_la-KeyboardHandlerP.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-KeyboardHandlerP.Po' tmpdepfile='$(DEPDIR)/libdevices_la-KeyboardHandlerP.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-KeyboardHandlerP.obj `if test -f 'KeyboardHandlerP.cpp'; then $(CYGPATH_W) 'KeyboardHandlerP.cpp'; else $(CYGPATH_W) '$(srcdir)/KeyboardHandlerP.cpp'; fi`
+
+libdevices_la-KeyboardHandlerP.lo: KeyboardHandlerP.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-KeyboardHandlerP.lo -MD -MP -MF "$(DEPDIR)/libdevices_la-KeyboardHandlerP.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libdevices_la-KeyboardHandlerP.lo `test -f 'KeyboardHandlerP.cpp' || echo '$(srcdir)/'`KeyboardHandlerP.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-KeyboardHandlerP.Tpo" "$(DEPDIR)/libdevices_la-KeyboardHandlerP.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-KeyboardHandlerP.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='KeyboardHandlerP.cpp' object='libdevices_la-KeyboardHandlerP.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-KeyboardHandlerP.Plo' tmpdepfile='$(DEPDIR)/libdevices_la-KeyboardHandlerP.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-KeyboardHandlerP.lo `test -f 'KeyboardHandlerP.cpp' || echo '$(srcdir)/'`KeyboardHandlerP.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -370,7 +860,7 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(LTLIBRARIES)
+all-am: Makefile $(LIBRARIES) $(LTLIBRARIES)
 
 installdirs:
 install: install-am
@@ -390,6 +880,7 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-rm -f Makefile $(CONFIG_CLEAN_FILES)
@@ -399,8 +890,8 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-generic clean-libtool clean-noinstLTLIBRARIES \
-	mostlyclean-am
+clean-am: clean-generic clean-libtool clean-noinstLIBRARIES \
+	clean-noinstLTLIBRARIES mostlyclean-am
 
 distclean: distclean-am
 
@@ -445,17 +936,24 @@ ps-am:
 uninstall-am: uninstall-info-am
 
 .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
-	clean-libtool clean-noinstLTLIBRARIES ctags distclean \
-	distclean-compile distclean-depend distclean-generic \
-	distclean-libtool distclean-tags distdir dvi dvi-am info \
-	info-am install install-am install-data install-data-am \
-	install-exec install-exec-am install-info install-info-am \
-	install-man install-strip installcheck installcheck-am \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags uninstall \
-	uninstall-am uninstall-info-am
+	clean-libtool clean-noinstLIBRARIES clean-noinstLTLIBRARIES \
+	ctags distclean distclean-compile distclean-depend \
+	distclean-generic distclean-libtool distclean-tags distdir dvi \
+	dvi-am info info-am install install-am install-data \
+	install-data-am install-exec install-exec-am install-info \
+	install-info-am install-man install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags uninstall uninstall-am uninstall-info-am
 
+
+devices.lst: $(devices_lst_OBJECTS)
+	@echo "Linking $@..."; \
+	rm -f $@; \
+	for obj in $(devices_lst_OBJECTS); do \
+	  echo $$obj >>$@; \
+	done
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

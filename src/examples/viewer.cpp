@@ -43,18 +43,22 @@ int main(int argc, char *argv[])
 {
   QuarterApplication app(argc, argv);
 
-  QFile file("quarterwidget.ui");
-  if (!file.open(QFile::ReadOnly)) {
-    assert(0 && "could not open ui file");
-  }
-  QUiLoader loader;
-  QWidget * widget = loader.load(&file);
-  assert(widget);
-  file.close();
+//   QFile file("quarterwidget.ui");
+//   if (!file.open(QFile::ReadOnly)) {
+//     assert(0 && "could not open ui file");
+//   }
+//   QUiLoader loader;
+//   QWidget * widget = loader.load(&file);
+//   assert(widget);
+//   file.close();
 
-  QuarterWidget * viewer = qFindChild<QuarterWidget *>(widget, "QuarterWidget");
-  assert(viewer);
-  viewer->getDeviceManager()->registerDevice(new DragDropHandler);
+//   QuarterWidget * viewer = qFindChild<QuarterWidget *>(widget, "QuarterWidget");
+//   assert(viewer);
+//   viewer->getDeviceManager()->registerDevice(new DragDropHandler);
+//   viewer->setSceneGraph(new SoCone);
+
+
+  QuarterWidget * viewer = new QuarterWidget;
   viewer->setSceneGraph(new SoCone);
 
   SoSeparator * overlayroot = new SoSeparator;
@@ -76,6 +80,6 @@ int main(int argc, char *argv[])
 
   (void)viewer->getSceneManager()->addSuperimposition(overlayroot);
 
-  widget->show();  
+  viewer->show();  
   return app.exec();
 }

@@ -45,9 +45,16 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BUILD_WITH_MSVC = @BUILD_WITH_MSVC@
+BUILD_WITH_MSVC_FALSE = @BUILD_WITH_MSVC_FALSE@
+BUILD_WITH_MSVC_TRUE = @BUILD_WITH_MSVC_TRUE@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
+COIN_USE_CPPFLAGS = @COIN_USE_CPPFLAGS@
+COIN_USE_CXXFLAGS = @COIN_USE_CXXFLAGS@
+COIN_USE_LDFLAGS = @COIN_USE_LDFLAGS@
+COIN_USE_LIBS = @COIN_USE_LIBS@
 CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CXX = @CXX@
@@ -88,11 +95,37 @@ PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PLUGIN_BUILD_CFLAGS = @PLUGIN_BUILD_CFLAGS@
+PLUGIN_BUILD_CPPFLAGS = @PLUGIN_BUILD_CPPFLAGS@
+PLUGIN_BUILD_CXXFLAGS = @PLUGIN_BUILD_CXXFLAGS@
+PLUGIN_BUILD_LIBFLAGS = @PLUGIN_BUILD_LIBFLAGS@
+QT_USE_CPPFLAGS = @QT_USE_CPPFLAGS@
+QT_USE_CXXFLAGS = @QT_USE_CXXFLAGS@
+QT_USE_LDFLAGS = @QT_USE_LDFLAGS@
+QT_USE_LIBS = @QT_USE_LIBS@
+QUARTER_BETA_VERSION = @QUARTER_BETA_VERSION@
+QUARTER_BUILD_CFLAGS = @QUARTER_BUILD_CFLAGS@
+QUARTER_BUILD_CPPFLAGS = @QUARTER_BUILD_CPPFLAGS@
+QUARTER_BUILD_CXXFLAGS = @QUARTER_BUILD_CXXFLAGS@
+QUARTER_LIBFLAGS = @QUARTER_LIBFLAGS@
+QUARTER_MAJOR_VERSION = @QUARTER_MAJOR_VERSION@
+QUARTER_MICRO_VERSION = @QUARTER_MICRO_VERSION@
+QUARTER_MINOR_VERSION = @QUARTER_MINOR_VERSION@
+QUARTER_USE_CPPFLAGS = @QUARTER_USE_CPPFLAGS@
+QUARTER_USE_LDFLAGS = @QUARTER_USE_LDFLAGS@
+QUARTER_USE_LIBS = @QUARTER_USE_LIBS@
+QUARTER_VERSION = @QUARTER_VERSION@
 RANLIB = @RANLIB@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
+SUFFIX = @SUFFIX@
 VERSION = @VERSION@
+VIEWER_BUILD_CFLAGS = @VIEWER_BUILD_CFLAGS@
+VIEWER_BUILD_CPPFLAGS = @VIEWER_BUILD_CPPFLAGS@
+VIEWER_BUILD_CXXFLAGS = @VIEWER_BUILD_CXXFLAGS@
+VIEWER_BUILD_LDFLAGS = @VIEWER_BUILD_LDFLAGS@
+VIEWER_BUILD_LIBFLAGS = @VIEWER_BUILD_LIBFLAGS@
 ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
@@ -135,19 +168,48 @@ sim_ac_coin_configcmd = @sim_ac_coin_configcmd@
 sim_ac_qt_cygpath = @sim_ac_qt_cygpath@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
+
 DEFAULT_INCLUDES = \
         -I$(top_builddir)/include \
+        -I$(top_srcdir)/include \
+        -I$(QTDIR)/include \
         -I$(QTDIR)/include/QtOpenGL \
         -I$(QTDIR)/include/QtGui \
+        -I$(QTDIR)/include/QtXml \
         -I$(QTDIR)/include/QtCore \
         -I$(QTDIR)/include/QtUiTools \
-        -I$(top_srcdir)/include
+        -I$(QTDIR)/include/QtDesigner
 
 
 bin_PROGRAMS = viewer
 
 viewer_SOURCES = viewer.cpp
-viewer_LDADD = -L../Quarter -lQuarter -lQtUiTools -lQtDesigner
+
+@BUILD_WITH_MSVC_TRUE@viewer_LDADD = \
+@BUILD_WITH_MSVC_TRUE@        $(QUARTER_USE_LIBS) \
+@BUILD_WITH_MSVC_TRUE@        $(COIN_USE_LIBS) \
+@BUILD_WITH_MSVC_TRUE@        $(QT_USE_LIBS) \
+@BUILD_WITH_MSVC_TRUE@        -lQtUiTools \
+@BUILD_WITH_MSVC_TRUE@        -lQtDesigner4 \
+@BUILD_WITH_MSVC_TRUE@        -lQtXml4 \
+@BUILD_WITH_MSVC_TRUE@        -lQtOpenGL4 \
+@BUILD_WITH_MSVC_TRUE@        -lNutsnBolts0
+
+
+@BUILD_WITH_MSVC_FALSE@viewer_LDADD = \
+@BUILD_WITH_MSVC_FALSE@        $(QUARTER_USE_LIBS) \
+@BUILD_WITH_MSVC_FALSE@        $(COIN_USE_LIBS) \
+@BUILD_WITH_MSVC_FALSE@        $(QT_USE_LIBS) \
+@BUILD_WITH_MSVC_FALSE@        -lQtUiTools \
+@BUILD_WITH_MSVC_FALSE@        -lQtDesigner\
+@BUILD_WITH_MSVC_FALSE@        -lQtXml \
+@BUILD_WITH_MSVC_FALSE@        -lNutsnBolts
+
+
+viewer_CPPFLAGS = $(VIEWER_BUILD_CPPFLAGS) $(QUARTER_USE_CPPFLAGS) $(COIN_USE_CPPFLAGS)
+viewer_CXXFLAGS = $(VIEWER_BUILD_CXXFLAGS)
+viewer_CFLAGS = $(VIEWER_BUILD_CFLAGS)
+viewer_LDFLAGS = $(VIEWER_BUILD_LIBFLAGS) $(QUARTER_USE_LDFLAGS) $(COIN_USE_LDFLAGS) $(QT_USE_LDFLAGS)
 subdir = src/examples
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
@@ -156,13 +218,13 @@ CONFIG_CLEAN_FILES =
 bin_PROGRAMS = viewer$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
-am_viewer_OBJECTS = viewer.$(OBJEXT)
+am_viewer_OBJECTS = viewer-viewer.$(OBJEXT)
 viewer_OBJECTS = $(am_viewer_OBJECTS)
-viewer_DEPENDENCIES =
-viewer_LDFLAGS =
+@BUILD_WITH_MSVC_TRUE@viewer_DEPENDENCIES =
+@BUILD_WITH_MSVC_FALSE@viewer_DEPENDENCIES =
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/viewer.Po
+@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/viewer-viewer.Po
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) \
@@ -223,7 +285,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/viewer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/viewer-viewer.Po@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -260,6 +322,39 @@ distclean-depend:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/$*.Plo' tmpdepfile='$(DEPDIR)/$*.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
+
+viewer-viewer.o: viewer.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -MT viewer-viewer.o -MD -MP -MF "$(DEPDIR)/viewer-viewer.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o viewer-viewer.o `test -f 'viewer.cpp' || echo '$(srcdir)/'`viewer.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/viewer-viewer.Tpo" "$(DEPDIR)/viewer-viewer.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/viewer-viewer.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='viewer.cpp' object='viewer-viewer.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/viewer-viewer.Po' tmpdepfile='$(DEPDIR)/viewer-viewer.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -c -o viewer-viewer.o `test -f 'viewer.cpp' || echo '$(srcdir)/'`viewer.cpp
+
+viewer-viewer.obj: viewer.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -MT viewer-viewer.obj -MD -MP -MF "$(DEPDIR)/viewer-viewer.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o viewer-viewer.obj `if test -f 'viewer.cpp'; then $(CYGPATH_W) 'viewer.cpp'; else $(CYGPATH_W) '$(srcdir)/viewer.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/viewer-viewer.Tpo" "$(DEPDIR)/viewer-viewer.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/viewer-viewer.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='viewer.cpp' object='viewer-viewer.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/viewer-viewer.Po' tmpdepfile='$(DEPDIR)/viewer-viewer.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -c -o viewer-viewer.obj `if test -f 'viewer.cpp'; then $(CYGPATH_W) 'viewer.cpp'; else $(CYGPATH_W) '$(srcdir)/viewer.cpp'; fi`
+
+viewer-viewer.lo: viewer.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -MT viewer-viewer.lo -MD -MP -MF "$(DEPDIR)/viewer-viewer.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o viewer-viewer.lo `test -f 'viewer.cpp' || echo '$(srcdir)/'`viewer.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/viewer-viewer.Tpo" "$(DEPDIR)/viewer-viewer.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/viewer-viewer.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='viewer.cpp' object='viewer-viewer.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/viewer-viewer.Plo' tmpdepfile='$(DEPDIR)/viewer-viewer.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -c -o viewer-viewer.lo `test -f 'viewer.cpp' || echo '$(srcdir)/'`viewer.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
