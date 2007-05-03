@@ -586,7 +586,7 @@ uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 	uninstall-am uninstall-binPROGRAMS uninstall-info-am
 
 
-qrc_viewer.cpp: $(srcdir)/viewer.qrc
+qrc_viewer.cpp: $(srcdir)/viewer.qrc $(srcdir)/viewer.ui
 	$(RCC) -name viewer $(srcdir)/viewer.qrc -o $@
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

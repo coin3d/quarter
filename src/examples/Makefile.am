@@ -49,5 +49,5 @@ viewer_CXXFLAGS = $(VIEWER_BUILD_CXXFLAGS)
 viewer_CFLAGS = $(VIEWER_BUILD_CFLAGS)
 viewer_LDFLAGS = $(VIEWER_BUILD_LIBFLAGS) $(QUARTER_USE_LDFLAGS) $(COIN_USE_LDFLAGS) $(QT_USE_LDFLAGS)
 
-qrc_viewer.cpp: $(srcdir)/viewer.qrc
+qrc_viewer.cpp: $(srcdir)/viewer.qrc $(srcdir)/viewer.ui
 	$(RCC) -name viewer $(srcdir)/viewer.qrc -o $@
