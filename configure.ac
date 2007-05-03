@@ -88,6 +88,11 @@ if test x"$MOC" = x"false"; then
   SIM_AC_ERROR([no-moc])
 fi
 
+SIM_AC_QT_PROG(RCC, rcc)
+if test x"$RCC" = x"false"; then
+  SIM_AC_ERROR([no-rcc])
+fi
+
 AC_SUBST([COIN_USE_CPPFLAGS])
 AC_SUBST([COIN_USE_CXXFLAGS])
 AC_SUBST([COIN_USE_LDFLAGS])

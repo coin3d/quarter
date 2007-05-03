@@ -12,12 +12,14 @@ DEFAULT_INCLUDES = \
 
 bin_PROGRAMS = viewer
 
-viewer_SOURCES = viewer.cpp
+BuiltSources = qrc_viewer.cpp
+viewer_SOURCES = viewer.cpp $(BuiltSources)
 
 CLEANFILES = \
         viewer.exe \
         viewer.pdb \
-        viewer.exe.manifest
+        viewer.exe.manifest \
+        $(BuiltSources)
 
 
 if BUILD_WITH_MSVC
@@ -46,3 +48,6 @@ viewer_CPPFLAGS = $(VIEWER_BUILD_CPPFLAGS) $(QUARTER_USE_CPPFLAGS) $(COIN_USE_CP
 viewer_CXXFLAGS = $(VIEWER_BUILD_CXXFLAGS)
 viewer_CFLAGS = $(VIEWER_BUILD_CFLAGS)
 viewer_LDFLAGS = $(VIEWER_BUILD_LIBFLAGS) $(QUARTER_USE_LDFLAGS) $(COIN_USE_LDFLAGS) $(QT_USE_LDFLAGS)
+
+qrc_viewer.cpp: $(srcdir)/viewer.qrc
+	$(RCC) -name viewer $(srcdir)/viewer.qrc -o $@
