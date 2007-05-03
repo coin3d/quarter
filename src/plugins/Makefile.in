@@ -189,30 +189,30 @@ libQuarterWidgetPlugin_la_SOURCES = \
         $(RegularSources) $(BuiltSources) $(PrivateHeaders)
 
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_SOURCES = \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
         $(RegularSources) $(BuiltSources) $(PrivateHeaders)
 
 
-@BUILD_WITH_MSVC_TRUE@lib_LIBRARIES = QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib
+@BUILD_WITH_MSVC_TRUE@lib_LIBRARIES = QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 @BUILD_WITH_MSVC_FALSE@lib_LTLIBRARIES = libQuarterWidgetPlugin.la
 
 libQuarterWidgetPlugin_la_LIBADD = \
         $(QUARTER_USE_LDFLAGS) $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner -lQtOpenGL
 
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_LIBADD = \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD = \
         $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner4 -lQtOpenGL4
 
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS = \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS = \
         $(PLUGIN_BUILD_CPPFLAGS) $(QUARTER_USE_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
 
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS = \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS = \
         $(PLUGIN_BUILD_CXXFLAGS) $(COIN_USE_CXXFLAGS) $(QT_USE_CXXFLAGS)
 
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CFLAGS = \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CFLAGS = \
         $(PLUGIN_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
 
 
@@ -230,11 +230,11 @@ libQuarterWidgetPlugin_la_lib_CFLAGS = \
 
 CLEANFILES = \
         $(BuiltSources) \
-        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib \
-        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.dll \
-        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.exp \
-        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.pdb \
-        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.dll.manifest
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.dll \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.exp \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.pdb \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.dll.manifest
 
 subdir = src/plugins
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -243,17 +243,17 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 LIBRARIES = $(lib_LIBRARIES)
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_AR = $(AR) cru
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_DEPENDENCIES =
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_AR = $(AR) cru
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_DEPENDENCIES =
 am__objects_1 = \
-	QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.$(OBJEXT)
+	QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.$(OBJEXT)
 am__objects_2 = \
-	QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.$(OBJEXT)
+	QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.$(OBJEXT)
 am__objects_3 =
-am_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_OBJECTS = \
+am_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
 	$(am__objects_1) $(am__objects_2) $(am__objects_3)
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_OBJECTS = \
-	$(am_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_OBJECTS)
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
+	$(am_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 
 libQuarterWidgetPlugin_la_LDFLAGS =
@@ -267,8 +267,8 @@ libQuarterWidgetPlugin_la_OBJECTS = \
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = \
-@AMDEP_TRUE@	./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarterWidgetPlugin_la-QuarterWidgetPlugin.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarterWidgetPlugin_la-moc_QuarterWidgetPlugin.Plo
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -286,10 +286,11 @@ LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES = $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_SOURCES) \
+DIST_SOURCES = \
+	$(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES) \
 	$(libQuarterWidgetPlugin_la_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_SOURCES) $(libQuarterWidgetPlugin_la_SOURCES)
+SOURCES = $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES) $(libQuarterWidgetPlugin_la_SOURCES)
 
 all: all-am
 
@@ -367,8 +368,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarterWidgetPlugin_la-QuarterWidgetPlugin.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarterWidgetPlugin_la-moc_QuarterWidgetPlugin.Plo@am__quote@
 
@@ -408,71 +409,71 @@ distclean-depend:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.o: QuarterWidgetPlugin.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.o -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.o `test -f 'QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`QuarterWidgetPlugin.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Tpo"; exit 1; \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.o: QuarterWidgetPlugin.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.o -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.o `test -f 'QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`QuarterWidgetPlugin.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Tpo"; exit 1; \
 @am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterWidgetPlugin.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Po' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterWidgetPlugin.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Po' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.o `test -f 'QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`QuarterWidgetPlugin.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.o `test -f 'QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`QuarterWidgetPlugin.cpp
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.obj: QuarterWidgetPlugin.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.obj -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.obj `if test -f 'QuarterWidgetPlugin.cpp'; then $(CYGPATH_W) 'QuarterWidgetPlugin.cpp'; else $(CYGPATH_W) '$(srcdir)/QuarterWidgetPlugin.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Tpo"; exit 1; \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.obj: QuarterWidgetPlugin.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.obj -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.obj `if test -f 'QuarterWidgetPlugin.cpp'; then $(CYGPATH_W) 'QuarterWidgetPlugin.cpp'; else $(CYGPATH_W) '$(srcdir)/QuarterWidgetPlugin.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Tpo"; exit 1; \
 @am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterWidgetPlugin.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Po' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterWidgetPlugin.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Po' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.obj `if test -f 'QuarterWidgetPlugin.cpp'; then $(CYGPATH_W) 'QuarterWidgetPlugin.cpp'; else $(CYGPATH_W) '$(srcdir)/QuarterWidgetPlugin.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.obj `if test -f 'QuarterWidgetPlugin.cpp'; then $(CYGPATH_W) 'QuarterWidgetPlugin.cpp'; else $(CYGPATH_W) '$(srcdir)/QuarterWidgetPlugin.cpp'; fi`
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.lo: QuarterWidgetPlugin.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.lo -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.lo `test -f 'QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`QuarterWidgetPlugin.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Tpo"; exit 1; \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.lo: QuarterWidgetPlugin.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.lo -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.lo `test -f 'QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`QuarterWidgetPlugin.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Tpo"; exit 1; \
 @am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterWidgetPlugin.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.Plo' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterWidgetPlugin.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Plo' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-QuarterWidgetPlugin.lo `test -f 'QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`QuarterWidgetPlugin.cpp
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.lo `test -f 'QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`QuarterWidgetPlugin.cpp
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.o: moc_QuarterWidgetPlugin.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.o -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.o `test -f 'moc_QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`moc_QuarterWidgetPlugin.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Tpo"; exit 1; \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.o: moc_QuarterWidgetPlugin.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.o -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.o `test -f 'moc_QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`moc_QuarterWidgetPlugin.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Tpo"; exit 1; \
 @am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_QuarterWidgetPlugin.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Po' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_QuarterWidgetPlugin.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Po' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.o `test -f 'moc_QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`moc_QuarterWidgetPlugin.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.o `test -f 'moc_QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`moc_QuarterWidgetPlugin.cpp
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.obj: moc_QuarterWidgetPlugin.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.obj -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.obj `if test -f 'moc_QuarterWidgetPlugin.cpp'; then $(CYGPATH_W) 'moc_QuarterWidgetPlugin.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_QuarterWidgetPlugin.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Tpo"; exit 1; \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.obj: moc_QuarterWidgetPlugin.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.obj -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.obj `if test -f 'moc_QuarterWidgetPlugin.cpp'; then $(CYGPATH_W) 'moc_QuarterWidgetPlugin.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_QuarterWidgetPlugin.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Tpo"; exit 1; \
 @am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_QuarterWidgetPlugin.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Po' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_QuarterWidgetPlugin.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Po' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.obj `if test -f 'moc_QuarterWidgetPlugin.cpp'; then $(CYGPATH_W) 'moc_QuarterWidgetPlugin.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_QuarterWidgetPlugin.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.obj `if test -f 'moc_QuarterWidgetPlugin.cpp'; then $(CYGPATH_W) 'moc_QuarterWidgetPlugin.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_QuarterWidgetPlugin.cpp'; fi`
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.lo: moc_QuarterWidgetPlugin.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.lo -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.lo `test -f 'moc_QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`moc_QuarterWidgetPlugin.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Tpo"; exit 1; \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.lo: moc_QuarterWidgetPlugin.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.lo -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.lo `test -f 'moc_QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`moc_QuarterWidgetPlugin.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Tpo"; exit 1; \
 @am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_QuarterWidgetPlugin.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.Plo' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_QuarterWidgetPlugin.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Plo' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib-moc_QuarterWidgetPlugin.lo `test -f 'moc_QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`moc_QuarterWidgetPlugin.cpp
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.lo `test -f 'moc_QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`moc_QuarterWidgetPlugin.cpp
 
 libQuarterWidgetPlugin_la-QuarterWidgetPlugin.o: QuarterWidgetPlugin.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarterWidgetPlugin_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libQuarterWidgetPlugin_la-QuarterWidgetPlugin.o -MD -MP -MF "$(DEPDIR)/libQuarterWidgetPlugin_la-QuarterWidgetPlugin.Tpo" \
@@ -731,23 +732,23 @@ uninstall-am: uninstall-info-am uninstall-libLIBRARIES \
 	uninstall-libLTLIBRARIES uninstall-local
 
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib: Makefile \
-	$(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \
-	$(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_DEPENDENCIES)
-	@basename="QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@"; \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib: Makefile \
+	$(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS) \
+	$(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_DEPENDENCIES)
+	@basename="QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@"; \
 	rm -f "$$basename.dll" "$$basename.lib"; \
 	echo "Linking $$basename.lib..."; \
 	echo $(CC) $(LDFLAGS) \
           $(PLUGIN_BUILD_LIBFLAGS) \
-	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \
-	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_LIBADD) \
+	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS) \
+	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD) \
           $(QUARTER_USE_LDFLAGS) \
           $(COIN_USE_LDFLAGS) \
           $(QT_USE_LDFLAGS)
 	$(CC) $(LDFLAGS) \
           $(PLUGIN_BUILD_LIBFLAGS) \
-	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \
-	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_LIBADD) \
+	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS) \
+	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD) \
           $(QUARTER_USE_LDFLAGS) \
           $(COIN_USE_LDFLAGS) \
           $(QT_USE_LDFLAGS)
@@ -755,7 +756,7 @@ QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib: Makefile \
 moc_QuarterWidgetPlugin.cpp: $(srcdir)/QuarterWidgetPlugin.h
 	$(MOC) -o $@ $(srcdir)/QuarterWidgetPlugin.h $(DEFAULT_INCLUDES)
 
-@BUILD_WITH_MSVC_TRUE@all-local: QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib
+@BUILD_WITH_MSVC_TRUE@all-local: QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 
 @BUILD_WITH_MSVC_TRUE@install-exec-local: QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 @BUILD_WITH_MSVC_TRUE@	@basename="QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@"; \

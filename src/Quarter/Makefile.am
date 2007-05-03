@@ -29,18 +29,18 @@ libQuarter_la_SOURCES = \
         $(BuiltSources) \
         $(PrivateHeaders)
 
-Quarter@QUARTER_MAJOR_VERSION@_lib_SOURCES = \
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
         $(RegularSources) \
         $(BuiltSources) \
         $(PrivateHeaders)
 
-Quarter@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS = \
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS = \
         $(QUARTER_BUILD_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
 
-Quarter@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS = \
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS = \
         $(QUARTER_BUILD_CXXFLAGS) $(COIN_USE_CXXFLAGS) $(QT_USE_CXXFLAGS)
 
-Quarter@QUARTER_MAJOR_VERSION@_lib_CFLAGS = \
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CFLAGS = \
         $(QUARTER_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
 
 libQuarter_la_CPPFLAGS = \
@@ -54,7 +54,7 @@ libQuarter_la_CFLAGS = \
 
 
 if BUILD_WITH_MSVC
-lib_LIBRARIES = Quarter@QUARTER_MAJOR_VERSION@.lib
+lib_LIBRARIES = Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 else
 lib_LTLIBRARIES = libQuarter.la
 endif 
@@ -62,35 +62,35 @@ endif
 libQuarter_la_LIBADD = \
         devices/libdevices.la -lNutsnBolts $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL
 
-Quarter@QUARTER_MAJOR_VERSION@_lib_LIBADD = \
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD = \
         devices/devices.lst -lNutsnBolts0 $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL4
 
 
 CLEANFILES = \
         $(BuiltSources) \
-        Quarter@QUARTER_MAJOR_VERSION@.lib \
-        Quarter@QUARTER_MAJOR_VERSION@.exp \
-        Quarter@QUARTER_MAJOR_VERSION@.dll \
-        Quarter@QUARTER_MAJOR_VERSION@.pdb \
-        Quarter@QUARTER_MAJOR_VERSION@.dll.manifest
+        Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib \
+        Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.exp \
+        Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.dll \
+        Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.pdb \
+        Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.dll.manifest
 
 
-Quarter@QUARTER_MAJOR_VERSION@.lib: Makefile \
-	$(Quarter@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \
-	$(Quarter@QUARTER_MAJOR_VERSION@_lib_DEPENDENCIES)
-	@basename="Quarter@QUARTER_MAJOR_VERSION@"; \
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib: Makefile \
+	$(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS) \
+	$(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_DEPENDENCIES)
+	@basename="Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@"; \
 	rm -f "$$basename.dll" "$$basename.lib"; \
 	echo "Linking $$basename.lib..."; \
 	echo $(CC) $(LDFLAGS) \
           $(QUARTER_LIBFLAGS) \
-	  $(Quarter@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \
-          $(Quarter@QUARTER_MAJOR_VERSION@_lib_LIBADD) \
+	  $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS) \
+          $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD) \
           $(COIN_USE_LDFLAGS) \
           $(QT_USE_LDFLAGS); \
 	$(CC) $(LDFLAGS) \
         $(QUARTER_LIBFLAGS) \
-	  $(Quarter@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \
-	  $(Quarter@QUARTER_MAJOR_VERSION@_lib_LIBADD) \
+	  $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS) \
+	  $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD) \
           $(COIN_USE_LDFLAGS) \
           $(QT_USE_LDFLAGS);
 
@@ -102,7 +102,7 @@ moc_SensorManager.cpp: $(srcdir)/SensorManager.h
 	$(MOC) -o $@ $(srcdir)/SensorManager.h
 
 if BUILD_WITH_MSVC
-all-local: Quarter@QUARTER_MAJOR_VERSION@.lib
+all-local: Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 
 install-exec-local: Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 	@basename="Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@"; \

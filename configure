@@ -20408,10 +20408,36 @@ esac
 if test "${with_suffix+set}" = set; then
   withval="$with_suffix"
   SUFFIX=$withval
+
+if test x"${sim_ac_configuration_settings+set}" = x"set"; then
+  sim_ac_configuration_settings="$sim_ac_configuration_settings|Library Suffix:$SUFFIX"
+else
+  sim_ac_configuration_settings="Library Suffix:$SUFFIX"
+fi
+
 else
   SUFFIX=
 fi;
 
+
+
+if test x"$prefix" = x"NONE"; then
+  prefix=/usr/local
+fi
+
+
+if test x"${sim_ac_configuration_settings+set}" = x"set"; then
+  sim_ac_configuration_settings="$sim_ac_configuration_settings|Installation prefix:$prefix"
+else
+  sim_ac_configuration_settings="Installation prefix:$prefix"
+fi
+
+
+if test x"${sim_ac_configuration_settings+set}" = x"set"; then
+  sim_ac_configuration_settings="$sim_ac_configuration_settings|Library version:0.1.0a"
+else
+  sim_ac_configuration_settings="Library version:0.1.0a"
+fi
 
 
 QUARTER_RELEASE=

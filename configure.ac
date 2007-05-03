@@ -132,10 +132,18 @@ AC_ARG_WITH(
   [suffix],
   [AC_HELP_STRING([--with-suffix=string],
                   [specify library name suffix (e.g. "_g")])],
-  [SUFFIX=$withval],
+  [SUFFIX=$withval]
+  SIM_AC_CONFIGURATION_SETTING([Library Suffix], [$SUFFIX]),
   [SUFFIX=])
 
 AC_SUBST(SUFFIX)
+
+if test x"$prefix" = x"NONE"; then
+  prefix=/usr/local
+fi
+
+SIM_AC_CONFIGURATION_SETTING([Installation prefix], [$prefix])
+SIM_AC_CONFIGURATION_SETTING([Library version], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA])
 
 QUARTER_RELEASE=
 

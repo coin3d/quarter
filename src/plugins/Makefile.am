@@ -15,12 +15,12 @@ BuiltSources = moc_QuarterWidgetPlugin.cpp
 libQuarterWidgetPlugin_la_SOURCES = \
         $(RegularSources) $(BuiltSources) $(PrivateHeaders)
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_SOURCES = \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
         $(RegularSources) $(BuiltSources) $(PrivateHeaders)
 
 
 if BUILD_WITH_MSVC
-lib_LIBRARIES = QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib
+lib_LIBRARIES = QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 else
 lib_LTLIBRARIES = libQuarterWidgetPlugin.la
 endif
@@ -28,16 +28,16 @@ endif
 libQuarterWidgetPlugin_la_LIBADD = \
         $(QUARTER_USE_LDFLAGS) $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner -lQtOpenGL
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_LIBADD = \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD = \
         $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner4 -lQtOpenGL4
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CPPFLAGS = \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS = \
         $(PLUGIN_BUILD_CPPFLAGS) $(QUARTER_USE_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CXXFLAGS = \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS = \
         $(PLUGIN_BUILD_CXXFLAGS) $(COIN_USE_CXXFLAGS) $(QT_USE_CXXFLAGS)
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_CFLAGS = \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CFLAGS = \
         $(PLUGIN_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
 
 libQuarterWidgetPlugin_la_CPPFLAGS = \
@@ -54,29 +54,29 @@ bindir = $(QTDIR)/plugins/designer
 
 CLEANFILES = \
         $(BuiltSources) \
-        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib \
-        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.dll \
-        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.exp \
-        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.pdb \
-        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.dll.manifest
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.dll \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.exp \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.pdb \
+        QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.dll.manifest
 
-QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib: Makefile \
-	$(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \
-	$(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_DEPENDENCIES)
-	@basename="QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@"; \
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib: Makefile \
+	$(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS) \
+	$(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_DEPENDENCIES)
+	@basename="QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@"; \
 	rm -f "$$basename.dll" "$$basename.lib"; \
 	echo "Linking $$basename.lib..."; \
 	echo $(CC) $(LDFLAGS) \
           $(PLUGIN_BUILD_LIBFLAGS) \
-	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \
-	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_LIBADD) \
+	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS) \
+	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD) \
           $(QUARTER_USE_LDFLAGS) \
           $(COIN_USE_LDFLAGS) \
           $(QT_USE_LDFLAGS)
 	$(CC) $(LDFLAGS) \
           $(PLUGIN_BUILD_LIBFLAGS) \
-	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_OBJECTS) \
-	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@_lib_LIBADD) \
+	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS) \
+	  $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD) \
           $(QUARTER_USE_LDFLAGS) \
           $(COIN_USE_LDFLAGS) \
           $(QT_USE_LDFLAGS)
@@ -85,7 +85,7 @@ moc_QuarterWidgetPlugin.cpp: $(srcdir)/QuarterWidgetPlugin.h
 	$(MOC) -o $@ $(srcdir)/QuarterWidgetPlugin.h $(DEFAULT_INCLUDES)
 
 if BUILD_WITH_MSVC
-all-local: QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@.lib
+all-local: QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 
 install-exec-local: QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 	@basename="QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@"; \

@@ -94,6 +94,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
   PRIVATE(this)->scenemanager->setSceneGraph(superscene);
   
   PRIVATE(this)->navigationsystem->viewAll();
+  superscene->touch();
 }
 
 void 
