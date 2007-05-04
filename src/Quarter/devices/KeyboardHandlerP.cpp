@@ -31,7 +31,6 @@ KeyboardHandlerP::KeyboardHandlerP(void)
   this->keyboard = new SoKeyboardEvent;
   
   if (keyboardmap == NULL) {
-    // FIXME: delete these on exit (20070306 frodo)
     keyboardmap = new KeyMap;
     keypadmap = new KeyMap;
     this->initKeyMap();
