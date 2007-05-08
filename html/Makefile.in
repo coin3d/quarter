@@ -14,13 +14,16 @@
 
 @SET_MAKE@
 
+# NOTES:
+#   This Makefile.am relies on $(htmldir) being AC_SUBST'ed into place...
+
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
-top_builddir = ../../..
+top_builddir = ..
 
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = @INSTALL@
@@ -182,31 +185,19 @@ sim_ac_relative_src_dir = @sim_ac_relative_src_dir@
 sim_ac_relative_src_dir_p = @sim_ac_relative_src_dir_p@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-
-libdevicesinc_HEADERS = \
-        DeviceHandler.h \
-        DeviceManager.h \
-        DragDropHandler.h \
-        KeyboardHandler.h \
-        MouseHandler.h
-
-
-libdevicesincdir = $(includedir)/Quarter/devices/.
-subdir = include/Quarter/devices
+subdir = html
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 DIST_SOURCES =
-HEADERS = $(libdevicesinc_HEADERS)
-
-DIST_COMMON = $(libdevicesinc_HEADERS) Makefile.am Makefile.in
+DIST_COMMON = Makefile.am Makefile.in
 all: all-am
 
 .SUFFIXES:
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.ac $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  include/Quarter/devices/Makefile
+	  $(AUTOMAKE) --gnu  html/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -219,81 +210,15 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
-libdevicesincHEADERS_INSTALL = $(INSTALL_HEADER)
-install-libdevicesincHEADERS: $(libdevicesinc_HEADERS)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(libdevicesincdir)
-	@list='$(libdevicesinc_HEADERS)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " $(libdevicesincHEADERS_INSTALL) $$d$$p $(DESTDIR)$(libdevicesincdir)/$$f"; \
-	  $(libdevicesincHEADERS_INSTALL) $$d$$p $(DESTDIR)$(libdevicesincdir)/$$f; \
-	done
-
-uninstall-libdevicesincHEADERS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(libdevicesinc_HEADERS)'; for p in $$list; do \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f $(DESTDIR)$(libdevicesincdir)/$$f"; \
-	  rm -f $(DESTDIR)$(libdevicesincdir)/$$f; \
-	done
-
-ETAGS = etags
-ETAGSFLAGS =
-
-CTAGS = ctags
-CTAGSFLAGS =
-
 tags: TAGS
-
-ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
-	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
-	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
-	  done | \
-	  $(AWK) '    { files[$$0] = 1; } \
-	       END { for (i in files) print i; }'`; \
-	mkid -fID $$unique
-
-TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
-		$(TAGS_FILES) $(LISP)
-	tags=; \
-	here=`pwd`; \
-	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
-	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
-	  done | \
-	  $(AWK) '    { files[$$0] = 1; } \
-	       END { for (i in files) print i; }'`; \
-	test -z "$(ETAGS_ARGS)$$tags$$unique" \
-	  || $(ETAGS) $(ETAGSFLAGS) $(AM_ETAGSFLAGS) $(ETAGS_ARGS) \
-	     $$tags $$unique
+TAGS:
 
 ctags: CTAGS
-CTAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
-		$(TAGS_FILES) $(LISP)
-	tags=; \
-	here=`pwd`; \
-	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
-	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
-	  done | \
-	  $(AWK) '    { files[$$0] = 1; } \
-	       END { for (i in files) print i; }'`; \
-	test -z "$(CTAGS_ARGS)$$tags$$unique" \
-	  || $(CTAGS) $(CTAGSFLAGS) $(AM_CTAGSFLAGS) $(CTAGS_ARGS) \
-	     $$tags $$unique
+CTAGS:
 
-GTAGS:
-	here=`$(am__cd) $(top_builddir) && pwd` \
-	  && cd $(top_srcdir) \
-	  && gtags -i $(GTAGS_ARGS) $$here
-
-distclean-tags:
-	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 
-top_distdir = ../../..
+top_distdir = ..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
 
 distdir: $(DISTFILES)
@@ -325,10 +250,9 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(HEADERS)
+all-am: Makefile all-local
 
 installdirs:
-	$(mkinstalldirs) $(DESTDIR)$(libdevicesincdir)
 install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
@@ -359,8 +283,7 @@ clean-am: clean-generic clean-libtool mostlyclean-am
 
 distclean: distclean-am
 
-distclean-am: clean-am distclean-generic distclean-libtool \
-	distclean-tags
+distclean-am: clean-am distclean-generic distclean-libtool
 
 dvi: dvi-am
 
@@ -370,7 +293,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-libdevicesincHEADERS
+install-data-am: install-data-local
 
 install-exec-am:
 
@@ -396,19 +319,62 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-info-am uninstall-libdevicesincHEADERS
+uninstall-am: uninstall-info-am uninstall-local
 
-.PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
-	clean-libtool ctags distclean distclean-generic \
-	distclean-libtool distclean-tags distdir dvi dvi-am info \
-	info-am install install-am install-data install-data-am \
-	install-exec install-exec-am install-info install-info-am \
-	install-libdevicesincHEADERS install-man install-strip \
+.PHONY: all all-am all-local check check-am clean clean-generic \
+	clean-libtool distclean distclean-generic distclean-libtool \
+	distdir dvi dvi-am info info-am install install-am install-data \
+	install-data-am install-data-local install-exec install-exec-am \
+	install-info install-info-am install-man install-strip \
 	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags uninstall \
-	uninstall-am uninstall-info-am uninstall-libdevicesincHEADERS
+	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am \
+	uninstall-info-am uninstall-local
 
+
+# **************************************************************************
+# build trickery
+
+@BUILD_HTMLPAGES_TRUE@$(top_builddir)/docs/quarter.doxygen: $(top_srcdir)/docs/quarter.doxygen.in $(top_builddir)/config.status
+@BUILD_HTMLPAGES_TRUE@	@( cd $(top_builddir); $(MAKE) docs/quarter.doxygen )
+
+@BUILD_HTMLPAGES_TRUE@index.html: $(top_builddir)/docs/quarter.doxygen
+@BUILD_HTMLPAGES_TRUE@	@( cd ..; \
+@BUILD_HTMLPAGES_TRUE@	echo " $(sim_ac_doxygen_exe) docs/quarter.doxygen"; \
+@BUILD_HTMLPAGES_TRUE@	"$(sim_ac_doxygen_exe)" docs/quarter.doxygen )
+
+@BUILD_HTMLPAGES_TRUE@filelist.txt: index.html
+@BUILD_HTMLPAGES_TRUE@	@if cmp -s $(top_srcdir)/docs/doxygen/Coin_logo.png Coin_logo.png; then :; else \
+@BUILD_HTMLPAGES_TRUE@	  echo  " cp $(top_srcdir)/docs/doxygen/Coin_logo.png ."; \
+@BUILD_HTMLPAGES_TRUE@	  cp $(top_srcdir)/docs/doxygen/Coin_logo.png .; \
+@BUILD_HTMLPAGES_TRUE@	fi
+@BUILD_HTMLPAGES_TRUE@	@ls -1 | egrep '(\.html|\.png|\.gif|\.css|\.tag)$$' >filelist.txt
+
+@BUILD_HTMLPAGES_TRUE@all-local: filelist.txt
+
+@BUILD_HTMLPAGES_TRUE@install-data-local: install-html
+
+@BUILD_HTMLPAGES_TRUE@uninstall-local: uninstall-html
+
+@BUILD_HTMLPAGES_TRUE@install-html: filelist.txt
+@BUILD_HTMLPAGES_TRUE@	@$(NORMAL_INSTALL)
+@BUILD_HTMLPAGES_TRUE@	$(mkinstalldirs) $(DESTDIR)$(htmldir)
+@BUILD_HTMLPAGES_TRUE@	@list="`cat filelist.txt`"; \
+@BUILD_HTMLPAGES_TRUE@	for file in $$list; do \
+@BUILD_HTMLPAGES_TRUE@	  echo " $(INSTALL_DATA) $$file $(DESTDIR)$(htmldir)/$$file"; \
+@BUILD_HTMLPAGES_TRUE@	  $(INSTALL_DATA) $$file "$(DESTDIR)$(htmldir)/$$file"; \
+@BUILD_HTMLPAGES_TRUE@	done
+
+@BUILD_HTMLPAGES_TRUE@uninstall-html: filelist.txt
+@BUILD_HTMLPAGES_TRUE@	@$(NORMAL_UNINSTALL)
+@BUILD_HTMLPAGES_TRUE@	@list="`cat filelist.txt`"; \
+@BUILD_HTMLPAGES_TRUE@	for file in $$list; do \
+@BUILD_HTMLPAGES_TRUE@	  echo " rm -f $(DESTDIR)$(htmldir)/$$file"; \
+@BUILD_HTMLPAGES_TRUE@	  rm -f "$(DESTDIR)$(htmldir)/$$file"; \
+@BUILD_HTMLPAGES_TRUE@	done
+@BUILD_HTMLPAGES_TRUE@	@echo " rmdir $(DESTDIR)$(htmldir)"; \
+@BUILD_HTMLPAGES_TRUE@	rmdir $(DESTDIR)$(htmldir) 2>/dev/null; \
+@BUILD_HTMLPAGES_TRUE@	:
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

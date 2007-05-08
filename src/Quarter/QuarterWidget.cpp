@@ -20,6 +20,11 @@
  *
 \**************************************************************************/
 
+/*!
+  \class QuarterWidget 
+  \brief The QuarterWidget class is 
+*/
+
 #include <assert.h>
 
 #include <Inventor/SbViewportRegion.h>
@@ -43,12 +48,14 @@ using namespace SIM::Coin3D::Quarter;
 
 #define PRIVATE(obj) obj->pimpl
 
+/*! constructor */
 QuarterWidget::QuarterWidget(QWidget * parent)
   : inherited(parent) 
 {
   this->constructor();
 }
 
+/*! constructor */
 QuarterWidget::QuarterWidget(QGLContext * context, QWidget * parent)
   : inherited(context, parent)
 {
@@ -72,6 +79,7 @@ QuarterWidget::constructor(void)
   this->setMouseTracking(TRUE);
 }
 
+/*! destructor */
 QuarterWidget::~QuarterWidget()
 {
   delete PRIVATE(this);

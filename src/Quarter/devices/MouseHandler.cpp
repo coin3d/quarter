@@ -20,6 +20,12 @@
  *
 \**************************************************************************/
 
+/*!
+  \class MouseHandler MouseHandler.h Quarter/MouseHandler.h
+  \brief The MouseHandler class is 
+*/
+
+
 #include <Quarter/devices/MouseHandler.h>
 
 #include <QEvent>

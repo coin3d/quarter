@@ -10,7 +10,7 @@ m4_define([QUARTER_ABI_AGE], [QUARTER_MINOR])
 AC_INIT([Quarter], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA],
   [coin-bugs@coin3d.org])
 
-AC_CONFIG_SRCDIR(src/Quarter/QuarterWidget.cpp)
+AC_CONFIG_SRCDIR(src/Quarter/Quarter.cpp)
 AC_CONFIG_AUX_DIR(cfg)
 AM_CONFIG_HEADER(config.h)
 
@@ -28,7 +28,6 @@ if $BUILD_WITH_MSVC; then
     CFLAGS="$CFLAGS $sim_ac_msvcrt_CFLAGS"
     CXXFLAGS="$CXXFLAGS $sim_ac_msvcrt_CXXFLAGS"
     LDFLAGS="$LDFLAGS $sim_ac_msvcrt_LDFLAGS"
-    #LIBS="$LIBS $sim_ac_msvcrt_LIBS"
   ])
 fi
 
@@ -42,7 +41,7 @@ AC_SUBST([QUARTER_VERSION], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_
 
 VERSION=$QUARTER_VERSION
 
-AM_INIT_AUTOMAKE(Quarter, 1.0)
+AM_INIT_AUTOMAKE(Quarter, $QUARTER_VERSION)
 AM_MAINTAINER_MODE
 AC_PREREQ(2.50)
 AC_PROG_CC
@@ -113,6 +112,14 @@ AC_SUBST([QUARTER_USE_LDFLAGS])
 AC_SUBST([QUARTER_USE_LIBS])
 
 
+# Miscellaneous options and initializations.
+quarter_build_dir=`pwd`
+quarter_src_dir=`cd "$srcdir"; pwd`
+AC_SUBST([quarter_build_dir])
+AC_SUBST([quarter_src_dir])
+
+SIM_AC_RELATIVE_SRC_DIR
+
 # **************************************************************************
 # Figure out if library should be built static or dynamic.
 
@@ -145,6 +152,66 @@ fi
 SIM_AC_CONFIGURATION_SETTING([Installation prefix], [$prefix])
 SIM_AC_CONFIGURATION_SETTING([Library version], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA])
 
+# *******************************************************************
+# * Do we want to build the documentation?
+# *******************************************************************
+
+AC_ARG_VAR([htmldir],
+           [destination for HTML docs (default ${datadir}/Quarter/html)])
+
+AC_ARG_ENABLE(html,
+  AC_HELP_STRING([--enable-html], [build and install Quarter HTML documentation]),
+  [case $enableval in
+    yes | true) want_html=yes ;;
+    *)          want_html=no ;;
+  esac],
+  [want_html=no])
+
+case $htmldir in
+"")
+  htmldir="$datadir/Quarter/html"
+  ;;
+/*)
+  # do nothing - absolute path
+  ;;
+*)
+  htmldir="\${prefix}/$htmldir"
+  ;;
+esac
+
+AC_SUBST(htmldir)
+
+# Used in the Doxygen parameter file.
+AC_SUBST([QUARTER_DOC_HTML], [`echo $want_html | tr '[a-z]' '[A-Z]'`])
+AC_SUBST([quarter_html_dir], [`pwd`/html])
+AM_CONDITIONAL(BUILD_HTMLPAGES, test x"$want_html" = x"yes")
+
+if test x"$want_html" = x"yes"; then
+  SIM_AC_CONFIGURATION_SETTING([HTML installation], [$htmldir])
+fi
+
+# Perl is used for the Doxygen-based doc generation, plus when making
+# NSIS installation packages.
+AC_PATH_PROG(sim_ac_perl_exe, perl, false, $PATH)
+
+if test x"$want_html" = x"yes"; then
+  SIM_AC_DOXYGEN_TOOL([], [SIM_AC_ERROR([no-doxygen])])
+  if test x"$sim_ac_perl_exe" = xfalse; then
+    AC_MSG_ERROR([Could not find the Perl executable, which is needed for Doxygen doc generation.])
+  fi
+fi
+
+# path_tag is used to identify paths in docs/coin.doxygen that needs to be
+# transformed using cygpath under cygwin.
+
+case $host in
+*-cygwin) path_tag="<PATH>" ;;
+*)        path_tag= ;;
+esac
+
+AC_SUBST(path_tag)
+
+
 QUARTER_RELEASE=
 
 if $BUILD_WITH_MSVC; then
@@ -173,7 +240,6 @@ if $BUILD_WITH_MSVC; then
   QUARTER_LIBFLAGS="$QUARTER_LIBFLAGS $sim_ac_msvcrt_LIBLDFLAGS"
   QUARTER_LIBS="$LIBS $sim_ac_msvcrt_LIBLIBS"
 
-  QUARTER_USE_LDFLAGS="-L../Quarter"
   QUARTER_USE_LIBS="-lQuarter${QUARTER_MAJOR_VERSION}${SUFFIX}"
 
   if $QUARTER_STATIC; then
@@ -282,7 +348,8 @@ AC_CONFIG_FILES([
         src/Quarter/Makefile
         src/Quarter/devices/Makefile
         src/examples/Makefile
-        src/plugins/Makefile])
+        src/plugins/Makefile
+        html/Makefile])
 
 AC_OUTPUT
 

@@ -20,6 +20,12 @@
  *
 \**************************************************************************/
 
+/*!
+  \class DeviceManager DeviceManager.h Quarter/DeviceManager.h
+  \brief The DeviceManager class is 
+*/
+
+
 #include <assert.h>
 #include <Quarter/devices/DeviceManager.h>
 #include <Quarter/devices/DeviceHandler.h>

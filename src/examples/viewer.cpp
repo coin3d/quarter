@@ -55,9 +55,14 @@ int main(int argc, char *argv[])
   QuarterWidget * viewer = qFindChild<QuarterWidget *>(widget, "QuarterWidget");
   assert(viewer);
   viewer->getDeviceManager()->registerDevice(new DragDropHandler);
-  viewer->setSceneGraph(new SoCone);
+
+  SoCone * scene = new SoCone;
+  scene->ref();
+
+  viewer->setSceneGraph(scene);
 
   SoSeparator * overlayroot = new SoSeparator;
+  overlayroot->ref();
   SoTranslation * translation = new SoTranslation;
   translation->translation.setValue(SbVec3f(0.1,0.1,0.1));
   SoBaseColor * color = new SoBaseColor;
@@ -76,6 +81,11 @@ int main(int argc, char *argv[])
 
   (void)viewer->getSceneManager()->addSuperimposition(overlayroot);
 
-  widget->show();  
-  return app.exec();
+  widget->show();
+  int retval = app.exec();
+
+  overlayroot->unref();
+  scene->unref();
+
+  return retval;
 }

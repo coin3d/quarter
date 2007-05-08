@@ -20,6 +20,12 @@
  *
 \**************************************************************************/
 
+/*!
+  \class DeviceHandler DeviceHandler.h Quarter/DeviceHandler.h
+  \brief The DeviceHandler class is 
+*/
+
+
 #include <Quarter/devices/DeviceHandler.h>
 
 using namespace SIM::Coin3D::Quarter;

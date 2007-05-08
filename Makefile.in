@@ -45,6 +45,8 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BUILD_HTMLPAGES_FALSE = @BUILD_HTMLPAGES_FALSE@
+BUILD_HTMLPAGES_TRUE = @BUILD_HTMLPAGES_TRUE@
 BUILD_WITH_MSVC = @BUILD_WITH_MSVC@
 BUILD_WITH_MSVC_FALSE = @BUILD_WITH_MSVC_FALSE@
 BUILD_WITH_MSVC_TRUE = @BUILD_WITH_MSVC_TRUE@
@@ -107,6 +109,7 @@ QUARTER_BETA_VERSION = @QUARTER_BETA_VERSION@
 QUARTER_BUILD_CFLAGS = @QUARTER_BUILD_CFLAGS@
 QUARTER_BUILD_CPPFLAGS = @QUARTER_BUILD_CPPFLAGS@
 QUARTER_BUILD_CXXFLAGS = @QUARTER_BUILD_CXXFLAGS@
+QUARTER_DOC_HTML = @QUARTER_DOC_HTML@
 QUARTER_LIBFLAGS = @QUARTER_LIBFLAGS@
 QUARTER_MAJOR_VERSION = @QUARTER_MAJOR_VERSION@
 QUARTER_MICRO_VERSION = @QUARTER_MICRO_VERSION@
@@ -133,6 +136,7 @@ ac_ct_CXX = @ac_ct_CXX@
 ac_ct_F77 = @ac_ct_F77@
 ac_ct_RANLIB = @ac_ct_RANLIB@
 ac_ct_STRIP = @ac_ct_STRIP@
+ac_unique_file = @ac_unique_file@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
 am__fastdepCXX_FALSE = @am__fastdepCXX_FALSE@
@@ -153,6 +157,7 @@ host_alias = @host_alias@
 host_cpu = @host_cpu@
 host_os = @host_os@
 host_vendor = @host_vendor@
+htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
@@ -161,15 +166,30 @@ libexecdir = @libexecdir@
 localstatedir = @localstatedir@
 mandir = @mandir@
 oldincludedir = @oldincludedir@
+path_tag = @path_tag@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
+quarter_build_dir = @quarter_build_dir@
+quarter_html_dir = @quarter_html_dir@
+quarter_src_dir = @quarter_src_dir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sim_ac_coin_configcmd = @sim_ac_coin_configcmd@
+sim_ac_doxygen_exe = @sim_ac_doxygen_exe@
+sim_ac_perl_exe = @sim_ac_perl_exe@
 sim_ac_qt_cygpath = @sim_ac_qt_cygpath@
+sim_ac_relative_src_dir = @sim_ac_relative_src_dir@
+sim_ac_relative_src_dir_p = @sim_ac_relative_src_dir_p@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-SUBDIRS = src include
+@BUILD_HTMLPAGES_FALSE@HTMLDIR = 
+
+@BUILD_HTMLPAGES_TRUE@HTMLDIR = html
+
+SUBDIRS = src include $(HTMLDIR)
+
+EXTRA_DIST = docs/quarter.doxygen.in
+DISTCLEANFILES = docs/quarter.doxygen
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
@@ -186,7 +206,7 @@ DIST_COMMON = README AUTHORS COPYING ChangeLog INSTALL Makefile.am \
 	Makefile.in NEWS aclocal.m4 cfg/config.guess cfg/config.sub \
 	cfg/depcomp cfg/install-sh cfg/ltmain.sh cfg/missing \
 	cfg/mkinstalldirs config.h.in configure configure.ac
-DIST_SUBDIRS = $(SUBDIRS)
+DIST_SUBDIRS = src include html
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -375,7 +395,7 @@ distcleancheck_listfiles = find . -type f -print
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkinstalldirs) $(distdir)/cfg
+	$(mkinstalldirs) $(distdir)/cfg $(distdir)/docs
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
@@ -402,7 +422,7 @@ distdir: $(DISTFILES)
 	    || exit 1; \
 	  fi; \
 	done
-	list='$(SUBDIRS)'; for subdir in $$list; do \
+	list='$(DIST_SUBDIRS)'; for subdir in $$list; do \
 	  if test "$$subdir" = .; then :; else \
 	    test -d $(distdir)/$$subdir \
 	    || mkdir $(distdir)/$$subdir \
@@ -510,6 +530,7 @@ clean-generic:
 
 distclean-generic:
 	-rm -f Makefile $(CONFIG_CLEAN_FILES)
+	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -580,6 +601,23 @@ uninstall-info: uninstall-info-recursive
 	tags-recursive uninstall uninstall-am uninstall-info-am \
 	uninstall-info-recursive uninstall-recursive
 
+
+docs/quarter.doxygen: $(srcdir)/docs/quarter.doxygen.in config.status
+	@if test -d docs; then :; else mkdir docs; fi
+	@./config.status --file=$@:$@.in
+	@$(srcdir)/cfg/doxy4win.pl docs/quarter.doxygen
+
+doxygen-doc: built-sources
+	if test x"@QUARTER_DOC_HTML@" = x"YES"; then \
+	  mkdir -p "@quarter_html_dir@"; \
+	else :; fi
+	@sim_ac_doxygen_exe@ $(top_builddir)/docs/quarter.doxygen
+
+doxygen-docs: built-sources
+	if test x"@QUARTER_DOC_HTML@" = x"YES"; then \
+	  mkdir -p "@quarter_html_dir@"; \
+	else :; fi
+	@sim_ac_doxygen_exe@ $(top_builddir)/docs/quarter.doxygen
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

@@ -20,6 +20,12 @@
  *
 \**************************************************************************/
 
+/*!
+  \class QuarterApplication QuarterApplication.h Quarter/QuarterApplication.h
+  \brief The QuarterApplication class is 
+*/
+
+
 #include <Quarter/QuarterApplication.h>
 #include <Quarter/Quarter.h>
 

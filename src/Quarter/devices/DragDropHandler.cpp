@@ -20,6 +20,12 @@
  *
 \**************************************************************************/
 
+/*!
+  \class DragDropHandler DragDropHandler.h Quarter/DragDropHandler.h
+  \brief The DragDropHandler class is 
+*/
+
+
 #include <Quarter/devices/DragDropHandler.h>
 
 #include <QUrl>

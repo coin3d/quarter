@@ -26,7 +26,7 @@ lib_LTLIBRARIES = libQuarterWidgetPlugin.la
 endif
 
 libQuarterWidgetPlugin_la_LIBADD = \
-        $(QUARTER_USE_LDFLAGS) $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner -lQtOpenGL
+        $(QT_USE_LDFLAGS) $(QUARTER_USE_LDFLAGS) $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner -lQtOpenGL
 
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD = \
         $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner4 -lQtOpenGL4

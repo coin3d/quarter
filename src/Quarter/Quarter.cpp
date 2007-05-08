@@ -20,6 +20,13 @@
  *
 \**************************************************************************/
 
+/*!
+  \mainpage
+  Quarter is a Gui binding for Coin and Qt-4
+
+*/
+
+
 #include <Inventor/SoDB.h>
 #include <Inventor/nodekits/SoNodeKit.h>
 #include <NutsnBolts/NutsnBolts.h>
@@ -49,6 +56,10 @@ Quarter::~Quarter()
   }
 }
 
+/*!
+  initialize Quarter
+ */
+
 void
 Quarter::init(void)
 {
@@ -64,6 +75,9 @@ Quarter::init(void)
   self = new Quarter;
 }
 
+/*!
+  clean up resources
+ */
 void
 Quarter::clean(void)
 {

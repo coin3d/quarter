@@ -20,6 +20,12 @@
  *
 \**************************************************************************/
 
+/*!
+  \class KeyboardHandler KeyboardHandler.h Quarter/KeyboardHandler.h
+  \brief The KeyboardHandler class is 
+*/
+
+
 #include <Quarter/devices/KeyboardHandler.h>
 
 #include <QEvent>
