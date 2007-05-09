@@ -21,10 +21,12 @@
 \**************************************************************************/
 
 /*!
-  \class DragDropHandler DragDropHandler.h Quarter/DragDropHandler.h
-  \brief The DragDropHandler class is 
-*/
+  \class SIM::Coin3D::Quarter::DragDropHandler DragDropHandler.h Quarter/devices/DragDropHandler.h
 
+  \brief The DragDropHandler class provides drag and drop
+  functionality to the QuarterWidget. It is not registered with the
+  DeviceManager by default.
+*/
 
 #include <Quarter/devices/DragDropHandler.h>
 
@@ -73,6 +75,10 @@ DragDropHandler::~DragDropHandler()
   delete PRIVATE(this);
 }
 
+/*! Detects a QDragEnterEvent and if the event is the dropping of a
+  valid Inventor or VRML it opens the file, reads in the scenegraph
+  and calls setSceneGraph on the QuarterWidget
+ */
 const SoEvent * 
 DragDropHandler::translateEvent(QEvent * event)
 {

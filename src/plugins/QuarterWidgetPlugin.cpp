@@ -20,6 +20,11 @@
  *
 \**************************************************************************/
 
+/*!
+  \class SIM::Coin3D::Quarter::QtDesigner::QuarterWidgetPlugin QuarterWidgetPlugin.h QuarterWidgetPlugin.h 
+  \ingroup plugins
+ */
+
 #include "QuarterWidgetPlugin.h"
 
 #include <QtPlugin>
@@ -42,6 +47,9 @@ using namespace SIM::Coin3D::Quarter::QtDesigner;
 
 #define PRIVATE(obj) obj->pimpl
 
+/*!
+  constructor
+ */
 QuarterWidgetPlugin::QuarterWidgetPlugin(QObject * parent)
   : QObject(parent)
 {
@@ -49,6 +57,9 @@ QuarterWidgetPlugin::QuarterWidgetPlugin(QObject * parent)
   PRIVATE(this)->initialized = false;
 }
 
+/*!
+  destructor
+ */
 QuarterWidgetPlugin::~QuarterWidgetPlugin()
 {
   delete PRIVATE(this);

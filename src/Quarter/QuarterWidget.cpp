@@ -20,9 +20,12 @@
  *
 \**************************************************************************/
 
-/*!
-  \class QuarterWidget 
-  \brief The QuarterWidget class is 
+/*!  
+  \class SIM::Coin3D::Quarter::QuarterWidget QuarterWidget.h Quarter/QuarterWidget.h
+
+  \brief The QuarterWidget class is the main class in Quarter. It
+  provides a widget for Coin rendering. It provides scenegraph
+  management and event handling.
 */
 
 #include <assert.h>
@@ -85,6 +88,9 @@ QuarterWidget::~QuarterWidget()
   delete PRIVATE(this);
 }
 
+/*!
+  Sets the Inventor scenegraph to be rendered
+ */
 void
 QuarterWidget::setSceneGraph(SoNode * node)
 {
@@ -105,54 +111,84 @@ QuarterWidget::setSceneGraph(SoNode * node)
   superscene->touch();
 }
 
+/*! Set the camera to be manipulated trough the viewer controls. The
+  camera passed in as argument must already be part of the scene
+  graph. If the application code does not explicitly call this method,
+  the scenegraph will be searched for a camera to use. If there are
+  more than one camera in the scenegraph, the first one is used.
+ */
 void 
 QuarterWidget::setCamera(SoCamera * camera)
 {
   PRIVATE(this)->navigationsystem->setCamera(camera);
 }
 
+/*!
+  Returns a pointer to the device manager
+ */
 DeviceManager * 
 QuarterWidget::getDeviceManager(void) const
 {
   return PRIVATE(this)->devicemanager;
 }
 
+/*!
+  Returns a pointer to the scene manager
+ */
 NbSceneManager * 
 QuarterWidget::getSceneManager(void) const
 {
   return PRIVATE(this)->scenemanager;
 }
 
+/*!
+  Reposition the current camera to display the entire scene
+ */
 void 
 QuarterWidget::viewAll(void)
 {
   PRIVATE(this)->navigationsystem->viewAll();
 }
 
+/*!
+  Overridden from QGLWidget to enable OpenGL depth buffer
+ */
 void
 QuarterWidget::initializeGL(void)
 {
   glEnable(GL_DEPTH_TEST);
 }
 
+/*!
+  Overridden from QGLWidget to resize the Coin scenegraph
+ */
 void
 QuarterWidget::resizeGL(int width, int height)
 {
   PRIVATE(this)->scenemanager->setViewportRegion(SbViewportRegion(width, height));
 }
 
+/*!
+  Overridden from QGLWidget to render the scenegraph
+ */
 void
 QuarterWidget::paintGL(void)
 {
   PRIVATE(this)->scenemanager->render(TRUE, TRUE);
 }
 
+/*!
+  Overridden from QGLWidget to render the scenegraph
+ */
 void 
 QuarterWidget::actualRedraw(void)
 {
   PRIVATE(this)->scenemanager->render(TRUE, TRUE);
 }
 
+/*!
+
+ */
 void 
 QuarterWidget::renderCB(void * closure, SoSceneManager *)
 {
@@ -166,6 +202,12 @@ QuarterWidget::renderCB(void * closure, SoSceneManager *)
   }
 }
 
+/*! Translates Qt Events into Coin events and passes them on to the
+  scenemanager for processing. If the event can not be translated or
+  processed, it is forwarded to Qt and the method returns false. This
+  method could be overridden in a subclass in order to catch events of
+  particular interest to the application programmer.
+ */
 bool 
 QuarterWidget::event(QEvent * event)
 {

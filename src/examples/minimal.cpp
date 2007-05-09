@@ -20,36 +20,43 @@
  *
 \**************************************************************************/
 
-/*! 
-  \class SIM::Coin3D::Quarter::QuarterApplication 
-  QuarterApplication.h 
-  Quarter/QuarterApplication.h
+#include <Inventor/nodes/SoCone.h>
+#include <Inventor/nodes/SoBaseColor.h>
+#include <Inventor/nodes/SoSeparator.h>
 
-  \brief 
-  The QuarterApplication does not do anything particularly
-  interesting, other than initialize Quarter in its constructor and
-  deinitialize Quarter in its destructor.
-*/
-
-
+#include <Quarter/QuarterWidget.h>
 #include <Quarter/QuarterApplication.h>
-#include <Quarter/Quarter.h>
 
 using namespace SIM::Coin3D::Quarter;
-
-/*!
-  constructor kasjfløasdkjfldsaf
- */
-QuarterApplication::QuarterApplication(int & argc, char ** argv)
-  : inherited(argc, argv)
+  
+int
+main(int argc, char ** argv)
 {
-  Quarter::init();
-}
+  // Initializes Quarter (and implicitly also Coin and Qt
+  QuarterApplication app(argc, argv);
 
-/*!
-  destructor
- */
-QuarterApplication::~QuarterApplication()
-{
-  Quarter::clean();
+  // Make a dead simple scene graph by using the Coin library, only
+  // containing a single yellow cone under the scenegraph root.
+  SoSeparator * root = new SoSeparator;
+  root->ref();
+
+  SoBaseColor * col = new SoBaseColor;
+  col->rgb = SbColor(1, 1, 0);
+  root->addChild(col);
+
+  root->addChild(new SoCone);
+  
+  // Create a QuarterWidget for displaying a Coin scene graph
+  QuarterWidget * viewer = new QuarterWidget;
+  viewer->setSceneGraph(root);
+
+  // Pop up the QuarterWidget
+  viewer->show();
+  // Loop until exit.
+  app.exec();
+  // Clean up resources.
+  root->unref();
+  delete viewer;
+
+  return 0;
 }

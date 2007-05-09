@@ -20,9 +20,15 @@
  *
 \**************************************************************************/
 
-/*!
-  \class DeviceManager DeviceManager.h Quarter/DeviceManager.h
-  \brief The DeviceManager class is 
+/*! \class SIM::Coin3D::Quarter::DeviceManager DeviceManager.h Quarter/devices/DeviceManager.h 
+
+  \brief The DeviceManager class is responsible for holding a list of
+  devices which can translate events such as a MouseHandler and
+  KeyboardHandler for translation of mouse and keyboard events,
+  respectively.
+
+  Custom device handlers can be registered with this class for more
+  functionality
 */
 
 
@@ -33,17 +39,26 @@
 
 using namespace SIM::Coin3D::Quarter;
 
+/*!
+  constructor
+ */
 DeviceManager::DeviceManager(QuarterWidget * quarterwidget)
 {
   assert(quarterwidget);
   this->quarterwidget = quarterwidget;
 }
 
+/*!
+  destructor
+ */
 DeviceManager::~DeviceManager()
 {
   qDeleteAll(this->devices);
 }
 
+/*!
+  Runs trough the list of registered devices to translate events
+ */
 const SoEvent * 
 DeviceManager::translateEvent(QEvent * qevent)
 {
@@ -56,12 +71,18 @@ DeviceManager::translateEvent(QEvent * qevent)
   return NULL;
 }
 
+/*!
+  Returns the QuarterWidget this devicemanager belongs to
+ */
 const QuarterWidget * 
 DeviceManager::getWidget(void) const
 {
   return this->quarterwidget;
 }
 
+/*!
+  Register a device for event translation
+ */
 void 
 DeviceManager::registerDevice(DeviceHandler * device)
 {
@@ -71,6 +92,9 @@ DeviceManager::registerDevice(DeviceHandler * device)
   }
 }
 
+/*!
+  unregister a device
+ */
 void 
 DeviceManager::unregisterDevice(DeviceHandler * device)
 {

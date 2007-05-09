@@ -21,10 +21,12 @@
 \**************************************************************************/
 
 /*!
-  \class MouseHandler MouseHandler.h Quarter/MouseHandler.h
-  \brief The MouseHandler class is 
-*/
+  \class SIM::Coin3D::Quarter::MouseHandler MouseHandler.h Quarter/devices/MouseHandler.h
 
+  \brief The MouseHandler class provides translation of mouse events
+  on the QuarterWidget. It is registered with the DeviceManager by
+  default.
+*/
 
 #include <Quarter/devices/MouseHandler.h>
 
@@ -81,6 +83,9 @@ MouseHandler::~MouseHandler()
   delete PRIVATE(this);
 }
 
+/*! Translates from QMouseEvents to SoLocation2Events and
+  SoMouseButtonEVents
+ */
 const SoEvent * 
 MouseHandler::translateEvent(QEvent * event)
 {

@@ -20,9 +20,11 @@
  *
 \**************************************************************************/
 
-/*!
-  \class DeviceHandler DeviceHandler.h Quarter/DeviceHandler.h
-  \brief The DeviceHandler class is 
+/*!  \class SIM::Coin3D::Quarter::DeviceHandler DeviceHandler.h Quarter/devices/DeviceHandler.h 
+
+  \brief The DeviceHandler class is the base class for eventhandlers
+  such as the KeyboardHandler and MouseHandler. It can be subclassed
+  to create event handlers for other devices.
 */
 
 
