@@ -35,6 +35,10 @@ CLEANFILES = \
         qrc_dynamicui.cpp \
         ui_QuarterViewer.h
 
+EXTRA_DIST = \
+        dynamicui.qrc \
+        QuarterViewer.ui
+
 EXAMPLES_LDFLAGS = \
         $(QUARTER_USE_LDFLAGS) \
         $(COIN_USE_LDFLAGS) \
