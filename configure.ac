@@ -192,18 +192,13 @@ AC_SUBST([quarter_html_dir], [`pwd`/html])
 AM_CONDITIONAL(BUILD_HTMLPAGES, test x"$want_html" = x"yes")
 
 if test x"$want_html" = x"yes"; then
-  SIM_AC_CONFIGURATION_SETTING([HTML installation], [$htmldir])
-fi
-
-# Perl is used for the Doxygen-based doc generation, plus when making
-# NSIS installation packages.
-AC_PATH_PROG(sim_ac_perl_exe, perl, false, $PATH)
-
-if test x"$want_html" = x"yes"; then
   SIM_AC_DOXYGEN_TOOL([], [SIM_AC_ERROR([no-doxygen])])
+  # Perl is used for the Doxygen-based doc generation
+  AC_PATH_PROG(sim_ac_perl_exe, perl, false, $PATH)
   if test x"$sim_ac_perl_exe" = xfalse; then
     AC_MSG_ERROR([Could not find the Perl executable, which is needed for Doxygen doc generation.])
   fi
+  SIM_AC_CONFIGURATION_SETTING([HTML installation], [$htmldir])
 fi
 
 # path_tag is used to identify paths in docs/coin.doxygen that needs to be
