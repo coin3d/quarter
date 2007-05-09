@@ -233,6 +233,7 @@ QUARTER_USE_LIBS="-lQuarter"
 
 # Quarter
 if $BUILD_WITH_MSVC; then
+  rm -f vc80.pdb
   QUARTER_BUILD_CPPFLAGS="$QUARTER_BUILD_CPPFLAGS $sim_ac_msvcrt_CPPFLAGS"
   QUARTER_BUILD_CXXFLAGS="$QUARTER_BUILD_CPPFLAGS $sim_ac_msvcrt_CXXFLAGS"
   QUARTER_BUILD_CFLAGS="$QUARTER_BUILD_CPPFLAGS $sim_ac_msvcrt_CFLAGS"
@@ -329,12 +330,7 @@ if $BUILD_WITH_MSVC; then
   if $QUARTER_RELEASE; then
     EXAMPLES_BUILD_LIBFLAGS="$EXAMPLES_BUILD_LIBFLAGS /RELEASE"
   else
-    debugfile="`pwd`/src/examples/viewer.pdb"
-    debugfile=`cygpath -w "$debugfile" | sed 's,\\\\,\\\\\\\\,g'`
-
-    EXAMPLES_BUILD_CFLAGS="/Fd$debugfile -g $EXAMPLES_BUILD_CFLAGS"
-    EXAMPLES_BUILD_CXXFLAGS="/Fd$debugfile -g $EXAMPLES_BUILD_CXXFLAGS"
-    EXAMPLES_BUILD_LIBFLAGS="$EXAMPLES_BUILD_LIBFLAGS /DEBUG /PDB:viewer.pdb"
+    EXAMPLES_BUILD_LIBFLAGS="$EXAMPLES_BUILD_LIBFLAGS /DEBUG"
   fi
 
 fi
