@@ -465,7 +465,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS BUILD_WITH_MSVC BUILD_WITH_MSVC_TRUE BUILD_WITH_MSVC_FALSE QUARTER_MAJOR_VERSION QUARTER_MINOR_VERSION QUARTER_MICRO_VERSION QUARTER_BETA_VERSION QUARTER_VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE am__leading_dot MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE build build_cpu build_vendor build_os host host_cpu host_vendor host_os EGREP LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CPP CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL sim_ac_coin_configcmd sim_ac_qt_cygpath MOC RCC COIN_USE_CPPFLAGS COIN_USE_CXXFLAGS COIN_USE_LDFLAGS COIN_USE_LIBS QT_USE_CPPFLAGS QT_USE_CXXFLAGS QT_USE_LDFLAGS QT_USE_LIBS QUARTER_BUILD_CPPFLAGS QUARTER_BUILD_CFLAGS QUARTER_BUILD_CXXFLAGS QUARTER_LIBFLAGS QUARTER_USE_CPPFLAGS QUARTER_USE_LDFLAGS QUARTER_USE_LIBS quarter_build_dir quarter_src_dir ac_unique_file sim_ac_relative_src_dir sim_ac_relative_src_dir_p SUFFIX htmldir QUARTER_DOC_HTML quarter_html_dir BUILD_HTMLPAGES_TRUE BUILD_HTMLPAGES_FALSE sim_ac_perl_exe sim_ac_doxygen_exe path_tag PLUGIN_BUILD_CPPFLAGS PLUGIN_BUILD_CXXFLAGS PLUGIN_BUILD_CFLAGS PLUGIN_BUILD_LIBFLAGS VIEWER_BUILD_CPPFLAGS VIEWER_BUILD_CXXFLAGS VIEWER_BUILD_CFLAGS VIEWER_BUILD_LDFLAGS VIEWER_BUILD_LIBFLAGS LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS BUILD_WITH_MSVC BUILD_WITH_MSVC_TRUE BUILD_WITH_MSVC_FALSE QUARTER_MAJOR_VERSION QUARTER_MINOR_VERSION QUARTER_MICRO_VERSION QUARTER_BETA_VERSION QUARTER_VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE am__leading_dot MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE build build_cpu build_vendor build_os host host_cpu host_vendor host_os EGREP LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CPP CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL sim_ac_coin_configcmd sim_ac_qt_cygpath MOC RCC UIC COIN_USE_CPPFLAGS COIN_USE_CXXFLAGS COIN_USE_LDFLAGS COIN_USE_LIBS QT_USE_CPPFLAGS QT_USE_CXXFLAGS QT_USE_LDFLAGS QT_USE_LIBS QUARTER_BUILD_CPPFLAGS QUARTER_BUILD_CFLAGS QUARTER_BUILD_CXXFLAGS QUARTER_LIBFLAGS QUARTER_USE_CPPFLAGS QUARTER_USE_LDFLAGS QUARTER_USE_LIBS quarter_build_dir quarter_src_dir ac_unique_file sim_ac_relative_src_dir sim_ac_relative_src_dir_p SUFFIX htmldir QUARTER_DOC_HTML quarter_html_dir BUILD_HTMLPAGES_TRUE BUILD_HTMLPAGES_FALSE sim_ac_perl_exe sim_ac_doxygen_exe path_tag PLUGIN_BUILD_CPPFLAGS PLUGIN_BUILD_CXXFLAGS PLUGIN_BUILD_CFLAGS PLUGIN_BUILD_LIBFLAGS EXAMPLES_BUILD_CPPFLAGS EXAMPLES_BUILD_CXXFLAGS EXAMPLES_BUILD_CFLAGS EXAMPLES_BUILD_LDFLAGS EXAMPLES_BUILD_LIBFLAGS LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -20377,6 +20377,99 @@ fi
 
 
 
+if $sim_ac_with_qt; then
+
+  sim_ac_path=$PATH
+  if test -n "$sim_ac_qtdir"; then
+    sim_ac_path=$sim_ac_qtdir/bin:$PATH
+  fi
+
+  # Extract the first word of "uic", so it can be a program name with args.
+set dummy uic; ac_word=$2
+echo "$as_me:$LINENO: checking for $ac_word" >&5
+echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
+if test "${ac_cv_path_UIC+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  case $UIC in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_UIC="$UIC" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $sim_ac_path
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+  for ac_exec_ext in '' $ac_executable_extensions; do
+  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_UIC="$as_dir/$ac_word$ac_exec_ext"
+    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+done
+
+  test -z "$ac_cv_path_UIC" && ac_cv_path_UIC="false"
+  ;;
+esac
+fi
+UIC=$ac_cv_path_UIC
+
+if test -n "$UIC"; then
+  echo "$as_me:$LINENO: result: $UIC" >&5
+echo "${ECHO_T}$UIC" >&6
+else
+  echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+fi
+
+  if test x"$UIC" = x"false"; then
+    if test -z "$QTDIR"; then
+      { echo "$as_me:$LINENO: WARNING: QTDIR environment variable not set -- this might be an indication of a problem" >&5
+echo "$as_me: WARNING: QTDIR environment variable not set -- this might be an indication of a problem" >&2;}
+    fi
+    { echo "$as_me:$LINENO: WARNING: the \`\`uic'' Qt pre-processor tool not found" >&5
+echo "$as_me: WARNING: the \`\`uic'' Qt pre-processor tool not found" >&2;}
+  fi
+else
+  UIC=false
+
+fi
+
+if test x"$RCC" = x"false"; then
+
+echo >&2 ""
+
+
+: ${sim_ac_message_file=$ac_aux_dir/errors.txt}
+if test -f $sim_ac_message_file; then
+  sim_ac_message="`sed -n -e '/^!no-uic$/,/^!/ { /^!/ d; p; }' <$sim_ac_message_file`"
+  if test x"$sim_ac_message" = x""; then
+    { { echo "$as_me:$LINENO: error: no message named 'no-uic' in '$sim_ac_message_file' - notify the $PACKAGE_NAME maintainer(s)" >&5
+echo "$as_me: error: no message named 'no-uic' in '$sim_ac_message_file' - notify the $PACKAGE_NAME maintainer(s)" >&2;}
+   { (exit 1); exit 1; }; }
+  else
+    eval "echo >&2 \"$sim_ac_message\""
+  fi
+else
+  { { echo "$as_me:$LINENO: error: file '$sim_ac_message_file' not found - notify the $PACKAGE_NAME maintainer(s)" >&5
+echo "$as_me: error: file '$sim_ac_message_file' not found - notify the $PACKAGE_NAME maintainer(s)" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
+
+
+echo >&2 ""
+{ { echo "$as_me:$LINENO: error: aborting" >&5
+echo "$as_me: error: aborting" >&2;}
+   { (exit 1); exit 1; }; }
+
+fi
+
+
+
+
 
 
 
@@ -20847,22 +20940,22 @@ fi
 
 
 if $BUILD_WITH_MSVC; then
-  VIEWER_BUILD_CPPFLAGS="$VIEWER_BUILD_CPPFLAGS $sim_ac_msvcrt_CPPFLAGS"
-  VIEWER_BUILD_CXXFLAGS="$VIEWER_BUILD_CPPFLAGS $sim_ac_msvcrt_CXXFLAGS"
-  VIEWER_BUILD_CFLAGS="$VIEWER_BUILD_CPPFLAGS $sim_ac_msvcrt_CFLAGS"
-  VIEWER_LIBFLAGS="$VIEWER_LIBFLAGS $sim_ac_msvcrt_LIBLDFLAGS"
+  EXAMPLES_BUILD_CPPFLAGS="$EXAMPLES_BUILD_CPPFLAGS $sim_ac_msvcrt_CPPFLAGS"
+  EXAMPLES_BUILD_CXXFLAGS="$EXAMPLES_BUILD_CPPFLAGS $sim_ac_msvcrt_CXXFLAGS"
+  EXAMPLES_BUILD_CFLAGS="$EXAMPLES_BUILD_CPPFLAGS $sim_ac_msvcrt_CFLAGS"
+  EXAMPLES_LIBFLAGS="$EXAMPLES_LIBFLAGS $sim_ac_msvcrt_LIBLDFLAGS"
 
-  VIEWER_BUILD_LIBFLAGS="/INCREMENTAL:NO $VIEWER_BUILD_LIBFLAGS"
+  EXAMPLES_BUILD_LIBFLAGS="/INCREMENTAL:NO $EXAMPLES_BUILD_LIBFLAGS"
 
   if $QUARTER_RELEASE; then
-    VIEWER_BUILD_LIBFLAGS="$VIEWER_BUILD_LIBFLAGS /RELEASE"
+    EXAMPLES_BUILD_LIBFLAGS="$EXAMPLES_BUILD_LIBFLAGS /RELEASE"
   else
     debugfile="`pwd`/src/examples/viewer.pdb"
     debugfile=`cygpath -w "$debugfile" | sed 's,\\\\,\\\\\\\\,g'`
 
-    VIEWER_BUILD_CFLAGS="/Fd$debugfile -g $VIEWER_BUILD_CFLAGS"
-    VIEWER_BUILD_CXXFLAGS="/Fd$debugfile -g $VIEWER_BUILD_CXXFLAGS"
-    VIEWER_BUILD_LIBFLAGS="$VIEWER_BUILD_LIBFLAGS /DEBUG /PDB:viewer.pdb"
+    EXAMPLES_BUILD_CFLAGS="/Fd$debugfile -g $EXAMPLES_BUILD_CFLAGS"
+    EXAMPLES_BUILD_CXXFLAGS="/Fd$debugfile -g $EXAMPLES_BUILD_CXXFLAGS"
+    EXAMPLES_BUILD_LIBFLAGS="$EXAMPLES_BUILD_LIBFLAGS /DEBUG /PDB:viewer.pdb"
   fi
 
 fi
@@ -21621,6 +21714,7 @@ s,@sim_ac_coin_configcmd@,$sim_ac_coin_configcmd,;t t
 s,@sim_ac_qt_cygpath@,$sim_ac_qt_cygpath,;t t
 s,@MOC@,$MOC,;t t
 s,@RCC@,$RCC,;t t
+s,@UIC@,$UIC,;t t
 s,@COIN_USE_CPPFLAGS@,$COIN_USE_CPPFLAGS,;t t
 s,@COIN_USE_CXXFLAGS@,$COIN_USE_CXXFLAGS,;t t
 s,@COIN_USE_LDFLAGS@,$COIN_USE_LDFLAGS,;t t
@@ -21654,11 +21748,11 @@ s,@PLUGIN_BUILD_CPPFLAGS@,$PLUGIN_BUILD_CPPFLAGS,;t t
 s,@PLUGIN_BUILD_CXXFLAGS@,$PLUGIN_BUILD_CXXFLAGS,;t t
 s,@PLUGIN_BUILD_CFLAGS@,$PLUGIN_BUILD_CFLAGS,;t t
 s,@PLUGIN_BUILD_LIBFLAGS@,$PLUGIN_BUILD_LIBFLAGS,;t t
-s,@VIEWER_BUILD_CPPFLAGS@,$VIEWER_BUILD_CPPFLAGS,;t t
-s,@VIEWER_BUILD_CXXFLAGS@,$VIEWER_BUILD_CXXFLAGS,;t t
-s,@VIEWER_BUILD_CFLAGS@,$VIEWER_BUILD_CFLAGS,;t t
-s,@VIEWER_BUILD_LDFLAGS@,$VIEWER_BUILD_LDFLAGS,;t t
-s,@VIEWER_BUILD_LIBFLAGS@,$VIEWER_BUILD_LIBFLAGS,;t t
+s,@EXAMPLES_BUILD_CPPFLAGS@,$EXAMPLES_BUILD_CPPFLAGS,;t t
+s,@EXAMPLES_BUILD_CXXFLAGS@,$EXAMPLES_BUILD_CXXFLAGS,;t t
+s,@EXAMPLES_BUILD_CFLAGS@,$EXAMPLES_BUILD_CFLAGS,;t t
+s,@EXAMPLES_BUILD_LDFLAGS@,$EXAMPLES_BUILD_LDFLAGS,;t t
+s,@EXAMPLES_BUILD_LIBFLAGS@,$EXAMPLES_BUILD_LIBFLAGS,;t t
 s,@LIBOBJS@,$LIBOBJS,;t t
 s,@LTLIBOBJS@,$LTLIBOBJS,;t t
 CEOF

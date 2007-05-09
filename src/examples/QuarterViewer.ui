@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>Form</class>
- <widget class="QWidget" name="Form" >
+ <class>QuarterViewer</class>
+ <widget class="QWidget" name="QuarterViewer" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -10,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Form</string>
+   <string>QuarterViewer</string>
   </property>
   <layout class="QGridLayout" >
    <property name="margin" >
@@ -35,7 +35,7 @@
   <customwidget>
    <class>SIM::Coin3D::Quarter::QuarterWidget</class>
    <extends>QWidget</extends>
-   <header>QuarterWidget.h</header>
+   <header>Quarter/QuarterWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

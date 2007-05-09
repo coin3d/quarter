@@ -71,6 +71,11 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
+EXAMPLES_BUILD_CFLAGS = @EXAMPLES_BUILD_CFLAGS@
+EXAMPLES_BUILD_CPPFLAGS = @EXAMPLES_BUILD_CPPFLAGS@
+EXAMPLES_BUILD_CXXFLAGS = @EXAMPLES_BUILD_CXXFLAGS@
+EXAMPLES_BUILD_LDFLAGS = @EXAMPLES_BUILD_LDFLAGS@
+EXAMPLES_BUILD_LIBFLAGS = @EXAMPLES_BUILD_LIBFLAGS@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
@@ -124,12 +129,8 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 SUFFIX = @SUFFIX@
+UIC = @UIC@
 VERSION = @VERSION@
-VIEWER_BUILD_CFLAGS = @VIEWER_BUILD_CFLAGS@
-VIEWER_BUILD_CPPFLAGS = @VIEWER_BUILD_CPPFLAGS@
-VIEWER_BUILD_CXXFLAGS = @VIEWER_BUILD_CXXFLAGS@
-VIEWER_BUILD_LDFLAGS = @VIEWER_BUILD_LDFLAGS@
-VIEWER_BUILD_LIBFLAGS = @VIEWER_BUILD_LIBFLAGS@
 ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
@@ -186,6 +187,8 @@ target_alias = @target_alias@
 DEFAULT_INCLUDES = \
         -I$(top_builddir)/include \
         -I$(top_srcdir)/include \
+        -I$(top_builddir)/src/examples \
+        -I$(top_srcdir)/src/examples \
         -I$(QTDIR)/include \
         -I$(QTDIR)/include/QtOpenGL \
         -I$(QTDIR)/include/QtGui \
@@ -195,95 +198,129 @@ DEFAULT_INCLUDES = \
         -I$(QTDIR)/include/QtDesigner
 
 
-bin_PROGRAMS = viewer minimal
+noinst_PROGRAMS = minimal dynamicui directui inheritui
 
-BuiltSources = qrc_viewer.cpp
-viewer_SOURCES = viewer.cpp $(BuiltSources)
 minimal_SOURCES = minimal.cpp
+dynamicui_SOURCES = dynamicui.cpp qrc_dynamicui.cpp
+directui_SOURCES = directui.cpp
+inheritui_SOURCES = inheritui.cpp QuarterViewer.h QuarterViewer.cpp
 
 CLEANFILES = \
-        viewer.exe \
-        viewer.pdb \
-        viewer.exe.manifest \
         minimal.exe \
         minimal.pdb \
         minimal.exe.manifest \
-        $(BuiltSources)
+        dynamicui.exe \
+        dynamicui.pdb \
+        dynamicui.exe.manifest \
+        directui.exe \
+        directui.pdb \
+        directui.exe.manifest \
+        inheritui.exe \
+        inheritui.pdb \
+        inheritui.exe.manifest \
+        qrc_dynamicui.cpp \
+        ui_QuarterViewer.h
 
 
-@BUILD_WITH_MSVC_TRUE@viewer_LDADD = \
-@BUILD_WITH_MSVC_TRUE@        $(QUARTER_USE_LIBS) \
-@BUILD_WITH_MSVC_TRUE@        $(COIN_USE_LIBS) \
-@BUILD_WITH_MSVC_TRUE@        $(QT_USE_LIBS) \
+EXAMPLES_LDFLAGS = \
+        $(QUARTER_USE_LDFLAGS) \
+        $(COIN_USE_LDFLAGS) \
+        $(QT_USE_LDFLAGS) \
+        $(EXAMPLES_BUILD_LIBFLAGS)
+
+
+EXAMPLES_CPPFLAGS = \
+        $(EXAMPLES_BUILD_CPPFLAGS) \
+        $(QUARTER_USE_CPPFLAGS) \
+        $(COIN_USE_CPPFLAGS) \
+        $(QT_USE_CPPFLAGS)
+
+
+@BUILD_WITH_MSVC_TRUE@EXAMPLES_LIBS = \
 @BUILD_WITH_MSVC_TRUE@        -lQtUiTools \
 @BUILD_WITH_MSVC_TRUE@        -lQtDesigner4 \
 @BUILD_WITH_MSVC_TRUE@        -lQtXml4 \
 @BUILD_WITH_MSVC_TRUE@        -lQtOpenGL4 \
-@BUILD_WITH_MSVC_TRUE@        -lNutsnBolts0
-
-
-@BUILD_WITH_MSVC_FALSE@viewer_LDADD = \
-@BUILD_WITH_MSVC_FALSE@        $(QUARTER_USE_LIBS) \
-@BUILD_WITH_MSVC_FALSE@        $(COIN_USE_LIBS) \
-@BUILD_WITH_MSVC_FALSE@        $(QT_USE_LIBS) \
-@BUILD_WITH_MSVC_FALSE@        -lQtUiTools \
-@BUILD_WITH_MSVC_FALSE@        -lQtDesigner\
-@BUILD_WITH_MSVC_FALSE@        -lQtXml \
-@BUILD_WITH_MSVC_FALSE@        -lNutsnBolts
-
-
-@BUILD_WITH_MSVC_TRUE@minimal_LDADD = \
-@BUILD_WITH_MSVC_TRUE@        $(QUARTER_USE_LIBS) \
-@BUILD_WITH_MSVC_TRUE@        $(COIN_USE_LIBS) \
+@BUILD_WITH_MSVC_TRUE@        -lNutsnBolts0 \
 @BUILD_WITH_MSVC_TRUE@        $(QT_USE_LIBS) \
-@BUILD_WITH_MSVC_TRUE@        -lQtUiTools \
-@BUILD_WITH_MSVC_TRUE@        -lQtDesigner4 \
-@BUILD_WITH_MSVC_TRUE@        -lQtXml4 \
-@BUILD_WITH_MSVC_TRUE@        -lQtOpenGL4 \
-@BUILD_WITH_MSVC_TRUE@        -lNutsnBolts0
+@BUILD_WITH_MSVC_TRUE@        $(QUARTER_USE_LIBS) \
+@BUILD_WITH_MSVC_TRUE@        $(COIN_USE_LIBS) 
 
-
-@BUILD_WITH_MSVC_FALSE@minimal_LDADD = \
-@BUILD_WITH_MSVC_FALSE@        $(QUARTER_USE_LIBS) \
-@BUILD_WITH_MSVC_FALSE@        $(COIN_USE_LIBS) \
-@BUILD_WITH_MSVC_FALSE@        $(QT_USE_LIBS) \
+@BUILD_WITH_MSVC_FALSE@EXAMPLES_LIBS = \
 @BUILD_WITH_MSVC_FALSE@        -lQtUiTools \
-@BUILD_WITH_MSVC_FALSE@        -lQtDesigner\
+@BUILD_WITH_MSVC_FALSE@        -lQtDesigner \
 @BUILD_WITH_MSVC_FALSE@        -lQtXml \
-@BUILD_WITH_MSVC_FALSE@        -lNutsnBolts
+@BUILD_WITH_MSVC_FALSE@        -lQtOpenGL \
+@BUILD_WITH_MSVC_FALSE@        -lNutsnBolts \
+@BUILD_WITH_MSVC_FALSE@        $(QT_USE_LIBS) \
+@BUILD_WITH_MSVC_FALSE@        $(QUARTER_USE_LIBS) \
+@BUILD_WITH_MSVC_FALSE@        $(COIN_USE_LIBS) 
 
 
-viewer_CPPFLAGS = $(VIEWER_BUILD_CPPFLAGS) $(QUARTER_USE_CPPFLAGS) $(COIN_USE_CPPFLAGS)
-viewer_CXXFLAGS = $(VIEWER_BUILD_CXXFLAGS)
-viewer_CFLAGS = $(VIEWER_BUILD_CFLAGS)
-viewer_LDFLAGS = $(VIEWER_BUILD_LIBFLAGS) $(QUARTER_USE_LDFLAGS) $(COIN_USE_LDFLAGS) $(QT_USE_LDFLAGS)
+@BUILD_WITH_MSVC_TRUE@minimal_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 
-minimal_CPPFLAGS = $(VIEWER_BUILD_CPPFLAGS) $(QUARTER_USE_CPPFLAGS) $(COIN_USE_CPPFLAGS)
-minimal_CXXFLAGS = $(VIEWER_BUILD_CXXFLAGS)
-minimal_CFLAGS = $(VIEWER_BUILD_CFLAGS)
-minimal_LDFLAGS = $(VIEWER_BUILD_LIBFLAGS) $(QUARTER_USE_LDFLAGS) $(COIN_USE_LDFLAGS) $(QT_USE_LDFLAGS)
+@BUILD_WITH_MSVC_FALSE@minimal_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+@BUILD_WITH_MSVC_TRUE@dynamicui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+@BUILD_WITH_MSVC_FALSE@dynamicui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+@BUILD_WITH_MSVC_TRUE@directui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+@BUILD_WITH_MSVC_FALSE@directui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+@BUILD_WITH_MSVC_TRUE@inheritui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+@BUILD_WITH_MSVC_FALSE@inheritui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+
+minimal_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
+minimal_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
+minimal_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
+minimal_LDFLAGS = $(EXAMPLES_LDFLAGS)
+
+directui_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
+directui_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
+directui_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
+directui_LDFLAGS = $(EXAMPLES_LDFLAGS)
+
+dynamicui_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
+dynamicui_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
+dynamicui_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
+dynamicui_LDFLAGS = $(EXAMPLES_LDFLAGS)
+
+inheritui_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
+inheritui_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
+inheritui_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
+inheritui_LDFLAGS = $(EXAMPLES_LDFLAGS)
 subdir = src/examples
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
-bin_PROGRAMS = viewer$(EXEEXT) minimal$(EXEEXT)
-PROGRAMS = $(bin_PROGRAMS)
+noinst_PROGRAMS = minimal$(EXEEXT) dynamicui$(EXEEXT) directui$(EXEEXT) \
+	inheritui$(EXEEXT)
+PROGRAMS = $(noinst_PROGRAMS)
 
+am_directui_OBJECTS = directui-directui.$(OBJEXT)
+directui_OBJECTS = $(am_directui_OBJECTS)
+@BUILD_WITH_MSVC_TRUE@directui_DEPENDENCIES =
+@BUILD_WITH_MSVC_FALSE@directui_DEPENDENCIES =
+am_dynamicui_OBJECTS = dynamicui-dynamicui.$(OBJEXT) \
+	dynamicui-qrc_dynamicui.$(OBJEXT)
+dynamicui_OBJECTS = $(am_dynamicui_OBJECTS)
+@BUILD_WITH_MSVC_TRUE@dynamicui_DEPENDENCIES =
+@BUILD_WITH_MSVC_FALSE@dynamicui_DEPENDENCIES =
+am_inheritui_OBJECTS = inheritui-inheritui.$(OBJEXT) \
+	inheritui-QuarterViewer.$(OBJEXT)
+inheritui_OBJECTS = $(am_inheritui_OBJECTS)
+@BUILD_WITH_MSVC_TRUE@inheritui_DEPENDENCIES =
+@BUILD_WITH_MSVC_FALSE@inheritui_DEPENDENCIES =
 am_minimal_OBJECTS = minimal-minimal.$(OBJEXT)
 minimal_OBJECTS = $(am_minimal_OBJECTS)
 @BUILD_WITH_MSVC_TRUE@minimal_DEPENDENCIES =
 @BUILD_WITH_MSVC_FALSE@minimal_DEPENDENCIES =
-am__objects_1 = viewer-qrc_viewer.$(OBJEXT)
-am_viewer_OBJECTS = viewer-viewer.$(OBJEXT) $(am__objects_1)
-viewer_OBJECTS = $(am_viewer_OBJECTS)
-@BUILD_WITH_MSVC_TRUE@viewer_DEPENDENCIES =
-@BUILD_WITH_MSVC_FALSE@viewer_DEPENDENCIES =
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/minimal-minimal.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/viewer-qrc_viewer.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/viewer-viewer.Po
+@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/directui-directui.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/dynamicui-dynamicui.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/dynamicui-qrc_dynamicui.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/inheritui-QuarterViewer.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/inheritui-inheritui.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/minimal-minimal.Po
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) \
@@ -292,9 +329,17 @@ LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) \
 CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES = $(minimal_SOURCES) $(viewer_SOURCES)
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
+	$(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
+DIST_SOURCES = $(directui_SOURCES) $(dynamicui_SOURCES) \
+	$(inheritui_SOURCES) $(minimal_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(minimal_SOURCES) $(viewer_SOURCES)
+SOURCES = $(directui_SOURCES) $(dynamicui_SOURCES) $(inheritui_SOURCES) $(minimal_SOURCES)
 
 all: all-am
 
@@ -305,41 +350,25 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configu
 	  $(AUTOMAKE) --gnu  src/examples/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
-binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
-install-binPROGRAMS: $(bin_PROGRAMS)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(bindir)
-	@list='$(bin_PROGRAMS)'; for p in $$list; do \
-	  p1=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
-	  if test -f $$p \
-	     || test -f $$p1 \
-	  ; then \
-	    f=`echo "$$p1" | sed 's,^.*/,,;$(transform);s/$$/$(EXEEXT)/'`; \
-	   echo " $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(binPROGRAMS_INSTALL) $$p $(DESTDIR)$(bindir)/$$f"; \
-	   $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(binPROGRAMS_INSTALL) $$p $(DESTDIR)$(bindir)/$$f || exit 1; \
-	  else :; fi; \
-	done
 
-uninstall-binPROGRAMS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(bin_PROGRAMS)'; for p in $$list; do \
-	  f=`echo "$$p" | sed 's,^.*/,,;s/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/'`; \
-	  echo " rm -f $(DESTDIR)$(bindir)/$$f"; \
-	  rm -f $(DESTDIR)$(bindir)/$$f; \
-	done
-
-clean-binPROGRAMS:
-	@list='$(bin_PROGRAMS)'; for p in $$list; do \
+clean-noinstPROGRAMS:
+	@list='$(noinst_PROGRAMS)'; for p in $$list; do \
 	  f=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
+directui$(EXEEXT): $(directui_OBJECTS) $(directui_DEPENDENCIES) 
+	@rm -f directui$(EXEEXT)
+	$(CXXLINK) $(directui_LDFLAGS) $(directui_OBJECTS) $(directui_LDADD) $(LIBS)
+dynamicui$(EXEEXT): $(dynamicui_OBJECTS) $(dynamicui_DEPENDENCIES) 
+	@rm -f dynamicui$(EXEEXT)
+	$(CXXLINK) $(dynamicui_LDFLAGS) $(dynamicui_OBJECTS) $(dynamicui_LDADD) $(LIBS)
+inheritui$(EXEEXT): $(inheritui_OBJECTS) $(inheritui_DEPENDENCIES) 
+	@rm -f inheritui$(EXEEXT)
+	$(CXXLINK) $(inheritui_LDFLAGS) $(inheritui_OBJECTS) $(inheritui_LDADD) $(LIBS)
 minimal$(EXEEXT): $(minimal_OBJECTS) $(minimal_DEPENDENCIES) 
 	@rm -f minimal$(EXEEXT)
 	$(CXXLINK) $(minimal_LDFLAGS) $(minimal_OBJECTS) $(minimal_LDADD) $(LIBS)
-viewer$(EXEEXT): $(viewer_OBJECTS) $(viewer_DEPENDENCIES) 
-	@rm -f viewer$(EXEEXT)
-	$(CXXLINK) $(viewer_LDFLAGS) $(viewer_OBJECTS) $(viewer_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT) core *.core
@@ -347,9 +376,12 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/directui-directui.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dynamicui-dynamicui.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dynamicui-qrc_dynamicui.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inheritui-QuarterViewer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inheritui-inheritui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/minimal-minimal.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/viewer-qrc_viewer.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/viewer-viewer.Po@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -387,6 +419,171 @@ distclean-depend:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
 
+directui-directui.o: directui.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(directui_CPPFLAGS) $(CPPFLAGS) $(directui_CXXFLAGS) $(CXXFLAGS) -MT directui-directui.o -MD -MP -MF "$(DEPDIR)/directui-directui.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o directui-directui.o `test -f 'directui.cpp' || echo '$(srcdir)/'`directui.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/directui-directui.Tpo" "$(DEPDIR)/directui-directui.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/directui-directui.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='directui.cpp' object='directui-directui.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/directui-directui.Po' tmpdepfile='$(DEPDIR)/directui-directui.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(directui_CPPFLAGS) $(CPPFLAGS) $(directui_CXXFLAGS) $(CXXFLAGS) -c -o directui-directui.o `test -f 'directui.cpp' || echo '$(srcdir)/'`directui.cpp
+
+directui-directui.obj: directui.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(directui_CPPFLAGS) $(CPPFLAGS) $(directui_CXXFLAGS) $(CXXFLAGS) -MT directui-directui.obj -MD -MP -MF "$(DEPDIR)/directui-directui.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o directui-directui.obj `if test -f 'directui.cpp'; then $(CYGPATH_W) 'directui.cpp'; else $(CYGPATH_W) '$(srcdir)/directui.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/directui-directui.Tpo" "$(DEPDIR)/directui-directui.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/directui-directui.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='directui.cpp' object='directui-directui.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/directui-directui.Po' tmpdepfile='$(DEPDIR)/directui-directui.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(directui_CPPFLAGS) $(CPPFLAGS) $(directui_CXXFLAGS) $(CXXFLAGS) -c -o directui-directui.obj `if test -f 'directui.cpp'; then $(CYGPATH_W) 'directui.cpp'; else $(CYGPATH_W) '$(srcdir)/directui.cpp'; fi`
+
+directui-directui.lo: directui.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(directui_CPPFLAGS) $(CPPFLAGS) $(directui_CXXFLAGS) $(CXXFLAGS) -MT directui-directui.lo -MD -MP -MF "$(DEPDIR)/directui-directui.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o directui-directui.lo `test -f 'directui.cpp' || echo '$(srcdir)/'`directui.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/directui-directui.Tpo" "$(DEPDIR)/directui-directui.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/directui-directui.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='directui.cpp' object='directui-directui.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/directui-directui.Plo' tmpdepfile='$(DEPDIR)/directui-directui.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(directui_CPPFLAGS) $(CPPFLAGS) $(directui_CXXFLAGS) $(CXXFLAGS) -c -o directui-directui.lo `test -f 'directui.cpp' || echo '$(srcdir)/'`directui.cpp
+
+dynamicui-dynamicui.o: dynamicui.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -MT dynamicui-dynamicui.o -MD -MP -MF "$(DEPDIR)/dynamicui-dynamicui.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o dynamicui-dynamicui.o `test -f 'dynamicui.cpp' || echo '$(srcdir)/'`dynamicui.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/dynamicui-dynamicui.Tpo" "$(DEPDIR)/dynamicui-dynamicui.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/dynamicui-dynamicui.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='dynamicui.cpp' object='dynamicui-dynamicui.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/dynamicui-dynamicui.Po' tmpdepfile='$(DEPDIR)/dynamicui-dynamicui.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -c -o dynamicui-dynamicui.o `test -f 'dynamicui.cpp' || echo '$(srcdir)/'`dynamicui.cpp
+
+dynamicui-dynamicui.obj: dynamicui.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -MT dynamicui-dynamicui.obj -MD -MP -MF "$(DEPDIR)/dynamicui-dynamicui.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o dynamicui-dynamicui.obj `if test -f 'dynamicui.cpp'; then $(CYGPATH_W) 'dynamicui.cpp'; else $(CYGPATH_W) '$(srcdir)/dynamicui.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/dynamicui-dynamicui.Tpo" "$(DEPDIR)/dynamicui-dynamicui.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/dynamicui-dynamicui.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='dynamicui.cpp' object='dynamicui-dynamicui.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/dynamicui-dynamicui.Po' tmpdepfile='$(DEPDIR)/dynamicui-dynamicui.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -c -o dynamicui-dynamicui.obj `if test -f 'dynamicui.cpp'; then $(CYGPATH_W) 'dynamicui.cpp'; else $(CYGPATH_W) '$(srcdir)/dynamicui.cpp'; fi`
+
+dynamicui-dynamicui.lo: dynamicui.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -MT dynamicui-dynamicui.lo -MD -MP -MF "$(DEPDIR)/dynamicui-dynamicui.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o dynamicui-dynamicui.lo `test -f 'dynamicui.cpp' || echo '$(srcdir)/'`dynamicui.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/dynamicui-dynamicui.Tpo" "$(DEPDIR)/dynamicui-dynamicui.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/dynamicui-dynamicui.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='dynamicui.cpp' object='dynamicui-dynamicui.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/dynamicui-dynamicui.Plo' tmpdepfile='$(DEPDIR)/dynamicui-dynamicui.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -c -o dynamicui-dynamicui.lo `test -f 'dynamicui.cpp' || echo '$(srcdir)/'`dynamicui.cpp
+
+dynamicui-qrc_dynamicui.o: qrc_dynamicui.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -MT dynamicui-qrc_dynamicui.o -MD -MP -MF "$(DEPDIR)/dynamicui-qrc_dynamicui.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o dynamicui-qrc_dynamicui.o `test -f 'qrc_dynamicui.cpp' || echo '$(srcdir)/'`qrc_dynamicui.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/dynamicui-qrc_dynamicui.Tpo" "$(DEPDIR)/dynamicui-qrc_dynamicui.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/dynamicui-qrc_dynamicui.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_dynamicui.cpp' object='dynamicui-qrc_dynamicui.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/dynamicui-qrc_dynamicui.Po' tmpdepfile='$(DEPDIR)/dynamicui-qrc_dynamicui.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -c -o dynamicui-qrc_dynamicui.o `test -f 'qrc_dynamicui.cpp' || echo '$(srcdir)/'`qrc_dynamicui.cpp
+
+dynamicui-qrc_dynamicui.obj: qrc_dynamicui.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -MT dynamicui-qrc_dynamicui.obj -MD -MP -MF "$(DEPDIR)/dynamicui-qrc_dynamicui.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o dynamicui-qrc_dynamicui.obj `if test -f 'qrc_dynamicui.cpp'; then $(CYGPATH_W) 'qrc_dynamicui.cpp'; else $(CYGPATH_W) '$(srcdir)/qrc_dynamicui.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/dynamicui-qrc_dynamicui.Tpo" "$(DEPDIR)/dynamicui-qrc_dynamicui.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/dynamicui-qrc_dynamicui.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_dynamicui.cpp' object='dynamicui-qrc_dynamicui.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/dynamicui-qrc_dynamicui.Po' tmpdepfile='$(DEPDIR)/dynamicui-qrc_dynamicui.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -c -o dynamicui-qrc_dynamicui.obj `if test -f 'qrc_dynamicui.cpp'; then $(CYGPATH_W) 'qrc_dynamicui.cpp'; else $(CYGPATH_W) '$(srcdir)/qrc_dynamicui.cpp'; fi`
+
+dynamicui-qrc_dynamicui.lo: qrc_dynamicui.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -MT dynamicui-qrc_dynamicui.lo -MD -MP -MF "$(DEPDIR)/dynamicui-qrc_dynamicui.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o dynamicui-qrc_dynamicui.lo `test -f 'qrc_dynamicui.cpp' || echo '$(srcdir)/'`qrc_dynamicui.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/dynamicui-qrc_dynamicui.Tpo" "$(DEPDIR)/dynamicui-qrc_dynamicui.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/dynamicui-qrc_dynamicui.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_dynamicui.cpp' object='dynamicui-qrc_dynamicui.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/dynamicui-qrc_dynamicui.Plo' tmpdepfile='$(DEPDIR)/dynamicui-qrc_dynamicui.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -c -o dynamicui-qrc_dynamicui.lo `test -f 'qrc_dynamicui.cpp' || echo '$(srcdir)/'`qrc_dynamicui.cpp
+
+inheritui-inheritui.o: inheritui.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -MT inheritui-inheritui.o -MD -MP -MF "$(DEPDIR)/inheritui-inheritui.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o inheritui-inheritui.o `test -f 'inheritui.cpp' || echo '$(srcdir)/'`inheritui.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/inheritui-inheritui.Tpo" "$(DEPDIR)/inheritui-inheritui.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/inheritui-inheritui.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='inheritui.cpp' object='inheritui-inheritui.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/inheritui-inheritui.Po' tmpdepfile='$(DEPDIR)/inheritui-inheritui.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -c -o inheritui-inheritui.o `test -f 'inheritui.cpp' || echo '$(srcdir)/'`inheritui.cpp
+
+inheritui-inheritui.obj: inheritui.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -MT inheritui-inheritui.obj -MD -MP -MF "$(DEPDIR)/inheritui-inheritui.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o inheritui-inheritui.obj `if test -f 'inheritui.cpp'; then $(CYGPATH_W) 'inheritui.cpp'; else $(CYGPATH_W) '$(srcdir)/inheritui.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/inheritui-inheritui.Tpo" "$(DEPDIR)/inheritui-inheritui.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/inheritui-inheritui.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='inheritui.cpp' object='inheritui-inheritui.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/inheritui-inheritui.Po' tmpdepfile='$(DEPDIR)/inheritui-inheritui.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -c -o inheritui-inheritui.obj `if test -f 'inheritui.cpp'; then $(CYGPATH_W) 'inheritui.cpp'; else $(CYGPATH_W) '$(srcdir)/inheritui.cpp'; fi`
+
+inheritui-inheritui.lo: inheritui.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -MT inheritui-inheritui.lo -MD -MP -MF "$(DEPDIR)/inheritui-inheritui.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o inheritui-inheritui.lo `test -f 'inheritui.cpp' || echo '$(srcdir)/'`inheritui.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/inheritui-inheritui.Tpo" "$(DEPDIR)/inheritui-inheritui.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/inheritui-inheritui.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='inheritui.cpp' object='inheritui-inheritui.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/inheritui-inheritui.Plo' tmpdepfile='$(DEPDIR)/inheritui-inheritui.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -c -o inheritui-inheritui.lo `test -f 'inheritui.cpp' || echo '$(srcdir)/'`inheritui.cpp
+
+inheritui-QuarterViewer.o: QuarterViewer.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -MT inheritui-QuarterViewer.o -MD -MP -MF "$(DEPDIR)/inheritui-QuarterViewer.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o inheritui-QuarterViewer.o `test -f 'QuarterViewer.cpp' || echo '$(srcdir)/'`QuarterViewer.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/inheritui-QuarterViewer.Tpo" "$(DEPDIR)/inheritui-QuarterViewer.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/inheritui-QuarterViewer.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterViewer.cpp' object='inheritui-QuarterViewer.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/inheritui-QuarterViewer.Po' tmpdepfile='$(DEPDIR)/inheritui-QuarterViewer.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -c -o inheritui-QuarterViewer.o `test -f 'QuarterViewer.cpp' || echo '$(srcdir)/'`QuarterViewer.cpp
+
+inheritui-QuarterViewer.obj: QuarterViewer.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -MT inheritui-QuarterViewer.obj -MD -MP -MF "$(DEPDIR)/inheritui-QuarterViewer.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o inheritui-QuarterViewer.obj `if test -f 'QuarterViewer.cpp'; then $(CYGPATH_W) 'QuarterViewer.cpp'; else $(CYGPATH_W) '$(srcdir)/QuarterViewer.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/inheritui-QuarterViewer.Tpo" "$(DEPDIR)/inheritui-QuarterViewer.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/inheritui-QuarterViewer.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterViewer.cpp' object='inheritui-QuarterViewer.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/inheritui-QuarterViewer.Po' tmpdepfile='$(DEPDIR)/inheritui-QuarterViewer.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -c -o inheritui-QuarterViewer.obj `if test -f 'QuarterViewer.cpp'; then $(CYGPATH_W) 'QuarterViewer.cpp'; else $(CYGPATH_W) '$(srcdir)/QuarterViewer.cpp'; fi`
+
+inheritui-QuarterViewer.lo: QuarterViewer.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -MT inheritui-QuarterViewer.lo -MD -MP -MF "$(DEPDIR)/inheritui-QuarterViewer.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o inheritui-QuarterViewer.lo `test -f 'QuarterViewer.cpp' || echo '$(srcdir)/'`QuarterViewer.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/inheritui-QuarterViewer.Tpo" "$(DEPDIR)/inheritui-QuarterViewer.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/inheritui-QuarterViewer.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterViewer.cpp' object='inheritui-QuarterViewer.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/inheritui-QuarterViewer.Plo' tmpdepfile='$(DEPDIR)/inheritui-QuarterViewer.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -c -o inheritui-QuarterViewer.lo `test -f 'QuarterViewer.cpp' || echo '$(srcdir)/'`QuarterViewer.cpp
+
 minimal-minimal.o: minimal.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(minimal_CPPFLAGS) $(CPPFLAGS) $(minimal_CXXFLAGS) $(CXXFLAGS) -MT minimal-minimal.o -MD -MP -MF "$(DEPDIR)/minimal-minimal.Tpo" \
 @am__fastdepCXX_TRUE@	  -c -o minimal-minimal.o `test -f 'minimal.cpp' || echo '$(srcdir)/'`minimal.cpp; \
@@ -419,72 +616,6 @@ minimal-minimal.lo: minimal.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/minimal-minimal.Plo' tmpdepfile='$(DEPDIR)/minimal-minimal.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(minimal_CPPFLAGS) $(CPPFLAGS) $(minimal_CXXFLAGS) $(CXXFLAGS) -c -o minimal-minimal.lo `test -f 'minimal.cpp' || echo '$(srcdir)/'`minimal.cpp
-
-viewer-viewer.o: viewer.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -MT viewer-viewer.o -MD -MP -MF "$(DEPDIR)/viewer-viewer.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o viewer-viewer.o `test -f 'viewer.cpp' || echo '$(srcdir)/'`viewer.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/viewer-viewer.Tpo" "$(DEPDIR)/viewer-viewer.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/viewer-viewer.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='viewer.cpp' object='viewer-viewer.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/viewer-viewer.Po' tmpdepfile='$(DEPDIR)/viewer-viewer.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -c -o viewer-viewer.o `test -f 'viewer.cpp' || echo '$(srcdir)/'`viewer.cpp
-
-viewer-viewer.obj: viewer.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -MT viewer-viewer.obj -MD -MP -MF "$(DEPDIR)/viewer-viewer.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o viewer-viewer.obj `if test -f 'viewer.cpp'; then $(CYGPATH_W) 'viewer.cpp'; else $(CYGPATH_W) '$(srcdir)/viewer.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/viewer-viewer.Tpo" "$(DEPDIR)/viewer-viewer.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/viewer-viewer.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='viewer.cpp' object='viewer-viewer.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/viewer-viewer.Po' tmpdepfile='$(DEPDIR)/viewer-viewer.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -c -o viewer-viewer.obj `if test -f 'viewer.cpp'; then $(CYGPATH_W) 'viewer.cpp'; else $(CYGPATH_W) '$(srcdir)/viewer.cpp'; fi`
-
-viewer-viewer.lo: viewer.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -MT viewer-viewer.lo -MD -MP -MF "$(DEPDIR)/viewer-viewer.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o viewer-viewer.lo `test -f 'viewer.cpp' || echo '$(srcdir)/'`viewer.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/viewer-viewer.Tpo" "$(DEPDIR)/viewer-viewer.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/viewer-viewer.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='viewer.cpp' object='viewer-viewer.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/viewer-viewer.Plo' tmpdepfile='$(DEPDIR)/viewer-viewer.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -c -o viewer-viewer.lo `test -f 'viewer.cpp' || echo '$(srcdir)/'`viewer.cpp
-
-viewer-qrc_viewer.o: qrc_viewer.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -MT viewer-qrc_viewer.o -MD -MP -MF "$(DEPDIR)/viewer-qrc_viewer.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o viewer-qrc_viewer.o `test -f 'qrc_viewer.cpp' || echo '$(srcdir)/'`qrc_viewer.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/viewer-qrc_viewer.Tpo" "$(DEPDIR)/viewer-qrc_viewer.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/viewer-qrc_viewer.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_viewer.cpp' object='viewer-qrc_viewer.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/viewer-qrc_viewer.Po' tmpdepfile='$(DEPDIR)/viewer-qrc_viewer.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -c -o viewer-qrc_viewer.o `test -f 'qrc_viewer.cpp' || echo '$(srcdir)/'`qrc_viewer.cpp
-
-viewer-qrc_viewer.obj: qrc_viewer.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -MT viewer-qrc_viewer.obj -MD -MP -MF "$(DEPDIR)/viewer-qrc_viewer.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o viewer-qrc_viewer.obj `if test -f 'qrc_viewer.cpp'; then $(CYGPATH_W) 'qrc_viewer.cpp'; else $(CYGPATH_W) '$(srcdir)/qrc_viewer.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/viewer-qrc_viewer.Tpo" "$(DEPDIR)/viewer-qrc_viewer.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/viewer-qrc_viewer.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_viewer.cpp' object='viewer-qrc_viewer.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/viewer-qrc_viewer.Po' tmpdepfile='$(DEPDIR)/viewer-qrc_viewer.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -c -o viewer-qrc_viewer.obj `if test -f 'qrc_viewer.cpp'; then $(CYGPATH_W) 'qrc_viewer.cpp'; else $(CYGPATH_W) '$(srcdir)/qrc_viewer.cpp'; fi`
-
-viewer-qrc_viewer.lo: qrc_viewer.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -MT viewer-qrc_viewer.lo -MD -MP -MF "$(DEPDIR)/viewer-qrc_viewer.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o viewer-qrc_viewer.lo `test -f 'qrc_viewer.cpp' || echo '$(srcdir)/'`qrc_viewer.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/viewer-qrc_viewer.Tpo" "$(DEPDIR)/viewer-qrc_viewer.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/viewer-qrc_viewer.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_viewer.cpp' object='viewer-qrc_viewer.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/viewer-qrc_viewer.Plo' tmpdepfile='$(DEPDIR)/viewer-qrc_viewer.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(viewer_CPPFLAGS) $(CPPFLAGS) $(viewer_CXXFLAGS) $(CXXFLAGS) -c -o viewer-qrc_viewer.lo `test -f 'qrc_viewer.cpp' || echo '$(srcdir)/'`qrc_viewer.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -586,7 +717,6 @@ check: check-am
 all-am: Makefile $(PROGRAMS)
 
 installdirs:
-	$(mkinstalldirs) $(DESTDIR)$(bindir)
 install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
@@ -614,7 +744,8 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
+clean-am: clean-generic clean-libtool clean-noinstPROGRAMS \
+	mostlyclean-am
 
 distclean: distclean-am
 
@@ -631,7 +762,7 @@ info-am:
 
 install-data-am:
 
-install-exec-am: install-binPROGRAMS
+install-exec-am:
 
 install-info: install-info-am
 
@@ -656,23 +787,28 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-info-am
+uninstall-am: uninstall-info-am
 
-.PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
-	clean-generic clean-libtool ctags distclean distclean-compile \
-	distclean-depend distclean-generic distclean-libtool \
-	distclean-tags distdir dvi dvi-am info info-am install \
-	install-am install-binPROGRAMS install-data install-data-am \
+.PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
+	clean-libtool clean-noinstPROGRAMS ctags distclean \
+	distclean-compile distclean-depend distclean-generic \
+	distclean-libtool distclean-tags distdir dvi dvi-am info \
+	info-am install install-am install-data install-data-am \
 	install-exec install-exec-am install-info install-info-am \
 	install-man install-strip installcheck installcheck-am \
 	installdirs maintainer-clean maintainer-clean-generic \
 	mostlyclean mostlyclean-compile mostlyclean-generic \
 	mostlyclean-libtool pdf pdf-am ps ps-am tags uninstall \
-	uninstall-am uninstall-binPROGRAMS uninstall-info-am
+	uninstall-am uninstall-info-am
 
 
-qrc_viewer.cpp: $(srcdir)/viewer.qrc $(srcdir)/viewer.ui
-	$(RCC) -name viewer $(srcdir)/viewer.qrc -o $@
+qrc_dynamicui.cpp: $(srcdir)/dynamicui.qrc $(srcdir)/QuarterViewer.ui
+	$(RCC) -name dynamicui $< -o $@
+
+directui.cpp: ui_QuarterViewer.h
+
+ui_QuarterViewer.h: $(srcdir)/QuarterViewer.ui
+	$(UIC) $< -o $@
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

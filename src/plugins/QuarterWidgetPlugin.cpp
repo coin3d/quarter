@@ -152,7 +152,7 @@ QuarterWidgetPlugin::domXml(void) const
 QString 
 QuarterWidgetPlugin::includeFile(void) const
 {
-  return "QuarterWidget.h";
+  return "Quarter/QuarterWidget.h";
 }
 
 Q_EXPORT_PLUGIN2(quarterwidget, QuarterWidgetPlugin)
