@@ -21,9 +21,12 @@
 \**************************************************************************/
 
 /*!
-  \class SIM::Coin3D::Quarter::QtDesigner::QuarterWidgetPlugin QuarterWidgetPlugin.h QuarterWidgetPlugin.h 
-  \ingroup plugins
- */
+  \page QuarterWidgetPlugin Qt Designer Plugin
+
+  The QuarterWidgetPlugin installs in $QTDIR/plugins/designer where it
+  will be automatically picked up by Qt Designer.
+*/
+
 
 #include "QuarterWidgetPlugin.h"
 
@@ -32,11 +35,13 @@
 #include <Quarter/Quarter.h>
 #include <Quarter/QuarterWidget.h>
 
+#ifndef DOXYGEN_SKIP_THIS
+
 namespace SIM { namespace Coin3D { namespace Quarter { namespace QtDesigner {
 
 class QuarterWidgetPluginP {
 public:
-  QuarterWidgetPluginP(void) {}
+  QuarterWidgetPluginP(void) {} 
   bool initialized;
 };
 
@@ -46,6 +51,8 @@ using namespace SIM::Coin3D::Quarter;
 using namespace SIM::Coin3D::Quarter::QtDesigner;
 
 #define PRIVATE(obj) obj->pimpl
+
+#endif // DOXYGEN_SKIP_THIS
 
 /*!
   constructor

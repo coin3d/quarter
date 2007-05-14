@@ -20,6 +20,14 @@
  *
 \**************************************************************************/
 
+/*!  
+  \page directui A Direct Approach
+
+  This example demonstrate how to create a simple viewer without
+  subclassing the class generated from the ui file
+
+*/
+
 #include <Inventor/nodes/SoCone.h>
 #include <Inventor/nodes/SoBaseColor.h>
 #include <Inventor/nodes/SoSeparator.h>

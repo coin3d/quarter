@@ -36,11 +36,15 @@ class QUARTER_DLL_API DeviceHandler {
 public:
   DeviceHandler(void) {}
   virtual ~DeviceHandler() {}
-  
+
+  /*! Subclasses must override this method to provide custom event
+    handling
+   */
   virtual const SoEvent * translateEvent(QEvent * event) = 0;
-  void setManager(DeviceManager * manager);
   
 protected:
+  void setManager(DeviceManager * manager);
+
   friend class DeviceManager;
   DeviceManager * manager;
 };

@@ -469,7 +469,6 @@ INPUT                  = @path_tag@@quarter_src_dir@/include/Quarter/Basic.h \
                          @path_tag@@quarter_src_dir@/include/Quarter/devices/DragDropHandler.h \
                          @path_tag@@quarter_src_dir@/include/Quarter/devices/KeyboardHandler.h \
                          @path_tag@@quarter_src_dir@/include/Quarter/devices/MouseHandler.h \
-                         @path_tag@@quarter_src_dir@/src/plugins/QuarterWidgetPlugin.h \
                          @path_tag@@quarter_src_dir@/src/Quarter/QuarterApplication.cpp \
                          @path_tag@@quarter_src_dir@/src/Quarter/Quarter.cpp \
                          @path_tag@@quarter_src_dir@/src/Quarter/QuarterWidget.cpp \
@@ -478,7 +477,11 @@ INPUT                  = @path_tag@@quarter_src_dir@/include/Quarter/Basic.h \
                          @path_tag@@quarter_src_dir@/src/Quarter/devices/DragDropHandler.cpp \
                          @path_tag@@quarter_src_dir@/src/Quarter/devices/KeyboardHandler.cpp \
                          @path_tag@@quarter_src_dir@/src/Quarter/devices/MouseHandler.cpp \
-                         @path_tag@@quarter_src_dir@/src/plugins/QuarterWidgetPlugin.cpp
+                         @path_tag@@quarter_src_dir@/src/plugins/QuarterWidgetPlugin.cpp \
+                         @path_tag@@quarter_src_dir@/src/examples/minimal.cpp \
+                         @path_tag@@quarter_src_dir@/src/examples/directui.cpp \
+                         @path_tag@@quarter_src_dir@/src/examples/dynamicui.cpp \
+                         @path_tag@@quarter_src_dir@/src/examples/inheritui.cpp 
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 

@@ -20,6 +20,11 @@
  *
 \**************************************************************************/
 
+/*!  
+  This example shows a minimal stand-alone
+  example of a QuarterViewer without the use of ui files
+ */
+
 #include <Inventor/nodes/SoCone.h>
 #include <Inventor/nodes/SoBaseColor.h>
 #include <Inventor/nodes/SoSeparator.h>

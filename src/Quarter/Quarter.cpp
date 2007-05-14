@@ -20,7 +20,7 @@
  *
 \**************************************************************************/
 
-/*! \mainpage 
+/*! \mainpage
 
   Quarter is a light-weight glue library that provides seamless
   integration between Systems in Motions's \COIN high-level 3D
@@ -36,6 +36,8 @@
   subclass of QGLWidget. This widget provides functionality for
   rendering of Coin scenegraphs and translation of QEvents into
   SoEvents. Using this widget is as easy as using any other QWidget.
+
+  \subpage QuarterWidgetPlugin
 
   Quarter also comes with a plugin for Qt Designer, Trolltech's tool
   for designing and building GUIs. Once you install Quarter, the
@@ -97,9 +99,20 @@
   }
   \endcode
 
-  This example code can be found in the Quarter/src/examples directory.
+  \subpage examples
+*/
 
-  \defgroup plugins Plugins
+/*!
+  \page examples More Examples
+
+  The examples code is included in Quarter and can be found in the
+  src/examples subdirectory. 
+
+  \subpage directui
+
+  \subpage dynamicui
+
+  \subpage inheritui
 */
 
 
