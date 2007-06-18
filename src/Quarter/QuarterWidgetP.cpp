@@ -37,16 +37,10 @@ using namespace SIM::Coin3D::Quarter;
 
 QuarterWidgetP::QuarterWidgetP(QuarterWidget * master) 
 {
-  this->scenemanager = new NbSceneManager;
-  this->devicemanager = new DeviceManager(master);
-  this->navigationsystem = NULL;
 }
 
 QuarterWidgetP::~QuarterWidgetP() 
 {
-  delete this->scenemanager;
-  delete this->devicemanager;
-  delete this->navigationsystem;
 }
 
 static const char * superscene[] = {

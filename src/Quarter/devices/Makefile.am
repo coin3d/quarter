@@ -7,10 +7,12 @@ DEFAULT_INCLUDES = \
         -I$(top_srcdir)/include \
         -I$(top_srcdir)/src/Quarter
 
-CLEANFILES = .\#* *.bak *~ *.lst
+BuiltSources = \
+        moc_ContextMenuHandlerP.cpp
 
 PrivateHeaders = \
-        KeyboardHandlerP.h
+        KeyboardHandlerP.h \
+        ContextMenuHandlerP.h
 
 RegularSources = \
         DeviceManager.cpp \
@@ -18,13 +20,15 @@ RegularSources = \
         KeyboardHandler.cpp \
         DragDropHandler.cpp \
         DeviceHandler.cpp \
-        KeyboardHandlerP.cpp
+        KeyboardHandlerP.cpp \
+        ContextMenuHandler.cpp \
+        ContextMenuHandlerP.cpp
 
 libdevices_la_SOURCES = \
-        $(RegularSources) $(PrivateHeaders)
+        $(RegularSources) $(PrivateHeaders) $(BuiltSources)
 
 devices_lst_SOURCES = \
-        $(RegularSources) $(PrivateHeaders)
+        $(RegularSources) $(PrivateHeaders) $(BuiltSources)
 
 devices_lst_CPPFLAGS = \
         $(QUARTER_BUILD_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
@@ -43,6 +47,11 @@ libdevices_la_CXXFLAGS = \
 
 libdevices_la_CFLAGS = \
         $(QUARTER_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
+
+CLEANFILES = .\#* *.bak *~ *.lst $(BuiltSources)
+
+moc_ContextMenuHandlerP.cpp: $(srcdir)/ContextMenuHandlerP.h
+	$(MOC) -o $@ $<
 
 
 if BUILD_WITH_MSVC

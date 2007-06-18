@@ -47,6 +47,9 @@ AC_PREREQ(2.50)
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_INSTALL
+
+SIM_AC_STRIP_EXIT_DECLARATION
+
 #  Default to not building a static library.
 #  Can be overridden by the user with --enable-static.
 AM_DISABLE_STATIC

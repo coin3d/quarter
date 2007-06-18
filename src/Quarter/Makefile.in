@@ -1240,10 +1240,10 @@ Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib: Makefile \
           $(QT_USE_LDFLAGS);
 
 moc_QuarterWidget.cpp: $(top_srcdir)/include/Quarter/QuarterWidget.h
-	$(MOC) -o $@ $(top_srcdir)/include/Quarter/QuarterWidget.h
+	$(MOC) -o $@ $<
 
 moc_SensorManager.cpp: $(srcdir)/SensorManager.h
-	$(MOC) -o $@ $(srcdir)/SensorManager.h
+	$(MOC) -o $@ $<
 
 @BUILD_WITH_MSVC_TRUE@all-local: Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 

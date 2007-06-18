@@ -36,6 +36,7 @@
 #include <Inventor/nodes/SoNode.h>
 #include <Inventor/nodes/SoCamera.h>
 #include <Inventor/nodes/SoSeparator.h>
+#include <Inventor/SbColor.h>
 
 #include <NutsnBolts/NbSceneManager.h>
 #include <NutsnBolts/navigation/NbNavigationSystem.h>
@@ -44,6 +45,7 @@
 #include <Quarter/devices/DeviceManager.h>
 #include <Quarter/devices/MouseHandler.h>
 #include <Quarter/devices/KeyboardHandler.h>
+#include <Quarter/devices/ContextMenuHandler.h>
 
 #include "QuarterWidgetP.h"
 
@@ -70,12 +72,17 @@ QuarterWidget::constructor(void)
 {
   PRIVATE(this) = new QuarterWidgetP(this);
 
+  PRIVATE(this)->scenemanager = new NbSceneManager;
+  PRIVATE(this)->devicemanager = new DeviceManager(this);
   PRIVATE(this)->navigationsystem = NbNavigationSystem::createByName(NB_EXAMINER_SYSTEM);
+
   PRIVATE(this)->scenemanager->setNavigationSystem(PRIVATE(this)->navigationsystem);
   PRIVATE(this)->scenemanager->setNavigationState(NbSceneManager::MIXED_NAVIGATION);
   PRIVATE(this)->scenemanager->setRenderCallback(QuarterWidget::renderCB, this);
+  PRIVATE(this)->scenemanager->setBackgroundColor(SbColor(0.0f, 0.0f, 0.0f));
   PRIVATE(this)->scenemanager->activate();
   
+  // PRIVATE(this)->devicemanager->registerDevice(new ContextMenuHandler);
   PRIVATE(this)->devicemanager->registerDevice(new MouseHandler);
   PRIVATE(this)->devicemanager->registerDevice(new KeyboardHandler);
   
@@ -85,6 +92,10 @@ QuarterWidget::constructor(void)
 /*! destructor */
 QuarterWidget::~QuarterWidget()
 {
+  delete PRIVATE(this)->scenemanager;
+  delete PRIVATE(this)->devicemanager;
+  delete PRIVATE(this)->navigationsystem;
+
   delete PRIVATE(this);
 }
 

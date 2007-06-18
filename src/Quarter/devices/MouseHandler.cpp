@@ -84,7 +84,7 @@ MouseHandler::~MouseHandler()
 }
 
 /*! Translates from QMouseEvents to SoLocation2Events and
-  SoMouseButtonEVents
+  SoMouseButtonEvents
  */
 const SoEvent * 
 MouseHandler::translateEvent(QEvent * event)

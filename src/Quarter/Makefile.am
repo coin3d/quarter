@@ -96,10 +96,10 @@ Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib: Makefile \
 
 
 moc_QuarterWidget.cpp: $(top_srcdir)/include/Quarter/QuarterWidget.h
-	$(MOC) -o $@ $(top_srcdir)/include/Quarter/QuarterWidget.h
+	$(MOC) -o $@ $<
 
 moc_SensorManager.cpp: $(srcdir)/SensorManager.h
-	$(MOC) -o $@ $(srcdir)/SensorManager.h
+	$(MOC) -o $@ $<
 
 if BUILD_WITH_MSVC
 all-local: Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib

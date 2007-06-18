@@ -62,8 +62,8 @@ KeyboardHandlerP::keyEvent(QKeyEvent * qevent)
     keypadmap->value(qkey, SoKeyboardEvent::ANY) :
     keyboardmap->value(qkey, SoKeyboardEvent::ANY);
 
-  const char * printable = qevent->text().toAscii().constData();
-  this->keyboard->setPrintableCharacter(*printable);
+  const char printable = *(qevent->text().toAscii().constData());
+  this->keyboard->setPrintableCharacter(printable);
   this->keyboard->setKey(sokey);
   // FIXME: what about position? (20070307 frodo)
   return this->keyboard;
