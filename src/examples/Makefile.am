@@ -12,12 +12,13 @@ DEFAULT_INCLUDES = \
         -I$(QTDIR)/include/QtUiTools \
         -I$(QTDIR)/include/QtDesigner
 
-noinst_PROGRAMS = minimal dynamicui directui inheritui
+noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition
 
 minimal_SOURCES = minimal.cpp
 dynamicui_SOURCES = dynamicui.cpp qrc_dynamicui.cpp
 directui_SOURCES = directui.cpp
 inheritui_SOURCES = inheritui.cpp QuarterViewer.h QuarterViewer.cpp
+superimposition_SOURCES = superimposition.cpp
 
 CLEANFILES = \
         minimal.exe \
@@ -32,6 +33,9 @@ CLEANFILES = \
         inheritui.exe \
         inheritui.pdb \
         inheritui.exe.manifest \
+        superimposition.exe \
+        superimposition.pdb \
+        superimposition.exe.manifest \
         qrc_dynamicui.cpp \
         ui_QuarterViewer.h
 
@@ -61,11 +65,6 @@ EXAMPLES_LIBS = \
         $(QT_USE_LIBS) \
         $(QUARTER_USE_LIBS) \
         $(COIN_USE_LIBS) 
-
-minimal_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
-dynamicui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
-directui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
-inheritui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 else
 EXAMPLES_LIBS = \
         -lQtUiTools \
@@ -76,12 +75,13 @@ EXAMPLES_LIBS = \
         $(QT_USE_LIBS) \
         $(QUARTER_USE_LIBS) \
         $(COIN_USE_LIBS) 
+endif
 
 minimal_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 dynamicui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 directui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 inheritui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
-endif
+superimposition_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 
 minimal_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
 minimal_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
@@ -102,6 +102,11 @@ inheritui_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
 inheritui_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
 inheritui_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
 inheritui_LDFLAGS = $(EXAMPLES_LDFLAGS)
+
+superimposition_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
+superimposition_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
+superimposition_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
+superimposition_LDFLAGS = $(EXAMPLES_LDFLAGS)
 
 qrc_dynamicui.cpp: $(srcdir)/dynamicui.qrc $(srcdir)/QuarterViewer.ui
 	$(RCC) -name dynamicui $< -o $@

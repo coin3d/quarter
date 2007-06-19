@@ -146,7 +146,7 @@ QuarterWidget::getDeviceManager(void) const
 /*!
   Returns a pointer to the scene manager
  */
-NbSceneManager * 
+SoSceneManager * 
 QuarterWidget::getSceneManager(void) const
 {
   return PRIVATE(this)->scenemanager;

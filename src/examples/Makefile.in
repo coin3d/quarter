@@ -198,12 +198,13 @@ DEFAULT_INCLUDES = \
         -I$(QTDIR)/include/QtDesigner
 
 
-noinst_PROGRAMS = minimal dynamicui directui inheritui
+noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition
 
 minimal_SOURCES = minimal.cpp
 dynamicui_SOURCES = dynamicui.cpp qrc_dynamicui.cpp
 directui_SOURCES = directui.cpp
 inheritui_SOURCES = inheritui.cpp QuarterViewer.h QuarterViewer.cpp
+superimposition_SOURCES = superimposition.cpp
 
 CLEANFILES = \
         minimal.exe \
@@ -218,6 +219,9 @@ CLEANFILES = \
         inheritui.exe \
         inheritui.pdb \
         inheritui.exe.manifest \
+        superimposition.exe \
+        superimposition.pdb \
+        superimposition.exe.manifest \
         qrc_dynamicui.cpp \
         ui_QuarterViewer.h
 
@@ -262,15 +266,11 @@ EXAMPLES_CPPFLAGS = \
 @BUILD_WITH_MSVC_FALSE@        $(COIN_USE_LIBS) 
 
 
-@BUILD_WITH_MSVC_TRUE@minimal_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
-
-@BUILD_WITH_MSVC_FALSE@minimal_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
-@BUILD_WITH_MSVC_TRUE@dynamicui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
-@BUILD_WITH_MSVC_FALSE@dynamicui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
-@BUILD_WITH_MSVC_TRUE@directui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
-@BUILD_WITH_MSVC_FALSE@directui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
-@BUILD_WITH_MSVC_TRUE@inheritui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
-@BUILD_WITH_MSVC_FALSE@inheritui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+minimal_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+dynamicui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+directui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+inheritui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+superimposition_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 
 minimal_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
 minimal_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
@@ -291,13 +291,18 @@ inheritui_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
 inheritui_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
 inheritui_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
 inheritui_LDFLAGS = $(EXAMPLES_LDFLAGS)
+
+superimposition_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
+superimposition_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
+superimposition_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
+superimposition_LDFLAGS = $(EXAMPLES_LDFLAGS)
 subdir = src/examples
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 noinst_PROGRAMS = minimal$(EXEEXT) dynamicui$(EXEEXT) directui$(EXEEXT) \
-	inheritui$(EXEEXT)
+	inheritui$(EXEEXT) superimposition$(EXEEXT)
 PROGRAMS = $(noinst_PROGRAMS)
 
 am_directui_OBJECTS = directui-directui.$(OBJEXT)
@@ -318,6 +323,10 @@ am_minimal_OBJECTS = minimal-minimal.$(OBJEXT)
 minimal_OBJECTS = $(am_minimal_OBJECTS)
 @BUILD_WITH_MSVC_TRUE@minimal_DEPENDENCIES =
 @BUILD_WITH_MSVC_FALSE@minimal_DEPENDENCIES =
+am_superimposition_OBJECTS = superimposition-superimposition.$(OBJEXT)
+superimposition_OBJECTS = $(am_superimposition_OBJECTS)
+@BUILD_WITH_MSVC_TRUE@superimposition_DEPENDENCIES =
+@BUILD_WITH_MSVC_FALSE@superimposition_DEPENDENCIES =
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/directui-directui.Po \
@@ -325,7 +334,8 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/dynamicui-qrc_dynamicui.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/inheritui-QuarterViewer.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/inheritui-inheritui.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/minimal-minimal.Po
+@AMDEP_TRUE@	./$(DEPDIR)/minimal-minimal.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/superimposition-superimposition.Po
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) \
@@ -342,9 +352,10 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 DIST_SOURCES = $(directui_SOURCES) $(dynamicui_SOURCES) \
-	$(inheritui_SOURCES) $(minimal_SOURCES)
+	$(inheritui_SOURCES) $(minimal_SOURCES) \
+	$(superimposition_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(directui_SOURCES) $(dynamicui_SOURCES) $(inheritui_SOURCES) $(minimal_SOURCES)
+SOURCES = $(directui_SOURCES) $(dynamicui_SOURCES) $(inheritui_SOURCES) $(minimal_SOURCES) $(superimposition_SOURCES)
 
 all: all-am
 
@@ -374,6 +385,9 @@ inheritui$(EXEEXT): $(inheritui_OBJECTS) $(inheritui_DEPENDENCIES)
 minimal$(EXEEXT): $(minimal_OBJECTS) $(minimal_DEPENDENCIES) 
 	@rm -f minimal$(EXEEXT)
 	$(CXXLINK) $(minimal_LDFLAGS) $(minimal_OBJECTS) $(minimal_LDADD) $(LIBS)
+superimposition$(EXEEXT): $(superimposition_OBJECTS) $(superimposition_DEPENDENCIES) 
+	@rm -f superimposition$(EXEEXT)
+	$(CXXLINK) $(superimposition_LDFLAGS) $(superimposition_OBJECTS) $(superimposition_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT) core *.core
@@ -387,6 +401,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inheritui-QuarterViewer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inheritui-inheritui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/minimal-minimal.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/superimposition-superimposition.Po@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -621,6 +636,39 @@ minimal-minimal.lo: minimal.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/minimal-minimal.Plo' tmpdepfile='$(DEPDIR)/minimal-minimal.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(minimal_CPPFLAGS) $(CPPFLAGS) $(minimal_CXXFLAGS) $(CXXFLAGS) -c -o minimal-minimal.lo `test -f 'minimal.cpp' || echo '$(srcdir)/'`minimal.cpp
+
+superimposition-superimposition.o: superimposition.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(superimposition_CPPFLAGS) $(CPPFLAGS) $(superimposition_CXXFLAGS) $(CXXFLAGS) -MT superimposition-superimposition.o -MD -MP -MF "$(DEPDIR)/superimposition-superimposition.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o superimposition-superimposition.o `test -f 'superimposition.cpp' || echo '$(srcdir)/'`superimposition.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/superimposition-superimposition.Tpo" "$(DEPDIR)/superimposition-superimposition.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/superimposition-superimposition.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='superimposition.cpp' object='superimposition-superimposition.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/superimposition-superimposition.Po' tmpdepfile='$(DEPDIR)/superimposition-superimposition.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(superimposition_CPPFLAGS) $(CPPFLAGS) $(superimposition_CXXFLAGS) $(CXXFLAGS) -c -o superimposition-superimposition.o `test -f 'superimposition.cpp' || echo '$(srcdir)/'`superimposition.cpp
+
+superimposition-superimposition.obj: superimposition.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(superimposition_CPPFLAGS) $(CPPFLAGS) $(superimposition_CXXFLAGS) $(CXXFLAGS) -MT superimposition-superimposition.obj -MD -MP -MF "$(DEPDIR)/superimposition-superimposition.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o superimposition-superimposition.obj `if test -f 'superimposition.cpp'; then $(CYGPATH_W) 'superimposition.cpp'; else $(CYGPATH_W) '$(srcdir)/superimposition.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/superimposition-superimposition.Tpo" "$(DEPDIR)/superimposition-superimposition.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/superimposition-superimposition.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='superimposition.cpp' object='superimposition-superimposition.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/superimposition-superimposition.Po' tmpdepfile='$(DEPDIR)/superimposition-superimposition.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(superimposition_CPPFLAGS) $(CPPFLAGS) $(superimposition_CXXFLAGS) $(CXXFLAGS) -c -o superimposition-superimposition.obj `if test -f 'superimposition.cpp'; then $(CYGPATH_W) 'superimposition.cpp'; else $(CYGPATH_W) '$(srcdir)/superimposition.cpp'; fi`
+
+superimposition-superimposition.lo: superimposition.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(superimposition_CPPFLAGS) $(CPPFLAGS) $(superimposition_CXXFLAGS) $(CXXFLAGS) -MT superimposition-superimposition.lo -MD -MP -MF "$(DEPDIR)/superimposition-superimposition.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o superimposition-superimposition.lo `test -f 'superimposition.cpp' || echo '$(srcdir)/'`superimposition.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/superimposition-superimposition.Tpo" "$(DEPDIR)/superimposition-superimposition.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/superimposition-superimposition.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='superimposition.cpp' object='superimposition-superimposition.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/superimposition-superimposition.Plo' tmpdepfile='$(DEPDIR)/superimposition-superimposition.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(superimposition_CPPFLAGS) $(CPPFLAGS) $(superimposition_CXXFLAGS) $(CXXFLAGS) -c -o superimposition-superimposition.lo `test -f 'superimposition.cpp' || echo '$(srcdir)/'`superimposition.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
