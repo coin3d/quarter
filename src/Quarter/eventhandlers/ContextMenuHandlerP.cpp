@@ -1,3 +1,4 @@
+
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
@@ -25,13 +26,11 @@
 #include <QMenu>
 #include <QMap>
 #include <QActionGroup>
-#include <QContextMenuEvent>
+#include <QMouseEvent>
 
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/devices/DeviceManager.h>
-#include <Quarter/devices/ContextMenuHandler.h> 
-
-#include <NutsnBolts/NbSceneManager.h>
+#include <Quarter/eventhandlers/EventManager.h>
+#include <Quarter/eventhandlers/ContextMenuHandler.h> 
 
 using namespace SIM::Coin3D::Quarter;
 
@@ -47,8 +46,8 @@ ContextMenuHandlerP::~ContextMenuHandlerP()
   
 }
 
-void
-ContextMenuHandlerP::contextMenuEvent(QContextMenuEvent * event)
+bool
+ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
 {
   QList<RenderModePair *> rendermodes;
   QList<StereoModePair *> stereomodes;
@@ -116,6 +115,8 @@ ContextMenuHandlerP::contextMenuEvent(QContextMenuEvent * event)
   delete rendermenu;
   delete stereomenu;
   delete contextmenu;
+
+  return true;
 }
 
 void

@@ -184,29 +184,29 @@ sim_ac_relative_src_dir_p = @sim_ac_relative_src_dir_p@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
-libdevicesinc_HEADERS = \
-        DeviceHandler.h \
-        DeviceManager.h \
-        KeyboardHandler.h \
-        MouseHandler.h
+libeventhandlersinc_HEADERS = \
+        DragDropHandler.h \
+        EventManager.h \
+        EventHandler.h \
+        ContextMenuHandler.h
 
 
-libdevicesincdir = $(includedir)/Quarter/devices/.
-subdir = include/Quarter/devices
+libeventhandlersincdir = $(includedir)/Quarter/eventhandlers/.
+subdir = include/Quarter/eventhandlers
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 DIST_SOURCES =
-HEADERS = $(libdevicesinc_HEADERS)
+HEADERS = $(libeventhandlersinc_HEADERS)
 
-DIST_COMMON = $(libdevicesinc_HEADERS) Makefile.am Makefile.in
+DIST_COMMON = $(libeventhandlersinc_HEADERS) Makefile.am Makefile.in
 all: all-am
 
 .SUFFIXES:
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.ac $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  include/Quarter/devices/Makefile
+	  $(AUTOMAKE) --gnu  include/Quarter/eventhandlers/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -219,23 +219,23 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
-libdevicesincHEADERS_INSTALL = $(INSTALL_HEADER)
-install-libdevicesincHEADERS: $(libdevicesinc_HEADERS)
+libeventhandlersincHEADERS_INSTALL = $(INSTALL_HEADER)
+install-libeventhandlersincHEADERS: $(libeventhandlersinc_HEADERS)
 	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(libdevicesincdir)
-	@list='$(libdevicesinc_HEADERS)'; for p in $$list; do \
+	$(mkinstalldirs) $(DESTDIR)$(libeventhandlersincdir)
+	@list='$(libeventhandlersinc_HEADERS)'; for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " $(libdevicesincHEADERS_INSTALL) $$d$$p $(DESTDIR)$(libdevicesincdir)/$$f"; \
-	  $(libdevicesincHEADERS_INSTALL) $$d$$p $(DESTDIR)$(libdevicesincdir)/$$f; \
+	  echo " $(libeventhandlersincHEADERS_INSTALL) $$d$$p $(DESTDIR)$(libeventhandlersincdir)/$$f"; \
+	  $(libeventhandlersincHEADERS_INSTALL) $$d$$p $(DESTDIR)$(libeventhandlersincdir)/$$f; \
 	done
 
-uninstall-libdevicesincHEADERS:
+uninstall-libeventhandlersincHEADERS:
 	@$(NORMAL_UNINSTALL)
-	@list='$(libdevicesinc_HEADERS)'; for p in $$list; do \
+	@list='$(libeventhandlersinc_HEADERS)'; for p in $$list; do \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f $(DESTDIR)$(libdevicesincdir)/$$f"; \
-	  rm -f $(DESTDIR)$(libdevicesincdir)/$$f; \
+	  echo " rm -f $(DESTDIR)$(libeventhandlersincdir)/$$f"; \
+	  rm -f $(DESTDIR)$(libeventhandlersincdir)/$$f; \
 	done
 
 ETAGS = etags
@@ -328,7 +328,7 @@ check: check-am
 all-am: Makefile $(HEADERS)
 
 installdirs:
-	$(mkinstalldirs) $(DESTDIR)$(libdevicesincdir)
+	$(mkinstalldirs) $(DESTDIR)$(libeventhandlersincdir)
 install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
@@ -370,7 +370,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-libdevicesincHEADERS
+install-data-am: install-libeventhandlersincHEADERS
 
 install-exec-am:
 
@@ -396,18 +396,19 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-info-am uninstall-libdevicesincHEADERS
+uninstall-am: uninstall-info-am uninstall-libeventhandlersincHEADERS
 
 .PHONY: CTAGS GTAGS all all-am check check-am clean clean-generic \
 	clean-libtool ctags distclean distclean-generic \
 	distclean-libtool distclean-tags distdir dvi dvi-am info \
 	info-am install install-am install-data install-data-am \
 	install-exec install-exec-am install-info install-info-am \
-	install-libdevicesincHEADERS install-man install-strip \
+	install-libeventhandlersincHEADERS install-man install-strip \
 	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
 	mostlyclean-libtool pdf pdf-am ps ps-am tags uninstall \
-	uninstall-am uninstall-info-am uninstall-libdevicesincHEADERS
+	uninstall-am uninstall-info-am \
+	uninstall-libeventhandlersincHEADERS
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

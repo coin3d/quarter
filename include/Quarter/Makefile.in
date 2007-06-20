@@ -183,7 +183,7 @@ sim_ac_relative_src_dir = @sim_ac_relative_src_dir@
 sim_ac_relative_src_dir_p = @sim_ac_relative_src_dir_p@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-SUBDIRS = devices
+SUBDIRS = devices eventhandlers
 
 libQuarterinc_HEADERS = \
         Basic.h \

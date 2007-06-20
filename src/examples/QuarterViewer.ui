@@ -21,6 +21,9 @@
    </property>
    <item row="0" column="0" >
     <widget class="SIM::Coin3D::Quarter::QuarterWidget" name="QuarterWidget" >
+     <property name="acceptDrops" >
+      <bool>true</bool>
+     </property>
      <property name="toolTip" >
       <string>QuarterWidget</string>
      </property>

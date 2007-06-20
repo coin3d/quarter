@@ -343,9 +343,11 @@ AC_CONFIG_FILES([
         include/Makefile
         include/Quarter/Makefile
         include/Quarter/devices/Makefile
+        include/Quarter/eventhandlers/Makefile
         src/Makefile
         src/Quarter/Makefile
         src/Quarter/devices/Makefile
+        src/Quarter/eventhandlers/Makefile
         src/examples/Makefile
         src/plugins/Makefile
         html/Makefile])

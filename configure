@@ -21038,7 +21038,7 @@ if $BUILD_WITH_MSVC; then
 
 fi
 
-                                                                                                    ac_config_files="$ac_config_files Makefile include/Makefile include/Quarter/Makefile include/Quarter/devices/Makefile src/Makefile src/Quarter/Makefile src/Quarter/devices/Makefile src/examples/Makefile src/plugins/Makefile html/Makefile"
+                                                                                                                        ac_config_files="$ac_config_files Makefile include/Makefile include/Quarter/Makefile include/Quarter/devices/Makefile include/Quarter/eventhandlers/Makefile src/Makefile src/Quarter/Makefile src/Quarter/devices/Makefile src/Quarter/eventhandlers/Makefile src/examples/Makefile src/plugins/Makefile html/Makefile"
 
 
 cat >confcache <<\_ACEOF
@@ -21622,9 +21622,11 @@ do
   "include/Makefile" ) CONFIG_FILES="$CONFIG_FILES include/Makefile" ;;
   "include/Quarter/Makefile" ) CONFIG_FILES="$CONFIG_FILES include/Quarter/Makefile" ;;
   "include/Quarter/devices/Makefile" ) CONFIG_FILES="$CONFIG_FILES include/Quarter/devices/Makefile" ;;
+  "include/Quarter/eventhandlers/Makefile" ) CONFIG_FILES="$CONFIG_FILES include/Quarter/eventhandlers/Makefile" ;;
   "src/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
   "src/Quarter/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/Quarter/Makefile" ;;
   "src/Quarter/devices/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/Quarter/devices/Makefile" ;;
+  "src/Quarter/eventhandlers/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/Quarter/eventhandlers/Makefile" ;;
   "src/examples/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/examples/Makefile" ;;
   "src/plugins/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/plugins/Makefile" ;;
   "html/Makefile" ) CONFIG_FILES="$CONFIG_FILES html/Makefile" ;;

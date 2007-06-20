@@ -45,7 +45,9 @@
 #include <Quarter/devices/DeviceManager.h>
 #include <Quarter/devices/MouseHandler.h>
 #include <Quarter/devices/KeyboardHandler.h>
-#include <Quarter/devices/ContextMenuHandler.h>
+#include <Quarter/eventhandlers/EventManager.h>
+#include <Quarter/eventhandlers/ContextMenuHandler.h>
+#include <Quarter/eventhandlers/DragDropHandler.h>
 
 #include "QuarterWidgetP.h"
 
@@ -74,6 +76,7 @@ QuarterWidget::constructor(void)
 
   PRIVATE(this)->scenemanager = new NbSceneManager;
   PRIVATE(this)->devicemanager = new DeviceManager(this);
+  PRIVATE(this)->eventmanager = new EventManager(this);
   PRIVATE(this)->navigationsystem = NbNavigationSystem::createByName(NB_EXAMINER_SYSTEM);
 
   PRIVATE(this)->scenemanager->setNavigationSystem(PRIVATE(this)->navigationsystem);
@@ -82,10 +85,12 @@ QuarterWidget::constructor(void)
   PRIVATE(this)->scenemanager->setBackgroundColor(SbColor(0.0f, 0.0f, 0.0f));
   PRIVATE(this)->scenemanager->activate();
   
-  // PRIVATE(this)->devicemanager->registerDevice(new ContextMenuHandler);
   PRIVATE(this)->devicemanager->registerDevice(new MouseHandler);
   PRIVATE(this)->devicemanager->registerDevice(new KeyboardHandler);
   
+  PRIVATE(this)->eventmanager->registerEventHandler(new ContextMenuHandler);
+  PRIVATE(this)->eventmanager->registerEventHandler(new DragDropHandler);
+
   this->setMouseTracking(TRUE);
 }
 
@@ -93,6 +98,7 @@ QuarterWidget::constructor(void)
 QuarterWidget::~QuarterWidget()
 {
   delete PRIVATE(this)->scenemanager;
+  delete PRIVATE(this)->eventmanager;
   delete PRIVATE(this)->devicemanager;
   delete PRIVATE(this)->navigationsystem;
 
@@ -222,6 +228,10 @@ QuarterWidget::renderCB(void * closure, SoSceneManager *)
 bool 
 QuarterWidget::event(QEvent * event)
 {
+  if (PRIVATE(this)->eventmanager->handleEvent(event)) {
+    return true;
+  }
+
   const SoEvent * soevent = PRIVATE(this)->devicemanager->translateEvent(event);
   if (soevent && PRIVATE(this)->scenemanager->processEvent(soevent)) {
     return true;

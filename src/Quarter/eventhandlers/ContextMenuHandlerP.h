@@ -20,46 +20,39 @@
  *
 \**************************************************************************/
 
-/*!
-  \class SIM::Coin3D::Quarter::ContextMenuHandler ContextMenuHandler.h Quarter/devices/ContextMenuHandler.h
+#ifndef QUARTER_CONTEXTMENUHANDLERP_H
+#define QUARTER_CONTEXTMENUHANDLERP_H
 
-  \brief The ContextMenuHandler handles the context menu on the
-  QuarterWidget. It is not registered with the DeviceManager by default.
-*/
+#include <QPair>
+#include <QObject>
+#include <Inventor/SoSceneManager.h>
 
-#include <Quarter/devices/ContextMenuHandler.h>
+class QAction;
+class QMouseEvent;
 
-#include <QEvent>
-#include <QContextMenuEvent>
-#include <Inventor/events/SoEvents.h>
+namespace SIM { namespace Coin3D { namespace Quarter {
 
-#include "ContextMenuHandlerP.h"
+class ContextMenuHandler;
 
-using namespace SIM::Coin3D::Quarter;
+class ContextMenuHandlerP : public QObject {
+  Q_OBJECT
+public:
+  ContextMenuHandlerP(ContextMenuHandler * publ);
+  ~ContextMenuHandlerP();
 
-#define PRIVATE(obj) obj->pimpl
+  bool contextMenuEvent(QMouseEvent * event);
 
-ContextMenuHandler::ContextMenuHandler(void)
-{
-  PRIVATE(this) = new ContextMenuHandlerP(this);
-}
+public slots:
+  void changeRenderMode(QAction * action);
+  void changeStereoMode(QAction * action);
 
-ContextMenuHandler::~ContextMenuHandler()
-{
-  delete PRIVATE(this);
-}
+private:
+  ContextMenuHandler * publ;
+};
 
-const SoEvent * 
-ContextMenuHandler::translateEvent(QEvent * event)
-{
-  switch (event->type()) {
-  case QEvent::ContextMenu:
-    PRIVATE(this)->contextMenuEvent((QContextMenuEvent *) event);
-    break;
-  default:
-    break;
-  }
-  return NULL;
-}
+typedef QPair<SoSceneManager::RenderMode, QString> RenderModePair;
+typedef QPair<SoSceneManager::StereoMode, QString> StereoModePair;
 
-#undef PRIVATE
+}}} // namespace
+
+#endif // QUARTER_CONTEXTMENUHANDLERP_H

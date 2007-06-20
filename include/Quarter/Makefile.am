@@ -1,4 +1,4 @@
-SUBDIRS = devices
+SUBDIRS = devices eventhandlers
 
 libQuarterinc_HEADERS = \
         Basic.h \

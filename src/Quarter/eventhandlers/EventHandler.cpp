@@ -1,6 +1,3 @@
-#ifndef QUARTER_CONTEXTMENUHANDLER_H
-#define QUARTER_CONTEXTMENUHANDLER_H
-
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
@@ -23,26 +20,21 @@
  *
 \**************************************************************************/
 
-#include <Quarter/Basic.h>
-#include <Quarter/devices/DeviceHandler.h>
+/*!  \class SIM::Coin3D::Quarter::DeviceHandler DeviceHandler.h Quarter/devices/DeviceHandler.h 
 
-class QEvent;
-class SoEvent;
+  \brief The DeviceHandler class is the base class for eventhandlers
+  such as the KeyboardHandler and MouseHandler. It can be subclassed
+  to create event handlers for other devices.
+*/
 
-namespace SIM { namespace Coin3D { namespace Quarter {
 
-class QUARTER_DLL_API ContextMenuHandler : public DeviceHandler {
-public:
-  ContextMenuHandler(void);
-  virtual ~ContextMenuHandler();
-  
-  virtual const SoEvent * translateEvent(QEvent * event);
+#include <Quarter/eventhandlers/EventHandler.h>
 
-private:
-  friend class ContextMenuHandlerP;
-  class ContextMenuHandlerP * pimpl;
-};
+using namespace SIM::Coin3D::Quarter;
 
-}}} // namespace
+void 
+EventHandler::setManager(EventManager * manager)
+{
+  this->manager = manager;
+}
 
-#endif // QUARTER_CONTEXTMENUHANDLER_H

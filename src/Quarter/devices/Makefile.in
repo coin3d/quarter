@@ -193,32 +193,24 @@ DEFAULT_INCLUDES = \
         -I$(top_srcdir)/src/Quarter
 
 
-BuiltSources = \
-        moc_ContextMenuHandlerP.cpp
-
-
 PrivateHeaders = \
-        KeyboardHandlerP.h \
-        ContextMenuHandlerP.h
+        KeyboardHandlerP.h
 
 
 RegularSources = \
         DeviceManager.cpp \
         MouseHandler.cpp \
         KeyboardHandler.cpp \
-        DragDropHandler.cpp \
         DeviceHandler.cpp \
-        KeyboardHandlerP.cpp \
-        ContextMenuHandler.cpp \
-        ContextMenuHandlerP.cpp
+        KeyboardHandlerP.cpp
 
 
 libdevices_la_SOURCES = \
-        $(RegularSources) $(PrivateHeaders) $(BuiltSources)
+        $(RegularSources) $(PrivateHeaders)
 
 
 devices_lst_SOURCES = \
-        $(RegularSources) $(PrivateHeaders) $(BuiltSources)
+        $(RegularSources) $(PrivateHeaders)
 
 
 devices_lst_CPPFLAGS = \
@@ -245,7 +237,7 @@ libdevices_la_CFLAGS = \
         $(QUARTER_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
 
 
-CLEANFILES = .\#* *.bak *~ *.lst $(BuiltSources)
+CLEANFILES = .\#* *.bak *~ *.lst
 
 @BUILD_WITH_MSVC_TRUE@noinst_LIBRARIES = devices.lst
 @BUILD_WITH_MSVC_FALSE@noinst_LTLIBRARIES = libdevices.la
@@ -261,50 +253,33 @@ devices_lst_LIBADD =
 am__objects_1 = devices_lst-DeviceManager.$(OBJEXT) \
 	devices_lst-MouseHandler.$(OBJEXT) \
 	devices_lst-KeyboardHandler.$(OBJEXT) \
-	devices_lst-DragDropHandler.$(OBJEXT) \
 	devices_lst-DeviceHandler.$(OBJEXT) \
-	devices_lst-KeyboardHandlerP.$(OBJEXT) \
-	devices_lst-ContextMenuHandler.$(OBJEXT) \
-	devices_lst-ContextMenuHandlerP.$(OBJEXT)
+	devices_lst-KeyboardHandlerP.$(OBJEXT)
 am__objects_2 =
-am__objects_3 = devices_lst-moc_ContextMenuHandlerP.$(OBJEXT)
-am_devices_lst_OBJECTS = $(am__objects_1) $(am__objects_2) \
-	$(am__objects_3)
+am_devices_lst_OBJECTS = $(am__objects_1) $(am__objects_2)
 devices_lst_OBJECTS = $(am_devices_lst_OBJECTS)
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 
 libdevices_la_LDFLAGS =
 libdevices_la_LIBADD =
-am__objects_4 = libdevices_la-DeviceManager.lo \
+am__objects_3 = libdevices_la-DeviceManager.lo \
 	libdevices_la-MouseHandler.lo libdevices_la-KeyboardHandler.lo \
-	libdevices_la-DragDropHandler.lo libdevices_la-DeviceHandler.lo \
-	libdevices_la-KeyboardHandlerP.lo \
-	libdevices_la-ContextMenuHandler.lo \
-	libdevices_la-ContextMenuHandlerP.lo
-am__objects_5 = libdevices_la-moc_ContextMenuHandlerP.lo
-am_libdevices_la_OBJECTS = $(am__objects_4) $(am__objects_2) \
-	$(am__objects_5)
+	libdevices_la-DeviceHandler.lo \
+	libdevices_la-KeyboardHandlerP.lo
+am_libdevices_la_OBJECTS = $(am__objects_3) $(am__objects_2)
 libdevices_la_OBJECTS = $(am_libdevices_la_OBJECTS)
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/devices_lst-ContextMenuHandler.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/devices_lst-ContextMenuHandlerP.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/devices_lst-DeviceHandler.Po \
+@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/devices_lst-DeviceHandler.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/devices_lst-DeviceManager.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/devices_lst-DragDropHandler.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/devices_lst-KeyboardHandler.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/devices_lst-KeyboardHandlerP.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/devices_lst-MouseHandler.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-ContextMenuHandler.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-DeviceHandler.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-DeviceManager.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-DragDropHandler.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-KeyboardHandler.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-KeyboardHandlerP.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-MouseHandler.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Plo
+@AMDEP_TRUE@	./$(DEPDIR)/libdevices_la-MouseHandler.Plo
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) \
@@ -354,24 +329,16 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-ContextMenuHandler.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-ContextMenuHandlerP.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-DeviceHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-DeviceManager.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-DragDropHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-KeyboardHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-KeyboardHandlerP.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-MouseHandler.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-ContextMenuHandler.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-DeviceHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-DeviceManager.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-DragDropHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-KeyboardHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-KeyboardHandlerP.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-MouseHandler.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Plo@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -508,39 +475,6 @@ devices_lst-KeyboardHandler.lo: KeyboardHandler.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-KeyboardHandler.lo `test -f 'KeyboardHandler.cpp' || echo '$(srcdir)/'`KeyboardHandler.cpp
 
-devices_lst-DragDropHandler.o: DragDropHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DragDropHandler.o -MD -MP -MF "$(DEPDIR)/devices_lst-DragDropHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o devices_lst-DragDropHandler.o `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-DragDropHandler.Tpo" "$(DEPDIR)/devices_lst-DragDropHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-DragDropHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DragDropHandler.cpp' object='devices_lst-DragDropHandler.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-DragDropHandler.Po' tmpdepfile='$(DEPDIR)/devices_lst-DragDropHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-DragDropHandler.o `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp
-
-devices_lst-DragDropHandler.obj: DragDropHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DragDropHandler.obj -MD -MP -MF "$(DEPDIR)/devices_lst-DragDropHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o devices_lst-DragDropHandler.obj `if test -f 'DragDropHandler.cpp'; then $(CYGPATH_W) 'DragDropHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/DragDropHandler.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-DragDropHandler.Tpo" "$(DEPDIR)/devices_lst-DragDropHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-DragDropHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DragDropHandler.cpp' object='devices_lst-DragDropHandler.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-DragDropHandler.Po' tmpdepfile='$(DEPDIR)/devices_lst-DragDropHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-DragDropHandler.obj `if test -f 'DragDropHandler.cpp'; then $(CYGPATH_W) 'DragDropHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/DragDropHandler.cpp'; fi`
-
-devices_lst-DragDropHandler.lo: DragDropHandler.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DragDropHandler.lo -MD -MP -MF "$(DEPDIR)/devices_lst-DragDropHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o devices_lst-DragDropHandler.lo `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-DragDropHandler.Tpo" "$(DEPDIR)/devices_lst-DragDropHandler.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-DragDropHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DragDropHandler.cpp' object='devices_lst-DragDropHandler.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-DragDropHandler.Plo' tmpdepfile='$(DEPDIR)/devices_lst-DragDropHandler.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-DragDropHandler.lo `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp
-
 devices_lst-DeviceHandler.o: DeviceHandler.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-DeviceHandler.o -MD -MP -MF "$(DEPDIR)/devices_lst-DeviceHandler.Tpo" \
 @am__fastdepCXX_TRUE@	  -c -o devices_lst-DeviceHandler.o `test -f 'DeviceHandler.cpp' || echo '$(srcdir)/'`DeviceHandler.cpp; \
@@ -606,105 +540,6 @@ devices_lst-KeyboardHandlerP.lo: KeyboardHandlerP.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-KeyboardHandlerP.Plo' tmpdepfile='$(DEPDIR)/devices_lst-KeyboardHandlerP.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-KeyboardHandlerP.lo `test -f 'KeyboardHandlerP.cpp' || echo '$(srcdir)/'`KeyboardHandlerP.cpp
-
-devices_lst-ContextMenuHandler.o: ContextMenuHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-ContextMenuHandler.o -MD -MP -MF "$(DEPDIR)/devices_lst-ContextMenuHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o devices_lst-ContextMenuHandler.o `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-ContextMenuHandler.Tpo" "$(DEPDIR)/devices_lst-ContextMenuHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-ContextMenuHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandler.cpp' object='devices_lst-ContextMenuHandler.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-ContextMenuHandler.Po' tmpdepfile='$(DEPDIR)/devices_lst-ContextMenuHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-ContextMenuHandler.o `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp
-
-devices_lst-ContextMenuHandler.obj: ContextMenuHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-ContextMenuHandler.obj -MD -MP -MF "$(DEPDIR)/devices_lst-ContextMenuHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o devices_lst-ContextMenuHandler.obj `if test -f 'ContextMenuHandler.cpp'; then $(CYGPATH_W) 'ContextMenuHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenuHandler.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-ContextMenuHandler.Tpo" "$(DEPDIR)/devices_lst-ContextMenuHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-ContextMenuHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandler.cpp' object='devices_lst-ContextMenuHandler.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-ContextMenuHandler.Po' tmpdepfile='$(DEPDIR)/devices_lst-ContextMenuHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-ContextMenuHandler.obj `if test -f 'ContextMenuHandler.cpp'; then $(CYGPATH_W) 'ContextMenuHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenuHandler.cpp'; fi`
-
-devices_lst-ContextMenuHandler.lo: ContextMenuHandler.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-ContextMenuHandler.lo -MD -MP -MF "$(DEPDIR)/devices_lst-ContextMenuHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o devices_lst-ContextMenuHandler.lo `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-ContextMenuHandler.Tpo" "$(DEPDIR)/devices_lst-ContextMenuHandler.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-ContextMenuHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandler.cpp' object='devices_lst-ContextMenuHandler.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-ContextMenuHandler.Plo' tmpdepfile='$(DEPDIR)/devices_lst-ContextMenuHandler.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-ContextMenuHandler.lo `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp
-
-devices_lst-ContextMenuHandlerP.o: ContextMenuHandlerP.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-ContextMenuHandlerP.o -MD -MP -MF "$(DEPDIR)/devices_lst-ContextMenuHandlerP.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o devices_lst-ContextMenuHandlerP.o `test -f 'ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`ContextMenuHandlerP.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-ContextMenuHandlerP.Tpo" "$(DEPDIR)/devices_lst-ContextMenuHandlerP.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-ContextMenuHandlerP.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandlerP.cpp' object='devices_lst-ContextMenuHandlerP.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-ContextMenuHandlerP.Po' tmpdepfile='$(DEPDIR)/devices_lst-ContextMenuHandlerP.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-ContextMenuHandlerP.o `test -f 'ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`ContextMenuHandlerP.cpp
-
-devices_lst-ContextMenuHandlerP.obj: ContextMenuHandlerP.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-ContextMenuHandlerP.obj -MD -MP -MF "$(DEPDIR)/devices_lst-ContextMenuHandlerP.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o devices_lst-ContextMenuHandlerP.obj `if test -f 'ContextMenuHandlerP.cpp'; then $(CYGPATH_W) 'ContextMenuHandlerP.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenuHandlerP.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-ContextMenuHandlerP.Tpo" "$(DEPDIR)/devices_lst-ContextMenuHandlerP.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-ContextMenuHandlerP.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandlerP.cpp' object='devices_lst-ContextMenuHandlerP.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-ContextMenuHandlerP.Po' tmpdepfile='$(DEPDIR)/devices_lst-ContextMenuHandlerP.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-ContextMenuHandlerP.obj `if test -f 'ContextMenuHandlerP.cpp'; then $(CYGPATH_W) 'ContextMenuHandlerP.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenuHandlerP.cpp'; fi`
-
-devices_lst-ContextMenuHandlerP.lo: ContextMenuHandlerP.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-ContextMenuHandlerP.lo -MD -MP -MF "$(DEPDIR)/devices_lst-ContextMenuHandlerP.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o devices_lst-ContextMenuHandlerP.lo `test -f 'ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`ContextMenuHandlerP.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-ContextMenuHandlerP.Tpo" "$(DEPDIR)/devices_lst-ContextMenuHandlerP.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-ContextMenuHandlerP.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandlerP.cpp' object='devices_lst-ContextMenuHandlerP.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-ContextMenuHandlerP.Plo' tmpdepfile='$(DEPDIR)/devices_lst-ContextMenuHandlerP.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-ContextMenuHandlerP.lo `test -f 'ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`ContextMenuHandlerP.cpp
-
-devices_lst-moc_ContextMenuHandlerP.o: moc_ContextMenuHandlerP.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-moc_ContextMenuHandlerP.o -MD -MP -MF "$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o devices_lst-moc_ContextMenuHandlerP.o `test -f 'moc_ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`moc_ContextMenuHandlerP.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Tpo" "$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenuHandlerP.cpp' object='devices_lst-moc_ContextMenuHandlerP.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Po' tmpdepfile='$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-moc_ContextMenuHandlerP.o `test -f 'moc_ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`moc_ContextMenuHandlerP.cpp
-
-devices_lst-moc_ContextMenuHandlerP.obj: moc_ContextMenuHandlerP.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-moc_ContextMenuHandlerP.obj -MD -MP -MF "$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o devices_lst-moc_ContextMenuHandlerP.obj `if test -f 'moc_ContextMenuHandlerP.cpp'; then $(CYGPATH_W) 'moc_ContextMenuHandlerP.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_ContextMenuHandlerP.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Tpo" "$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenuHandlerP.cpp' object='devices_lst-moc_ContextMenuHandlerP.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Po' tmpdepfile='$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-moc_ContextMenuHandlerP.obj `if test -f 'moc_ContextMenuHandlerP.cpp'; then $(CYGPATH_W) 'moc_ContextMenuHandlerP.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_ContextMenuHandlerP.cpp'; fi`
-
-devices_lst-moc_ContextMenuHandlerP.lo: moc_ContextMenuHandlerP.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -MT devices_lst-moc_ContextMenuHandlerP.lo -MD -MP -MF "$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o devices_lst-moc_ContextMenuHandlerP.lo `test -f 'moc_ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`moc_ContextMenuHandlerP.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Tpo" "$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenuHandlerP.cpp' object='devices_lst-moc_ContextMenuHandlerP.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.Plo' tmpdepfile='$(DEPDIR)/devices_lst-moc_ContextMenuHandlerP.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(devices_lst_CPPFLAGS) $(CPPFLAGS) $(devices_lst_CXXFLAGS) $(CXXFLAGS) -c -o devices_lst-moc_ContextMenuHandlerP.lo `test -f 'moc_ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`moc_ContextMenuHandlerP.cpp
 
 libdevices_la-DeviceManager.o: DeviceManager.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DeviceManager.o -MD -MP -MF "$(DEPDIR)/libdevices_la-DeviceManager.Tpo" \
@@ -805,39 +640,6 @@ libdevices_la-KeyboardHandler.lo: KeyboardHandler.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-KeyboardHandler.lo `test -f 'KeyboardHandler.cpp' || echo '$(srcdir)/'`KeyboardHandler.cpp
 
-libdevices_la-DragDropHandler.o: DragDropHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DragDropHandler.o -MD -MP -MF "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libdevices_la-DragDropHandler.o `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo" "$(DEPDIR)/libdevices_la-DragDropHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DragDropHandler.cpp' object='libdevices_la-DragDropHandler.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-DragDropHandler.Po' tmpdepfile='$(DEPDIR)/libdevices_la-DragDropHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-DragDropHandler.o `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp
-
-libdevices_la-DragDropHandler.obj: DragDropHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DragDropHandler.obj -MD -MP -MF "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libdevices_la-DragDropHandler.obj `if test -f 'DragDropHandler.cpp'; then $(CYGPATH_W) 'DragDropHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/DragDropHandler.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo" "$(DEPDIR)/libdevices_la-DragDropHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DragDropHandler.cpp' object='libdevices_la-DragDropHandler.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-DragDropHandler.Po' tmpdepfile='$(DEPDIR)/libdevices_la-DragDropHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-DragDropHandler.obj `if test -f 'DragDropHandler.cpp'; then $(CYGPATH_W) 'DragDropHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/DragDropHandler.cpp'; fi`
-
-libdevices_la-DragDropHandler.lo: DragDropHandler.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DragDropHandler.lo -MD -MP -MF "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libdevices_la-DragDropHandler.lo `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo" "$(DEPDIR)/libdevices_la-DragDropHandler.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-DragDropHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='DragDropHandler.cpp' object='libdevices_la-DragDropHandler.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-DragDropHandler.Plo' tmpdepfile='$(DEPDIR)/libdevices_la-DragDropHandler.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-DragDropHandler.lo `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp
-
 libdevices_la-DeviceHandler.o: DeviceHandler.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-DeviceHandler.o -MD -MP -MF "$(DEPDIR)/libdevices_la-DeviceHandler.Tpo" \
 @am__fastdepCXX_TRUE@	  -c -o libdevices_la-DeviceHandler.o `test -f 'DeviceHandler.cpp' || echo '$(srcdir)/'`DeviceHandler.cpp; \
@@ -903,105 +705,6 @@ libdevices_la-KeyboardHandlerP.lo: KeyboardHandlerP.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-KeyboardHandlerP.Plo' tmpdepfile='$(DEPDIR)/libdevices_la-KeyboardHandlerP.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-KeyboardHandlerP.lo `test -f 'KeyboardHandlerP.cpp' || echo '$(srcdir)/'`KeyboardHandlerP.cpp
-
-libdevices_la-ContextMenuHandler.o: ContextMenuHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-ContextMenuHandler.o -MD -MP -MF "$(DEPDIR)/libdevices_la-ContextMenuHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libdevices_la-ContextMenuHandler.o `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-ContextMenuHandler.Tpo" "$(DEPDIR)/libdevices_la-ContextMenuHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-ContextMenuHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandler.cpp' object='libdevices_la-ContextMenuHandler.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-ContextMenuHandler.Po' tmpdepfile='$(DEPDIR)/libdevices_la-ContextMenuHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-ContextMenuHandler.o `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp
-
-libdevices_la-ContextMenuHandler.obj: ContextMenuHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-ContextMenuHandler.obj -MD -MP -MF "$(DEPDIR)/libdevices_la-ContextMenuHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libdevices_la-ContextMenuHandler.obj `if test -f 'ContextMenuHandler.cpp'; then $(CYGPATH_W) 'ContextMenuHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenuHandler.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-ContextMenuHandler.Tpo" "$(DEPDIR)/libdevices_la-ContextMenuHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-ContextMenuHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandler.cpp' object='libdevices_la-ContextMenuHandler.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-ContextMenuHandler.Po' tmpdepfile='$(DEPDIR)/libdevices_la-ContextMenuHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-ContextMenuHandler.obj `if test -f 'ContextMenuHandler.cpp'; then $(CYGPATH_W) 'ContextMenuHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenuHandler.cpp'; fi`
-
-libdevices_la-ContextMenuHandler.lo: ContextMenuHandler.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-ContextMenuHandler.lo -MD -MP -MF "$(DEPDIR)/libdevices_la-ContextMenuHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libdevices_la-ContextMenuHandler.lo `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-ContextMenuHandler.Tpo" "$(DEPDIR)/libdevices_la-ContextMenuHandler.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-ContextMenuHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandler.cpp' object='libdevices_la-ContextMenuHandler.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-ContextMenuHandler.Plo' tmpdepfile='$(DEPDIR)/libdevices_la-ContextMenuHandler.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-ContextMenuHandler.lo `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp
-
-libdevices_la-ContextMenuHandlerP.o: ContextMenuHandlerP.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-ContextMenuHandlerP.o -MD -MP -MF "$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libdevices_la-ContextMenuHandlerP.o `test -f 'ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`ContextMenuHandlerP.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Tpo" "$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandlerP.cpp' object='libdevices_la-ContextMenuHandlerP.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Po' tmpdepfile='$(DEPDIR)/libdevices_la-ContextMenuHandlerP.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-ContextMenuHandlerP.o `test -f 'ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`ContextMenuHandlerP.cpp
-
-libdevices_la-ContextMenuHandlerP.obj: ContextMenuHandlerP.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-ContextMenuHandlerP.obj -MD -MP -MF "$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libdevices_la-ContextMenuHandlerP.obj `if test -f 'ContextMenuHandlerP.cpp'; then $(CYGPATH_W) 'ContextMenuHandlerP.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenuHandlerP.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Tpo" "$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandlerP.cpp' object='libdevices_la-ContextMenuHandlerP.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Po' tmpdepfile='$(DEPDIR)/libdevices_la-ContextMenuHandlerP.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-ContextMenuHandlerP.obj `if test -f 'ContextMenuHandlerP.cpp'; then $(CYGPATH_W) 'ContextMenuHandlerP.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenuHandlerP.cpp'; fi`
-
-libdevices_la-ContextMenuHandlerP.lo: ContextMenuHandlerP.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-ContextMenuHandlerP.lo -MD -MP -MF "$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libdevices_la-ContextMenuHandlerP.lo `test -f 'ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`ContextMenuHandlerP.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Tpo" "$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandlerP.cpp' object='libdevices_la-ContextMenuHandlerP.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-ContextMenuHandlerP.Plo' tmpdepfile='$(DEPDIR)/libdevices_la-ContextMenuHandlerP.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-ContextMenuHandlerP.lo `test -f 'ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`ContextMenuHandlerP.cpp
-
-libdevices_la-moc_ContextMenuHandlerP.o: moc_ContextMenuHandlerP.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-moc_ContextMenuHandlerP.o -MD -MP -MF "$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libdevices_la-moc_ContextMenuHandlerP.o `test -f 'moc_ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`moc_ContextMenuHandlerP.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Tpo" "$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenuHandlerP.cpp' object='libdevices_la-moc_ContextMenuHandlerP.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Po' tmpdepfile='$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-moc_ContextMenuHandlerP.o `test -f 'moc_ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`moc_ContextMenuHandlerP.cpp
-
-libdevices_la-moc_ContextMenuHandlerP.obj: moc_ContextMenuHandlerP.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-moc_ContextMenuHandlerP.obj -MD -MP -MF "$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libdevices_la-moc_ContextMenuHandlerP.obj `if test -f 'moc_ContextMenuHandlerP.cpp'; then $(CYGPATH_W) 'moc_ContextMenuHandlerP.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_ContextMenuHandlerP.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Tpo" "$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenuHandlerP.cpp' object='libdevices_la-moc_ContextMenuHandlerP.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Po' tmpdepfile='$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-moc_ContextMenuHandlerP.obj `if test -f 'moc_ContextMenuHandlerP.cpp'; then $(CYGPATH_W) 'moc_ContextMenuHandlerP.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_ContextMenuHandlerP.cpp'; fi`
-
-libdevices_la-moc_ContextMenuHandlerP.lo: moc_ContextMenuHandlerP.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -MT libdevices_la-moc_ContextMenuHandlerP.lo -MD -MP -MF "$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libdevices_la-moc_ContextMenuHandlerP.lo `test -f 'moc_ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`moc_ContextMenuHandlerP.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Tpo" "$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenuHandlerP.cpp' object='libdevices_la-moc_ContextMenuHandlerP.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.Plo' tmpdepfile='$(DEPDIR)/libdevices_la-moc_ContextMenuHandlerP.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdevices_la_CPPFLAGS) $(CPPFLAGS) $(libdevices_la_CXXFLAGS) $(CXXFLAGS) -c -o libdevices_la-moc_ContextMenuHandlerP.lo `test -f 'moc_ContextMenuHandlerP.cpp' || echo '$(srcdir)/'`moc_ContextMenuHandlerP.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -1187,9 +890,6 @@ uninstall-am: uninstall-info-am
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags uninstall uninstall-am uninstall-info-am
 
-
-moc_ContextMenuHandlerP.cpp: $(srcdir)/ContextMenuHandlerP.h
-	$(MOC) -o $@ $<
 
 devices.lst: $(devices_lst_OBJECTS)
 	@echo "Linking $@..."; \

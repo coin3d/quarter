@@ -184,7 +184,7 @@ sim_ac_relative_src_dir_p = @sim_ac_relative_src_dir_p@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
-SUBDIRS = devices
+SUBDIRS = devices eventhandlers
 
 DEFAULT_INCLUDES = \
         -I$(QTDIR)/include \
@@ -253,11 +253,11 @@ libQuarter_la_CFLAGS = \
 @BUILD_WITH_MSVC_FALSE@lib_LTLIBRARIES = libQuarter.la
 
 libQuarter_la_LIBADD = \
-        devices/libdevices.la -lNutsnBolts $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL
+        devices/libdevices.la eventhandlers/libeventhandlers.la -lNutsnBolts $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL
 
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD = \
-        devices/devices.lst -lNutsnBolts0 $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL4
+        devices/devices.lst eventhandlers/libeventhandlers.lst -lNutsnBolts0 $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL4
 
 
 CLEANFILES = \
@@ -277,7 +277,7 @@ LIBRARIES = $(lib_LIBRARIES)
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_AR = $(AR) cru
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_DEPENDENCIES = \
-	devices/devices.lst
+	devices/devices.lst eventhandlers/libeventhandlers.lst
 am__objects_1 = \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Quarter.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidget.$(OBJEXT) \
@@ -295,7 +295,8 @@ Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
 LTLIBRARIES = $(lib_LTLIBRARIES)
 
 libQuarter_la_LDFLAGS =
-libQuarter_la_DEPENDENCIES = devices/libdevices.la
+libQuarter_la_DEPENDENCIES = devices/libdevices.la \
+	eventhandlers/libeventhandlers.la
 am__objects_4 = libQuarter_la-Quarter.lo libQuarter_la-QuarterWidget.lo \
 	libQuarter_la-SensorManager.lo libQuarter_la-QuarterWidgetP.lo \
 	libQuarter_la-QuarterApplication.lo

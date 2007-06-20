@@ -1,5 +1,5 @@
-#ifndef QUARTER_DRAGDROPHANDLER_H
-#define QUARTER_DRAGDROPHANDLER_H
+#ifndef QUARTER_EVENTHANDLER_H
+#define QUARTER_EVENTHANDLER_H
 
 /**************************************************************************\
  *
@@ -24,24 +24,31 @@
 \**************************************************************************/
 
 #include <Quarter/Basic.h>
-#include <Quarter/devices/DeviceHandler.h>
 
 class QEvent;
-class SoEvent;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class QUARTER_DLL_API DragDropHandler : public DeviceHandler {
+class EventManager;
+      
+class QUARTER_DLL_API EventHandler {
 public:
-  DragDropHandler(void);
-  virtual ~DragDropHandler();
-  virtual const SoEvent * translateEvent(QEvent * event);
-  
-private:
-  friend class DragDropHandlerP;
-  class DragDropHandlerP * pimpl;
+  EventHandler(void) {}
+  virtual ~EventHandler() {}
+
+  /*! Subclasses must override this method to provide custom event
+    handling
+   */
+  virtual bool handleEvent(QEvent * event) = 0;
+
+protected:
+  void setManager(EventManager * manager);
+
+  friend class EventManager;
+  EventManager * manager;
+
 };
 
 }}} // namespace
 
-#endif // QUARTER_DRAGDROPHANDLER_H
+#endif // QUARTER_EVENTHANDLER_H

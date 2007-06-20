@@ -28,7 +28,7 @@
   DeviceManager by default.
 */
 
-#include <Quarter/devices/DragDropHandler.h>
+#include <Quarter/eventhandlers/DragDropHandler.h>
 
 #include <QUrl>
 #include <QFileInfo>
@@ -40,7 +40,7 @@
 #include <Inventor/nodes/SoSeparator.h>
 
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/devices/DeviceManager.h>
+#include <Quarter/eventhandlers/EventManager.h>
 #include <stdlib.h>
 
 namespace SIM { namespace Coin3D { namespace Quarter {
@@ -79,20 +79,19 @@ DragDropHandler::~DragDropHandler()
   valid Inventor or VRML it opens the file, reads in the scenegraph
   and calls setSceneGraph on the QuarterWidget
  */
-const SoEvent * 
-DragDropHandler::translateEvent(QEvent * event)
+bool
+DragDropHandler::handleEvent(QEvent * event)
 {
   switch (event->type()) {
   case QEvent::DragEnter:
     PRIVATE(this)->dragEnterEvent((QDragEnterEvent *) event);
-    break;
+    return true;
   case QEvent::Drop:
     PRIVATE(this)->dropEvent((QDropEvent *) event);
-    break;
+    return true;
   default:
-    break;
+    return false;
   }
-  return NULL;
 }
   
 void 

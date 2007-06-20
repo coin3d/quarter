@@ -2,9 +2,7 @@
 libdevicesinc_HEADERS = \
         DeviceHandler.h \
         DeviceManager.h \
-        DragDropHandler.h \
         KeyboardHandler.h \
-        MouseHandler.h \
-        ContextMenuHandler.h
+        MouseHandler.h
 
 libdevicesincdir = $(includedir)/Quarter/devices/.

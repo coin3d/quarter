@@ -1,3 +1,6 @@
+#ifndef QUARTER_CONTEXTMENUHANDLER_H
+#define QUARTER_CONTEXTMENUHANDLER_H
+
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
@@ -20,39 +23,25 @@
  *
 \**************************************************************************/
 
-#ifndef QUARTER_CONTEXTMENUHANDLERP_H
-#define QUARTER_CONTEXTMENUHANDLERP_H
+#include <Quarter/Basic.h>
+#include <Quarter/eventhandlers/EventHandler.h>
 
-#include <QPair>
-#include <QObject>
-#include <Inventor/SoSceneManager.h>
-
-class QAction;
-class QContextMenuEvent;
+class QEvent;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class ContextMenuHandler;
-
-class ContextMenuHandlerP : public QObject {
-  Q_OBJECT
+class QUARTER_DLL_API ContextMenuHandler : public EventHandler {
 public:
-  ContextMenuHandlerP(ContextMenuHandler * publ);
-  ~ContextMenuHandlerP();
-
-  void contextMenuEvent(QContextMenuEvent * event);
-
-public slots:
-  void changeRenderMode(QAction * action);
-  void changeStereoMode(QAction * action);
+  ContextMenuHandler(void);
+  virtual ~ContextMenuHandler();
+  
+  virtual bool handleEvent(QEvent * event);
 
 private:
-  ContextMenuHandler * publ;
+  friend class ContextMenuHandlerP;
+  class ContextMenuHandlerP * pimpl;
 };
-
-typedef QPair<SoSceneManager::RenderMode, QString> RenderModePair;
-typedef QPair<SoSceneManager::StereoMode, QString> StereoModePair;
 
 }}} // namespace
 
-#endif // QUARTER_CONTEXTMENUHANDLERP_H
+#endif // QUARTER_CONTEXTMENUHANDLER_H

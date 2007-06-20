@@ -1,5 +1,5 @@
-#ifndef QUARTER_QUARTERWIDGETP_H
-#define QUARTER_QUARTERWIDGETP_H
+#ifndef QUARTER_DRAGDROPHANDLER_H
+#define QUARTER_DRAGDROPHANDLER_H
 
 /**************************************************************************\
  *
@@ -23,34 +23,25 @@
  *
 \**************************************************************************/
 
-#include <Inventor/SbBasic.h>
+#include <Quarter/Basic.h>
+#include <Quarter/eventhandlers/EventHandler.h>
 
-class SoNode;
-class SoCamera;
-class SoSeparator;
-
-class NbSceneManager;
-class NbNavigationSystem;
+class QEvent;
+class SoEvent;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class DeviceManager;
-class EventManager;
-
-class QuarterWidgetP {
+class QUARTER_DLL_API DragDropHandler : public EventHandler {
 public:
-  QuarterWidgetP(class QuarterWidget * master);
-  ~QuarterWidgetP();
-
-  SoSeparator * createSuperScene(void);
-  SoCamera * getCamera(SoSeparator * root);
-
-  NbNavigationSystem * navigationsystem;  
-  NbSceneManager * scenemanager;
-  DeviceManager * devicemanager;
-  EventManager * eventmanager;
+  DragDropHandler(void);
+  virtual ~DragDropHandler();
+  virtual bool handleEvent(QEvent * event);
+  
+private:
+  friend class DragDropHandlerP;
+  class DragDropHandlerP * pimpl;
 };
 
-#endif // QUARTER_QUARTERWIDGETP_H
-
 }}} // namespace
+
+#endif // QUARTER_DRAGDROPHANDLER_H

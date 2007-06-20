@@ -1,5 +1,5 @@
-#ifndef QUARTER_QUARTERWIDGETP_H
-#define QUARTER_QUARTERWIDGETP_H
+#ifndef QUARTER_EVENTMANAGER_H
+#define QUARTER_EVENTMANAGER_H
 
 /**************************************************************************\
  *
@@ -23,34 +23,32 @@
  *
 \**************************************************************************/
 
-#include <Inventor/SbBasic.h>
+#include <QList>
+#include <Quarter/Basic.h>
 
-class SoNode;
-class SoCamera;
-class SoSeparator;
-
-class NbSceneManager;
-class NbNavigationSystem;
+class QEvent;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class DeviceManager;
-class EventManager;
+class EventHandler;
+class QuarterWidget;
 
-class QuarterWidgetP {
+class QUARTER_DLL_API EventManager {
 public:
-  QuarterWidgetP(class QuarterWidget * master);
-  ~QuarterWidgetP();
+  EventManager(QuarterWidget * quarterwidget);
+  ~EventManager();
 
-  SoSeparator * createSuperScene(void);
-  SoCamera * getCamera(SoSeparator * root);
+  bool handleEvent(QEvent * event);
+  const QuarterWidget * getWidget(void) const;
+  
+  void registerEventHandler(EventHandler * handler);
+  void unregisterEventHandler(EventHandler * handler);
 
-  NbNavigationSystem * navigationsystem;  
-  NbSceneManager * scenemanager;
-  DeviceManager * devicemanager;
-  EventManager * eventmanager;
+private:
+  QList<EventHandler *> eventhandlers;
+  QuarterWidget * quarterwidget;
 };
 
-#endif // QUARTER_QUARTERWIDGETP_H
-
 }}} // namespace
+
+#endif // QUARTER_EVENTMANAGER_H
