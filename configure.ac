@@ -64,6 +64,16 @@ SIM_AC_HAVE_COIN_IFELSE([
   COIN_USE_LIBS=$sim_ac_coin_libs
 ], [AC_MSG_ERROR(couldn't compile and link against Coin)])
 
+# seems to be required for the Qt test on Mac OS X. pederb, 2007-06-27
+sim_ac_want_x11=no
+case $host_os in
+  darwin*)
+    SIM_AC_CHECK_X11([sim_ac_want_x11=yes],[sim_ac_want_x11=no])
+    ;;
+  *)
+    sim_ac_want_x11=yes
+    ;;
+esac
 
 SIM_AC_CHECK_QT([
   QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qt_cppflags"
