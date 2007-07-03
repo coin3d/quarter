@@ -93,8 +93,6 @@ SIM_AC_CHECK_QT([
 #  SIM_AC_ERROR([no-qgl])
 #])
 
-# FIXME: configure check for NutsnBolts? (20070426 frodo)
-
 SIM_AC_QT_PROG(MOC, moc)
 if test x"$MOC" = x"false"; then
   SIM_AC_ERROR([no-moc])

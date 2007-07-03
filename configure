@@ -21793,8 +21793,6 @@ fi
 #  SIM_AC_ERROR([no-qgl])
 #])
 
-# FIXME: configure check for NutsnBolts? (20070426 frodo)
-
 
 
 

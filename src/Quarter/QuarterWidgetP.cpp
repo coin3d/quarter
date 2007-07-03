@@ -25,12 +25,6 @@
 #include <Inventor/nodes/SoCamera.h>
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/actions/SoSearchAction.h>
-
-#include <NutsnBolts/navigation/NbNavigationSystem.h>
-#include <NutsnBolts/NbSceneManager.h>
-
-#include <Quarter/devices/DeviceManager.h>
-
 #include <stdlib.h>
 
 using namespace SIM::Coin3D::Quarter;

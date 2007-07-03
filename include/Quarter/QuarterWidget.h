@@ -30,7 +30,8 @@
 class SoNode;
 class SoEvent;
 class SoCamera;
-class SoSceneManager;
+class SoEventManager;
+class SoRenderManager;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
@@ -48,7 +49,8 @@ public:
   virtual void setSceneGraph(SoNode * root);
   virtual void setCamera(SoCamera * camera);
   DeviceManager * getDeviceManager(void) const;
-  SoSceneManager * getSceneManager(void) const;
+  SoEventManager * getSoEventManager(void) const;
+  SoRenderManager * getSoRenderManager(void) const;
                                                    
 public slots:
   virtual void viewAll(void);
@@ -60,7 +62,7 @@ protected:
   virtual bool event(QEvent * event);
   virtual void actualRedraw(void);
 
-  static void renderCB(void * closure, SoSceneManager *);
+  static void renderCB(void * closure, SoRenderManager *);
 
 private:
   void constructor(void);

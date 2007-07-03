@@ -61,7 +61,6 @@ EXAMPLES_LIBS = \
         -lQtDesigner4 \
         -lQtXml4 \
         -lQtOpenGL4 \
-        -lNutsnBolts0 \
         $(QT_USE_LIBS) \
         $(QUARTER_USE_LIBS) \
         $(COIN_USE_LIBS) 
@@ -71,7 +70,6 @@ EXAMPLES_LIBS = \
         -lQtDesigner \
         -lQtXml \
         -lQtOpenGL \
-        -lNutsnBolts \
         $(QT_USE_LIBS) \
         $(QUARTER_USE_LIBS) \
         $(COIN_USE_LIBS) 

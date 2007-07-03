@@ -34,7 +34,7 @@
 #include <Inventor/nodes/SoCone.h>
 #include <Inventor/nodes/SoBaseColor.h>
 #include <Inventor/nodes/SoTranslation.h>
-#include <Inventor/SoSceneManager.h>
+#include <Inventor/SoRenderManager.h>
 
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/QuarterApplication.h>
@@ -88,7 +88,7 @@ main(int argc, char ** argv)
   // Add some super imposed text
   SoSeparator * superimposed = create_superimposition();
   superimposed->ref();
-  (void)viewer->getSceneManager()->addSuperimposition(superimposed);
+  (void)viewer->getSoRenderManager()->addSuperimposition(superimposed);
 
   // Pop up the QuarterWidget
   viewer->show();

@@ -118,7 +118,6 @@
 
 #include <Inventor/SoDB.h>
 #include <Inventor/nodekits/SoNodeKit.h>
-#include <NutsnBolts/NutsnBolts.h>
 
 #include <Quarter/Quarter.h>
 #include "SensorManager.h"
@@ -158,7 +157,6 @@ Quarter::init(void)
   
   SoDB::init();
   SoNodeKit::init();
-  NutsnBolts::init();
   
   self = new Quarter;
 }
@@ -169,7 +167,6 @@ Quarter::init(void)
 void
 Quarter::clean(void)
 {
-  NutsnBolts::clean();
   assert(self);
   delete self;
 }

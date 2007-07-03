@@ -52,18 +52,18 @@ ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
   QList<RenderModePair *> rendermodes;
   QList<StereoModePair *> stereomodes;
   
-  rendermodes.append(new RenderModePair(SoSceneManager::AS_IS, "as is"));
-  rendermodes.append(new RenderModePair(SoSceneManager::WIREFRAME, "wireframe"));
-  rendermodes.append(new RenderModePair(SoSceneManager::WIREFRAME_OVERLAY, "wireframe overlay"));
-  rendermodes.append(new RenderModePair(SoSceneManager::POINTS, "points"));
-  rendermodes.append(new RenderModePair(SoSceneManager::HIDDEN_LINE, "hidden line"));
-  rendermodes.append(new RenderModePair(SoSceneManager::BOUNDING_BOX, "bounding box"));
+  rendermodes.append(new RenderModePair(SoRenderManager::AS_IS, "as is"));
+  rendermodes.append(new RenderModePair(SoRenderManager::WIREFRAME, "wireframe"));
+  rendermodes.append(new RenderModePair(SoRenderManager::WIREFRAME_OVERLAY, "wireframe overlay"));
+  rendermodes.append(new RenderModePair(SoRenderManager::POINTS, "points"));
+  rendermodes.append(new RenderModePair(SoRenderManager::HIDDEN_LINE, "hidden line"));
+  rendermodes.append(new RenderModePair(SoRenderManager::BOUNDING_BOX, "bounding box"));
 
-  stereomodes.append(new StereoModePair(SoSceneManager::MONO, "mono"));
-  stereomodes.append(new StereoModePair(SoSceneManager::ANAGLYPH, "anaglyph"));
-  stereomodes.append(new StereoModePair(SoSceneManager::QUAD_BUFFER, "quad buffer"));
-  stereomodes.append(new StereoModePair(SoSceneManager::INTERLEAVED_ROWS, "interleaved rows"));
-  stereomodes.append(new StereoModePair(SoSceneManager::INTERLEAVED_COLUMNS, "interleaved columns"));
+  stereomodes.append(new StereoModePair(SoRenderManager::MONO, "mono"));
+  stereomodes.append(new StereoModePair(SoRenderManager::ANAGLYPH, "anaglyph"));
+  stereomodes.append(new StereoModePair(SoRenderManager::QUAD_BUFFER, "quad buffer"));
+  stereomodes.append(new StereoModePair(SoRenderManager::INTERLEAVED_ROWS, "interleaved rows"));
+  stereomodes.append(new StereoModePair(SoRenderManager::INTERLEAVED_COLUMNS, "interleaved columns"));
 
   QMenu * contextmenu = new QMenu;
   QMenu * rendermenu = new QMenu("Render Mode");
@@ -75,12 +75,12 @@ ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
   QActionGroup * rendermodegroup = new QActionGroup(this);
 
   const QuarterWidget * quarterwidget = PUBLIC(this)->manager->getWidget();
-  SoSceneManager * scenemanager = quarterwidget->getSceneManager();
+  SoRenderManager * rendermanager = quarterwidget->getSoRenderManager();
 
   foreach(RenderModePair * rendermode, rendermodes) {
     QAction * action = new QAction(rendermode->second, this);
     action->setCheckable(true);
-    action->setChecked(scenemanager->getRenderMode() == rendermode->first);
+    action->setChecked(rendermanager->getRenderMode() == rendermode->first);
     action->setData(rendermode->first);
     rendermodeactions.append(action);
     rendermodegroup->addAction(action);
@@ -90,7 +90,7 @@ ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
   foreach(StereoModePair * stereomode, stereomodes) {
     QAction * action = new QAction(stereomode->second, this);
     action->setCheckable(true);
-    action->setChecked(scenemanager->getStereoMode() == stereomode->first);
+    action->setChecked(rendermanager->getStereoMode() == stereomode->first);
     action->setData(stereomode->first);
     stereomodeactions.append(action);
     stereomodegroup->addAction(action);
@@ -123,20 +123,20 @@ void
 ContextMenuHandlerP::changeRenderMode(QAction * action)
 {
   const QuarterWidget * quarterwidget = PUBLIC(this)->manager->getWidget();
-  SoSceneManager * scenemanager = quarterwidget->getSceneManager();
+  SoRenderManager * rendermanager = quarterwidget->getSoRenderManager();
 
   QVariant rendermode = action->data();
-  scenemanager->setRenderMode((SoSceneManager::RenderMode)rendermode.toInt());
+  rendermanager->setRenderMode((SoRenderManager::RenderMode)rendermode.toInt());
 }
 
 void
 ContextMenuHandlerP::changeStereoMode(QAction * action)
 {
   const QuarterWidget * quarterwidget = PUBLIC(this)->manager->getWidget();
-  SoSceneManager * scenemanager = quarterwidget->getSceneManager();
+  SoRenderManager * rendermanager = quarterwidget->getSoRenderManager();
   
   QVariant stereomode = action->data();
-  scenemanager->setStereoMode((SoSceneManager::StereoMode)stereomode.toInt());
+  rendermanager->setStereoMode((SoRenderManager::StereoMode)stereomode.toInt());
 }
 
 #undef PUBLIC

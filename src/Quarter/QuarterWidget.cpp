@@ -38,8 +38,10 @@
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/SbColor.h>
 
-#include <NutsnBolts/NbSceneManager.h>
-#include <NutsnBolts/navigation/NbNavigationSystem.h>
+#include <Inventor/SoSceneManager.h>
+#include <Inventor/SoRenderManager.h>
+#include <Inventor/SoEventManager.h>
+#include <Inventor/navigation/SoNavigationSystem.h>
 
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/devices/DeviceManager.h>
@@ -74,16 +76,19 @@ QuarterWidget::constructor(void)
 {
   PRIVATE(this) = new QuarterWidgetP(this);
 
-  PRIVATE(this)->scenemanager = new NbSceneManager;
+  PRIVATE(this)->sorendermanager = new SoRenderManager;
+  PRIVATE(this)->soeventmanager = new SoEventManager;
   PRIVATE(this)->devicemanager = new DeviceManager(this);
   PRIVATE(this)->eventmanager = new EventManager(this);
-  PRIVATE(this)->navigationsystem = NbNavigationSystem::createByName(NB_EXAMINER_SYSTEM);
-
-  PRIVATE(this)->scenemanager->setNavigationSystem(PRIVATE(this)->navigationsystem);
-  PRIVATE(this)->scenemanager->setNavigationState(NbSceneManager::MIXED_NAVIGATION);
-  PRIVATE(this)->scenemanager->setRenderCallback(QuarterWidget::renderCB, this);
-  PRIVATE(this)->scenemanager->setBackgroundColor(SbColor(0.0f, 0.0f, 0.0f));
-  PRIVATE(this)->scenemanager->activate();
+  PRIVATE(this)->navigationsystem = SoNavigationSystem::createByName(SO_EXAMINER_SYSTEM);
+  
+  PRIVATE(this)->sorendermanager->setAutoClipping(SoRenderManager::VARIABLE_NEAR_PLANE);
+  PRIVATE(this)->sorendermanager->setRenderCallback(QuarterWidget::renderCB, this);
+  PRIVATE(this)->sorendermanager->setBackgroundColor(SbColor(0.0f, 0.0f, 0.0f));
+  PRIVATE(this)->sorendermanager->activate();
+  
+  PRIVATE(this)->soeventmanager->setNavigationSystem(PRIVATE(this)->navigationsystem);
+  PRIVATE(this)->soeventmanager->setNavigationState(SoEventManager::MIXED_NAVIGATION);
   
   PRIVATE(this)->devicemanager->registerDevice(new MouseHandler);
   PRIVATE(this)->devicemanager->registerDevice(new KeyboardHandler);
@@ -97,7 +102,8 @@ QuarterWidget::constructor(void)
 /*! destructor */
 QuarterWidget::~QuarterWidget()
 {
-  delete PRIVATE(this)->scenemanager;
+  delete PRIVATE(this)->sorendermanager;
+  delete PRIVATE(this)->soeventmanager;
   delete PRIVATE(this)->eventmanager;
   delete PRIVATE(this)->devicemanager;
   delete PRIVATE(this)->navigationsystem;
@@ -121,8 +127,10 @@ QuarterWidget::setSceneGraph(SoNode * node)
     superscene->addChild(node);
   }
 
-  PRIVATE(this)->navigationsystem->setCamera(camera);  
-  PRIVATE(this)->scenemanager->setSceneGraph(superscene);
+  PRIVATE(this)->soeventmanager->setSceneGraph(superscene);
+  PRIVATE(this)->sorendermanager->setSceneGraph(superscene);
+  PRIVATE(this)->soeventmanager->setCamera(camera);
+  PRIVATE(this)->sorendermanager->setCamera(camera);
   
   PRIVATE(this)->navigationsystem->viewAll();
   superscene->touch();
@@ -150,12 +158,21 @@ QuarterWidget::getDeviceManager(void) const
 }
 
 /*!
-  Returns a pointer to the scene manager
+  Returns a pointer to the render manager
  */
-SoSceneManager * 
-QuarterWidget::getSceneManager(void) const
+SoRenderManager * 
+QuarterWidget::getSoRenderManager(void) const
 {
-  return PRIVATE(this)->scenemanager;
+  return PRIVATE(this)->sorendermanager;
+}
+
+/*!
+  Returns a pointer to the event manager
+ */
+SoEventManager * 
+QuarterWidget::getSoEventManager(void) const
+{
+  return PRIVATE(this)->soeventmanager;
 }
 
 /*!
@@ -182,7 +199,9 @@ QuarterWidget::initializeGL(void)
 void
 QuarterWidget::resizeGL(int width, int height)
 {
-  PRIVATE(this)->scenemanager->setViewportRegion(SbViewportRegion(width, height));
+  SbViewportRegion vp(width, height);
+  PRIVATE(this)->sorendermanager->setViewportRegion(vp);
+  PRIVATE(this)->soeventmanager->setViewportRegion(vp);
 }
 
 /*!
@@ -191,7 +210,7 @@ QuarterWidget::resizeGL(int width, int height)
 void
 QuarterWidget::paintGL(void)
 {
-  PRIVATE(this)->scenemanager->render(TRUE, TRUE);
+  PRIVATE(this)->sorendermanager->render(TRUE, TRUE);
 }
 
 /*!
@@ -200,14 +219,14 @@ QuarterWidget::paintGL(void)
 void 
 QuarterWidget::actualRedraw(void)
 {
-  PRIVATE(this)->scenemanager->render(TRUE, TRUE);
+  PRIVATE(this)->sorendermanager->render(TRUE, TRUE);
 }
 
 /*!
 
  */
 void 
-QuarterWidget::renderCB(void * closure, SoSceneManager *)
+QuarterWidget::renderCB(void * closure, SoRenderManager *)
 {
   assert(closure);
   QuarterWidget * thisp = (QuarterWidget *) closure;
@@ -233,7 +252,7 @@ QuarterWidget::event(QEvent * event)
   }
 
   const SoEvent * soevent = PRIVATE(this)->devicemanager->translateEvent(event);
-  if (soevent && PRIVATE(this)->scenemanager->processEvent(soevent)) {
+  if (soevent && PRIVATE(this)->soeventmanager->processEvent(soevent)) {
     return true;
   }
   return inherited::event(event);

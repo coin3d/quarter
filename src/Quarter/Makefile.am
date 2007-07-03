@@ -60,10 +60,10 @@ lib_LTLIBRARIES = libQuarter.la
 endif 
 
 libQuarter_la_LIBADD = \
-        devices/libdevices.la eventhandlers/libeventhandlers.la -lNutsnBolts $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL
+        devices/libdevices.la eventhandlers/libeventhandlers.la $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD = \
-        devices/devices.lst eventhandlers/eventhandlers.lst -lNutsnBolts0 $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL4
+        devices/devices.lst eventhandlers/eventhandlers.lst $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL4
 
 
 CLEANFILES = \

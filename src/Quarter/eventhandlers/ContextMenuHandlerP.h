@@ -25,7 +25,7 @@
 
 #include <QPair>
 #include <QObject>
-#include <Inventor/SoSceneManager.h>
+#include <Inventor/SoRenderManager.h>
 
 class QAction;
 class QMouseEvent;
@@ -50,8 +50,8 @@ private:
   ContextMenuHandler * publ;
 };
 
-typedef QPair<SoSceneManager::RenderMode, QString> RenderModePair;
-typedef QPair<SoSceneManager::StereoMode, QString> StereoModePair;
+typedef QPair<SoRenderManager::RenderMode, QString> RenderModePair;
+typedef QPair<SoRenderManager::StereoMode, QString> StereoModePair;
 
 }}} // namespace
 
