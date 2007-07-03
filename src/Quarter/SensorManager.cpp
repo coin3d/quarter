@@ -28,7 +28,6 @@
 #include <Inventor/SbTime.h>
 #include <Inventor/SoSceneManager.h>
 #include <Inventor/nodekits/SoNodeKit.h>
-#include <NutsnBolts/NutsnBolts.h>
 
 using namespace SIM::Coin3D::Quarter;
 
