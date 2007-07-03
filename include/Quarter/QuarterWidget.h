@@ -44,7 +44,7 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
 public:
   QuarterWidget(QWidget * parent = 0);
   QuarterWidget(QGLContext * context, QWidget * parent = 0);
-  ~QuarterWidget();
+  virtual ~QuarterWidget();
 
   virtual void setSceneGraph(SoNode * root);
   virtual void setCamera(SoCamera * camera);
