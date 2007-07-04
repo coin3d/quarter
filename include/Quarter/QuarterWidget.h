@@ -32,6 +32,7 @@ class SoEvent;
 class SoCamera;
 class SoEventManager;
 class SoRenderManager;
+class SoDirectionalLight;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
@@ -46,6 +47,9 @@ public:
   QuarterWidget(QGLContext * context, QWidget * parent = 0);
   virtual ~QuarterWidget();
 
+  void enableHeadlight(const SbBool onoff);
+  SoDirectionalLight * getHeadlight(void);
+  
   virtual void setSceneGraph(SoNode * root);
   virtual void setCamera(SoCamera * camera);
   DeviceManager * getDeviceManager(void) const;

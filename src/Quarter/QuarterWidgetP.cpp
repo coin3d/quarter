@@ -24,6 +24,10 @@
 
 #include <Inventor/nodes/SoCamera.h>
 #include <Inventor/nodes/SoSeparator.h>
+#include <Inventor/nodes/SoSwitch.h>
+#include <Inventor/nodes/SoDirectionalLight.h>
+#include <Inventor/nodes/SoPerspectiveCamera.h>
+
 #include <Inventor/actions/SoSearchAction.h>
 #include <stdlib.h>
 
@@ -37,43 +41,14 @@ QuarterWidgetP::~QuarterWidgetP()
 {
 }
 
-static const char * superscene[] = {
-  "#Inventor V2.1 ascii\n",
-  "\n",
-  "DEF root Separator {\n",
-  "  DEF light DirectionalLight {\n",
-  "    direction 0 0 -1\n",
-  "    intensity 1.0\n",
-  "  }\n",
-  "  DEF camera PerspectiveCamera {\n",
-  "  }\n",
-  "}\n",
-  NULL
-};
-
 SoSeparator *
-QuarterWidgetP::createSuperScene(void)
+QuarterWidgetP::createSuperScene(const SbBool createcamera,
+                                 const SbBool addheadlight)
 {
-  SoInput in;
-  in.setStringArray(superscene);
-  SoNode * scene;
-  if (!SoDB::read(&in, scene)) {
-    assert(0 && "unable to read superscene");
-    return NULL;
-  }
-  
-  scene->ref();
-  
-  SoSearchAction sa;
-  sa.setInterest(SoSearchAction::FIRST);
-  sa.setName(SbName("root"));
-  sa.apply(scene);
-  
-  assert(sa.getPath() && 
-         sa.getPath()->getTail()->isOfType(SoSeparator::getClassTypeId()) &&
-         "wrong or missing root node");
-
-  return (SoSeparator *) sa.getPath()->getTail();
+  SoSeparator * sep = new SoSeparator;
+  if (createcamera) sep->addChild(new SoPerspectiveCamera);
+  if (addheadlight) sep->addChild(this->headlight);
+  return sep;
 }
 
 SoCamera * 

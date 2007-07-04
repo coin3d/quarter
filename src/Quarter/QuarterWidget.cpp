@@ -36,6 +36,8 @@
 #include <Inventor/nodes/SoNode.h>
 #include <Inventor/nodes/SoCamera.h>
 #include <Inventor/nodes/SoSeparator.h>
+#include <Inventor/nodes/SoDirectionalLight.h>
+#include <Inventor/actions/SoSearchAction.h>
 #include <Inventor/SbColor.h>
 
 #include <Inventor/SoSceneManager.h>
@@ -81,6 +83,8 @@ QuarterWidget::constructor(void)
   PRIVATE(this)->devicemanager = new DeviceManager(this);
   PRIVATE(this)->eventmanager = new EventManager(this);
   PRIVATE(this)->navigationsystem = SoNavigationSystem::createByName(SO_EXAMINER_SYSTEM);
+  PRIVATE(this)->headlight = new SoDirectionalLight;
+  PRIVATE(this)->headlight->ref();
   
   PRIVATE(this)->sorendermanager->setAutoClipping(SoRenderManager::VARIABLE_NEAR_PLANE);
   PRIVATE(this)->sorendermanager->setRenderCallback(QuarterWidget::renderCB, this);
@@ -102,6 +106,7 @@ QuarterWidget::constructor(void)
 /*! destructor */
 QuarterWidget::~QuarterWidget()
 {
+  PRIVATE(this)->headlight->unref();
   delete PRIVATE(this)->sorendermanager;
   delete PRIVATE(this)->soeventmanager;
   delete PRIVATE(this)->eventmanager;
@@ -109,6 +114,25 @@ QuarterWidget::~QuarterWidget()
   delete PRIVATE(this)->navigationsystem;
 
   delete PRIVATE(this);
+}
+
+/*!
+  Enable/diable the headlight. This wille toggle the SoDirectionalLigh::on
+  field (returned from getHeadlight()).
+*/
+void 
+QuarterWidget::enableHeadlight(const SbBool onoff)
+{
+  PRIVATE(this)->headlight->on = onoff;
+}
+
+/*!
+  Returns the light used for the headlight.
+*/
+SoDirectionalLight * 
+QuarterWidget::getHeadlight(void)
+{
+  return PRIVATE(this)->headlight;
 }
 
 /*!
@@ -121,12 +145,24 @@ QuarterWidget::setSceneGraph(SoNode * node)
   SoSeparator * superscene = NULL;
 
   if (node) {
-    superscene = PRIVATE(this)->createSuperScene();
-    camera = PRIVATE(this)->getCamera(superscene);
-
+    node->ref();
+    SoSearchAction sa;
+    sa.setType(SoCamera::getClassTypeId());
+    sa.setInterest(SoSearchAction::FIRST);
+    sa.apply(node);
+    
+    SbBool createcamera = sa.getPath() == NULL; 
+    superscene = PRIVATE(this)->createSuperScene(createcamera, TRUE);
     superscene->addChild(node);
+    node->unref();
   }
-
+  
+  if (superscene) {
+    superscene->ref();
+    camera = PRIVATE(this)->getCamera(superscene);
+    superscene->unrefNoDelete();
+  }
+  
   PRIVATE(this)->soeventmanager->setSceneGraph(superscene);
   PRIVATE(this)->sorendermanager->setSceneGraph(superscene);
   PRIVATE(this)->soeventmanager->setCamera(camera);
