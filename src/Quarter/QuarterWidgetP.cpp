@@ -23,12 +23,9 @@
 #include "QuarterWidgetP.h"
 
 #include <Inventor/nodes/SoCamera.h>
-#include <Inventor/nodes/SoSeparator.h>
-#include <Inventor/nodes/SoSwitch.h>
-#include <Inventor/nodes/SoDirectionalLight.h>
-#include <Inventor/nodes/SoPerspectiveCamera.h>
-
+#include <Inventor/nodes/SoNode.h>
 #include <Inventor/actions/SoSearchAction.h>
+
 #include <stdlib.h>
 
 using namespace SIM::Coin3D::Quarter;
@@ -41,27 +38,19 @@ QuarterWidgetP::~QuarterWidgetP()
 {
 }
 
-SoSeparator *
-QuarterWidgetP::createSuperScene(const SbBool createcamera,
-                                 const SbBool addheadlight)
-{
-  SoSeparator * sep = new SoSeparator;
-  if (createcamera) sep->addChild(new SoPerspectiveCamera);
-  if (addheadlight) sep->addChild(this->headlight);
-  return sep;
-}
-
 SoCamera * 
-QuarterWidgetP::getCamera(SoSeparator * root)
+QuarterWidgetP::searchForCamera(SoNode * root)
 {
   SoSearchAction sa;
   sa.setInterest(SoSearchAction::FIRST);
   sa.setType(SoCamera::getClassTypeId());
   sa.apply(root);
   
-  assert(sa.getPath() && 
-         sa.getPath()->getTail()->isOfType(SoCamera::getClassTypeId()) &&
-         "wrong or missing camera");
-  
-  return (SoCamera *) sa.getPath()->getTail();
+  if (sa.getPath()) {
+    SoNode * node = sa.getPath()->getTail();
+    if (node && node->isOfType(SoCamera::getClassTypeId())) {
+      return (SoCamera *) node;
+    }
+  }
+  return NULL;
 }

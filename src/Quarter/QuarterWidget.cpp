@@ -37,7 +37,7 @@
 #include <Inventor/nodes/SoCamera.h>
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/nodes/SoDirectionalLight.h>
-#include <Inventor/actions/SoSearchAction.h>
+#include <Inventor/nodes/SoPerspectiveCamera.h>
 #include <Inventor/SbColor.h>
 
 #include <Inventor/SoSceneManager.h>
@@ -112,7 +112,7 @@ QuarterWidget::~QuarterWidget()
   delete PRIVATE(this)->eventmanager;
   delete PRIVATE(this)->devicemanager;
   delete PRIVATE(this)->navigationsystem;
-
+  
   delete PRIVATE(this);
 }
 
@@ -143,33 +143,30 @@ QuarterWidget::setSceneGraph(SoNode * node)
 {
   SoCamera * camera = NULL;
   SoSeparator * superscene = NULL;
-
+  
   if (node) {
     node->ref();
-    SoSearchAction sa;
-    sa.setType(SoCamera::getClassTypeId());
-    sa.setInterest(SoSearchAction::FIRST);
-    sa.apply(node);
+
+    superscene = new SoSeparator;
+    superscene->addChild(PRIVATE(this)->headlight);
+
+    // if the scene does not contain a camera, add one
+    if (!(camera = PRIVATE(this)->searchForCamera(node))) { 
+      camera = new SoPerspectiveCamera;
+      superscene->addChild(camera);
+    }
     
-    SbBool createcamera = sa.getPath() == NULL; 
-    superscene = PRIVATE(this)->createSuperScene(createcamera, TRUE);
     superscene->addChild(node);
     node->unref();
-  }
-  
-  if (superscene) {
-    superscene->ref();
-    camera = PRIVATE(this)->getCamera(superscene);
-    superscene->unrefNoDelete();
   }
   
   PRIVATE(this)->soeventmanager->setSceneGraph(superscene);
   PRIVATE(this)->sorendermanager->setSceneGraph(superscene);
   PRIVATE(this)->soeventmanager->setCamera(camera);
   PRIVATE(this)->sorendermanager->setCamera(camera);
-  
+
   PRIVATE(this)->navigationsystem->viewAll();
-  superscene->touch();
+  if (superscene) { superscene->touch(); }
 }
 
 /*! Set the camera to be manipulated trough the viewer controls. The

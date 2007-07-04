@@ -27,12 +27,10 @@
 
 class SoNode;
 class SoCamera;
-class SoSeparator;
 class SoSceneManager;
 class SoRenderManager;
 class SoEventManager;
 class SoNavigationSystem;
-class SoSwitch;
 class SoDirectionalLight;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
@@ -45,10 +43,7 @@ public:
   QuarterWidgetP(class QuarterWidget * master);
   ~QuarterWidgetP();
   
-  SoSeparator * createSuperScene(const SbBool createcamera,
-                                 const SbBool addheadlight);
-  
-  SoCamera * getCamera(SoSeparator * root);
+  SoCamera * searchForCamera(SoNode * root);
   
   SoNavigationSystem * navigationsystem;  
   SoSceneManager * scenemanager;
