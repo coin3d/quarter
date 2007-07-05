@@ -52,7 +52,6 @@ public:
   uint32_t getCacheContextId(void) const;
   
   virtual void setSceneGraph(SoNode * root);
-  virtual void setCamera(SoCamera * camera);
   DeviceManager * getDeviceManager(void) const;
   SoEventManager * getSoEventManager(void) const;
   SoRenderManager * getSoRenderManager(void) const;

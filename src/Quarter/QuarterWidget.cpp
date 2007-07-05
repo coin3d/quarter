@@ -175,20 +175,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
   PRIVATE(this)->soeventmanager->setCamera(camera);
   PRIVATE(this)->sorendermanager->setCamera(camera);
 
-  PRIVATE(this)->soeventmanager->getNavigationSystem()->viewAll();
   if (superscene) { superscene->touch(); }
-}
-
-/*! Set the camera to be manipulated trough the viewer controls. The
-  camera passed in as argument must already be part of the scene
-  graph. If the application code does not explicitly call this method,
-  the scenegraph will be searched for a camera to use. If there are
-  more than one camera in the scenegraph, the first one is used.
- */
-void 
-QuarterWidget::setCamera(SoCamera * camera)
-{
-  PRIVATE(this)->soeventmanager->getNavigationSystem()->setCamera(camera);
 }
 
 /*!
