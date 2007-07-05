@@ -25,17 +25,30 @@
 #include <Inventor/nodes/SoCamera.h>
 #include <Inventor/nodes/SoNode.h>
 #include <Inventor/actions/SoSearchAction.h>
+#include <Inventor/elements/SoGLCacheContextElement.h>
+#include <Inventor/lists/SbList.h>
 
 #include <stdlib.h>
 
 using namespace SIM::Coin3D::Quarter;
 
-QuarterWidgetP::QuarterWidgetP(QuarterWidget * master) 
+class QuarterWidgetP_cachecontext {
+public:
+  SbList <const QGLWidget *> widgetlist;
+  uint32_t id;
+};
+
+static SbList <QuarterWidgetP_cachecontext *> * cachecontext_list = NULL;
+
+QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * sharewidget) 
 {
+  this->master = masterptr;
+  this->cachecontext = findCacheContext(masterptr, sharewidget);
 }
 
 QuarterWidgetP::~QuarterWidgetP() 
 {
+  this->cachecontext->widgetlist.removeItem((const QGLWidget*) this->master);
 }
 
 SoCamera * 
@@ -53,4 +66,35 @@ QuarterWidgetP::searchForCamera(SoNode * root)
     }
   }
   return NULL;
+}
+
+uint32_t 
+QuarterWidgetP::getCacheContextId(void) const
+{
+  return this->cachecontext->id;
+}
+
+QuarterWidgetP_cachecontext * 
+QuarterWidgetP::findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget)
+{
+  if (cachecontext_list == NULL) {
+    // FIXME: static memory leak
+    cachecontext_list = new SbList <QuarterWidgetP_cachecontext*>;
+  }
+  for (int i = 0; i < cachecontext_list->getLength(); i++) {
+    QuarterWidgetP_cachecontext * cachecontext = (*cachecontext_list)[i];
+    
+    for (int j = 0; j < cachecontext->widgetlist.getLength(); j++) {
+      if (cachecontext->widgetlist[j] == sharewidget) {
+        cachecontext->widgetlist.append((const QGLWidget*) widget);
+        return cachecontext;
+      }
+    }
+  }
+  QuarterWidgetP_cachecontext * cachecontext = new QuarterWidgetP_cachecontext;
+  cachecontext->id = SoGLCacheContextElement::getUniqueCacheContext();
+  cachecontext->widgetlist.append((const QGLWidget*) widget);
+  cachecontext_list->append(cachecontext);
+  
+  return cachecontext;
 }

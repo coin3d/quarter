@@ -32,6 +32,8 @@ class SoRenderManager;
 class SoEventManager;
 class SoNavigationSystem;
 class SoDirectionalLight;
+class QuarterWidgetP_cachecontext;
+class QGLWidget;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
@@ -40,11 +42,14 @@ class EventManager;
 
 class QuarterWidgetP {
 public:
-  QuarterWidgetP(class QuarterWidget * master);
+  
+  QuarterWidgetP(class QuarterWidget * master, const QGLWidget * sharewidget);
   ~QuarterWidgetP();
   
   SoCamera * searchForCamera(SoNode * root);
-  
+  uint32_t getCacheContextId(void) const;
+
+  QuarterWidget * master;
   SoNavigationSystem * navigationsystem;  
   SoSceneManager * scenemanager;
   DeviceManager * devicemanager;
@@ -52,8 +57,12 @@ public:
   SoRenderManager * sorendermanager;
   SoEventManager * soeventmanager;
   SoDirectionalLight * headlight;
-};
+  QuarterWidgetP_cachecontext * cachecontext;
 
+private:
+  QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);
+};
+  
 #endif // QUARTER_QUARTERWIDGETP_H
 
 }}} // namespace

@@ -49,6 +49,7 @@ public:
 
   void enableHeadlight(const SbBool onoff);
   SoDirectionalLight * getHeadlight(void);
+  uint32_t getCacheContextId(void) const;
   
   virtual void setSceneGraph(SoNode * root);
   virtual void setCamera(SoCamera * camera);

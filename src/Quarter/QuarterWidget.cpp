@@ -38,6 +38,7 @@
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/nodes/SoDirectionalLight.h>
 #include <Inventor/nodes/SoPerspectiveCamera.h>
+#include <Inventor/actions/SoGLRenderAction.h>
 #include <Inventor/SbColor.h>
 
 #include <Inventor/SoSceneManager.h>
@@ -76,7 +77,7 @@ QuarterWidget::QuarterWidget(QGLContext * context, QWidget * parent, const QGLWi
 void
 QuarterWidget::constructor(const QGLWidget * sharewidget)
 {
-  PRIVATE(this) = new QuarterWidgetP(this);
+  PRIVATE(this) = new QuarterWidgetP(this, sharewidget);
 
   PRIVATE(this)->sorendermanager = new SoRenderManager;
   PRIVATE(this)->soeventmanager = new SoEventManager;
@@ -100,6 +101,9 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->eventmanager->registerEventHandler(new ContextMenuHandler);
   PRIVATE(this)->eventmanager->registerEventHandler(new DragDropHandler);
 
+  // set up a cache context for the default SoGLRenderAction
+  PRIVATE(this)->sorendermanager->getGLRenderAction()->setCacheContext(this->getCacheContextId());
+  
   this->setMouseTracking(TRUE);
 }
 
@@ -134,6 +138,16 @@ QuarterWidget::getHeadlight(void)
 {
   return PRIVATE(this)->headlight;
 }
+
+/*!
+  Returns the Coin cache context id for this widget.
+*/
+uint32_t 
+QuarterWidget::getCacheContextId(void) const
+{
+  return PRIVATE(this)->getCacheContextId();
+}
+
 
 /*!
   Sets the Inventor scenegraph to be rendered
