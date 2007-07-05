@@ -118,6 +118,7 @@
 
 #include <Inventor/SoDB.h>
 #include <Inventor/nodekits/SoNodeKit.h>
+#include <Inventor/SoInteraction.h>
 
 #include <Quarter/Quarter.h>
 #include "SensorManager.h"
@@ -157,7 +158,8 @@ Quarter::init(void)
   
   SoDB::init();
   SoNodeKit::init();
-  
+  SoInteraction::init();
+
   self = new Quarter;
 }
 
