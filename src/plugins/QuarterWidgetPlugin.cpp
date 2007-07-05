@@ -43,6 +43,7 @@ class QuarterWidgetPluginP {
 public:
   QuarterWidgetPluginP(void) {} 
   bool initialized;
+  QGLWidget * firstwidget; // for context sharing
 };
 
 }}}} // namespace
@@ -62,6 +63,7 @@ QuarterWidgetPlugin::QuarterWidgetPlugin(QObject * parent)
 {
   PRIVATE(this) = new QuarterWidgetPluginP;
   PRIVATE(this)->initialized = false;
+  PRIVATE(this)->firstwidget = 0;
 }
 
 /*!
@@ -92,7 +94,8 @@ QuarterWidgetPlugin::isInitialized(void) const
 QWidget *
 QuarterWidgetPlugin::createWidget(QWidget * parent)
 {
-  QuarterWidget * widget = new QuarterWidget(parent);
+  QuarterWidget * widget = new QuarterWidget(parent, PRIVATE(this)->firstwidget);
+  if (PRIVATE(this)->firstwidget == 0) PRIVATE(this)->firstwidget = widget;
   widget->setSceneGraph(new SoCube);
   return widget;
 }
