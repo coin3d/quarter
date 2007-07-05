@@ -43,8 +43,8 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   Q_OBJECT
 
 public:
-  QuarterWidget(QWidget * parent = 0);
-  QuarterWidget(QGLContext * context, QWidget * parent = 0);
+  QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0);
+  QuarterWidget(QGLContext * context, QWidget * parent = 0, const QGLWidget * sharewidget = 0);
   virtual ~QuarterWidget();
 
   void enableHeadlight(const SbBool onoff);
@@ -69,7 +69,7 @@ protected:
   static void renderCB(void * closure, SoRenderManager *);
 
 private:
-  void constructor(void);
+  void constructor(const QGLWidget * sharewidget);
   friend class QuarterWidgetP;
   class QuarterWidgetP * pimpl;
 };
