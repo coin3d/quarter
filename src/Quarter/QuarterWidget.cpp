@@ -78,12 +78,11 @@ void
 QuarterWidget::constructor(const QGLWidget * sharewidget)
 {
   PRIVATE(this) = new QuarterWidgetP(this, sharewidget);
-
+  
   PRIVATE(this)->sorendermanager = new SoRenderManager;
   PRIVATE(this)->soeventmanager = new SoEventManager;
   PRIVATE(this)->devicemanager = new DeviceManager(this);
   PRIVATE(this)->eventmanager = new EventManager(this);
-  PRIVATE(this)->navigationsystem = SoNavigationSystem::createByName(SO_EXAMINER_SYSTEM);
   PRIVATE(this)->headlight = new SoDirectionalLight;
   PRIVATE(this)->headlight->ref();
   
@@ -92,7 +91,6 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->sorendermanager->setBackgroundColor(SbColor(0.0f, 0.0f, 0.0f));
   PRIVATE(this)->sorendermanager->activate();
   
-  PRIVATE(this)->soeventmanager->setNavigationSystem(PRIVATE(this)->navigationsystem);
   PRIVATE(this)->soeventmanager->setNavigationState(SoEventManager::MIXED_NAVIGATION);
   
   PRIVATE(this)->devicemanager->registerDevice(new MouseHandler);
@@ -115,8 +113,6 @@ QuarterWidget::~QuarterWidget()
   delete PRIVATE(this)->soeventmanager;
   delete PRIVATE(this)->eventmanager;
   delete PRIVATE(this)->devicemanager;
-  delete PRIVATE(this)->navigationsystem;
-  
   delete PRIVATE(this);
 }
 
@@ -179,7 +175,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
   PRIVATE(this)->soeventmanager->setCamera(camera);
   PRIVATE(this)->sorendermanager->setCamera(camera);
 
-  PRIVATE(this)->navigationsystem->viewAll();
+  PRIVATE(this)->soeventmanager->getNavigationSystem()->viewAll();
   if (superscene) { superscene->touch(); }
 }
 
@@ -192,7 +188,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
 void 
 QuarterWidget::setCamera(SoCamera * camera)
 {
-  PRIVATE(this)->navigationsystem->setCamera(camera);
+  PRIVATE(this)->soeventmanager->getNavigationSystem()->setCamera(camera);
 }
 
 /*!
@@ -228,7 +224,7 @@ QuarterWidget::getSoEventManager(void) const
 void 
 QuarterWidget::viewAll(void)
 {
-  PRIVATE(this)->navigationsystem->viewAll();
+  PRIVATE(this)->soeventmanager->getNavigationSystem()->viewAll();
 }
 
 /*!

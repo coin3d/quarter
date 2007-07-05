@@ -30,7 +30,6 @@ class SoCamera;
 class SoSceneManager;
 class SoRenderManager;
 class SoEventManager;
-class SoNavigationSystem;
 class SoDirectionalLight;
 class QuarterWidgetP_cachecontext;
 class QGLWidget;
@@ -50,7 +49,6 @@ public:
   uint32_t getCacheContextId(void) const;
 
   QuarterWidget * master;
-  SoNavigationSystem * navigationsystem;  
   SoSceneManager * scenemanager;
   DeviceManager * devicemanager;
   EventManager * eventmanager;
