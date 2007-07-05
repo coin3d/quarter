@@ -45,7 +45,7 @@ SensorManager::SensorManager(void)
   this->connect(this->idletimer, SIGNAL(timeout(void)), this, SLOT(idleTimeout()));
   this->connect(this->delaytimer, SIGNAL(timeout(void)), this, SLOT(delayTimeout()));
   this->connect(this->timerqueuetimer, SIGNAL(timeout(void)), this, SLOT(timerQueueTimeout()));
-
+  
   SoDB::getSensorManager()->setChangedCallback(SensorManager::sensorQueueChanged, this);
   SoDB::setRealTimeInterval(1.0 / 25.0);
   SoSceneManager::enableRealTimeUpdate(FALSE);
@@ -104,6 +104,7 @@ void
 SensorManager::idleTimeout(void)
 {
   SoDB::getSensorManager()->processTimerQueue();
+  SoDB::getSensorManager()->processDelayQueue(TRUE);
   SensorManager::sensorQueueChanged(this);
 }
 
@@ -111,7 +112,6 @@ void
 SensorManager::timerQueueTimeout(void)
 {
   SoDB::getSensorManager()->processTimerQueue();
-  SoDB::getSensorManager()->processDelayQueue(TRUE);
   SensorManager::sensorQueueChanged(this);  
 }
 
@@ -119,6 +119,6 @@ void
 SensorManager::delayTimeout(void)
 {
   SoDB::getSensorManager()->processTimerQueue();
-  SoDB::getSensorManager()->processDelayQueue(TRUE);
+  SoDB::getSensorManager()->processDelayQueue(FALSE);
   SensorManager::sensorQueueChanged(this);  
 }
