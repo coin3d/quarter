@@ -103,6 +103,9 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->sorendermanager->getGLRenderAction()->setCacheContext(this->getCacheContextId());
   
   this->setMouseTracking(TRUE);
+
+  // set focus policy to Strong by default
+  this->setFocusPolicy(Qt::StrongFocus);
 }
 
 /*! destructor */
