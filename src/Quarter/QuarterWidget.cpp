@@ -153,6 +153,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
 {
   SoCamera * camera = NULL;
   SoSeparator * superscene = NULL;
+  SbBool viewall = FALSE;
   
   if (node) {
     node->ref();
@@ -164,6 +165,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
     if (!(camera = PRIVATE(this)->searchForCamera(node))) { 
       camera = new SoPerspectiveCamera;
       superscene->addChild(camera);
+      viewall = TRUE;
     }
     
     superscene->addChild(node);
@@ -175,6 +177,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
   PRIVATE(this)->soeventmanager->setCamera(camera);
   PRIVATE(this)->sorendermanager->setCamera(camera);
 
+  if (viewall) { this->viewAll(); }
   if (superscene) { superscene->touch(); }
 }
 
