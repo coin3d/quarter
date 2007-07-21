@@ -57,55 +57,128 @@ AC_PROG_LIBTOOL
 
 AC_LANG(C++)
 
-SIM_AC_HAVE_COIN_IFELSE([
-  COIN_USE_CPPFLAGS=$sim_ac_coin_cppflags
-  COIN_USE_CXXFLAGS=$sim_ac_coin_cxxflags
-  COIN_USE_LDFLAGS=$sim_ac_coin_ldflags
-  COIN_USE_LIBS=$sim_ac_coin_libs
-], [AC_MSG_ERROR(couldn't compile and link against Coin)])
+PKG_CONFIG_PATH="$prefix/lib/pkgconfig/:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH
 
-# seems to be required for the Qt test on Mac OS X. pederb, 2007-06-27
-sim_ac_want_x11=no
-case $host_os in
-  darwin*)
-    SIM_AC_CHECK_X11([sim_ac_want_x11=yes],[sim_ac_want_x11=no])
-    ;;
-  *)
-    sim_ac_want_x11=yes
-    ;;
-esac
+PKG_CHECK_MODULES([Coin], [Coin], [
+  COIN_USE_CPPFLAGS="$Coin_CFLAGS"
+  COIN_USE_CXXFLAGS="$Coin_CFLAGS"
+  COIN_USE_LDFLAGS="$Coin_LIBS"
+  COIN_USE_LIBS="$Coin_LIBS"
 
-SIM_AC_CHECK_QT([
-  QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qt_cppflags"
-  QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $sim_ac_qt_cxxflags"
-  QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qt_ldflags"
-  QT_USE_LIBS="$sim_ac_qt_libs $QT_USE_LIBS"
+  SIM_AC_CONFIGURATION_SETTING([Coin version], [`$PKG_CONFIG --modversion Coin`])
 ], [
-  SIM_AC_ERROR([no-qt])
+  AC_MSG_RESULT([no])
+  PKG_CHECK_MODULES([Coin2], [Coin-2], [
+    COIN_USE_CPPFLAGS="$Coin2_CFLAGS"
+    COIN_USE_CXXFLAGS="$Coin2_CFLAGS"
+    COIN_USE_LDFLAGS="$Coin2_LIBS"
+    COIN_USE_LIBS="$Coin2_LIBS"
+    SIM_AC_CONFIGURATION_SETTING([Coin-2 version], [`$PKG_CONFIG --modversion Coin-2`])
+  ], [
+    AC_MSG_RESULT([no])
+    SIM_AC_HAVE_COIN_IFELSE([
+      COIN_USE_CPPFLAGS=$sim_ac_coin_cppflags
+      COIN_USE_CXXFLAGS=$sim_ac_coin_cxxflags
+      COIN_USE_LDFLAGS=$sim_ac_coin_ldflags
+      COIN_USE_LIBS=$sim_ac_coin_libs
+    ], [AC_MSG_ERROR(couldn't compile and link against Coin)])
+
+  ])
 ])
 
-#SIM_AC_CHECK_QGL([
-#  QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
-#  QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $sim_ac_qgl_cxxflags"
-#  QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qgl_ldflags"
-#  QT_USE_LIBS="$sim_ac_qgl_libs $QT_USE_LIBS"
-#], [
-#  SIM_AC_ERROR([no-qgl])
-#])
+PKG_CHECK_MODULES([Qt4], [QtCore QtGui QtOpenGL QtXml], [
+  QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $Qt4_CFLAGS"
+  QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $Qt4_CFLAGS"
+  QT_USE_LDFLAGS="$QT_USE_LDFLAGS $Qt4_LIBS"
+  QT_USE_LIBS="$Qt4_LIBS $QT_USE_LIBS"
 
-SIM_AC_QT_PROG(MOC, moc)
-if test x"$MOC" = x"false"; then
-  SIM_AC_ERROR([no-moc])
-fi
+  QT_USE_LIBDIR=`$PKG_CONFIG --variable=libdir QtCore`
+  QT_USE_INCDIR=`dirname \`$PKG_CONFIG --variable=includedir QtCore\``
 
-SIM_AC_QT_PROG(RCC, rcc)
-if test x"$RCC" = x"false"; then
-  SIM_AC_ERROR([no-rcc])
-fi
+  AC_PATH_PROG([MOC], [moc], [false], [$PATH])
+  if test x"$MOC" = x"false"; then
+    SIM_AC_ERROR([no-moc])
+  fi
 
-SIM_AC_QT_PROG(UIC, uic)
-if test x"$RCC" = x"false"; then
-  SIM_AC_ERROR([no-uic])
+  AC_PATH_PROG([RCC], [rcc], [false], [$PATH])
+  if test x"$RCC" = x"false"; then
+    SIM_AC_ERROR([no-rcc])
+  fi
+  
+  AC_PATH_PROG([UIC], [uic], [false], [$PATH])
+  if test x"UIC" = x"false"; then
+    SIM_AC_ERROR([no-uic])
+  fi
+
+  SIM_AC_CONFIGURATION_SETTING([Qt version], [`$PKG_CONFIG --modversion QtCore`])
+], [
+  if test -n "$PKG_CONFIG"; then
+    # use more appropriate QGL error message for pkg-config
+    SIM_AC_ERROR([no-qgl])
+  else
+    # try standard qt.m4 approach in case no pkg-config was found
+
+    # FIXME: To save you from wasting time and having to look at ugly
+    # m4 macros and shell scripts read the "AC_REQUIRE' is often
+    # misunderstood." section in the autoconf manual to "understand"
+    # why we can't handle the SIM_AC_CHECK_QT section below right here
+    # (or who knows, maybe there is a actually some way?). We would
+    # otherwise end up with an expanded SIM_AC_WITH_QT before the
+    # outermost PKG_CHECK_MODULES. 20070721 tamer.
+    sim_ac_pkgconfig_check_failed=true
+  fi
+])
+
+if test x"$sim_ac_pkgconfig_check_failed" = xtrue; then
+  # seems to be required for the Qt test on Mac OS X. pederb, 2007-06-27
+  sim_ac_want_x11=no
+  case $host_os in
+    darwin*)
+      SIM_AC_CHECK_X11([sim_ac_want_x11=yes],[sim_ac_want_x11=no])
+      ;;
+    *)
+      sim_ac_want_x11=yes
+      ;;
+  esac
+
+  SIM_AC_CHECK_QT([
+    QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qt_cppflags"
+    QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $sim_ac_qt_cxxflags"
+    QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qt_ldflags"
+    QT_USE_LIBS="$sim_ac_qt_libs $QT_USE_LIBS"
+  ], [
+    SIM_AC_ERROR([no-qt])
+  ])
+
+  # FIXME: relying on $QTDIR is not really a kosher way to handle the
+  # lib/incdir case. 20070721 tamer.
+  QT_USE_LIBDIR=$(QTDIR)
+  QT_USE_INCDIR=$(QTDIR)/include
+
+  #SIM_AC_CHECK_QGL([
+  #  QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
+  #  QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $sim_ac_qgl_cxxflags"
+  #  QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qgl_ldflags"
+  #  QT_USE_LIBS="$sim_ac_qgl_libs $QT_USE_LIBS"
+  #], [
+  #  SIM_AC_ERROR([no-qgl])
+  #])
+  
+  SIM_AC_QT_PROG(MOC, moc)
+  if test x"$MOC" = x"false"; then
+    SIM_AC_ERROR([no-moc])
+  fi
+  
+  SIM_AC_QT_PROG(RCC, rcc)
+  if test x"$RCC" = x"false"; then
+    SIM_AC_ERROR([no-rcc])
+  fi
+  
+  SIM_AC_QT_PROG(UIC, uic)
+  if test x"$UIC" = x"false"; then
+    SIM_AC_ERROR([no-uic])
+  fi
 fi
 
 AC_SUBST([COIN_USE_CPPFLAGS])
@@ -115,7 +188,9 @@ AC_SUBST([COIN_USE_LIBS])
 
 AC_SUBST([QT_USE_CPPFLAGS])
 AC_SUBST([QT_USE_CXXFLAGS])
+AC_SUBST([QT_USE_INCDIR])
 AC_SUBST([QT_USE_LDFLAGS])
+AC_SUBST([QT_USE_LIBDIR])
 AC_SUBST([QT_USE_LIBS])
 
 AC_SUBST([QUARTER_BUILD_CPPFLAGS], [-DQUARTER_INTERNAL])
@@ -165,8 +240,8 @@ if test x"$prefix" = x"NONE"; then
   prefix=/usr/local
 fi
 
-SIM_AC_CONFIGURATION_SETTING([Installation prefix], [$prefix])
-SIM_AC_CONFIGURATION_SETTING([Library version], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA])
+SIM_AC_CONFIGURATION_SETTING([Quarter version], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA])
+SIM_AC_CONFIGURATION_SETTING([Quarter installation prefix], [$prefix])
 
 # *******************************************************************
 # * Do we want to build the documentation?
