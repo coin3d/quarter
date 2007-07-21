@@ -2,10 +2,6 @@
 SUBDIRS = devices eventhandlers
 
 DEFAULT_INCLUDES = \
-        -I$(QTDIR)/include \
-        -I$(QTDIR)/include/QtOpenGL \
-        -I$(QTDIR)/include/QtGui \
-        -I$(QTDIR)/include/QtCore \
         -I$(top_srcdir)/include \
         -I$(top_srcdir)/src/Quarter
 

@@ -1,12 +1,9 @@
 
 DEFAULT_INCLUDES = \
         -I$(top_srcdir)/include \
-        -I$(top_builddir)/include \
-        -I$(QTDIR)/include/QtOpenGL \
-        -I$(QTDIR)/include/QtGui \
-        -I$(QTDIR)/include/QtCore \
-        -I$(QTDIR)/include/QtUiTools \
-        -I$(QTDIR)/include/QtDesigner
+        -I$(top_builddir)/include
+
+QT_DESIGNER_INCLUDE = -I$(QT_USE_INCDIR)/QtDesigner
 
 PrivateHeaders = QuarterWidgetPlugin.h
 RegularSources = QuarterWidgetPlugin.cpp
@@ -41,16 +38,16 @@ QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CFLAGS = \
         $(PLUGIN_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
 
 libQuarterWidgetPlugin_la_CPPFLAGS = \
-        $(PLUGIN_BUILD_CPPFLAGS) $(QUARTER_USE_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
+        $(PLUGIN_BUILD_CPPFLAGS) $(QUARTER_USE_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS) $(QT_DESIGNER_INCLUDE)
 
 libQuarterWidgetPlugin_la_lib_CXXFLAGS = \
         $(PLUGIN_BUILD_CXXFLAGS) $(COIN_USE_CXXFLAGS) $(QT_USE_CXXFLAGS)
 
 libQuarterWidgetPlugin_la_lib_CFLAGS = \
-        $(PLUGIN_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
+        $(PLUGIN_BUILD_CFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
 
-libdir = $(QTDIR)/plugins/designer
-bindir = $(QTDIR)/plugins/designer
+libdir = $(QT_USE_LIBDIR)/plugins/designer
+bindir = $(QT_USE_LIBDIR)/plugins/designer
 
 CLEANFILES = \
         $(BuiltSources) \
@@ -82,7 +79,8 @@ QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib: Makefile \
           $(QT_USE_LDFLAGS)
 
 moc_QuarterWidgetPlugin.cpp: $(srcdir)/QuarterWidgetPlugin.h
-	$(MOC) -o $@ $(srcdir)/QuarterWidgetPlugin.h $(DEFAULT_INCLUDES)
+	$(MOC) -o $@ $(srcdir)/QuarterWidgetPlugin.h $(DEFAULT_INCLUDES) $(QT_DESIGNER_INCLUDE)
+
 
 if BUILD_WITH_MSVC
 all-local: QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib

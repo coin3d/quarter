@@ -3,14 +3,9 @@ DEFAULT_INCLUDES = \
         -I$(top_builddir)/include \
         -I$(top_srcdir)/include \
         -I$(top_builddir)/src/examples \
-        -I$(top_srcdir)/src/examples \
-        -I$(QTDIR)/include \
-        -I$(QTDIR)/include/QtOpenGL \
-        -I$(QTDIR)/include/QtGui \
-        -I$(QTDIR)/include/QtXml \
-        -I$(QTDIR)/include/QtCore \
-        -I$(QTDIR)/include/QtUiTools \
-        -I$(QTDIR)/include/QtDesigner
+        -I$(top_srcdir)/src/examples
+
+QT_UITOOLS_INCLUDE = -I$(QT_USE_INCDIR)/QtUiTools
 
 noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition
 
@@ -91,7 +86,7 @@ directui_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
 directui_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
 directui_LDFLAGS = $(EXAMPLES_LDFLAGS)
 
-dynamicui_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
+dynamicui_CPPFLAGS = $(EXAMPLES_CPPFLAGS) $(QT_UITOOLS_INCLUDE)
 dynamicui_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
 dynamicui_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
 dynamicui_LDFLAGS = $(EXAMPLES_LDFLAGS)
