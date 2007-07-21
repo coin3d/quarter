@@ -64,6 +64,10 @@ CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
+Coin2_CFLAGS = @Coin2_CFLAGS@
+Coin2_LIBS = @Coin2_LIBS@
+Coin_CFLAGS = @Coin_CFLAGS@
+Coin_LIBS = @Coin_LIBS@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 ECHO = @ECHO@
@@ -102,13 +106,16 @@ PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PKG_CONFIG = @PKG_CONFIG@
 PLUGIN_BUILD_CFLAGS = @PLUGIN_BUILD_CFLAGS@
 PLUGIN_BUILD_CPPFLAGS = @PLUGIN_BUILD_CPPFLAGS@
 PLUGIN_BUILD_CXXFLAGS = @PLUGIN_BUILD_CXXFLAGS@
 PLUGIN_BUILD_LIBFLAGS = @PLUGIN_BUILD_LIBFLAGS@
 QT_USE_CPPFLAGS = @QT_USE_CPPFLAGS@
 QT_USE_CXXFLAGS = @QT_USE_CXXFLAGS@
+QT_USE_INCDIR = @QT_USE_INCDIR@
 QT_USE_LDFLAGS = @QT_USE_LDFLAGS@
+QT_USE_LIBDIR = @QT_USE_LIBDIR@
 QT_USE_LIBS = @QT_USE_LIBS@
 QUARTER_BETA_VERSION = @QUARTER_BETA_VERSION@
 QUARTER_BUILD_CFLAGS = @QUARTER_BUILD_CFLAGS@
@@ -123,6 +130,8 @@ QUARTER_USE_CPPFLAGS = @QUARTER_USE_CPPFLAGS@
 QUARTER_USE_LDFLAGS = @QUARTER_USE_LDFLAGS@
 QUARTER_USE_LIBS = @QUARTER_USE_LIBS@
 QUARTER_VERSION = @QUARTER_VERSION@
+Qt4_CFLAGS = @Qt4_CFLAGS@
+Qt4_LIBS = @Qt4_LIBS@
 RANLIB = @RANLIB@
 RCC = @RCC@
 SET_MAKE = @SET_MAKE@
@@ -141,6 +150,7 @@ ac_ct_CXX = @ac_ct_CXX@
 ac_ct_F77 = @ac_ct_F77@
 ac_ct_RANLIB = @ac_ct_RANLIB@
 ac_ct_STRIP = @ac_ct_STRIP@
+ac_pt_PKG_CONFIG = @ac_pt_PKG_CONFIG@
 ac_unique_file = @ac_unique_file@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
@@ -192,15 +202,10 @@ DEFAULT_INCLUDES = \
         -I$(top_builddir)/include \
         -I$(top_srcdir)/include \
         -I$(top_builddir)/src/examples \
-        -I$(top_srcdir)/src/examples \
-        -I$(QTDIR)/include \
-        -I$(QTDIR)/include/QtOpenGL \
-        -I$(QTDIR)/include/QtGui \
-        -I$(QTDIR)/include/QtXml \
-        -I$(QTDIR)/include/QtCore \
-        -I$(QTDIR)/include/QtUiTools \
-        -I$(QTDIR)/include/QtDesigner
+        -I$(top_srcdir)/src/examples
 
+
+QT_UITOOLS_INCLUDE = -I$(QT_USE_INCDIR)/QtUiTools
 
 noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition
 
@@ -284,7 +289,7 @@ directui_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
 directui_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
 directui_LDFLAGS = $(EXAMPLES_LDFLAGS)
 
-dynamicui_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
+dynamicui_CPPFLAGS = $(EXAMPLES_CPPFLAGS) $(QT_UITOOLS_INCLUDE)
 dynamicui_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
 dynamicui_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
 dynamicui_LDFLAGS = $(EXAMPLES_LDFLAGS)
