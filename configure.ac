@@ -57,68 +57,93 @@ AC_PROG_LIBTOOL
 
 AC_LANG(C++)
 
-PKG_CONFIG_PATH="$prefix/lib/pkgconfig/:$PKG_CONFIG_PATH"
-export PKG_CONFIG_PATH
+test "x$prefix" = xNONE && prefix=$ac_default_prefix
 
-PKG_CHECK_MODULES([Coin], [Coin], [
-  COIN_USE_CPPFLAGS="$Coin_CFLAGS"
-  COIN_USE_CXXFLAGS="$Coin_CFLAGS"
-  COIN_USE_LDFLAGS="$Coin_LIBS"
-  COIN_USE_LIBS="$Coin_LIBS"
+sim_ac_enable_pkgconfig=true
+sim_ac_pkgconfig_check_failed=true
 
-  SIM_AC_CONFIGURATION_SETTING([Coin version], [`$PKG_CONFIG --modversion Coin`])
-], [
-  AC_MSG_RESULT([no])
-  PKG_CHECK_MODULES([Coin2], [Coin-2], [
-    COIN_USE_CPPFLAGS="$Coin2_CFLAGS"
-    COIN_USE_CXXFLAGS="$Coin2_CFLAGS"
-    COIN_USE_LDFLAGS="$Coin2_LIBS"
-    COIN_USE_LIBS="$Coin2_LIBS"
-    SIM_AC_CONFIGURATION_SETTING([Coin-2 version], [`$PKG_CONFIG --modversion Coin-2`])
+AC_ARG_ENABLE(
+  [pkgconfig],
+  AC_HELP_STRING([--enable-pkgconfig], [enable pkgconfig usage for Coin/Qt4 detection [[default=yes]]]), [
+  case $enableval in
+    no) sim_ac_enable_pkgconfig=false ;;
+    *) ;;
+  esac])
+
+if $sim_ac_enable_pkgconfig; then
+  PKG_CONFIG_PATH="${prefix}/lib/pkgconfig/:$PKG_CONFIG_PATH"
+  export PKG_CONFIG_PATH
+  
+  PKG_CHECK_MODULES([Coin], [Coin], [
+    COIN_USE_CPPFLAGS="$Coin_CFLAGS"
+    COIN_USE_CXXFLAGS="$Coin_CFLAGS"
+    COIN_USE_LDFLAGS="$Coin_LIBS"
+    COIN_USE_LIBS="$Coin_LIBS"
+  
+    SIM_AC_CONFIGURATION_SETTING([Coin version], [`$PKG_CONFIG --modversion Coin`])
+    sim_ac_pkgconfig_check_failed=false
   ], [
     AC_MSG_RESULT([no])
-    SIM_AC_HAVE_COIN_IFELSE([
-      COIN_USE_CPPFLAGS=$sim_ac_coin_cppflags
-      COIN_USE_CXXFLAGS=$sim_ac_coin_cxxflags
-      COIN_USE_LDFLAGS=$sim_ac_coin_ldflags
-      COIN_USE_LIBS=$sim_ac_coin_libs
-    ], [AC_MSG_ERROR(couldn't compile and link against Coin)])
+    PKG_CHECK_MODULES([Coin2], [Coin-2], [
+      COIN_USE_CPPFLAGS="$Coin2_CFLAGS"
+      COIN_USE_CXXFLAGS="$Coin2_CFLAGS"
+      COIN_USE_LDFLAGS="$Coin2_LIBS"
+      COIN_USE_LIBS="$Coin2_LIBS"
 
+      SIM_AC_CONFIGURATION_SETTING([Coin-2 version], [`$PKG_CONFIG --modversion Coin-2`])
+      sim_ac_pkgconfig_check_failed=false
+    ], [
+      AC_MSG_RESULT([no])
+
+      # try standard qt.m4 approach in case no pkg-config was found
+      sim_ac_pkgconfig_check_failed=true
+    ])
   ])
-])
+fi
 
-PKG_CHECK_MODULES([Qt4], [QtCore QtGui QtOpenGL QtXml], [
-  QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $Qt4_CFLAGS"
-  QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $Qt4_CFLAGS"
-  QT_USE_LDFLAGS="$QT_USE_LDFLAGS $Qt4_LIBS"
-  QT_USE_LIBS="$Qt4_LIBS $QT_USE_LIBS"
+if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed; then
+  SIM_AC_HAVE_COIN_IFELSE([
+    COIN_USE_CPPFLAGS=$sim_ac_coin_cppflags
+    COIN_USE_CXXFLAGS=$sim_ac_coin_cxxflags
+    COIN_USE_LDFLAGS=$sim_ac_coin_ldflags
+    COIN_USE_LIBS=$sim_ac_coin_libs
+  ], [AC_MSG_ERROR(couldn't compile and link against Coin)])
+fi
 
-  QT_USE_LIBDIR=`$PKG_CONFIG --variable=libdir QtCore`
-  QT_USE_INCDIR=`dirname \`$PKG_CONFIG --variable=includedir QtCore\``
+sim_ac_pkgconfig_check_failed=true
 
-  AC_PATH_PROG([MOC], [moc], [false], [$PATH])
-  if test x"$MOC" = x"false"; then
-    SIM_AC_ERROR([no-moc])
-  fi
-
-  AC_PATH_PROG([RCC], [rcc], [false], [$PATH])
-  if test x"$RCC" = x"false"; then
-    SIM_AC_ERROR([no-rcc])
-  fi
+if $sim_ac_enable_pkgconfig; then
+  PKG_CHECK_MODULES([Qt4], [QtCore QtGui QtOpenGL QtXml], [
+    QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $Qt4_CFLAGS"
+    QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $Qt4_CFLAGS"
+    QT_USE_LDFLAGS="$QT_USE_LDFLAGS $Qt4_LIBS"
+    QT_USE_LIBS="$Qt4_LIBS $QT_USE_LIBS"
   
-  AC_PATH_PROG([UIC], [uic], [false], [$PATH])
-  if test x"UIC" = x"false"; then
-    SIM_AC_ERROR([no-uic])
-  fi
+    QT_USE_LIBDIR=`$PKG_CONFIG --variable=libdir QtCore`
+    QT_USE_INCDIR=`dirname \`$PKG_CONFIG --variable=includedir QtCore\``
+  
+    AC_PATH_PROG([MOC], [moc], [false], [$PATH])
+    if test x"$MOC" = x"false"; then
+      SIM_AC_ERROR([no-moc])
+    fi
+  
+    AC_PATH_PROG([RCC], [rcc], [false], [$PATH])
+    if test x"$RCC" = x"false"; then
+      SIM_AC_ERROR([no-rcc])
+    fi
+    
+    AC_PATH_PROG([UIC], [uic], [false], [$PATH])
+    if test x"UIC" = x"false"; then
+      SIM_AC_ERROR([no-uic])
+    fi
+  
+    SIM_AC_CONFIGURATION_SETTING([Qt version], [`$PKG_CONFIG --modversion QtCore`])
 
-  SIM_AC_CONFIGURATION_SETTING([Qt version], [`$PKG_CONFIG --modversion QtCore`])
-], [
-  if test -n "$PKG_CONFIG"; then
-    # use more appropriate QGL error message for pkg-config
-    SIM_AC_ERROR([no-qgl])
-  else
+    sim_ac_pkgconfig_check_failed=false
+  ], [
+    AC_MSG_RESULT([no])
     # try standard qt.m4 approach in case no pkg-config was found
-
+  
     # FIXME: To save you from wasting time and having to look at ugly
     # m4 macros and shell scripts read the "AC_REQUIRE' is often
     # misunderstood." section in the autoconf manual to "understand"
@@ -127,10 +152,10 @@ PKG_CHECK_MODULES([Qt4], [QtCore QtGui QtOpenGL QtXml], [
     # otherwise end up with an expanded SIM_AC_WITH_QT before the
     # outermost PKG_CHECK_MODULES. 20070721 tamer.
     sim_ac_pkgconfig_check_failed=true
-  fi
-])
+  ])
+fi
 
-if test x"$sim_ac_pkgconfig_check_failed" = xtrue; then
+if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed; then
   # seems to be required for the Qt test on Mac OS X. pederb, 2007-06-27
   sim_ac_want_x11=no
   case $host_os in
@@ -153,8 +178,8 @@ if test x"$sim_ac_pkgconfig_check_failed" = xtrue; then
 
   # FIXME: relying on $QTDIR is not really a kosher way to handle the
   # lib/incdir case. 20070721 tamer.
-  QT_USE_LIBDIR=$(QTDIR)
-  QT_USE_INCDIR=$(QTDIR)/include
+  QT_USE_LIBDIR="${QTDIR}"
+  QT_USE_INCDIR="${QTDIR}"/include
 
   #SIM_AC_CHECK_QGL([
   #  QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
@@ -235,10 +260,6 @@ AC_ARG_WITH(
   [SUFFIX=])
 
 AC_SUBST(SUFFIX)
-
-if test x"$prefix" = x"NONE"; then
-  prefix=/usr/local
-fi
 
 SIM_AC_CONFIGURATION_SETTING([Quarter version], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA])
 SIM_AC_CONFIGURATION_SETTING([Quarter installation prefix], [$prefix])
