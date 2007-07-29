@@ -1,0 +1,17 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: Quarter
+Description: a Qt Gui widget for Coin
+URL: http://www.coin3d.org
+Version: @QUARTER_VERSION@
+Requires: Coin, QtCore, QtGui, QtOpenGL, QtXml
+Conflicts:
+Libs: -L${libdir} @QUARTER_USE_LDFLAGS@ @QUARTER_USE_LIBS@
+Cflags: -I${includedir} @QUARTER_USE_CPPFLAGS@
+
+quarter_host=@host@
+datadir=@datadir@
+qt_version=@QT_VERSION@
