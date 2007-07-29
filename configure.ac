@@ -84,20 +84,9 @@ if $sim_ac_enable_pkgconfig; then
     sim_ac_pkgconfig_check_failed=false
   ], [
     AC_MSG_RESULT([no])
-    PKG_CHECK_MODULES([Coin2], [Coin-2], [
-      COIN_USE_CPPFLAGS="$Coin2_CFLAGS"
-      COIN_USE_CXXFLAGS="$Coin2_CFLAGS"
-      COIN_USE_LDFLAGS="$Coin2_LIBS"
-      COIN_USE_LIBS="$Coin2_LIBS"
 
-      SIM_AC_CONFIGURATION_SETTING([Coin-2 version], [`$PKG_CONFIG --modversion Coin-2`])
-      sim_ac_pkgconfig_check_failed=false
-    ], [
-      AC_MSG_RESULT([no])
-
-      # try standard qt.m4 approach in case no pkg-config was found
-      sim_ac_pkgconfig_check_failed=true
-    ])
+    # try standard qt.m4 approach in case no pkg-config was found
+    sim_ac_pkgconfig_check_failed=true
   ])
 fi
 
@@ -121,22 +110,26 @@ if $sim_ac_enable_pkgconfig; then
   
     QT_USE_LIBDIR=`$PKG_CONFIG --variable=libdir QtCore`
     QT_USE_INCDIR=`dirname \`$PKG_CONFIG --variable=includedir QtCore\``
-  
-    AC_PATH_PROG([MOC], [moc], [false], [$PATH])
-    if test x"$MOC" = x"false"; then
+
+    AC_MSG_CHECKING([for the location of moc])
+    MOC=`$PKG_CONFIG --variable=moc_location QtCore`
+    if test -z $MOC; then
       SIM_AC_ERROR([no-moc])
     fi
-  
+    AC_MSG_RESULT([$MOC])
+
+    AC_MSG_CHECKING([for the location of uic])
+    MOC=`$PKG_CONFIG --variable=uic_location QtCore`
+    if test -z $UIC; then
+      SIM_AC_ERROR([no-uic])
+    fi
+    AC_MSG_RESULT([$MOC])
+    
     AC_PATH_PROG([RCC], [rcc], [false], [$PATH])
     if test x"$RCC" = x"false"; then
       SIM_AC_ERROR([no-rcc])
     fi
-    
-    AC_PATH_PROG([UIC], [uic], [false], [$PATH])
-    if test x"UIC" = x"false"; then
-      SIM_AC_ERROR([no-uic])
-    fi
-  
+      
     SIM_AC_CONFIGURATION_SETTING([Qt version], [`$PKG_CONFIG --modversion QtCore`])
 
     sim_ac_pkgconfig_check_failed=false
