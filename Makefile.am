@@ -7,7 +7,13 @@ endif
 
 SUBDIRS = src include $(HTMLDIR)
 
-EXTRA_DIST = docs/quarter.doxygen.in
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA= Quarter.pc
+
+EXTRA_DIST = \
+	Quarter.pc.in \
+	docs/quarter.doxygen.in
+
 DISTCLEANFILES = docs/quarter.doxygen
 
 docs/quarter.doxygen: $(srcdir)/docs/quarter.doxygen.in config.status

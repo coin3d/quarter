@@ -111,26 +111,28 @@ if $sim_ac_enable_pkgconfig; then
     QT_USE_LIBDIR=`$PKG_CONFIG --variable=libdir QtCore`
     QT_USE_INCDIR=`dirname \`$PKG_CONFIG --variable=includedir QtCore\``
 
-    AC_MSG_CHECKING([for the location of moc])
+    AC_MSG_CHECKING([for moc])
     MOC=`$PKG_CONFIG --variable=moc_location QtCore`
     if test -z $MOC; then
       SIM_AC_ERROR([no-moc])
     fi
     AC_MSG_RESULT([$MOC])
 
-    AC_MSG_CHECKING([for the location of uic])
-    MOC=`$PKG_CONFIG --variable=uic_location QtCore`
+    AC_MSG_CHECKING([for uic])
+    UIC=`$PKG_CONFIG --variable=uic_location QtCore`
     if test -z $UIC; then
       SIM_AC_ERROR([no-uic])
     fi
-    AC_MSG_RESULT([$MOC])
+    AC_MSG_RESULT([$UIC])
     
     AC_PATH_PROG([RCC], [rcc], [false], [$PATH])
     if test x"$RCC" = x"false"; then
       SIM_AC_ERROR([no-rcc])
     fi
-      
-    SIM_AC_CONFIGURATION_SETTING([Qt version], [`$PKG_CONFIG --modversion QtCore`])
+ 
+    QT_VERSION=`$PKG_CONFIG --modversion QtCore`
+    SIM_AC_CONFIGURATION_SETTING([Qt version], [$QT_VERSION])
+    AC_SUBST([QT_VERSION])
 
     sim_ac_pkgconfig_check_failed=false
   ], [
@@ -436,18 +438,20 @@ if $BUILD_WITH_MSVC; then
 fi
   
 AC_CONFIG_FILES([
-        Makefile
-        include/Makefile
-        include/Quarter/Makefile
-        include/Quarter/devices/Makefile
-        include/Quarter/eventhandlers/Makefile
-        src/Makefile
-        src/Quarter/Makefile
-        src/Quarter/devices/Makefile
-        src/Quarter/eventhandlers/Makefile
-        src/examples/Makefile
-        src/plugins/Makefile
-        html/Makefile])
+	Makefile
+	Quarter.pc
+	include/Makefile
+	include/Quarter/Makefile
+	include/Quarter/devices/Makefile
+	include/Quarter/eventhandlers/Makefile
+	src/Makefile
+	src/Quarter/Makefile
+	src/Quarter/devices/Makefile
+	src/Quarter/eventhandlers/Makefile
+	src/examples/Makefile
+	src/plugins/Makefile
+	html/Makefile
+])
 
 AC_OUTPUT
 
