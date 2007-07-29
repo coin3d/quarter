@@ -64,8 +64,6 @@ CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
-Coin2_CFLAGS = @Coin2_CFLAGS@
-Coin2_LIBS = @Coin2_LIBS@
 Coin_CFLAGS = @Coin_CFLAGS@
 Coin_LIBS = @Coin_LIBS@
 DEFS = @DEFS@
@@ -117,6 +115,7 @@ QT_USE_INCDIR = @QT_USE_INCDIR@
 QT_USE_LDFLAGS = @QT_USE_LDFLAGS@
 QT_USE_LIBDIR = @QT_USE_LIBDIR@
 QT_USE_LIBS = @QT_USE_LIBS@
+QT_VERSION = @QT_VERSION@
 QUARTER_BETA_VERSION = @QUARTER_BETA_VERSION@
 QUARTER_BUILD_CFLAGS = @QUARTER_BUILD_CFLAGS@
 QUARTER_BUILD_CPPFLAGS = @QUARTER_BUILD_CPPFLAGS@
@@ -203,14 +202,23 @@ target_alias = @target_alias@
 
 SUBDIRS = src include $(HTMLDIR)
 
-EXTRA_DIST = docs/quarter.doxygen.in
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = Quarter.pc
+
+EXTRA_DIST = \
+	Quarter.pc.in \
+	docs/quarter.doxygen.in
+
+
 DISTCLEANFILES = docs/quarter.doxygen
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = config.h
-CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_FILES = Quarter.pc
 DIST_SOURCES =
+DATA = $(pkgconfig_DATA)
+
 
 RECURSIVE_TARGETS = info-recursive dvi-recursive pdf-recursive \
 	ps-recursive install-info-recursive uninstall-info-recursive \
@@ -218,9 +226,10 @@ RECURSIVE_TARGETS = info-recursive dvi-recursive pdf-recursive \
 	installdirs-recursive install-recursive uninstall-recursive \
 	check-recursive installcheck-recursive
 DIST_COMMON = README AUTHORS COPYING ChangeLog INSTALL Makefile.am \
-	Makefile.in NEWS aclocal.m4 cfg/config.guess cfg/config.sub \
-	cfg/depcomp cfg/install-sh cfg/ltmain.sh cfg/missing \
-	cfg/mkinstalldirs config.h.in configure configure.ac
+	Makefile.in NEWS Quarter.pc.in aclocal.m4 cfg/config.guess \
+	cfg/config.sub cfg/depcomp cfg/install-sh cfg/ltmain.sh \
+	cfg/missing cfg/mkinstalldirs config.h.in configure \
+	configure.ac
 DIST_SUBDIRS = src include html
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
@@ -259,6 +268,8 @@ $(srcdir)/config.h.in: @MAINTAINER_MODE_TRUE@ $(top_srcdir)/configure.ac $(ACLOC
 
 distclean-hdr:
 	-rm -f config.h stamp-h1
+Quarter.pc: $(top_builddir)/config.status Quarter.pc.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -269,6 +280,24 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
+pkgconfigDATA_INSTALL = $(INSTALL_DATA)
+install-pkgconfigDATA: $(pkgconfig_DATA)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(pkgconfigdir)
+	@list='$(pkgconfig_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " $(pkgconfigDATA_INSTALL) $$d$$p $(DESTDIR)$(pkgconfigdir)/$$f"; \
+	  $(pkgconfigDATA_INSTALL) $$d$$p $(DESTDIR)$(pkgconfigdir)/$$f; \
+	done
+
+uninstall-pkgconfigDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(pkgconfig_DATA)'; for p in $$list; do \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " rm -f $(DESTDIR)$(pkgconfigdir)/$$f"; \
+	  rm -f $(DESTDIR)$(pkgconfigdir)/$$f; \
+	done
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -410,7 +439,7 @@ distcleancheck_listfiles = find . -type f -print
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkinstalldirs) $(distdir)/cfg $(distdir)/docs
+	$(mkinstalldirs) $(distdir)/. $(distdir)/cfg $(distdir)/docs
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
@@ -521,9 +550,10 @@ distcleancheck: distclean
 	       exit 1; } >&2
 check-am: all-am
 check: check-recursive
-all-am: Makefile config.h
+all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
+	$(mkinstalldirs) $(DESTDIR)$(pkgconfigdir)
 
 install: install-recursive
 install-exec: install-exec-recursive
@@ -567,7 +597,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am:
+install-data-am: install-pkgconfigDATA
 
 install-exec-am:
 
@@ -594,7 +624,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-info-am
+uninstall-am: uninstall-info-am uninstall-pkgconfigDATA
 
 uninstall-info: uninstall-info-recursive
 
@@ -607,14 +637,16 @@ uninstall-info: uninstall-info-recursive
 	info-recursive install install-am install-data install-data-am \
 	install-data-recursive install-exec install-exec-am \
 	install-exec-recursive install-info install-info-am \
-	install-info-recursive install-man install-recursive \
-	install-strip installcheck installcheck-am installdirs \
-	installdirs-am installdirs-recursive maintainer-clean \
-	maintainer-clean-generic maintainer-clean-recursive mostlyclean \
-	mostlyclean-generic mostlyclean-libtool mostlyclean-recursive \
-	pdf pdf-am pdf-recursive ps ps-am ps-recursive tags \
-	tags-recursive uninstall uninstall-am uninstall-info-am \
-	uninstall-info-recursive uninstall-recursive
+	install-info-recursive install-man install-pkgconfigDATA \
+	install-recursive install-strip installcheck installcheck-am \
+	installdirs installdirs-am installdirs-recursive \
+	maintainer-clean maintainer-clean-generic \
+	maintainer-clean-recursive mostlyclean mostlyclean-generic \
+	mostlyclean-libtool mostlyclean-recursive pdf pdf-am \
+	pdf-recursive ps ps-am ps-recursive tags tags-recursive \
+	uninstall uninstall-am uninstall-info-am \
+	uninstall-info-recursive uninstall-pkgconfigDATA \
+	uninstall-recursive
 
 
 docs/quarter.doxygen: $(srcdir)/docs/quarter.doxygen.in config.status
