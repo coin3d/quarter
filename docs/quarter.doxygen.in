@@ -460,28 +460,32 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = @path_tag@@quarter_src_dir@/include/Quarter/Basic.h \
-                         @path_tag@@quarter_src_dir@/include/Quarter/QuarterApplication.h \
-                         @path_tag@@quarter_src_dir@/include/Quarter/QuarterWidget.h \
-                         @path_tag@@quarter_src_dir@/include/Quarter/Quarter.h \
-                         @path_tag@@quarter_src_dir@/include/Quarter/devices/DeviceHandler.h \
-                         @path_tag@@quarter_src_dir@/include/Quarter/devices/DeviceManager.h \
-                         @path_tag@@quarter_src_dir@/include/Quarter/devices/DragDropHandler.h \
-                         @path_tag@@quarter_src_dir@/include/Quarter/devices/KeyboardHandler.h \
-                         @path_tag@@quarter_src_dir@/include/Quarter/devices/MouseHandler.h \
-                         @path_tag@@quarter_src_dir@/src/Quarter/QuarterApplication.cpp \
-                         @path_tag@@quarter_src_dir@/src/Quarter/Quarter.cpp \
-                         @path_tag@@quarter_src_dir@/src/Quarter/QuarterWidget.cpp \
-                         @path_tag@@quarter_src_dir@/src/Quarter/devices/DeviceHandler.cpp \
-                         @path_tag@@quarter_src_dir@/src/Quarter/devices/DeviceManager.cpp \
-                         @path_tag@@quarter_src_dir@/src/Quarter/devices/DragDropHandler.cpp \
-                         @path_tag@@quarter_src_dir@/src/Quarter/devices/KeyboardHandler.cpp \
-                         @path_tag@@quarter_src_dir@/src/Quarter/devices/MouseHandler.cpp \
-                         @path_tag@@quarter_src_dir@/src/plugins/QuarterWidgetPlugin.cpp \
-                         @path_tag@@quarter_src_dir@/src/examples/minimal.cpp \
-                         @path_tag@@quarter_src_dir@/src/examples/directui.cpp \
-                         @path_tag@@quarter_src_dir@/src/examples/dynamicui.cpp \
-                         @path_tag@@quarter_src_dir@/src/examples/inheritui.cpp 
+INPUT = @path_tag@@quarter_src_dir@/include/Quarter/Basic.h \
+        @path_tag@@quarter_src_dir@/include/Quarter/QuarterApplication.h \
+        @path_tag@@quarter_src_dir@/include/Quarter/QuarterWidget.h \
+        @path_tag@@quarter_src_dir@/include/Quarter/Quarter.h \
+        @path_tag@@quarter_src_dir@/include/Quarter/eventhandlers/EventManager.h \
+        @path_tag@@quarter_src_dir@/include/Quarter/eventhandlers/EventHandler.h \
+        @path_tag@@quarter_src_dir@/include/Quarter/eventhandlers/DragDropHandler.h \
+        @path_tag@@quarter_src_dir@/include/Quarter/eventhandlers/ContextMenuHandler.h \
+        @path_tag@@quarter_src_dir@/include/Quarter/devices/DeviceHandler.h \
+        @path_tag@@quarter_src_dir@/include/Quarter/devices/KeyboardHandler.h \
+        @path_tag@@quarter_src_dir@/include/Quarter/devices/MouseHandler.h \
+        @path_tag@@quarter_src_dir@/src/Quarter/QuarterApplication.cpp \
+        @path_tag@@quarter_src_dir@/src/Quarter/Quarter.cpp \
+        @path_tag@@quarter_src_dir@/src/Quarter/QuarterWidget.cpp \
+        @path_tag@@quarter_src_dir@/src/Quarter/devices/DeviceHandler.cpp \
+        @path_tag@@quarter_src_dir@/src/Quarter/devices/KeyboardHandler.cpp \
+        @path_tag@@quarter_src_dir@/src/Quarter/devices/MouseHandler.cpp \
+        @path_tag@@quarter_src_dir@/src/Quarter/devices/DeviceManager.cpp \
+        @path_tag@@quarter_src_dir@/src/Quarter/eventhandlers/ContextMenuHandler.cpp \
+        @path_tag@@quarter_src_dir@/src/Quarter/eventhandlers/EventHandler.cpp \
+        @path_tag@@quarter_src_dir@/src/Quarter/eventhandlers/DragDropHandler.cpp \
+        @path_tag@@quarter_src_dir@/src/plugins/QuarterWidgetPlugin.cpp \
+        @path_tag@@quarter_src_dir@/src/examples/minimal.cpp \
+        @path_tag@@quarter_src_dir@/src/examples/directui.cpp \
+        @path_tag@@quarter_src_dir@/src/examples/dynamicui.cpp \
+        @path_tag@@quarter_src_dir@/src/examples/inheritui.cpp 
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
