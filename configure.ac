@@ -116,14 +116,36 @@ if $sim_ac_enable_pkgconfig; then
     if test -z $MOC; then
       SIM_AC_ERROR([no-moc])
     fi
-    AC_MSG_RESULT([$MOC])
+
+    # Debian provides a wrong moc_location path (Bug#401807)
+    if test -x $MOC; then
+      AC_MSG_RESULT([$MOC])
+    else
+      AC_MSG_RESULT([QtCore pkg-config provided moc_location points to non-existing path])
+      MOC=""  
+      AC_PATH_PROG([MOC], [moc], [false], [$PATH])
+      if test x"$MOC" = x"false"; then
+        SIM_AC_ERROR([no-moc])
+      fi
+    fi
 
     AC_MSG_CHECKING([for uic])
     UIC=`$PKG_CONFIG --variable=uic_location QtCore`
     if test -z $UIC; then
       SIM_AC_ERROR([no-uic])
     fi
-    AC_MSG_RESULT([$UIC])
+
+    # Debian provides a wrong uic_location path (Bug#401807)
+    if test -x $UIC; then
+      AC_MSG_RESULT([$UIC])
+    else
+      AC_MSG_RESULT([QtCore pkg-config provided uic_location points to non-existing path])
+      UIC=""
+      AC_PATH_PROG([UIC], [uic], [false], [$PATH])
+      if test x"$UIC" = x"false"; then
+        SIM_AC_ERROR([no-uic])
+      fi
+    fi
     
     AC_PATH_PROG([RCC], [rcc], [false], [$PATH])
     if test x"$RCC" = x"false"; then
