@@ -199,10 +199,20 @@ target_alias = @target_alias@
 
 SUBDIRS = devices eventhandlers
 
-DEFAULT_INCLUDES = \
-        -I$(top_srcdir)/include \
-        -I$(top_srcdir)/src/Quarter
+@BUILD_WITH_MSVC_TRUE@includes = \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include/QtOpenGL \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include/QtGui \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include/QtCore \
+@BUILD_WITH_MSVC_TRUE@        -I$(top_srcdir)/include \
+@BUILD_WITH_MSVC_TRUE@        -I$(top_srcdir)/src/Quarter
 
+@BUILD_WITH_MSVC_FALSE@includes = \
+@BUILD_WITH_MSVC_FALSE@        -I$(top_srcdir)/include \
+@BUILD_WITH_MSVC_FALSE@        -I$(top_srcdir)/src/Quarter
+
+
+DEFAULT_INCLUDES = $(includes)
 
 BuiltSources = \
         moc_QuarterWidget.cpp \

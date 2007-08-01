@@ -1,7 +1,20 @@
 
-DEFAULT_INCLUDES = \
+if BUILD_WITH_MSVC
+includes = \
+        -I$(QTDIR)/include \
+        -I$(QTDIR)/include/QtOpenGL \
+        -I$(QTDIR)/include/QtGui \
+        -I$(QTDIR)/include/QtCore \
+        -I$(QTDIR)/include/QtDesigner \
         -I$(top_srcdir)/include \
-        -I$(top_builddir)/include
+        -I$(top_srcdir)/src/Quarter
+else
+includes = \
+        -I$(top_srcdir)/include \
+        -I$(top_srcdir)/src/Quarter
+endif
+
+DEFAULT_INCLUDES = $(includes)
 
 QT_DESIGNER_INCLUDE = -I$(QT_USE_INCDIR)/QtDesigner
 
@@ -46,8 +59,14 @@ libQuarterWidgetPlugin_la_lib_CXXFLAGS = \
 libQuarterWidgetPlugin_la_lib_CFLAGS = \
         $(PLUGIN_BUILD_CFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
 
-libdir = $(QT_USE_LIBDIR)/plugins/designer
-bindir = $(QT_USE_LIBDIR)/plugins/designer
+if BUILD_WITH_MSVC
+plugindir = $(QTDIR)/plugins/designer
+else
+plugindir = $(QT_USE_LIBDIR)/plugins/designer
+endif
+
+libdir = $(plugindir)
+bindir = $(plugindir)
 
 CLEANFILES = \
         $(BuiltSources) \

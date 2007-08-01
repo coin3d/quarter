@@ -1,9 +1,24 @@
 
-DEFAULT_INCLUDES = \
+if BUILD_WITH_MSVC
+includes = \
+        -I$(QTDIR)/include \
+        -I$(QTDIR)/include/QtOpenGL \
+        -I$(QTDIR)/include/QtGui \
+        -I$(QTDIR)/include/QtCore \
+        -I$(QTDIR)/include/QtUiTools \
         -I$(top_builddir)/include \
         -I$(top_srcdir)/include \
         -I$(top_builddir)/src/examples \
         -I$(top_srcdir)/src/examples
+else
+includes = \
+        -I$(top_builddir)/include \
+        -I$(top_srcdir)/include \
+        -I$(top_builddir)/src/examples \
+        -I$(top_srcdir)/src/examples
+endif
+
+DEFAULT_INCLUDES = $(includes)
 
 QT_UITOOLS_INCLUDE = -I$(QT_USE_INCDIR)/QtUiTools
 

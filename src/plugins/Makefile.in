@@ -158,7 +158,7 @@ am__fastdepCXX_TRUE = @am__fastdepCXX_TRUE@
 am__include = @am__include@
 am__leading_dot = @am__leading_dot@
 am__quote = @am__quote@
-bindir = $(QT_USE_LIBDIR)/plugins/designer
+bindir = $(plugindir)
 build = @build@
 build_alias = @build_alias@
 build_cpu = @build_cpu@
@@ -176,7 +176,7 @@ includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
 
-libdir = $(QT_USE_LIBDIR)/plugins/designer
+libdir = $(plugindir)
 libexecdir = @libexecdir@
 localstatedir = @localstatedir@
 mandir = @mandir@
@@ -198,10 +198,21 @@ sim_ac_relative_src_dir_p = @sim_ac_relative_src_dir_p@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
-DEFAULT_INCLUDES = \
-        -I$(top_srcdir)/include \
-        -I$(top_builddir)/include
+@BUILD_WITH_MSVC_TRUE@includes = \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include/QtOpenGL \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include/QtGui \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include/QtCore \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include/QtDesigner \
+@BUILD_WITH_MSVC_TRUE@        -I$(top_srcdir)/include \
+@BUILD_WITH_MSVC_TRUE@        -I$(top_srcdir)/src/Quarter
 
+@BUILD_WITH_MSVC_FALSE@includes = \
+@BUILD_WITH_MSVC_FALSE@        -I$(top_srcdir)/include \
+@BUILD_WITH_MSVC_FALSE@        -I$(top_srcdir)/src/Quarter
+
+
+DEFAULT_INCLUDES = $(includes)
 
 QT_DESIGNER_INCLUDE = -I$(QT_USE_INCDIR)/QtDesigner
 
@@ -251,6 +262,9 @@ libQuarterWidgetPlugin_la_lib_CXXFLAGS = \
 libQuarterWidgetPlugin_la_lib_CFLAGS = \
         $(PLUGIN_BUILD_CFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
 
+
+@BUILD_WITH_MSVC_TRUE@plugindir = $(QTDIR)/plugins/designer
+@BUILD_WITH_MSVC_FALSE@plugindir = $(QT_USE_LIBDIR)/plugins/designer
 
 CLEANFILES = \
         $(BuiltSources) \

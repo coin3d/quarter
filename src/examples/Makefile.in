@@ -197,12 +197,25 @@ sim_ac_relative_src_dir_p = @sim_ac_relative_src_dir_p@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
-DEFAULT_INCLUDES = \
-        -I$(top_builddir)/include \
-        -I$(top_srcdir)/include \
-        -I$(top_builddir)/src/examples \
-        -I$(top_srcdir)/src/examples
+@BUILD_WITH_MSVC_TRUE@includes = \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include/QtOpenGL \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include/QtGui \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include/QtCore \
+@BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include/QtUiTools \
+@BUILD_WITH_MSVC_TRUE@        -I$(top_builddir)/include \
+@BUILD_WITH_MSVC_TRUE@        -I$(top_srcdir)/include \
+@BUILD_WITH_MSVC_TRUE@        -I$(top_builddir)/src/examples \
+@BUILD_WITH_MSVC_TRUE@        -I$(top_srcdir)/src/examples
 
+@BUILD_WITH_MSVC_FALSE@includes = \
+@BUILD_WITH_MSVC_FALSE@        -I$(top_builddir)/include \
+@BUILD_WITH_MSVC_FALSE@        -I$(top_srcdir)/include \
+@BUILD_WITH_MSVC_FALSE@        -I$(top_builddir)/src/examples \
+@BUILD_WITH_MSVC_FALSE@        -I$(top_srcdir)/src/examples
+
+
+DEFAULT_INCLUDES = $(includes)
 
 QT_UITOOLS_INCLUDE = -I$(QT_USE_INCDIR)/QtUiTools
 
