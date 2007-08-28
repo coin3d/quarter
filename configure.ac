@@ -241,8 +241,6 @@ LIBS="$LIBS $QT_USE_LIBS -lQtUiTools"
 AC_CACHE_CHECK([for Qt Designer plugins path], QT_DESIGNER_PLUGIN_PATH, [
   AC_RUN_IFELSE(
     [AC_LANG_SOURCE([
-#include <iostream>
-
 #include <QApplication>
 #include <QFile>
 #include <QStringList>
