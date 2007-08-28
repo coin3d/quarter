@@ -465,7 +465,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS BUILD_WITH_MSVC BUILD_WITH_MSVC_TRUE BUILD_WITH_MSVC_FALSE QUARTER_MAJOR_VERSION QUARTER_MINOR_VERSION QUARTER_MICRO_VERSION QUARTER_BETA_VERSION QUARTER_VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE am__leading_dot MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE build build_cpu build_vendor build_os host host_cpu host_vendor host_os EGREP LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CPP CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL PKG_CONFIG ac_pt_PKG_CONFIG Coin_CFLAGS Coin_LIBS sim_ac_coin_configcmd Qt4_CFLAGS Qt4_LIBS MOC UIC RCC QT_VERSION X_CFLAGS X_PRE_LIBS X_LIBS X_EXTRA_LIBS sim_ac_qt_cygpath COIN_USE_CPPFLAGS COIN_USE_CXXFLAGS COIN_USE_LDFLAGS COIN_USE_LIBS QT_USE_CPPFLAGS QT_USE_CXXFLAGS QT_USE_INCDIR QT_USE_LDFLAGS QT_USE_LIBDIR QT_USE_LIBS QUARTER_BUILD_CPPFLAGS QUARTER_BUILD_CFLAGS QUARTER_BUILD_CXXFLAGS QUARTER_LIBFLAGS QUARTER_USE_CPPFLAGS QUARTER_USE_LDFLAGS QUARTER_USE_LIBS quarter_build_dir quarter_src_dir ac_unique_file sim_ac_relative_src_dir sim_ac_relative_src_dir_p SUFFIX htmldir QUARTER_DOC_HTML quarter_html_dir BUILD_HTMLPAGES_TRUE BUILD_HTMLPAGES_FALSE sim_ac_doxygen_exe sim_ac_perl_exe path_tag PLUGIN_BUILD_CPPFLAGS PLUGIN_BUILD_CXXFLAGS PLUGIN_BUILD_CFLAGS PLUGIN_BUILD_LIBFLAGS EXAMPLES_BUILD_CPPFLAGS EXAMPLES_BUILD_CXXFLAGS EXAMPLES_BUILD_CFLAGS EXAMPLES_BUILD_LDFLAGS EXAMPLES_BUILD_LIBFLAGS LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS BUILD_WITH_MSVC BUILD_WITH_MSVC_TRUE BUILD_WITH_MSVC_FALSE QUARTER_MAJOR_VERSION QUARTER_MINOR_VERSION QUARTER_MICRO_VERSION QUARTER_BETA_VERSION QUARTER_VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE am__leading_dot MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE build build_cpu build_vendor build_os host host_cpu host_vendor host_os EGREP LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CPP CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL PKG_CONFIG ac_pt_PKG_CONFIG Coin_CFLAGS Coin_LIBS sim_ac_coin_configcmd Qt4_CFLAGS Qt4_LIBS MOC UIC RCC QT_VERSION X_CFLAGS X_PRE_LIBS X_LIBS X_EXTRA_LIBS sim_ac_qt_cygpath QT_DESIGNER_PLUGIN_PATH COIN_USE_CPPFLAGS COIN_USE_CXXFLAGS COIN_USE_LDFLAGS COIN_USE_LIBS QT_USE_CPPFLAGS QT_USE_CXXFLAGS QT_USE_INCDIR QT_USE_LDFLAGS QT_USE_LIBDIR QT_USE_LIBS QUARTER_BUILD_CPPFLAGS QUARTER_BUILD_CFLAGS QUARTER_BUILD_CXXFLAGS QUARTER_LIBFLAGS QUARTER_USE_CPPFLAGS QUARTER_USE_LDFLAGS QUARTER_USE_LIBS quarter_build_dir quarter_src_dir ac_unique_file sim_ac_relative_src_dir sim_ac_relative_src_dir_p SUFFIX htmldir QUARTER_DOC_HTML quarter_html_dir BUILD_HTMLPAGES_TRUE BUILD_HTMLPAGES_FALSE sim_ac_doxygen_exe sim_ac_perl_exe path_tag PLUGIN_BUILD_CPPFLAGS PLUGIN_BUILD_CXXFLAGS PLUGIN_BUILD_CFLAGS PLUGIN_BUILD_LIBFLAGS EXAMPLES_BUILD_CPPFLAGS EXAMPLES_BUILD_CXXFLAGS EXAMPLES_BUILD_CFLAGS EXAMPLES_BUILD_LDFLAGS EXAMPLES_BUILD_LIBFLAGS LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -19713,7 +19713,7 @@ echo "$as_me: error: aborting" >&2;}
 
     fi
 
-    # Debian provides a wrong uic_location path (Bug#401807)
+    # Debian provides a wrong uic_location path (Debian bug #401807)
     if test -x $UIC; then
       echo "$as_me:$LINENO: result: $UIC" >&5
 echo "${ECHO_T}$UIC" >&6
@@ -19792,7 +19792,11 @@ echo "$as_me: error: aborting" >&2;}
       fi
     fi
 
-    # Extract the first word of "rcc", so it can be a program name with args.
+    # OBS: Deduct rcc path over common dirname for moc and uic as
+    # pkg-config doesn't provide one. This is to ensure that binaries
+    # for the same Qt versions are picked up. 20070828 tamer.
+    if test `dirname $MOC` = `dirname $UIC`; then
+      # Extract the first word of "rcc", so it can be a program name with args.
 set dummy rcc; ac_word=$2
 echo "$as_me:$LINENO: checking for $ac_word" >&5
 echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
@@ -19805,7 +19809,7 @@ else
   ;;
   *)
   as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
+for as_dir in `dirname $MOC`
 do
   IFS=$as_save_IFS
   test -z "$as_dir" && as_dir=.
@@ -19832,7 +19836,36 @@ else
 echo "${ECHO_T}no" >&6
 fi
 
-    if test x"$RCC" = x"false"; then
+      if test x"$RCC" = x"false"; then
+
+echo >&2 ""
+
+
+: ${sim_ac_message_file=$ac_aux_dir/errors.txt}
+if test -f $sim_ac_message_file; then
+  sim_ac_message="`sed -n -e '/^!no-rcc$/,/^!/ { /^!/ d; p; }' <$sim_ac_message_file`"
+  if test x"$sim_ac_message" = x""; then
+    { { echo "$as_me:$LINENO: error: no message named 'no-rcc' in '$sim_ac_message_file' - notify the $PACKAGE_NAME maintainer(s)" >&5
+echo "$as_me: error: no message named 'no-rcc' in '$sim_ac_message_file' - notify the $PACKAGE_NAME maintainer(s)" >&2;}
+   { (exit 1); exit 1; }; }
+  else
+    eval "echo >&2 \"$sim_ac_message\""
+  fi
+else
+  { { echo "$as_me:$LINENO: error: file '$sim_ac_message_file' not found - notify the $PACKAGE_NAME maintainer(s)" >&5
+echo "$as_me: error: file '$sim_ac_message_file' not found - notify the $PACKAGE_NAME maintainer(s)" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
+
+
+echo >&2 ""
+{ { echo "$as_me:$LINENO: error: aborting" >&5
+echo "$as_me: error: aborting" >&2;}
+   { (exit 1); exit 1; }; }
+
+      fi
+    else
 
 echo >&2 ""
 
@@ -22566,99 +22599,6 @@ if $sim_ac_with_qt; then
     sim_ac_path=$sim_ac_qtdir/bin:$PATH
   fi
 
-  # Extract the first word of "rcc", so it can be a program name with args.
-set dummy rcc; ac_word=$2
-echo "$as_me:$LINENO: checking for $ac_word" >&5
-echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
-if test "${ac_cv_path_RCC+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  case $RCC in
-  [\\/]* | ?:[\\/]*)
-  ac_cv_path_RCC="$RCC" # Let the user override the test with a path.
-  ;;
-  *)
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $sim_ac_path
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-  for ac_exec_ext in '' $ac_executable_extensions; do
-  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_path_RCC="$as_dir/$ac_word$ac_exec_ext"
-    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-done
-
-  test -z "$ac_cv_path_RCC" && ac_cv_path_RCC="false"
-  ;;
-esac
-fi
-RCC=$ac_cv_path_RCC
-
-if test -n "$RCC"; then
-  echo "$as_me:$LINENO: result: $RCC" >&5
-echo "${ECHO_T}$RCC" >&6
-else
-  echo "$as_me:$LINENO: result: no" >&5
-echo "${ECHO_T}no" >&6
-fi
-
-  if test x"$RCC" = x"false"; then
-    if test -z "$QTDIR"; then
-      { echo "$as_me:$LINENO: WARNING: QTDIR environment variable not set -- this might be an indication of a problem" >&5
-echo "$as_me: WARNING: QTDIR environment variable not set -- this might be an indication of a problem" >&2;}
-    fi
-    { echo "$as_me:$LINENO: WARNING: the \`\`rcc'' Qt pre-processor tool not found" >&5
-echo "$as_me: WARNING: the \`\`rcc'' Qt pre-processor tool not found" >&2;}
-  fi
-else
-  RCC=false
-
-fi
-
-  if test x"$RCC" = x"false"; then
-
-echo >&2 ""
-
-
-: ${sim_ac_message_file=$ac_aux_dir/errors.txt}
-if test -f $sim_ac_message_file; then
-  sim_ac_message="`sed -n -e '/^!no-rcc$/,/^!/ { /^!/ d; p; }' <$sim_ac_message_file`"
-  if test x"$sim_ac_message" = x""; then
-    { { echo "$as_me:$LINENO: error: no message named 'no-rcc' in '$sim_ac_message_file' - notify the $PACKAGE_NAME maintainer(s)" >&5
-echo "$as_me: error: no message named 'no-rcc' in '$sim_ac_message_file' - notify the $PACKAGE_NAME maintainer(s)" >&2;}
-   { (exit 1); exit 1; }; }
-  else
-    eval "echo >&2 \"$sim_ac_message\""
-  fi
-else
-  { { echo "$as_me:$LINENO: error: file '$sim_ac_message_file' not found - notify the $PACKAGE_NAME maintainer(s)" >&5
-echo "$as_me: error: file '$sim_ac_message_file' not found - notify the $PACKAGE_NAME maintainer(s)" >&2;}
-   { (exit 1); exit 1; }; }
-fi
-
-
-
-echo >&2 ""
-{ { echo "$as_me:$LINENO: error: aborting" >&5
-echo "$as_me: error: aborting" >&2;}
-   { (exit 1); exit 1; }; }
-
-  fi
-
-
-
-
-if $sim_ac_with_qt; then
-
-  sim_ac_path=$PATH
-  if test -n "$sim_ac_qtdir"; then
-    sim_ac_path=$sim_ac_qtdir/bin:$PATH
-  fi
-
   # Extract the first word of "uic", so it can be a program name with args.
 set dummy uic; ac_word=$2
 echo "$as_me:$LINENO: checking for $ac_word" >&5
@@ -22741,7 +22681,202 @@ echo "$as_me: error: aborting" >&2;}
    { (exit 1); exit 1; }; }
 
   fi
+
+
+
+
+if $sim_ac_with_qt; then
+
+  sim_ac_path=$PATH
+  if test -n "$sim_ac_qtdir"; then
+    sim_ac_path=$sim_ac_qtdir/bin:$PATH
+  fi
+
+  # Extract the first word of "rcc", so it can be a program name with args.
+set dummy rcc; ac_word=$2
+echo "$as_me:$LINENO: checking for $ac_word" >&5
+echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
+if test "${ac_cv_path_RCC+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  case $RCC in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_RCC="$RCC" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $sim_ac_path
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+  for ac_exec_ext in '' $ac_executable_extensions; do
+  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_RCC="$as_dir/$ac_word$ac_exec_ext"
+    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+done
+
+  test -z "$ac_cv_path_RCC" && ac_cv_path_RCC="false"
+  ;;
+esac
 fi
+RCC=$ac_cv_path_RCC
+
+if test -n "$RCC"; then
+  echo "$as_me:$LINENO: result: $RCC" >&5
+echo "${ECHO_T}$RCC" >&6
+else
+  echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+fi
+
+  if test x"$RCC" = x"false"; then
+    if test -z "$QTDIR"; then
+      { echo "$as_me:$LINENO: WARNING: QTDIR environment variable not set -- this might be an indication of a problem" >&5
+echo "$as_me: WARNING: QTDIR environment variable not set -- this might be an indication of a problem" >&2;}
+    fi
+    { echo "$as_me:$LINENO: WARNING: the \`\`rcc'' Qt pre-processor tool not found" >&5
+echo "$as_me: WARNING: the \`\`rcc'' Qt pre-processor tool not found" >&2;}
+  fi
+else
+  RCC=false
+
+fi
+
+  if test x"$RCC" = x"false"; then
+
+echo >&2 ""
+
+
+: ${sim_ac_message_file=$ac_aux_dir/errors.txt}
+if test -f $sim_ac_message_file; then
+  sim_ac_message="`sed -n -e '/^!no-rcc$/,/^!/ { /^!/ d; p; }' <$sim_ac_message_file`"
+  if test x"$sim_ac_message" = x""; then
+    { { echo "$as_me:$LINENO: error: no message named 'no-rcc' in '$sim_ac_message_file' - notify the $PACKAGE_NAME maintainer(s)" >&5
+echo "$as_me: error: no message named 'no-rcc' in '$sim_ac_message_file' - notify the $PACKAGE_NAME maintainer(s)" >&2;}
+   { (exit 1); exit 1; }; }
+  else
+    eval "echo >&2 \"$sim_ac_message\""
+  fi
+else
+  { { echo "$as_me:$LINENO: error: file '$sim_ac_message_file' not found - notify the $PACKAGE_NAME maintainer(s)" >&5
+echo "$as_me: error: file '$sim_ac_message_file' not found - notify the $PACKAGE_NAME maintainer(s)" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
+
+
+echo >&2 ""
+{ { echo "$as_me:$LINENO: error: aborting" >&5
+echo "$as_me: error: aborting" >&2;}
+   { (exit 1); exit 1; }; }
+
+  fi
+fi
+
+sim_ac_qtdesignerpath_save_CPPFLAGS=$CPPFLAGS
+sim_ac_qtdesignerpath_save_LDFLAGS=$LDFLAGS
+sim_ac_qtdesignerpath_save_LIBS=$LIBS
+
+CPPFLAGS="$CPPFLAGS $QT_USE_CPPFLAGS"
+LDFLAGS="$LDFLAGS $QT_USE_LDFLAGS"
+LIBS="$LIBS $QT_USE_LIBS -lQtUiTools"
+
+echo "$as_me:$LINENO: checking for Qt Designer plugins path" >&5
+echo $ECHO_N "checking for Qt Designer plugins path... $ECHO_C" >&6
+if test "${QT_DESIGNER_PLUGIN_PATH+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+
+  if test "$cross_compiling" = yes; then
+  { { echo "$as_me:$LINENO: error: cannot run test program while cross compiling
+See \`config.log' for more details." >&5
+echo "$as_me: error: cannot run test program while cross compiling
+See \`config.log' for more details." >&2;}
+   { (exit 1); exit 1; }; }
+else
+  cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+#include <iostream>
+
+#include <QApplication>
+#include <QFile>
+#include <QStringList>
+#include <QtUiTools/QUiLoader>
+
+int
+main(int argc, char **argv)
+{
+  QApplication app(argc, argv);
+
+  QUiLoader::QUiLoader qld;
+  QStringList pluginPaths = qld.pluginPaths();
+
+  /* Assumption: first path entry contains the location within the
+   * system. 20070828 tamer. */
+  if (pluginPaths.size() <= 0) {
+    return 1;
+  }
+
+  QFile file("conftest.out");
+  file.open(QIODevice::WriteOnly);
+  file.write(pluginPaths.at(0).toLocal8Bit().constData());
+  file.close();
+
+  return 0;
+}
+
+_ACEOF
+rm -f conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } && { ac_try='./conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  QT_DESIGNER_PLUGIN_PATH=`cat conftest.out`
+else
+  echo "$as_me: program exited with status $ac_status" >&5
+echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+( exit $ac_status )
+{ { echo "$as_me:$LINENO: error: could not determine Qt Designer plugins path
+See \`config.log' for more details." >&5
+echo "$as_me: error: could not determine Qt Designer plugins path
+See \`config.log' for more details." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+fi
+
+fi
+echo "$as_me:$LINENO: result: $QT_DESIGNER_PLUGIN_PATH" >&5
+echo "${ECHO_T}$QT_DESIGNER_PLUGIN_PATH" >&6
+
+CPPFLAGS="$sim_ac_qtdesignerpath_save_CPPFLAGS"
+LDFLAGS="$sim_ac_qtdesignerpath_save_LDFLAGS"
+LIBS="$sim_ac_qtdesignerpath_save_LIBS"
+
+
+if test x"${sim_ac_configuration_settings+set}" = x"set"; then
+  sim_ac_configuration_settings="$sim_ac_configuration_settings|Qt Designer plugin path:$QT_DESIGNER_PLUGIN_PATH"
+else
+  sim_ac_configuration_settings="Qt Designer plugin path:$QT_DESIGNER_PLUGIN_PATH"
+fi
+
+
 
 
 
@@ -23994,6 +24129,7 @@ s,@X_PRE_LIBS@,$X_PRE_LIBS,;t t
 s,@X_LIBS@,$X_LIBS,;t t
 s,@X_EXTRA_LIBS@,$X_EXTRA_LIBS,;t t
 s,@sim_ac_qt_cygpath@,$sim_ac_qt_cygpath,;t t
+s,@QT_DESIGNER_PLUGIN_PATH@,$QT_DESIGNER_PLUGIN_PATH,;t t
 s,@COIN_USE_CPPFLAGS@,$COIN_USE_CPPFLAGS,;t t
 s,@COIN_USE_CXXFLAGS@,$COIN_USE_CXXFLAGS,;t t
 s,@COIN_USE_LDFLAGS@,$COIN_USE_LDFLAGS,;t t

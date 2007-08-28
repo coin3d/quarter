@@ -62,7 +62,7 @@ libQuarterWidgetPlugin_la_lib_CFLAGS = \
 if BUILD_WITH_MSVC
 plugindir = $(QTDIR)/plugins/designer
 else
-plugindir = $(QT_USE_LIBDIR)/plugins/designer
+plugindir = $(QT_DESIGNER_PLUGIN_PATH)
 endif
 
 libdir = $(plugindir)
