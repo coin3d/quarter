@@ -135,7 +135,7 @@ if $sim_ac_enable_pkgconfig; then
       SIM_AC_ERROR([no-uic])
     fi
 
-    # Debian provides a wrong uic_location path (Bug#401807)
+    # Debian provides a wrong uic_location path (Debian bug #401807)
     if test -x $UIC; then
       AC_MSG_RESULT([$UIC])
     else
@@ -147,10 +147,17 @@ if $sim_ac_enable_pkgconfig; then
       fi
     fi
     
-    AC_PATH_PROG([RCC], [rcc], [false], [$PATH])
-    if test x"$RCC" = x"false"; then
-      SIM_AC_ERROR([no-rcc])
-    fi
+    # OBS: Deduct rcc path over common dirname for moc and uic as
+    # pkg-config doesn't provide one. This is to ensure that binaries
+    # for the same Qt versions are picked up. 20070828 tamer.
+    if test `dirname $MOC` = `dirname $UIC`; then
+      AC_PATH_PROG([RCC], [rcc], [false], [`dirname $MOC`])
+      if test x"$RCC" = x"false"; then
+        SIM_AC_ERROR([no-rcc])
+      fi
+    else
+      SIM_AC_ERROR([no-rcc])      
+    fi  
  
     QT_VERSION=`$PKG_CONFIG --modversion QtCore`
     SIM_AC_CONFIGURATION_SETTING([Qt version], [$QT_VERSION])
@@ -212,16 +219,67 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed
     SIM_AC_ERROR([no-moc])
   fi
   
-  SIM_AC_QT_PROG(RCC, rcc)
-  if test x"$RCC" = x"false"; then
-    SIM_AC_ERROR([no-rcc])
-  fi
-  
   SIM_AC_QT_PROG(UIC, uic)
   if test x"$UIC" = x"false"; then
     SIM_AC_ERROR([no-uic])
   fi
+
+  SIM_AC_QT_PROG(RCC, rcc)
+  if test x"$RCC" = x"false"; then
+    SIM_AC_ERROR([no-rcc])
+  fi
 fi
+
+sim_ac_qtdesignerpath_save_CPPFLAGS=$CPPFLAGS
+sim_ac_qtdesignerpath_save_LDFLAGS=$LDFLAGS
+sim_ac_qtdesignerpath_save_LIBS=$LIBS
+
+CPPFLAGS="$CPPFLAGS $QT_USE_CPPFLAGS"
+LDFLAGS="$LDFLAGS $QT_USE_LDFLAGS"
+LIBS="$LIBS $QT_USE_LIBS -lQtUiTools"
+
+AC_CACHE_CHECK([for Qt Designer plugins path], QT_DESIGNER_PLUGIN_PATH, [
+  AC_RUN_IFELSE(
+    [AC_LANG_SOURCE([
+#include <iostream>
+
+#include <QApplication>
+#include <QFile>
+#include <QStringList>
+#include <QtUiTools/QUiLoader>
+
+int
+main(int argc, char **argv)
+{
+  QApplication app(argc, argv);
+
+  QUiLoader::QUiLoader qld;
+  QStringList pluginPaths = qld.pluginPaths();
+
+  /* Assumption: first path entry contains the location within the
+   * system. 20070828 tamer. */
+  if (pluginPaths.size() <= 0) {
+    return 1;
+  }
+
+  QFile file("conftest.out");
+  file.open(QIODevice::WriteOnly);
+  file.write(pluginPaths.at(0).toLocal8Bit().constData());
+  file.close();
+
+  return 0;
+}
+  ])],
+  [QT_DESIGNER_PLUGIN_PATH=`cat conftest.out`],
+  [AC_MSG_FAILURE([could not determine Qt Designer plugins path])])
+])
+
+CPPFLAGS="$sim_ac_qtdesignerpath_save_CPPFLAGS"
+LDFLAGS="$sim_ac_qtdesignerpath_save_LDFLAGS"
+LIBS="$sim_ac_qtdesignerpath_save_LIBS"
+
+SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path], [$QT_DESIGNER_PLUGIN_PATH])
+AC_SUBST([QT_DESIGNER_PLUGIN_PATH])
 
 AC_SUBST([COIN_USE_CPPFLAGS])
 AC_SUBST([COIN_USE_CXXFLAGS])
