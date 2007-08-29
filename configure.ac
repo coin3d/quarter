@@ -233,10 +233,13 @@ fi
 sim_ac_qtdesignerpath_save_CPPFLAGS=$CPPFLAGS
 sim_ac_qtdesignerpath_save_LDFLAGS=$LDFLAGS
 sim_ac_qtdesignerpath_save_LIBS=$LIBS
+eval "sim_ac_qtdesignerpath_save_RUNPATH_VAR=\$$runpath_var"
 
 CPPFLAGS="$CPPFLAGS $QT_USE_CPPFLAGS"
 LDFLAGS="$LDFLAGS $QT_USE_LDFLAGS"
 LIBS="$LIBS $QT_USE_LIBS -lQtUiTools"
+eval "$runpath_var=$QT_USE_LIBDIR"
+eval "export $runpath_var"
 
 AC_CACHE_CHECK([for Qt Designer plugins path], QT_DESIGNER_PLUGIN_PATH, [
   AC_RUN_IFELSE(
@@ -275,6 +278,7 @@ main(int argc, char **argv)
 CPPFLAGS="$sim_ac_qtdesignerpath_save_CPPFLAGS"
 LDFLAGS="$sim_ac_qtdesignerpath_save_LDFLAGS"
 LIBS="$sim_ac_qtdesignerpath_save_LIBS"
+eval "$runpath_var=$sim_ac_qtdesignerpath_save_RUNPATH_VAR"
 
 SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path], [$QT_DESIGNER_PLUGIN_PATH])
 AC_SUBST([QT_DESIGNER_PLUGIN_PATH])

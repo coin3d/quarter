@@ -22779,10 +22779,13 @@ fi
 sim_ac_qtdesignerpath_save_CPPFLAGS=$CPPFLAGS
 sim_ac_qtdesignerpath_save_LDFLAGS=$LDFLAGS
 sim_ac_qtdesignerpath_save_LIBS=$LIBS
+eval "sim_ac_qtdesignerpath_save_RUNPATH_VAR=\$$runpath_var"
 
 CPPFLAGS="$CPPFLAGS $QT_USE_CPPFLAGS"
 LDFLAGS="$LDFLAGS $QT_USE_LDFLAGS"
 LIBS="$LIBS $QT_USE_LIBS -lQtUiTools"
+eval "$runpath_var=$QT_USE_LIBDIR"
+eval "export $runpath_var"
 
 echo "$as_me:$LINENO: checking for Qt Designer plugins path" >&5
 echo $ECHO_N "checking for Qt Designer plugins path... $ECHO_C" >&6
@@ -22866,6 +22869,7 @@ echo "${ECHO_T}$QT_DESIGNER_PLUGIN_PATH" >&6
 CPPFLAGS="$sim_ac_qtdesignerpath_save_CPPFLAGS"
 LDFLAGS="$sim_ac_qtdesignerpath_save_LDFLAGS"
 LIBS="$sim_ac_qtdesignerpath_save_LIBS"
+eval "$runpath_var=$sim_ac_qtdesignerpath_save_RUNPATH_VAR"
 
 
 if test x"${sim_ac_configuration_settings+set}" = x"set"; then
