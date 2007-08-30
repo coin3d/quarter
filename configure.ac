@@ -207,7 +207,7 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed
 
   # we use QtXml in Quarter
   if $BUILD_WITH_MSVC; then
-    QT_USE_LIBS="$QT_USE_LIBS -lQtXml"
+    QT_USE_LIBS="$QT_USE_LIBS -lQtXml4"
   else
     QT_USE_LIBS="$QT_USE_LIBS -lQtXml"
   fi
