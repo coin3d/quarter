@@ -48,6 +48,9 @@ public:
   QWidget * createWidget(QWidget * parent);
   void initialize(QDesignerFormEditorInterface * core);
   
+private slots:
+  void widgetDestroyed(QObject * obj);
+
 private:
   class QuarterWidgetPluginP * pimpl;
 };

@@ -95,7 +95,11 @@ QWidget *
 QuarterWidgetPlugin::createWidget(QWidget * parent)
 {
   QuarterWidget * widget = new QuarterWidget(parent, PRIVATE(this)->firstwidget);
-  if (PRIVATE(this)->firstwidget == 0) PRIVATE(this)->firstwidget = widget;
+  if (PRIVATE(this)->firstwidget == 0) {
+    PRIVATE(this)->firstwidget = widget;
+    QObject::connect(widget, SIGNAL(destroyed(QObject*)),
+                     this, SLOT(widgetDestroyed(QObject*)));
+  }
   widget->setSceneGraph(new SoCube);
   return widget;
 }
@@ -134,6 +138,13 @@ bool
 QuarterWidgetPlugin::isContainer(void) const
 {
   return false;
+}
+
+void 
+QuarterWidgetPlugin::widgetDestroyed(QObject * obj)
+{
+  QuarterWidget * widget = (QuarterWidget*) obj;
+  if (widget == PRIVATE(this)->firstwidget) PRIVATE(this)->firstwidget = NULL;
 }
 
 QString 
