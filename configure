@@ -22807,9 +22807,9 @@ cat confdefs.h >>conftest.$ac_ext
 cat >>conftest.$ac_ext <<_ACEOF
 /* end confdefs.h.  */
 
-#include <QApplication>
-#include <QFile>
-#include <QStringList>
+#include <QtGui/QApplication>
+#include <QtCore/QFile>
+#include <QtCore/QStringList>
 #include <QtUiTools/QUiLoader>
 
 int
