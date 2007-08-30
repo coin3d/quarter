@@ -23,8 +23,8 @@
 #ifndef QUARTER_CONTEXTMENUHANDLERP_H
 #define QUARTER_CONTEXTMENUHANDLERP_H
 
-#include <QPair>
-#include <QObject>
+#include <QtCore/QPair>
+#include <QtCore/QObject>
 #include <Inventor/SoRenderManager.h>
 
 class QAction;

@@ -30,7 +30,7 @@
 
 #include "QuarterWidgetPlugin.h"
 
-#include <QtPlugin>
+#include <QtCore/QtPlugin>
 #include <Inventor/nodes/SoCube.h>
 #include <Quarter/Quarter.h>
 #include <Quarter/QuarterWidget.h>
