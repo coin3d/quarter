@@ -23,7 +23,7 @@
  *
 \**************************************************************************/
 
-#include <QKeyEvent>
+#include <QtGui/QKeyEvent>
 #include <Inventor/events/SoKeyboardEvent.h>
 
 class SoEvent;
