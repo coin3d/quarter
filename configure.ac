@@ -244,9 +244,9 @@ eval "export $runpath_var"
 AC_CACHE_CHECK([for Qt Designer plugins path], QT_DESIGNER_PLUGIN_PATH, [
   AC_RUN_IFELSE(
     [AC_LANG_SOURCE([
-#include <QApplication>
-#include <QFile>
-#include <QStringList>
+#include <QtGui/QApplication>
+#include <QtCore/QFile>
+#include <QtCore/QStringList>
 #include <QtUiTools/QUiLoader>
 
 int
