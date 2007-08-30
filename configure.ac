@@ -206,7 +206,11 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed
   QT_USE_INCDIR="${QTDIR}"/include
 
   # we use QtXml in Quarter
-  QT_USE_LIBS="$QT_USE_LIBS -lQtXml4"  
+  if $BUILD_WITH_MSVC; then
+    QT_USE_LIBS="$QT_USE_LIBS -lQtXml"
+  else
+    QT_USE_LIBS="$QT_USE_LIBS -lQtXml"
+  fi
 
   #SIM_AC_CHECK_QGL([
   #  QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"

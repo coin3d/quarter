@@ -22488,7 +22488,12 @@ fi
   QT_USE_INCDIR="${QTDIR}"/include
 
   # we use QtXml in Quarter
-  QT_USE_LIBS="$QT_USE_LIBS -lQtXml4"
+  if $BUILD_WITH_MSVC; then
+    QT_USE_LIBS="$QT_USE_LIBS -lQtXml"
+  else
+    QT_USE_LIBS="$QT_USE_LIBS -lQtXml"
+  fi
+
   #SIM_AC_CHECK_QGL([
   #  QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
   #  QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $sim_ac_qgl_cxxflags"
