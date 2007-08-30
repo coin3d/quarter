@@ -254,7 +254,7 @@ main(int argc, char **argv)
 {
   QApplication app(argc, argv);
 
-  QUiLoader::QUiLoader qld;
+  QUiLoader qld;
   QStringList pluginPaths = qld.pluginPaths();
 
   /* Assumption: first path entry contains the location within the
