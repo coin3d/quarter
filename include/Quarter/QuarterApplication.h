@@ -23,7 +23,7 @@
  *
 \**************************************************************************/
 
-#include <QApplication>
+#include <QtGui/QApplication>
 #include <Quarter/Basic.h>
 
 namespace SIM { namespace Coin3D { namespace Quarter {

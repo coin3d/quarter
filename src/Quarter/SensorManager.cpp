@@ -22,7 +22,7 @@
 
 #include "SensorManager.h"
 
-#include <QTimer>
+#include <QtCore/QTimer>
 
 #include <Inventor/SoDB.h>
 #include <Inventor/SbTime.h>

@@ -30,11 +30,11 @@
 
 #include <Quarter/devices/MouseHandler.h>
 
-#include <QEvent>
-#include <QSize>
-#include <QMouseEvent>
-#include <QWheelEvent>
-#include <QResizeEvent>
+#include <QtCore/QEvent>
+#include <QtCore/QSize>
+#include <QtGui/QMouseEvent>
+#include <QtGui/QWheelEvent>
+#include <QtGui/QResizeEvent>
 
 #include <Inventor/SbVec2s.h>
 #include <Inventor/events/SoEvents.h>

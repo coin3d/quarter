@@ -23,7 +23,7 @@
  *
 \**************************************************************************/
 
-#include <QGLWidget>
+#include <QtOpenGL/QGLWidget>
 #include <Inventor/SbBasic.h>
 #include <Quarter/Basic.h>
 

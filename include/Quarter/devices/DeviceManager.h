@@ -23,7 +23,7 @@
  *
 \**************************************************************************/
 
-#include <QList>
+#include <QtCore/QList>
 #include <Quarter/Basic.h>
 
 class QEvent;

@@ -23,7 +23,7 @@
  *
 \**************************************************************************/
 
-#include <QObject>
+#include <QtCore/QObject>
 
 class QTimer;
 

@@ -23,10 +23,10 @@
 
 #include "ContextMenuHandlerP.h"
 
-#include <QMenu>
-#include <QMap>
-#include <QActionGroup>
-#include <QMouseEvent>
+#include <QtGui/QMenu>
+#include <QtCore/QMap>
+#include <QtGui/QActionGroup>
+#include <QtGui/QMouseEvent>
 
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/eventhandlers/EventManager.h>

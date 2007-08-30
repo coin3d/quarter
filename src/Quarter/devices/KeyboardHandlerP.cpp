@@ -21,7 +21,7 @@
 \**************************************************************************/
 
 #include "KeyboardHandlerP.h"
-#include <QMap>
+#include <QtCore/QMap>
 #include <Inventor/errors/SoDebugError.h>
 
 using namespace SIM::Coin3D::Quarter;

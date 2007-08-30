@@ -29,7 +29,7 @@
 
 #include <Quarter/eventhandlers/ContextMenuHandler.h>
 
-#include <QEvent>
+#include <QtCore/QEvent>
 #include <QContextMenuEvent>
 #include <Inventor/events/SoEvents.h>
 

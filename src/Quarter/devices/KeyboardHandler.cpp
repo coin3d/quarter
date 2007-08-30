@@ -31,8 +31,8 @@
 
 #include <Quarter/devices/KeyboardHandler.h>
 
-#include <QEvent>
-#include <QKeyEvent>
+#include <QtCore/QEvent>
+#include <QtGui/QKeyEvent>
 #include <Inventor/events/SoEvents.h>
 #include <Inventor/events/SoKeyboardEvent.h>
 
