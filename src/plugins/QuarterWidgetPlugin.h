@@ -23,7 +23,7 @@
  *
 \**************************************************************************/
 
-#include <QtDesigner/QDesignerCustomWidgetInterface>
+#include <QDesignerCustomWidgetInterface>
 
 namespace SIM { namespace Coin3D { namespace Quarter { namespace QtDesigner {
 
