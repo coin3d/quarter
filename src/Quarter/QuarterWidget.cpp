@@ -185,6 +185,15 @@ QuarterWidget::setSceneGraph(SoNode * node)
 }
 
 /*!
+  Returns pointer to root of scene graph
+*/
+SoNode * 
+QuarterWidget::getSceneGraph(void) const
+{
+  return PRIVATE(this)->sorendermanager->getSceneGraph();
+}
+
+/*!
   Returns a pointer to the device manager
  */
 DeviceManager * 
