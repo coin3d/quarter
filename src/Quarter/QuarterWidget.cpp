@@ -47,17 +47,12 @@
 #include <Inventor/navigation/SoNavigationSystem.h>
 
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/DropManager.h>
 #include <Quarter/devices/DeviceManager.h>
 #include <Quarter/devices/MouseHandler.h>
 #include <Quarter/devices/KeyboardHandler.h>
 #include <Quarter/eventhandlers/EventManager.h>
 #include <Quarter/eventhandlers/ContextMenuHandler.h>
 #include <Quarter/eventhandlers/DragDropHandler.h>
-#include <QDropEvent>
-#include <QDragMoveEvent>
-#include <QDragLeaveEvent>
-#include <QDragEnterEvent>
 
 #include "QuarterWidgetP.h"
 
@@ -306,14 +301,6 @@ QuarterWidget::event(QEvent * event)
     return true;
   }
   return inherited::event(event);
-}
-
-/*!
-  Adds a dropmanager to this QuarterWidget may handle more than one.
-*/
-void 
-QuarterWidget::addDropManager(DropManager * dropManager) {
-  this->installEventFilter(dropManager);
 }
 
 #undef PRIVATE

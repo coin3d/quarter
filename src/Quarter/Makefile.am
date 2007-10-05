@@ -18,7 +18,6 @@ endif
 DEFAULT_INCLUDES = $(includes)
 
 BuiltSources = \
-        moc_DropManager.cpp \
         moc_QuarterWidget.cpp \
         moc_SensorManager.cpp
 
@@ -27,7 +26,6 @@ PrivateHeaders = \
         QuarterWidgetP.h
 
 RegularSources = \
-        DropManager.cpp \
         Quarter.cpp \
         QuarterWidget.cpp \
         SensorManager.cpp \

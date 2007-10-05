@@ -26,7 +26,6 @@
 #include <QtOpenGL/QGLWidget>
 #include <Inventor/SbBasic.h>
 #include <Quarter/Basic.h>
-#include <Quarter/DropManager.h>
 
 class SoNode;
 class SoEvent;
@@ -38,8 +37,7 @@ class SoDirectionalLight;
 namespace SIM { namespace Coin3D { namespace Quarter {
 
 class DeviceManager;
-class DropManager;
- 
+
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   typedef QGLWidget inherited;
   Q_OBJECT
@@ -58,16 +56,10 @@ public:
   DeviceManager * getDeviceManager(void) const;
   SoEventManager * getSoEventManager(void) const;
   SoRenderManager * getSoRenderManager(void) const;
-
-  void addDropManager(DropManager * dm);
-
+                                                   
 public slots:
   virtual void viewAll(void);
 
-signals:
-  friend class DropManager;
-  void drop();
- 
 protected:
   virtual void resizeGL(int width, int height);
   virtual void initializeGL(void);
@@ -81,7 +73,6 @@ private:
   void constructor(const QGLWidget * sharewidget);
   friend class QuarterWidgetP;
   class QuarterWidgetP * pimpl;
-
 };
 
 }}} // namespace
