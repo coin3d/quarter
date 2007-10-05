@@ -1,5 +1,5 @@
-#ifndef QUARTER_QUARTERWIDGETP_H
-#define QUARTER_QUARTERWIDGETP_H
+#ifndef DROP_MANAGER_H
+#define DROP_MANAGER_H
 
 /**************************************************************************\
  *
@@ -23,47 +23,21 @@
  *
 \**************************************************************************/
 
-#include <Inventor/SbBasic.h>
-#include <vector>
-
-class DropManager;
-class SoNode;
-class SoCamera;
-class SoSceneManager;
-class SoRenderManager;
-class SoEventManager;
-class SoDirectionalLight;
-class QuarterWidgetP_cachecontext;
-class QGLWidget;
-
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class DeviceManager;
-class EventManager;
+  class QUARTER_DLL_API DropManager : public QObject
+     {
+       Q_OBJECT
+	 public:
+       virtual void accept(QDragEnterEvent * event);
+       virtual void drop(QDropEvent * event);
+       virtual void move(QDragMoveEvent * event);
+       virtual void stopMove(QDragLeaveEvent * event);
 
-class QuarterWidgetP {
-public:
+     protected:
+       bool eventFilter(QObject *obj, QEvent *event);
+     };
   
-  QuarterWidgetP(class QuarterWidget * master, const QGLWidget * sharewidget);
-  ~QuarterWidgetP();
-  
-  SoCamera * searchForCamera(SoNode * root);
-  uint32_t getCacheContextId(void) const;
+}}} //namespace
 
-  QuarterWidget * master;
-  SoSceneManager * scenemanager;
-  DeviceManager * devicemanager;
-  EventManager * eventmanager;
-  SoRenderManager * sorendermanager;
-  SoEventManager * soeventmanager;
-  SoDirectionalLight * headlight;
-  QuarterWidgetP_cachecontext * cachecontext;
-  std::vector<DropManager*> dropManagers;
-
-private:
-  QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);
-};
-  
-#endif // QUARTER_QUARTERWIDGETP_H
-
-}}} // namespace
+#endif //DROP_MANAGER_H
