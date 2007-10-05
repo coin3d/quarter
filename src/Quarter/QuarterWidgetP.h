@@ -24,9 +24,7 @@
 \**************************************************************************/
 
 #include <Inventor/SbBasic.h>
-#include <vector>
 
-class DropManager;
 class SoNode;
 class SoCamera;
 class SoSceneManager;
@@ -58,7 +56,6 @@ public:
   SoEventManager * soeventmanager;
   SoDirectionalLight * headlight;
   QuarterWidgetP_cachecontext * cachecontext;
-  std::vector<DropManager*> dropManagers;
 
 private:
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);
