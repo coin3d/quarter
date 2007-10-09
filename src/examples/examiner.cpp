@@ -21,10 +21,10 @@
 \**************************************************************************/
 
 /*! 
-  \page dynamicui Dynamic Loading
+  \page examiner Examiner type Viewer
   
-  This example demonstrate how to dynamically load a QuarterWidget
-  from a Qt Designer ui file.
+  This example demonstrate how to create a simple viewer that can load
+  Inventor files
 */
 
 #include <QUiLoader>
@@ -58,13 +58,31 @@ int main(int argc, char *argv[])
 
   // Make a dead simple scene graph by using the Coin library, only
   // containing a single yellow cone under the scenegraph root.
-  SoSeparator * root = new SoSeparator;
+  SoSeparator * root = NULL;
+  
+  if (argc < 2) {
+    root = new SoSeparator;
+    root->addChild(new SoCone);
+  } else {
+    // Open the argument file..
+    SoInput in;
+    SbBool ok = in.openFile(argv[1]);
+    if (!ok) {
+      qFatal("could not open file %s\n", argv[1]);
+      exit(1); 
+    }
+    
+    // ..and import it.
+    root = SoDB::readAll(&in);
+  }
+  
+  if (root == NULL) { 
+    qFatal("could not read file %s\n", argv[1]);
+    exit(1); 
+  }
+  
   root->ref();
   
-  SoBaseColor * col = new SoBaseColor;
-  col->rgb = SbColor(1, 1, 0);
-  root->addChild(col);
-
   root->addChild(new SoCone);
   viewer->setSceneGraph(root);
   

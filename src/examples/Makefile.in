@@ -220,13 +220,14 @@ DEFAULT_INCLUDES = $(includes)
 
 QT_UITOOLS_INCLUDE = -I$(QT_USE_INCDIR)/QtUiTools
 
-noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition
+noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition examiner
 
 minimal_SOURCES = minimal.cpp
 dynamicui_SOURCES = dynamicui.cpp qrc_dynamicui.cpp
 directui_SOURCES = directui.cpp
 inheritui_SOURCES = inheritui.cpp QuarterViewer.h QuarterViewer.cpp
 superimposition_SOURCES = superimposition.cpp
+examiner_SOURCES = examiner.cpp qrc_examiner.cpp
 
 CLEANFILES = \
         minimal.exe \
@@ -244,12 +245,16 @@ CLEANFILES = \
         superimposition.exe \
         superimposition.pdb \
         superimposition.exe.manifest \
+        examiner.exe \
+        examiner.pdb \
+        examiner.exe.manifest \
         qrc_dynamicui.cpp \
+        qrc_examiner.cpp \
         ui_QuarterViewer.h
 
 
 EXTRA_DIST = \
-        dynamicui.qrc \
+        quarterviewer.qrc \
         QuarterViewer.ui
 
 
@@ -291,6 +296,7 @@ dynamicui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 directui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 inheritui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 superimposition_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+examiner_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 
 minimal_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
 minimal_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
@@ -316,13 +322,18 @@ superimposition_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
 superimposition_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
 superimposition_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
 superimposition_LDFLAGS = $(EXAMPLES_LDFLAGS)
+
+examiner_CPPFLAGS = $(EXAMPLES_CPPFLAGS) $(QT_UITOOLS_INCLUDE)
+examiner_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
+examiner_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
+examiner_LDFLAGS = $(EXAMPLES_LDFLAGS)
 subdir = src/examples
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 noinst_PROGRAMS = minimal$(EXEEXT) dynamicui$(EXEEXT) directui$(EXEEXT) \
-	inheritui$(EXEEXT) superimposition$(EXEEXT)
+	inheritui$(EXEEXT) superimposition$(EXEEXT) examiner$(EXEEXT)
 PROGRAMS = $(noinst_PROGRAMS)
 
 am_directui_OBJECTS = directui-directui.$(OBJEXT)
@@ -334,6 +345,11 @@ am_dynamicui_OBJECTS = dynamicui-dynamicui.$(OBJEXT) \
 dynamicui_OBJECTS = $(am_dynamicui_OBJECTS)
 @BUILD_WITH_MSVC_TRUE@dynamicui_DEPENDENCIES =
 @BUILD_WITH_MSVC_FALSE@dynamicui_DEPENDENCIES =
+am_examiner_OBJECTS = examiner-examiner.$(OBJEXT) \
+	examiner-qrc_examiner.$(OBJEXT)
+examiner_OBJECTS = $(am_examiner_OBJECTS)
+@BUILD_WITH_MSVC_TRUE@examiner_DEPENDENCIES =
+@BUILD_WITH_MSVC_FALSE@examiner_DEPENDENCIES =
 am_inheritui_OBJECTS = inheritui-inheritui.$(OBJEXT) \
 	inheritui-QuarterViewer.$(OBJEXT)
 inheritui_OBJECTS = $(am_inheritui_OBJECTS)
@@ -352,6 +368,8 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/directui-directui.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/dynamicui-dynamicui.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/dynamicui-qrc_dynamicui.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/examiner-examiner.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/examiner-qrc_examiner.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/inheritui-QuarterViewer.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/inheritui-inheritui.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/minimal-minimal.Po \
@@ -372,10 +390,10 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 DIST_SOURCES = $(directui_SOURCES) $(dynamicui_SOURCES) \
-	$(inheritui_SOURCES) $(minimal_SOURCES) \
+	$(examiner_SOURCES) $(inheritui_SOURCES) $(minimal_SOURCES) \
 	$(superimposition_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(directui_SOURCES) $(dynamicui_SOURCES) $(inheritui_SOURCES) $(minimal_SOURCES) $(superimposition_SOURCES)
+SOURCES = $(directui_SOURCES) $(dynamicui_SOURCES) $(examiner_SOURCES) $(inheritui_SOURCES) $(minimal_SOURCES) $(superimposition_SOURCES)
 
 all: all-am
 
@@ -399,6 +417,9 @@ directui$(EXEEXT): $(directui_OBJECTS) $(directui_DEPENDENCIES)
 dynamicui$(EXEEXT): $(dynamicui_OBJECTS) $(dynamicui_DEPENDENCIES) 
 	@rm -f dynamicui$(EXEEXT)
 	$(CXXLINK) $(dynamicui_LDFLAGS) $(dynamicui_OBJECTS) $(dynamicui_LDADD) $(LIBS)
+examiner$(EXEEXT): $(examiner_OBJECTS) $(examiner_DEPENDENCIES) 
+	@rm -f examiner$(EXEEXT)
+	$(CXXLINK) $(examiner_LDFLAGS) $(examiner_OBJECTS) $(examiner_LDADD) $(LIBS)
 inheritui$(EXEEXT): $(inheritui_OBJECTS) $(inheritui_DEPENDENCIES) 
 	@rm -f inheritui$(EXEEXT)
 	$(CXXLINK) $(inheritui_LDFLAGS) $(inheritui_OBJECTS) $(inheritui_LDADD) $(LIBS)
@@ -418,6 +439,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/directui-directui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dynamicui-dynamicui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dynamicui-qrc_dynamicui.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/examiner-examiner.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/examiner-qrc_examiner.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inheritui-QuarterViewer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/inheritui-inheritui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/minimal-minimal.Po@am__quote@
@@ -557,6 +580,72 @@ dynamicui-qrc_dynamicui.lo: qrc_dynamicui.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/dynamicui-qrc_dynamicui.Plo' tmpdepfile='$(DEPDIR)/dynamicui-qrc_dynamicui.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(dynamicui_CPPFLAGS) $(CPPFLAGS) $(dynamicui_CXXFLAGS) $(CXXFLAGS) -c -o dynamicui-qrc_dynamicui.lo `test -f 'qrc_dynamicui.cpp' || echo '$(srcdir)/'`qrc_dynamicui.cpp
+
+examiner-examiner.o: examiner.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(examiner_CPPFLAGS) $(CPPFLAGS) $(examiner_CXXFLAGS) $(CXXFLAGS) -MT examiner-examiner.o -MD -MP -MF "$(DEPDIR)/examiner-examiner.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o examiner-examiner.o `test -f 'examiner.cpp' || echo '$(srcdir)/'`examiner.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/examiner-examiner.Tpo" "$(DEPDIR)/examiner-examiner.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/examiner-examiner.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='examiner.cpp' object='examiner-examiner.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/examiner-examiner.Po' tmpdepfile='$(DEPDIR)/examiner-examiner.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(examiner_CPPFLAGS) $(CPPFLAGS) $(examiner_CXXFLAGS) $(CXXFLAGS) -c -o examiner-examiner.o `test -f 'examiner.cpp' || echo '$(srcdir)/'`examiner.cpp
+
+examiner-examiner.obj: examiner.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(examiner_CPPFLAGS) $(CPPFLAGS) $(examiner_CXXFLAGS) $(CXXFLAGS) -MT examiner-examiner.obj -MD -MP -MF "$(DEPDIR)/examiner-examiner.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o examiner-examiner.obj `if test -f 'examiner.cpp'; then $(CYGPATH_W) 'examiner.cpp'; else $(CYGPATH_W) '$(srcdir)/examiner.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/examiner-examiner.Tpo" "$(DEPDIR)/examiner-examiner.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/examiner-examiner.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='examiner.cpp' object='examiner-examiner.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/examiner-examiner.Po' tmpdepfile='$(DEPDIR)/examiner-examiner.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(examiner_CPPFLAGS) $(CPPFLAGS) $(examiner_CXXFLAGS) $(CXXFLAGS) -c -o examiner-examiner.obj `if test -f 'examiner.cpp'; then $(CYGPATH_W) 'examiner.cpp'; else $(CYGPATH_W) '$(srcdir)/examiner.cpp'; fi`
+
+examiner-examiner.lo: examiner.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(examiner_CPPFLAGS) $(CPPFLAGS) $(examiner_CXXFLAGS) $(CXXFLAGS) -MT examiner-examiner.lo -MD -MP -MF "$(DEPDIR)/examiner-examiner.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o examiner-examiner.lo `test -f 'examiner.cpp' || echo '$(srcdir)/'`examiner.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/examiner-examiner.Tpo" "$(DEPDIR)/examiner-examiner.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/examiner-examiner.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='examiner.cpp' object='examiner-examiner.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/examiner-examiner.Plo' tmpdepfile='$(DEPDIR)/examiner-examiner.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(examiner_CPPFLAGS) $(CPPFLAGS) $(examiner_CXXFLAGS) $(CXXFLAGS) -c -o examiner-examiner.lo `test -f 'examiner.cpp' || echo '$(srcdir)/'`examiner.cpp
+
+examiner-qrc_examiner.o: qrc_examiner.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(examiner_CPPFLAGS) $(CPPFLAGS) $(examiner_CXXFLAGS) $(CXXFLAGS) -MT examiner-qrc_examiner.o -MD -MP -MF "$(DEPDIR)/examiner-qrc_examiner.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o examiner-qrc_examiner.o `test -f 'qrc_examiner.cpp' || echo '$(srcdir)/'`qrc_examiner.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/examiner-qrc_examiner.Tpo" "$(DEPDIR)/examiner-qrc_examiner.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/examiner-qrc_examiner.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_examiner.cpp' object='examiner-qrc_examiner.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/examiner-qrc_examiner.Po' tmpdepfile='$(DEPDIR)/examiner-qrc_examiner.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(examiner_CPPFLAGS) $(CPPFLAGS) $(examiner_CXXFLAGS) $(CXXFLAGS) -c -o examiner-qrc_examiner.o `test -f 'qrc_examiner.cpp' || echo '$(srcdir)/'`qrc_examiner.cpp
+
+examiner-qrc_examiner.obj: qrc_examiner.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(examiner_CPPFLAGS) $(CPPFLAGS) $(examiner_CXXFLAGS) $(CXXFLAGS) -MT examiner-qrc_examiner.obj -MD -MP -MF "$(DEPDIR)/examiner-qrc_examiner.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o examiner-qrc_examiner.obj `if test -f 'qrc_examiner.cpp'; then $(CYGPATH_W) 'qrc_examiner.cpp'; else $(CYGPATH_W) '$(srcdir)/qrc_examiner.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/examiner-qrc_examiner.Tpo" "$(DEPDIR)/examiner-qrc_examiner.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/examiner-qrc_examiner.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_examiner.cpp' object='examiner-qrc_examiner.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/examiner-qrc_examiner.Po' tmpdepfile='$(DEPDIR)/examiner-qrc_examiner.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(examiner_CPPFLAGS) $(CPPFLAGS) $(examiner_CXXFLAGS) $(CXXFLAGS) -c -o examiner-qrc_examiner.obj `if test -f 'qrc_examiner.cpp'; then $(CYGPATH_W) 'qrc_examiner.cpp'; else $(CYGPATH_W) '$(srcdir)/qrc_examiner.cpp'; fi`
+
+examiner-qrc_examiner.lo: qrc_examiner.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(examiner_CPPFLAGS) $(CPPFLAGS) $(examiner_CXXFLAGS) $(CXXFLAGS) -MT examiner-qrc_examiner.lo -MD -MP -MF "$(DEPDIR)/examiner-qrc_examiner.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o examiner-qrc_examiner.lo `test -f 'qrc_examiner.cpp' || echo '$(srcdir)/'`qrc_examiner.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/examiner-qrc_examiner.Tpo" "$(DEPDIR)/examiner-qrc_examiner.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/examiner-qrc_examiner.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_examiner.cpp' object='examiner-qrc_examiner.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/examiner-qrc_examiner.Plo' tmpdepfile='$(DEPDIR)/examiner-qrc_examiner.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(examiner_CPPFLAGS) $(CPPFLAGS) $(examiner_CXXFLAGS) $(CXXFLAGS) -c -o examiner-qrc_examiner.lo `test -f 'qrc_examiner.cpp' || echo '$(srcdir)/'`qrc_examiner.cpp
 
 inheritui-inheritui.o: inheritui.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(inheritui_CPPFLAGS) $(CPPFLAGS) $(inheritui_CXXFLAGS) $(CXXFLAGS) -MT inheritui-inheritui.o -MD -MP -MF "$(DEPDIR)/inheritui-inheritui.Tpo" \
@@ -875,8 +964,11 @@ uninstall-am: uninstall-info-am
 	uninstall-am uninstall-info-am
 
 
-qrc_dynamicui.cpp: $(srcdir)/dynamicui.qrc $(srcdir)/QuarterViewer.ui
+qrc_dynamicui.cpp: $(srcdir)/quarterviewer.qrc $(srcdir)/QuarterViewer.ui
 	$(RCC) -name dynamicui $< -o $@
+
+qrc_examiner.cpp: $(srcdir)/quarterviewer.qrc $(srcdir)/QuarterViewer.ui
+	$(RCC) -name examiner $< -o $@
 
 directui.cpp: ui_QuarterViewer.h
 

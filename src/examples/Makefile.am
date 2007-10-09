@@ -22,13 +22,14 @@ DEFAULT_INCLUDES = $(includes)
 
 QT_UITOOLS_INCLUDE = -I$(QT_USE_INCDIR)/QtUiTools
 
-noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition
+noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition examiner
 
 minimal_SOURCES = minimal.cpp
 dynamicui_SOURCES = dynamicui.cpp qrc_dynamicui.cpp
 directui_SOURCES = directui.cpp
 inheritui_SOURCES = inheritui.cpp QuarterViewer.h QuarterViewer.cpp
 superimposition_SOURCES = superimposition.cpp
+examiner_SOURCES = examiner.cpp qrc_examiner.cpp
 
 CLEANFILES = \
         minimal.exe \
@@ -46,11 +47,15 @@ CLEANFILES = \
         superimposition.exe \
         superimposition.pdb \
         superimposition.exe.manifest \
+        examiner.exe \
+        examiner.pdb \
+        examiner.exe.manifest \
         qrc_dynamicui.cpp \
+        qrc_examiner.cpp \
         ui_QuarterViewer.h
 
 EXTRA_DIST = \
-        dynamicui.qrc \
+        quarterviewer.qrc \
         QuarterViewer.ui
 
 EXAMPLES_LDFLAGS = \
@@ -90,6 +95,7 @@ dynamicui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 directui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 inheritui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 superimposition_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+examiner_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 
 minimal_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
 minimal_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
@@ -116,8 +122,16 @@ superimposition_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
 superimposition_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
 superimposition_LDFLAGS = $(EXAMPLES_LDFLAGS)
 
-qrc_dynamicui.cpp: $(srcdir)/dynamicui.qrc $(srcdir)/QuarterViewer.ui
+examiner_CPPFLAGS = $(EXAMPLES_CPPFLAGS) $(QT_UITOOLS_INCLUDE)
+examiner_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
+examiner_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
+examiner_LDFLAGS = $(EXAMPLES_LDFLAGS)
+
+qrc_dynamicui.cpp: $(srcdir)/quarterviewer.qrc $(srcdir)/QuarterViewer.ui
 	$(RCC) -name dynamicui $< -o $@
+
+qrc_examiner.cpp: $(srcdir)/quarterviewer.qrc $(srcdir)/QuarterViewer.ui
+	$(RCC) -name examiner $< -o $@
 
 directui.cpp: ui_QuarterViewer.h
 
