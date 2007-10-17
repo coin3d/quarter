@@ -74,7 +74,7 @@ EventManager::handleEvent(QEvent * qevent)
 /*!
   Returns the QuarterWidget this devicemanager belongs to
  */
-const QuarterWidget * 
+QuarterWidget * 
 EventManager::getWidget(void) const
 {
   return this->quarterwidget;

@@ -25,6 +25,7 @@
 
 #include <QtOpenGL/QGLWidget>
 #include <Inventor/SbBasic.h>
+#include <Inventor/actions/SoGLRenderAction.h>
 #include <Quarter/Basic.h>
 
 class SoNode;
@@ -50,6 +51,8 @@ public:
   void enableHeadlight(const SbBool onoff);
   SoDirectionalLight * getHeadlight(void);
   uint32_t getCacheContextId(void) const;
+
+  void setTransparencyType(SoGLRenderAction::TransparencyType type);
   
   virtual void setSceneGraph(SoNode * root);
   virtual SoNode * getSceneGraph(void) const;

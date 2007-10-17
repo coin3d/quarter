@@ -30,7 +30,7 @@
 
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/eventhandlers/EventManager.h>
-#include <Quarter/eventhandlers/ContextMenuHandler.h> 
+#include <Quarter/eventhandlers/ContextMenuHandler.h>
 
 using namespace SIM::Coin3D::Quarter;
 
@@ -51,6 +51,7 @@ ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
 {
   QList<RenderModePair *> rendermodes;
   QList<StereoModePair *> stereomodes;
+  QList<TransparencyTypePair *> transparencytypes;
   
   rendermodes.append(new RenderModePair(SoRenderManager::AS_IS, "as is"));
   rendermodes.append(new RenderModePair(SoRenderManager::WIREFRAME, "wireframe"));
@@ -65,14 +66,29 @@ ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
   stereomodes.append(new StereoModePair(SoRenderManager::INTERLEAVED_ROWS, "interleaved rows"));
   stereomodes.append(new StereoModePair(SoRenderManager::INTERLEAVED_COLUMNS, "interleaved columns"));
 
+  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::NONE, "none"));
+  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SCREEN_DOOR, "screen door"));
+  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::ADD, "add"));
+  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::DELAYED_ADD, "delayed add"));
+  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_ADD, "sorted object add"));
+  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::BLEND, "blend"));
+  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::DELAYED_BLEND, "delayed blend"));
+  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_BLEND, "sorted object blend"));
+  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_ADD, "sorted object sorted triangle add"));
+  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_BLEND, "sorted object sorted triangle blend"));
+  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_LAYERS_BLEND, "sorted layers blend"));
+
   QMenu * contextmenu = new QMenu;
   QMenu * rendermenu = new QMenu("Render Mode");
   QMenu * stereomenu = new QMenu("Stereo Mode");
+  QMenu * transparencymenu = new QMenu("Transparency Type");
 
   QList<QAction *> rendermodeactions;
   QList<QAction *> stereomodeactions;
+  QList<QAction *> transparencytypeactions;
   QActionGroup * stereomodegroup = new QActionGroup(this);
   QActionGroup * rendermodegroup = new QActionGroup(this);
+  QActionGroup * transparencytypegroup = new QActionGroup(this);
 
   const QuarterWidget * quarterwidget = PUBLIC(this)->manager->getWidget();
   SoRenderManager * rendermanager = quarterwidget->getSoRenderManager();
@@ -86,7 +102,7 @@ ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
     rendermodegroup->addAction(action);
     rendermenu->addAction(action);
   }
-
+  
   foreach(StereoModePair * stereomode, stereomodes) {
     QAction * action = new QAction(stereomode->second, this);
     action->setCheckable(true);
@@ -97,23 +113,39 @@ ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
     stereomenu->addAction(action);
   }
 
+  foreach(TransparencyTypePair * transparencytype, transparencytypes) {
+    QAction * action = new QAction(transparencytype->second, this);
+    action->setCheckable(true);
+    action->setChecked(rendermanager->getGLRenderAction()->getTransparencyType() == transparencytype->first);
+    action->setData(transparencytype->first);
+    transparencytypeactions.append(action);
+    transparencytypegroup->addAction(action);
+    transparencymenu->addAction(action);
+  }
+
   connect(rendermodegroup, SIGNAL(triggered(QAction *)), 
           this, SLOT(changeRenderMode(QAction *)));
   
   connect(stereomodegroup, SIGNAL(triggered(QAction *)), 
           this, SLOT(changeStereoMode(QAction *)));
 
+  connect(transparencytypegroup, SIGNAL(triggered(QAction *)),
+          this, SLOT(changeTransparencyType(QAction *)));
+
   contextmenu->addMenu(rendermenu);
   contextmenu->addMenu(stereomenu);
+  contextmenu->addMenu(transparencymenu);
   
   contextmenu->exec(event->globalPos());
 
   // clean up
   foreach(RenderModePair * rendermode, rendermodes) delete rendermode;
   foreach(StereoModePair * stereomode, stereomodes) delete stereomode;
+  foreach(TransparencyTypePair * transparencytype, transparencytypes) delete transparencytype;
   
   delete rendermenu;
   delete stereomenu;
+  delete transparencymenu;
   delete contextmenu;
 
   return true;
@@ -137,6 +169,14 @@ ContextMenuHandlerP::changeStereoMode(QAction * action)
   
   QVariant stereomode = action->data();
   rendermanager->setStereoMode((SoRenderManager::StereoMode)stereomode.toInt());
+}
+
+void 
+ContextMenuHandlerP::changeTransparencyType(QAction * action)
+{
+  QuarterWidget * quarterwidget = PUBLIC(this)->manager->getWidget();
+  QVariant transparencytype = action->data();
+  quarterwidget->setTransparencyType((SoGLRenderAction::TransparencyType)transparencytype.toInt());
 }
 
 #undef PUBLIC

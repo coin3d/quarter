@@ -26,6 +26,7 @@
 #include <QtCore/QPair>
 #include <QtCore/QObject>
 #include <Inventor/SoRenderManager.h>
+#include <Inventor/actions/SoGLRenderAction.h>
 
 class QAction;
 class QMouseEvent;
@@ -45,6 +46,7 @@ public:
 public slots:
   void changeRenderMode(QAction * action);
   void changeStereoMode(QAction * action);
+  void changeTransparencyType(QAction * action);
 
 private:
   ContextMenuHandler * publ;
@@ -52,6 +54,7 @@ private:
 
 typedef QPair<SoRenderManager::RenderMode, QString> RenderModePair;
 typedef QPair<SoRenderManager::StereoMode, QString> StereoModePair;
+typedef QPair<SoGLRenderAction::TransparencyType, QString> TransparencyTypePair;
 
 }}} // namespace
 

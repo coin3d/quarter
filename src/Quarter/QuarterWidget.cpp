@@ -38,7 +38,6 @@
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/nodes/SoDirectionalLight.h>
 #include <Inventor/nodes/SoPerspectiveCamera.h>
-#include <Inventor/actions/SoGLRenderAction.h>
 #include <Inventor/SbColor.h>
 
 #include <Inventor/SoSceneManager.h>
@@ -147,6 +146,16 @@ QuarterWidget::getCacheContextId(void) const
   return PRIVATE(this)->getCacheContextId();
 }
 
+/*!
+  This method sets the transparency type to be used for the scene.
+*/
+void 
+QuarterWidget::setTransparencyType(SoGLRenderAction::TransparencyType type)
+{
+  assert(PRIVATE(this)->sorendermanager);
+  PRIVATE(this)->sorendermanager->getGLRenderAction()->setTransparencyType(type);
+  PRIVATE(this)->sorendermanager->scheduleRedraw();
+}
 
 /*!
   Sets the Inventor scenegraph to be rendered
