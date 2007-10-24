@@ -151,6 +151,7 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 SUFFIX = @SUFFIX@
 UIC = @UIC@
+UNIX2WINPATH = @UNIX2WINPATH@
 VERSION = @VERSION@
 X_CFLAGS = @X_CFLAGS@
 X_EXTRA_LIBS = @X_EXTRA_LIBS@
@@ -1006,7 +1007,7 @@ uninstall-am: uninstall-info-am
 
 
 moc_ContextMenuHandlerP.cpp: $(srcdir)/ContextMenuHandlerP.h
-	$(MOC) -o $@ $<
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/ContextMenuHandlerP.h`
 
 eventhandlers.lst: $(eventhandlers_lst_OBJECTS)
 	@echo "Linking $@..."; \

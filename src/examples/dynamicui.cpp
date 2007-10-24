@@ -28,7 +28,7 @@
 */
 
 #include <QUiLoader>
-#include <QFile>
+#include <QtCore/QFile>
 
 #include <Inventor/nodes/SoCone.h>
 #include <Inventor/nodes/SoBaseColor.h>

@@ -3,9 +3,6 @@ if BUILD_WITH_MSVC
 includes = \
         -I$(QTDIR)/include \
         -I$(QTDIR)/include/QtOpenGL \
-        -I$(QTDIR)/include/QtGui \
-        -I$(QTDIR)/include/QtCore \
-        -I$(QTDIR)/include/QtDesigner \
         -I$(top_srcdir)/include \
         -I$(top_srcdir)/src/Quarter
 else
@@ -18,9 +15,10 @@ DEFAULT_INCLUDES = $(includes)
 
 if MAC_FRAMEWORK
 QT_DESIGNER_INCLUDE = -I$(QT_USE_INCDIR)/QtDesigner.framework/Headers
-else
-QT_DESIGNER_INCLUDE = -I$(QT_USE_INCDIR)/QtDesigner
+else 
+QT_DESIGNER_INCLUDE = -I`$(UNIX2WINPATH) $(QT_USE_INCDIR)`/QtDesigner
 endif
+
 
 PrivateHeaders = QuarterWidgetPlugin.h
 RegularSources = QuarterWidgetPlugin.cpp
@@ -43,10 +41,10 @@ libQuarterWidgetPlugin_la_LIBADD = \
         $(QT_USE_LDFLAGS) $(QUARTER_USE_LDFLAGS) $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS)
 
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD = \
-        $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner4 -lQtOpenGL4 -lQtXml4
+        $(QT_USE_LDFLAGS) $(QUARTER_USE_LDFLAGS) $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS)
 
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS = \
-        $(PLUGIN_BUILD_CPPFLAGS) $(QUARTER_USE_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
+        $(PLUGIN_BUILD_CPPFLAGS) $(QUARTER_USE_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS) $(QT_DESIGNER_INCLUDE)
 
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS = \
         $(PLUGIN_BUILD_CXXFLAGS) $(COIN_USE_CXXFLAGS) $(QT_USE_CXXFLAGS)
@@ -63,14 +61,8 @@ libQuarterWidgetPlugin_la_lib_CXXFLAGS = \
 libQuarterWidgetPlugin_la_lib_CFLAGS = \
         $(PLUGIN_BUILD_CFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
 
-if BUILD_WITH_MSVC
-plugindir = $(QTDIR)/plugins/designer
-else 
-plugindir = $(QT_DESIGNER_PLUGIN_PATH)
-endif
-
-libdir = $(plugindir)
-bindir = $(plugindir)
+libdir = $(QT_DESIGNER_PLUGIN_PATH)
+bindir = $(QT_DESIGNER_PLUGIN_PATH)
 
 CLEANFILES = \
         $(BuiltSources) \
@@ -102,7 +94,7 @@ QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib: Makefile \
           $(QT_USE_LDFLAGS)
 
 moc_QuarterWidgetPlugin.cpp: $(srcdir)/QuarterWidgetPlugin.h
-	$(MOC) -o $@ $(srcdir)/QuarterWidgetPlugin.h $(DEFAULT_INCLUDES) $(QT_DESIGNER_INCLUDE)
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/QuarterWidgetPlugin.h` $(DEFAULT_INCLUDES) $(QT_DESIGNER_INCLUDE)
 
 
 if BUILD_WITH_MSVC

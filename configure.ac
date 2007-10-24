@@ -258,6 +258,8 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed
   if test x"$RCC" = x"false"; then
     SIM_AC_ERROR([no-rcc])
   fi
+
+  QT_USE_INCDIR="$sim_ac_qtdir/include"
 fi
 
 # we use some extra libs in Quarter
@@ -428,6 +430,17 @@ case $host in
 esac
 
 AC_SUBST(path_tag)
+
+# Qt's moc wants Windows-style paths, so if the inputfile is an
+# absolute Cygwin-style path it needs conversion.
+AC_PATH_PROG(UNIX2WINPATH, cygpath, false)
+if test x"$UNIX2WINPATH" = x"false"; then
+  UNIX2WINPATH="echo"
+else
+  UNIX2WINPATH="CYGWIN= $UNIX2WINPATH -w"
+fi
+AC_SUBST([UNIX2WINPATH])
+
 
 # *******************************************************************
 # get the plugin path for Qt Designer

@@ -76,10 +76,6 @@ EXAMPLES_CPPFLAGS = \
 
 if BUILD_WITH_MSVC
 EXAMPLES_LIBS = \
-        -lQtUiTools \
-        -lQtDesigner4 \
-        -lQtXml4 \
-        -lQtOpenGL4 \
         $(QT_USE_LIBS) \
         $(QUARTER_USE_LIBS) \
         $(COIN_USE_LIBS) 
@@ -128,12 +124,12 @@ examiner_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
 examiner_LDFLAGS = $(EXAMPLES_LDFLAGS)
 
 qrc_dynamicui.cpp: $(srcdir)/quarterviewer.qrc $(srcdir)/QuarterViewer.ui
-	$(RCC) -name dynamicui $< -o $@
+	$(RCC) -name dynamicui -o $@ `$(UNIX2WINPATH) $(srcdir)/quarterviewer.qrc`
 
 qrc_examiner.cpp: $(srcdir)/quarterviewer.qrc $(srcdir)/QuarterViewer.ui
-	$(RCC) -name examiner $< -o $@
+	$(RCC) -name examiner -o $@ `$(UNIX2WINPATH) $(srcdir)/quarterviewer.qrc`
 
 directui.cpp: ui_QuarterViewer.h
 
 ui_QuarterViewer.h: $(srcdir)/QuarterViewer.ui
-	$(UIC) $< -o $@
+	$(UIC) -o $@ `$(UNIX2WINPATH) $(srcdir)/QuarterViewer.ui`

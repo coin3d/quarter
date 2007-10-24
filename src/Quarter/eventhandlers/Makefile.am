@@ -55,7 +55,7 @@ libeventhandlers_la_CFLAGS = \
 CLEANFILES = .\#* *.bak *~ *.lst $(BuiltSources)
 
 moc_ContextMenuHandlerP.cpp: $(srcdir)/ContextMenuHandlerP.h
-	$(MOC) -o $@ $<
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/ContextMenuHandlerP.h`
 
 
 if BUILD_WITH_MSVC
