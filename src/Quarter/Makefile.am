@@ -67,11 +67,16 @@ else
 lib_LTLIBRARIES = libQuarter.la
 endif 
 
+if MAC_FRAMEWORK
+# hack to change libdir value when installing Mac OS X compiler framework
+lib@nop@dir = $(MAC_FRAMEWORK_PREFIX)/$(MAC_FRAMEWORK_NAME).framework/Versions/$(MAC_FRAMEWORK_VERSION)/Libraries
+endif
+
 libQuarter_la_LIBADD = \
-        devices/libdevices.la eventhandlers/libeventhandlers.la $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL
+        devices/libdevices.la eventhandlers/libeventhandlers.la $(COIN_USE_LIBS) $(QT_USE_LIBS)
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD = \
-        devices/devices.lst eventhandlers/eventhandlers.lst $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtOpenGL4
+        devices/devices.lst eventhandlers/eventhandlers.lst $(COIN_USE_LIBS) $(QT_USE_LIBS)
 
 
 CLEANFILES = \
@@ -126,6 +131,18 @@ else
 install-exec-local:
 endif
 
+if MAC_FRAMEWORK
+install-data-local:
+	@$(NORMAL_INSTALL)
+	@echo "Setting up Mac OS X framework"
+	@$(mkinstalldirs) $(DESTDIR)$(MAC_FRAMEWORK_PREFIX)/$(MAC_FRAMEWORK_NAME).framework/Versions/$(MAC_FRAMEWORK_VERSION)
+	@ln -sf $(MAC_FRAMEWORK_VERSION) $(DESTDIR)$(MAC_FRAMEWORK_PREFIX)/$(MAC_FRAMEWORK_NAME).framework/Versions/Current
+	@ln -sf Versions/Current/Headers $(DESTDIR)$(MAC_FRAMEWORK_PREFIX)/$(MAC_FRAMEWORK_NAME).framework/Headers
+	@ln -sf Versions/Current/Libraries $(DESTDIR)$(MAC_FRAMEWORK_PREFIX)/$(MAC_FRAMEWORK_NAME).framework/Libraries
+	@ln -sf Versions/Current/Resources $(DESTDIR)$(MAC_FRAMEWORK_PREFIX)/$(MAC_FRAMEWORK_NAME).framework/Resources
+	cd $(DESTDIR)$(MAC_FRAMEWORK_PREFIX)/$(MAC_FRAMEWORK_NAME).framework/Versions/Current && ln -sf Libraries/libQuarter.dylib $(MAC_FRAMEWORK_NAME) && cd -; \
+	cd $(DESTDIR)$(MAC_FRAMEWORK_PREFIX)/$(MAC_FRAMEWORK_NAME).framework && ln -sf Versions/Current/$(MAC_FRAMEWORK_NAME) $(MAC_FRAMEWORK_NAME) && install_name_tool -id $(MAC_FRAMEWORK_NAME).framework/Versions/$(MAC_FRAMEWORK_VERSION)/$(MAC_FRAMEWORK_NAME) $(MAC_FRAMEWORK_NAME) && cd -;
+else
 install-data-local:
 	@basename="Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@"; \
 	for ext in lib; do \
@@ -136,6 +153,7 @@ install-data-local:
 	    $(INSTALL_PROGRAM) "$$file" "$(DESTDIR)$(libdir)/$$file" || exit 1; \
 	  fi \
 	done
+endif
 
 uninstall-local:
 	@basename="Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@"; \

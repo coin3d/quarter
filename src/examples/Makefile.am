@@ -20,7 +20,11 @@ endif
 
 DEFAULT_INCLUDES = $(includes)
 
+if MAC_FRAMEWORK
+QT_UITOOLS_INCLUDE = -I/usr/include/QtUiTools
+else
 QT_UITOOLS_INCLUDE = -I$(QT_USE_INCDIR)/QtUiTools
+endif
 
 noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition examiner
 
@@ -81,10 +85,6 @@ EXAMPLES_LIBS = \
         $(COIN_USE_LIBS) 
 else
 EXAMPLES_LIBS = \
-        -lQtUiTools \
-        -lQtDesigner \
-        -lQtXml \
-        -lQtOpenGL \
         $(QT_USE_LIBS) \
         $(QUARTER_USE_LIBS) \
         $(COIN_USE_LIBS) 

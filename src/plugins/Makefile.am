@@ -16,7 +16,11 @@ endif
 
 DEFAULT_INCLUDES = $(includes)
 
+if MAC_FRAMEWORK
+QT_DESIGNER_INCLUDE = -I$(QT_USE_INCDIR)/QtDesigner.framework/Headers
+else
 QT_DESIGNER_INCLUDE = -I$(QT_USE_INCDIR)/QtDesigner
+endif
 
 PrivateHeaders = QuarterWidgetPlugin.h
 RegularSources = QuarterWidgetPlugin.cpp
@@ -36,10 +40,10 @@ lib_LTLIBRARIES = libQuarterWidgetPlugin.la
 endif
 
 libQuarterWidgetPlugin_la_LIBADD = \
-        $(QT_USE_LDFLAGS) $(QUARTER_USE_LDFLAGS) $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner -lQtOpenGL
+        $(QT_USE_LDFLAGS) $(QUARTER_USE_LDFLAGS) $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS)
 
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD = \
-        $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner4 -lQtOpenGL4
+        $(QUARTER_USE_LIBS) $(COIN_USE_LIBS) $(QT_USE_LIBS) -lQtUiTools -lQtDesigner4 -lQtOpenGL4 -lQtXml4
 
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS = \
         $(PLUGIN_BUILD_CPPFLAGS) $(QUARTER_USE_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
@@ -61,7 +65,7 @@ libQuarterWidgetPlugin_la_lib_CFLAGS = \
 
 if BUILD_WITH_MSVC
 plugindir = $(QTDIR)/plugins/designer
-else
+else 
 plugindir = $(QT_DESIGNER_PLUGIN_PATH)
 endif
 

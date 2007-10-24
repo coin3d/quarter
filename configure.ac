@@ -7,6 +7,11 @@ m4_define([QUARTER_ABI_CURRENT], [1])
 m4_define([QUARTER_ABI_REVISION], [QUARTER_MICRO])
 m4_define([QUARTER_ABI_AGE], [QUARTER_MINOR])
 
+m4_define([MAC_FRAMEWORK_NAME_DEFAULT], [Quarter])
+m4_define([MAC_FRAMEWORK_PREFIX_DEFAULT], [/Library/Frameworks])
+m4_define([MAC_FRAMEWORK_VERSION_DEFAULT], [A])
+m4_define([MAC_DESIGNERPLUGINS_PREFIX_DEFAULT], [/Developer/Applications/Qt/plugins/designer])
+
 AC_INIT([Quarter], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA],
   [coin-bugs@coin3d.org])
 
@@ -59,17 +64,60 @@ AC_LANG(C++)
 
 test "x$prefix" = xNONE && prefix=$ac_default_prefix
 
+# **************************************************************************
+# decide if we want to build Mac OS X framework
+
+AC_ARG_WITH([framework],
+  [  --with-framework  Do Mac OS X-like framework installation
+  --without-framework  Do regular installation on Mac OS X],
+  [sim_ac_framework_name="MAC_FRAMEWORK_NAME_DEFAULT"
+  case $withval in
+  yes ) sim_ac_framework=true ;;
+  no ) sim_ac_framework=false ;;
+  * ) sim_ac_framework=true; sim_ac_framework_name="$withval" ;;
+  esac],
+  [sim_ac_framework_name="MAC_FRAMEWORK_NAME_DEFAULT"
+  case $host_os in
+  darwin* ) sim_ac_framework=true ;;
+  * ) sim_ac_framework=false ;;
+  esac])
+
+# don't allow name to be overrided - just toggled on/off
+sim_ac_framework_name="MAC_FRAMEWORK_NAME_DEFAULT"
+
+AC_ARG_WITH([framework-prefix],
+  [  --with-framework-prefix=<path>  (default: "MAC_FRAMEWORK_PREFIX_DEFAULT")],
+  [sim_ac_framework_prefix="$withval"],
+  [sim_ac_framework_prefix="MAC_FRAMEWORK_PREFIX_DEFAULT"])
+
+sim_ac_framework_version="MAC_FRAMEWORK_VERSION_DEFAULT"
+
+
+# **************************************************************************
+# decide if we want to use pkg-config
+
 sim_ac_enable_pkgconfig=true
 sim_ac_pkgconfig_check_failed=true
 
 AC_ARG_ENABLE(
   [pkgconfig],
-  AC_HELP_STRING([--enable-pkgconfig], [enable pkgconfig usage for Coin/Qt4 detection [[default=yes]]]), [
+  AC_HELP_STRING([--enable-pkgconfig], 
+  [enable pkgconfig usage for Coin/Qt4 detection [[default=yes]]]), 
+  [
   case $enableval in
     no) sim_ac_enable_pkgconfig=false ;;
     *) ;;
   esac])
 
+# *******************************************************************
+
+if $sim_ac_framework; then
+   # use the normal Coin m4 macro
+   sim_ac_enable_pkgconfig=false
+fi
+
+# *******************************************************************
+# try to use pkg-config
 if $sim_ac_enable_pkgconfig; then
   PKG_CONFIG_PATH="${prefix}/lib/pkgconfig/:$PKG_CONFIG_PATH"
   export PKG_CONFIG_PATH
@@ -88,20 +136,7 @@ if $sim_ac_enable_pkgconfig; then
     # try standard qt.m4 approach in case no pkg-config was found
     sim_ac_pkgconfig_check_failed=true
   ])
-fi
 
-if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed; then
-  SIM_AC_HAVE_COIN_IFELSE([
-    COIN_USE_CPPFLAGS=$sim_ac_coin_cppflags
-    COIN_USE_CXXFLAGS=$sim_ac_coin_cxxflags
-    COIN_USE_LDFLAGS=$sim_ac_coin_ldflags
-    COIN_USE_LIBS=$sim_ac_coin_libs
-  ], [AC_MSG_ERROR(couldn't compile and link against Coin)])
-fi
-
-sim_ac_pkgconfig_check_failed=true
-
-if $sim_ac_enable_pkgconfig; then
   PKG_CHECK_MODULES([Qt4], [QtCore QtGui QtOpenGL QtXml], [
     QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $Qt4_CFLAGS"
     QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $Qt4_CFLAGS"
@@ -179,6 +214,8 @@ if $sim_ac_enable_pkgconfig; then
   ])
 fi
 
+# *******************************************************************
+# pkg-config did not work, or we did not want to use it
 if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed; then
   # seems to be required for the Qt test on Mac OS X. pederb, 2007-06-27
   sim_ac_want_x11=no
@@ -191,6 +228,13 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed
       ;;
   esac
 
+  SIM_AC_HAVE_COIN_IFELSE([
+    COIN_USE_CPPFLAGS=$sim_ac_coin_cppflags
+    COIN_USE_CXXFLAGS=$sim_ac_coin_cxxflags
+    COIN_USE_LDFLAGS=$sim_ac_coin_ldflags
+    COIN_USE_LIBS=$sim_ac_coin_libs
+  ], [AC_MSG_ERROR(couldn't compile and link against Coin)])
+
   SIM_AC_CHECK_QT([
     QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qt_cppflags"
     QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $sim_ac_qt_cxxflags"
@@ -200,27 +244,6 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed
     SIM_AC_ERROR([no-qt])
   ])
 
-  # FIXME: relying on $QTDIR is not really a kosher way to handle the
-  # lib/incdir case. 20070721 tamer.
-  QT_USE_LIBDIR="${QTDIR}"
-  QT_USE_INCDIR="${QTDIR}"/include
-
-  # we use QtXml in Quarter
-  if $BUILD_WITH_MSVC; then
-    QT_USE_LIBS="$QT_USE_LIBS -lQtXml4"
-  else
-    QT_USE_LIBS="$QT_USE_LIBS -lQtXml"
-  fi
-
-  #SIM_AC_CHECK_QGL([
-  #  QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
-  #  QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $sim_ac_qgl_cxxflags"
-  #  QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qgl_ldflags"
-  #  QT_USE_LIBS="$sim_ac_qgl_libs $QT_USE_LIBS"
-  #], [
-  #  SIM_AC_ERROR([no-qgl])
-  #])
-  
   SIM_AC_QT_PROG(MOC, moc)
   if test x"$MOC" = x"false"; then
     SIM_AC_ERROR([no-moc])
@@ -237,58 +260,49 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed
   fi
 fi
 
-sim_ac_qtdesignerpath_save_CPPFLAGS=$CPPFLAGS
-sim_ac_qtdesignerpath_save_LDFLAGS=$LDFLAGS
-sim_ac_qtdesignerpath_save_LIBS=$LIBS
-eval "sim_ac_qtdesignerpath_save_RUNPATH_VAR=\$$runpath_var"
+# we use some extra libs in Quarter
+if $sim_ac_framework; then
+  QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtDesigner -lQtUiTools"
+  QT_USE_INCDIR=${sim_ac_qt_framework_dir}
+else
+  if $BUILD_WITH_MSVC; then
+    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner4 -lQtOpenGL4 -lQtXml4"
+  else
+    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtOpenGL -lQtXml"
+  fi
+fi
 
-CPPFLAGS="$CPPFLAGS $QT_USE_CPPFLAGS"
-LDFLAGS="$LDFLAGS $QT_USE_LDFLAGS"
-LIBS="$LIBS $QT_USE_LIBS -lQtUiTools"
-eval "$runpath_var=$QT_USE_LIBDIR"
-eval "export $runpath_var"
+# *******************************************************************
+# if we want Mac OS X framework, check if Coin is installed as a framework
+if $sim_ac_framework && $sim_ac_coin_avail; then
+  sim_ac_coin_frameworkdir=`$sim_ac_coin_configcmd --frameworkdir 2>/dev/null`
+  if test x"$sim_ac_coin_frameworkdir" = x""; then
+    SIM_AC_CONFIGURATION_WARNING([Coin was not installed as a framework, so Quarter can't be either (option was disabled).])
+    sim_ac_framework=false
+  else
+    # Inventor.framework and Quarter.framework must be in the same location
+    ivframeworkprefix=`dirname "${sim_ac_coin_frameworkdir}"`
+    if test x"${ivframeworkprefix}" != x"${sim_ac_framework_prefix}"; then
+      SIM_AC_CONFIGURATION_WARNING([Quarter.framework must be installed in the same location as Inventor.framework. Changed Quarter framework directory to ${ivframeworkprefix}.])
+      sim_ac_framework_prefix=${ivframeworkprefix}
+    fi
+  fi
+  SIM_AC_CONFIGURATION_SETTING([Framework Installation Prefix], [$sim_ac_framework_prefix])
+else
+  sim_ac_framework=false
+fi
 
-AC_CACHE_CHECK([for Qt Designer plugins path], QT_DESIGNER_PLUGIN_PATH, [
-  AC_RUN_IFELSE(
-    [AC_LANG_SOURCE([
-#include <QtGui/QApplication>
-#include <QtCore/QFile>
-#include <QtCore/QStringList>
-#include <QtUiTools/QUiLoader>
+AC_SUBST([MAC_FRAMEWORK], [$sim_ac_framework])
+AC_SUBST([MAC_FRAMEWORK_NAME], [$sim_ac_framework_name])
+AC_SUBST([MAC_FRAMEWORK_PREFIX], [$sim_ac_framework_prefix])
+AC_SUBST([MAC_FRAMEWORK_VERSION], [$sim_ac_framework_version])
+AC_SUBST([MAC_DESIGNERPLUGINS_PREFIX], [MAC_DESIGNERPLUGINS_PREFIX_DEFAULT])
+AC_SUBST([nop], [])
 
-int
-main(int argc, char **argv)
-{
-  QApplication app(argc, argv);
-
-  QUiLoader qld;
-  QStringList pluginPaths = qld.pluginPaths();
-
-  /* Assumption: first path entry contains the location within the
-   * system. 20070828 tamer. */
-  if (pluginPaths.size() <= 0) {
-    return 1;
-  }
-
-  QFile file("conftest.out");
-  file.open(QIODevice::WriteOnly);
-  file.write(pluginPaths.at(0).toLocal8Bit().constData());
-  file.close();
-
-  return 0;
-}
-  ])],
-  [QT_DESIGNER_PLUGIN_PATH=`cat conftest.out`],
-  [AC_MSG_FAILURE([could not determine Qt Designer plugins path])])
-])
-
-CPPFLAGS="$sim_ac_qtdesignerpath_save_CPPFLAGS"
-LDFLAGS="$sim_ac_qtdesignerpath_save_LDFLAGS"
-LIBS="$sim_ac_qtdesignerpath_save_LIBS"
-eval "$runpath_var=$sim_ac_qtdesignerpath_save_RUNPATH_VAR"
-
-SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path], [$QT_DESIGNER_PLUGIN_PATH])
-AC_SUBST([QT_DESIGNER_PLUGIN_PATH])
+AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
+AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
+AM_CONDITIONAL([MACOSX], [$sim_ac_macosx])
+AM_CONDITIONAL([MACOSX_10_2FF], [$sim_ac_macosx_10_2ff])
 
 AC_SUBST([COIN_USE_CPPFLAGS])
 AC_SUBST([COIN_USE_CXXFLAGS])
@@ -312,7 +326,9 @@ AC_SUBST([QUARTER_USE_LDFLAGS])
 AC_SUBST([QUARTER_USE_LIBS])
 
 
+# **************************************************************************
 # Miscellaneous options and initializations.
+
 quarter_build_dir=`pwd`
 quarter_src_dir=`cd "$srcdir"; pwd`
 AC_SUBST([quarter_build_dir])
@@ -320,7 +336,6 @@ AC_SUBST([quarter_src_dir])
 
 SIM_AC_RELATIVE_SRC_DIR
 
-# **************************************************************************
 # Figure out if library should be built static or dynamic.
 
 case ${enable_static-no} in
@@ -335,6 +350,17 @@ yes | true) QUARTER_STATIC=false ;;
 *)          QUARTER_STATIC=true ;;
 esac
 
+# **************************************************************************
+
+AC_ARG_WITH(
+  [alternate],
+  [AC_HELP_STRING([--with-alternate=string],
+                  [specify name of alternate configuration])],
+  [CONFIG=$withval],
+  [CONFIG=default])
+
+AC_SUBST(CONFIG)
+
 AC_ARG_WITH(
   [suffix],
   [AC_HELP_STRING([--with-suffix=string],
@@ -345,12 +371,13 @@ AC_ARG_WITH(
 
 AC_SUBST(SUFFIX)
 
+# **************************************************************************
+
 SIM_AC_CONFIGURATION_SETTING([Quarter version], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA])
 SIM_AC_CONFIGURATION_SETTING([Quarter installation prefix], [$prefix])
 
 # *******************************************************************
-# * Do we want to build the documentation?
-# *******************************************************************
+# Do we want to build the documentation?
 
 AC_ARG_VAR([htmldir],
            [destination for HTML docs (default ${datadir}/Quarter/html)])
@@ -402,6 +429,56 @@ esac
 
 AC_SUBST(path_tag)
 
+# *******************************************************************
+# get the plugin path for Qt Designer
+
+sim_ac_qtdesignerpath_save_CPPFLAGS=$CPPFLAGS
+sim_ac_qtdesignerpath_save_LDFLAGS=$LDFLAGS
+sim_ac_qtdesignerpath_save_LIBS=$LIBS
+
+CPPFLAGS="$CPPFLAGS $QT_USE_CPPFLAGS"
+LDFLAGS="$LDFLAGS $QT_USE_LDFLAGS"
+LIBS="$LIBS $QT_USE_LIBS -lQtUiTools"
+
+AC_CACHE_CHECK([for Qt Designer plugins path], QT_DESIGNER_PLUGIN_PATH, [
+  AC_RUN_IFELSE(
+    [AC_LANG_SOURCE([
+#include <QtGui/QApplication>
+#include <QtCore/QFile>
+#include <QtCore/QStringList>
+#include <QtUiTools/QUiLoader>
+
+int
+main(int argc, char **argv)
+{
+  QApplication app(argc, argv);
+  QUiLoader qld;
+  QStringList pluginPaths = qld.pluginPaths();
+
+  /* Assumption: first path entry contains the location within the
+   * system. 20070828 tamer. */
+    if (pluginPaths.size() <= 0) {
+    return 1;
+  }
+
+  QFile file("conftest.out");
+  file.open(QIODevice::WriteOnly);
+  file.write(pluginPaths.at(0).toLocal8Bit().constData());
+  file.close();
+
+  return 0;
+}
+  ])],
+  [QT_DESIGNER_PLUGIN_PATH=`cat conftest.out`],
+  [AC_MSG_FAILURE([could not determine Qt Designer plugins path])])
+])
+
+CPPFLAGS="$sim_ac_qtdesignerpath_save_CPPFLAGS"
+LDFLAGS="$sim_ac_qtdesignerpath_save_LDFLAGS"
+LIBS="$sim_ac_qtdesignerpath_save_LIBS"
+
+SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path], [$QT_DESIGNER_PLUGIN_PATH])
+AC_SUBST([QT_DESIGNER_PLUGIN_PATH])
 
 QUARTER_RELEASE=
 
@@ -542,6 +619,7 @@ if $BUILD_WITH_MSVC; then
   fi
 
 fi
+
   
 AC_CONFIG_FILES([
 	Makefile
