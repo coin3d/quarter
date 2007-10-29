@@ -49,6 +49,7 @@ public:
   uint32_t getCacheContextId(void) const;
 
   QuarterWidget * master;
+  SoNode * scene;
   SoSceneManager * scenemanager;
   DeviceManager * devicemanager;
   EventManager * eventmanager;

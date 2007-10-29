@@ -78,6 +78,8 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 {
   PRIVATE(this) = new QuarterWidgetP(this, sharewidget);
   
+  PRIVATE(this)->scene = NULL;
+
   PRIVATE(this)->sorendermanager = new SoRenderManager;
   PRIVATE(this)->soeventmanager = new SoEventManager;
   PRIVATE(this)->devicemanager = new DeviceManager(this);
@@ -111,6 +113,9 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 QuarterWidget::~QuarterWidget()
 {
   PRIVATE(this)->headlight->unref();
+  if (PRIVATE(this)->scene) {
+    PRIVATE(this)->scene->unref();
+  }
   delete PRIVATE(this)->sorendermanager;
   delete PRIVATE(this)->soeventmanager;
   delete PRIVATE(this)->eventmanager;
@@ -163,12 +168,24 @@ QuarterWidget::setTransparencyType(SoGLRenderAction::TransparencyType type)
 void
 QuarterWidget::setSceneGraph(SoNode * node)
 {
+  if (node != NULL && node == PRIVATE(this)->scene) {
+    return;
+  }
+
+  if (PRIVATE(this)->scene) {
+    PRIVATE(this)->scene->unref();
+    PRIVATE(this)->scene = NULL;
+  }
+
   SoCamera * camera = NULL;
   SoSeparator * superscene = NULL;
   SbBool viewall = FALSE;
   
   if (node) {
     node->ref();
+
+    PRIVATE(this)->scene = node;
+    PRIVATE(this)->scene->ref();
 
     superscene = new SoSeparator;
     superscene->addChild(PRIVATE(this)->headlight);
@@ -199,7 +216,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
 SoNode * 
 QuarterWidget::getSceneGraph(void) const
 {
-  return PRIVATE(this)->sorendermanager->getSceneGraph();
+  return PRIVATE(this)->scene;
 }
 
 /*!
