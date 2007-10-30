@@ -26,7 +26,7 @@ else
 QT_UITOOLS_INCLUDE = -I$(QT_USE_INCDIR)/QtUiTools
 endif
 
-noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition examiner
+noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition examiner mdi
 
 minimal_SOURCES = minimal.cpp
 dynamicui_SOURCES = dynamicui.cpp qrc_dynamicui.cpp
@@ -34,6 +34,7 @@ directui_SOURCES = directui.cpp
 inheritui_SOURCES = inheritui.cpp QuarterViewer.h QuarterViewer.cpp
 superimposition_SOURCES = superimposition.cpp
 examiner_SOURCES = examiner.cpp qrc_examiner.cpp
+mdi_SOURCES = mdi.cpp moc_MdiMainWindow.cpp MdiMainWindow.cpp MdiMainWindow.h MdiQuarterWidget.cpp MdiQuarterWidget.h
 
 CLEANFILES = \
         minimal.exe \
@@ -54,9 +55,13 @@ CLEANFILES = \
         examiner.exe \
         examiner.pdb \
         examiner.exe.manifest \
+        mdi.exe \
+        mdi.pdb \
+        mdi.exe.manifest \
         qrc_dynamicui.cpp \
         qrc_examiner.cpp \
-        ui_QuarterViewer.h
+        ui_QuarterViewer.h \
+        moc_MdiMainWindow.cpp
 
 EXTRA_DIST = \
         quarterviewer.qrc \
@@ -92,6 +97,7 @@ directui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 inheritui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 superimposition_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 examiner_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
+mdi_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 
 minimal_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
 minimal_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
@@ -123,6 +129,11 @@ examiner_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
 examiner_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
 examiner_LDFLAGS = $(EXAMPLES_LDFLAGS)
 
+mdi_CPPFLAGS = $(EXAMPLES_CPPFLAGS)
+mdi_CXXFLAGS = $(EXAMPLES_BUILD_CXXFLAGS)
+mdi_CFLAGS = $(EXAMPLES_BUILD_CFLAGS)
+mdi_LDFLAGS = $(EXAMPLES_LDFLAGS)
+
 qrc_dynamicui.cpp: $(srcdir)/quarterviewer.qrc $(srcdir)/QuarterViewer.ui
 	$(RCC) -name dynamicui -o $@ `$(UNIX2WINPATH) $(srcdir)/quarterviewer.qrc`
 
@@ -133,3 +144,6 @@ directui.cpp: ui_QuarterViewer.h
 
 ui_QuarterViewer.h: $(srcdir)/QuarterViewer.ui
 	$(UIC) -o $@ `$(UNIX2WINPATH) $(srcdir)/QuarterViewer.ui`
+
+moc_MdiMainWindow.cpp: $(srcdir)/MdiMainWindow.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/MdiMainWindow.h`

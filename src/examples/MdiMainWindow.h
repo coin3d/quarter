@@ -1,5 +1,5 @@
-#ifndef QUARTER_QUARTERVIEWER_H
-#define QUARTER_QUARTERVIEWER_H
+#ifndef QUARTER_MDI_MAINWINDOW_H
+#define QUARTER_MDI_MAINWINDOW_H
 
 /**************************************************************************\
  *
@@ -23,16 +23,44 @@
  *
 \**************************************************************************/
 
-#include "ui_QuarterViewer.h"
 
-class QuarterViewer : public QWidget {
+#include <QMainWindow>
+
+class QMenu;
+class QAction;
+class QString;
+class QGLWidget;
+class QWorkspace;
+class QDropEvent;
+class QCloseEvent;
+class MdiQuarterWidget;
+
+class MdiMainWindow : public QMainWindow {
+  typedef QMainWindow inherited;
+  Q_OBJECT
+
 public:
-  QuarterViewer(QWidget * parent = 0);
-  ~QuarterViewer();
+  MdiMainWindow(void);
+  ~MdiMainWindow();
+
+protected:
+  virtual void closeEvent(QCloseEvent * event);
+  virtual void dragEnterEvent(QDragEnterEvent * event);
+  virtual void dropEvent(QDropEvent * event);
+
+private slots:
+  void open(void);
+  void open(const QString & filename);
 
 private:
-  Ui::QuarterViewer ui;
-  class SoSeparator * root;
+  MdiQuarterWidget * activeMdiChild(void);
+  MdiQuarterWidget * createMdiChild(void);
+  MdiQuarterWidget * findMdiChild(const QString & filename);
+
+  QMenu * filemenu;
+  QAction * fileopenaction;
+  QWorkspace * workspace;
+  QGLWidget * firstwidget; // for context sharing
 };
 
-#endif // QUARTER_QUARTERVIEWER_H
+#endif // QUARTER_MDI_MAINWINDOW_H

@@ -485,7 +485,9 @@ INPUT = @path_tag@@quarter_src_dir@/include/Quarter/Basic.h \
         @path_tag@@quarter_src_dir@/src/examples/minimal.cpp \
         @path_tag@@quarter_src_dir@/src/examples/directui.cpp \
         @path_tag@@quarter_src_dir@/src/examples/dynamicui.cpp \
-        @path_tag@@quarter_src_dir@/src/examples/inheritui.cpp 
+        @path_tag@@quarter_src_dir@/src/examples/inheritui.cpp \
+        @path_tag@@quarter_src_dir@/src/examples/examiner.cpp \
+        @path_tag@@quarter_src_dir@/src/examples/mdi.cpp 
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 

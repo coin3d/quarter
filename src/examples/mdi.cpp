@@ -1,6 +1,3 @@
-#ifndef QUARTER_QUARTERVIEWER_H
-#define QUARTER_QUARTERVIEWER_H
-
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
@@ -23,16 +20,21 @@
  *
 \**************************************************************************/
 
-#include "ui_QuarterViewer.h"
+/*!  
+  \page mdi Multiple Document Interface
 
-class QuarterViewer : public QWidget {
-public:
-  QuarterViewer(QWidget * parent = 0);
-  ~QuarterViewer();
+  This example shows how to implement a simple Multiple Document
+  Interface using Qt's QWorkspace class and Quarter's QuarterWidget.
+ */
 
-private:
-  Ui::QuarterViewer ui;
-  class SoSeparator * root;
-};
+#include <Quarter/QuarterApplication.h>
+using namespace SIM::Coin3D::Quarter;
+#include "MdiMainWindow.h"
 
-#endif // QUARTER_QUARTERVIEWER_H
+ int main(int argc, char *argv[])
+ {
+   QuarterApplication app(argc, argv);
+   MdiMainWindow mainwin;
+   mainwin.show();
+   return app.exec();
+ }

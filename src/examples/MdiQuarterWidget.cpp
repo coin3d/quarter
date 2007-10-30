@@ -1,6 +1,3 @@
-#ifndef QUARTER_QUARTERVIEWER_H
-#define QUARTER_QUARTERVIEWER_H
-
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
@@ -23,16 +20,47 @@
  *
 \**************************************************************************/
 
-#include "ui_QuarterViewer.h"
+#include "MdiQuarterWidget.h"
 
-class QuarterViewer : public QWidget {
-public:
-  QuarterViewer(QWidget * parent = 0);
-  ~QuarterViewer();
+#include <Inventor/SoInput.h>
+#include <Inventor/nodes/SoSeparator.h>
 
-private:
-  Ui::QuarterViewer ui;
-  class SoSeparator * root;
-};
+MdiQuarterWidget::MdiQuarterWidget(QWidget * parent, const QGLWidget * sharewidget)
+  : inherited(parent, sharewidget)
+{
+  
+}
 
-#endif // QUARTER_QUARTERVIEWER_H
+MdiQuarterWidget::~MdiQuarterWidget()
+{
+  
+}
+
+
+bool 
+MdiQuarterWidget::loadFile(const QString & filename)
+{
+  SoInput in;
+  if (in.openFile(filename.toLatin1().constData())) {
+    SoSeparator * root = SoDB::readAll(&in);
+    if (root) {
+      this->setSceneGraph(root);
+      this->currentfile = filename;
+      this->setWindowTitle(filename);
+      return true;
+    }
+  }
+  return false;
+}
+
+const QString & 
+MdiQuarterWidget::currentFile(void) const
+{
+  return this->currentfile;
+}
+
+QSize 
+MdiQuarterWidget::minimumSizeHint(void) const
+{
+  return QSize(640, 480);
+}

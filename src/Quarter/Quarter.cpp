@@ -113,6 +113,10 @@
   \subpage dynamicui
 
   \subpage inheritui
+
+  \subpage mdi
+
+  \subpage examiner
 */
 
 

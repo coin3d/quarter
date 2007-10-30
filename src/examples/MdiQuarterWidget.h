@@ -1,5 +1,5 @@
-#ifndef QUARTER_QUARTERVIEWER_H
-#define QUARTER_QUARTERVIEWER_H
+#ifndef MDI_QUARTER_WIDGET_H
+#define MDI_QUARTER_WIDGET_H
 
 /**************************************************************************\
  *
@@ -23,16 +23,26 @@
  *
 \**************************************************************************/
 
-#include "ui_QuarterViewer.h"
+#include <Quarter/QuarterWidget.h>
+using namespace SIM::Coin3D::Quarter;
 
-class QuarterViewer : public QWidget {
+#include <QSize>
+
+class QString;
+
+class MdiQuarterWidget : public QuarterWidget {
+  typedef QuarterWidget inherited;
 public:
-  QuarterViewer(QWidget * parent = 0);
-  ~QuarterViewer();
+  MdiQuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0);
+  ~MdiQuarterWidget();
+
+  bool loadFile(const QString & filename);
+  const QString & currentFile(void) const;
+
+  virtual QSize minimumSizeHint(void) const;
 
 private:
-  Ui::QuarterViewer ui;
-  class SoSeparator * root;
+  QString currentfile;
 };
 
-#endif // QUARTER_QUARTERVIEWER_H
+#endif // MDI_QUARTER_WIDGET_H
