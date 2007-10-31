@@ -23,11 +23,11 @@
 #include "MdiMainWindow.h"
 #include "MdiQuarterWidget.h"
 
-#include <QtGui>
-#include <QAction>
-#include <QDropEvent>
-#include <QCloseEvent>
-#include <QDragEnterEvent>
+#include <QtGui/QtGui>
+#include <QtGui/QAction>
+#include <QtGui/QDropEvent>
+#include <QtGui/QCloseEvent>
+#include <QtGui/QDragEnterEvent>
 
 using namespace SIM::Coin3D::Quarter;
 

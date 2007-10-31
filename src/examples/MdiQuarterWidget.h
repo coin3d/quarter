@@ -26,7 +26,7 @@
 #include <Quarter/QuarterWidget.h>
 using namespace SIM::Coin3D::Quarter;
 
-#include <QSize>
+#include <QtCore/QSize>
 
 class QString;
 
