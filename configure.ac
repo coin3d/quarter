@@ -240,9 +240,22 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed
     QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $sim_ac_qt_cxxflags"
     QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qt_ldflags"
     QT_USE_LIBS="$sim_ac_qt_libs $QT_USE_LIBS"
+    CPPFLAGS="$CPPFLAGS $sim_ac_qt_cppflags"
+    LDFLAGS="$LDFLAGS $sim_ac_qt_ldflags"
+    LIBS="$sim_ac_qt_libs $LIBS"
   ], [
     SIM_AC_ERROR([no-qt])
   ])
+
+  SIM_AC_CHECK_QGL([
+    QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
+    QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qgl_ldflags"
+    QT_USE_LIBS="$sim_ac_qgl_libs $QT_USE_LIBS"
+    QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
+  ], [
+    SIM_AC_ERROR([no-qgl])
+  ])
+
 
   SIM_AC_QT_PROG(MOC, moc)
   if test x"$MOC" = x"false"; then
@@ -269,9 +282,9 @@ if $sim_ac_framework; then
   QT_USE_INCDIR=${sim_ac_qt_framework_dir}
 else
   if $BUILD_WITH_MSVC; then
-    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner4 -lQtOpenGL4 -lQtXml4"
+    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner4 -lQtXml4"
   else
-    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtOpenGL -lQtXml"
+    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
   fi
 fi
 

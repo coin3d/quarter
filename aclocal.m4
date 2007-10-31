@@ -9060,8 +9060,13 @@ if $sim_ac_with_qt; then
 
     AC_MSG_CHECKING([for the QGL extension library])
 
+    sim_ac_qt_suffix=
+    if $sim_ac_qt_debug; then
+      sim_ac_qt_suffix=d
+    fi
+
     sim_ac_qgl_libs=UNRESOLVED
-    for sim_ac_qgl_libcheck in "-lQtOpenGL4" "-lQtOpenGL" "-lqgl" "-lqgl -luser32"; do
+    for sim_ac_qgl_libcheck in "-lQtOpenGL${sim_ac_qt_suffix}${sim_ac_qt_major_version}" "-lQtOpenGL" "-lqgl" "-lqgl -luser32"; do
       if test "x$sim_ac_qgl_libs" = "xUNRESOLVED"; then
         LIBS="$sim_ac_qgl_libcheck $sim_ac_save_LIBS"
         AC_TRY_LINK([#include <qgl.h>],

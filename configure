@@ -22444,6 +22444,9 @@ echo "${ECHO_T}$sim_ac_qt_cppflags $sim_ac_QTDIR_ldflags $sim_ac_qt_libs" >&6
     QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $sim_ac_qt_cxxflags"
     QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qt_ldflags"
     QT_USE_LIBS="$sim_ac_qt_libs $QT_USE_LIBS"
+    CPPFLAGS="$CPPFLAGS $sim_ac_qt_cppflags"
+    LDFLAGS="$LDFLAGS $sim_ac_qt_ldflags"
+    LIBS="$sim_ac_qt_libs $LIBS"
 
 
     sim_ac_qt_install=`cd $sim_ac_qtdir; pwd`/bin/install
@@ -22525,6 +22528,193 @@ echo "$as_me: error: aborting" >&2;}
 
   fi
 fi
+
+
+
+
+
+
+sim_ac_qgl_avail=no
+sim_ac_qgl_cppflags=
+sim_ac_qgl_ldflags=
+sim_ac_qgl_libs=
+
+if $sim_ac_with_qt; then
+  # first check if we can link with the QGL widget already
+  echo "$as_me:$LINENO: checking whether the QGL widget is part of main Qt library" >&5
+echo $ECHO_N "checking whether the QGL widget is part of main Qt library... $ECHO_C" >&6
+if test "${sim_cv_lib_qgl_integrated+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#include <qgl.h>
+int
+main ()
+{
+QGLFormat * f = new QGLFormat; f->setDepth(true);
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  sim_cv_lib_qgl_integrated=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+sim_cv_lib_qgl_integrated=no
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+fi
+echo "$as_me:$LINENO: result: $sim_cv_lib_qgl_integrated" >&5
+echo "${ECHO_T}$sim_cv_lib_qgl_integrated" >&6
+
+  if test x"$sim_cv_lib_qgl_integrated" = xyes; then
+    sim_ac_qgl_avail=yes
+
+    QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
+    QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qgl_ldflags"
+    QT_USE_LIBS="$sim_ac_qgl_libs $QT_USE_LIBS"
+    QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
+
+  else
+    sim_ac_save_LIBS=$LIBS
+    LIBS="$sim_ac_qgl_libs $LIBS"
+
+    echo "$as_me:$LINENO: checking for the QGL extension library" >&5
+echo $ECHO_N "checking for the QGL extension library... $ECHO_C" >&6
+
+    sim_ac_qt_suffix=
+    if $sim_ac_qt_debug; then
+      sim_ac_qt_suffix=d
+    fi
+
+    sim_ac_qgl_libs=UNRESOLVED
+    for sim_ac_qgl_libcheck in "-lQtOpenGL${sim_ac_qt_suffix}${sim_ac_qt_major_version}" "-lQtOpenGL" "-lqgl" "-lqgl -luser32"; do
+      if test "x$sim_ac_qgl_libs" = "xUNRESOLVED"; then
+        LIBS="$sim_ac_qgl_libcheck $sim_ac_save_LIBS"
+        cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#include <qgl.h>
+int
+main ()
+{
+QGLFormat * f = new QGLFormat; f->setDepth(true);
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  sim_ac_qgl_libs="$sim_ac_qgl_libcheck"
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+      fi
+    done
+
+    if test x"$sim_ac_qgl_libs" != xUNRESOLVED; then
+      echo "$as_me:$LINENO: result: $sim_ac_qgl_libs" >&5
+echo "${ECHO_T}$sim_ac_qgl_libs" >&6
+      sim_ac_qgl_avail=yes
+
+    QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
+    QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qgl_ldflags"
+    QT_USE_LIBS="$sim_ac_qgl_libs $QT_USE_LIBS"
+    QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
+
+    else
+      echo "$as_me:$LINENO: result: unavailable" >&5
+echo "${ECHO_T}unavailable" >&6
+      LIBS=$sim_ac_save_LIBS
+
+
+echo >&2 ""
+
+
+: ${sim_ac_message_file=$ac_aux_dir/errors.txt}
+if test -f $sim_ac_message_file; then
+  sim_ac_message="`sed -n -e '/^!no-qgl$/,/^!/ { /^!/ d; p; }' <$sim_ac_message_file`"
+  if test x"$sim_ac_message" = x""; then
+    { { echo "$as_me:$LINENO: error: no message named 'no-qgl' in '$sim_ac_message_file' - notify the $PACKAGE_NAME maintainer(s)" >&5
+echo "$as_me: error: no message named 'no-qgl' in '$sim_ac_message_file' - notify the $PACKAGE_NAME maintainer(s)" >&2;}
+   { (exit 1); exit 1; }; }
+  else
+    eval "echo >&2 \"$sim_ac_message\""
+  fi
+else
+  { { echo "$as_me:$LINENO: error: file '$sim_ac_message_file' not found - notify the $PACKAGE_NAME maintainer(s)" >&5
+echo "$as_me: error: file '$sim_ac_message_file' not found - notify the $PACKAGE_NAME maintainer(s)" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
+
+
+echo >&2 ""
+{ { echo "$as_me:$LINENO: error: aborting" >&5
+echo "$as_me: error: aborting" >&2;}
+   { (exit 1); exit 1; }; }
+
+
+    fi
+  fi
+fi
+
 
 
 
@@ -22816,9 +23006,9 @@ if $sim_ac_framework; then
   QT_USE_INCDIR=${sim_ac_qt_framework_dir}
 else
   if $BUILD_WITH_MSVC; then
-    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner4 -lQtOpenGL4 -lQtXml4"
+    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner4 -lQtXml4"
   else
-    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtOpenGL -lQtXml"
+    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
   fi
 fi
 
