@@ -26,8 +26,6 @@
 
 #include <QMainWindow>
 
-class QMenu;
-class QAction;
 class QString;
 class QGLWidget;
 class QWorkspace;
@@ -57,8 +55,6 @@ private:
   MdiQuarterWidget * createMdiChild(void);
   MdiQuarterWidget * findMdiChild(const QString & filename);
 
-  QMenu * filemenu;
-  QAction * fileopenaction;
   QWorkspace * workspace;
   QGLWidget * firstwidget; // for context sharing
 };

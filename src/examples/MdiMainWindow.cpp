@@ -39,10 +39,23 @@ MdiMainWindow::MdiMainWindow(void)
   this->setAcceptDrops(true);
   this->setWindowTitle(tr("Quarter MDI example"));
   
-  this->filemenu = this->menuBar()->addMenu(tr("&File"));
-  this->fileopenaction = new QAction(tr("&Open"), this);
-  this->connect(this->fileopenaction, SIGNAL(triggered()), this, SLOT(open()));
-  this->filemenu->addAction(this->fileopenaction);
+  QMenu * filemenu = this->menuBar()->addMenu(tr("&File"));
+  QMenu * windowmenu = this->menuBar()->addMenu(tr("&Windows"));
+
+  QAction * fileopenaction = new QAction(tr("&Open"), this);
+  QAction * fileexitaction = new QAction(tr("E&xit"), this);
+  QAction * tileaction = new QAction(tr("Tile"), this);
+  QAction * cascadeaction = new QAction(tr("Cascade"), this);
+
+  filemenu->addAction(fileopenaction);
+  filemenu->addAction(fileexitaction);
+  windowmenu->addAction(tileaction);
+  windowmenu->addAction(cascadeaction);
+
+  this->connect(fileopenaction, SIGNAL(triggered()), this, SLOT(open()));
+  this->connect(fileexitaction, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
+  this->connect(tileaction, SIGNAL(triggered()), this->workspace, SLOT(tile()));
+  this->connect(cascadeaction, SIGNAL(triggered()), this->workspace, SLOT(cascade()));
 
   QSignalMapper * windowmapper = new QSignalMapper(this);
   this->connect(windowmapper, SIGNAL(mapped(QWidget *)),
@@ -75,11 +88,6 @@ void
 MdiMainWindow::closeEvent(QCloseEvent * event)
 {
   this->workspace->closeAllWindows();
-  if (this->workspace->activeWindow()) {
-    event->ignore();
-  } else  {
-    event->accept();
-  }
 }
 
 void 
