@@ -38,7 +38,7 @@
 using namespace SIM::Coin3D::Quarter;
 
 /*!
-  constructor kasjfløasdkjfldsaf
+  constructor
  */
 QuarterApplication::QuarterApplication(int & argc, char ** argv)
   : inherited(argc, argv)
