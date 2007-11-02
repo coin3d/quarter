@@ -465,7 +465,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS BUILD_WITH_MSVC BUILD_WITH_MSVC_TRUE BUILD_WITH_MSVC_FALSE QUARTER_MAJOR_VERSION QUARTER_MINOR_VERSION QUARTER_MICRO_VERSION QUARTER_BETA_VERSION QUARTER_VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE am__leading_dot MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE build build_cpu build_vendor build_os host host_cpu host_vendor host_os EGREP LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CPP CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL PKG_CONFIG ac_pt_PKG_CONFIG Coin_CFLAGS Coin_LIBS Qt4_CFLAGS Qt4_LIBS MOC UIC RCC QT_VERSION X_CFLAGS X_PRE_LIBS X_LIBS X_EXTRA_LIBS sim_ac_coin_configcmd sim_ac_qt_cygpath MAC_FRAMEWORK MAC_FRAMEWORK_NAME MAC_FRAMEWORK_PREFIX MAC_FRAMEWORK_VERSION MAC_DESIGNERPLUGINS_PREFIX nop MAC_FRAMEWORK_TRUE MAC_FRAMEWORK_FALSE MACOSX_TRUE MACOSX_FALSE MACOSX_10_2FF_TRUE MACOSX_10_2FF_FALSE COIN_USE_CPPFLAGS COIN_USE_CXXFLAGS COIN_USE_LDFLAGS COIN_USE_LIBS QT_USE_CPPFLAGS QT_USE_CXXFLAGS QT_USE_INCDIR QT_USE_LDFLAGS QT_USE_LIBDIR QT_USE_LIBS QUARTER_BUILD_CPPFLAGS QUARTER_BUILD_CFLAGS QUARTER_BUILD_CXXFLAGS QUARTER_LIBFLAGS QUARTER_USE_CPPFLAGS QUARTER_USE_LDFLAGS QUARTER_USE_LIBS quarter_build_dir quarter_src_dir ac_unique_file sim_ac_relative_src_dir sim_ac_relative_src_dir_p CONFIG SUFFIX htmldir QUARTER_DOC_HTML quarter_html_dir BUILD_HTMLPAGES_TRUE BUILD_HTMLPAGES_FALSE sim_ac_doxygen_exe sim_ac_perl_exe path_tag UNIX2WINPATH QT_DESIGNER_PLUGIN_PATH PLUGIN_BUILD_CPPFLAGS PLUGIN_BUILD_CXXFLAGS PLUGIN_BUILD_CFLAGS PLUGIN_BUILD_LIBFLAGS EXAMPLES_BUILD_CPPFLAGS EXAMPLES_BUILD_CXXFLAGS EXAMPLES_BUILD_CFLAGS EXAMPLES_BUILD_LDFLAGS EXAMPLES_BUILD_LIBFLAGS LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS BUILD_WITH_MSVC BUILD_WITH_MSVC_TRUE BUILD_WITH_MSVC_FALSE QUARTER_MAJOR_VERSION QUARTER_MINOR_VERSION QUARTER_MICRO_VERSION QUARTER_BETA_VERSION QUARTER_VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE am__leading_dot MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE build build_cpu build_vendor build_os host host_cpu host_vendor host_os EGREP LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CPP CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL PKG_CONFIG ac_pt_PKG_CONFIG Coin_CFLAGS Coin_LIBS Qt4_CFLAGS Qt4_LIBS MOC UIC RCC QT_VERSION sim_ac_coin_configcmd X_CFLAGS X_PRE_LIBS X_LIBS X_EXTRA_LIBS sim_ac_qt_cygpath MAC_FRAMEWORK MAC_FRAMEWORK_NAME MAC_FRAMEWORK_PREFIX MAC_FRAMEWORK_VERSION MAC_DESIGNERPLUGINS_PREFIX nop MAC_FRAMEWORK_TRUE MAC_FRAMEWORK_FALSE MACOSX_TRUE MACOSX_FALSE MACOSX_10_2FF_TRUE MACOSX_10_2FF_FALSE COIN_USE_CPPFLAGS COIN_USE_CXXFLAGS COIN_USE_LDFLAGS COIN_USE_LIBS QT_USE_CPPFLAGS QT_USE_CXXFLAGS QT_USE_INCDIR QT_USE_LDFLAGS QT_USE_LIBDIR QT_USE_LIBS QUARTER_BUILD_CPPFLAGS QUARTER_BUILD_CFLAGS QUARTER_BUILD_CXXFLAGS QUARTER_LIBFLAGS QUARTER_USE_CPPFLAGS QUARTER_USE_LDFLAGS QUARTER_USE_LIBS quarter_build_dir quarter_src_dir ac_unique_file sim_ac_relative_src_dir sim_ac_relative_src_dir_p CONFIG SUFFIX htmldir QUARTER_DOC_HTML quarter_html_dir BUILD_HTMLPAGES_TRUE BUILD_HTMLPAGES_FALSE sim_ac_doxygen_exe sim_ac_perl_exe path_tag UNIX2WINPATH QT_DESIGNER_PLUGIN_PATH PLUGIN_BUILD_CPPFLAGS PLUGIN_BUILD_CXXFLAGS PLUGIN_BUILD_CFLAGS PLUGIN_BUILD_LIBFLAGS EXAMPLES_BUILD_CPPFLAGS EXAMPLES_BUILD_CXXFLAGS EXAMPLES_BUILD_CFLAGS EXAMPLES_BUILD_LDFLAGS EXAMPLES_BUILD_LIBFLAGS LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -1087,9 +1087,9 @@ Optional Packages:
   --with-framework  Do Mac OS X-like framework installation
   --without-framework  Do regular installation on Mac OS X
   --with-framework-prefix=<path>  (default: "/Library/Frameworks")
-  --with-x                use the X Window System
   --with-coin             enable use of Coin [default=yes]
   --with-coin=DIR         give prefix location of Coin
+  --with-x                use the X Window System
   --with-qt=true|false|DIR
                           specify if Qt should be used, and optionally the
                           location of the Qt library default=true
@@ -18946,7 +18946,8 @@ sim_ac_framework_version="A"
 # decide if we want to use pkg-config
 
 sim_ac_enable_pkgconfig=true
-sim_ac_pkgconfig_check_failed=true
+sim_ac_pkgconfig_check_qt_failed=true
+sim_ac_pkgconfig_check_coin_failed=true
 
 # Check whether --enable-pkgconfig or --disable-pkgconfig was given.
 if test "${enable_pkgconfig+set}" = set; then
@@ -19140,7 +19141,7 @@ fi
 echo "${ECHO_T}no" >&6
 
     # try standard qt.m4 approach in case no pkg-config was found
-    sim_ac_pkgconfig_check_failed=true
+    sim_ac_pkgconfig_check_coin_failed=true
 
 elif test $pkg_failed = untried; then
 
@@ -19148,7 +19149,7 @@ elif test $pkg_failed = untried; then
 echo "${ECHO_T}no" >&6
 
     # try standard qt.m4 approach in case no pkg-config was found
-    sim_ac_pkgconfig_check_failed=true
+    sim_ac_pkgconfig_check_coin_failed=true
 
 else
 	Coin_CFLAGS=$pkg_cv_Coin_CFLAGS
@@ -19168,7 +19169,7 @@ else
   sim_ac_configuration_settings="Coin version:`$PKG_CONFIG --modversion Coin`"
 fi
 
-    sim_ac_pkgconfig_check_failed=false
+    sim_ac_pkgconfig_check_coin_failed=false
 
 fi
 
@@ -19243,7 +19244,7 @@ echo "${ECHO_T}no" >&6
     # (or who knows, maybe there is a actually some way?). We would
     # otherwise end up with an expanded SIM_AC_WITH_QT before the
     # outermost PKG_CHECK_MODULES. 20070721 tamer.
-    sim_ac_pkgconfig_check_failed=true
+    sim_ac_pkgconfig_check_qt_failed=true
 
 elif test $pkg_failed = untried; then
 
@@ -19258,7 +19259,7 @@ echo "${ECHO_T}no" >&6
     # (or who knows, maybe there is a actually some way?). We would
     # otherwise end up with an expanded SIM_AC_WITH_QT before the
     # outermost PKG_CHECK_MODULES. 20070721 tamer.
-    sim_ac_pkgconfig_check_failed=true
+    sim_ac_pkgconfig_check_qt_failed=true
 
 else
 	Qt4_CFLAGS=$pkg_cv_Qt4_CFLAGS
@@ -19611,14 +19612,362 @@ fi
 
 
 
-    sim_ac_pkgconfig_check_failed=false
+    sim_ac_pkgconfig_check_qt_failed=false
 
 fi
 fi
 
 # *******************************************************************
 # pkg-config did not work, or we did not want to use it
-if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed; then
+if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_coin_failed; then
+
+
+
+# official variables
+sim_ac_coin_avail=false
+sim_ac_coin_cppflags=
+sim_ac_coin_cflags=
+sim_ac_coin_cxxflags=
+sim_ac_coin_ldflags=
+sim_ac_coin_libs=
+sim_ac_coin_datadir=
+sim_ac_coin_includedir=
+sim_ac_coin_version=
+
+# internal variables
+: ${sim_ac_coin_desired=true}
+sim_ac_coin_extrapath=
+
+
+# Check whether --with-coin or --without-coin was given.
+if test "${with_coin+set}" = set; then
+  withval="$with_coin"
+   case $withval in
+    no)  sim_ac_coin_desired=false ;;
+    yes) sim_ac_coin_desired=true ;;
+    *)   sim_ac_coin_desired=true
+         sim_ac_coin_extrapath=$withval ;;
+    esac
+fi;
+
+case $build in
+*-mks ) sim_ac_pathsep=";" ;;
+* )     sim_ac_pathsep="${PATH_SEPARATOR}" ;;
+esac
+
+if $sim_ac_coin_desired; then
+  sim_ac_path=$PATH
+  test -z "$sim_ac_coin_extrapath" || ## search in --with-coin path
+    sim_ac_path="$sim_ac_coin_extrapath/bin${sim_ac_pathsep}$sim_ac_path"
+  test x"$prefix" = xNONE ||          ## search in --prefix path
+    sim_ac_path="$sim_ac_path${sim_ac_pathsep}$prefix/bin"
+
+  # Extract the first word of "coin-config", so it can be a program name with args.
+set dummy coin-config; ac_word=$2
+echo "$as_me:$LINENO: checking for $ac_word" >&5
+echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
+if test "${ac_cv_path_sim_ac_coin_configcmd+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  case $sim_ac_coin_configcmd in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_sim_ac_coin_configcmd="$sim_ac_coin_configcmd" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $sim_ac_path
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+  for ac_exec_ext in '' $ac_executable_extensions; do
+  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_sim_ac_coin_configcmd="$as_dir/$ac_word$ac_exec_ext"
+    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+done
+
+  test -z "$ac_cv_path_sim_ac_coin_configcmd" && ac_cv_path_sim_ac_coin_configcmd="false"
+  ;;
+esac
+fi
+sim_ac_coin_configcmd=$ac_cv_path_sim_ac_coin_configcmd
+
+if test -n "$sim_ac_coin_configcmd"; then
+  echo "$as_me:$LINENO: result: $sim_ac_coin_configcmd" >&5
+echo "${ECHO_T}$sim_ac_coin_configcmd" >&6
+else
+  echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+fi
+
+
+  if test "X$sim_ac_coin_configcmd" != "Xfalse"; then
+    test -n "$CONFIG" &&
+      $sim_ac_coin_configcmd --alternate=$CONFIG >/dev/null 2>/dev/null &&
+      sim_ac_coin_configcmd="$sim_ac_coin_configcmd --alternate=$CONFIG"
+  fi
+
+  if $sim_ac_coin_configcmd; then
+    sim_ac_coin_version=`$sim_ac_coin_configcmd --version`
+    sim_ac_coin_cppflags=`$sim_ac_coin_configcmd --cppflags`
+    sim_ac_coin_cflags=`$sim_ac_coin_configcmd --cflags 2>/dev/null`
+    sim_ac_coin_cxxflags=`$sim_ac_coin_configcmd --cxxflags`
+    sim_ac_coin_ldflags=`$sim_ac_coin_configcmd --ldflags`
+    sim_ac_coin_libs=`$sim_ac_coin_configcmd --libs`
+    sim_ac_coin_datadir=`$sim_ac_coin_configcmd --datadir`
+    # Hide stderr on the following, as ``--includedir'', ``--msvcrt''
+    # and ``--cflags'' options were added late to coin-config.
+    sim_ac_coin_includedir=`$sim_ac_coin_configcmd --includedir 2>/dev/null`
+    sim_ac_coin_msvcrt=`$sim_ac_coin_configcmd --msvcrt 2>/dev/null`
+    sim_ac_coin_cflags=`$sim_ac_coin_configcmd --cflags 2>/dev/null`
+    echo "$as_me:$LINENO: checking if we can compile and link with the Coin library" >&5
+echo $ECHO_N "checking if we can compile and link with the Coin library... $ECHO_C" >&6
+if test "${sim_cv_coin_avail+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  sim_ac_save_cppflags=$CPPFLAGS
+      sim_ac_save_cxxflags=$CXXFLAGS
+      sim_ac_save_ldflags=$LDFLAGS
+      sim_ac_save_libs=$LIBS
+      CPPFLAGS="$CPPFLAGS $sim_ac_coin_cppflags"
+      CXXFLAGS="$CXXFLAGS $sim_ac_coin_cxxflags"
+      LDFLAGS="$LDFLAGS $sim_ac_coin_ldflags"
+      LIBS="$sim_ac_coin_libs $LIBS"
+      ac_ext=cc
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+
+      cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#include <Inventor/SoDB.h>
+int
+main ()
+{
+SoDB::init();
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  sim_cv_coin_avail=true
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+sim_cv_coin_avail=false
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+
+      ac_ext=cc
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+      CPPFLAGS=$sim_ac_save_cppflags
+      CXXFLAGS=$sim_ac_save_cxxflags
+      LDFLAGS=$sim_ac_save_ldflags
+      LIBS=$sim_ac_save_libs
+
+fi
+echo "$as_me:$LINENO: result: $sim_cv_coin_avail" >&5
+echo "${ECHO_T}$sim_cv_coin_avail" >&6
+    sim_ac_coin_avail=$sim_cv_coin_avail
+
+    if $sim_ac_coin_avail; then :; else
+      { echo "$as_me:$LINENO: WARNING:
+Compilation and/or linking with the Coin main library SDK failed, for
+unknown reason. If you are familiar with configure-based configuration
+and building, investigate the 'config.log' file for clues.
+
+If you can not figure out what went wrong, please forward the 'config.log'
+file to the email address <coin-support@coin3d.org> and ask for help by
+describing the situation where this failed.
+" >&5
+echo "$as_me: WARNING:
+Compilation and/or linking with the Coin main library SDK failed, for
+unknown reason. If you are familiar with configure-based configuration
+and building, investigate the 'config.log' file for clues.
+
+If you can not figure out what went wrong, please forward the 'config.log'
+file to the email address <coin-support@coin3d.org> and ask for help by
+describing the situation where this failed.
+" >&2;}
+    fi
+  else # no 'coin-config' found
+
+# FIXME: test for Coin without coin-config script here
+    if test x"$COINDIR" != x""; then
+      sim_ac_coindir=`cygpath -u "$COINDIR" 2>/dev/null || echo "$COINDIR"`
+      if test -d $sim_ac_coindir/bin && test -d $sim_ac_coindir/lib && test -d $sim_ac_coindir/include/Inventor; then
+        # using newest version (last alphabetically) in case of multiple libs
+        sim_ac_coin_lib_file=`echo $sim_ac_coindir/lib/coin*.lib | sed -e 's,.* ,,g'`
+        if test -f $sim_ac_coin_lib_file; then
+          sim_ac_coin_lib_name=`echo $sim_ac_coin_lib_file | sed -e 's,.*/,,g' -e 's,.lib,,'`
+          sim_ac_save_cppflags=$CPPFLAGS
+          sim_ac_save_libs=$LIBS
+          sim_ac_save_ldflags=$LDFLAGS
+          CPPFLAGS="$CPPFLAGS -I$sim_ac_coindir/include"
+          if test -f $sim_ac_coindir/bin/$sim_ac_coin_lib_name.dll; then
+            CPPFLAGS="$CPPFLAGS -DCOIN_DLL"
+          fi
+          LDFLAGS="$LDFLAGS -L$sim_ac_coindir/lib"
+          LIBS="-l$sim_ac_coin_lib_name -lopengl32 $LIBS"
+
+          ac_ext=cc
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+
+          cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#include <Inventor/SoDB.h>
+int
+main ()
+{
+SoDB::init();
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  sim_cv_coin_avail=true
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+sim_cv_coin_avail=false
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+
+          ac_ext=cc
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+          CPPFLAGS=$sim_ac_save_cppflags
+          LDFLAGS=$sim_ac_save_ldflags
+          LIBS=$sim_ac_save_libs
+          sim_ac_coin_avail=$sim_cv_coin_avail
+        fi
+      fi
+    fi
+
+    if $sim_ac_coin_avail; then
+      sim_ac_coin_cppflags=-I$sim_ac_coindir/include
+      if test -f $sim_ac_coindir/bin/$sim_ac_coin_lib_name.dll; then
+        sim_ac_coin_cppflags="$sim_ac_coin_cppflags -DCOIN_DLL"
+      fi
+      sim_ac_coin_ldflags=-L$sim_ac_coindir/lib
+      sim_ac_coin_libs="-l$sim_ac_coin_lib_name -lopengl32"
+      sim_ac_coin_datadir=$sim_ac_coindir/data
+    else
+      locations=`IFS="${sim_ac_pathsep}"; for p in $sim_ac_path; do echo " -> $p/coin-config"; done`
+      { echo "$as_me:$LINENO: WARNING: cannot find 'coin-config' at any of these locations:
+$locations" >&5
+echo "$as_me: WARNING: cannot find 'coin-config' at any of these locations:
+$locations" >&2;}
+      { echo "$as_me:$LINENO: WARNING:
+Need to be able to run 'coin-config' to figure out how to build and link
+against the Coin library. To rectify this problem, you most likely need
+to a) install Coin if it has not been installed, b) add the Coin install
+bin/ directory to your PATH environment variable.
+" >&5
+echo "$as_me: WARNING:
+Need to be able to run 'coin-config' to figure out how to build and link
+against the Coin library. To rectify this problem, you most likely need
+to a) install Coin if it has not been installed, b) add the Coin install
+bin/ directory to your PATH environment variable.
+" >&2;}
+    fi
+  fi
+fi
+
+if $sim_ac_coin_avail; then
+
+    COIN_USE_CPPFLAGS=$sim_ac_coin_cppflags
+    COIN_USE_CXXFLAGS=$sim_ac_coin_cxxflags
+    COIN_USE_LDFLAGS=$sim_ac_coin_ldflags
+    COIN_USE_LIBS=$sim_ac_coin_libs
+
+
+if test x"${sim_ac_configuration_settings+set}" = x"set"; then
+  sim_ac_configuration_settings="$sim_ac_configuration_settings|Coin version:`$sim_ac_coin_configcmd --version`"
+else
+  sim_ac_configuration_settings="Coin version:`$sim_ac_coin_configcmd --version`"
+fi
+
+
+
+else
+  { { echo "$as_me:$LINENO: error: couldn't compile and link against Coin" >&5
+echo "$as_me: error: couldn't compile and link against Coin" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
+fi
+
+if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_qt_failed; then
   # seems to be required for the Qt test on Mac OS X. pederb, 2007-06-27
   sim_ac_want_x11=no
   case $host_os in
@@ -21133,343 +21482,6 @@ fi
       sim_ac_want_x11=yes
       ;;
   esac
-
-
-
-
-# official variables
-sim_ac_coin_avail=false
-sim_ac_coin_cppflags=
-sim_ac_coin_cflags=
-sim_ac_coin_cxxflags=
-sim_ac_coin_ldflags=
-sim_ac_coin_libs=
-sim_ac_coin_datadir=
-sim_ac_coin_includedir=
-sim_ac_coin_version=
-
-# internal variables
-: ${sim_ac_coin_desired=true}
-sim_ac_coin_extrapath=
-
-
-# Check whether --with-coin or --without-coin was given.
-if test "${with_coin+set}" = set; then
-  withval="$with_coin"
-   case $withval in
-    no)  sim_ac_coin_desired=false ;;
-    yes) sim_ac_coin_desired=true ;;
-    *)   sim_ac_coin_desired=true
-         sim_ac_coin_extrapath=$withval ;;
-    esac
-fi;
-
-case $build in
-*-mks ) sim_ac_pathsep=";" ;;
-* )     sim_ac_pathsep="${PATH_SEPARATOR}" ;;
-esac
-
-if $sim_ac_coin_desired; then
-  sim_ac_path=$PATH
-  test -z "$sim_ac_coin_extrapath" || ## search in --with-coin path
-    sim_ac_path="$sim_ac_coin_extrapath/bin${sim_ac_pathsep}$sim_ac_path"
-  test x"$prefix" = xNONE ||          ## search in --prefix path
-    sim_ac_path="$sim_ac_path${sim_ac_pathsep}$prefix/bin"
-
-  # Extract the first word of "coin-config", so it can be a program name with args.
-set dummy coin-config; ac_word=$2
-echo "$as_me:$LINENO: checking for $ac_word" >&5
-echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
-if test "${ac_cv_path_sim_ac_coin_configcmd+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  case $sim_ac_coin_configcmd in
-  [\\/]* | ?:[\\/]*)
-  ac_cv_path_sim_ac_coin_configcmd="$sim_ac_coin_configcmd" # Let the user override the test with a path.
-  ;;
-  *)
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $sim_ac_path
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-  for ac_exec_ext in '' $ac_executable_extensions; do
-  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_path_sim_ac_coin_configcmd="$as_dir/$ac_word$ac_exec_ext"
-    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-done
-
-  test -z "$ac_cv_path_sim_ac_coin_configcmd" && ac_cv_path_sim_ac_coin_configcmd="false"
-  ;;
-esac
-fi
-sim_ac_coin_configcmd=$ac_cv_path_sim_ac_coin_configcmd
-
-if test -n "$sim_ac_coin_configcmd"; then
-  echo "$as_me:$LINENO: result: $sim_ac_coin_configcmd" >&5
-echo "${ECHO_T}$sim_ac_coin_configcmd" >&6
-else
-  echo "$as_me:$LINENO: result: no" >&5
-echo "${ECHO_T}no" >&6
-fi
-
-
-  if test "X$sim_ac_coin_configcmd" != "Xfalse"; then
-    test -n "$CONFIG" &&
-      $sim_ac_coin_configcmd --alternate=$CONFIG >/dev/null 2>/dev/null &&
-      sim_ac_coin_configcmd="$sim_ac_coin_configcmd --alternate=$CONFIG"
-  fi
-
-  if $sim_ac_coin_configcmd; then
-    sim_ac_coin_version=`$sim_ac_coin_configcmd --version`
-    sim_ac_coin_cppflags=`$sim_ac_coin_configcmd --cppflags`
-    sim_ac_coin_cflags=`$sim_ac_coin_configcmd --cflags 2>/dev/null`
-    sim_ac_coin_cxxflags=`$sim_ac_coin_configcmd --cxxflags`
-    sim_ac_coin_ldflags=`$sim_ac_coin_configcmd --ldflags`
-    sim_ac_coin_libs=`$sim_ac_coin_configcmd --libs`
-    sim_ac_coin_datadir=`$sim_ac_coin_configcmd --datadir`
-    # Hide stderr on the following, as ``--includedir'', ``--msvcrt''
-    # and ``--cflags'' options were added late to coin-config.
-    sim_ac_coin_includedir=`$sim_ac_coin_configcmd --includedir 2>/dev/null`
-    sim_ac_coin_msvcrt=`$sim_ac_coin_configcmd --msvcrt 2>/dev/null`
-    sim_ac_coin_cflags=`$sim_ac_coin_configcmd --cflags 2>/dev/null`
-    echo "$as_me:$LINENO: checking if we can compile and link with the Coin library" >&5
-echo $ECHO_N "checking if we can compile and link with the Coin library... $ECHO_C" >&6
-if test "${sim_cv_coin_avail+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  sim_ac_save_cppflags=$CPPFLAGS
-      sim_ac_save_cxxflags=$CXXFLAGS
-      sim_ac_save_ldflags=$LDFLAGS
-      sim_ac_save_libs=$LIBS
-      CPPFLAGS="$CPPFLAGS $sim_ac_coin_cppflags"
-      CXXFLAGS="$CXXFLAGS $sim_ac_coin_cxxflags"
-      LDFLAGS="$LDFLAGS $sim_ac_coin_ldflags"
-      LIBS="$sim_ac_coin_libs $LIBS"
-      ac_ext=cc
-ac_cpp='$CXXCPP $CPPFLAGS'
-ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
-
-
-      cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-#include <Inventor/SoDB.h>
-int
-main ()
-{
-SoDB::init();
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_cxx_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  sim_cv_coin_avail=true
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-sim_cv_coin_avail=false
-fi
-rm -f conftest.err conftest.$ac_objext \
-      conftest$ac_exeext conftest.$ac_ext
-
-      ac_ext=cc
-ac_cpp='$CXXCPP $CPPFLAGS'
-ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
-
-      CPPFLAGS=$sim_ac_save_cppflags
-      CXXFLAGS=$sim_ac_save_cxxflags
-      LDFLAGS=$sim_ac_save_ldflags
-      LIBS=$sim_ac_save_libs
-
-fi
-echo "$as_me:$LINENO: result: $sim_cv_coin_avail" >&5
-echo "${ECHO_T}$sim_cv_coin_avail" >&6
-    sim_ac_coin_avail=$sim_cv_coin_avail
-
-    if $sim_ac_coin_avail; then :; else
-      { echo "$as_me:$LINENO: WARNING:
-Compilation and/or linking with the Coin main library SDK failed, for
-unknown reason. If you are familiar with configure-based configuration
-and building, investigate the 'config.log' file for clues.
-
-If you can not figure out what went wrong, please forward the 'config.log'
-file to the email address <coin-support@coin3d.org> and ask for help by
-describing the situation where this failed.
-" >&5
-echo "$as_me: WARNING:
-Compilation and/or linking with the Coin main library SDK failed, for
-unknown reason. If you are familiar with configure-based configuration
-and building, investigate the 'config.log' file for clues.
-
-If you can not figure out what went wrong, please forward the 'config.log'
-file to the email address <coin-support@coin3d.org> and ask for help by
-describing the situation where this failed.
-" >&2;}
-    fi
-  else # no 'coin-config' found
-
-# FIXME: test for Coin without coin-config script here
-    if test x"$COINDIR" != x""; then
-      sim_ac_coindir=`cygpath -u "$COINDIR" 2>/dev/null || echo "$COINDIR"`
-      if test -d $sim_ac_coindir/bin && test -d $sim_ac_coindir/lib && test -d $sim_ac_coindir/include/Inventor; then
-        # using newest version (last alphabetically) in case of multiple libs
-        sim_ac_coin_lib_file=`echo $sim_ac_coindir/lib/coin*.lib | sed -e 's,.* ,,g'`
-        if test -f $sim_ac_coin_lib_file; then
-          sim_ac_coin_lib_name=`echo $sim_ac_coin_lib_file | sed -e 's,.*/,,g' -e 's,.lib,,'`
-          sim_ac_save_cppflags=$CPPFLAGS
-          sim_ac_save_libs=$LIBS
-          sim_ac_save_ldflags=$LDFLAGS
-          CPPFLAGS="$CPPFLAGS -I$sim_ac_coindir/include"
-          if test -f $sim_ac_coindir/bin/$sim_ac_coin_lib_name.dll; then
-            CPPFLAGS="$CPPFLAGS -DCOIN_DLL"
-          fi
-          LDFLAGS="$LDFLAGS -L$sim_ac_coindir/lib"
-          LIBS="-l$sim_ac_coin_lib_name -lopengl32 $LIBS"
-
-          ac_ext=cc
-ac_cpp='$CXXCPP $CPPFLAGS'
-ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
-
-
-          cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-#include <Inventor/SoDB.h>
-int
-main ()
-{
-SoDB::init();
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_cxx_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  sim_cv_coin_avail=true
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-sim_cv_coin_avail=false
-fi
-rm -f conftest.err conftest.$ac_objext \
-      conftest$ac_exeext conftest.$ac_ext
-
-          ac_ext=cc
-ac_cpp='$CXXCPP $CPPFLAGS'
-ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
-
-          CPPFLAGS=$sim_ac_save_cppflags
-          LDFLAGS=$sim_ac_save_ldflags
-          LIBS=$sim_ac_save_libs
-          sim_ac_coin_avail=$sim_cv_coin_avail
-        fi
-      fi
-    fi
-
-    if $sim_ac_coin_avail; then
-      sim_ac_coin_cppflags=-I$sim_ac_coindir/include
-      if test -f $sim_ac_coindir/bin/$sim_ac_coin_lib_name.dll; then
-        sim_ac_coin_cppflags="$sim_ac_coin_cppflags -DCOIN_DLL"
-      fi
-      sim_ac_coin_ldflags=-L$sim_ac_coindir/lib
-      sim_ac_coin_libs="-l$sim_ac_coin_lib_name -lopengl32"
-      sim_ac_coin_datadir=$sim_ac_coindir/data
-    else
-      locations=`IFS="${sim_ac_pathsep}"; for p in $sim_ac_path; do echo " -> $p/coin-config"; done`
-      { echo "$as_me:$LINENO: WARNING: cannot find 'coin-config' at any of these locations:
-$locations" >&5
-echo "$as_me: WARNING: cannot find 'coin-config' at any of these locations:
-$locations" >&2;}
-      { echo "$as_me:$LINENO: WARNING:
-Need to be able to run 'coin-config' to figure out how to build and link
-against the Coin library. To rectify this problem, you most likely need
-to a) install Coin if it has not been installed, b) add the Coin install
-bin/ directory to your PATH environment variable.
-" >&5
-echo "$as_me: WARNING:
-Need to be able to run 'coin-config' to figure out how to build and link
-against the Coin library. To rectify this problem, you most likely need
-to a) install Coin if it has not been installed, b) add the Coin install
-bin/ directory to your PATH environment variable.
-" >&2;}
-    fi
-  fi
-fi
-
-if $sim_ac_coin_avail; then
-
-    COIN_USE_CPPFLAGS=$sim_ac_coin_cppflags
-    COIN_USE_CXXFLAGS=$sim_ac_coin_cxxflags
-    COIN_USE_LDFLAGS=$sim_ac_coin_ldflags
-    COIN_USE_LIBS=$sim_ac_coin_libs
-
-else
-  { { echo "$as_me:$LINENO: error: couldn't compile and link against Coin" >&5
-echo "$as_me: error: couldn't compile and link against Coin" >&2;}
-   { (exit 1); exit 1; }; }
-fi
-
 
 
 sim_ac_qtdir=
@@ -24560,11 +24572,11 @@ s,@MOC@,$MOC,;t t
 s,@UIC@,$UIC,;t t
 s,@RCC@,$RCC,;t t
 s,@QT_VERSION@,$QT_VERSION,;t t
+s,@sim_ac_coin_configcmd@,$sim_ac_coin_configcmd,;t t
 s,@X_CFLAGS@,$X_CFLAGS,;t t
 s,@X_PRE_LIBS@,$X_PRE_LIBS,;t t
 s,@X_LIBS@,$X_LIBS,;t t
 s,@X_EXTRA_LIBS@,$X_EXTRA_LIBS,;t t
-s,@sim_ac_coin_configcmd@,$sim_ac_coin_configcmd,;t t
 s,@sim_ac_qt_cygpath@,$sim_ac_qt_cygpath,;t t
 s,@MAC_FRAMEWORK@,$MAC_FRAMEWORK,;t t
 s,@MAC_FRAMEWORK_NAME@,$MAC_FRAMEWORK_NAME,;t t

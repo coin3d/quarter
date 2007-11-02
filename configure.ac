@@ -97,7 +97,8 @@ sim_ac_framework_version="MAC_FRAMEWORK_VERSION_DEFAULT"
 # decide if we want to use pkg-config
 
 sim_ac_enable_pkgconfig=true
-sim_ac_pkgconfig_check_failed=true
+sim_ac_pkgconfig_check_qt_failed=true
+sim_ac_pkgconfig_check_coin_failed=true
 
 AC_ARG_ENABLE(
   [pkgconfig],
@@ -129,12 +130,12 @@ if $sim_ac_enable_pkgconfig; then
     COIN_USE_LIBS="$Coin_LIBS"
   
     SIM_AC_CONFIGURATION_SETTING([Coin version], [`$PKG_CONFIG --modversion Coin`])
-    sim_ac_pkgconfig_check_failed=false
+    sim_ac_pkgconfig_check_coin_failed=false
   ], [
     AC_MSG_RESULT([no])
 
     # try standard qt.m4 approach in case no pkg-config was found
-    sim_ac_pkgconfig_check_failed=true
+    sim_ac_pkgconfig_check_coin_failed=true
   ])
 
   PKG_CHECK_MODULES([Qt4], [QtCore QtGui QtOpenGL QtXml], [
@@ -198,7 +199,7 @@ if $sim_ac_enable_pkgconfig; then
     SIM_AC_CONFIGURATION_SETTING([Qt version], [$QT_VERSION])
     AC_SUBST([QT_VERSION])
 
-    sim_ac_pkgconfig_check_failed=false
+    sim_ac_pkgconfig_check_qt_failed=false
   ], [
     AC_MSG_RESULT([no])
     # try standard qt.m4 approach in case no pkg-config was found
@@ -210,13 +211,25 @@ if $sim_ac_enable_pkgconfig; then
     # (or who knows, maybe there is a actually some way?). We would
     # otherwise end up with an expanded SIM_AC_WITH_QT before the
     # outermost PKG_CHECK_MODULES. 20070721 tamer.
-    sim_ac_pkgconfig_check_failed=true
+    sim_ac_pkgconfig_check_qt_failed=true
   ])
 fi
 
 # *******************************************************************
 # pkg-config did not work, or we did not want to use it
-if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed; then
+if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_coin_failed; then
+  SIM_AC_HAVE_COIN_IFELSE([
+    COIN_USE_CPPFLAGS=$sim_ac_coin_cppflags
+    COIN_USE_CXXFLAGS=$sim_ac_coin_cxxflags
+    COIN_USE_LDFLAGS=$sim_ac_coin_ldflags
+    COIN_USE_LIBS=$sim_ac_coin_libs
+
+    SIM_AC_CONFIGURATION_SETTING([Coin version], [`$sim_ac_coin_configcmd --version`])
+
+  ], [AC_MSG_ERROR(couldn't compile and link against Coin)])
+fi
+
+if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_qt_failed; then
   # seems to be required for the Qt test on Mac OS X. pederb, 2007-06-27
   sim_ac_want_x11=no
   case $host_os in
@@ -227,13 +240,6 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_failed
       sim_ac_want_x11=yes
       ;;
   esac
-
-  SIM_AC_HAVE_COIN_IFELSE([
-    COIN_USE_CPPFLAGS=$sim_ac_coin_cppflags
-    COIN_USE_CXXFLAGS=$sim_ac_coin_cxxflags
-    COIN_USE_LDFLAGS=$sim_ac_coin_ldflags
-    COIN_USE_LIBS=$sim_ac_coin_libs
-  ], [AC_MSG_ERROR(couldn't compile and link against Coin)])
 
   SIM_AC_CHECK_QT([
     QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qt_cppflags"
