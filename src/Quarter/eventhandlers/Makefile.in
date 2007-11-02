@@ -243,12 +243,22 @@ RegularSources = \
         ContextMenuHandlerP.cpp
 
 
+BUILT_SOURCES = $(BuiltSources)
+
 libeventhandlers_la_SOURCES = \
-        $(RegularSources) $(PrivateHeaders) $(BuiltSources)
+        $(RegularSources) $(PrivateHeaders) 
 
 
 eventhandlers_lst_SOURCES = \
-        $(RegularSources) $(PrivateHeaders) $(BuiltSources)
+        $(RegularSources) $(PrivateHeaders) 
+
+
+nodist_libeventhandlers_la_SOURCES = \
+        $(BuiltSources)
+
+
+nodist_eventhandlers_lst_SOURCES = \
+        $(BuiltSources)
 
 
 eventhandlers_lst_CPPFLAGS = \
@@ -294,10 +304,11 @@ am__objects_1 = eventhandlers_lst-EventManager.$(OBJEXT) \
 	eventhandlers_lst-ContextMenuHandler.$(OBJEXT) \
 	eventhandlers_lst-ContextMenuHandlerP.$(OBJEXT)
 am__objects_2 =
+am_eventhandlers_lst_OBJECTS = $(am__objects_1) $(am__objects_2)
 am__objects_3 = eventhandlers_lst-moc_ContextMenuHandlerP.$(OBJEXT)
-am_eventhandlers_lst_OBJECTS = $(am__objects_1) $(am__objects_2) \
-	$(am__objects_3)
-eventhandlers_lst_OBJECTS = $(am_eventhandlers_lst_OBJECTS)
+nodist_eventhandlers_lst_OBJECTS = $(am__objects_3)
+eventhandlers_lst_OBJECTS = $(am_eventhandlers_lst_OBJECTS) \
+	$(nodist_eventhandlers_lst_OBJECTS)
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 
 libeventhandlers_la_LDFLAGS =
@@ -307,10 +318,11 @@ am__objects_4 = libeventhandlers_la-EventManager.lo \
 	libeventhandlers_la-DragDropHandler.lo \
 	libeventhandlers_la-ContextMenuHandler.lo \
 	libeventhandlers_la-ContextMenuHandlerP.lo
+am_libeventhandlers_la_OBJECTS = $(am__objects_4) $(am__objects_2)
 am__objects_5 = libeventhandlers_la-moc_ContextMenuHandlerP.lo
-am_libeventhandlers_la_OBJECTS = $(am__objects_4) $(am__objects_2) \
-	$(am__objects_5)
-libeventhandlers_la_OBJECTS = $(am_libeventhandlers_la_OBJECTS)
+nodist_libeventhandlers_la_OBJECTS = $(am__objects_5)
+libeventhandlers_la_OBJECTS = $(am_libeventhandlers_la_OBJECTS) \
+	$(nodist_libeventhandlers_la_OBJECTS)
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = \
@@ -344,9 +356,10 @@ LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 DIST_SOURCES = $(eventhandlers_lst_SOURCES) \
 	$(libeventhandlers_la_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(eventhandlers_lst_SOURCES) $(libeventhandlers_la_SOURCES)
+SOURCES = $(eventhandlers_lst_SOURCES) $(nodist_eventhandlers_lst_SOURCES) $(libeventhandlers_la_SOURCES) $(nodist_libeventhandlers_la_SOURCES)
 
-all: all-am
+all: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
 .SUFFIXES: .cpp .lo .o .obj
@@ -917,11 +930,13 @@ distdir: $(DISTFILES)
 	  fi; \
 	done
 check-am: all-am
-check: check-am
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-am
 all-am: Makefile $(LIBRARIES) $(LTLIBRARIES)
 
 installdirs:
-install: install-am
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-am
 install-exec: install-exec-am
 install-data: install-data-am
 uninstall: uninstall-am
@@ -946,6 +961,7 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-am
 
 clean-am: clean-generic clean-libtool clean-noinstLIBRARIES \

@@ -24,12 +24,19 @@ PrivateHeaders = QuarterWidgetPlugin.h
 RegularSources = QuarterWidgetPlugin.cpp
 BuiltSources = moc_QuarterWidgetPlugin.cpp
 
+BUILT_SOURCES = $(BuiltSources)
+
 libQuarterWidgetPlugin_la_SOURCES = \
-        $(RegularSources) $(BuiltSources) $(PrivateHeaders)
+        $(RegularSources) $(PrivateHeaders)
 
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
-        $(RegularSources) $(BuiltSources) $(PrivateHeaders)
+        $(RegularSources) $(PrivateHeaders)
 
+nodist_libQuarterWidgetPlugin_la_SOURCES = \
+        $(BuiltSources)
+
+nodist_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
+        $(BuiltSources)
 
 if BUILD_WITH_MSVC
 lib_LIBRARIES = QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib

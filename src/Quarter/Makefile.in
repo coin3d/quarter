@@ -247,16 +247,24 @@ RegularSources = \
         QuarterApplication.cpp
 
 
+BUILT_SOURCES = $(BuiltSources)
+
 libQuarter_la_SOURCES = \
         $(RegularSources) \
-        $(BuiltSources) \
         $(PrivateHeaders)
 
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
         $(RegularSources) \
-        $(BuiltSources) \
         $(PrivateHeaders)
+
+
+nodist_libQuarter_la_SOURCES = \
+        $(BuiltSources)
+
+
+nodist_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
+        $(BuiltSources)
 
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS = \
@@ -321,14 +329,17 @@ am__objects_1 = \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SensorManager.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.$(OBJEXT)
-am__objects_2 = \
+am__objects_2 =
+am_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = $(am__objects_1) \
+	$(am__objects_2)
+am__objects_3 = \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.$(OBJEXT)
-am__objects_3 =
-am_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = $(am__objects_1) \
-	$(am__objects_2) $(am__objects_3)
+nodist_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
+	$(am__objects_3)
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
-	$(am_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS)
+	$(am_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS) \
+	$(nodist_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 
 libQuarter_la_LDFLAGS =
@@ -337,11 +348,12 @@ libQuarter_la_DEPENDENCIES = devices/libdevices.la \
 am__objects_4 = libQuarter_la-Quarter.lo libQuarter_la-QuarterWidget.lo \
 	libQuarter_la-SensorManager.lo libQuarter_la-QuarterWidgetP.lo \
 	libQuarter_la-QuarterApplication.lo
+am_libQuarter_la_OBJECTS = $(am__objects_4) $(am__objects_2)
 am__objects_5 = libQuarter_la-moc_QuarterWidget.lo \
 	libQuarter_la-moc_SensorManager.lo
-am_libQuarter_la_OBJECTS = $(am__objects_4) $(am__objects_5) \
-	$(am__objects_3)
-libQuarter_la_OBJECTS = $(am_libQuarter_la_OBJECTS)
+nodist_libQuarter_la_OBJECTS = $(am__objects_5)
+libQuarter_la_OBJECTS = $(am_libQuarter_la_OBJECTS) \
+	$(nodist_libQuarter_la_OBJECTS)
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = \
@@ -384,9 +396,10 @@ RECURSIVE_TARGETS = info-recursive dvi-recursive pdf-recursive \
 	check-recursive installcheck-recursive
 DIST_COMMON = Makefile.am Makefile.in
 DIST_SUBDIRS = $(SUBDIRS)
-SOURCES = $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES) $(libQuarter_la_SOURCES)
+SOURCES = $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES) $(nodist_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES) $(libQuarter_la_SOURCES) $(nodist_libQuarter_la_SOURCES)
 
-all: all-recursive
+all: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
 .SUFFIXES:
 .SUFFIXES: .cpp .lo .o .obj
@@ -1154,13 +1167,15 @@ distdir: $(DISTFILES)
 	  fi; \
 	done
 check-am: all-am
-check: check-recursive
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-recursive
 all-am: Makefile $(LIBRARIES) $(LTLIBRARIES) all-local
 installdirs: installdirs-recursive
 installdirs-am:
 	$(mkinstalldirs) $(DESTDIR)$(libdir) $(DESTDIR)$(libdir)
 
-install: install-recursive
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-recursive
 install-exec: install-exec-recursive
 install-data: install-data-recursive
 uninstall: uninstall-recursive
@@ -1185,6 +1200,7 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-recursive
 
 clean-am: clean-generic clean-libLIBRARIES clean-libLTLIBRARIES \

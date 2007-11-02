@@ -28,11 +28,19 @@ RegularSources = \
         ContextMenuHandler.cpp \
         ContextMenuHandlerP.cpp
 
+BUILT_SOURCES = $(BuiltSources)
+
 libeventhandlers_la_SOURCES = \
-        $(RegularSources) $(PrivateHeaders) $(BuiltSources)
+        $(RegularSources) $(PrivateHeaders) 
 
 eventhandlers_lst_SOURCES = \
-        $(RegularSources) $(PrivateHeaders) $(BuiltSources)
+        $(RegularSources) $(PrivateHeaders) 
+
+nodist_libeventhandlers_la_SOURCES = \
+        $(BuiltSources)
+
+nodist_eventhandlers_lst_SOURCES = \
+        $(BuiltSources)
 
 eventhandlers_lst_CPPFLAGS = \
         $(QUARTER_BUILD_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)

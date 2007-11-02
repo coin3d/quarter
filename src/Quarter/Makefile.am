@@ -32,15 +32,21 @@ RegularSources = \
         QuarterWidgetP.cpp \
         QuarterApplication.cpp
 
+BUILT_SOURCES = $(BuiltSources)
+
 libQuarter_la_SOURCES = \
         $(RegularSources) \
-        $(BuiltSources) \
         $(PrivateHeaders)
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
         $(RegularSources) \
-        $(BuiltSources) \
         $(PrivateHeaders)
+
+nodist_libQuarter_la_SOURCES = \
+        $(BuiltSources)
+
+nodist_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
+        $(BuiltSources)
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS = \
         $(QUARTER_BUILD_CPPFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
@@ -86,7 +92,6 @@ CLEANFILES = \
         Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.dll \
         Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.pdb \
         Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.dll.manifest
-
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib: Makefile \
 	$(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS) \

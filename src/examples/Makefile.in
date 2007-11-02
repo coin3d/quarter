@@ -238,12 +238,15 @@ DEFAULT_INCLUDES = $(includes)
 noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition examiner mdi
 
 minimal_SOURCES = minimal.cpp
-dynamicui_SOURCES = dynamicui.cpp qrc_dynamicui.cpp
+dynamicui_SOURCES = dynamicui.cpp 
+nodist_dynamicui_SOURCES = qrc_dynamicui.cpp
 directui_SOURCES = directui.cpp
 inheritui_SOURCES = inheritui.cpp QuarterViewer.h QuarterViewer.cpp
 superimposition_SOURCES = superimposition.cpp
-examiner_SOURCES = examiner.cpp qrc_examiner.cpp
-mdi_SOURCES = mdi.cpp moc_MdiMainWindow.cpp MdiMainWindow.cpp MdiMainWindow.h MdiQuarterWidget.cpp MdiQuarterWidget.h
+examiner_SOURCES = examiner.cpp 
+nodist_examiner_SOURCES = qrc_examiner.cpp
+mdi_SOURCES = mdi.cpp MdiMainWindow.cpp MdiMainWindow.h MdiQuarterWidget.cpp MdiQuarterWidget.h
+nodist_mdi_SOURCES = moc_MdiMainWindow.cpp
 
 CLEANFILES = \
         minimal.exe \
@@ -359,14 +362,14 @@ am_directui_OBJECTS = directui-directui.$(OBJEXT)
 directui_OBJECTS = $(am_directui_OBJECTS)
 @BUILD_WITH_MSVC_TRUE@directui_DEPENDENCIES =
 @BUILD_WITH_MSVC_FALSE@directui_DEPENDENCIES =
-am_dynamicui_OBJECTS = dynamicui-dynamicui.$(OBJEXT) \
-	dynamicui-qrc_dynamicui.$(OBJEXT)
-dynamicui_OBJECTS = $(am_dynamicui_OBJECTS)
+am_dynamicui_OBJECTS = dynamicui-dynamicui.$(OBJEXT)
+nodist_dynamicui_OBJECTS = dynamicui-qrc_dynamicui.$(OBJEXT)
+dynamicui_OBJECTS = $(am_dynamicui_OBJECTS) $(nodist_dynamicui_OBJECTS)
 @BUILD_WITH_MSVC_TRUE@dynamicui_DEPENDENCIES =
 @BUILD_WITH_MSVC_FALSE@dynamicui_DEPENDENCIES =
-am_examiner_OBJECTS = examiner-examiner.$(OBJEXT) \
-	examiner-qrc_examiner.$(OBJEXT)
-examiner_OBJECTS = $(am_examiner_OBJECTS)
+am_examiner_OBJECTS = examiner-examiner.$(OBJEXT)
+nodist_examiner_OBJECTS = examiner-qrc_examiner.$(OBJEXT)
+examiner_OBJECTS = $(am_examiner_OBJECTS) $(nodist_examiner_OBJECTS)
 @BUILD_WITH_MSVC_TRUE@examiner_DEPENDENCIES =
 @BUILD_WITH_MSVC_FALSE@examiner_DEPENDENCIES =
 am_inheritui_OBJECTS = inheritui-inheritui.$(OBJEXT) \
@@ -374,9 +377,10 @@ am_inheritui_OBJECTS = inheritui-inheritui.$(OBJEXT) \
 inheritui_OBJECTS = $(am_inheritui_OBJECTS)
 @BUILD_WITH_MSVC_TRUE@inheritui_DEPENDENCIES =
 @BUILD_WITH_MSVC_FALSE@inheritui_DEPENDENCIES =
-am_mdi_OBJECTS = mdi-mdi.$(OBJEXT) mdi-moc_MdiMainWindow.$(OBJEXT) \
-	mdi-MdiMainWindow.$(OBJEXT) mdi-MdiQuarterWidget.$(OBJEXT)
-mdi_OBJECTS = $(am_mdi_OBJECTS)
+am_mdi_OBJECTS = mdi-mdi.$(OBJEXT) mdi-MdiMainWindow.$(OBJEXT) \
+	mdi-MdiQuarterWidget.$(OBJEXT)
+nodist_mdi_OBJECTS = mdi-moc_MdiMainWindow.$(OBJEXT)
+mdi_OBJECTS = $(am_mdi_OBJECTS) $(nodist_mdi_OBJECTS)
 @BUILD_WITH_MSVC_TRUE@mdi_DEPENDENCIES =
 @BUILD_WITH_MSVC_FALSE@mdi_DEPENDENCIES =
 am_minimal_OBJECTS = minimal-minimal.$(OBJEXT)
@@ -421,7 +425,7 @@ DIST_SOURCES = $(directui_SOURCES) $(dynamicui_SOURCES) \
 	$(examiner_SOURCES) $(inheritui_SOURCES) $(mdi_SOURCES) \
 	$(minimal_SOURCES) $(superimposition_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(directui_SOURCES) $(dynamicui_SOURCES) $(examiner_SOURCES) $(inheritui_SOURCES) $(mdi_SOURCES) $(minimal_SOURCES) $(superimposition_SOURCES)
+SOURCES = $(directui_SOURCES) $(dynamicui_SOURCES) $(nodist_dynamicui_SOURCES) $(examiner_SOURCES) $(nodist_examiner_SOURCES) $(inheritui_SOURCES) $(mdi_SOURCES) $(nodist_mdi_SOURCES) $(minimal_SOURCES) $(superimposition_SOURCES)
 
 all: all-am
 
@@ -781,39 +785,6 @@ mdi-mdi.lo: mdi.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -c -o mdi-mdi.lo `test -f 'mdi.cpp' || echo '$(srcdir)/'`mdi.cpp
 
-mdi-moc_MdiMainWindow.o: moc_MdiMainWindow.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -MT mdi-moc_MdiMainWindow.o -MD -MP -MF "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o mdi-moc_MdiMainWindow.o `test -f 'moc_MdiMainWindow.cpp' || echo '$(srcdir)/'`moc_MdiMainWindow.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo" "$(DEPDIR)/mdi-moc_MdiMainWindow.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_MdiMainWindow.cpp' object='mdi-moc_MdiMainWindow.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/mdi-moc_MdiMainWindow.Po' tmpdepfile='$(DEPDIR)/mdi-moc_MdiMainWindow.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -c -o mdi-moc_MdiMainWindow.o `test -f 'moc_MdiMainWindow.cpp' || echo '$(srcdir)/'`moc_MdiMainWindow.cpp
-
-mdi-moc_MdiMainWindow.obj: moc_MdiMainWindow.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -MT mdi-moc_MdiMainWindow.obj -MD -MP -MF "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o mdi-moc_MdiMainWindow.obj `if test -f 'moc_MdiMainWindow.cpp'; then $(CYGPATH_W) 'moc_MdiMainWindow.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_MdiMainWindow.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo" "$(DEPDIR)/mdi-moc_MdiMainWindow.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_MdiMainWindow.cpp' object='mdi-moc_MdiMainWindow.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/mdi-moc_MdiMainWindow.Po' tmpdepfile='$(DEPDIR)/mdi-moc_MdiMainWindow.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -c -o mdi-moc_MdiMainWindow.obj `if test -f 'moc_MdiMainWindow.cpp'; then $(CYGPATH_W) 'moc_MdiMainWindow.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_MdiMainWindow.cpp'; fi`
-
-mdi-moc_MdiMainWindow.lo: moc_MdiMainWindow.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -MT mdi-moc_MdiMainWindow.lo -MD -MP -MF "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o mdi-moc_MdiMainWindow.lo `test -f 'moc_MdiMainWindow.cpp' || echo '$(srcdir)/'`moc_MdiMainWindow.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo" "$(DEPDIR)/mdi-moc_MdiMainWindow.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_MdiMainWindow.cpp' object='mdi-moc_MdiMainWindow.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/mdi-moc_MdiMainWindow.Plo' tmpdepfile='$(DEPDIR)/mdi-moc_MdiMainWindow.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -c -o mdi-moc_MdiMainWindow.lo `test -f 'moc_MdiMainWindow.cpp' || echo '$(srcdir)/'`moc_MdiMainWindow.cpp
-
 mdi-MdiMainWindow.o: MdiMainWindow.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -MT mdi-MdiMainWindow.o -MD -MP -MF "$(DEPDIR)/mdi-MdiMainWindow.Tpo" \
 @am__fastdepCXX_TRUE@	  -c -o mdi-MdiMainWindow.o `test -f 'MdiMainWindow.cpp' || echo '$(srcdir)/'`MdiMainWindow.cpp; \
@@ -879,6 +850,39 @@ mdi-MdiQuarterWidget.lo: MdiQuarterWidget.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/mdi-MdiQuarterWidget.Plo' tmpdepfile='$(DEPDIR)/mdi-MdiQuarterWidget.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -c -o mdi-MdiQuarterWidget.lo `test -f 'MdiQuarterWidget.cpp' || echo '$(srcdir)/'`MdiQuarterWidget.cpp
+
+mdi-moc_MdiMainWindow.o: moc_MdiMainWindow.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -MT mdi-moc_MdiMainWindow.o -MD -MP -MF "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o mdi-moc_MdiMainWindow.o `test -f 'moc_MdiMainWindow.cpp' || echo '$(srcdir)/'`moc_MdiMainWindow.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo" "$(DEPDIR)/mdi-moc_MdiMainWindow.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_MdiMainWindow.cpp' object='mdi-moc_MdiMainWindow.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/mdi-moc_MdiMainWindow.Po' tmpdepfile='$(DEPDIR)/mdi-moc_MdiMainWindow.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -c -o mdi-moc_MdiMainWindow.o `test -f 'moc_MdiMainWindow.cpp' || echo '$(srcdir)/'`moc_MdiMainWindow.cpp
+
+mdi-moc_MdiMainWindow.obj: moc_MdiMainWindow.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -MT mdi-moc_MdiMainWindow.obj -MD -MP -MF "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o mdi-moc_MdiMainWindow.obj `if test -f 'moc_MdiMainWindow.cpp'; then $(CYGPATH_W) 'moc_MdiMainWindow.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_MdiMainWindow.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo" "$(DEPDIR)/mdi-moc_MdiMainWindow.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_MdiMainWindow.cpp' object='mdi-moc_MdiMainWindow.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/mdi-moc_MdiMainWindow.Po' tmpdepfile='$(DEPDIR)/mdi-moc_MdiMainWindow.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -c -o mdi-moc_MdiMainWindow.obj `if test -f 'moc_MdiMainWindow.cpp'; then $(CYGPATH_W) 'moc_MdiMainWindow.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_MdiMainWindow.cpp'; fi`
+
+mdi-moc_MdiMainWindow.lo: moc_MdiMainWindow.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -MT mdi-moc_MdiMainWindow.lo -MD -MP -MF "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o mdi-moc_MdiMainWindow.lo `test -f 'moc_MdiMainWindow.cpp' || echo '$(srcdir)/'`moc_MdiMainWindow.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo" "$(DEPDIR)/mdi-moc_MdiMainWindow.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/mdi-moc_MdiMainWindow.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_MdiMainWindow.cpp' object='mdi-moc_MdiMainWindow.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/mdi-moc_MdiMainWindow.Plo' tmpdepfile='$(DEPDIR)/mdi-moc_MdiMainWindow.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(mdi_CPPFLAGS) $(CPPFLAGS) $(mdi_CXXFLAGS) $(CXXFLAGS) -c -o mdi-moc_MdiMainWindow.lo `test -f 'moc_MdiMainWindow.cpp' || echo '$(srcdir)/'`moc_MdiMainWindow.cpp
 
 minimal-minimal.o: minimal.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(minimal_CPPFLAGS) $(CPPFLAGS) $(minimal_CXXFLAGS) $(CXXFLAGS) -MT minimal-minimal.o -MD -MP -MF "$(DEPDIR)/minimal-minimal.Tpo" \

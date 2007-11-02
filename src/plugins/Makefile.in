@@ -233,12 +233,22 @@ PrivateHeaders = QuarterWidgetPlugin.h
 RegularSources = QuarterWidgetPlugin.cpp
 BuiltSources = moc_QuarterWidgetPlugin.cpp
 
+BUILT_SOURCES = $(BuiltSources)
+
 libQuarterWidgetPlugin_la_SOURCES = \
-        $(RegularSources) $(BuiltSources) $(PrivateHeaders)
+        $(RegularSources) $(PrivateHeaders)
 
 
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
-        $(RegularSources) $(BuiltSources) $(PrivateHeaders)
+        $(RegularSources) $(PrivateHeaders)
+
+
+nodist_libQuarterWidgetPlugin_la_SOURCES = \
+        $(BuiltSources)
+
+
+nodist_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
+        $(BuiltSources)
 
 
 @BUILD_WITH_MSVC_TRUE@lib_LIBRARIES = QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
@@ -295,23 +305,27 @@ QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_AR = $(AR) cru
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_DEPENDENCIES =
 am__objects_1 = \
 	QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.$(OBJEXT)
-am__objects_2 = \
-	QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.$(OBJEXT)
-am__objects_3 =
+am__objects_2 =
 am_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
-	$(am__objects_1) $(am__objects_2) $(am__objects_3)
+	$(am__objects_1) $(am__objects_2)
+am__objects_3 = \
+	QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.$(OBJEXT)
+nodist_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
+	$(am__objects_3)
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
-	$(am_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS)
+	$(am_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS) \
+	$(nodist_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 
 libQuarterWidgetPlugin_la_LDFLAGS =
 libQuarterWidgetPlugin_la_DEPENDENCIES =
 am__objects_4 = libQuarterWidgetPlugin_la-QuarterWidgetPlugin.lo
+am_libQuarterWidgetPlugin_la_OBJECTS = $(am__objects_4) $(am__objects_2)
 am__objects_5 = libQuarterWidgetPlugin_la-moc_QuarterWidgetPlugin.lo
-am_libQuarterWidgetPlugin_la_OBJECTS = $(am__objects_4) $(am__objects_5) \
-	$(am__objects_3)
+nodist_libQuarterWidgetPlugin_la_OBJECTS = $(am__objects_5)
 libQuarterWidgetPlugin_la_OBJECTS = \
-	$(am_libQuarterWidgetPlugin_la_OBJECTS)
+	$(am_libQuarterWidgetPlugin_la_OBJECTS) \
+	$(nodist_libQuarterWidgetPlugin_la_OBJECTS)
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = \
@@ -338,9 +352,10 @@ DIST_SOURCES = \
 	$(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES) \
 	$(libQuarterWidgetPlugin_la_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES) $(libQuarterWidgetPlugin_la_SOURCES)
+SOURCES = $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES) $(nodist_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES) $(libQuarterWidgetPlugin_la_SOURCES) $(nodist_libQuarterWidgetPlugin_la_SOURCES)
 
-all: all-am
+all: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) all-am
 
 .SUFFIXES:
 .SUFFIXES: .cpp .lo .o .obj
@@ -685,12 +700,14 @@ distdir: $(DISTFILES)
 	  fi; \
 	done
 check-am: all-am
-check: check-am
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-am
 all-am: Makefile $(LIBRARIES) $(LTLIBRARIES) all-local
 
 installdirs:
 	$(mkinstalldirs) $(DESTDIR)$(libdir) $(DESTDIR)$(libdir)
-install: install-am
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-am
 install-exec: install-exec-am
 install-data: install-data-am
 uninstall: uninstall-am
@@ -715,6 +732,7 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-am
 
 clean-am: clean-generic clean-libLIBRARIES clean-libLTLIBRARIES \

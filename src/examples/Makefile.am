@@ -29,12 +29,15 @@ endif
 noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition examiner mdi
 
 minimal_SOURCES = minimal.cpp
-dynamicui_SOURCES = dynamicui.cpp qrc_dynamicui.cpp
+dynamicui_SOURCES = dynamicui.cpp 
+nodist_dynamicui_SOURCES = qrc_dynamicui.cpp
 directui_SOURCES = directui.cpp
 inheritui_SOURCES = inheritui.cpp QuarterViewer.h QuarterViewer.cpp
 superimposition_SOURCES = superimposition.cpp
-examiner_SOURCES = examiner.cpp qrc_examiner.cpp
-mdi_SOURCES = mdi.cpp moc_MdiMainWindow.cpp MdiMainWindow.cpp MdiMainWindow.h MdiQuarterWidget.cpp MdiQuarterWidget.h
+examiner_SOURCES = examiner.cpp 
+nodist_examiner_SOURCES = qrc_examiner.cpp
+mdi_SOURCES = mdi.cpp MdiMainWindow.cpp MdiMainWindow.h MdiQuarterWidget.cpp MdiQuarterWidget.h
+nodist_mdi_SOURCES = moc_MdiMainWindow.cpp
 
 CLEANFILES = \
         minimal.exe \
