@@ -12,7 +12,9 @@ pkgconfig_DATA= Quarter.pc
 
 EXTRA_DIST = \
 	Quarter.pc.in \
-	docs/quarter.doxygen.in
+	docs/quarter.doxygen.in \
+        cfg/wrapmsvc.exe \
+        cfg/errors.txt
 
 DISTCLEANFILES = docs/quarter.doxygen
 
