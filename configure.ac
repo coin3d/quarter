@@ -283,7 +283,7 @@ fi
 
 # we use some extra libs in Quarter
 if $sim_ac_framework; then
-  QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtDesigner -lQtUiTools"
+  QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtScript -Wl,-framework,QtDesigner -lQtUiTools"
   COIN_USE_LIBS="$COIN_USE_LIBS -Wl,-framework,Inventor"
   QT_USE_INCDIR=${sim_ac_qt_framework_dir}
 else
