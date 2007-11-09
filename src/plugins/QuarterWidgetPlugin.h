@@ -27,11 +27,11 @@
 
 namespace SIM { namespace Coin3D { namespace Quarter { namespace QtDesigner {
 
-class QuarterWidgetPlugin : public QObject, 
+class QuarterWidgetPlugin : public QObject,
                             public QDesignerCustomWidgetInterface {
   Q_OBJECT
   Q_INTERFACES(QDesignerCustomWidgetInterface)
-    
+
 public:
   QuarterWidgetPlugin(QObject * parent = 0);
   ~QuarterWidgetPlugin();
@@ -47,7 +47,7 @@ public:
   QString whatsThis(void) const;
   QWidget * createWidget(QWidget * parent);
   void initialize(QDesignerFormEditorInterface * core);
-  
+
 private slots:
   void widgetDestroyed(QObject * obj);
 

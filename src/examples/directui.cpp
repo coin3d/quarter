@@ -20,7 +20,7 @@
  *
 \**************************************************************************/
 
-/*!  
+/*!
   \page directui A Direct Approach
 
   This example demonstrate how to create a simple viewer without
@@ -59,7 +59,7 @@ main(int argc, char ** argv)
   root->addChild(col);
 
   root->addChild(new SoCone);
-  
+
   // Create a QuarterWidget for displaying a Coin scene graph
   ui.QuarterWidget->setSceneGraph(root);
 

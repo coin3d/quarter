@@ -38,7 +38,7 @@ MdiMainWindow::MdiMainWindow(void)
   this->setCentralWidget(this->workspace);
   this->setAcceptDrops(true);
   this->setWindowTitle(tr("Quarter MDI example"));
-  
+
   QMenu * filemenu = this->menuBar()->addMenu(tr("&File"));
   QMenu * windowmenu = this->menuBar()->addMenu(tr("&Windows"));
 
@@ -64,39 +64,39 @@ MdiMainWindow::MdiMainWindow(void)
 
 MdiMainWindow::~MdiMainWindow()
 {
-  
+
 }
 
-void 
+void
 MdiMainWindow::dragEnterEvent(QDragEnterEvent * event)
 {
   // just accept anything...
   event->acceptProposedAction();
 }
 
-void 
+void
 MdiMainWindow::dropEvent(QDropEvent * event)
 {
   const QMimeData * mimedata = event->mimeData();
-  if (mimedata->hasUrls()) { 
+  if (mimedata->hasUrls()) {
     QString path = mimedata->urls().takeFirst().path();
     this->open(path);
   }
 }
 
-void 
+void
 MdiMainWindow::closeEvent(QCloseEvent * event)
 {
   this->workspace->closeAllWindows();
 }
 
-void 
+void
 MdiMainWindow::open(void)
 {
   this->open(QFileDialog::getOpenFileName(this));
 }
 
-void 
+void
 MdiMainWindow::open(const QString & filename)
 {
   if (!filename.isEmpty()) {
@@ -104,7 +104,7 @@ MdiMainWindow::open(const QString & filename)
     if (existing) {
       this->workspace->setActiveWindow(existing);
       return;
-    }  
+    }
     MdiQuarterWidget * child = this->createMdiChild();
     if (child->loadFile(filename)) {
       this->statusBar()->showMessage(tr("File loaded"), 2000);
@@ -115,7 +115,7 @@ MdiMainWindow::open(const QString & filename)
   }
 }
 
-MdiQuarterWidget * 
+MdiQuarterWidget *
 MdiMainWindow::findMdiChild(const QString & filename)
 {
   QString canonicalpath = QFileInfo(filename).canonicalFilePath();
@@ -128,15 +128,15 @@ MdiMainWindow::findMdiChild(const QString & filename)
   return 0;
 }
 
-MdiQuarterWidget * 
+MdiQuarterWidget *
 MdiMainWindow::createMdiChild(void)
 {
   MdiQuarterWidget * widget = new MdiQuarterWidget(NULL, this->firstwidget);
   this->workspace->addWindow(widget);
-  
+
   if (this->firstwidget = 0) {
     this->firstwidget = widget;
   }
-  
+
   return widget;
 }

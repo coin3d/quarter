@@ -37,35 +37,35 @@ SensorManager::SensorManager(void)
   this->idletimer = new QTimer;
   this->delaytimer = new QTimer;
   this->timerqueuetimer = new QTimer;
-  
+
   this->idletimer->setSingleShot(true);
   this->delaytimer->setSingleShot(true);
   this->timerqueuetimer->setSingleShot(true);
-  
+
   this->connect(this->idletimer, SIGNAL(timeout(void)), this, SLOT(idleTimeout()));
   this->connect(this->delaytimer, SIGNAL(timeout(void)), this, SLOT(delayTimeout()));
   this->connect(this->timerqueuetimer, SIGNAL(timeout(void)), this, SLOT(timerQueueTimeout()));
-  
+
   SoDB::getSensorManager()->setChangedCallback(SensorManager::sensorQueueChanged, this);
   SoDB::setRealTimeInterval(1.0 / 25.0);
   SoSceneManager::enableRealTimeUpdate(FALSE);
 }
 
-SensorManager::~SensorManager() 
+SensorManager::~SensorManager()
 {
   delete this->idletimer;
   delete this->delaytimer;
   delete this->timerqueuetimer;
 }
 
-void 
+void
 SensorManager::sensorQueueChanged(void * closure)
 {
   SensorManager * thisp = (SensorManager * ) closure;
   SoSensorManager * sensormanager = SoDB::getSensorManager();
   assert(sensormanager);
   assert(thisp);
-  
+
   SbTime interval;
   if (sensormanager->isTimerSensorPending(interval)) {
     interval -= SbTime::getTimeOfDay();
@@ -80,7 +80,7 @@ SensorManager::sensorQueueChanged(void * closure)
   } else if (thisp->timerqueuetimer->isActive()) {
     thisp->timerqueuetimer->stop();
   }
-  
+
   if (sensormanager->isDelaySensorPending()) {
     thisp->idletimer->start(0);
 
@@ -100,7 +100,7 @@ SensorManager::sensorQueueChanged(void * closure)
   }
 }
 
-void 
+void
 SensorManager::idleTimeout(void)
 {
   SoDB::getSensorManager()->processTimerQueue();
@@ -108,17 +108,17 @@ SensorManager::idleTimeout(void)
   SensorManager::sensorQueueChanged(this);
 }
 
-void 
+void
 SensorManager::timerQueueTimeout(void)
 {
   SoDB::getSensorManager()->processTimerQueue();
-  SensorManager::sensorQueueChanged(this);  
+  SensorManager::sensorQueueChanged(this);
 }
 
-void 
+void
 SensorManager::delayTimeout(void)
 {
   SoDB::getSensorManager()->processTimerQueue();
   SoDB::getSensorManager()->processDelayQueue(FALSE);
-  SensorManager::sensorQueueChanged(this);  
+  SensorManager::sensorQueueChanged(this);
 }

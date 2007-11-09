@@ -54,7 +54,7 @@ KeyboardHandler::~KeyboardHandler()
 
 /*! Translates from QKeyEvents to SoKeyboardEvents
  */
-const SoEvent * 
+const SoEvent *
 KeyboardHandler::translateEvent(QEvent * event)
 {
   switch (event->type()) {

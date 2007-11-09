@@ -35,10 +35,10 @@ class KeyboardHandlerP {
 public:
   KeyboardHandlerP(void);
   ~KeyboardHandlerP();
-  
+
   const SoEvent * keyEvent(QKeyEvent * event);
   void initKeyMap(void);
-  
+
   typedef QMap<Qt::Key, SoKeyboardEvent::Key> KeyMap;
   static KeyMap * keyboardmap;
   static KeyMap * keypadmap;

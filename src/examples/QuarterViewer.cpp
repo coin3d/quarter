@@ -41,7 +41,7 @@ QuarterViewer::QuarterViewer(QWidget * parent)
   root->addChild(col);
 
   this->root->addChild(new SoCone);
-  
+
   // Create a QuarterWidget for displaying a Coin scene graph
   ui.QuarterWidget->setSceneGraph(this->root);
 }

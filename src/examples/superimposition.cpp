@@ -20,7 +20,7 @@
  *
 \**************************************************************************/
 
-/*!  
+/*!
   This example shows a minimal stand-alone
   example of a QuarterViewer without the use of ui files
  */
@@ -40,27 +40,27 @@
 #include <Quarter/QuarterApplication.h>
 
 using namespace SIM::Coin3D::Quarter;
-  
+
 // create a simple scene displaying some text to be super-imposed on
 // the normal scene graph
-static SoSeparator * create_superimposition(void) 
+static SoSeparator * create_superimposition(void)
 {
   SoSeparator * root = new SoSeparator;
   SoText2 * text = new SoText2;
   SoBaseColor * color = new SoBaseColor;
   SoOrthographicCamera * orthocam = new SoOrthographicCamera;
-  
+
   text->string.setValue("Superimposed Scene");
   color->rgb.setValue(SbColor(1.0, 0.0, 0.0));
-  
+
   orthocam->height.setValue(1.0);
   orthocam->nearDistance.setValue(0.0);
   orthocam->farDistance.setValue(1.0);
-  
+
   root->addChild(orthocam);
   root->addChild(color);
   root->addChild(text);
-  
+
   return root;
 }
 
@@ -78,9 +78,9 @@ main(int argc, char ** argv)
   SoBaseColor * col = new SoBaseColor;
   col->rgb = SbColor(1, 1, 0);
   root->addChild(col);
-  
+
   root->addChild(new SoCone);
-  
+
   // Create a QuarterWidget for displaying a Coin scene graph
   QuarterWidget * viewer = new QuarterWidget;
   viewer->setSceneGraph(root);
@@ -98,6 +98,6 @@ main(int argc, char ** argv)
   root->unref();
   superimposed->unref();
   delete viewer;
-  
+
   return 0;
 }

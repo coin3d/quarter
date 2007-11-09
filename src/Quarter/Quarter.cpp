@@ -25,7 +25,7 @@
   Quarter is a light-weight glue library that provides seamless
   integration between Systems in Motions's \COIN high-level 3D
   visualization library and Trolltech's \QT 2D user interface
-  library. 
+  library.
 
   \QT and \COIN is a perfect match since they are both open source,
   widely portable and easy to use. Quarter has evolved from Systems in
@@ -59,30 +59,30 @@
   #include <Inventor/nodes/SoBaseColor.h>
   #include <Inventor/nodes/SoCone.h>
   #include <Inventor/nodes/SoSeparator.h>
-  
+
   #include <Quarter/QuarterWidget.h>
   #include <Quarter/QuarterApplication.h>
-  
+
   using namespace SIM::Coin3D::Quarter;
-  
+
   int
   main(int argc, char ** argv)
   {
     // Initializes SoQt library (and implicitly also the Coin and Qt
     // libraries).
     QuarterApplication app(argc, argv);
-    
+
     // Make a dead simple scene graph by using the Coin library, only
     // containing a single yellow cone under the scenegraph root.
     SoSeparator * root = new SoSeparator;
     root->ref();
-    
+
     SoBaseColor * col = new SoBaseColor;
     col->rgb = SbColor(1, 1, 0);
     root->addChild(col);
-    
+
     root->addChild(new SoCone);
-    
+
     // Create a QuarterWidget for displaying a Coin scene graph
     QuarterWidget * viewer = new QuarterWidget;
     viewer->setSceneGraph(root);
@@ -106,7 +106,7 @@
   \page examples More Examples
 
   The examples code is included in Quarter and can be found in the
-  src/examples subdirectory. 
+  src/examples subdirectory.
 
   \subpage directui
 
@@ -159,7 +159,7 @@ Quarter::init(void)
     fprintf(stderr, "Quarter is already initialized\n");
     return;
   }
-  
+
   SoDB::init();
   SoNodeKit::init();
   SoInteraction::init();

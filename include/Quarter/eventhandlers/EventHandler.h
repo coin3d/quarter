@@ -30,7 +30,7 @@ class QEvent;
 namespace SIM { namespace Coin3D { namespace Quarter {
 
 class EventManager;
-      
+
 class QUARTER_DLL_API EventHandler {
 public:
   EventHandler(void) {}

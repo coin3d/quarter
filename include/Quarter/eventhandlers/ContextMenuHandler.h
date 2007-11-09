@@ -34,7 +34,7 @@ class QUARTER_DLL_API ContextMenuHandler : public EventHandler {
 public:
   ContextMenuHandler(void);
   virtual ~ContextMenuHandler();
-  
+
   virtual bool handleEvent(QEvent * event);
 
 private:

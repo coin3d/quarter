@@ -20,7 +20,7 @@
  *
 \**************************************************************************/
 
-/*! \class SIM::Coin3D::Quarter::EventManager EventManager.h Quarter/devices/EventManager.h 
+/*! \class SIM::Coin3D::Quarter::EventManager EventManager.h Quarter/devices/EventManager.h
 
   \brief The EventManager class is responsible for holding a list of
   devices which can translate events such as a MouseHandler and
@@ -74,7 +74,7 @@ EventManager::handleEvent(QEvent * qevent)
 /*!
   Returns the QuarterWidget this devicemanager belongs to
  */
-QuarterWidget * 
+QuarterWidget *
 EventManager::getWidget(void) const
 {
   return this->quarterwidget;
@@ -83,7 +83,7 @@ EventManager::getWidget(void) const
 /*!
   Register a device for event translation
  */
-void 
+void
 EventManager::registerEventHandler(EventHandler * handler)
 {
   if (!this->eventhandlers.contains(handler)) {
@@ -95,7 +95,7 @@ EventManager::registerEventHandler(EventHandler * handler)
 /*!
   unregister a device
  */
-void 
+void
 EventManager::unregisterEventHandler(EventHandler * handler)
 {
   if (this->eventhandlers.contains(handler)) {

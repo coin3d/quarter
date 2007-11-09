@@ -43,7 +43,7 @@ ContextMenuHandlerP::ContextMenuHandlerP(ContextMenuHandler * publ)
 
 ContextMenuHandlerP::~ContextMenuHandlerP()
 {
-  
+
 }
 
 bool
@@ -52,7 +52,7 @@ ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
   QList<RenderModePair *> rendermodes;
   QList<StereoModePair *> stereomodes;
   QList<TransparencyTypePair *> transparencytypes;
-  
+
   rendermodes.append(new RenderModePair(SoRenderManager::AS_IS, "as is"));
   rendermodes.append(new RenderModePair(SoRenderManager::WIREFRAME, "wireframe"));
   rendermodes.append(new RenderModePair(SoRenderManager::WIREFRAME_OVERLAY, "wireframe overlay"));
@@ -102,7 +102,7 @@ ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
     rendermodegroup->addAction(action);
     rendermenu->addAction(action);
   }
-  
+
   foreach(StereoModePair * stereomode, stereomodes) {
     QAction * action = new QAction(stereomode->second, this);
     action->setCheckable(true);
@@ -123,10 +123,10 @@ ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
     transparencymenu->addAction(action);
   }
 
-  connect(rendermodegroup, SIGNAL(triggered(QAction *)), 
+  connect(rendermodegroup, SIGNAL(triggered(QAction *)),
           this, SLOT(changeRenderMode(QAction *)));
-  
-  connect(stereomodegroup, SIGNAL(triggered(QAction *)), 
+
+  connect(stereomodegroup, SIGNAL(triggered(QAction *)),
           this, SLOT(changeStereoMode(QAction *)));
 
   connect(transparencytypegroup, SIGNAL(triggered(QAction *)),
@@ -135,14 +135,14 @@ ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
   contextmenu->addMenu(rendermenu);
   contextmenu->addMenu(stereomenu);
   contextmenu->addMenu(transparencymenu);
-  
+
   contextmenu->exec(event->globalPos());
 
   // clean up
   foreach(RenderModePair * rendermode, rendermodes) delete rendermode;
   foreach(StereoModePair * stereomode, stereomodes) delete stereomode;
   foreach(TransparencyTypePair * transparencytype, transparencytypes) delete transparencytype;
-  
+
   delete rendermenu;
   delete stereomenu;
   delete transparencymenu;
@@ -166,12 +166,12 @@ ContextMenuHandlerP::changeStereoMode(QAction * action)
 {
   const QuarterWidget * quarterwidget = PUBLIC(this)->manager->getWidget();
   SoRenderManager * rendermanager = quarterwidget->getSoRenderManager();
-  
+
   QVariant stereomode = action->data();
   rendermanager->setStereoMode((SoRenderManager::StereoMode)stereomode.toInt());
 }
 
-void 
+void
 ContextMenuHandlerP::changeTransparencyType(QAction * action)
 {
   QuarterWidget * quarterwidget = PUBLIC(this)->manager->getWidget();

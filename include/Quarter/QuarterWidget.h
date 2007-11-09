@@ -53,13 +53,13 @@ public:
   uint32_t getCacheContextId(void) const;
 
   void setTransparencyType(SoGLRenderAction::TransparencyType type);
-  
+
   virtual void setSceneGraph(SoNode * root);
   virtual SoNode * getSceneGraph(void) const;
   DeviceManager * getDeviceManager(void) const;
   SoEventManager * getSoEventManager(void) const;
   SoRenderManager * getSoRenderManager(void) const;
-                                                   
+
 public slots:
   virtual void viewAll(void);
 

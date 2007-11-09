@@ -40,7 +40,7 @@ public:
 
   bool handleEvent(QEvent * event);
   QuarterWidget * getWidget(void) const;
-  
+
   void registerEventHandler(EventHandler * handler);
   void unregisterEventHandler(EventHandler * handler);
 

@@ -26,10 +26,10 @@
 
 using namespace SIM::Coin3D::Quarter;
 
-KeyboardHandlerP::KeyboardHandlerP(void) 
+KeyboardHandlerP::KeyboardHandlerP(void)
 {
   this->keyboard = new SoKeyboardEvent;
-  
+
   if (keyboardmap == NULL) {
     keyboardmap = new KeyMap;
     keypadmap = new KeyMap;
@@ -42,20 +42,20 @@ KeyboardHandlerP::~KeyboardHandlerP()
   delete this->keyboard;
 }
 
-const SoEvent * 
+const SoEvent *
 KeyboardHandlerP::keyEvent(QKeyEvent * qevent)
 {
   const Qt::KeyboardModifiers modifiers = qevent->modifiers();
-  
+
   this->keyboard->setTime(SbTime::getTimeOfDay());
   this->keyboard->setShiftDown(modifiers & Qt::ShiftModifier);
   this->keyboard->setCtrlDown(modifiers & Qt::ControlModifier);
   this->keyboard->setAltDown(modifiers & Qt::AltModifier);
-  
+
   (qevent->type() == QEvent::KeyPress) ?
     this->keyboard->setState(SoButtonEvent::DOWN):
     this->keyboard->setState(SoButtonEvent::UP);
-  
+
   Qt::Key qkey = (Qt::Key) qevent->key();
 
   SoKeyboardEvent::Key sokey = (modifiers & Qt::KeypadModifier) ?
@@ -74,7 +74,7 @@ KeyboardHandlerP::KeyMap * KeyboardHandlerP::keypadmap = NULL;
 
 void
 KeyboardHandlerP::initKeyMap(void)
-{  
+{
   // keyboard
   keyboardmap->insert(Qt::Key_Shift,   SoKeyboardEvent::LEFT_SHIFT);
   keyboardmap->insert(Qt::Key_Alt,     SoKeyboardEvent::LEFT_ALT);
@@ -192,7 +192,7 @@ KeyboardHandlerP::initKeyMap(void)
   keypadmap->insert(Qt::Key_Delete,   SoKeyboardEvent::PAD_DELETE);
   keypadmap->insert(Qt::Key_Period,   SoKeyboardEvent::PAD_PERIOD);
 
-  
+
 #if 0 // FIXME: don't know what to do with these (20070306 frodo)
   keyboardmap->insert(Qt::, SoKeyboardEvent::RIGHT_SHIFT);
   keyboardmap->insert(Qt::, SoKeyboardEvent::RIGHT_CONTROL);

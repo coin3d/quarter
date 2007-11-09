@@ -41,7 +41,7 @@ namespace SIM { namespace Coin3D { namespace Quarter { namespace QtDesigner {
 
 class QuarterWidgetPluginP {
 public:
-  QuarterWidgetPluginP(void) {} 
+  QuarterWidgetPluginP(void) {}
   bool initialized;
   QGLWidget * firstwidget; // for context sharing
 };
@@ -74,7 +74,7 @@ QuarterWidgetPlugin::~QuarterWidgetPlugin()
   delete PRIVATE(this);
 }
 
-void 
+void
 QuarterWidgetPlugin::initialize(QDesignerFormEditorInterface *)
 {
   if (PRIVATE(this)->initialized) {
@@ -85,7 +85,7 @@ QuarterWidgetPlugin::initialize(QDesignerFormEditorInterface *)
   PRIVATE(this)->initialized = true;
 }
 
-bool 
+bool
 QuarterWidgetPlugin::isInitialized(void) const
 {
   return PRIVATE(this)->initialized;
@@ -104,13 +104,13 @@ QuarterWidgetPlugin::createWidget(QWidget * parent)
   return widget;
 }
 
-QString 
+QString
 QuarterWidgetPlugin::name(void) const
 {
   return "SIM::Coin3D::Quarter::QuarterWidget";
 }
 
-QString 
+QString
 QuarterWidgetPlugin::group(void) const
 {
   return "Display Widgets [Coin3D]";
@@ -122,35 +122,35 @@ QuarterWidgetPlugin::icon(void) const
   return QIcon();
 }
 
-QString 
+QString
 QuarterWidgetPlugin::toolTip(void) const
 {
   return "";
 }
 
-QString 
+QString
 QuarterWidgetPlugin::whatsThis(void) const
 {
   return "";
 }
 
-bool 
+bool
 QuarterWidgetPlugin::isContainer(void) const
 {
   return false;
 }
 
-void 
+void
 QuarterWidgetPlugin::widgetDestroyed(QObject * obj)
 {
   QuarterWidget * widget = (QuarterWidget*) obj;
   if (widget == PRIVATE(this)->firstwidget) PRIVATE(this)->firstwidget = NULL;
 }
 
-QString 
+QString
 QuarterWidgetPlugin::domXml(void) const
 {
-  return 
+  return
     "<widget class=\"SIM::Coin3D::Quarter::QuarterWidget\" \
              name=\"SIM::Coin3D::Quarter::QuarterWidget\">\n"
     " <property name=\"geometry\">\n"
@@ -170,7 +170,7 @@ QuarterWidgetPlugin::domXml(void) const
     "</widget>\n";
 }
 
-QString 
+QString
 QuarterWidgetPlugin::includeFile(void) const
 {
   return "Quarter/QuarterWidget.h";

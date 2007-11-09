@@ -49,19 +49,19 @@ public:
     this->mousebutton = new SoMouseButtonEvent;
     this->windowsize = SbVec2s(-1, -1);
   }
-  
+
   ~MouseHandlerP() {
     delete this->location2;
     delete this->mousebutton;
   }
-  
+
   const SoEvent * mouseMoveEvent(QMouseEvent * event);
   const SoEvent * mouseWheelEvent(QWheelEvent * event);
   const SoEvent * mouseButtonEvent(QMouseEvent * event);
-  
+
   void resizeEvent(QResizeEvent * event);
   void setModifiers(SoEvent * soevent, QInputEvent * qevent);
-  
+
   class SoLocation2Event * location2;
   class SoMouseButtonEvent * mousebutton;
   SbVec2s windowsize;
@@ -86,7 +86,7 @@ MouseHandler::~MouseHandler()
 /*! Translates from QMouseEvents to SoLocation2Events and
   SoMouseButtonEvents
  */
-const SoEvent * 
+const SoEvent *
 MouseHandler::translateEvent(QEvent * event)
 {
   switch (event->type()) {
@@ -105,7 +105,7 @@ MouseHandler::translateEvent(QEvent * event)
   }
 }
 
-void 
+void
 MouseHandlerP::setModifiers(SoEvent * soevent, QInputEvent * qevent)
 {
   // FIXME: How do we get the time from the qevent? (20070306 frodo)
@@ -115,14 +115,14 @@ MouseHandlerP::setModifiers(SoEvent * soevent, QInputEvent * qevent)
   soevent->setAltDown(qevent->modifiers() & Qt::AltModifier);
 }
 
-void 
+void
 MouseHandlerP::resizeEvent(QResizeEvent * event)
 {
   this->windowsize = SbVec2s(event->size().width(),
                              event->size().height());
 }
 
-const SoEvent * 
+const SoEvent *
 MouseHandlerP::mouseMoveEvent(QMouseEvent * event)
 {
   MouseHandlerP::setModifiers(this->location2, event);
@@ -133,7 +133,7 @@ MouseHandlerP::mouseMoveEvent(QMouseEvent * event)
   return this->location2;
 }
 
-const SoEvent * 
+const SoEvent *
 MouseHandlerP::mouseWheelEvent(QWheelEvent * event)
 {
   MouseHandlerP::setModifiers(this->mousebutton, event);
@@ -144,14 +144,14 @@ MouseHandlerP::mouseWheelEvent(QWheelEvent * event)
   // the wheel was rotated forwards away from the user; a negative
   // value indicates that the wheel was rotated backwards toward the
   // user.
-  (event->delta() > 0) ? 
+  (event->delta() > 0) ?
     this->mousebutton->setButton(SoMouseButtonEvent::BUTTON4):
     this->mousebutton->setButton(SoMouseButtonEvent::BUTTON5);
 
   return this->mousebutton;
 }
 
-const SoEvent * 
+const SoEvent *
 MouseHandlerP::mouseButtonEvent(QMouseEvent * event)
 {
   MouseHandlerP::setModifiers(this->mousebutton, event);
@@ -160,7 +160,7 @@ MouseHandlerP::mouseButtonEvent(QMouseEvent * event)
   (event->type() == QEvent::MouseButtonPress) ?
     this->mousebutton->setState(SoButtonEvent::DOWN):
     this->mousebutton->setState(SoButtonEvent::UP);
-  
+
   switch (event->button()) {
   case Qt::LeftButton:
     this->mousebutton->setButton(SoMouseButtonEvent::BUTTON1);

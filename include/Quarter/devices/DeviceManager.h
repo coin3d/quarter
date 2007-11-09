@@ -41,7 +41,7 @@ public:
 
   const SoEvent * translateEvent(QEvent * event);
   const QuarterWidget * getWidget(void) const;
-  
+
   void registerDevice(DeviceHandler * device);
   void unregisterDevice(DeviceHandler * device);
 

@@ -52,7 +52,7 @@ public:
   }
   void dragEnterEvent(QDragEnterEvent * event);
   void dropEvent(QDropEvent * event);
-  
+
   QStringList suffixes;
   DragDropHandler * master;
 };
@@ -93,31 +93,31 @@ DragDropHandler::handleEvent(QEvent * event)
     return false;
   }
 }
-  
-void 
+
+void
 DragDropHandlerP::dragEnterEvent(QDragEnterEvent * event)
 {
   const QMimeData * mimedata = event->mimeData();
   if (!mimedata->hasUrls() & !mimedata->hasText()) return;
 
-  if (mimedata->hasUrls()) { 
+  if (mimedata->hasUrls()) {
     QFileInfo fileinfo(mimedata->urls().takeFirst().path());
     QString suffix = fileinfo.suffix().toLower();
     if (!this->suffixes.contains(suffix)) { return; }
   }
-  
+
   event->acceptProposedAction();
 }
 
-void 
+void
 DragDropHandlerP::dropEvent(QDropEvent * event)
 {
   const QMimeData * mimedata = event->mimeData();
-  
+
   SoSeparator * root;
   SoInput in;
-  
-  if (mimedata->hasUrls()) { 
+
+  if (mimedata->hasUrls()) {
     QUrl url = mimedata->urls().takeFirst();
     if (url.scheme().isEmpty() || url.scheme().toLower() == QString("file") ) {
       // attempt to open file
@@ -133,7 +133,7 @@ DragDropHandlerP::dropEvent(QDropEvent * event)
   // attempt to import it
   root = SoDB::readAll(&in);
   if (root == NULL) return;
-  
+
   // get QuarterWidget and set new scenegraph
   QuarterWidget * quarterwidget = (QuarterWidget *) PUBLIC(this)->manager->getWidget();
   quarterwidget->setSceneGraph(root);

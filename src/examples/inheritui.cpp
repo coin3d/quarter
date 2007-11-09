@@ -22,7 +22,7 @@
 
 /*!
   \page inheritui Single Inheritance
-  
+
   This example demonstrate how to create a simple viewer by
   subclassing a generated class from an ui file
 */

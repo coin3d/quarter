@@ -20,7 +20,7 @@
  *
 \**************************************************************************/
 
-/*!  \class SIM::Coin3D::Quarter::EventHandler EventHandler.h Quarter/eventhandlers/EventHandler.h 
+/*!  \class SIM::Coin3D::Quarter::EventHandler EventHandler.h Quarter/eventhandlers/EventHandler.h
 
   \brief The EventHandler class is the base class for eventhandlers
   such as the ContextMenuHandler and DragDropHandler.
@@ -31,7 +31,7 @@
 
 using namespace SIM::Coin3D::Quarter;
 
-void 
+void
 EventHandler::setManager(EventManager * manager)
 {
   this->manager = manager;

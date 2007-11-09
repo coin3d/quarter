@@ -20,7 +20,7 @@
  *
 \**************************************************************************/
 
-/*!  
+/*!
   This example shows a minimal stand-alone
   example of a QuarterViewer without the use of ui files
  */
@@ -33,7 +33,7 @@
 #include <Quarter/QuarterApplication.h>
 
 using namespace SIM::Coin3D::Quarter;
-  
+
 int
 main(int argc, char ** argv)
 {
@@ -50,7 +50,7 @@ main(int argc, char ** argv)
   root->addChild(col);
 
   root->addChild(new SoCone);
-  
+
   // Create a QuarterWidget for displaying a Coin scene graph
   QuarterWidget * viewer = new QuarterWidget;
   viewer->setSceneGraph(root);

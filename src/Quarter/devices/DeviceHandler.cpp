@@ -20,7 +20,7 @@
  *
 \**************************************************************************/
 
-/*!  \class SIM::Coin3D::Quarter::DeviceHandler DeviceHandler.h Quarter/devices/DeviceHandler.h 
+/*!  \class SIM::Coin3D::Quarter::DeviceHandler DeviceHandler.h Quarter/devices/DeviceHandler.h
 
   \brief The DeviceHandler class is the base class for eventhandlers
   such as the KeyboardHandler and MouseHandler. It can be subclassed
@@ -32,7 +32,7 @@
 
 using namespace SIM::Coin3D::Quarter;
 
-void 
+void
 DeviceHandler::setManager(DeviceManager * manager)
 {
   this->manager = manager;

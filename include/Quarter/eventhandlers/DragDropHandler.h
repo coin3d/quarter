@@ -36,7 +36,7 @@ public:
   DragDropHandler(void);
   virtual ~DragDropHandler();
   virtual bool handleEvent(QEvent * event);
-  
+
 private:
   friend class DragDropHandlerP;
   class DragDropHandlerP * pimpl;

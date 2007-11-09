@@ -31,11 +31,11 @@ class QUARTER_DLL_API Quarter {
 public:
   static void init(void);
   static void clean(void);
-  
+
 private:
   Quarter(void);
   ~Quarter();
-  
+
   class SensorManager * sensormanager;
 };
 

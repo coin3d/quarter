@@ -35,9 +35,9 @@ class QUARTER_DLL_API KeyboardHandler : public DeviceHandler {
 public:
   KeyboardHandler(void);
   virtual ~KeyboardHandler();
-  
+
   virtual const SoEvent * translateEvent(QEvent * event);
-  
+
 private:
   friend class KeyboardHandlerP;
   class KeyboardHandlerP * pimpl;

@@ -20,7 +20,7 @@
  *
 \**************************************************************************/
 
-/*!  
+/*!
   \class SIM::Coin3D::Quarter::QuarterWidget QuarterWidget.h Quarter/QuarterWidget.h
 
   \brief The QuarterWidget class is the main class in Quarter. It
@@ -61,7 +61,7 @@ using namespace SIM::Coin3D::Quarter;
 
 /*! constructor */
 QuarterWidget::QuarterWidget(QWidget * parent, const QGLWidget * sharewidget)
-  : inherited(parent, sharewidget, 0) 
+  : inherited(parent, sharewidget, 0)
 {
   this->constructor(sharewidget);
 }
@@ -77,7 +77,7 @@ void
 QuarterWidget::constructor(const QGLWidget * sharewidget)
 {
   PRIVATE(this) = new QuarterWidgetP(this, sharewidget);
-  
+
   PRIVATE(this)->scene = NULL;
 
   PRIVATE(this)->sorendermanager = new SoRenderManager;
@@ -86,23 +86,23 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->eventmanager = new EventManager(this);
   PRIVATE(this)->headlight = new SoDirectionalLight;
   PRIVATE(this)->headlight->ref();
-  
+
   PRIVATE(this)->sorendermanager->setAutoClipping(SoRenderManager::VARIABLE_NEAR_PLANE);
   PRIVATE(this)->sorendermanager->setRenderCallback(QuarterWidget::renderCB, this);
   PRIVATE(this)->sorendermanager->setBackgroundColor(SbColor(0.0f, 0.0f, 0.0f));
   PRIVATE(this)->sorendermanager->activate();
-  
+
   PRIVATE(this)->soeventmanager->setNavigationState(SoEventManager::MIXED_NAVIGATION);
-  
+
   PRIVATE(this)->devicemanager->registerDevice(new MouseHandler);
   PRIVATE(this)->devicemanager->registerDevice(new KeyboardHandler);
-  
+
   PRIVATE(this)->eventmanager->registerEventHandler(new ContextMenuHandler);
   PRIVATE(this)->eventmanager->registerEventHandler(new DragDropHandler);
 
   // set up a cache context for the default SoGLRenderAction
   PRIVATE(this)->sorendermanager->getGLRenderAction()->setCacheContext(this->getCacheContextId());
-  
+
   this->setMouseTracking(TRUE);
 
   // set focus policy to Strong by default
@@ -127,7 +127,7 @@ QuarterWidget::~QuarterWidget()
   Enable/diable the headlight. This wille toggle the SoDirectionalLigh::on
   field (returned from getHeadlight()).
 */
-void 
+void
 QuarterWidget::enableHeadlight(const SbBool onoff)
 {
   PRIVATE(this)->headlight->on = onoff;
@@ -136,7 +136,7 @@ QuarterWidget::enableHeadlight(const SbBool onoff)
 /*!
   Returns the light used for the headlight.
 */
-SoDirectionalLight * 
+SoDirectionalLight *
 QuarterWidget::getHeadlight(void)
 {
   return PRIVATE(this)->headlight;
@@ -145,7 +145,7 @@ QuarterWidget::getHeadlight(void)
 /*!
   Returns the Coin cache context id for this widget.
 */
-uint32_t 
+uint32_t
 QuarterWidget::getCacheContextId(void) const
 {
   return PRIVATE(this)->getCacheContextId();
@@ -154,7 +154,7 @@ QuarterWidget::getCacheContextId(void) const
 /*!
   This method sets the transparency type to be used for the scene.
 */
-void 
+void
 QuarterWidget::setTransparencyType(SoGLRenderAction::TransparencyType type)
 {
   assert(PRIVATE(this)->sorendermanager);
@@ -180,7 +180,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
   SoCamera * camera = NULL;
   SoSeparator * superscene = NULL;
   SbBool viewall = FALSE;
-  
+
   if (node) {
     node->ref();
 
@@ -191,16 +191,16 @@ QuarterWidget::setSceneGraph(SoNode * node)
     superscene->addChild(PRIVATE(this)->headlight);
 
     // if the scene does not contain a camera, add one
-    if (!(camera = PRIVATE(this)->searchForCamera(node))) { 
+    if (!(camera = PRIVATE(this)->searchForCamera(node))) {
       camera = new SoPerspectiveCamera;
       superscene->addChild(camera);
       viewall = TRUE;
     }
-    
+
     superscene->addChild(node);
     node->unref();
   }
-  
+
   PRIVATE(this)->soeventmanager->setSceneGraph(superscene);
   PRIVATE(this)->sorendermanager->setSceneGraph(superscene);
   PRIVATE(this)->soeventmanager->setCamera(camera);
@@ -213,7 +213,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
 /*!
   Returns pointer to root of scene graph
 */
-SoNode * 
+SoNode *
 QuarterWidget::getSceneGraph(void) const
 {
   return PRIVATE(this)->scene;
@@ -222,7 +222,7 @@ QuarterWidget::getSceneGraph(void) const
 /*!
   Returns a pointer to the device manager
  */
-DeviceManager * 
+DeviceManager *
 QuarterWidget::getDeviceManager(void) const
 {
   return PRIVATE(this)->devicemanager;
@@ -231,7 +231,7 @@ QuarterWidget::getDeviceManager(void) const
 /*!
   Returns a pointer to the render manager
  */
-SoRenderManager * 
+SoRenderManager *
 QuarterWidget::getSoRenderManager(void) const
 {
   return PRIVATE(this)->sorendermanager;
@@ -240,7 +240,7 @@ QuarterWidget::getSoRenderManager(void) const
 /*!
   Returns a pointer to the event manager
  */
-SoEventManager * 
+SoEventManager *
 QuarterWidget::getSoEventManager(void) const
 {
   return PRIVATE(this)->soeventmanager;
@@ -249,7 +249,7 @@ QuarterWidget::getSoEventManager(void) const
 /*!
   Reposition the current camera to display the entire scene
  */
-void 
+void
 QuarterWidget::viewAll(void)
 {
   PRIVATE(this)->soeventmanager->getNavigationSystem()->viewAll();
@@ -287,7 +287,7 @@ QuarterWidget::paintGL(void)
 /*!
   Overridden from QGLWidget to render the scenegraph
  */
-void 
+void
 QuarterWidget::actualRedraw(void)
 {
   PRIVATE(this)->sorendermanager->render(TRUE, TRUE);
@@ -296,12 +296,12 @@ QuarterWidget::actualRedraw(void)
 /*!
 
  */
-void 
+void
 QuarterWidget::renderCB(void * closure, SoRenderManager *)
 {
   assert(closure);
   QuarterWidget * thisp = (QuarterWidget *) closure;
-  
+
   thisp->makeCurrent();
   thisp->actualRedraw();
   if (thisp->doubleBuffer()) {
@@ -315,7 +315,7 @@ QuarterWidget::renderCB(void * closure, SoRenderManager *)
   method could be overridden in a subclass in order to catch events of
   particular interest to the application programmer.
  */
-bool 
+bool
 QuarterWidget::event(QEvent * event)
 {
   if (PRIVATE(this)->eventmanager->handleEvent(event)) {

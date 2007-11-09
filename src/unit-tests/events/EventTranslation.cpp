@@ -27,16 +27,16 @@ EventTranslation::initTestCase(void)
 {
   Quarter::init();
   this->quarterwidget = new QuarterWidget;
-  
+
   SoSeparator * root = new SoSeparator;
 
   SoEventCallback * eventcallback = new SoEventCallback;
-  eventcallback->addEventCallback(SoEvent::getClassTypeId(), 
-                                  event_cb, 
+  eventcallback->addEventCallback(SoEvent::getClassTypeId(),
+                                  event_cb,
                                   this->quarterwidget);
-  
+
   root->addChild(eventcallback);
-  
+
   this->quarterwidget->setSceneGraph(root);
 }
 
@@ -47,39 +47,39 @@ EventTranslation::cleanupTestCase(void)
   Quarter::clean();
 }
 
-void 
+void
 EventTranslation::translateKeypadEvents_data(void)
 {
   QTest::addColumn<QTestEventList>("qevent");
   QTest::addColumn<int>("sokey");
 
-  KeyboardHandlerP::KeyMap::const_iterator it = 
+  KeyboardHandlerP::KeyMap::const_iterator it =
     KeyboardHandlerP::keypadmap->constBegin();
-  
+
   while (it != KeyboardHandlerP::keypadmap->constEnd()) {
     Qt::Key qkey = it.key();
     SoKeyboardEvent::Key sokey = it.value();
-    
+
     QTestEventList list;
     list.addKeyPress(qkey, Qt::KeypadModifier);
-    
+
     QTest::newRow("Key") << list << int(sokey);
-    
+
     it++;
   }
-  
+
 }
 
-void 
+void
 EventTranslation::translateKeypadEvents(void)
 {
   QFETCH(QTestEventList, qevent);
   QFETCH(int, sokey);
-  
+
   qevent.simulate(this->quarterwidget);
-  
+
   QCOMPARE(bool(currentevent->isOfType(SoKeyboardEvent::getClassTypeId())), true);
-  
+
   SoKeyboardEvent * keyboardevent = (SoKeyboardEvent *) currentevent;
   QCOMPARE(int(keyboardevent->getKey()), sokey);
 }
@@ -96,9 +96,9 @@ EventTranslation::translateKeyboardEvents_data(void)
   modifiers += Qt::ControlModifier;
   modifiers += Qt::AltModifier;
 
-  KeyboardHandlerP::KeyMap::const_iterator it = 
+  KeyboardHandlerP::KeyMap::const_iterator it =
     KeyboardHandlerP::keyboardmap->constBegin();
-  
+
   while (it != KeyboardHandlerP::keyboardmap->constEnd()) {
     Qt::Key qkey = it.key();
     SoKeyboardEvent::Key sokey = it.value();
@@ -107,7 +107,7 @@ EventTranslation::translateKeyboardEvents_data(void)
       QTestEventList list;
       list.addKeyPress(qkey, modifier);
       QTest::newRow("Key") << list << int(sokey) << int(modifier);
-    }    
+    }
     it++;
   }
 }
@@ -118,11 +118,11 @@ EventTranslation::translateKeyboardEvents(void)
   QFETCH(QTestEventList, qevent);
   QFETCH(int, sokey);
   QFETCH(int, qmodifier);
-  
+
   qevent.simulate(this->quarterwidget);
-  
+
   QCOMPARE(bool(currentevent->isOfType(SoKeyboardEvent::getClassTypeId())), true);
-  
+
   SoKeyboardEvent * keyboardevent = (SoKeyboardEvent *) currentevent;
   QCOMPARE(int(keyboardevent->getKey()), sokey);
 
@@ -131,7 +131,7 @@ EventTranslation::translateKeyboardEvents(void)
   if (keyboardevent->getKey() != SoKeyboardEvent::LEFT_ALT &&
       keyboardevent->getKey() != SoKeyboardEvent::LEFT_SHIFT &&
       keyboardevent->getKey() != SoKeyboardEvent::LEFT_CONTROL) {
-    
+
     QCOMPARE(qmodifier == Qt::ShiftModifier, bool(keyboardevent->wasShiftDown()));
     QCOMPARE(qmodifier == Qt::ControlModifier, bool(keyboardevent->wasCtrlDown()));
     QCOMPARE(qmodifier == Qt::AltModifier, bool(keyboardevent->wasAltDown()));

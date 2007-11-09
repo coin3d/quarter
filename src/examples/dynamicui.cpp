@@ -20,9 +20,9 @@
  *
 \**************************************************************************/
 
-/*! 
+/*!
   \page dynamicui Dynamic Loading
-  
+
   This example demonstrate how to dynamically load a QuarterWidget
   from a Qt Designer ui file.
 */
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
   QWidget * widget = loader.load(&file);
   assert(widget);
   file.close();
-  
+
   // Get the QuarterWidget
   QuarterWidget * viewer = qFindChild<QuarterWidget *>(widget, "QuarterWidget");
   assert(viewer && "could not find child QuarterWidget in ui file");
@@ -60,14 +60,14 @@ int main(int argc, char *argv[])
   // containing a single yellow cone under the scenegraph root.
   SoSeparator * root = new SoSeparator;
   root->ref();
-  
+
   SoBaseColor * col = new SoBaseColor;
   col->rgb = SbColor(1, 1, 0);
   root->addChild(col);
 
   root->addChild(new SoCone);
   viewer->setSceneGraph(root);
-  
+
   // Pop up the QuarterWidget
   widget->show();
   // Loop until exit.
@@ -75,6 +75,6 @@ int main(int argc, char *argv[])
   // Clean up resources.
   root->unref();
   delete widget;
-  
+
   return 0;
 }

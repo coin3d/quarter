@@ -20,7 +20,7 @@
  *
 \**************************************************************************/
 
-/*!  
+/*!
   \page mdi Multiple Document Interface
 
   This example shows how to implement a simple Multiple Document

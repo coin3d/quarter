@@ -28,16 +28,16 @@
 MdiQuarterWidget::MdiQuarterWidget(QWidget * parent, const QGLWidget * sharewidget)
   : inherited(parent, sharewidget)
 {
-  
+
 }
 
 MdiQuarterWidget::~MdiQuarterWidget()
 {
-  
+
 }
 
 
-bool 
+bool
 MdiQuarterWidget::loadFile(const QString & filename)
 {
   SoInput in;
@@ -53,13 +53,13 @@ MdiQuarterWidget::loadFile(const QString & filename)
   return false;
 }
 
-const QString & 
+const QString &
 MdiQuarterWidget::currentFile(void) const
 {
   return this->currentfile;
 }
 
-QSize 
+QSize
 MdiQuarterWidget::minimumSizeHint(void) const
 {
   return QSize(640, 480);

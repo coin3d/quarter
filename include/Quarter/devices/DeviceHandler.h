@@ -41,7 +41,7 @@ public:
     handling
    */
   virtual const SoEvent * translateEvent(QEvent * event) = 0;
-  
+
 protected:
   void setManager(DeviceManager * manager);
 

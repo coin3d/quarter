@@ -20,9 +20,9 @@
  *
 \**************************************************************************/
 
-/*! 
+/*!
   \page examiner Examiner type Viewer
-  
+
   This example demonstrate how to create a simple viewer that can load
   Inventor files
 */
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
   QWidget * widget = loader.load(&file);
   assert(widget);
   file.close();
-  
+
   // Get the QuarterWidget
   QuarterWidget * viewer = qFindChild<QuarterWidget *>(widget, "QuarterWidget");
   assert(viewer && "could not find child QuarterWidget in ui file");
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
   // Make a dead simple scene graph by using the Coin library, only
   // containing a single yellow cone under the scenegraph root.
   SoSeparator * root = NULL;
-  
+
   if (argc < 2) {
     root = new SoSeparator;
     root->addChild(new SoCone);
@@ -69,23 +69,23 @@ int main(int argc, char *argv[])
     SbBool ok = in.openFile(argv[1]);
     if (!ok) {
       qFatal("could not open file %s\n", argv[1]);
-      exit(1); 
+      exit(1);
     }
-    
+
     // ..and import it.
     root = SoDB::readAll(&in);
   }
-  
-  if (root == NULL) { 
+
+  if (root == NULL) {
     qFatal("could not read file %s\n", argv[1]);
-    exit(1); 
+    exit(1);
   }
-  
+
   root->ref();
-  
+
   root->addChild(new SoCone);
   viewer->setSceneGraph(root);
-  
+
   // Pop up the QuarterWidget
   widget->show();
   // Loop until exit.
@@ -93,6 +93,6 @@ int main(int argc, char *argv[])
   // Clean up resources.
   root->unref();
   delete widget;
-  
+
   return 0;
 }

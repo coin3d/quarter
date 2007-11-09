@@ -41,10 +41,10 @@ class EventManager;
 
 class QuarterWidgetP {
 public:
-  
+
   QuarterWidgetP(class QuarterWidget * master, const QGLWidget * sharewidget);
   ~QuarterWidgetP();
-  
+
   SoCamera * searchForCamera(SoNode * root);
   uint32_t getCacheContextId(void) const;
 
@@ -61,7 +61,7 @@ public:
 private:
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);
 };
-  
+
 #endif // QUARTER_QUARTERWIDGETP_H
 
 }}} // namespace

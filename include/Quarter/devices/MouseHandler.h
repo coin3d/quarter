@@ -35,7 +35,7 @@ class QUARTER_DLL_API MouseHandler : public DeviceHandler {
 public:
   MouseHandler(void);
   virtual ~MouseHandler();
-  
+
   virtual const SoEvent * translateEvent(QEvent * event);
 
 private:

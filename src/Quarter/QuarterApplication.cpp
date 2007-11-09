@@ -20,12 +20,12 @@
  *
 \**************************************************************************/
 
-/*! 
-  \class SIM::Coin3D::Quarter::QuarterApplication 
-  QuarterApplication.h 
+/*!
+  \class SIM::Coin3D::Quarter::QuarterApplication
+  QuarterApplication.h
   Quarter/QuarterApplication.h
 
-  \brief 
+  \brief
   The QuarterApplication does not do anything particularly
   interesting, other than initialize Quarter in its constructor and
   deinitialize Quarter in its destructor.

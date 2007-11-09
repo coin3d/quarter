@@ -40,25 +40,25 @@ public:
 
 static SbList <QuarterWidgetP_cachecontext *> * cachecontext_list = NULL;
 
-QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * sharewidget) 
+QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * sharewidget)
 {
   this->master = masterptr;
   this->cachecontext = findCacheContext(masterptr, sharewidget);
 }
 
-QuarterWidgetP::~QuarterWidgetP() 
+QuarterWidgetP::~QuarterWidgetP()
 {
   this->cachecontext->widgetlist.removeItem((const QGLWidget*) this->master);
 }
 
-SoCamera * 
+SoCamera *
 QuarterWidgetP::searchForCamera(SoNode * root)
 {
   SoSearchAction sa;
   sa.setInterest(SoSearchAction::FIRST);
   sa.setType(SoCamera::getClassTypeId());
   sa.apply(root);
-  
+
   if (sa.getPath()) {
     SoNode * node = sa.getPath()->getTail();
     if (node && node->isOfType(SoCamera::getClassTypeId())) {
@@ -68,13 +68,13 @@ QuarterWidgetP::searchForCamera(SoNode * root)
   return NULL;
 }
 
-uint32_t 
+uint32_t
 QuarterWidgetP::getCacheContextId(void) const
 {
   return this->cachecontext->id;
 }
 
-QuarterWidgetP_cachecontext * 
+QuarterWidgetP_cachecontext *
 QuarterWidgetP::findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget)
 {
   if (cachecontext_list == NULL) {
@@ -83,7 +83,7 @@ QuarterWidgetP::findCacheContext(QuarterWidget * widget, const QGLWidget * share
   }
   for (int i = 0; i < cachecontext_list->getLength(); i++) {
     QuarterWidgetP_cachecontext * cachecontext = (*cachecontext_list)[i];
-    
+
     for (int j = 0; j < cachecontext->widgetlist.getLength(); j++) {
       if (cachecontext->widgetlist[j] == sharewidget) {
         cachecontext->widgetlist.append((const QGLWidget*) widget);
@@ -95,6 +95,6 @@ QuarterWidgetP::findCacheContext(QuarterWidget * widget, const QGLWidget * share
   cachecontext->id = SoGLCacheContextElement::getUniqueCacheContext();
   cachecontext->widgetlist.append((const QGLWidget*) widget);
   cachecontext_list->append(cachecontext);
-  
+
   return cachecontext;
 }
