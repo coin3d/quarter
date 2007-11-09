@@ -118,11 +118,13 @@ DragDropHandlerP::dropEvent(QDropEvent * event)
   SoInput in;
   
   if (mimedata->hasUrls()) { 
-    QString path = mimedata->urls().takeFirst().path();
-    // attempt to open file
-    if (!in.openFile(path.toLatin1().constData())) return;
-
+    QUrl url = mimedata->urls().takeFirst();
+    if (url.scheme().isEmpty() || url.scheme().toLower() == QString("file") ) {
+      // attempt to open file
+      if (!in.openFile(url.toLocalFile().toLatin1().constData())) return;
+    }
   } else if (mimedata->hasText()) {
+    /* FIXME 2007-11-09 preng: dropping text buffer does not work on Windows Vista. */
     QByteArray bytes = mimedata->text().toUtf8();
     in.setBuffer((void *) bytes.constData(), bytes.size());
     if (!in.isValidBuffer()) return;
