@@ -98,7 +98,7 @@ void
 DragDropHandlerP::dragEnterEvent(QDragEnterEvent * event)
 {
   const QMimeData * mimedata = event->mimeData();
-  if (!mimedata->hasUrls() & !mimedata->hasText()) return;
+  if (!mimedata->hasUrls() && !mimedata->hasText()) return;
 
   if (mimedata->hasUrls()) {
     QFileInfo fileinfo(mimedata->urls().takeFirst().path());
