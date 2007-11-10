@@ -56,6 +56,7 @@ public:
 
   virtual void setSceneGraph(SoNode * root);
   virtual SoNode * getSceneGraph(void) const;
+  virtual void qglClearColor(const QColor & c) const;
   DeviceManager * getDeviceManager(void) const;
   SoEventManager * getSoEventManager(void) const;
   SoRenderManager * getSoRenderManager(void) const;
