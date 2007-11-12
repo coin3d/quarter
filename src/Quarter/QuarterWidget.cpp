@@ -332,11 +332,15 @@ QuarterWidget::event(QEvent * event)
 /*!
   Set backgroundcolor to a given QColor
 
-  Remember QColors are given in integers between 0 and 255, as opposed to SbColor which is in [0,1]
+  Remember QColors are given in integers between 0 and 255, as opposed
+  to SbColor which is in [0,1]
  */
 void 
-QuarterWidget::qglClearColor(const QColor & c) const {
-  PRIVATE(this)->sorendermanager->setBackgroundColor(SbColor(c.red()/255.0,c.green()/255.0,c.blue()/255.0));
+QuarterWidget::qglClearColor(const QColor & c) const 
+{
+  PRIVATE(this)->sorendermanager->setBackgroundColor(SbColor(c.red() / 255.0,
+                                                             c.green() / 255.0,
+                                                             c.blue() / 255.0));
 }
 
 
