@@ -47,6 +47,8 @@ AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
 BUILD_HTMLPAGES_FALSE = @BUILD_HTMLPAGES_FALSE@
 BUILD_HTMLPAGES_TRUE = @BUILD_HTMLPAGES_TRUE@
+BUILD_LIBRARY_FALSE = @BUILD_LIBRARY_FALSE@
+BUILD_LIBRARY_TRUE = @BUILD_LIBRARY_TRUE@
 BUILD_WITH_MSVC = @BUILD_WITH_MSVC@
 BUILD_WITH_MSVC_FALSE = @BUILD_WITH_MSVC_FALSE@
 BUILD_WITH_MSVC_TRUE = @BUILD_WITH_MSVC_TRUE@
@@ -215,7 +217,10 @@ target_alias = @target_alias@
 
 @BUILD_HTMLPAGES_TRUE@HTMLDIR = html
 
-SUBDIRS = src include $(HTMLDIR)
+@BUILD_LIBRARY_TRUE@SRCDIRS = src
+@BUILD_LIBRARY_FALSE@SRCDIRS = 
+
+SUBDIRS = include $(HTMLDIR) $(SRCDIRS)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = Quarter.pc
@@ -247,7 +252,7 @@ DIST_COMMON = README AUTHORS COPYING ChangeLog INSTALL Makefile.am \
 	cfg/config.sub cfg/depcomp cfg/install-sh cfg/ltmain.sh \
 	cfg/missing cfg/mkinstalldirs config.h.in configure \
 	configure.ac
-DIST_SUBDIRS = src include html
+DIST_SUBDIRS = include html src
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 

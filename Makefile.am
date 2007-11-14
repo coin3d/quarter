@@ -5,7 +5,13 @@ else
 HTMLDIR =
 endif
 
-SUBDIRS = src include $(HTMLDIR)
+if BUILD_LIBRARY
+SRCDIRS = src
+else
+SRCDIRS =
+endif
+
+SUBDIRS = include $(HTMLDIR) $(SRCDIRS)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA= Quarter.pc

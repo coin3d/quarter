@@ -64,6 +64,76 @@ AC_LANG(C++)
 
 test "x$prefix" = xNONE && prefix=$ac_default_prefix
 
+# *******************************************************************
+# disable build if you just want to generate doc.
+
+sim_ac_build_library=true
+AC_ARG_ENABLE(
+  [build],
+  [AC_HELP_STRING([--disable-build], [disable configuration for library build])],
+  [case $enableval in
+  no | false)
+   sim_ac_build_library=false
+   SIM_AC_CONFIGURATION_SETTING([Quarter build type], [build disabled])
+   ;;
+  esac])
+
+AM_CONDITIONAL(BUILD_LIBRARY, $sim_ac_build_library)
+
+# *******************************************************************
+# Do we want to build the documentation?
+
+AC_ARG_VAR([htmldir],
+           [destination for HTML docs (default ${datadir}/Quarter/html)])
+
+AC_ARG_ENABLE(html,
+  AC_HELP_STRING([--enable-html], [build and install Quarter HTML documentation]),
+  [case $enableval in
+    yes | true) want_html=yes ;;
+    *)          want_html=no ;;
+  esac],
+  [want_html=no])
+
+case $htmldir in
+"")
+  htmldir="$datadir/Quarter/html"
+  ;;
+/*)
+  # do nothing - absolute path
+  ;;
+*)
+  htmldir="\${prefix}/$htmldir"
+  ;;
+esac
+
+AC_SUBST(htmldir)
+
+# Used in the Doxygen parameter file.
+AC_SUBST([QUARTER_DOC_HTML], [`echo $want_html | tr '[a-z]' '[A-Z]'`])
+AC_SUBST([quarter_html_dir], [`pwd`/html])
+AM_CONDITIONAL(BUILD_HTMLPAGES, test x"$want_html" = x"yes")
+
+if test x"$want_html" = x"yes"; then
+  SIM_AC_DOXYGEN_TOOL([], [SIM_AC_ERROR([no-doxygen])])
+  # Perl is used for the Doxygen-based doc generation
+  AC_PATH_PROG(sim_ac_perl_exe, perl, false, $PATH)
+  if test x"$sim_ac_perl_exe" = xfalse; then
+    AC_MSG_ERROR([Could not find the Perl executable, which is needed for Doxygen doc generation.])
+  fi
+  SIM_AC_CONFIGURATION_SETTING([HTML installation], [$htmldir])
+fi
+
+# path_tag is used to identify paths in docs/coin.doxygen that needs to be
+# transformed using cygpath under cygwin.
+
+case $host in
+*-cygwin) path_tag="<PATH>" ;;
+*)        path_tag= ;;
+esac
+
+AC_SUBST(path_tag)
+
+
 # **************************************************************************
 # decide if we want to build Mac OS X framework
 
@@ -119,7 +189,7 @@ fi
 
 # *******************************************************************
 # try to use pkg-config
-if $sim_ac_enable_pkgconfig; then
+if $sim_ac_enable_pkgconfig && $sim_ac_build_library; then
   PKG_CONFIG_PATH="${prefix}/lib/pkgconfig/:$PKG_CONFIG_PATH"
   export PKG_CONFIG_PATH
   
@@ -241,44 +311,46 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_qt_fai
       ;;
   esac
 
-  SIM_AC_CHECK_QT([
-    QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qt_cppflags"
-    QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $sim_ac_qt_cxxflags"
-    QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qt_ldflags"
-    QT_USE_LIBS="$sim_ac_qt_libs $QT_USE_LIBS"
-    CPPFLAGS="$CPPFLAGS $sim_ac_qt_cppflags"
-    LDFLAGS="$LDFLAGS $sim_ac_qt_ldflags"
-    LIBS="$sim_ac_qt_libs $LIBS"
-  ], [
-    SIM_AC_ERROR([no-qt])
-  ])
+  if $sim_ac_build_library; then
+    SIM_AC_CHECK_QT([
+      QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qt_cppflags"
+      QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $sim_ac_qt_cxxflags"
+      QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qt_ldflags"
+      QT_USE_LIBS="$sim_ac_qt_libs $QT_USE_LIBS"
+      CPPFLAGS="$CPPFLAGS $sim_ac_qt_cppflags"
+      LDFLAGS="$LDFLAGS $sim_ac_qt_ldflags"
+      LIBS="$sim_ac_qt_libs $LIBS"
+    ], [
+      SIM_AC_ERROR([no-qt])
+    ])
 
-  SIM_AC_CHECK_QGL([
-    QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
-    QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qgl_ldflags"
-    QT_USE_LIBS="$sim_ac_qgl_libs $QT_USE_LIBS"
-    QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
-  ], [
-    SIM_AC_ERROR([no-qgl])
-  ])
+    SIM_AC_CHECK_QGL([
+      QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
+      QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qgl_ldflags"
+      QT_USE_LIBS="$sim_ac_qgl_libs $QT_USE_LIBS"
+      QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
+    ], [
+      SIM_AC_ERROR([no-qgl])
+    ])
 
 
-  SIM_AC_QT_PROG(MOC, moc)
-  if test x"$MOC" = x"false"; then
-    SIM_AC_ERROR([no-moc])
-  fi
+    SIM_AC_QT_PROG(MOC, moc)
+    if test x"$MOC" = x"false"; then
+      SIM_AC_ERROR([no-moc])
+    fi
   
-  SIM_AC_QT_PROG(UIC, uic)
-  if test x"$UIC" = x"false"; then
-    SIM_AC_ERROR([no-uic])
-  fi
+    SIM_AC_QT_PROG(UIC, uic)
+    if test x"$UIC" = x"false"; then
+      SIM_AC_ERROR([no-uic])
+    fi
 
-  SIM_AC_QT_PROG(RCC, rcc)
-  if test x"$RCC" = x"false"; then
-    SIM_AC_ERROR([no-rcc])
-  fi
+    SIM_AC_QT_PROG(RCC, rcc)
+    if test x"$RCC" = x"false"; then
+      SIM_AC_ERROR([no-rcc])
+    fi
 
-  QT_USE_INCDIR="$sim_ac_qtdir/include"
+    QT_USE_INCDIR="$sim_ac_qtdir/include"
+  fi
 fi
 
 # we use some extra libs in Quarter
@@ -398,58 +470,6 @@ AC_SUBST(SUFFIX)
 SIM_AC_CONFIGURATION_SETTING([Quarter version], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA])
 SIM_AC_CONFIGURATION_SETTING([Quarter installation prefix], [$prefix])
 
-# *******************************************************************
-# Do we want to build the documentation?
-
-AC_ARG_VAR([htmldir],
-           [destination for HTML docs (default ${datadir}/Quarter/html)])
-
-AC_ARG_ENABLE(html,
-  AC_HELP_STRING([--enable-html], [build and install Quarter HTML documentation]),
-  [case $enableval in
-    yes | true) want_html=yes ;;
-    *)          want_html=no ;;
-  esac],
-  [want_html=no])
-
-case $htmldir in
-"")
-  htmldir="$datadir/Quarter/html"
-  ;;
-/*)
-  # do nothing - absolute path
-  ;;
-*)
-  htmldir="\${prefix}/$htmldir"
-  ;;
-esac
-
-AC_SUBST(htmldir)
-
-# Used in the Doxygen parameter file.
-AC_SUBST([QUARTER_DOC_HTML], [`echo $want_html | tr '[a-z]' '[A-Z]'`])
-AC_SUBST([quarter_html_dir], [`pwd`/html])
-AM_CONDITIONAL(BUILD_HTMLPAGES, test x"$want_html" = x"yes")
-
-if test x"$want_html" = x"yes"; then
-  SIM_AC_DOXYGEN_TOOL([], [SIM_AC_ERROR([no-doxygen])])
-  # Perl is used for the Doxygen-based doc generation
-  AC_PATH_PROG(sim_ac_perl_exe, perl, false, $PATH)
-  if test x"$sim_ac_perl_exe" = xfalse; then
-    AC_MSG_ERROR([Could not find the Perl executable, which is needed for Doxygen doc generation.])
-  fi
-  SIM_AC_CONFIGURATION_SETTING([HTML installation], [$htmldir])
-fi
-
-# path_tag is used to identify paths in docs/coin.doxygen that needs to be
-# transformed using cygpath under cygwin.
-
-case $host in
-*-cygwin) path_tag="<PATH>" ;;
-*)        path_tag= ;;
-esac
-
-AC_SUBST(path_tag)
 
 # Qt's moc wants Windows-style paths, so if the inputfile is an
 # absolute Cygwin-style path it needs conversion.
@@ -473,45 +493,47 @@ CPPFLAGS="$CPPFLAGS $QT_USE_CPPFLAGS"
 LDFLAGS="$LDFLAGS $QT_USE_LDFLAGS"
 LIBS="$LIBS $QT_USE_LIBS -lQtUiTools"
 
-AC_CACHE_CHECK([for Qt Designer plugins path], QT_DESIGNER_PLUGIN_PATH, [
-  AC_RUN_IFELSE(
-    [AC_LANG_SOURCE([
-#include <QtGui/QApplication>
-#include <QtCore/QFile>
-#include <QtCore/QStringList>
-#include <QtUiTools/QUiLoader>
+if $sim_ac_build_library; then
+  AC_CACHE_CHECK([for Qt Designer plugins path], QT_DESIGNER_PLUGIN_PATH, [
+    AC_RUN_IFELSE(
+      [AC_LANG_SOURCE([
+  #include <QtGui/QApplication>
+  #include <QtCore/QFile>
+  #include <QtCore/QStringList>
+  #include <QtUiTools/QUiLoader>
 
-int
-main(int argc, char **argv)
-{
-  QApplication app(argc, argv);
-  QUiLoader qld;
-  QStringList pluginPaths = qld.pluginPaths();
+  int
+  main(int argc, char **argv) 
+  {
+    QApplication app(argc, argv);
+    QUiLoader qld;
+    QStringList pluginPaths = qld.pluginPaths();
 
-  /* Assumption: first path entry contains the location within the
-   * system. 20070828 tamer. */
-    if (pluginPaths.size() <= 0) {
-    return 1;
+    /* Assumption: first path entry contains the location within the
+     * system. 20070828 tamer. */
+      if (pluginPaths.size() <= 0) {
+      return 1;
+    }
+
+    QFile file("conftest.out");
+    file.open(QIODevice::WriteOnly);
+    file.write(pluginPaths.at(0).toLocal8Bit().constData());
+    file.close();
+
+    return 0;
   }
+    ])],
+    [QT_DESIGNER_PLUGIN_PATH=`cat conftest.out`],
+    [AC_MSG_FAILURE([could not determine Qt Designer plugins path])])
+  ])
 
-  QFile file("conftest.out");
-  file.open(QIODevice::WriteOnly);
-  file.write(pluginPaths.at(0).toLocal8Bit().constData());
-  file.close();
+  CPPFLAGS="$sim_ac_qtdesignerpath_save_CPPFLAGS"
+  LDFLAGS="$sim_ac_qtdesignerpath_save_LDFLAGS"
+  LIBS="$sim_ac_qtdesignerpath_save_LIBS"
 
-  return 0;
-}
-  ])],
-  [QT_DESIGNER_PLUGIN_PATH=`cat conftest.out`],
-  [AC_MSG_FAILURE([could not determine Qt Designer plugins path])])
-])
-
-CPPFLAGS="$sim_ac_qtdesignerpath_save_CPPFLAGS"
-LDFLAGS="$sim_ac_qtdesignerpath_save_LDFLAGS"
-LIBS="$sim_ac_qtdesignerpath_save_LIBS"
-
-SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path], [$QT_DESIGNER_PLUGIN_PATH])
-AC_SUBST([QT_DESIGNER_PLUGIN_PATH])
+  SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path], [$QT_DESIGNER_PLUGIN_PATH])
+  AC_SUBST([QT_DESIGNER_PLUGIN_PATH])
+fi
 
 QUARTER_RELEASE=
 
