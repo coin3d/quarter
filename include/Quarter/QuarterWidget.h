@@ -27,6 +27,7 @@
 #include <Inventor/SbBasic.h>
 #include <Inventor/actions/SoGLRenderAction.h>
 #include <Quarter/Basic.h>
+#include <QtGui/QColor>
 
 class SoNode;
 class SoEvent;
@@ -42,6 +43,7 @@ class DeviceManager;
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   typedef QGLWidget inherited;
   Q_OBJECT
+  Q_PROPERTY(QColor backgroundColor READ getBackgroundColor WRITE setBackgroundColor)
 
 public:
   QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0);
@@ -53,10 +55,12 @@ public:
   uint32_t getCacheContextId(void) const;
 
   void setTransparencyType(SoGLRenderAction::TransparencyType type);
+  void setBackgroundColor(const QColor & color);
+  QColor getBackgroundColor(void) const;
 
   virtual void setSceneGraph(SoNode * root);
   virtual SoNode * getSceneGraph(void) const;
-  virtual void qglClearColor(const QColor & c) const;
+  
   DeviceManager * getDeviceManager(void) const;
   SoEventManager * getSoEventManager(void) const;
   SoRenderManager * getSoRenderManager(void) const;

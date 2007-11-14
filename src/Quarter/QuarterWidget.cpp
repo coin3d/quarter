@@ -336,12 +336,25 @@ QuarterWidget::event(QEvent * event)
   to SbColor which is in [0,1]
  */
 void 
-QuarterWidget::qglClearColor(const QColor & c) const 
+QuarterWidget::setBackgroundColor(const QColor & color)
 {
-  PRIVATE(this)->sorendermanager->setBackgroundColor(SbColor(c.red() / 255.0,
-                                                             c.green() / 255.0,
-                                                             c.blue() / 255.0));
+  PRIVATE(this)->sorendermanager->setBackgroundColor(SbColor(SbClamp(color.red() / 255.0, 0.0, 1.0),
+                                                             SbClamp(color.green() / 255.0, 0.0, 1.0),
+                                                             SbClamp(color.blue() / 255.0, 0.0, 1.0)));
 }
 
+/*!  
+  Returns color used for clearing the rendering area before
+  rendering the scene.
+ */
+QColor
+QuarterWidget::getBackgroundColor(void) const
+{
+  SbColor bg = PRIVATE(this)->sorendermanager->getBackgroundColor();
+
+  return QColor(SbClamp(int(bg[0] * 255.0), 0, 255),
+                SbClamp(int(bg[1] * 255.0), 0, 255),
+                SbClamp(int(bg[2] * 255.0), 0, 255));
+}
 
 #undef PRIVATE
