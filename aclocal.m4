@@ -8977,6 +8977,7 @@ if $sim_ac_with_qt; then
           for sim_ac_qt_libcheck in \
               "-lQtGui${sim_ac_qt_suffix}${sim_ac_qt_major_version} -lQtCore${sim_ac_qt_suffix}${sim_ac_qt_major_version}" \
               "-lQtGui -lQtCore" \
+              "-lQtGui -lQtCore -luser32 -lole32 -limm32 -lcomdlg32 -lgdi32 -lwinspool -lwinmm -ladvapi32 -lws2_32 -lshell32" \
               "-lqt-gl" \
               "-lqt-mt" \
               "-lqt" \
