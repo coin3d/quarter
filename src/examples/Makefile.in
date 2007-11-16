@@ -81,6 +81,7 @@ EXAMPLES_BUILD_CPPFLAGS = @EXAMPLES_BUILD_CPPFLAGS@
 EXAMPLES_BUILD_CXXFLAGS = @EXAMPLES_BUILD_CXXFLAGS@
 EXAMPLES_BUILD_LDFLAGS = @EXAMPLES_BUILD_LDFLAGS@
 EXAMPLES_BUILD_LIBFLAGS = @EXAMPLES_BUILD_LIBFLAGS@
+EXAMPLES_EXTRA_LIBS = @EXAMPLES_EXTRA_LIBS@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
@@ -297,15 +298,9 @@ EXAMPLES_CPPFLAGS = \
         $(QT_USE_CPPFLAGS)
 
 
-@BUILD_WITH_MSVC_TRUE@EXAMPLES_LIBS = \
-@BUILD_WITH_MSVC_TRUE@        $(QT_USE_LIBS) \
-@BUILD_WITH_MSVC_TRUE@        $(QUARTER_USE_LIBS) \
-@BUILD_WITH_MSVC_TRUE@        $(COIN_USE_LIBS) 
-
-@BUILD_WITH_MSVC_FALSE@EXAMPLES_LIBS = \
-@BUILD_WITH_MSVC_FALSE@        $(QT_USE_LIBS) \
-@BUILD_WITH_MSVC_FALSE@        $(QUARTER_USE_LIBS) \
-@BUILD_WITH_MSVC_FALSE@        $(COIN_USE_LIBS) 
+EXAMPLES_LIBS = \
+        $(QUARTER_USE_LIBS) \
+        $(EXAMPLES_EXTRA_LIBS) 
 
 
 minimal_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
@@ -362,37 +357,30 @@ PROGRAMS = $(noinst_PROGRAMS)
 
 am_directui_OBJECTS = directui-directui.$(OBJEXT)
 directui_OBJECTS = $(am_directui_OBJECTS)
-@BUILD_WITH_MSVC_TRUE@directui_DEPENDENCIES =
-@BUILD_WITH_MSVC_FALSE@directui_DEPENDENCIES =
+directui_DEPENDENCIES =
 am_dynamicui_OBJECTS = dynamicui-dynamicui.$(OBJEXT)
 nodist_dynamicui_OBJECTS = dynamicui-qrc_dynamicui.$(OBJEXT)
 dynamicui_OBJECTS = $(am_dynamicui_OBJECTS) $(nodist_dynamicui_OBJECTS)
-@BUILD_WITH_MSVC_TRUE@dynamicui_DEPENDENCIES =
-@BUILD_WITH_MSVC_FALSE@dynamicui_DEPENDENCIES =
+dynamicui_DEPENDENCIES =
 am_examiner_OBJECTS = examiner-examiner.$(OBJEXT)
 nodist_examiner_OBJECTS = examiner-qrc_examiner.$(OBJEXT)
 examiner_OBJECTS = $(am_examiner_OBJECTS) $(nodist_examiner_OBJECTS)
-@BUILD_WITH_MSVC_TRUE@examiner_DEPENDENCIES =
-@BUILD_WITH_MSVC_FALSE@examiner_DEPENDENCIES =
+examiner_DEPENDENCIES =
 am_inheritui_OBJECTS = inheritui-inheritui.$(OBJEXT) \
 	inheritui-QuarterViewer.$(OBJEXT)
 inheritui_OBJECTS = $(am_inheritui_OBJECTS)
-@BUILD_WITH_MSVC_TRUE@inheritui_DEPENDENCIES =
-@BUILD_WITH_MSVC_FALSE@inheritui_DEPENDENCIES =
+inheritui_DEPENDENCIES =
 am_mdi_OBJECTS = mdi-mdi.$(OBJEXT) mdi-MdiMainWindow.$(OBJEXT) \
 	mdi-MdiQuarterWidget.$(OBJEXT)
 nodist_mdi_OBJECTS = mdi-moc_MdiMainWindow.$(OBJEXT)
 mdi_OBJECTS = $(am_mdi_OBJECTS) $(nodist_mdi_OBJECTS)
-@BUILD_WITH_MSVC_TRUE@mdi_DEPENDENCIES =
-@BUILD_WITH_MSVC_FALSE@mdi_DEPENDENCIES =
+mdi_DEPENDENCIES =
 am_minimal_OBJECTS = minimal-minimal.$(OBJEXT)
 minimal_OBJECTS = $(am_minimal_OBJECTS)
-@BUILD_WITH_MSVC_TRUE@minimal_DEPENDENCIES =
-@BUILD_WITH_MSVC_FALSE@minimal_DEPENDENCIES =
+minimal_DEPENDENCIES =
 am_superimposition_OBJECTS = superimposition-superimposition.$(OBJEXT)
 superimposition_OBJECTS = $(am_superimposition_OBJECTS)
-@BUILD_WITH_MSVC_TRUE@superimposition_DEPENDENCIES =
-@BUILD_WITH_MSVC_FALSE@superimposition_DEPENDENCIES =
+superimposition_DEPENDENCIES =
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/directui-directui.Po \

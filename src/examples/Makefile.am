@@ -82,17 +82,9 @@ EXAMPLES_CPPFLAGS = \
         $(COIN_USE_CPPFLAGS) \
         $(QT_USE_CPPFLAGS)
 
-if BUILD_WITH_MSVC
 EXAMPLES_LIBS = \
-        $(QT_USE_LIBS) \
         $(QUARTER_USE_LIBS) \
-        $(COIN_USE_LIBS) 
-else
-EXAMPLES_LIBS = \
-        $(QT_USE_LIBS) \
-        $(QUARTER_USE_LIBS) \
-        $(COIN_USE_LIBS) 
-endif
+        $(EXAMPLES_EXTRA_LIBS) 
 
 minimal_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)
 dynamicui_LDADD = $(EXAMPLES_LDFLAGS) $(EXAMPLES_LIBS)

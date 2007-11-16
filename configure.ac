@@ -135,6 +135,22 @@ AC_SUBST(path_tag)
 
 
 # **************************************************************************
+# Figure out if library should be built static or dynamic.
+
+case ${enable_static-no} in
+yes | true) QUARTER_STATIC=true
+            enable_shared=no ;; # fix --enable-static bug? in autoconf 2.58
+*)          QUARTER_STATIC=false ;;
+esac
+
+case ${enable_shared-default} in
+default)    ;;
+yes | true) QUARTER_STATIC=false ;;
+*)          QUARTER_STATIC=true ;;
+esac
+
+
+# **************************************************************************
 # decide if we want to build Mac OS X framework
 
 AC_ARG_WITH([framework],
@@ -288,14 +304,19 @@ fi
 # *******************************************************************
 # pkg-config did not work, or we did not want to use it
 if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_coin_failed; then
+
+  if $sim_ac_build_library; then
+    SIM_AC_CHECK_HEADER_GL([
+      CPPFLAGS="$CPPFLAGS $sim_ac_gl_cppflags"
+    ], [AC_MSG_ERROR([could not detect a gl.h header file])])
+  fi
+
   SIM_AC_HAVE_COIN_IFELSE([
     COIN_USE_CPPFLAGS=$sim_ac_coin_cppflags
     COIN_USE_CXXFLAGS=$sim_ac_coin_cxxflags
     COIN_USE_LDFLAGS=$sim_ac_coin_ldflags
     COIN_USE_LIBS=$sim_ac_coin_libs
-
     SIM_AC_CONFIGURATION_SETTING([Coin version], [`$sim_ac_coin_configcmd --version`])
-
   ], [AC_MSG_ERROR(couldn't compile and link against Coin)])
 fi
 
@@ -316,13 +337,19 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_qt_fai
       QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qt_cppflags"
       QT_USE_CXXFLAGS="$QT_USE_CXXFLAGS $sim_ac_qt_cxxflags"
       QT_USE_LDFLAGS="$QT_USE_LDFLAGS $sim_ac_qt_ldflags"
-      QT_USE_LIBS="$sim_ac_qt_libs $QT_USE_LIBS"
-      CPPFLAGS="$CPPFLAGS $sim_ac_qt_cppflags"
-      LDFLAGS="$LDFLAGS $sim_ac_qt_ldflags"
-      LIBS="$sim_ac_qt_libs $LIBS"
+      QT_USE_LIBS=" $QT_USE_LIBS $sim_ac_qt_libs"
     ], [
       SIM_AC_ERROR([no-qt])
     ])
+
+    sim_ac_configure_save_cppflags=$CPPFLAGS
+    sim_ac_configure_save_ldflags=$LDFLAGS
+    sim_ac_configure_save_libs=$LIBS
+
+    # need these for the QtOpenGL check
+    CPPFLAGS="$CPPFLAGS $COIN_USE_CPPFLAGS $QT_USE_CPPFLAGS"
+    LDFLAGS="$LDFLAGS $COIN_USE_LDFLAGS $QT_USE_LDFLAGS"
+    LIBS="$LIBS $COIN_USE_LIBS $QT_USE_LIBS"
 
     SIM_AC_CHECK_QGL([
       QT_USE_CPPFLAGS="$QT_USE_CPPFLAGS $sim_ac_qgl_cppflags"
@@ -333,6 +360,9 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_qt_fai
       SIM_AC_ERROR([no-qgl])
     ])
 
+    CPPFLAGS=$sim_ac_configure_save_cppflags
+    LDFLAGS=$sim_ac_configure_save_ldflags
+    LIBS=$sim_ac_configure_save_libs
 
     SIM_AC_QT_PROG(MOC, moc)
     if test x"$MOC" = x"false"; then
@@ -353,14 +383,18 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_qt_fai
   fi
 fi
 
-# we use some extra libs in Quarter
+# we use some extra libs in Quarter FIXME: clean up this mess! (20071116 frodo)
 if $sim_ac_framework; then
   QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtScript -Wl,-framework,QtDesigner -lQtUiTools"
   COIN_USE_LIBS="$COIN_USE_LIBS -Wl,-framework,Inventor"
   QT_USE_INCDIR=${sim_ac_qt_framework_dir}
 else
   if $BUILD_WITH_MSVC; then
-    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner4 -lQtXml4"
+    if $QUARTER_STATIC; then
+      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
+    else
+      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner4 -lQtXml4"
+    fi
   else
     QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
   fi
@@ -386,39 +420,6 @@ else
   sim_ac_framework=false
 fi
 
-AC_SUBST([MAC_FRAMEWORK], [$sim_ac_framework])
-AC_SUBST([MAC_FRAMEWORK_NAME], [$sim_ac_framework_name])
-AC_SUBST([MAC_FRAMEWORK_PREFIX], [$sim_ac_framework_prefix])
-AC_SUBST([MAC_FRAMEWORK_VERSION], [$sim_ac_framework_version])
-AC_SUBST([MAC_DESIGNERPLUGINS_PREFIX], [MAC_DESIGNERPLUGINS_PREFIX_DEFAULT])
-AC_SUBST([nop], [])
-
-AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
-AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
-AM_CONDITIONAL([MACOSX], [$sim_ac_macosx])
-AM_CONDITIONAL([MACOSX_10_2FF], [$sim_ac_macosx_10_2ff])
-
-AC_SUBST([COIN_USE_CPPFLAGS])
-AC_SUBST([COIN_USE_CXXFLAGS])
-AC_SUBST([COIN_USE_LDFLAGS])
-AC_SUBST([COIN_USE_LIBS])
-
-AC_SUBST([QT_USE_CPPFLAGS])
-AC_SUBST([QT_USE_CXXFLAGS])
-AC_SUBST([QT_USE_INCDIR])
-AC_SUBST([QT_USE_LDFLAGS])
-AC_SUBST([QT_USE_LIBDIR])
-AC_SUBST([QT_USE_LIBS])
-
-AC_SUBST([QUARTER_BUILD_CPPFLAGS], [-DQUARTER_INTERNAL])
-AC_SUBST([QUARTER_BUILD_CFLAGS])
-AC_SUBST([QUARTER_BUILD_CXXFLAGS])
-AC_SUBST([QUARTER_LIBFLAGS])
-
-AC_SUBST([QUARTER_USE_CPPFLAGS])
-AC_SUBST([QUARTER_USE_LDFLAGS])
-AC_SUBST([QUARTER_USE_LIBS])
-
 
 # **************************************************************************
 # Miscellaneous options and initializations.
@@ -429,22 +430,6 @@ AC_SUBST([quarter_build_dir])
 AC_SUBST([quarter_src_dir])
 
 SIM_AC_RELATIVE_SRC_DIR
-
-# Figure out if library should be built static or dynamic.
-
-case ${enable_static-no} in
-yes | true) QUARTER_STATIC=true
-            enable_shared=no ;; # fix --enable-static bug? in autoconf 2.58
-*)          QUARTER_STATIC=false ;;
-esac
-
-case ${enable_shared-default} in
-default)    ;;
-yes | true) QUARTER_STATIC=false ;;
-*)          QUARTER_STATIC=true ;;
-esac
-
-# **************************************************************************
 
 AC_ARG_WITH(
   [alternate],
@@ -485,15 +470,17 @@ AC_SUBST([UNIX2WINPATH])
 # *******************************************************************
 # get the plugin path for Qt Designer
 
-sim_ac_qtdesignerpath_save_CPPFLAGS=$CPPFLAGS
-sim_ac_qtdesignerpath_save_LDFLAGS=$LDFLAGS
-sim_ac_qtdesignerpath_save_LIBS=$LIBS
-
-CPPFLAGS="$CPPFLAGS $QT_USE_CPPFLAGS"
-LDFLAGS="$LDFLAGS $QT_USE_LDFLAGS"
-LIBS="$LIBS $QT_USE_LIBS -lQtUiTools"
 
 if $sim_ac_build_library; then
+
+  sim_ac_qtdesignerpath_save_CPPFLAGS=$CPPFLAGS
+  sim_ac_qtdesignerpath_save_LDFLAGS=$LDFLAGS
+  sim_ac_qtdesignerpath_save_LIBS=$LIBS
+
+  CPPFLAGS="$CPPFLAGS $QT_USE_CPPFLAGS"
+  LDFLAGS="$LDFLAGS $QT_USE_LDFLAGS"
+  LIBS="$LIBS $QT_USE_LIBS -lQtUiTools"
+
   AC_CACHE_CHECK([for Qt Designer plugins path], QT_DESIGNER_PLUGIN_PATH, [
     AC_RUN_IFELSE(
       [AC_LANG_SOURCE([
@@ -541,14 +528,37 @@ if $BUILD_WITH_MSVC; then
   SIM_AC_CONFIGURATION_SETTING([C library type], [$sim_ac_msvcrt])
   case $enable_symbols in
   no | false)
-    SIM_AC_CONFIGURATION_SETTING([Quarter build type], [dynamic .dll, no symbols])
     QUARTER_RELEASE=true
     ;;
     *)
-    SIM_AC_CONFIGURATION_SETTING([Quarter build type], [dynamic .dll + .pdb])
     QUARTER_RELEASE=false
     ;;
   esac
+fi
+
+if $QUARTER_RELEASE; then
+  if $QUARTER_STATIC; then
+    SIM_AC_CONFIGURATION_SETTING([Quarter build type], [static .lib, no symbols])
+  else
+    SIM_AC_CONFIGURATION_SETTING([Quarter build type], [dynamic .dll, no symbols])
+  fi
+else
+  if $QUARTER_STATIC; then
+    SIM_AC_CONFIGURATION_SETTING([Quarter build type], [static .lib + .pdb])
+  else
+    SIM_AC_CONFIGURATION_SETTING([Quarter build type], [dynamic .dll + .pdb])
+  fi
+fi
+
+
+# in case the QT_USE_LIBS and COIN_USE_LIBS are cleared, collect them
+# in a separate variable for the examples
+EXAMPLES_EXTRA_LIBS="$QT_USE_LIBS $COIN_USE_LIBS"
+
+# defer linking with Qt and Coin to the app if we're building a static .lib
+if $QUARTER_STATIC && $BUILD_WITH_MSVC; then
+  QT_USE_LIBS=
+  COIN_USE_LIBS=
 fi
 
 QUARTER_USE_LDFLAGS="-L../Quarter"
@@ -589,7 +599,41 @@ if $BUILD_WITH_MSVC; then
   fi
 fi
 
-# Plugin
+AC_SUBST([MAC_FRAMEWORK], [$sim_ac_framework])
+AC_SUBST([MAC_FRAMEWORK_NAME], [$sim_ac_framework_name])
+AC_SUBST([MAC_FRAMEWORK_PREFIX], [$sim_ac_framework_prefix])
+AC_SUBST([MAC_FRAMEWORK_VERSION], [$sim_ac_framework_version])
+AC_SUBST([MAC_DESIGNERPLUGINS_PREFIX], [MAC_DESIGNERPLUGINS_PREFIX_DEFAULT])
+AC_SUBST([nop], [])
+
+AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
+AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
+AM_CONDITIONAL([MACOSX], [$sim_ac_macosx])
+AM_CONDITIONAL([MACOSX_10_2FF], [$sim_ac_macosx_10_2ff])
+
+AC_SUBST([COIN_USE_CPPFLAGS])
+AC_SUBST([COIN_USE_CXXFLAGS])
+AC_SUBST([COIN_USE_LDFLAGS])
+AC_SUBST([COIN_USE_LIBS])
+
+AC_SUBST([QT_USE_CPPFLAGS])
+AC_SUBST([QT_USE_CXXFLAGS])
+AC_SUBST([QT_USE_INCDIR])
+AC_SUBST([QT_USE_LDFLAGS])
+AC_SUBST([QT_USE_LIBDIR])
+AC_SUBST([QT_USE_LIBS])
+
+AC_SUBST([QUARTER_BUILD_CPPFLAGS], [-DQUARTER_INTERNAL])
+AC_SUBST([QUARTER_BUILD_CFLAGS])
+AC_SUBST([QUARTER_BUILD_CXXFLAGS])
+AC_SUBST([QUARTER_LIBFLAGS])
+
+AC_SUBST([QUARTER_USE_CPPFLAGS])
+AC_SUBST([QUARTER_USE_LDFLAGS])
+AC_SUBST([QUARTER_USE_LIBS])
+
+AC_SUBST([EXAMPLES_EXTRA_LIBS])
+
 AC_SUBST([PLUGIN_BUILD_CPPFLAGS])
 AC_SUBST([PLUGIN_BUILD_CXXFLAGS])
 AC_SUBST([PLUGIN_BUILD_CFLAGS])
