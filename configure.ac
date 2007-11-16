@@ -133,23 +133,6 @@ esac
 
 AC_SUBST(path_tag)
 
-
-# **************************************************************************
-# Figure out if library should be built static or dynamic.
-
-case ${enable_static-no} in
-yes | true) QUARTER_STATIC=true
-            enable_shared=no ;; # fix --enable-static bug? in autoconf 2.58
-*)          QUARTER_STATIC=false ;;
-esac
-
-case ${enable_shared-default} in
-default)    ;;
-yes | true) QUARTER_STATIC=false ;;
-*)          QUARTER_STATIC=true ;;
-esac
-
-
 # **************************************************************************
 # decide if we want to build Mac OS X framework
 
@@ -202,6 +185,18 @@ if $sim_ac_framework; then
    # use the normal Coin m4 macro
    sim_ac_enable_pkgconfig=false
 fi
+
+AC_SUBST([MAC_FRAMEWORK], [$sim_ac_framework])
+AC_SUBST([MAC_FRAMEWORK_NAME], [$sim_ac_framework_name])
+AC_SUBST([MAC_FRAMEWORK_PREFIX], [$sim_ac_framework_prefix])
+AC_SUBST([MAC_FRAMEWORK_VERSION], [$sim_ac_framework_version])
+AC_SUBST([MAC_DESIGNERPLUGINS_PREFIX], [MAC_DESIGNERPLUGINS_PREFIX_DEFAULT])
+AC_SUBST([nop], [])
+
+AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
+AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
+AM_CONDITIONAL([MACOSX], [$sim_ac_macosx])
+AM_CONDITIONAL([MACOSX_10_2FF], [$sim_ac_macosx_10_2ff])
 
 # *******************************************************************
 # try to use pkg-config
@@ -383,22 +378,31 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_qt_fai
   fi
 fi
 
-# we use some extra libs in Quarter FIXME: clean up this mess! (20071116 frodo)
-if $sim_ac_framework; then
-  QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtScript -Wl,-framework,QtDesigner -lQtUiTools"
-  COIN_USE_LIBS="$COIN_USE_LIBS -Wl,-framework,Inventor"
-  QT_USE_INCDIR=${sim_ac_qt_framework_dir}
-else
-  if $BUILD_WITH_MSVC; then
-    if $QUARTER_STATIC; then
-      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
-    else
-      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner4 -lQtXml4"
-    fi
-  else
-    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
-  fi
-fi
+AC_SUBST([COIN_USE_CPPFLAGS])
+AC_SUBST([COIN_USE_CXXFLAGS])
+AC_SUBST([COIN_USE_LDFLAGS])
+AC_SUBST([COIN_USE_LIBS])
+
+AC_SUBST([QT_USE_CPPFLAGS])
+AC_SUBST([QT_USE_CXXFLAGS])
+AC_SUBST([QT_USE_INCDIR])
+AC_SUBST([QT_USE_LDFLAGS])
+AC_SUBST([QT_USE_LIBDIR])
+AC_SUBST([QT_USE_LIBS])
+
+AC_SUBST([QUARTER_BUILD_CPPFLAGS], [-DQUARTER_INTERNAL])
+AC_SUBST([QUARTER_BUILD_CFLAGS])
+AC_SUBST([QUARTER_BUILD_CXXFLAGS])
+AC_SUBST([QUARTER_LIBFLAGS])
+
+AC_SUBST([QUARTER_USE_CPPFLAGS])
+AC_SUBST([QUARTER_USE_LDFLAGS])
+AC_SUBST([QUARTER_USE_LIBS])
+
+AC_SUBST([PLUGIN_BUILD_CPPFLAGS])
+AC_SUBST([PLUGIN_BUILD_CXXFLAGS])
+AC_SUBST([PLUGIN_BUILD_CFLAGS])
+AC_SUBST([PLUGIN_BUILD_LIBFLAGS])
 
 # *******************************************************************
 # if we want Mac OS X framework, check if Coin is installed as a framework
@@ -449,6 +453,39 @@ AC_ARG_WITH(
   [SUFFIX=])
 
 AC_SUBST(SUFFIX)
+
+# **************************************************************************
+# Figure out if library should be built static or dynamic.
+
+case ${enable_static-no} in
+yes | true) QUARTER_STATIC=true
+            enable_shared=no ;; # fix --enable-static bug? in autoconf 2.58
+*)          QUARTER_STATIC=false ;;
+esac
+
+case ${enable_shared-default} in
+default)    ;;
+yes | true) QUARTER_STATIC=false ;;
+*)          QUARTER_STATIC=true ;;
+esac
+
+# **************************************************************************
+# we use some extra libs in Quarter FIXME: clean up this mess! (20071116 frodo)
+if $sim_ac_framework; then
+  QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtScript -Wl,-framework,QtDesigner -lQtUiTools"
+  COIN_USE_LIBS="$COIN_USE_LIBS -Wl,-framework,Inventor"
+  QT_USE_INCDIR=${sim_ac_qt_framework_dir}
+else
+  if $BUILD_WITH_MSVC; then
+    if $QUARTER_STATIC; then
+      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
+    else
+      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner4 -lQtXml4"
+    fi
+  else
+    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
+  fi
+fi
 
 # **************************************************************************
 
@@ -553,6 +590,7 @@ fi
 
 # in case the QT_USE_LIBS and COIN_USE_LIBS are cleared, collect them
 # in a separate variable for the examples
+AC_SUBST([EXAMPLES_EXTRA_LIBS])
 EXAMPLES_EXTRA_LIBS="$QT_USE_LIBS $COIN_USE_LIBS"
 
 # defer linking with Qt and Coin to the app if we're building a static .lib
@@ -598,46 +636,6 @@ if $BUILD_WITH_MSVC; then
     QUARTER_BUILD_LIBFLAGS="$QUARTER_LIBFLAGS /DEBUG /PDB:Quarter${QUARTER_MAJOR_VERSION}${SUFFIX}.pdb"
   fi
 fi
-
-AC_SUBST([MAC_FRAMEWORK], [$sim_ac_framework])
-AC_SUBST([MAC_FRAMEWORK_NAME], [$sim_ac_framework_name])
-AC_SUBST([MAC_FRAMEWORK_PREFIX], [$sim_ac_framework_prefix])
-AC_SUBST([MAC_FRAMEWORK_VERSION], [$sim_ac_framework_version])
-AC_SUBST([MAC_DESIGNERPLUGINS_PREFIX], [MAC_DESIGNERPLUGINS_PREFIX_DEFAULT])
-AC_SUBST([nop], [])
-
-AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
-AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
-AM_CONDITIONAL([MACOSX], [$sim_ac_macosx])
-AM_CONDITIONAL([MACOSX_10_2FF], [$sim_ac_macosx_10_2ff])
-
-AC_SUBST([COIN_USE_CPPFLAGS])
-AC_SUBST([COIN_USE_CXXFLAGS])
-AC_SUBST([COIN_USE_LDFLAGS])
-AC_SUBST([COIN_USE_LIBS])
-
-AC_SUBST([QT_USE_CPPFLAGS])
-AC_SUBST([QT_USE_CXXFLAGS])
-AC_SUBST([QT_USE_INCDIR])
-AC_SUBST([QT_USE_LDFLAGS])
-AC_SUBST([QT_USE_LIBDIR])
-AC_SUBST([QT_USE_LIBS])
-
-AC_SUBST([QUARTER_BUILD_CPPFLAGS], [-DQUARTER_INTERNAL])
-AC_SUBST([QUARTER_BUILD_CFLAGS])
-AC_SUBST([QUARTER_BUILD_CXXFLAGS])
-AC_SUBST([QUARTER_LIBFLAGS])
-
-AC_SUBST([QUARTER_USE_CPPFLAGS])
-AC_SUBST([QUARTER_USE_LDFLAGS])
-AC_SUBST([QUARTER_USE_LIBS])
-
-AC_SUBST([EXAMPLES_EXTRA_LIBS])
-
-AC_SUBST([PLUGIN_BUILD_CPPFLAGS])
-AC_SUBST([PLUGIN_BUILD_CXXFLAGS])
-AC_SUBST([PLUGIN_BUILD_CFLAGS])
-AC_SUBST([PLUGIN_BUILD_LIBFLAGS])
 
 # Mac OS X flags for Plugin
 case $host_os in
