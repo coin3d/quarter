@@ -293,6 +293,10 @@ libQuarter_la_CFLAGS = \
         $(QUARTER_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
 
 
+libQuarter_la_LDFLAGS = \
+        $(COIN_USE_LDFLAGS) $(QT_USE_LDFLAGS)
+
+
 @BUILD_WITH_MSVC_TRUE@lib_LIBRARIES = Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 @BUILD_WITH_MSVC_FALSE@lib_LTLIBRARIES = libQuarter.la
 
@@ -344,7 +348,6 @@ Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
 	$(nodist_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 
-libQuarter_la_LDFLAGS =
 libQuarter_la_DEPENDENCIES = devices/libdevices.la \
 	eventhandlers/libeventhandlers.la
 am__objects_4 = libQuarter_la-Quarter.lo libQuarter_la-QuarterWidget.lo \

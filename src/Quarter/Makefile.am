@@ -66,6 +66,9 @@ libQuarter_la_CXXFLAGS = \
 libQuarter_la_CFLAGS = \
         $(QUARTER_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
 
+libQuarter_la_LDFLAGS = \
+        $(COIN_USE_LDFLAGS) $(QT_USE_LDFLAGS)
+
 
 if BUILD_WITH_MSVC
 lib_LIBRARIES = Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
