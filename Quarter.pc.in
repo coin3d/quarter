@@ -5,7 +5,6 @@ includedir=@includedir@
 
 Name: Quarter
 Description: a Qt Gui widget for Coin
-URL: http://www.coin3d.org
 Version: @QUARTER_VERSION@
 Requires: Coin, QtCore, QtGui, QtOpenGL, QtXml
 Conflicts:
