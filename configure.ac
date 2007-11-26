@@ -63,6 +63,7 @@ AC_PROG_LIBTOOL
 AC_LANG(C++)
 
 test "x$prefix" = xNONE && prefix=$ac_default_prefix
+test "x$exec_prefix" = xNONE && exec_prefix=`eval echo "${prefix}"`
 
 # *******************************************************************
 # disable build if you just want to generate doc.
@@ -503,59 +504,74 @@ else
 fi
 AC_SUBST([UNIX2WINPATH])
 
+AC_ARG_WITH(
+  [qt-designer-plugin-path],
+  [AC_HELP_STRING([--with-qt-designer-plugin-path=<path>],
+                  [specify qt designer plugin path])],
+  [QT_DESIGNER_PLUGIN_PATH=$withval]
+  SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path (overriden)], [$QT_DESIGNER_PLUGIN_PATH]),
+  [QT_DESIGNER_PLUGIN_PATH=])
+
 
 # *******************************************************************
 # get the plugin path for Qt Designer
 
-
-if $sim_ac_build_library; then
-
-  sim_ac_qtdesignerpath_save_CPPFLAGS=$CPPFLAGS
-  sim_ac_qtdesignerpath_save_LDFLAGS=$LDFLAGS
-  sim_ac_qtdesignerpath_save_LIBS=$LIBS
-
-  CPPFLAGS="$CPPFLAGS $QT_USE_CPPFLAGS"
-  LDFLAGS="$LDFLAGS $QT_USE_LDFLAGS"
-  LIBS="$LIBS $QT_USE_LIBS -lQtUiTools"
-
-  AC_CACHE_CHECK([for Qt Designer plugins path], QT_DESIGNER_PLUGIN_PATH, [
-    AC_RUN_IFELSE(
-      [AC_LANG_SOURCE([
-  #include <QtGui/QApplication>
-  #include <QtCore/QFile>
-  #include <QtCore/QStringList>
-  #include <QtUiTools/QUiLoader>
-
-  int
-  main(int argc, char **argv) 
-  {
-    QApplication app(argc, argv);
-    QUiLoader qld;
-    QStringList pluginPaths = qld.pluginPaths();
-
-    /* Assumption: first path entry contains the location within the
-     * system. 20070828 tamer. */
-      if (pluginPaths.size() <= 0) {
-      return 1;
+if test "x$QT_DESIGNER_PLUGIN_PATH" = x && $sim_ac_build_library; then
+  if $BUILD_WITH_MSVC; then
+    sim_ac_qtdesignerpath_save_CPPFLAGS=$CPPFLAGS
+    sim_ac_qtdesignerpath_save_LDFLAGS=$LDFLAGS
+    sim_ac_qtdesignerpath_save_LIBS=$LIBS
+  
+    CPPFLAGS="$CPPFLAGS $QT_USE_CPPFLAGS"
+    LDFLAGS="$LDFLAGS $QT_USE_LDFLAGS"
+    LIBS="$LIBS $QT_USE_LIBS -lQtUiTools"
+  
+    AC_CACHE_CHECK([for Qt Designer plugins path], QT_DESIGNER_PLUGIN_PATH, [
+      AC_RUN_IFELSE(
+        [AC_LANG_SOURCE([
+    #include <QtGui/QApplication>
+    #include <QtCore/QFile>
+    #include <QtCore/QStringList>
+    #include <QtUiTools/QUiLoader>
+  
+    int
+    main(int argc, char **argv) 
+    {
+      QApplication app(argc, argv);
+      QUiLoader qld;
+      QStringList pluginPaths = qld.pluginPaths();
+  
+      /* Assumption: first path entry contains the location within the
+       * system. 20070828 tamer. */
+        if (pluginPaths.size() <= 0) {
+        return 1;
+      }
+  
+      QFile file("conftest.out");
+      file.open(QIODevice::WriteOnly);
+      file.write(pluginPaths.at(0).toLocal8Bit().constData());
+      file.close();
+  
+      return 0;
     }
-
-    QFile file("conftest.out");
-    file.open(QIODevice::WriteOnly);
-    file.write(pluginPaths.at(0).toLocal8Bit().constData());
-    file.close();
-
-    return 0;
-  }
-    ])],
-    [QT_DESIGNER_PLUGIN_PATH=`cat conftest.out`],
-    [AC_MSG_FAILURE([could not determine Qt Designer plugins path])])
-  ])
-
-  CPPFLAGS="$sim_ac_qtdesignerpath_save_CPPFLAGS"
-  LDFLAGS="$sim_ac_qtdesignerpath_save_LDFLAGS"
-  LIBS="$sim_ac_qtdesignerpath_save_LIBS"
+      ])],
+      [QT_DESIGNER_PLUGIN_PATH=`cat conftest.out`],
+      [AC_MSG_FAILURE([could not determine Qt Designer plugins path])])
+    ])
+  
+    CPPFLAGS="$sim_ac_qtdesignerpath_save_CPPFLAGS"
+    LDFLAGS="$sim_ac_qtdesignerpath_save_LDFLAGS"
+    LIBS="$sim_ac_qtdesignerpath_save_LIBS"
+  else
+    QT_DESIGNER_PLUGIN_PATH=`eval echo "${libdir}"`/designer
+  fi
 
   SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path], [$QT_DESIGNER_PLUGIN_PATH])
+
+  if ! $BUILD_WITH_MSVC; then
+    SIM_AC_CONFIGURATION_SETTING([don't forget to set QT_PLUGIN_PATH to], [`eval echo "${libdir}"`])
+  fi
+
   AC_SUBST([QT_DESIGNER_PLUGIN_PATH])
 fi
 
