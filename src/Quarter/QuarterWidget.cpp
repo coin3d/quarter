@@ -60,15 +60,15 @@ using namespace SIM::Coin3D::Quarter;
 #define PRIVATE(obj) obj->pimpl
 
 /*! constructor */
-QuarterWidget::QuarterWidget(QWidget * parent, const QGLWidget * sharewidget)
-  : inherited(parent, sharewidget, 0)
+QuarterWidget::QuarterWidget(QWidget * parent, const QGLWidget * sharewidget, Qt::WindowFlags f)
+  : inherited(parent, sharewidget, f)
 {
   this->constructor(sharewidget);
 }
 
 /*! constructor */
-QuarterWidget::QuarterWidget(QGLContext * context, QWidget * parent, const QGLWidget * sharewidget)
-  : inherited(context, parent, sharewidget, 0)
+QuarterWidget::QuarterWidget(QGLContext * context, QWidget * parent, const QGLWidget * sharewidget, Qt::WindowFlags f)
+  : inherited(context, parent, sharewidget, f)
 {
   this->constructor(sharewidget);
 }

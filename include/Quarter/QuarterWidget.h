@@ -46,8 +46,8 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   Q_PROPERTY(QColor backgroundColor READ getBackgroundColor WRITE setBackgroundColor)
 
 public:
-  QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0);
-  QuarterWidget(QGLContext * context, QWidget * parent = 0, const QGLWidget * sharewidget = 0);
+  QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
+  QuarterWidget(QGLContext * context, QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
   virtual ~QuarterWidget();
 
   void enableHeadlight(const SbBool onoff);
