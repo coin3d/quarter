@@ -152,7 +152,7 @@ QuarterWidgetPlugin::domXml(void) const
 {
   return
     "<widget class=\"SIM::Coin3D::Quarter::QuarterWidget\" \
-             name=\"SIM::Coin3D::Quarter::QuarterWidget\">\n"
+             name=\"quarterWidget\">\n"
     " <property name=\"geometry\">\n"
     "  <rect>\n"
     "   <x>0</x>\n"
