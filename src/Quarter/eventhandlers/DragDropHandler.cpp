@@ -116,6 +116,7 @@ DragDropHandlerP::dropEvent(QDropEvent * event)
 
   SoSeparator * root;
   SoInput in;
+  QByteArray bytes;
 
   if (mimedata->hasUrls()) {
     QUrl url = mimedata->urls().takeFirst();
@@ -125,7 +126,7 @@ DragDropHandlerP::dropEvent(QDropEvent * event)
     }
   } else if (mimedata->hasText()) {
     /* FIXME 2007-11-09 preng: dropping text buffer does not work on Windows Vista. */
-    QByteArray bytes = mimedata->text().toUtf8();
+    bytes = mimedata->text().toUtf8();
     in.setBuffer((void *) bytes.constData(), bytes.size());
     if (!in.isValidBuffer()) return;
   }
