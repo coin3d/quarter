@@ -604,9 +604,9 @@ if $BUILD_WITH_MSVC; then
     debugfile="`pwd`/src/Quarter/Quarter${QUARTER_MAJOR_VERSION}${SUFFIX}.pdb"
     debugfile=`cygpath -w "$debugfile" | sed 's,\\\\,\\\\\\\\,g'`
 
-    QUARTER_BUILD_CFLAGS="/Fd$debugfile -g $QUARTER_BUILD_CFLAGS"
-    QUARTER_BUILD_CXXFLAGS="/Fd$debugfile -g $QUARTER_BUILD_CXXFLAGS"
-    QUARTER_BUILD_LIBFLAGS="$QUARTER_LIBFLAGS /DEBUG /PDB:Quarter${QUARTER_MAJOR_VERSION}${SUFFIX}.pdb"
+    QUARTER_CFLAGS="/Fd$debugfile -g $QUARTER_CFLAGS"
+    QUARTER_CXXFLAGS="/Fd$debugfile -g $QUARTER_CXXFLAGS"
+    QUARTER_LIBFLAGS="$QUARTER_LIBFLAGS /DEBUG /PDB:Quarter${QUARTER_MAJOR_VERSION}${SUFFIX}.pdb"
   fi
 fi
 
