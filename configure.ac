@@ -560,6 +560,14 @@ else
   fi
 fi
 
+# **************************************************************************
+# Compiler control.
+
+SIM_AC_COMPILE_DEBUG([
+  CPPFLAGS="$CPPFLAGS -DQUARTER_DEBUG=1"
+], [
+  CPPFLAGS="$CPPFLAGS -DQUARTER_DEBUG=0"]
+)
 
 # in case the QT_USE_LIBS and COIN_USE_LIBS are cleared, collect them
 # in a separate variable for the examples
