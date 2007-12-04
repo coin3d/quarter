@@ -569,6 +569,8 @@ SIM_AC_COMPILE_DEBUG([
   CPPFLAGS="$CPPFLAGS -DQUARTER_DEBUG=0"]
 )
 
+SIM_AC_DEBUGSYMBOLS
+
 # in case the QT_USE_LIBS and COIN_USE_LIBS are cleared, collect them
 # in a separate variable for the examples
 AC_SUBST([EXAMPLES_EXTRA_LIBS])
