@@ -188,13 +188,14 @@ if $sim_ac_framework; then
 fi
 
 AC_SUBST([MAC_FRAMEWORK], [$sim_ac_framework])
+AC_SUBST([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
 AC_SUBST([MAC_FRAMEWORK_NAME], [$sim_ac_framework_name])
 AC_SUBST([MAC_FRAMEWORK_PREFIX], [$sim_ac_framework_prefix])
 AC_SUBST([MAC_FRAMEWORK_VERSION], [$sim_ac_framework_version])
 AC_SUBST([MAC_DESIGNERPLUGINS_PREFIX], [MAC_DESIGNERPLUGINS_PREFIX_DEFAULT])
 AC_SUBST([nop], [])
 
-AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
+AM_CONDITIONAL([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
 AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
 AM_CONDITIONAL([MACOSX], [$sim_ac_macosx])
 AM_CONDITIONAL([MACOSX_10_2FF], [$sim_ac_macosx_10_2ff])
@@ -472,7 +473,7 @@ esac
 
 # **************************************************************************
 # we use some extra libs in Quarter FIXME: clean up this mess! (20071116 frodo)
-if $sim_ac_framework; then
+if $sim_ac_have_qt_framework; then
   QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtScript -Wl,-framework,QtDesigner -lQtUiTools"
   COIN_USE_LIBS="$COIN_USE_LIBS -Wl,-framework,Inventor"
   QT_USE_INCDIR=${sim_ac_qt_framework_dir}

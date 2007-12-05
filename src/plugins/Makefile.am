@@ -13,7 +13,7 @@ endif
 
 DEFAULT_INCLUDES = $(includes)
 
-if MAC_FRAMEWORK
+if MAC_QT_FRAMEWORK
 QT_DESIGNER_INCLUDE = -I$(QT_USE_INCDIR)/QtDesigner.framework/Headers
 else 
 QT_DESIGNER_INCLUDE = -I`$(UNIX2WINPATH) $(QT_USE_INCDIR)`/QtDesigner
