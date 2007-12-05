@@ -119,7 +119,7 @@ QuarterWidgetPlugin::group(void) const
 QIcon
 QuarterWidgetPlugin::icon(void) const
 {
-  return QIcon();
+  return QIcon(":/coinlogo.png");
 }
 
 QString
