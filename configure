@@ -19201,10 +19201,6 @@ if test "${enable_pkgconfig+set}" = set; then
   esac
 fi;
 
-# FIXME: this bogus variable is never set in the pkg-config case, and
-# is then tested when empty in a lot of places here. larsa
-sim_ac_have_qt_framework=false
-
 # *******************************************************************
 
 if $sim_ac_framework; then
@@ -19905,49 +19901,6 @@ fi
 
 fi
 fi
-
-echo "$as_me:$LINENO: checking sim_ac_have_qt_framework" >&5
-echo $ECHO_N "checking sim_ac_have_qt_framework... $ECHO_C" >&6
-echo "$as_me:$LINENO: result: $sim_ac_have_qt_framework" >&5
-echo "${ECHO_T}$sim_ac_have_qt_framework" >&6
-echo "$as_me:$LINENO: checking sim_ac_have_qt_framework" >&5
-echo $ECHO_N "checking sim_ac_have_qt_framework... $ECHO_C" >&6
-echo "$as_me:$LINENO: result: $sim_ac_have_qt_framework" >&5
-echo "${ECHO_T}$sim_ac_have_qt_framework" >&6
-
-# **************************************************************************
-# Figure out if library should be built static or dynamic.
-
-case ${enable_static-no} in
-yes | true) QUARTER_STATIC=true
-            enable_shared=no ;; # fix --enable-static bug? in autoconf 2.58
-*)          QUARTER_STATIC=false ;;
-esac
-
-case ${enable_shared-default} in
-default)    ;;
-yes | true) QUARTER_STATIC=false ;;
-*)          QUARTER_STATIC=true ;;
-esac
-
-# **************************************************************************
-# we use some extra libs in Quarter FIXME: clean up this mess! (20071116 frodo)
-if $sim_ac_have_qt_framework; then
-  QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtScript -Wl,-framework,QtDesigner -lQtUiTools"
-  COIN_USE_LIBS="$COIN_USE_LIBS -Wl,-framework,Inventor"
-  QT_USE_INCDIR=${sim_ac_qt_framework_dir}
-else
-  if $BUILD_WITH_MSVC; then
-    if $QUARTER_STATIC; then
-      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
-    else
-      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner4 -lQtXml4"
-    fi
-  else
-    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
-  fi
-fi
-
 
 MAC_QT_FRAMEWORK=$sim_ac_have_qt_framework
 
@@ -23816,6 +23769,39 @@ else
 fi;
 
 
+
+# **************************************************************************
+# Figure out if library should be built static or dynamic.
+
+case ${enable_static-no} in
+yes | true) QUARTER_STATIC=true
+            enable_shared=no ;; # fix --enable-static bug? in autoconf 2.58
+*)          QUARTER_STATIC=false ;;
+esac
+
+case ${enable_shared-default} in
+default)    ;;
+yes | true) QUARTER_STATIC=false ;;
+*)          QUARTER_STATIC=true ;;
+esac
+
+# **************************************************************************
+# we use some extra libs in Quarter FIXME: clean up this mess! (20071116 frodo)
+if $sim_ac_have_qt_framework; then
+  QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtScript -Wl,-framework,QtDesigner -lQtUiTools"
+  COIN_USE_LIBS="$COIN_USE_LIBS -Wl,-framework,Inventor"
+  QT_USE_INCDIR=${sim_ac_qt_framework_dir}
+else
+  if $BUILD_WITH_MSVC; then
+    if $QUARTER_STATIC; then
+      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
+    else
+      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner4 -lQtXml4"
+    fi
+  else
+    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
+  fi
+fi
 
 # **************************************************************************
 
