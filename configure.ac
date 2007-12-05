@@ -188,14 +188,12 @@ if $sim_ac_framework; then
 fi
 
 AC_SUBST([MAC_FRAMEWORK], [$sim_ac_framework])
-AC_SUBST([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
 AC_SUBST([MAC_FRAMEWORK_NAME], [$sim_ac_framework_name])
 AC_SUBST([MAC_FRAMEWORK_PREFIX], [$sim_ac_framework_prefix])
 AC_SUBST([MAC_FRAMEWORK_VERSION], [$sim_ac_framework_version])
 AC_SUBST([MAC_DESIGNERPLUGINS_PREFIX], [MAC_DESIGNERPLUGINS_PREFIX_DEFAULT])
 AC_SUBST([nop], [])
 
-AM_CONDITIONAL([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
 AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
 AM_CONDITIONAL([MACOSX], [$sim_ac_macosx])
 AM_CONDITIONAL([MACOSX_10_2FF], [$sim_ac_macosx_10_2ff])
@@ -297,6 +295,9 @@ if $sim_ac_enable_pkgconfig && $sim_ac_build_library; then
     sim_ac_pkgconfig_check_qt_failed=true
   ])
 fi
+
+AC_SUBST([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
+AM_CONDITIONAL([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
 
 # *******************************************************************
 # pkg-config did not work, or we did not want to use it

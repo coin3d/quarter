@@ -465,7 +465,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS BUILD_WITH_MSVC BUILD_WITH_MSVC_TRUE BUILD_WITH_MSVC_FALSE QUARTER_MAJOR_VERSION QUARTER_MINOR_VERSION QUARTER_MICRO_VERSION QUARTER_BETA_VERSION QUARTER_VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE am__leading_dot MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE build build_cpu build_vendor build_os host host_cpu host_vendor host_os EGREP LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CPP CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL BUILD_LIBRARY_TRUE BUILD_LIBRARY_FALSE htmldir QUARTER_DOC_HTML quarter_html_dir BUILD_HTMLPAGES_TRUE BUILD_HTMLPAGES_FALSE sim_ac_doxygen_exe sim_ac_perl_exe path_tag MAC_FRAMEWORK MAC_QT_FRAMEWORK MAC_FRAMEWORK_NAME MAC_FRAMEWORK_PREFIX MAC_FRAMEWORK_VERSION MAC_DESIGNERPLUGINS_PREFIX nop MAC_QT_FRAMEWORK_TRUE MAC_QT_FRAMEWORK_FALSE MAC_FRAMEWORK_TRUE MAC_FRAMEWORK_FALSE MACOSX_TRUE MACOSX_FALSE MACOSX_10_2FF_TRUE MACOSX_10_2FF_FALSE PKG_CONFIG ac_pt_PKG_CONFIG Coin_CFLAGS Coin_LIBS Qt4_CFLAGS Qt4_LIBS MOC UIC RCC QT_VERSION X_CFLAGS X_PRE_LIBS X_LIBS X_EXTRA_LIBS sim_ac_coin_configcmd sim_ac_qt_cygpath COIN_USE_CPPFLAGS COIN_USE_CXXFLAGS COIN_USE_LDFLAGS COIN_USE_LIBS QT_USE_CPPFLAGS QT_USE_CXXFLAGS QT_USE_INCDIR QT_USE_LDFLAGS QT_USE_LIBDIR QT_USE_LIBS QUARTER_BUILD_CPPFLAGS QUARTER_BUILD_CFLAGS QUARTER_BUILD_CXXFLAGS QUARTER_LIBFLAGS QUARTER_USE_CPPFLAGS QUARTER_USE_LDFLAGS QUARTER_USE_LIBS PLUGIN_BUILD_CPPFLAGS PLUGIN_BUILD_CXXFLAGS PLUGIN_BUILD_CFLAGS PLUGIN_BUILD_LIBFLAGS quarter_build_dir quarter_src_dir ac_unique_file sim_ac_relative_src_dir sim_ac_relative_src_dir_p CONFIG SUFFIX UNIX2WINPATH QT_DESIGNER_PLUGIN_PATH DSUFFIX EXAMPLES_EXTRA_LIBS EXAMPLES_BUILD_CPPFLAGS EXAMPLES_BUILD_CXXFLAGS EXAMPLES_BUILD_CFLAGS EXAMPLES_BUILD_LDFLAGS EXAMPLES_BUILD_LIBFLAGS LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS BUILD_WITH_MSVC BUILD_WITH_MSVC_TRUE BUILD_WITH_MSVC_FALSE QUARTER_MAJOR_VERSION QUARTER_MINOR_VERSION QUARTER_MICRO_VERSION QUARTER_BETA_VERSION QUARTER_VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE am__leading_dot MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE build build_cpu build_vendor build_os host host_cpu host_vendor host_os EGREP LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CPP CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL BUILD_LIBRARY_TRUE BUILD_LIBRARY_FALSE htmldir QUARTER_DOC_HTML quarter_html_dir BUILD_HTMLPAGES_TRUE BUILD_HTMLPAGES_FALSE sim_ac_doxygen_exe sim_ac_perl_exe path_tag MAC_FRAMEWORK MAC_FRAMEWORK_NAME MAC_FRAMEWORK_PREFIX MAC_FRAMEWORK_VERSION MAC_DESIGNERPLUGINS_PREFIX nop MAC_FRAMEWORK_TRUE MAC_FRAMEWORK_FALSE MACOSX_TRUE MACOSX_FALSE MACOSX_10_2FF_TRUE MACOSX_10_2FF_FALSE PKG_CONFIG ac_pt_PKG_CONFIG Coin_CFLAGS Coin_LIBS Qt4_CFLAGS Qt4_LIBS MOC UIC RCC QT_VERSION MAC_QT_FRAMEWORK MAC_QT_FRAMEWORK_TRUE MAC_QT_FRAMEWORK_FALSE X_CFLAGS X_PRE_LIBS X_LIBS X_EXTRA_LIBS sim_ac_coin_configcmd sim_ac_qt_cygpath COIN_USE_CPPFLAGS COIN_USE_CXXFLAGS COIN_USE_LDFLAGS COIN_USE_LIBS QT_USE_CPPFLAGS QT_USE_CXXFLAGS QT_USE_INCDIR QT_USE_LDFLAGS QT_USE_LIBDIR QT_USE_LIBS QUARTER_BUILD_CPPFLAGS QUARTER_BUILD_CFLAGS QUARTER_BUILD_CXXFLAGS QUARTER_LIBFLAGS QUARTER_USE_CPPFLAGS QUARTER_USE_LDFLAGS QUARTER_USE_LIBS PLUGIN_BUILD_CPPFLAGS PLUGIN_BUILD_CXXFLAGS PLUGIN_BUILD_CFLAGS PLUGIN_BUILD_LIBFLAGS quarter_build_dir quarter_src_dir ac_unique_file sim_ac_relative_src_dir sim_ac_relative_src_dir_p CONFIG SUFFIX UNIX2WINPATH QT_DESIGNER_PLUGIN_PATH DSUFFIX EXAMPLES_EXTRA_LIBS EXAMPLES_BUILD_CPPFLAGS EXAMPLES_BUILD_CXXFLAGS EXAMPLES_BUILD_CFLAGS EXAMPLES_BUILD_LDFLAGS EXAMPLES_BUILD_LIBFLAGS LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -19210,8 +19210,6 @@ fi
 
 MAC_FRAMEWORK=$sim_ac_framework
 
-MAC_QT_FRAMEWORK=$sim_ac_have_qt_framework
-
 MAC_FRAMEWORK_NAME=$sim_ac_framework_name
 
 MAC_FRAMEWORK_PREFIX=$sim_ac_framework_prefix
@@ -19221,16 +19219,6 @@ MAC_FRAMEWORK_VERSION=$sim_ac_framework_version
 MAC_DESIGNERPLUGINS_PREFIX=/Developer/Applications/Qt/plugins/designer
 
 
-
-
-
-if $sim_ac_have_qt_framework; then
-  MAC_QT_FRAMEWORK_TRUE=
-  MAC_QT_FRAMEWORK_FALSE='#'
-else
-  MAC_QT_FRAMEWORK_TRUE='#'
-  MAC_QT_FRAMEWORK_FALSE=
-fi
 
 
 
@@ -19913,6 +19901,19 @@ fi
 
 fi
 fi
+
+MAC_QT_FRAMEWORK=$sim_ac_have_qt_framework
+
+
+
+if $sim_ac_have_qt_framework; then
+  MAC_QT_FRAMEWORK_TRUE=
+  MAC_QT_FRAMEWORK_FALSE='#'
+else
+  MAC_QT_FRAMEWORK_TRUE='#'
+  MAC_QT_FRAMEWORK_FALSE=
+fi
+
 
 # *******************************************************************
 # pkg-config did not work, or we did not want to use it
@@ -24648,13 +24649,6 @@ echo "$as_me: error: conditional \"BUILD_HTMLPAGES\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
-if test -z "${MAC_QT_FRAMEWORK_TRUE}" && test -z "${MAC_QT_FRAMEWORK_FALSE}"; then
-  { { echo "$as_me:$LINENO: error: conditional \"MAC_QT_FRAMEWORK\" was never defined.
-Usually this means the macro was only invoked conditionally." >&5
-echo "$as_me: error: conditional \"MAC_QT_FRAMEWORK\" was never defined.
-Usually this means the macro was only invoked conditionally." >&2;}
-   { (exit 1); exit 1; }; }
-fi
 if test -z "${MAC_FRAMEWORK_TRUE}" && test -z "${MAC_FRAMEWORK_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"MAC_FRAMEWORK\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
@@ -24673,6 +24667,13 @@ if test -z "${MACOSX_10_2FF_TRUE}" && test -z "${MACOSX_10_2FF_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"MACOSX_10_2FF\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 echo "$as_me: error: conditional \"MACOSX_10_2FF\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${MAC_QT_FRAMEWORK_TRUE}" && test -z "${MAC_QT_FRAMEWORK_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"MAC_QT_FRAMEWORK\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"MAC_QT_FRAMEWORK\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
@@ -25304,14 +25305,11 @@ s,@sim_ac_doxygen_exe@,$sim_ac_doxygen_exe,;t t
 s,@sim_ac_perl_exe@,$sim_ac_perl_exe,;t t
 s,@path_tag@,$path_tag,;t t
 s,@MAC_FRAMEWORK@,$MAC_FRAMEWORK,;t t
-s,@MAC_QT_FRAMEWORK@,$MAC_QT_FRAMEWORK,;t t
 s,@MAC_FRAMEWORK_NAME@,$MAC_FRAMEWORK_NAME,;t t
 s,@MAC_FRAMEWORK_PREFIX@,$MAC_FRAMEWORK_PREFIX,;t t
 s,@MAC_FRAMEWORK_VERSION@,$MAC_FRAMEWORK_VERSION,;t t
 s,@MAC_DESIGNERPLUGINS_PREFIX@,$MAC_DESIGNERPLUGINS_PREFIX,;t t
 s,@nop@,$nop,;t t
-s,@MAC_QT_FRAMEWORK_TRUE@,$MAC_QT_FRAMEWORK_TRUE,;t t
-s,@MAC_QT_FRAMEWORK_FALSE@,$MAC_QT_FRAMEWORK_FALSE,;t t
 s,@MAC_FRAMEWORK_TRUE@,$MAC_FRAMEWORK_TRUE,;t t
 s,@MAC_FRAMEWORK_FALSE@,$MAC_FRAMEWORK_FALSE,;t t
 s,@MACOSX_TRUE@,$MACOSX_TRUE,;t t
@@ -25328,6 +25326,9 @@ s,@MOC@,$MOC,;t t
 s,@UIC@,$UIC,;t t
 s,@RCC@,$RCC,;t t
 s,@QT_VERSION@,$QT_VERSION,;t t
+s,@MAC_QT_FRAMEWORK@,$MAC_QT_FRAMEWORK,;t t
+s,@MAC_QT_FRAMEWORK_TRUE@,$MAC_QT_FRAMEWORK_TRUE,;t t
+s,@MAC_QT_FRAMEWORK_FALSE@,$MAC_QT_FRAMEWORK_FALSE,;t t
 s,@X_CFLAGS@,$X_CFLAGS,;t t
 s,@X_PRE_LIBS@,$X_PRE_LIBS,;t t
 s,@X_LIBS@,$X_LIBS,;t t
