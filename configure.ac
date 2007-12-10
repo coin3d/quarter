@@ -550,17 +550,19 @@ if $BUILD_WITH_MSVC; then
   esac
 fi
 
-if $QUARTER_RELEASE; then
-  if $QUARTER_STATIC; then
-    SIM_AC_CONFIGURATION_SETTING([Quarter build type], [static .lib, no symbols])
+if $BUILD_WITH_MSVC; then
+  if $QUARTER_RELEASE; then
+    if $QUARTER_STATIC; then
+      SIM_AC_CONFIGURATION_SETTING([Quarter build type], [static .lib, no symbols])
+    else
+      SIM_AC_CONFIGURATION_SETTING([Quarter build type], [dynamic .dll, no symbols])
+    fi
   else
-    SIM_AC_CONFIGURATION_SETTING([Quarter build type], [dynamic .dll, no symbols])
-  fi
-else
-  if $QUARTER_STATIC; then
-    SIM_AC_CONFIGURATION_SETTING([Quarter build type], [static .lib + .pdb])
-  else
-    SIM_AC_CONFIGURATION_SETTING([Quarter build type], [dynamic .dll + .pdb])
+    if $QUARTER_STATIC; then
+      SIM_AC_CONFIGURATION_SETTING([Quarter build type], [static .lib + .pdb])
+    else
+      SIM_AC_CONFIGURATION_SETTING([Quarter build type], [dynamic .dll + .pdb])
+    fi
   fi
 fi
 

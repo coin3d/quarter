@@ -23940,8 +23940,9 @@ fi
   esac
 fi
 
-if $QUARTER_RELEASE; then
-  if $QUARTER_STATIC; then
+if $BUILD_WITH_MSVC; then
+  if $QUARTER_RELEASE; then
+    if $QUARTER_STATIC; then
 
 if test x"${sim_ac_configuration_settings+set}" = x"set"; then
   sim_ac_configuration_settings="$sim_ac_configuration_settings|Quarter build type:static .lib, no symbols"
@@ -23949,7 +23950,7 @@ else
   sim_ac_configuration_settings="Quarter build type:static .lib, no symbols"
 fi
 
-  else
+    else
 
 if test x"${sim_ac_configuration_settings+set}" = x"set"; then
   sim_ac_configuration_settings="$sim_ac_configuration_settings|Quarter build type:dynamic .dll, no symbols"
@@ -23957,9 +23958,9 @@ else
   sim_ac_configuration_settings="Quarter build type:dynamic .dll, no symbols"
 fi
 
-  fi
-else
-  if $QUARTER_STATIC; then
+    fi
+  else
+    if $QUARTER_STATIC; then
 
 if test x"${sim_ac_configuration_settings+set}" = x"set"; then
   sim_ac_configuration_settings="$sim_ac_configuration_settings|Quarter build type:static .lib + .pdb"
@@ -23967,7 +23968,7 @@ else
   sim_ac_configuration_settings="Quarter build type:static .lib + .pdb"
 fi
 
-  else
+    else
 
 if test x"${sim_ac_configuration_settings+set}" = x"set"; then
   sim_ac_configuration_settings="$sim_ac_configuration_settings|Quarter build type:dynamic .dll + .pdb"
@@ -23975,6 +23976,7 @@ else
   sim_ac_configuration_settings="Quarter build type:dynamic .dll + .pdb"
 fi
 
+    fi
   fi
 fi
 
