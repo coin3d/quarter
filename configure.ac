@@ -296,9 +296,6 @@ if $sim_ac_enable_pkgconfig && $sim_ac_build_library; then
   ])
 fi
 
-AC_SUBST([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
-AM_CONDITIONAL([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
-
 # *******************************************************************
 # pkg-config did not work, or we did not want to use it
 if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_coin_failed; then
@@ -379,7 +376,12 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_qt_fai
 
     QT_USE_INCDIR="$sim_ac_qtdir/include"
   fi
+else
+  sim_ac_have_qt_framework=false
 fi
+
+AM_CONDITIONAL([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
+AC_SUBST([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
 
 AC_SUBST([COIN_USE_CPPFLAGS])
 AC_SUBST([COIN_USE_CXXFLAGS])
