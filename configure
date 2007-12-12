@@ -23795,10 +23795,16 @@ if $sim_ac_have_qt_framework; then
   QT_USE_INCDIR=${sim_ac_qt_framework_dir}
 else
   if $BUILD_WITH_MSVC; then
+
+    sim_ac_qt_suffix=
+    if $sim_ac_qt_debug; then
+      sim_ac_qt_suffix=d
+    fi
+
     if $QUARTER_STATIC; then
-      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
+      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner${sim_ac_qt_suffix} -lQtXml${sim_ac_qt_suffix}"
     else
-      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner4 -lQtXml4"
+      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner${sim_ac_qt_suffix}4 -lQtXml${sim_ac_qt_suffix}4"
     fi
   else
     QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
