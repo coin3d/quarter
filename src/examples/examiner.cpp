@@ -83,7 +83,6 @@ int main(int argc, char *argv[])
 
   root->ref();
 
-  root->addChild(new SoCone);
   viewer->setSceneGraph(root);
 
   // Pop up the QuarterWidget
