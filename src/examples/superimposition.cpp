@@ -29,10 +29,7 @@
 #include <Inventor/nodes/SoBaseColor.h>
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/nodes/SoOrthographicCamera.h>
-#include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/nodes/SoText2.h>
-#include <Inventor/nodes/SoCone.h>
-#include <Inventor/nodes/SoBaseColor.h>
 #include <Inventor/nodes/SoTranslation.h>
 #include <Inventor/SoRenderManager.h>
 
