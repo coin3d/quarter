@@ -27,7 +27,7 @@
   from a Qt Designer ui file.
 */
 
-#include <QUiLoader>
+#include <QtUiTools/QUiLoader>
 #include <QtCore/QFile>
 
 #include <Inventor/nodes/SoCone.h>

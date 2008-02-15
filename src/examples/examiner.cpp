@@ -27,7 +27,7 @@
   Inventor files
 */
 
-#include <QUiLoader>
+#include <QtUiTools/QUiLoader>
 #include <QtCore/QFile>
 
 #include <Inventor/nodes/SoCone.h>
