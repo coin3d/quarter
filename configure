@@ -465,7 +465,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS BUILD_WITH_MSVC BUILD_WITH_MSVC_TRUE BUILD_WITH_MSVC_FALSE QUARTER_MAJOR_VERSION QUARTER_MINOR_VERSION QUARTER_MICRO_VERSION QUARTER_BETA_VERSION QUARTER_VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE am__leading_dot MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE build build_cpu build_vendor build_os host host_cpu host_vendor host_os EGREP LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CPP CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL BUILD_LIBRARY_TRUE BUILD_LIBRARY_FALSE htmldir QUARTER_DOC_HTML quarter_html_dir BUILD_HTMLPAGES_TRUE BUILD_HTMLPAGES_FALSE sim_ac_doxygen_exe sim_ac_perl_exe path_tag MAC_FRAMEWORK MAC_FRAMEWORK_NAME MAC_FRAMEWORK_PREFIX MAC_FRAMEWORK_VERSION MAC_DESIGNERPLUGINS_PREFIX nop MAC_FRAMEWORK_TRUE MAC_FRAMEWORK_FALSE MACOSX_TRUE MACOSX_FALSE MACOSX_10_2FF_TRUE MACOSX_10_2FF_FALSE PKG_CONFIG ac_pt_PKG_CONFIG Coin_CFLAGS Coin_LIBS Qt4_CFLAGS Qt4_LIBS MOC UIC RCC QT_VERSION X_CFLAGS X_PRE_LIBS X_LIBS X_EXTRA_LIBS sim_ac_coin_configcmd sim_ac_qt_cygpath MAC_QT_FRAMEWORK_TRUE MAC_QT_FRAMEWORK_FALSE MAC_QT_FRAMEWORK COIN_USE_CPPFLAGS COIN_USE_CXXFLAGS COIN_USE_LDFLAGS COIN_USE_LIBS QT_USE_CPPFLAGS QT_USE_CXXFLAGS QT_USE_INCDIR QT_USE_LDFLAGS QT_USE_LIBDIR QT_USE_LIBS QUARTER_BUILD_CPPFLAGS QUARTER_BUILD_CFLAGS QUARTER_BUILD_CXXFLAGS QUARTER_LIBFLAGS QUARTER_USE_CPPFLAGS QUARTER_USE_LDFLAGS QUARTER_USE_LIBS PLUGIN_BUILD_CPPFLAGS PLUGIN_BUILD_CXXFLAGS PLUGIN_BUILD_CFLAGS PLUGIN_BUILD_LIBFLAGS quarter_build_dir quarter_src_dir ac_unique_file sim_ac_relative_src_dir sim_ac_relative_src_dir_p CONFIG SUFFIX UNIX2WINPATH QT_DESIGNER_PLUGIN_PATH DSUFFIX EXAMPLES_EXTRA_LIBS EXAMPLES_BUILD_CPPFLAGS EXAMPLES_BUILD_CXXFLAGS EXAMPLES_BUILD_CFLAGS EXAMPLES_BUILD_LDFLAGS EXAMPLES_BUILD_LIBFLAGS LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS BUILD_WITH_MSVC BUILD_WITH_MSVC_TRUE BUILD_WITH_MSVC_FALSE QUARTER_MAJOR_VERSION QUARTER_MINOR_VERSION QUARTER_MICRO_VERSION QUARTER_BETA_VERSION QUARTER_VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE am__leading_dot MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE build build_cpu build_vendor build_os host host_cpu host_vendor host_os EGREP LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CPP CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL BUILD_LIBRARY_TRUE BUILD_LIBRARY_FALSE htmldir QUARTER_DOC_HTML quarter_html_dir BUILD_HTMLPAGES_TRUE BUILD_HTMLPAGES_FALSE sim_ac_doxygen_exe sim_ac_perl_exe path_tag MAC_FRAMEWORK MAC_FRAMEWORK_NAME MAC_FRAMEWORK_PREFIX MAC_FRAMEWORK_VERSION MAC_DESIGNERPLUGINS_PREFIX nop MAC_FRAMEWORK_TRUE MAC_FRAMEWORK_FALSE MACOSX_TRUE MACOSX_FALSE MACOSX_10_2FF_TRUE MACOSX_10_2FF_FALSE quarter_build_dir quarter_src_dir ac_unique_file sim_ac_relative_src_dir sim_ac_relative_src_dir_p CONFIG SUFFIX PKG_CONFIG ac_pt_PKG_CONFIG Coin_CFLAGS Coin_LIBS Qt4_CFLAGS Qt4_LIBS MOC UIC RCC QT_VERSION X_CFLAGS X_PRE_LIBS X_LIBS X_EXTRA_LIBS sim_ac_coin_configcmd sim_ac_qt_cygpath MAC_QT_FRAMEWORK_TRUE MAC_QT_FRAMEWORK_FALSE MAC_QT_FRAMEWORK COIN_USE_CPPFLAGS COIN_USE_CXXFLAGS COIN_USE_LDFLAGS COIN_USE_LIBS QT_USE_CPPFLAGS QT_USE_CXXFLAGS QT_USE_INCDIR QT_USE_LDFLAGS QT_USE_LIBDIR QT_USE_LIBS QUARTER_BUILD_CPPFLAGS QUARTER_BUILD_CFLAGS QUARTER_BUILD_CXXFLAGS QUARTER_LIBFLAGS QUARTER_USE_CPPFLAGS QUARTER_USE_LDFLAGS QUARTER_USE_LIBS PLUGIN_BUILD_CPPFLAGS PLUGIN_BUILD_CXXFLAGS PLUGIN_BUILD_CFLAGS PLUGIN_BUILD_LIBFLAGS UNIX2WINPATH QT_DESIGNER_PLUGIN_PATH DSUFFIX EXAMPLES_EXTRA_LIBS EXAMPLES_BUILD_CPPFLAGS EXAMPLES_BUILD_CXXFLAGS EXAMPLES_BUILD_CFLAGS EXAMPLES_BUILD_LDFLAGS EXAMPLES_BUILD_LIBFLAGS LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -1092,14 +1092,14 @@ Optional Packages:
   --with-framework  Do Mac OS X-like framework installation
   --without-framework  Do regular installation on Mac OS X
   --with-framework-prefix=<path>  (default: "/Library/Frameworks")
+  --with-alternate=string specify name of alternate configuration
+  --with-suffix=string    specify library name suffix (e.g. "_g")
   --with-x                use the X Window System
   --with-coin             enable use of Coin [default=yes]
   --with-coin=DIR         give prefix location of Coin
   --with-qt=true|false|DIR
                           specify if Qt should be used, and optionally the
                           location of the Qt library default=true
-  --with-alternate=string specify name of alternate configuration
-  --with-suffix=string    specify library name suffix (e.g. "_g")
   --with-qt-designer-plugin-path=<path>
                           specify qt designer plugin path
 
@@ -19251,6 +19251,101 @@ else
 fi
 
 
+# **************************************************************************
+# Miscellaneous options and initializations.
+
+quarter_build_dir=`pwd`
+quarter_src_dir=`cd "$srcdir"; pwd`
+
+
+
+
+
+temp_build_dir=`pwd`
+temp_src_dir=`cd "$srcdir"; pwd`
+
+temp_up=""
+temp_down=""
+
+while test "$temp_build_dir" != "$temp_src_dir"; do
+  srclen=`echo "$temp_src_dir" | wc -c`
+  buildlen=`echo "$temp_build_dir" | wc -c`
+  if test $srclen -gt $buildlen; then
+    # cut source tail, insert into temp_up
+    temp_src_tail=`echo "$temp_src_dir" | sed -e 's,.*/,,g'`
+    temp_src_dir=`echo "$temp_src_dir" | sed -e 's,/[^/]*\$,,g'`
+    if test x"$temp_up" = "x"; then
+      temp_up="$temp_src_tail"
+    else
+      temp_up="$temp_src_tail/$temp_up"
+    fi
+  else
+    # cut build tail, increase temp_down
+    temp_build_dir=`echo "$temp_build_dir" | sed -e 's,/[^/]*\$,,g'`
+    if test x"$temp_down" = "x"; then
+      temp_down=..
+    else
+      temp_down="../$temp_down"
+    fi
+  fi
+done
+
+if test x"$temp_down" = "x"; then
+  if test x"$temp_up" = "x"; then
+    sim_ac_relative_src_dir="."
+  else
+    sim_ac_relative_src_dir="$temp_up"
+  fi
+else
+  if test x"$temp_up" = "x"; then
+    sim_ac_relative_src_dir="$temp_down"
+  else
+    sim_ac_relative_src_dir="$temp_down/$temp_up"
+  fi
+fi
+
+# this gives false positives on windows, but that's ok for now...
+if test -f $sim_ac_relative_src_dir/$ac_unique_file; then
+  sim_ac_relative_src_dir_p=true;
+else
+  sim_ac_relative_src_dir_p=false;
+fi
+
+ # useful to have to check the relative path
+
+
+
+
+
+
+# Check whether --with-alternate or --without-alternate was given.
+if test "${with_alternate+set}" = set; then
+  withval="$with_alternate"
+  CONFIG=$withval
+else
+  CONFIG=default
+fi;
+
+
+
+
+# Check whether --with-suffix or --without-suffix was given.
+if test "${with_suffix+set}" = set; then
+  withval="$with_suffix"
+  SUFFIX=$withval
+
+if test x"${sim_ac_configuration_settings+set}" = x"set"; then
+  sim_ac_configuration_settings="$sim_ac_configuration_settings|Library Suffix:$SUFFIX"
+else
+  sim_ac_configuration_settings="Library Suffix:$SUFFIX"
+fi
+
+else
+  SUFFIX=
+fi;
+
+
+
 # *******************************************************************
 # try to use pkg-config
 if $sim_ac_enable_pkgconfig && $sim_ac_build_library; then
@@ -23676,102 +23771,6 @@ else
   sim_ac_framework=false
 fi
 
-
-# **************************************************************************
-# Miscellaneous options and initializations.
-
-quarter_build_dir=`pwd`
-quarter_src_dir=`cd "$srcdir"; pwd`
-
-
-
-
-
-temp_build_dir=`pwd`
-temp_src_dir=`cd "$srcdir"; pwd`
-
-temp_up=""
-temp_down=""
-
-while test "$temp_build_dir" != "$temp_src_dir"; do
-  srclen=`echo "$temp_src_dir" | wc -c`
-  buildlen=`echo "$temp_build_dir" | wc -c`
-  if test $srclen -gt $buildlen; then
-    # cut source tail, insert into temp_up
-    temp_src_tail=`echo "$temp_src_dir" | sed -e 's,.*/,,g'`
-    temp_src_dir=`echo "$temp_src_dir" | sed -e 's,/[^/]*\$,,g'`
-    if test x"$temp_up" = "x"; then
-      temp_up="$temp_src_tail"
-    else
-      temp_up="$temp_src_tail/$temp_up"
-    fi
-  else
-    # cut build tail, increase temp_down
-    temp_build_dir=`echo "$temp_build_dir" | sed -e 's,/[^/]*\$,,g'`
-    if test x"$temp_down" = "x"; then
-      temp_down=..
-    else
-      temp_down="../$temp_down"
-    fi
-  fi
-done
-
-if test x"$temp_down" = "x"; then
-  if test x"$temp_up" = "x"; then
-    sim_ac_relative_src_dir="."
-  else
-    sim_ac_relative_src_dir="$temp_up"
-  fi
-else
-  if test x"$temp_up" = "x"; then
-    sim_ac_relative_src_dir="$temp_down"
-  else
-    sim_ac_relative_src_dir="$temp_down/$temp_up"
-  fi
-fi
-
-# this gives false positives on windows, but that's ok for now...
-if test -f $sim_ac_relative_src_dir/$ac_unique_file; then
-  sim_ac_relative_src_dir_p=true;
-else
-  sim_ac_relative_src_dir_p=false;
-fi
-
- # useful to have to check the relative path
-
-
-
-
-
-
-# Check whether --with-alternate or --without-alternate was given.
-if test "${with_alternate+set}" = set; then
-  withval="$with_alternate"
-  CONFIG=$withval
-else
-  CONFIG=default
-fi;
-
-
-
-
-# Check whether --with-suffix or --without-suffix was given.
-if test "${with_suffix+set}" = set; then
-  withval="$with_suffix"
-  SUFFIX=$withval
-
-if test x"${sim_ac_configuration_settings+set}" = x"set"; then
-  sim_ac_configuration_settings="$sim_ac_configuration_settings|Library Suffix:$SUFFIX"
-else
-  sim_ac_configuration_settings="Library Suffix:$SUFFIX"
-fi
-
-else
-  SUFFIX=
-fi;
-
-
-
 # **************************************************************************
 # Figure out if library should be built static or dynamic.
 
@@ -25326,6 +25325,13 @@ s,@MACOSX_TRUE@,$MACOSX_TRUE,;t t
 s,@MACOSX_FALSE@,$MACOSX_FALSE,;t t
 s,@MACOSX_10_2FF_TRUE@,$MACOSX_10_2FF_TRUE,;t t
 s,@MACOSX_10_2FF_FALSE@,$MACOSX_10_2FF_FALSE,;t t
+s,@quarter_build_dir@,$quarter_build_dir,;t t
+s,@quarter_src_dir@,$quarter_src_dir,;t t
+s,@ac_unique_file@,$ac_unique_file,;t t
+s,@sim_ac_relative_src_dir@,$sim_ac_relative_src_dir,;t t
+s,@sim_ac_relative_src_dir_p@,$sim_ac_relative_src_dir_p,;t t
+s,@CONFIG@,$CONFIG,;t t
+s,@SUFFIX@,$SUFFIX,;t t
 s,@PKG_CONFIG@,$PKG_CONFIG,;t t
 s,@ac_pt_PKG_CONFIG@,$ac_pt_PKG_CONFIG,;t t
 s,@Coin_CFLAGS@,$Coin_CFLAGS,;t t
@@ -25366,13 +25372,6 @@ s,@PLUGIN_BUILD_CPPFLAGS@,$PLUGIN_BUILD_CPPFLAGS,;t t
 s,@PLUGIN_BUILD_CXXFLAGS@,$PLUGIN_BUILD_CXXFLAGS,;t t
 s,@PLUGIN_BUILD_CFLAGS@,$PLUGIN_BUILD_CFLAGS,;t t
 s,@PLUGIN_BUILD_LIBFLAGS@,$PLUGIN_BUILD_LIBFLAGS,;t t
-s,@quarter_build_dir@,$quarter_build_dir,;t t
-s,@quarter_src_dir@,$quarter_src_dir,;t t
-s,@ac_unique_file@,$ac_unique_file,;t t
-s,@sim_ac_relative_src_dir@,$sim_ac_relative_src_dir,;t t
-s,@sim_ac_relative_src_dir_p@,$sim_ac_relative_src_dir_p,;t t
-s,@CONFIG@,$CONFIG,;t t
-s,@SUFFIX@,$SUFFIX,;t t
 s,@UNIX2WINPATH@,$UNIX2WINPATH,;t t
 s,@QT_DESIGNER_PLUGIN_PATH@,$QT_DESIGNER_PLUGIN_PATH,;t t
 s,@DSUFFIX@,$DSUFFIX,;t t

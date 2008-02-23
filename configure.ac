@@ -198,6 +198,35 @@ AM_CONDITIONAL([MAC_FRAMEWORK], [$sim_ac_framework])
 AM_CONDITIONAL([MACOSX], [$sim_ac_macosx])
 AM_CONDITIONAL([MACOSX_10_2FF], [$sim_ac_macosx_10_2ff])
 
+# **************************************************************************
+# Miscellaneous options and initializations.
+
+quarter_build_dir=`pwd`
+quarter_src_dir=`cd "$srcdir"; pwd`
+AC_SUBST([quarter_build_dir])
+AC_SUBST([quarter_src_dir])
+
+SIM_AC_RELATIVE_SRC_DIR
+
+AC_ARG_WITH(
+  [alternate],
+  [AC_HELP_STRING([--with-alternate=string],
+                  [specify name of alternate configuration])],
+  [CONFIG=$withval],
+  [CONFIG=default])
+
+AC_SUBST(CONFIG)
+
+AC_ARG_WITH(
+  [suffix],
+  [AC_HELP_STRING([--with-suffix=string],
+                  [specify library name suffix (e.g. "_g")])],
+  [SUFFIX=$withval]
+  SIM_AC_CONFIGURATION_SETTING([Library Suffix], [$SUFFIX]),
+  [SUFFIX=])
+
+AC_SUBST(SUFFIX)
+
 # *******************************************************************
 # try to use pkg-config
 if $sim_ac_enable_pkgconfig && $sim_ac_build_library; then
@@ -428,36 +457,6 @@ if $sim_ac_framework && $sim_ac_coin_avail; then
 else
   sim_ac_framework=false
 fi
-
-
-# **************************************************************************
-# Miscellaneous options and initializations.
-
-quarter_build_dir=`pwd`
-quarter_src_dir=`cd "$srcdir"; pwd`
-AC_SUBST([quarter_build_dir])
-AC_SUBST([quarter_src_dir])
-
-SIM_AC_RELATIVE_SRC_DIR
-
-AC_ARG_WITH(
-  [alternate],
-  [AC_HELP_STRING([--with-alternate=string],
-                  [specify name of alternate configuration])],
-  [CONFIG=$withval],
-  [CONFIG=default])
-
-AC_SUBST(CONFIG)
-
-AC_ARG_WITH(
-  [suffix],
-  [AC_HELP_STRING([--with-suffix=string],
-                  [specify library name suffix (e.g. "_g")])],
-  [SUFFIX=$withval]
-  SIM_AC_CONFIGURATION_SETTING([Library Suffix], [$SUFFIX]),
-  [SUFFIX=])
-
-AC_SUBST(SUFFIX)
 
 # **************************************************************************
 # Figure out if library should be built static or dynamic.
