@@ -124,7 +124,7 @@ QuarterWidget::~QuarterWidget()
 }
 
 /*!
-  Enable/diable the headlight. This wille toggle the SoDirectionalLigh::on
+  Enable/disable the headlight. This wille toggle the SoDirectionalLigh::on
   field (returned from getHeadlight()).
 */
 void
