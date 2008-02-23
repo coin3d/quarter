@@ -19,8 +19,10 @@ pkgconfig_DATA= Quarter.pc
 EXTRA_DIST = \
 	Quarter.pc.in \
 	docs/quarter.doxygen.in \
+        docs/doxygen/Coin_logo.png \
         cfg/wrapmsvc.exe \
-        cfg/errors.txt
+        cfg/errors.txt \
+        cfg/doxy4win.pl
 
 DISTCLEANFILES = docs/quarter.doxygen
 

@@ -233,8 +233,10 @@ pkgconfig_DATA = Quarter.pc
 EXTRA_DIST = \
 	Quarter.pc.in \
 	docs/quarter.doxygen.in \
+        docs/doxygen/Coin_logo.png \
         cfg/wrapmsvc.exe \
-        cfg/errors.txt
+        cfg/errors.txt \
+        cfg/doxy4win.pl
 
 
 DISTCLEANFILES = docs/quarter.doxygen
@@ -466,7 +468,7 @@ distcleancheck_listfiles = find . -type f -print
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkinstalldirs) $(distdir)/. $(distdir)/cfg $(distdir)/docs
+	$(mkinstalldirs) $(distdir)/. $(distdir)/cfg $(distdir)/docs $(distdir)/docs/doxygen
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
