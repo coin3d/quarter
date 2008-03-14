@@ -273,6 +273,7 @@ QuarterWidget::resizeGL(int width, int height)
   SbViewportRegion vp(width, height);
   PRIVATE(this)->sorendermanager->setViewportRegion(vp);
   PRIVATE(this)->soeventmanager->setViewportRegion(vp);
+  PRIVATE(this)->sorendermanager->scheduleRedraw();
 }
 
 /*!
@@ -281,7 +282,7 @@ QuarterWidget::resizeGL(int width, int height)
 void
 QuarterWidget::paintGL(void)
 {
-  PRIVATE(this)->sorendermanager->render(TRUE, TRUE);
+  PRIVATE(this)->sorendermanager->scheduleRedraw();
 }
 
 /*!
