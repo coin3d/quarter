@@ -328,7 +328,6 @@ fi
 # *******************************************************************
 # pkg-config did not work, or we did not want to use it
 if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_coin_failed; then
-
   if $sim_ac_build_library; then
     SIM_AC_CHECK_HEADER_GL([
       CPPFLAGS="$CPPFLAGS $sim_ac_gl_cppflags"
@@ -440,12 +439,15 @@ AC_SUBST([PLUGIN_BUILD_LIBFLAGS])
 
 # *******************************************************************
 # if we want Mac OS X framework, check if Coin is installed as a framework
+sim_ac_have_inventor_framework=false
+
 if $sim_ac_framework && $sim_ac_coin_avail; then
   sim_ac_coin_frameworkdir=`$sim_ac_coin_configcmd --frameworkdir 2>/dev/null`
   if test x"$sim_ac_coin_frameworkdir" = x""; then
     SIM_AC_CONFIGURATION_WARNING([Coin was not installed as a framework, so Quarter can't be either (option was disabled).])
     sim_ac_framework=false
   else
+    sim_ac_have_inventor_framework=true
     # Inventor.framework and Quarter.framework must be in the same location
     ivframeworkprefix=`dirname "${sim_ac_coin_frameworkdir}"`
     if test x"${ivframeworkprefix}" != x"${sim_ac_framework_prefix}"; then
@@ -477,7 +479,6 @@ esac
 # we use some extra libs in Quarter FIXME: clean up this mess! (20071116 frodo)
 if $sim_ac_have_qt_framework; then
   QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtScript -Wl,-framework,QtDesigner -lQtUiTools"
-  COIN_USE_LIBS="$COIN_USE_LIBS -Wl,-framework,Inventor"
   QT_USE_INCDIR=${sim_ac_qt_framework_dir}
 else
   if $BUILD_WITH_MSVC; then
@@ -496,6 +497,11 @@ else
     QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
   fi
 fi
+
+if $sim_ac_have_inventor_framework; then
+  COIN_USE_LIBS="$COIN_USE_LIBS -Wl,-framework,Inventor"
+fi
+
 
 # **************************************************************************
 
@@ -711,7 +717,6 @@ if $BUILD_WITH_MSVC; then
 
 fi
 
-  
 AC_CONFIG_FILES([
 	Makefile
 	Quarter.pc

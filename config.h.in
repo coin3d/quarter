@@ -15,6 +15,9 @@
 /* define if the GL header should be included as OpenGL/gl.h */
 #undef HAVE_OPENGL_GL_H
 
+/* define if pthread's struct timespec uses nsecs and not usecs */
+#undef HAVE_PTHREAD_TIMESPEC_NSEC
+
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
 

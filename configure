@@ -1100,6 +1100,9 @@ Optional Packages:
   --with-qt=true|false|DIR
                           specify if Qt should be used, and optionally the
                           location of the Qt library default=true
+  --with-mesa             prefer MesaGL (if found) over OpenGL [default=no]
+  --with-opengl=DIR       OpenGL/Mesa installation directory
+  --with-pthread=DIR      pthread installation directory
   --with-qt-designer-plugin-path=<path>
                           specify qt designer plugin path
 
@@ -4526,7 +4529,7 @@ ia64-*-hpux*)
   ;;
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 4529 "configure"' > conftest.$ac_ext
+  echo '#line 4532 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -5661,7 +5664,7 @@ fi
 
 
 # Provide some information about the compiler.
-echo "$as_me:5664:" \
+echo "$as_me:5667:" \
      "checking for Fortran 77 compiler version" >&5
 ac_compiler=`set X $ac_compile; echo $2`
 { (eval echo "$as_me:$LINENO: \"$ac_compiler --version </dev/null >&5\"") >&5
@@ -6724,11 +6727,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:6727: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:6730: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:6731: \$? = $ac_status" >&5
+   echo "$as_me:6734: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -6992,11 +6995,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:6995: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:6998: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:6999: \$? = $ac_status" >&5
+   echo "$as_me:7002: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -7096,11 +7099,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:7099: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:7102: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:7103: \$? = $ac_status" >&5
+   echo "$as_me:7106: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -9441,7 +9444,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 9444 "configure"
+#line 9447 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -9541,7 +9544,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 9544 "configure"
+#line 9547 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11881,11 +11884,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:11884: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:11887: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:11888: \$? = $ac_status" >&5
+   echo "$as_me:11891: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -11985,11 +11988,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:11988: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:11991: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:11992: \$? = $ac_status" >&5
+   echo "$as_me:11995: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -13555,11 +13558,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:13558: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:13561: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:13562: \$? = $ac_status" >&5
+   echo "$as_me:13565: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -13659,11 +13662,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:13662: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:13665: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:13666: \$? = $ac_status" >&5
+   echo "$as_me:13669: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -15862,11 +15865,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:15865: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:15868: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:15869: \$? = $ac_status" >&5
+   echo "$as_me:15872: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -16130,11 +16133,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:16133: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:16136: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:16137: \$? = $ac_status" >&5
+   echo "$as_me:16140: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -16234,11 +16237,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:16237: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:16240: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:16241: \$? = $ac_status" >&5
+   echo "$as_me:16244: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -20000,7 +20003,6 @@ fi
 # *******************************************************************
 # pkg-config did not work, or we did not want to use it
 if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_coin_failed; then
-
   if $sim_ac_build_library; then
 
 echo "$as_me:$LINENO: checking for X" >&5
@@ -23209,6 +23211,631 @@ echo "$as_me: error: aborting" >&2;}
 fi
 
 
+
+
+sim_ac_ogl_cppflags=
+sim_ac_ogl_ldflags=
+sim_ac_ogl_lib=
+sim_ac_ogl_libs=
+
+
+# Check whether --with-mesa or --without-mesa was given.
+if test "${with_mesa+set}" = set; then
+  withval="$with_mesa"
+
+else
+  with_mesa=no
+fi;
+
+
+sim_ac_ogl_glnames="GL opengl32"
+sim_ac_ogl_mesaglnames=MesaGL
+
+if test "x$with_mesa" = "xyes"; then
+  sim_ac_ogl_first=$sim_ac_ogl_mesaglnames
+  sim_ac_ogl_second=$sim_ac_ogl_glnames
+else
+  sim_ac_ogl_first=$sim_ac_ogl_glnames
+  sim_ac_ogl_second=$sim_ac_ogl_mesaglnames
+fi
+
+
+# Check whether --with-opengl or --without-opengl was given.
+if test "${with_opengl+set}" = set; then
+  withval="$with_opengl"
+
+else
+  with_opengl=yes
+fi;
+
+if test x"$with_opengl" != xno; then
+
+  if test x"$with_opengl" != xyes && test x"$with_opengl" != x""; then
+    sim_ac_ogl_ldflags=-L$with_opengl/lib
+    # $sim_ac_ogl_cppflags is set up in the SIM_AC_CHECK_HEADER_GL
+    # invocation further below.
+  else
+    # On HP-UX platforms, OpenGL headers and libraries are usually installed
+    # at this location.
+    sim_ac_gl_hpux=/opt/graphics/OpenGL
+    if test -d $sim_ac_gl_hpux; then
+      sim_ac_ogl_ldflags=-L$sim_ac_gl_hpux/lib
+    fi
+  fi
+
+  sim_ac_use_framework_option=false;
+  case $host_os in
+  darwin*)
+
+    if $sim_ac_enable_darwin_x11; then
+      # Use X11-based GL instead of OpenGL.framework when building against X11
+      sim_ac_gl_darwin_x11=/usr/X11R6
+      if test -d $sim_ac_gl_darwin_x11; then
+        sim_ac_ogl_cppflags=-I$sim_ac_gl_darwin_x11/include
+        sim_ac_ogl_ldflags=-L$sim_ac_gl_darwin_x11/lib
+      fi
+    else
+
+
+
+ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+echo "$as_me:$LINENO: checking whether $CC accepts -framework OpenGL" >&5
+echo $ECHO_N "checking whether $CC accepts -framework OpenGL... $ECHO_C" >&6
+
+sim_ac_save_cppflags=$CPPFLAGS
+CPPFLAGS="$CPPFLAGS -framework OpenGL"
+cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext
+if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
+  (eval $ac_compile) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest.$ac_objext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  sim_ac_accept_result=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+sim_ac_accept_result=no
+fi
+rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
+echo "$as_me:$LINENO: result: $sim_ac_accept_result" >&5
+echo "${ECHO_T}$sim_ac_accept_result" >&6
+CPPFLAGS=$sim_ac_save_cppflags
+# This need to go last, in case CPPFLAGS is modified in arg 2 or arg 3.
+if test $sim_ac_accept_result = yes; then
+  sim_ac_use_framework_option=true
+else
+  :
+fi
+
+ac_ext=cc
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+
+    fi
+    ;;
+  esac
+
+  if $sim_ac_use_framework_option; then
+    sim_ac_ogl_ldflags="-Wl,-framework,OpenGL"
+    sim_ac_ogl_lib=OpenGL
+  fi
+
+  sim_ac_save_cppflags=$CPPFLAGS
+  sim_ac_save_ldflags=$LDFLAGS
+  sim_ac_save_libs=$LIBS
+
+  CPPFLAGS="$CPPFLAGS $sim_ac_ogl_cppflags"
+  LDFLAGS="$LDFLAGS $sim_ac_ogl_ldflags"
+
+  sim_ac_gl_header_avail=false
+echo "$as_me:$LINENO: checking how to include gl.h" >&5
+echo $ECHO_N "checking how to include gl.h... $ECHO_C" >&6
+if test x"$with_opengl" != x"no"; then
+  sim_ac_gl_save_CPPFLAGS=$CPPFLAGS
+  sim_ac_gl_cppflags=
+
+  if test x"$with_opengl" != xyes && test x"$with_opengl" != x""; then
+    sim_ac_gl_cppflags="-I${with_opengl}/include"
+  else
+    # On HP-UX platforms, OpenGL headers and libraries are usually installed
+    # at this location.
+    sim_ac_gl_hpux=/opt/graphics/OpenGL
+    if test -d $sim_ac_gl_hpux; then
+      sim_ac_gl_cppflags=-I$sim_ac_gl_hpux/include
+    fi
+  fi
+
+  # On Mac OS X, GL is part of the optional X11 fraemwork
+  case $host_os in
+  darwin*)
+
+    if $sim_ac_enable_darwin_x11; then
+      sim_ac_gl_darwin_x11=/usr/X11R6
+      if test -d $sim_ac_gl_darwin_x11; then
+        sim_ac_gl_cppflags=-I$sim_ac_gl_darwin_x11/include
+      fi
+    fi
+    ;;
+  esac
+
+  CPPFLAGS="$CPPFLAGS $sim_ac_gl_cppflags"
+
+  # Mac OS X framework (no X11, -framework OpenGL)
+  if $sim_ac_enable_darwin_x11; then :
+  else
+
+cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#include <OpenGL/gl.h>
+_ACEOF
+if { (eval echo "$as_me:$LINENO: \"$ac_cpp conftest.$ac_ext\"") >&5
+  (eval $ac_cpp conftest.$ac_ext) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } >/dev/null; then
+  if test -s conftest.err; then
+    ac_cpp_err=$ac_cxx_preproc_warn_flag
+    ac_cpp_err=$ac_cpp_err$ac_cxx_werror_flag
+  else
+    ac_cpp_err=
+  fi
+else
+  ac_cpp_err=yes
+fi
+if test -z "$ac_cpp_err"; then
+  ac_cv_header_OpenGL_gl_h=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+  ac_cv_header_OpenGL_gl_h=no
+fi
+rm -f conftest.err conftest.$ac_ext
+if test $ac_cv_header_OpenGL_gl_h = yes; then
+
+      sim_ac_gl_header_avail=true
+      sim_ac_gl_header=OpenGL/gl.h
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_OPENGL_GL_H 1
+_ACEOF
+
+
+fi
+
+
+
+  fi
+
+  if $sim_ac_gl_header_avail; then :
+  else
+
+cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#include <GL/gl.h>
+_ACEOF
+if { (eval echo "$as_me:$LINENO: \"$ac_cpp conftest.$ac_ext\"") >&5
+  (eval $ac_cpp conftest.$ac_ext) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } >/dev/null; then
+  if test -s conftest.err; then
+    ac_cpp_err=$ac_cxx_preproc_warn_flag
+    ac_cpp_err=$ac_cpp_err$ac_cxx_werror_flag
+  else
+    ac_cpp_err=
+  fi
+else
+  ac_cpp_err=yes
+fi
+if test -z "$ac_cpp_err"; then
+  ac_cv_header_GL_gl_h=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+  ac_cv_header_GL_gl_h=no
+fi
+rm -f conftest.err conftest.$ac_ext
+if test $ac_cv_header_GL_gl_h = yes; then
+
+      sim_ac_gl_header_avail=true
+      sim_ac_gl_header=GL/gl.h
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_GL_GL_H 1
+_ACEOF
+
+
+fi
+
+
+
+  fi
+
+  CPPFLAGS="$sim_ac_gl_save_CPPFLAGS"
+  if $sim_ac_gl_header_avail; then
+    if test x"$sim_ac_gl_cppflags" = x""; then
+      echo "$as_me:$LINENO: result: #include <$sim_ac_gl_header>" >&5
+echo "${ECHO_T}#include <$sim_ac_gl_header>" >&6
+    else
+      echo "$as_me:$LINENO: result: $sim_ac_gl_cppflags, #include <$sim_ac_gl_header>" >&5
+echo "${ECHO_T}$sim_ac_gl_cppflags, #include <$sim_ac_gl_header>" >&6
+    fi
+    CPPFLAGS="$CPPFLAGS $sim_ac_gl_cppflags"
+  else
+    echo "$as_me:$LINENO: result: not found" >&5
+echo "${ECHO_T}not found" >&6
+    { echo "$as_me:$LINENO: WARNING: could not find gl.h" >&5
+echo "$as_me: WARNING: could not find gl.h" >&2;}
+  fi
+else
+  echo "$as_me:$LINENO: result: disabled" >&5
+echo "${ECHO_T}disabled" >&6
+  { echo "$as_me:$LINENO: WARNING: could not find gl.h" >&5
+echo "$as_me: WARNING: could not find gl.h" >&2;}
+fi
+
+
+  sim_ac_glchk_hit=false
+  for sim_ac_tmp_outerloop in barebones withpthreads; do
+    if $sim_ac_glchk_hit; then :; else
+
+      sim_ac_oglchk_pthreadslib=""
+      if test "$sim_ac_tmp_outerloop" = "withpthreads"; then
+        { echo "$as_me:$LINENO: WARNING: couldn't compile or link with OpenGL library -- trying with pthread library in place..." >&5
+echo "$as_me: WARNING: couldn't compile or link with OpenGL library -- trying with pthread library in place..." >&2;}
+        LIBS="$sim_ac_save_libs"
+
+
+
+# Check whether --with-pthread or --without-pthread was given.
+if test "${with_pthread+set}" = set; then
+  withval="$with_pthread"
+
+else
+  with_pthread=yes
+fi;
+
+sim_ac_pthread_avail=no
+
+if test x"$with_pthread" != xno; then
+  if test x"$with_pthread" != xyes; then
+    sim_ac_pthread_cppflags="-I${with_pthread}/include"
+    sim_ac_pthread_ldflags="-L${with_pthread}/lib"
+  fi
+
+  # FIXME: should investigate and document the exact meaning of
+  # the _REENTRANT flag. larsa's commit message mentions
+  # "glibc-doc/FAQ.threads.html". Also, kintel points to the
+  # comp.programming.thrads FAQ, which has an entry on the
+  # _REENTRANT define.
+  #
+  # Preferably, it should only be set up when really needed
+  # (as detected by some other configure check).
+  #
+  # 20030306 mortene.
+  sim_ac_pthread_cppflags="-D_REENTRANT ${sim_ac_pthread_cppflags}"
+
+  sim_ac_save_cppflags=$CPPFLAGS
+  sim_ac_save_ldflags=$LDFLAGS
+  sim_ac_save_libs=$LIBS
+
+  CPPFLAGS="$CPPFLAGS $sim_ac_pthread_cppflags"
+  LDFLAGS="$LDFLAGS $sim_ac_pthread_ldflags"
+
+  sim_ac_pthread_avail=false
+
+  echo "$as_me:$LINENO: checking for POSIX threads" >&5
+echo $ECHO_N "checking for POSIX threads... $ECHO_C" >&6
+  # At least under FreeBSD, we link to pthreads library with -pthread.
+  for sim_ac_pthreads_libcheck in "-lpthread" "-pthread"; do
+    if $sim_ac_pthread_avail; then :; else
+      LIBS="$sim_ac_pthreads_libcheck $sim_ac_save_libs"
+      cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
+#include <pthread.h>
+int
+main ()
+{
+(void)pthread_create(0L, 0L, 0L, 0L);
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  sim_ac_pthread_avail=true
+                   sim_ac_pthread_libs="$sim_ac_pthreads_libcheck"
+
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+    fi
+  done
+
+  if $sim_ac_pthread_avail; then
+    echo "$as_me:$LINENO: result: $sim_ac_pthread_cppflags $sim_ac_pthread_ldflags $sim_ac_pthread_libs" >&5
+echo "${ECHO_T}$sim_ac_pthread_cppflags $sim_ac_pthread_ldflags $sim_ac_pthread_libs" >&6
+  else
+    echo "$as_me:$LINENO: result: not available" >&5
+echo "${ECHO_T}not available" >&6
+  fi
+
+  if $sim_ac_pthread_avail; then
+    echo "$as_me:$LINENO: checking the struct timespec resolution" >&5
+echo $ECHO_N "checking the struct timespec resolution... $ECHO_C" >&6
+if test "${sim_cv_lib_pthread_timespec_resolution+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
+#include <pthread.h>
+int
+main ()
+{
+struct timespec timeout;
+                       timeout.tv_nsec = 0;
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext
+if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
+  (eval $ac_compile) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest.$ac_objext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  sim_cv_lib_pthread_timespec_resolution=nsecs
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+sim_cv_lib_pthread_timespec_resolution=usecs
+fi
+rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
+fi
+echo "$as_me:$LINENO: result: $sim_cv_lib_pthread_timespec_resolution" >&5
+echo "${ECHO_T}$sim_cv_lib_pthread_timespec_resolution" >&6
+    if test x"$sim_cv_lib_pthread_timespec_resolution" = x"nsecs"; then
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_PTHREAD_TIMESPEC_NSEC 1
+_ACEOF
+
+    fi
+  fi
+
+  if $sim_ac_pthread_avail; then
+
+          sim_ac_ogl_cppflags="$sim_ac_ogl_cppflags $sim_ac_pthread_cppflags"
+          sim_ac_ogl_ldflags="$sim_ac_ogl_ldflags $sim_ac_pthread_ldflags"
+          sim_ac_oglchk_pthreadslib="$sim_ac_pthread_libs"
+
+  else
+    CPPFLAGS=$sim_ac_save_cppflags
+    LDFLAGS=$sim_ac_save_ldflags
+    LIBS=$sim_ac_save_libs
+    { echo "$as_me:$LINENO: WARNING: couldn't compile or link with pthread library" >&5
+echo "$as_me: WARNING: couldn't compile or link with pthread library" >&2;}
+
+  fi
+fi
+
+      fi
+
+      echo "$as_me:$LINENO: checking for OpenGL library dev-kit" >&5
+echo $ECHO_N "checking for OpenGL library dev-kit... $ECHO_C" >&6
+      # Mac OS X uses nada (only LDFLAGS), which is why "" was set first
+      for sim_ac_ogl_libcheck in "" $sim_ac_ogl_first $sim_ac_ogl_second; do
+        if $sim_ac_glchk_hit; then :; else
+          if test -n "${sim_ac_ogl_libcheck}"; then
+            LIBS="-l${sim_ac_ogl_libcheck} $sim_ac_oglchk_pthreadslib $sim_ac_save_libs"
+          else
+            LIBS="$sim_ac_oglchk_pthreadslib $sim_ac_save_libs"
+          fi
+          cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+#ifdef HAVE_WINDOWS_H
+             #include <windows.h>
+             #endif /* HAVE_WINDOWS_H */
+             #ifdef HAVE_GL_GL_H
+             #include <GL/gl.h>
+             #else /* ! HAVE_GL_GL_H */
+             #ifdef HAVE_OPENGL_GL_H
+             /* Mac OS X */
+             #include <OpenGL/gl.h>
+             #endif /* HAVE_OPENGL_GL_H */
+             #endif /* ! HAVE_GL_GL_H */
+
+int
+main ()
+{
+glPointSize(1.0f);
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+
+             sim_ac_glchk_hit=true
+             sim_ac_ogl_libs=$sim_ac_oglchk_pthreadslib
+             if test -n "${sim_ac_ogl_libcheck}"; then
+               sim_ac_ogl_lib=$sim_ac_ogl_libcheck
+               sim_ac_ogl_libs="-l${sim_ac_ogl_libcheck} $sim_ac_oglchk_pthreadslib"
+             fi
+
+
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+        fi
+      done
+      if $sim_ac_glchk_hit; then
+        echo "$as_me:$LINENO: result: $sim_ac_ogl_cppflags $sim_ac_ogl_ldflags $sim_ac_ogl_libs" >&5
+echo "${ECHO_T}$sim_ac_ogl_cppflags $sim_ac_ogl_ldflags $sim_ac_ogl_libs" >&6
+      else
+        echo "$as_me:$LINENO: result: unresolved" >&5
+echo "${ECHO_T}unresolved" >&6
+      fi
+    fi
+  done
+
+  if $sim_ac_glchk_hit; then
+    LIBS="$sim_ac_ogl_libs $sim_ac_save_libs"
+
+      EXAMPLES_BUILD_CPPFLAGS="$EXAMPLES_BUILD_CPPFLAGS $sim_ac_ogl_cppflags"
+      EXAMPLES_BUILD_LDFLAGS="$EXAMPLES_BUILD_LDFLAGS $sim_ac_ogl_ldflags"
+      EXAMPLES_BUILD_LIBS="$sim_ac_ogl_libs $EXAMPLES_BUILD_LIBS"
+
+  else
+    CPPFLAGS="$sim_ac_save_cppflags"
+    LDFLAGS="$sim_ac_save_ldflags"
+    LIBS="$sim_ac_save_libs"
+    { { echo "$as_me:$LINENO: error: needs an OpenGL-compatible development system installation" >&5
+echo "$as_me: error: needs an OpenGL-compatible development system installation" >&2;}
+   { (exit 1); exit 1; }; }
+  fi
+fi
+
+
     sim_ac_configure_save_cppflags=$CPPFLAGS
     sim_ac_configure_save_ldflags=$LDFLAGS
     sim_ac_configure_save_libs=$LIBS
@@ -23735,6 +24362,8 @@ QUARTER_BUILD_CPPFLAGS=-DQUARTER_INTERNAL
 
 # *******************************************************************
 # if we want Mac OS X framework, check if Coin is installed as a framework
+sim_ac_have_inventor_framework=false
+
 if $sim_ac_framework && $sim_ac_coin_avail; then
   sim_ac_coin_frameworkdir=`$sim_ac_coin_configcmd --frameworkdir 2>/dev/null`
   if test x"$sim_ac_coin_frameworkdir" = x""; then
@@ -23747,6 +24376,7 @@ fi
 
     sim_ac_framework=false
   else
+    sim_ac_have_inventor_framework=true
     # Inventor.framework and Quarter.framework must be in the same location
     ivframeworkprefix=`dirname "${sim_ac_coin_frameworkdir}"`
     if test x"${ivframeworkprefix}" != x"${sim_ac_framework_prefix}"; then
@@ -23790,7 +24420,6 @@ esac
 # we use some extra libs in Quarter FIXME: clean up this mess! (20071116 frodo)
 if $sim_ac_have_qt_framework; then
   QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtScript -Wl,-framework,QtDesigner -lQtUiTools"
-  COIN_USE_LIBS="$COIN_USE_LIBS -Wl,-framework,Inventor"
   QT_USE_INCDIR=${sim_ac_qt_framework_dir}
 else
   if $BUILD_WITH_MSVC; then
@@ -23809,6 +24438,11 @@ else
     QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
   fi
 fi
+
+if $sim_ac_have_inventor_framework; then
+  COIN_USE_LIBS="$COIN_USE_LIBS -Wl,-framework,Inventor"
+fi
+
 
 # **************************************************************************
 
@@ -24513,7 +25147,6 @@ if $BUILD_WITH_MSVC; then
   fi
 
 fi
-
 
                                                                                                                                   ac_config_files="$ac_config_files Makefile Quarter.pc include/Makefile include/Quarter/Makefile include/Quarter/devices/Makefile include/Quarter/eventhandlers/Makefile src/Makefile src/Quarter/Makefile src/Quarter/devices/Makefile src/Quarter/eventhandlers/Makefile src/examples/Makefile src/plugins/Makefile html/Makefile"
 
