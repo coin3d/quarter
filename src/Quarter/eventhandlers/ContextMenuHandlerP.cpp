@@ -25,7 +25,6 @@
 
 #include <QtGui/QMenu>
 #include <QtCore/QMap>
-#include <QtGui/QActionGroup>
 #include <QtGui/QMouseEvent>
 
 #include <Quarter/QuarterWidget.h>
@@ -36,147 +35,136 @@ using namespace SIM::Coin3D::Quarter;
 
 #define PUBLIC(obj) obj->publ
 
-ContextMenuHandlerP::ContextMenuHandlerP(ContextMenuHandler * publ)
+ContextMenu::ContextMenu(QuarterWidget * quarterwidget)
 {
   this->publ = publ;
-}
+  
+  this->quarterwidget = quarterwidget;
+  this->rendermanager = quarterwidget->getSoRenderManager();
 
-ContextMenuHandlerP::~ContextMenuHandlerP()
-{
+  this->contextmenu = new QMenu;
+  this->rendermenu = new QMenu("Render Mode");
+  this->stereomenu = new QMenu("Stereo Mode");
+  this->transparencymenu = new QMenu("Transparency Type");
 
-}
+  this->stereomodegroup = new QActionGroup(this);
+  this->rendermodegroup = new QActionGroup(this);
+  this->transparencytypegroup = new QActionGroup(this);
 
-bool
-ContextMenuHandlerP::contextMenuEvent(QMouseEvent * event)
-{
-  QList<RenderModePair *> rendermodes;
-  QList<StereoModePair *> stereomodes;
-  QList<TransparencyTypePair *> transparencytypes;
-
-  rendermodes.append(new RenderModePair(SoRenderManager::AS_IS, "as is"));
-  rendermodes.append(new RenderModePair(SoRenderManager::WIREFRAME, "wireframe"));
-  rendermodes.append(new RenderModePair(SoRenderManager::WIREFRAME_OVERLAY, "wireframe overlay"));
-  rendermodes.append(new RenderModePair(SoRenderManager::POINTS, "points"));
-  rendermodes.append(new RenderModePair(SoRenderManager::HIDDEN_LINE, "hidden line"));
-  rendermodes.append(new RenderModePair(SoRenderManager::BOUNDING_BOX, "bounding box"));
-
-  stereomodes.append(new StereoModePair(SoRenderManager::MONO, "mono"));
-  stereomodes.append(new StereoModePair(SoRenderManager::ANAGLYPH, "anaglyph"));
-  stereomodes.append(new StereoModePair(SoRenderManager::QUAD_BUFFER, "quad buffer"));
-  stereomodes.append(new StereoModePair(SoRenderManager::INTERLEAVED_ROWS, "interleaved rows"));
-  stereomodes.append(new StereoModePair(SoRenderManager::INTERLEAVED_COLUMNS, "interleaved columns"));
-
-  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::NONE, "none"));
-  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SCREEN_DOOR, "screen door"));
-  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::ADD, "add"));
-  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::DELAYED_ADD, "delayed add"));
-  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_ADD, "sorted object add"));
-  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::BLEND, "blend"));
-  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::DELAYED_BLEND, "delayed blend"));
-  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_BLEND, "sorted object blend"));
-  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_ADD, "sorted object sorted triangle add"));
-  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_BLEND, "sorted object sorted triangle blend"));
-  transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_LAYERS_BLEND, "sorted layers blend"));
-
-  QMenu * contextmenu = new QMenu;
-  QMenu * rendermenu = new QMenu("Render Mode");
-  QMenu * stereomenu = new QMenu("Stereo Mode");
-  QMenu * transparencymenu = new QMenu("Transparency Type");
-
-  QList<QAction *> rendermodeactions;
-  QList<QAction *> stereomodeactions;
-  QList<QAction *> transparencytypeactions;
-  QActionGroup * stereomodegroup = new QActionGroup(this);
-  QActionGroup * rendermodegroup = new QActionGroup(this);
-  QActionGroup * transparencytypegroup = new QActionGroup(this);
-
-  const QuarterWidget * quarterwidget = PUBLIC(this)->manager->getWidget();
-  SoRenderManager * rendermanager = quarterwidget->getSoRenderManager();
-
-  foreach(RenderModePair * rendermode, rendermodes) {
+  this->rendermodes.append(new RenderModePair(SoRenderManager::AS_IS, "as is"));
+  this->rendermodes.append(new RenderModePair(SoRenderManager::WIREFRAME, "wireframe"));
+  this->rendermodes.append(new RenderModePair(SoRenderManager::WIREFRAME_OVERLAY, "wireframe overlay"));
+  this->rendermodes.append(new RenderModePair(SoRenderManager::POINTS, "points"));
+  this->rendermodes.append(new RenderModePair(SoRenderManager::HIDDEN_LINE, "hidden line"));
+  this->rendermodes.append(new RenderModePair(SoRenderManager::BOUNDING_BOX, "bounding box"));
+    
+  this->stereomodes.append(new StereoModePair(SoRenderManager::MONO, "mono"));
+  this->stereomodes.append(new StereoModePair(SoRenderManager::ANAGLYPH, "anaglyph"));
+  this->stereomodes.append(new StereoModePair(SoRenderManager::QUAD_BUFFER, "quad buffer"));
+  this->stereomodes.append(new StereoModePair(SoRenderManager::INTERLEAVED_ROWS, "interleaved rows"));
+  this->stereomodes.append(new StereoModePair(SoRenderManager::INTERLEAVED_COLUMNS, "interleaved columns"));
+    
+  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::NONE, "none"));
+  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SCREEN_DOOR, "screen door"));
+  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::ADD, "add"));
+  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::DELAYED_ADD, "delayed add"));
+  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_ADD, "sorted object add"));
+  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::BLEND, "blend"));
+  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::DELAYED_BLEND, "delayed blend"));
+  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_BLEND, "sorted object blend"));
+  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_ADD, "sorted object sorted triangle add"));
+  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_BLEND, "sorted object sorted triangle blend"));
+  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_LAYERS_BLEND, "sorted layers blend"));
+    
+  foreach(RenderModePair * rendermode, this->rendermodes) {
     QAction * action = new QAction(rendermode->second, this);
     action->setCheckable(true);
     action->setChecked(rendermanager->getRenderMode() == rendermode->first);
     action->setData(rendermode->first);
-    rendermodeactions.append(action);
-    rendermodegroup->addAction(action);
-    rendermenu->addAction(action);
+    this->rendermodeactions.append(action);
+    this->rendermodegroup->addAction(action);
+    this->rendermenu->addAction(action);
   }
-
-  foreach(StereoModePair * stereomode, stereomodes) {
+    
+  foreach(StereoModePair * stereomode, this->stereomodes) {
     QAction * action = new QAction(stereomode->second, this);
     action->setCheckable(true);
     action->setChecked(rendermanager->getStereoMode() == stereomode->first);
     action->setData(stereomode->first);
-    stereomodeactions.append(action);
-    stereomodegroup->addAction(action);
-    stereomenu->addAction(action);
+    this->stereomodeactions.append(action);
+    this->stereomodegroup->addAction(action);
+    this->stereomenu->addAction(action);
   }
-
-  foreach(TransparencyTypePair * transparencytype, transparencytypes) {
+    
+  foreach(TransparencyTypePair * transparencytype, this->transparencytypes) {
     QAction * action = new QAction(transparencytype->second, this);
     action->setCheckable(true);
     action->setChecked(rendermanager->getGLRenderAction()->getTransparencyType() == transparencytype->first);
     action->setData(transparencytype->first);
-    transparencytypeactions.append(action);
-    transparencytypegroup->addAction(action);
-    transparencymenu->addAction(action);
+    this->transparencytypeactions.append(action);
+    this->transparencytypegroup->addAction(action);
+    this->transparencymenu->addAction(action);
   }
 
-  connect(rendermodegroup, SIGNAL(triggered(QAction *)),
-          this, SLOT(changeRenderMode(QAction *)));
+  this->connect(this->rendermodegroup, SIGNAL(triggered(QAction *)),
+                this, SLOT(changeRenderMode(QAction *)));
+    
+  this->connect(this->stereomodegroup, SIGNAL(triggered(QAction *)),
+                this, SLOT(changeStereoMode(QAction *)));
+    
+  this->connect(this->transparencytypegroup, SIGNAL(triggered(QAction *)),
+                this, SLOT(changeTransparencyType(QAction *)));
+    
 
-  connect(stereomodegroup, SIGNAL(triggered(QAction *)),
-          this, SLOT(changeStereoMode(QAction *)));
-
-  connect(transparencytypegroup, SIGNAL(triggered(QAction *)),
-          this, SLOT(changeTransparencyType(QAction *)));
-
-  contextmenu->addMenu(rendermenu);
-  contextmenu->addMenu(stereomenu);
-  contextmenu->addMenu(transparencymenu);
-
-  contextmenu->exec(event->globalPos());
-
-  // clean up
-  foreach(RenderModePair * rendermode, rendermodes) delete rendermode;
-  foreach(StereoModePair * stereomode, stereomodes) delete stereomode;
-  foreach(TransparencyTypePair * transparencytype, transparencytypes) delete transparencytype;
-
-  delete rendermenu;
-  delete stereomenu;
-  delete transparencymenu;
-  delete contextmenu;
-
+  this->contextmenu->addMenu(this->rendermenu);
+  this->contextmenu->addMenu(this->stereomenu);
+  this->contextmenu->addMenu(this->transparencymenu);
+}
+      
+ContextMenu::~ContextMenu()
+{
+  foreach(RenderModePair * rendermode, this->rendermodes) delete rendermode;
+  foreach(StereoModePair * stereomode, this->stereomodes) delete stereomode;
+  foreach(TransparencyTypePair * transparencytype, this->transparencytypes) delete transparencytype;
+  
+  delete this->rendermenu;
+  delete this->stereomenu;
+  delete this->transparencymenu;
+  delete this->contextmenu;
+}
+      
+QMenu * 
+ContextMenu::getMenu(void) const
+{ 
+  return this->contextmenu;
+}
+      
+bool
+ContextMenu::contextMenuEvent(QMouseEvent * event)
+{
+  (void) this->contextmenu->exec(event->globalPos());
   return true;
 }
 
 void
-ContextMenuHandlerP::changeRenderMode(QAction * action)
+ContextMenu::changeRenderMode(QAction * action)
 {
-  const QuarterWidget * quarterwidget = PUBLIC(this)->manager->getWidget();
-  SoRenderManager * rendermanager = quarterwidget->getSoRenderManager();
-
   QVariant rendermode = action->data();
-  rendermanager->setRenderMode((SoRenderManager::RenderMode)rendermode.toInt());
+  this->rendermanager->setRenderMode((SoRenderManager::RenderMode)rendermode.toInt());
 }
 
 void
-ContextMenuHandlerP::changeStereoMode(QAction * action)
+ContextMenu::changeStereoMode(QAction * action)
 {
-  const QuarterWidget * quarterwidget = PUBLIC(this)->manager->getWidget();
-  SoRenderManager * rendermanager = quarterwidget->getSoRenderManager();
-
   QVariant stereomode = action->data();
-  rendermanager->setStereoMode((SoRenderManager::StereoMode)stereomode.toInt());
+  this->rendermanager->setStereoMode((SoRenderManager::StereoMode)stereomode.toInt());
 }
 
 void
-ContextMenuHandlerP::changeTransparencyType(QAction * action)
+ContextMenu::changeTransparencyType(QAction * action)
 {
-  QuarterWidget * quarterwidget = PUBLIC(this)->manager->getWidget();
   QVariant transparencytype = action->data();
-  quarterwidget->setTransparencyType((SoGLRenderAction::TransparencyType)transparencytype.toInt());
+  this->quarterwidget->setTransparencyType((SoGLRenderAction::TransparencyType)transparencytype.toInt());
 }
 
 #undef PUBLIC

@@ -32,8 +32,18 @@
 #include <QtCore/QEvent>
 #include <QtGui/QContextMenuEvent>
 #include <Inventor/events/SoEvents.h>
+#include <Quarter/eventhandlers/EventManager.h>
 
 #include "ContextMenuHandlerP.h"
+
+namespace SIM { namespace Coin3D { namespace Quarter {
+
+class ContextMenuHandlerP {
+public:
+  ContextMenu * contextmenu;
+};
+
+}}} // namespace
 
 using namespace SIM::Coin3D::Quarter;
 
@@ -41,12 +51,24 @@ using namespace SIM::Coin3D::Quarter;
 
 ContextMenuHandler::ContextMenuHandler(void)
 {
-  PRIVATE(this) = new ContextMenuHandlerP(this);
+  PRIVATE(this) = new ContextMenuHandlerP;
+  PRIVATE(this)->contextmenu = NULL;
 }
 
 ContextMenuHandler::~ContextMenuHandler()
 {
-  delete PRIVATE(this);
+  if (PRIVATE(this)->contextmenu) {
+    delete PRIVATE(this)->contextmenu;
+  }
+}
+
+QMenu * 
+ContextMenuHandler::getContextMenu(void) const
+{
+  if (!PRIVATE(this)->contextmenu) {
+    PRIVATE(this)->contextmenu = new ContextMenu(this->manager->getWidget());
+  }
+  return PRIVATE(this)->contextmenu->getMenu();
 }
 
 bool
@@ -56,7 +78,8 @@ ContextMenuHandler::handleEvent(QEvent * event)
     QMouseEvent * mouseevent = (QMouseEvent *) event;
     if (mouseevent->button() == Qt::RightButton) {
       if (mouseevent->modifiers() & Qt::ControlModifier) {
-        return PRIVATE(this)->contextMenuEvent(mouseevent);
+        (void) this->getContextMenu(); // make sure a context menu is created
+        return PRIVATE(this)->contextmenu->contextMenuEvent(mouseevent);
       }
     }
   }

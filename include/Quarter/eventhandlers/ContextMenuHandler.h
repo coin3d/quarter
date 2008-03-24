@@ -27,6 +27,7 @@
 #include <Quarter/eventhandlers/EventHandler.h>
 
 class QEvent;
+class QMenu;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
@@ -36,6 +37,7 @@ public:
   virtual ~ContextMenuHandler();
 
   virtual bool handleEvent(QEvent * event);
+  QMenu * getContextMenu(void) const;
 
 private:
   friend class ContextMenuHandlerP;
