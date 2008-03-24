@@ -16,17 +16,17 @@ endif
 DEFAULT_INCLUDES = $(includes)
 
 BuiltSources = \
-        moc_ContextMenuHandlerP.cpp
+        moc_ContextMenu.cpp
 
 PrivateHeaders = \
-        ContextMenuHandlerP.h
+        ContextMenu.h
 
 RegularSources = \
         EventManager.cpp \
         EventHandler.cpp \
         DragDropHandler.cpp \
         ContextMenuHandler.cpp \
-        ContextMenuHandlerP.cpp
+        ContextMenu.cpp
 
 BUILT_SOURCES = $(BuiltSources)
 
@@ -62,8 +62,8 @@ libeventhandlers_la_CFLAGS = \
 
 CLEANFILES = .\#* *.bak *~ *.lst $(BuiltSources)
 
-moc_ContextMenuHandlerP.cpp: $(srcdir)/ContextMenuHandlerP.h
-	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/ContextMenuHandlerP.h`
+moc_ContextMenu.cpp: $(srcdir)/ContextMenu.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/ContextMenu.h`
 
 
 if BUILD_WITH_MSVC

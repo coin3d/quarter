@@ -21,7 +21,7 @@
  *
 \**************************************************************************/
 
-#include "ContextMenuHandlerP.h"
+#include "ContextMenu.h"
 
 #include <QtGui/QMenu>
 #include <QtCore/QMap>

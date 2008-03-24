@@ -34,7 +34,7 @@
 #include <Inventor/events/SoEvents.h>
 #include <Quarter/eventhandlers/EventManager.h>
 
-#include "ContextMenuHandlerP.h"
+#include "ContextMenu.h"
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
