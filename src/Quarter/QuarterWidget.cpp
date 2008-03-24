@@ -97,7 +97,8 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->devicemanager->registerDevice(new MouseHandler);
   PRIVATE(this)->devicemanager->registerDevice(new KeyboardHandler);
 
-  PRIVATE(this)->eventmanager->registerEventHandler(new ContextMenuHandler);
+  PRIVATE(this)->contextmenuhandler = new ContextMenuHandler;
+  PRIVATE(this)->eventmanager->registerEventHandler(PRIVATE(this)->contextmenuhandler);
   PRIVATE(this)->eventmanager->registerEventHandler(new DragDropHandler);
 
   // set up a cache context for the default SoGLRenderAction
@@ -229,6 +230,15 @@ QuarterWidget::getDeviceManager(void) const
 }
 
 /*!
+  Returns a pointer to the event manager
+ */
+EventManager * 
+QuarterWidget::getEventManager(void) const
+{
+  return PRIVATE(this)->eventmanager;
+}
+
+/*!
   Returns a pointer to the render manager
  */
 SoRenderManager *
@@ -357,6 +367,12 @@ QuarterWidget::getBackgroundColor(void) const
   return QColor(SbClamp(int(bg[0] * 255.0), 0, 255),
                 SbClamp(int(bg[1] * 255.0), 0, 255),
                 SbClamp(int(bg[2] * 255.0), 0, 255));
+}
+
+QMenu * 
+QuarterWidget::getContextMenu(void) const
+{
+  return PRIVATE(this)->contextmenuhandler->getContextMenu();
 }
 
 #undef PRIVATE

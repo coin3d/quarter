@@ -29,6 +29,7 @@
 #include <Quarter/Basic.h>
 #include <QtGui/QColor>
 
+class QMenu;
 class SoNode;
 class SoEvent;
 class SoCamera;
@@ -38,6 +39,7 @@ class SoDirectionalLight;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
+class EventManager;
 class DeviceManager;
 
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
@@ -57,11 +59,13 @@ public:
   void setTransparencyType(SoGLRenderAction::TransparencyType type);
   void setBackgroundColor(const QColor & color);
   QColor getBackgroundColor(void) const;
+  QMenu * getContextMenu(void) const;
 
   virtual void setSceneGraph(SoNode * root);
   virtual SoNode * getSceneGraph(void) const;
   
   DeviceManager * getDeviceManager(void) const;
+  EventManager * getEventManager(void) const;
   SoEventManager * getSoEventManager(void) const;
   SoRenderManager * getSoRenderManager(void) const;
 

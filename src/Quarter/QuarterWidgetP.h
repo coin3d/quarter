@@ -38,6 +38,7 @@ namespace SIM { namespace Coin3D { namespace Quarter {
 
 class DeviceManager;
 class EventManager;
+class ContextMenuHandler;
 
 class QuarterWidgetP {
 public:
@@ -57,6 +58,7 @@ public:
   SoEventManager * soeventmanager;
   SoDirectionalLight * headlight;
   QuarterWidgetP_cachecontext * cachecontext;
+  ContextMenuHandler * contextmenuhandler;
 
 private:
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);
