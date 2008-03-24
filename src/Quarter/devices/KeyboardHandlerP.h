@@ -38,6 +38,7 @@ public:
 
   const SoEvent * keyEvent(QKeyEvent * event);
   void initKeyMap(void);
+  static bool debugKeyEvents(void);
 
   typedef QMap<Qt::Key, SoKeyboardEvent::Key> KeyMap;
   static KeyMap * keyboardmap;

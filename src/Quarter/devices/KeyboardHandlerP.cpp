@@ -42,6 +42,13 @@ KeyboardHandlerP::~KeyboardHandlerP()
   delete this->keyboard;
 }
 
+bool
+KeyboardHandlerP::debugKeyEvents(void)
+{
+  const char * env = coin_getenv("QUARTER_DEBUG_KEYEVENTS");
+  return env && (atoi(env) > 0);
+}
+
 const SoEvent *
 KeyboardHandlerP::keyEvent(QKeyEvent * qevent)
 {
@@ -62,9 +69,17 @@ KeyboardHandlerP::keyEvent(QKeyEvent * qevent)
     keypadmap->value(qkey, SoKeyboardEvent::ANY) :
     keyboardmap->value(qkey, SoKeyboardEvent::ANY);
 
-  const char printable = *(qevent->text().toAscii().constData());
-  this->keyboard->setPrintableCharacter(printable);
+  const char * printable = qevent->text().toAscii().constData();
+  this->keyboard->setPrintableCharacter(*printable);
   this->keyboard->setKey(sokey);
+
+#if QUARTER_DEBUG
+  if (KeyboardHandlerP::debugKeyEvents()) {
+    SoDebugError::postInfo("KeyboardHandlerP::keyEvent",
+                           "qevent printable character %s", printable);
+  }
+#endif
+
   // FIXME: what about position? (20070307 frodo)
   return this->keyboard;
 }
@@ -167,6 +182,15 @@ KeyboardHandlerP::initKeyMap(void)
   keyboardmap->insert(Qt::Key_Agrave,       SoKeyboardEvent::GRAVE);
 
   // keypad
+
+  // on Mac OS X, the keypad modifier will also be set when an arrow
+  // key is pressed as the arrow keys are considered part of the
+  // keypad
+  keypadmap->insert(Qt::Key_Left,     SoKeyboardEvent::LEFT_ARROW);
+  keypadmap->insert(Qt::Key_Up,       SoKeyboardEvent::UP_ARROW);
+  keypadmap->insert(Qt::Key_Right,    SoKeyboardEvent::RIGHT_ARROW);
+  keypadmap->insert(Qt::Key_Down,     SoKeyboardEvent::DOWN_ARROW);
+
   keypadmap->insert(Qt::Key_Enter,    SoKeyboardEvent::PAD_ENTER);
   keypadmap->insert(Qt::Key_F1,       SoKeyboardEvent::PAD_F1);
   keypadmap->insert(Qt::Key_F2,       SoKeyboardEvent::PAD_F2);
