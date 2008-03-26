@@ -1,5 +1,5 @@
-#ifndef QUARTER_QUARTERAPPLICATION_H
-#define QUARTER_QUARTERAPPLICATION_H
+#ifndef QUARTER_IMAGELOADER_H
+#define QUARTER_IMAGELOADER_H
 
 /**************************************************************************\
  *
@@ -19,27 +19,28 @@
  *
  *  See <URL:http://www.coin3d.org/> for more information.
  *
- *  Systems in Motion AS, Bygdøy allé 5, N-0257 Oslo, NORWAY. (www.sim.no)
+ *  Systems in Motion AS, BygdÃ¸y allÃ© 5, N-0257 Oslo, NORWAY. (www.sim.no)
  *
 \**************************************************************************/
 
-#include <QtGui/QApplication>
-#include <Quarter/Basic.h>
+#include <Inventor/SbBasic.h>
+
+class SbImage;
+class SbString;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class ImageReader;
-
-class QUARTER_DLL_API QuarterApplication : public QApplication {
-  typedef QApplication inherited;
+class ImageReader {
 public:
-  QuarterApplication(int & argc, char ** argv);
-  ~QuarterApplication();
-
- private:
-  ImageReader * imagereader;
+  ImageReader(void);
+  ~ImageReader(void);
+  
+  SbBool readImage(const SbString & filename, SbImage * image) const;
+  
+private: 
+  static SbBool readImageCB(const SbString & filename, SbImage * image, void * closure);
 };
 
 }}} // namespace
 
-#endif // QUARTER_QUARTERAPPLICATION_H
+#endif // QUARTER_IMAGELOADER_H

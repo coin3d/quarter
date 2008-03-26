@@ -243,6 +243,7 @@ BuiltSources = \
 
 PrivateHeaders = \
         SensorManager.h \
+        ImageReader.h \
         QuarterWidgetP.h
 
 
@@ -251,7 +252,8 @@ RegularSources = \
         QuarterWidget.cpp \
         SensorManager.cpp \
         QuarterWidgetP.cpp \
-        QuarterApplication.cpp
+        QuarterApplication.cpp \
+        ImageReader.cpp
 
 
 BUILT_SOURCES = $(BuiltSources)
@@ -339,7 +341,8 @@ am__objects_1 = \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidget.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SensorManager.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.$(OBJEXT) \
-	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.$(OBJEXT)
+	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.$(OBJEXT) \
+	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.$(OBJEXT)
 am__objects_2 =
 am_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = $(am__objects_1) \
 	$(am__objects_2)
@@ -357,7 +360,8 @@ libQuarter_la_DEPENDENCIES = devices/libdevices.la \
 	eventhandlers/libeventhandlers.la
 am__objects_4 = libQuarter_la-Quarter.lo libQuarter_la-QuarterWidget.lo \
 	libQuarter_la-SensorManager.lo libQuarter_la-QuarterWidgetP.lo \
-	libQuarter_la-QuarterApplication.lo
+	libQuarter_la-QuarterApplication.lo \
+	libQuarter_la-ImageReader.lo
 am_libQuarter_la_OBJECTS = $(am__objects_4) $(am__objects_2)
 am__objects_5 = libQuarter_la-moc_QuarterWidget.lo \
 	libQuarter_la-moc_SensorManager.lo
@@ -367,6 +371,7 @@ libQuarter_la_OBJECTS = $(am_libQuarter_la_OBJECTS) \
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = \
+@AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Quarter.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidget.Po \
@@ -374,6 +379,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SensorManager.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-ImageReader.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-Quarter.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-QuarterApplication.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-QuarterWidget.Plo \
@@ -485,6 +491,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Quarter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidget.Po@am__quote@
@@ -492,6 +499,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SensorManager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-ImageReader.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-Quarter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-QuarterApplication.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-QuarterWidget.Plo@am__quote@
@@ -700,6 +708,39 @@ Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.lo: QuarterApplica
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.lo `test -f 'QuarterApplication.cpp' || echo '$(srcdir)/'`QuarterApplication.cpp
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.o: ImageReader.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.o `test -f 'ImageReader.cpp' || echo '$(srcdir)/'`ImageReader.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ImageReader.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.o `test -f 'ImageReader.cpp' || echo '$(srcdir)/'`ImageReader.cpp
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.obj: ImageReader.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.obj -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.obj `if test -f 'ImageReader.cpp'; then $(CYGPATH_W) 'ImageReader.cpp'; else $(CYGPATH_W) '$(srcdir)/ImageReader.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ImageReader.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.obj `if test -f 'ImageReader.cpp'; then $(CYGPATH_W) 'ImageReader.cpp'; else $(CYGPATH_W) '$(srcdir)/ImageReader.cpp'; fi`
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.lo: ImageReader.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.lo -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.lo `test -f 'ImageReader.cpp' || echo '$(srcdir)/'`ImageReader.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ImageReader.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.lo `test -f 'ImageReader.cpp' || echo '$(srcdir)/'`ImageReader.cpp
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.o: moc_QuarterWidget.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.Tpo" \
@@ -931,6 +972,39 @@ libQuarter_la-QuarterApplication.lo: QuarterApplication.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-QuarterApplication.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-QuarterApplication.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-QuarterApplication.lo `test -f 'QuarterApplication.cpp' || echo '$(srcdir)/'`QuarterApplication.cpp
+
+libQuarter_la-ImageReader.o: ImageReader.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-ImageReader.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-ImageReader.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-ImageReader.o `test -f 'ImageReader.cpp' || echo '$(srcdir)/'`ImageReader.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-ImageReader.Tpo" "$(DEPDIR)/libQuarter_la-ImageReader.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-ImageReader.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ImageReader.cpp' object='libQuarter_la-ImageReader.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-ImageReader.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-ImageReader.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-ImageReader.o `test -f 'ImageReader.cpp' || echo '$(srcdir)/'`ImageReader.cpp
+
+libQuarter_la-ImageReader.obj: ImageReader.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-ImageReader.obj -MD -MP -MF "$(DEPDIR)/libQuarter_la-ImageReader.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-ImageReader.obj `if test -f 'ImageReader.cpp'; then $(CYGPATH_W) 'ImageReader.cpp'; else $(CYGPATH_W) '$(srcdir)/ImageReader.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-ImageReader.Tpo" "$(DEPDIR)/libQuarter_la-ImageReader.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-ImageReader.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ImageReader.cpp' object='libQuarter_la-ImageReader.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-ImageReader.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-ImageReader.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-ImageReader.obj `if test -f 'ImageReader.cpp'; then $(CYGPATH_W) 'ImageReader.cpp'; else $(CYGPATH_W) '$(srcdir)/ImageReader.cpp'; fi`
+
+libQuarter_la-ImageReader.lo: ImageReader.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-ImageReader.lo -MD -MP -MF "$(DEPDIR)/libQuarter_la-ImageReader.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-ImageReader.lo `test -f 'ImageReader.cpp' || echo '$(srcdir)/'`ImageReader.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-ImageReader.Tpo" "$(DEPDIR)/libQuarter_la-ImageReader.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-ImageReader.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ImageReader.cpp' object='libQuarter_la-ImageReader.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-ImageReader.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-ImageReader.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-ImageReader.lo `test -f 'ImageReader.cpp' || echo '$(srcdir)/'`ImageReader.cpp
 
 libQuarter_la-moc_QuarterWidget.o: moc_QuarterWidget.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-moc_QuarterWidget.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-moc_QuarterWidget.Tpo" \

@@ -23,6 +23,7 @@ BuiltSources = \
 
 PrivateHeaders = \
         SensorManager.h \
+        ImageReader.h \
         QuarterWidgetP.h
 
 RegularSources = \
@@ -30,7 +31,8 @@ RegularSources = \
         QuarterWidget.cpp \
         SensorManager.cpp \
         QuarterWidgetP.cpp \
-        QuarterApplication.cpp
+        QuarterApplication.cpp \
+        ImageReader.cpp
 
 BUILT_SOURCES = $(BuiltSources)
 

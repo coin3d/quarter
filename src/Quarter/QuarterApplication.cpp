@@ -34,6 +34,7 @@
 
 #include <Quarter/QuarterApplication.h>
 #include <Quarter/Quarter.h>
+#include "ImageReader.h"
 
 using namespace SIM::Coin3D::Quarter;
 
@@ -44,6 +45,7 @@ QuarterApplication::QuarterApplication(int & argc, char ** argv)
   : inherited(argc, argv)
 {
   Quarter::init();
+  this->imagereader = new ImageReader;
 }
 
 /*!
@@ -51,5 +53,6 @@ QuarterApplication::QuarterApplication(int & argc, char ** argv)
  */
 QuarterApplication::~QuarterApplication()
 {
+  delete this->imagereader;
   Quarter::clean();
 }
