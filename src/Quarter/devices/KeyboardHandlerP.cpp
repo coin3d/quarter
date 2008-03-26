@@ -21,13 +21,18 @@
 \**************************************************************************/
 
 #include "KeyboardHandlerP.h"
+#include <Quarter/devices/KeyboardHandler.h>
+#include <Quarter/devices/DeviceManager.h>
 #include <QtCore/QMap>
 #include <Inventor/errors/SoDebugError.h>
 
 using namespace SIM::Coin3D::Quarter;
 
-KeyboardHandlerP::KeyboardHandlerP(void)
+#define PUBLIC(obj) obj->publ
+
+KeyboardHandlerP::KeyboardHandlerP(KeyboardHandler * publ)
 {
+  PUBLIC(this) = publ;
   this->keyboard = new SoKeyboardEvent;
 
   if (keyboardmap == NULL) {
@@ -55,6 +60,8 @@ KeyboardHandlerP::keyEvent(QKeyEvent * qevent)
   const Qt::KeyboardModifiers modifiers = qevent->modifiers();
 
   this->keyboard->setTime(SbTime::getTimeOfDay());
+  SbVec2s mp = PUBLIC(this)->manager->getLastMousePosition();
+  this->keyboard->setPosition(PUBLIC(this)->manager->getLastMousePosition());
   this->keyboard->setShiftDown(modifiers & Qt::ShiftModifier);
   this->keyboard->setCtrlDown(modifiers & Qt::ControlModifier);
   this->keyboard->setAltDown(modifiers & Qt::AltModifier);
@@ -80,7 +87,6 @@ KeyboardHandlerP::keyEvent(QKeyEvent * qevent)
   }
 #endif
 
-  // FIXME: what about position? (20070307 frodo)
   return this->keyboard;
 }
 
@@ -226,3 +232,5 @@ KeyboardHandlerP::initKeyMap(void)
   keyboardmap->insert(Qt::, SoKeyboardEvent::SHIFT_LOCK);
 #endif
 }
+
+#undef PUBLIC

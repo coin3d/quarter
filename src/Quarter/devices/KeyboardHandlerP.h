@@ -31,9 +31,11 @@ template <class Key, class T> class QMap;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
+class KeyboardHandler;
+
 class KeyboardHandlerP {
 public:
-  KeyboardHandlerP(void);
+  KeyboardHandlerP(KeyboardHandler * publ);
   ~KeyboardHandlerP();
 
   const SoEvent * keyEvent(QKeyEvent * event);
@@ -45,6 +47,7 @@ public:
   static KeyMap * keypadmap;
 
   SoKeyboardEvent * keyboard;
+  KeyboardHandler * publ;
 };
 
 }}} // namespace

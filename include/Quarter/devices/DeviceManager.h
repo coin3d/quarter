@@ -45,9 +45,10 @@ public:
   void registerDevice(DeviceHandler * device);
   void unregisterDevice(DeviceHandler * device);
 
+  SbVec2s getLastMousePosition(void) const;
+
 private:
-  QList<DeviceHandler *> devices;
-  QuarterWidget * quarterwidget;
+  class DeviceManagerP * pimpl;
 };
 
 }}} // namespace

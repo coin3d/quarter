@@ -33,9 +33,23 @@
 
 
 #include <assert.h>
+#include <Inventor/events/SoLocation2Event.h>
 #include <Quarter/devices/DeviceManager.h>
 #include <Quarter/devices/DeviceHandler.h>
 #include <Quarter/QuarterWidget.h>
+
+namespace SIM { namespace Coin3D { namespace Quarter {
+
+class DeviceManagerP {
+public:
+  QList<DeviceHandler *> devices;
+  QuarterWidget * quarterwidget;
+  SbVec2s lastmousepos;
+};
+
+}}} // namespace
+
+#define PRIVATE(obj) obj->pimpl
 
 using namespace SIM::Coin3D::Quarter;
 
@@ -45,7 +59,9 @@ using namespace SIM::Coin3D::Quarter;
 DeviceManager::DeviceManager(QuarterWidget * quarterwidget)
 {
   assert(quarterwidget);
-  this->quarterwidget = quarterwidget;
+  PRIVATE(this) = new DeviceManagerP;
+  PRIVATE(this)->quarterwidget = quarterwidget;
+  PRIVATE(this)->lastmousepos = SbVec2s(0, 0);
 }
 
 /*!
@@ -53,7 +69,8 @@ DeviceManager::DeviceManager(QuarterWidget * quarterwidget)
  */
 DeviceManager::~DeviceManager()
 {
-  qDeleteAll(this->devices);
+  qDeleteAll(PRIVATE(this)->devices);
+  delete PRIVATE(this);
 }
 
 /*!
@@ -63,8 +80,12 @@ const SoEvent *
 DeviceManager::translateEvent(QEvent * qevent)
 {
   DeviceHandler * device;
-  foreach(device, this->devices) {
+  foreach(device, PRIVATE(this)->devices) {
     if (const SoEvent * soevent = device->translateEvent(qevent)) {
+      // cache mouse position so other devices can access it
+      if (soevent->getTypeId() == SoLocation2Event::getClassTypeId()) {
+        PRIVATE(this)->lastmousepos = soevent->getPosition();
+      }
       return soevent;
     }
   }
@@ -77,7 +98,16 @@ DeviceManager::translateEvent(QEvent * qevent)
 const QuarterWidget *
 DeviceManager::getWidget(void) const
 {
-  return this->quarterwidget;
+  return PRIVATE(this)->quarterwidget;
+}
+
+/*!
+  Returns the last mouse position
+*/
+SbVec2s
+DeviceManager::getLastMousePosition(void) const
+{
+  return PRIVATE(this)->lastmousepos;
 }
 
 /*!
@@ -86,9 +116,9 @@ DeviceManager::getWidget(void) const
 void
 DeviceManager::registerDevice(DeviceHandler * device)
 {
-  if (!this->devices.contains(device)) {
+  if (!PRIVATE(this)->devices.contains(device)) {
     device->setManager(this);
-    this->devices += device;
+    PRIVATE(this)->devices += device;
   }
 }
 
@@ -98,7 +128,9 @@ DeviceManager::registerDevice(DeviceHandler * device)
 void
 DeviceManager::unregisterDevice(DeviceHandler * device)
 {
-  if (this->devices.contains(device)) {
-    this->devices.removeAt(this->devices.indexOf(device));
+  if (PRIVATE(this)->devices.contains(device)) {
+    PRIVATE(this)->devices.removeAt(PRIVATE(this)->devices.indexOf(device));
   }
 }
+
+#undef PRIVATE

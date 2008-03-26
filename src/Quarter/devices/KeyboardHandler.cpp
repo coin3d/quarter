@@ -44,7 +44,7 @@ using namespace SIM::Coin3D::Quarter;
 
 KeyboardHandler::KeyboardHandler(void)
 {
-  PRIVATE(this) = new KeyboardHandlerP;
+  PRIVATE(this) = new KeyboardHandlerP(this);
 }
 
 KeyboardHandler::~KeyboardHandler()
