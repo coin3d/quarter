@@ -33,6 +33,7 @@ class SoEventManager;
 class SoDirectionalLight;
 class QuarterWidgetP_cachecontext;
 class QGLWidget;
+class ScXMLStateMachine;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
@@ -62,6 +63,7 @@ public:
 
   static void prerendercb(void * userdata, SoRenderManager * manager);
   static void postrendercb(void * userdata, SoRenderManager * manager);
+  static void statechangecb(void * userdata, ScXMLStateMachine * statemachine, const char * stateid, SbBool enter, SbBool success);
 
 private:
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);

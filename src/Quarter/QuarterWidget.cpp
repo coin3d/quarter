@@ -90,6 +90,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
       statemachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
     SoScXMLStateMachine * sostatemachine =
       static_cast<SoScXMLStateMachine *>(statemachine);
+    statemachine->addStateChangeCallback(QuarterWidgetP::statechangecb, PRIVATE(this));
     PRIVATE(this)->soeventmanager->setNavigationSystem(NULL);
     PRIVATE(this)->soeventmanager->addSoScXMLStateMachine(sostatemachine);
   }

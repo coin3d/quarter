@@ -124,3 +124,17 @@ QuarterWidgetP::postrendercb(void * userdata, SoRenderManager * manager)
     statemachine->postGLRender();
   }
 }
+
+void
+QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine, const char * stateid, SbBool enter, SbBool)
+{
+  //QuarterWidgetP * thisp = static_cast<QuarterWidgetP *>(userdata);
+  if (enter) {
+    //SoDebugError::postInfo("QuarterWidget::stateChange",
+    //                       "entering state '%s'", stateid);
+  } else {
+    //SoDebugError::postInfo("QuarterWidget::stateChange",
+    //                       "exiting state '%s'", stateid);
+  }
+}
+
