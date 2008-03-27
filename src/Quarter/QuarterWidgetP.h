@@ -60,6 +60,9 @@ public:
   QuarterWidgetP_cachecontext * cachecontext;
   ContextMenuHandler * contextmenuhandler;
 
+  static void prerendercb(void * userdata, SoRenderManager * manager);
+  static void postrendercb(void * userdata, SoRenderManager * manager);
+
 private:
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);
 };

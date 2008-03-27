@@ -44,6 +44,8 @@
 #include <Inventor/SoRenderManager.h>
 #include <Inventor/SoEventManager.h>
 #include <Inventor/navigation/SoNavigationSystem.h>
+#include <Inventor/scxml/ScXML.h>
+#include <Inventor/scxml/SoScXMLStateMachine.h>
 
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/devices/DeviceManager.h>
@@ -82,6 +84,15 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   PRIVATE(this)->sorendermanager = new SoRenderManager;
   PRIVATE(this)->soeventmanager = new SoEventManager;
+  ScXMLStateMachine * statemachine =
+    ScXML::readFile("coin:scxml/navigation/examiner.xml");
+  if (statemachine &&
+      statemachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
+    SoScXMLStateMachine * sostatemachine =
+      static_cast<SoScXMLStateMachine *>(statemachine);
+    PRIVATE(this)->soeventmanager->setNavigationSystem(NULL);
+    PRIVATE(this)->soeventmanager->addSoScXMLStateMachine(sostatemachine);
+  }
   PRIVATE(this)->devicemanager = new DeviceManager(this);
   PRIVATE(this)->eventmanager = new EventManager(this);
   PRIVATE(this)->headlight = new SoDirectionalLight;
@@ -91,6 +102,8 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->sorendermanager->setRenderCallback(QuarterWidget::renderCB, this);
   PRIVATE(this)->sorendermanager->setBackgroundColor(SbColor(0.0f, 0.0f, 0.0f));
   PRIVATE(this)->sorendermanager->activate();
+  PRIVATE(this)->sorendermanager->addPreRenderCallback(QuarterWidgetP::prerendercb, PRIVATE(this));
+  PRIVATE(this)->sorendermanager->addPostRenderCallback(QuarterWidgetP::postrendercb, PRIVATE(this));
 
   PRIVATE(this)->soeventmanager->setNavigationState(SoEventManager::MIXED_NAVIGATION);
 
@@ -262,7 +275,16 @@ QuarterWidget::getSoEventManager(void) const
 void
 QuarterWidget::viewAll(void)
 {
-  PRIVATE(this)->soeventmanager->getNavigationSystem()->viewAll();
+  if (PRIVATE(this)->soeventmanager->getNavigationSystem()) {
+    PRIVATE(this)->soeventmanager->getNavigationSystem()->viewAll();
+  }
+  const SbName viewallevent("sim.coin3d.coin.navigation.ViewAll");
+  for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
+    SoScXMLStateMachine * sostatemachine =
+      PRIVATE(this)->soeventmanager->getSoScXMLStateMachine(c);
+    sostatemachine->queueEvent(viewallevent);
+    sostatemachine->processEventQueue();
+  }
 }
 
 /*!

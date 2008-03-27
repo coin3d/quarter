@@ -27,6 +27,8 @@
 #include <Inventor/actions/SoSearchAction.h>
 #include <Inventor/elements/SoGLCacheContextElement.h>
 #include <Inventor/lists/SbList.h>
+#include <Inventor/SoEventManager.h>
+#include <Inventor/scxml/SoScXMLStateMachine.h>
 
 #include <stdlib.h>
 
@@ -97,4 +99,28 @@ QuarterWidgetP::findCacheContext(QuarterWidget * widget, const QGLWidget * share
   cachecontext_list->append(cachecontext);
 
   return cachecontext;
+}
+
+void
+QuarterWidgetP::prerendercb(void * userdata, SoRenderManager * manager)
+{
+  QuarterWidgetP * thisp = static_cast<QuarterWidgetP *>(userdata);
+  SoEventManager * evman = thisp->soeventmanager;
+  assert(evman);
+  for (int c = 0; c < evman->getNumSoScXMLStateMachines(); ++c) {
+    SoScXMLStateMachine * statemachine = evman->getSoScXMLStateMachine(c);
+    statemachine->preGLRender();
+  }
+}
+
+void
+QuarterWidgetP::postrendercb(void * userdata, SoRenderManager * manager)
+{
+  QuarterWidgetP * thisp = static_cast<QuarterWidgetP *>(userdata);
+  SoEventManager * evman = thisp->soeventmanager;
+  assert(evman);
+  for (int c = 0; c < evman->getNumSoScXMLStateMachines(); ++c) {
+    SoScXMLStateMachine * statemachine = evman->getSoScXMLStateMachine(c);
+    statemachine->postGLRender();
+  }
 }
