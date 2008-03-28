@@ -175,6 +175,7 @@ Quarter::clean(void)
 {
   assert(self);
   delete self;
+  self = NULL;
 }
 
 #undef PRIVATE
