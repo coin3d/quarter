@@ -27,6 +27,9 @@
 #include <QtCore/QMap>
 #include <QtGui/QMouseEvent>
 
+#include <Inventor/SoEventManager.h>
+#include <Inventor/scxml/SoScXMLStateMachine.h>
+
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/eventhandlers/EventManager.h>
 #include <Quarter/eventhandlers/ContextMenuHandler.h>
@@ -142,6 +145,15 @@ ContextMenu::getMenu(void) const
 bool
 ContextMenu::contextMenuEvent(QMouseEvent * event)
 {
+  SoEventManager * soeventmanager = this->quarterwidget->getSoEventManager();
+  const SbName popupevent("sim.coin3d.coin.PopupMenuOpen");
+  for (int c = 0; c < soeventmanager->getNumSoScXMLStateMachines(); ++c) {
+    SoScXMLStateMachine * sostatemachine =
+      soeventmanager->getSoScXMLStateMachine(c);
+    sostatemachine->queueEvent(popupevent);
+    sostatemachine->processEventQueue();
+  }
+
   (void) this->contextmenu->exec(event->globalPos());
   return true;
 }
