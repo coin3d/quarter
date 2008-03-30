@@ -24,6 +24,7 @@
 \**************************************************************************/
 
 #include <Inventor/SbBasic.h>
+#include <QtGui/QCursor>
 
 class SoNode;
 class SoCamera;
@@ -64,6 +65,13 @@ public:
   static void prerendercb(void * userdata, SoRenderManager * manager);
   static void postrendercb(void * userdata, SoRenderManager * manager);
   static void statechangecb(void * userdata, ScXMLStateMachine * statemachine, const char * stateid, SbBool enter, SbBool success);
+
+  QCursor rotatecursor;
+  QCursor spincursor;
+  QCursor pancursor;
+  QCursor zoomcursor;
+  QCursor idlecursor;
+  QCursor defaultcursor;
 
 private:
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);

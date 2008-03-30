@@ -21,7 +21,9 @@
 \**************************************************************************/
 
 #include "QuarterWidgetP.h"
+#include <Quarter/QuarterWidget.h>
 
+#include <QtGui/QCursor>
 #include <Inventor/nodes/SoCamera.h>
 #include <Inventor/nodes/SoNode.h>
 #include <Inventor/actions/SoSearchAction.h>
@@ -46,6 +48,12 @@ QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * shar
 {
   this->master = masterptr;
   this->cachecontext = findCacheContext(masterptr, sharewidget);
+  this->rotatecursor = Qt::OpenHandCursor;
+  this->spincursor = Qt::ArrowCursor;
+  this->pancursor = Qt::SizeAllCursor;
+  this->zoomcursor = Qt::SizeVerCursor;
+  this->idlecursor = Qt::ArrowCursor;
+  this->defaultcursor = Qt::ArrowCursor;
 }
 
 QuarterWidgetP::~QuarterWidgetP()
@@ -128,13 +136,25 @@ QuarterWidgetP::postrendercb(void * userdata, SoRenderManager * manager)
 void
 QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine, const char * stateid, SbBool enter, SbBool)
 {
-  //QuarterWidgetP * thisp = static_cast<QuarterWidgetP *>(userdata);
+  QuarterWidgetP * thisp = static_cast<QuarterWidgetP *>(userdata);
   if (enter) {
-    //SoDebugError::postInfo("QuarterWidget::stateChange",
-    //                       "entering state '%s'", stateid);
+//      SoDebugError::postInfo("QuarterWidget::stateChange",
+//                             "entering state '%s'", stateid);
+    if (strcmp(stateid, "rotate") == 0) {
+      thisp->master->setCursor(thisp->rotatecursor);
+    } else if (strcmp(stateid, "zoom") == 0) {
+      thisp->master->setCursor(thisp->zoomcursor);
+    } else if (strcmp(stateid, "pan") == 0) {
+      thisp->master->setCursor(thisp->pancursor);
+    } else if (strcmp(stateid, "spin") == 0) {
+      thisp->master->setCursor(thisp->spincursor);
+    } else if (strcmp(stateid, "idle") == 0) {
+      thisp->master->setCursor(thisp->idlecursor);
+    }
   } else {
-    //SoDebugError::postInfo("QuarterWidget::stateChange",
-    //                       "exiting state '%s'", stateid);
+    thisp->master->setCursor(thisp->defaultcursor);
+//     SoDebugError::postInfo("QuarterWidget::stateChange",
+//                            "exiting state '%s'", stateid);
   }
 }
 

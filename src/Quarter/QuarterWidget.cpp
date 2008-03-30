@@ -138,6 +138,32 @@ QuarterWidget::~QuarterWidget()
   delete PRIVATE(this);
 }
 
+void 
+QuarterWidget::setModeCursor(NavigationMode mode, const QCursor & cursor)
+{
+  switch (mode) {
+  case ROTATE:
+    PRIVATE(this)->rotatecursor = cursor;
+    break;
+  case SPIN:
+    PRIVATE(this)->spincursor = cursor;
+    break;
+  case PAN:
+    PRIVATE(this)->pancursor = cursor;
+    break;
+  case ZOOM:
+    PRIVATE(this)->zoomcursor = cursor;
+    break;
+  case IDLE:
+    PRIVATE(this)->idlecursor = cursor;
+    break;
+  default:
+    SoDebugError::post("QuarterWidget::setModeCursor",
+                       "unknown navigation mode");
+    break;
+  }
+}
+
 /*!
   Enable/disable the headlight. This wille toggle the SoDirectionalLigh::on
   field (returned from getHeadlight()).

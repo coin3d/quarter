@@ -52,6 +52,15 @@ public:
   QuarterWidget(QGLContext * context, QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
   virtual ~QuarterWidget();
 
+  enum NavigationMode {
+    ROTATE,
+    SPIN,
+    PAN,
+    ZOOM,
+    IDLE
+  };
+
+  void setModeCursor(NavigationMode mode, const QCursor & cursor);
   void enableHeadlight(const SbBool onoff);
   SoDirectionalLight * getHeadlight(void);
   uint32_t getCacheContextId(void) const;
