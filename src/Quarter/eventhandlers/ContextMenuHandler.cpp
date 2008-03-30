@@ -60,6 +60,7 @@ ContextMenuHandler::~ContextMenuHandler()
   if (PRIVATE(this)->contextmenu) {
     delete PRIVATE(this)->contextmenu;
   }
+  delete PRIVATE(this);
 }
 
 QMenu * 
