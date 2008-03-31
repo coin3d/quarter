@@ -118,6 +118,13 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   // set up a cache context for the default SoGLRenderAction
   PRIVATE(this)->sorendermanager->getGLRenderAction()->setCacheContext(this->getCacheContextId());
 
+  // set up default cursors for the examiner navigation states
+  this->setStateCursor("rotate", Qt::OpenHandCursor);
+  this->setStateCursor("spin", Qt::ArrowCursor);
+  this->setStateCursor("pan", Qt::SizeAllCursor);
+  this->setStateCursor("zoom", Qt::SizeVerCursor);
+  this->setStateCursor("idle", Qt::ArrowCursor);
+
   this->setMouseTracking(TRUE);
 
   // set focus policy to Strong by default
@@ -139,29 +146,10 @@ QuarterWidget::~QuarterWidget()
 }
 
 void 
-QuarterWidget::setStateCursor(NavigationState state, const QCursor & cursor)
+QuarterWidget::setStateCursor(const SbName & state, const QCursor & cursor)
 {
-  switch (state) {
-  case ROTATE:
-    PRIVATE(this)->rotatecursor = cursor;
-    break;
-  case SPIN:
-    PRIVATE(this)->spincursor = cursor;
-    break;
-  case PAN:
-    PRIVATE(this)->pancursor = cursor;
-    break;
-  case ZOOM:
-    PRIVATE(this)->zoomcursor = cursor;
-    break;
-  case IDLE:
-    PRIVATE(this)->idlecursor = cursor;
-    break;
-  default:
-    SoDebugError::post("QuarterWidget::setModeCursor",
-                       "unknown navigation state");
-    break;
-  }
+  // will overwrite the value of an existing item
+  QuarterWidgetP::statecursormap->insert(state, cursor);
 }
 
 /*!

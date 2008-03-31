@@ -24,6 +24,7 @@
 \**************************************************************************/
 
 #include <Inventor/SbBasic.h>
+#include <Inventor/SbName.h>
 #include <QtGui/QCursor>
 
 class SoNode;
@@ -35,6 +36,7 @@ class SoDirectionalLight;
 class QuarterWidgetP_cachecontext;
 class QGLWidget;
 class ScXMLStateMachine;
+template <class Key, class T> class QMap;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
@@ -66,12 +68,8 @@ public:
   static void postrendercb(void * userdata, SoRenderManager * manager);
   static void statechangecb(void * userdata, ScXMLStateMachine * statemachine, const char * stateid, SbBool enter, SbBool success);
 
-  QCursor rotatecursor;
-  QCursor spincursor;
-  QCursor pancursor;
-  QCursor zoomcursor;
-  QCursor idlecursor;
-  QCursor defaultcursor;
+  typedef QMap<SbName, QCursor> StateCursorMap;
+  static StateCursorMap * statecursormap;
 
 private:
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);
