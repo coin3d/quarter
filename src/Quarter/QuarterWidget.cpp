@@ -139,9 +139,9 @@ QuarterWidget::~QuarterWidget()
 }
 
 void 
-QuarterWidget::setModeCursor(NavigationMode mode, const QCursor & cursor)
+QuarterWidget::setStateCursor(NavigationState state, const QCursor & cursor)
 {
-  switch (mode) {
+  switch (state) {
   case ROTATE:
     PRIVATE(this)->rotatecursor = cursor;
     break;
@@ -159,7 +159,7 @@ QuarterWidget::setModeCursor(NavigationMode mode, const QCursor & cursor)
     break;
   default:
     SoDebugError::post("QuarterWidget::setModeCursor",
-                       "unknown navigation mode");
+                       "unknown navigation state");
     break;
   }
 }
