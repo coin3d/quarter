@@ -151,7 +151,6 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
       }
       thisp->contextmenu->exec(thisp->devicemanager->getLastGlobalPosition());
     }
-    printf("state = %s\n", state.getString());
     if (statecursormap->contains(state)) {
       QCursor cursor = statecursormap->value(state);
       thisp->master->setCursor(cursor);
