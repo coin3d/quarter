@@ -16,7 +16,7 @@
  *
  *  See <URL:http://www.coin3d.org/> for more information.
  *
- *  Systems in Motion AS, Bygdøy allé 5, N-0257 Oslo, NORWAY. (www.sim.no)
+ *  Systems in Motion AS, BygdÃ¸y allÃ© 5, N-0257 Oslo, NORWAY. (www.sim.no)
  *
 \**************************************************************************/
 
@@ -93,6 +93,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
     statemachine->addStateChangeCallback(QuarterWidgetP::statechangecb, PRIVATE(this));
     PRIVATE(this)->soeventmanager->setNavigationSystem(NULL);
     PRIVATE(this)->soeventmanager->addSoScXMLStateMachine(sostatemachine);
+    sostatemachine->initialize();
   }
   PRIVATE(this)->devicemanager = new DeviceManager(this);
   PRIVATE(this)->eventmanager = new EventManager(this);
@@ -299,6 +300,7 @@ QuarterWidget::viewAll(void)
   for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
     SoScXMLStateMachine * sostatemachine =
       PRIVATE(this)->soeventmanager->getSoScXMLStateMachine(c);
+    assert(sostatemachine->isActive());
     sostatemachine->queueEvent(viewallevent);
     sostatemachine->processEventQueue();
   }
