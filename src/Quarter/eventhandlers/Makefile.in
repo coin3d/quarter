@@ -234,20 +234,13 @@ target_alias = @target_alias@
 
 DEFAULT_INCLUDES = $(includes)
 
-BuiltSources = \
-        moc_ContextMenu.cpp
-
-
-PrivateHeaders = \
-        ContextMenu.h
-
+BuiltSources = 
+PrivateHeaders = 
 
 RegularSources = \
         EventManager.cpp \
         EventHandler.cpp \
-        DragDropHandler.cpp \
-        ContextMenuHandler.cpp \
-        ContextMenu.cpp
+        DragDropHandler.cpp
 
 
 BUILT_SOURCES = $(BuiltSources)
@@ -307,43 +300,31 @@ eventhandlers_lst_AR = $(AR) cru
 eventhandlers_lst_LIBADD =
 am__objects_1 = eventhandlers_lst-EventManager.$(OBJEXT) \
 	eventhandlers_lst-EventHandler.$(OBJEXT) \
-	eventhandlers_lst-DragDropHandler.$(OBJEXT) \
-	eventhandlers_lst-ContextMenuHandler.$(OBJEXT) \
-	eventhandlers_lst-ContextMenu.$(OBJEXT)
+	eventhandlers_lst-DragDropHandler.$(OBJEXT)
 am__objects_2 =
 am_eventhandlers_lst_OBJECTS = $(am__objects_1) $(am__objects_2)
-am__objects_3 = eventhandlers_lst-moc_ContextMenu.$(OBJEXT)
-nodist_eventhandlers_lst_OBJECTS = $(am__objects_3)
+nodist_eventhandlers_lst_OBJECTS = $(am__objects_2)
 eventhandlers_lst_OBJECTS = $(am_eventhandlers_lst_OBJECTS) \
 	$(nodist_eventhandlers_lst_OBJECTS)
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 
 libeventhandlers_la_LDFLAGS =
 libeventhandlers_la_LIBADD =
-am__objects_4 = libeventhandlers_la-EventManager.lo \
+am__objects_3 = libeventhandlers_la-EventManager.lo \
 	libeventhandlers_la-EventHandler.lo \
-	libeventhandlers_la-DragDropHandler.lo \
-	libeventhandlers_la-ContextMenuHandler.lo \
-	libeventhandlers_la-ContextMenu.lo
-am_libeventhandlers_la_OBJECTS = $(am__objects_4) $(am__objects_2)
-am__objects_5 = libeventhandlers_la-moc_ContextMenu.lo
-nodist_libeventhandlers_la_OBJECTS = $(am__objects_5)
+	libeventhandlers_la-DragDropHandler.lo
+am_libeventhandlers_la_OBJECTS = $(am__objects_3) $(am__objects_2)
+nodist_libeventhandlers_la_OBJECTS = $(am__objects_2)
 libeventhandlers_la_OBJECTS = $(am_libeventhandlers_la_OBJECTS) \
 	$(nodist_libeventhandlers_la_OBJECTS)
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/eventhandlers_lst-ContextMenu.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/eventhandlers_lst-DragDropHandler.Po \
+@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/eventhandlers_lst-DragDropHandler.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/eventhandlers_lst-EventHandler.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/eventhandlers_lst-EventManager.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-ContextMenu.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-DragDropHandler.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-EventHandler.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-EventManager.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Plo
+@AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-EventManager.Plo
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) \
@@ -351,13 +332,6 @@ LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) \
 	$(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
-	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
-	$(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-CCLD = $(CC)
-LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 DIST_SOURCES = $(eventhandlers_lst_SOURCES) \
 	$(libeventhandlers_la_SOURCES)
@@ -395,18 +369,12 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventhandlers_lst-ContextMenu.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventhandlers_lst-DragDropHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventhandlers_lst-EventHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventhandlers_lst-EventManager.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libeventhandlers_la-ContextMenu.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libeventhandlers_la-DragDropHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libeventhandlers_la-EventHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libeventhandlers_la-EventManager.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Plo@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -543,105 +511,6 @@ eventhandlers_lst-DragDropHandler.lo: DragDropHandler.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-DragDropHandler.lo `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp
 
-eventhandlers_lst-ContextMenuHandler.o: ContextMenuHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-ContextMenuHandler.o -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-ContextMenuHandler.o `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Tpo" "$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandler.cpp' object='eventhandlers_lst-ContextMenuHandler.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-ContextMenuHandler.o `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp
-
-eventhandlers_lst-ContextMenuHandler.obj: ContextMenuHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-ContextMenuHandler.obj -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-ContextMenuHandler.obj `if test -f 'ContextMenuHandler.cpp'; then $(CYGPATH_W) 'ContextMenuHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenuHandler.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Tpo" "$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandler.cpp' object='eventhandlers_lst-ContextMenuHandler.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-ContextMenuHandler.obj `if test -f 'ContextMenuHandler.cpp'; then $(CYGPATH_W) 'ContextMenuHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenuHandler.cpp'; fi`
-
-eventhandlers_lst-ContextMenuHandler.lo: ContextMenuHandler.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-ContextMenuHandler.lo -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-ContextMenuHandler.lo `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Tpo" "$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandler.cpp' object='eventhandlers_lst-ContextMenuHandler.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.Plo' tmpdepfile='$(DEPDIR)/eventhandlers_lst-ContextMenuHandler.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-ContextMenuHandler.lo `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp
-
-eventhandlers_lst-ContextMenu.o: ContextMenu.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-ContextMenu.o -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-ContextMenu.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-ContextMenu.o `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-ContextMenu.Tpo" "$(DEPDIR)/eventhandlers_lst-ContextMenu.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-ContextMenu.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenu.cpp' object='eventhandlers_lst-ContextMenu.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-ContextMenu.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-ContextMenu.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-ContextMenu.o `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp
-
-eventhandlers_lst-ContextMenu.obj: ContextMenu.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-ContextMenu.obj -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-ContextMenu.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-ContextMenu.obj `if test -f 'ContextMenu.cpp'; then $(CYGPATH_W) 'ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenu.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-ContextMenu.Tpo" "$(DEPDIR)/eventhandlers_lst-ContextMenu.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-ContextMenu.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenu.cpp' object='eventhandlers_lst-ContextMenu.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-ContextMenu.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-ContextMenu.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-ContextMenu.obj `if test -f 'ContextMenu.cpp'; then $(CYGPATH_W) 'ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenu.cpp'; fi`
-
-eventhandlers_lst-ContextMenu.lo: ContextMenu.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-ContextMenu.lo -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-ContextMenu.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-ContextMenu.lo `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-ContextMenu.Tpo" "$(DEPDIR)/eventhandlers_lst-ContextMenu.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-ContextMenu.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenu.cpp' object='eventhandlers_lst-ContextMenu.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-ContextMenu.Plo' tmpdepfile='$(DEPDIR)/eventhandlers_lst-ContextMenu.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-ContextMenu.lo `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp
-
-eventhandlers_lst-moc_ContextMenu.o: moc_ContextMenu.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-moc_ContextMenu.o -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-moc_ContextMenu.o `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Tpo" "$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenu.cpp' object='eventhandlers_lst-moc_ContextMenu.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-moc_ContextMenu.o `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp
-
-eventhandlers_lst-moc_ContextMenu.obj: moc_ContextMenu.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-moc_ContextMenu.obj -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-moc_ContextMenu.obj `if test -f 'moc_ContextMenu.cpp'; then $(CYGPATH_W) 'moc_ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_ContextMenu.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Tpo" "$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenu.cpp' object='eventhandlers_lst-moc_ContextMenu.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-moc_ContextMenu.obj `if test -f 'moc_ContextMenu.cpp'; then $(CYGPATH_W) 'moc_ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_ContextMenu.cpp'; fi`
-
-eventhandlers_lst-moc_ContextMenu.lo: moc_ContextMenu.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-moc_ContextMenu.lo -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-moc_ContextMenu.lo `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Tpo" "$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenu.cpp' object='eventhandlers_lst-moc_ContextMenu.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.Plo' tmpdepfile='$(DEPDIR)/eventhandlers_lst-moc_ContextMenu.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-moc_ContextMenu.lo `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp
-
 libeventhandlers_la-EventManager.o: EventManager.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-EventManager.o -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-EventManager.Tpo" \
 @am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-EventManager.o `test -f 'EventManager.cpp' || echo '$(srcdir)/'`EventManager.cpp; \
@@ -740,105 +609,6 @@ libeventhandlers_la-DragDropHandler.lo: DragDropHandler.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-DragDropHandler.Plo' tmpdepfile='$(DEPDIR)/libeventhandlers_la-DragDropHandler.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-DragDropHandler.lo `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp
-
-libeventhandlers_la-ContextMenuHandler.o: ContextMenuHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-ContextMenuHandler.o -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-ContextMenuHandler.o `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Tpo" "$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandler.cpp' object='libeventhandlers_la-ContextMenuHandler.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-ContextMenuHandler.o `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp
-
-libeventhandlers_la-ContextMenuHandler.obj: ContextMenuHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-ContextMenuHandler.obj -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-ContextMenuHandler.obj `if test -f 'ContextMenuHandler.cpp'; then $(CYGPATH_W) 'ContextMenuHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenuHandler.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Tpo" "$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandler.cpp' object='libeventhandlers_la-ContextMenuHandler.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-ContextMenuHandler.obj `if test -f 'ContextMenuHandler.cpp'; then $(CYGPATH_W) 'ContextMenuHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenuHandler.cpp'; fi`
-
-libeventhandlers_la-ContextMenuHandler.lo: ContextMenuHandler.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-ContextMenuHandler.lo -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-ContextMenuHandler.lo `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Tpo" "$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenuHandler.cpp' object='libeventhandlers_la-ContextMenuHandler.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.Plo' tmpdepfile='$(DEPDIR)/libeventhandlers_la-ContextMenuHandler.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-ContextMenuHandler.lo `test -f 'ContextMenuHandler.cpp' || echo '$(srcdir)/'`ContextMenuHandler.cpp
-
-libeventhandlers_la-ContextMenu.o: ContextMenu.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-ContextMenu.o -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-ContextMenu.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-ContextMenu.o `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-ContextMenu.Tpo" "$(DEPDIR)/libeventhandlers_la-ContextMenu.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-ContextMenu.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenu.cpp' object='libeventhandlers_la-ContextMenu.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-ContextMenu.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-ContextMenu.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-ContextMenu.o `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp
-
-libeventhandlers_la-ContextMenu.obj: ContextMenu.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-ContextMenu.obj -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-ContextMenu.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-ContextMenu.obj `if test -f 'ContextMenu.cpp'; then $(CYGPATH_W) 'ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenu.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-ContextMenu.Tpo" "$(DEPDIR)/libeventhandlers_la-ContextMenu.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-ContextMenu.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenu.cpp' object='libeventhandlers_la-ContextMenu.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-ContextMenu.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-ContextMenu.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-ContextMenu.obj `if test -f 'ContextMenu.cpp'; then $(CYGPATH_W) 'ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenu.cpp'; fi`
-
-libeventhandlers_la-ContextMenu.lo: ContextMenu.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-ContextMenu.lo -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-ContextMenu.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-ContextMenu.lo `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-ContextMenu.Tpo" "$(DEPDIR)/libeventhandlers_la-ContextMenu.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-ContextMenu.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenu.cpp' object='libeventhandlers_la-ContextMenu.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-ContextMenu.Plo' tmpdepfile='$(DEPDIR)/libeventhandlers_la-ContextMenu.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-ContextMenu.lo `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp
-
-libeventhandlers_la-moc_ContextMenu.o: moc_ContextMenu.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-moc_ContextMenu.o -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-moc_ContextMenu.o `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Tpo" "$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenu.cpp' object='libeventhandlers_la-moc_ContextMenu.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-moc_ContextMenu.o `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp
-
-libeventhandlers_la-moc_ContextMenu.obj: moc_ContextMenu.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-moc_ContextMenu.obj -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-moc_ContextMenu.obj `if test -f 'moc_ContextMenu.cpp'; then $(CYGPATH_W) 'moc_ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_ContextMenu.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Tpo" "$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenu.cpp' object='libeventhandlers_la-moc_ContextMenu.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-moc_ContextMenu.obj `if test -f 'moc_ContextMenu.cpp'; then $(CYGPATH_W) 'moc_ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_ContextMenu.cpp'; fi`
-
-libeventhandlers_la-moc_ContextMenu.lo: moc_ContextMenu.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-moc_ContextMenu.lo -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-moc_ContextMenu.lo `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Tpo" "$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenu.cpp' object='libeventhandlers_la-moc_ContextMenu.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.Plo' tmpdepfile='$(DEPDIR)/libeventhandlers_la-moc_ContextMenu.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-moc_ContextMenu.lo `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -1027,9 +797,6 @@ uninstall-am: uninstall-info-am
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags uninstall uninstall-am uninstall-info-am
 
-
-moc_ContextMenu.cpp: $(srcdir)/ContextMenu.h
-	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/ContextMenu.h`
 
 eventhandlers.lst: $(eventhandlers_lst_OBJECTS)
 	@echo "Linking $@..."; \

@@ -42,7 +42,7 @@ namespace SIM { namespace Coin3D { namespace Quarter {
 
 class DeviceManager;
 class EventManager;
-class ContextMenuHandler;
+class ContextMenu;
 
 class QuarterWidgetP {
 public:
@@ -62,7 +62,7 @@ public:
   SoEventManager * soeventmanager;
   SoDirectionalLight * headlight;
   QuarterWidgetP_cachecontext * cachecontext;
-  ContextMenuHandler * contextmenuhandler;
+  ContextMenu * contextmenu;
 
   static void prerendercb(void * userdata, SoRenderManager * manager);
   static void postrendercb(void * userdata, SoRenderManager * manager);

@@ -38,11 +38,11 @@ using namespace SIM::Coin3D::Quarter;
 
 #define PUBLIC(obj) obj->publ
 
-ContextMenu::ContextMenu(QuarterWidget * quarterwidget)
+ContextMenu::ContextMenu(const QuarterWidget * quarterwidget)
+  : quarterwidget(quarterwidget)
 {
   this->publ = publ;
   
-  this->quarterwidget = quarterwidget;
   this->rendermanager = quarterwidget->getSoRenderManager();
 
   this->contextmenu = new QMenu;
@@ -156,8 +156,8 @@ ContextMenu::getMenu(void) const
   return this->contextmenu;
 }
       
-bool
-ContextMenu::contextMenuEvent(QContextMenuEvent * event)
+void
+ContextMenu::exec(const QPoint & pos)
 {
   SoEventManager * eventmanager = this->quarterwidget->getSoEventManager();
   const SbName popupevent("sim.coin3d.coin.PopupMenuOpen");
@@ -168,8 +168,7 @@ ContextMenu::contextMenuEvent(QContextMenuEvent * event)
     sostatemachine->processEventQueue();
   }
 
-  (void) this->contextmenu->exec(event->globalPos());
-  return true;
+  (void) this->contextmenu->exec(pos);
 }
 
 void
@@ -216,7 +215,10 @@ void
 ContextMenu::changeTransparencyType(QAction * action)
 {
   QVariant transparencytype = action->data();
-  this->quarterwidget->setTransparencyType((SoGLRenderAction::TransparencyType)transparencytype.toInt());
+  SoGLRenderAction::TransparencyType type = 
+    (SoGLRenderAction::TransparencyType) transparencytype.toInt(); 
+
+  ((QuarterWidget *)this->quarterwidget)->setTransparencyType(type);
 }
 
 #undef PUBLIC

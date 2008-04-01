@@ -238,13 +238,15 @@ DEFAULT_INCLUDES = $(includes)
 
 BuiltSources = \
         moc_QuarterWidget.cpp \
-        moc_SensorManager.cpp
+        moc_SensorManager.cpp \
+        moc_ContextMenu.cpp
 
 
 PrivateHeaders = \
         SensorManager.h \
         ImageReader.h \
-        QuarterWidgetP.h
+        QuarterWidgetP.h \
+        ContextMenu.h
 
 
 RegularSources = \
@@ -253,6 +255,7 @@ RegularSources = \
         SensorManager.cpp \
         QuarterWidgetP.cpp \
         QuarterApplication.cpp \
+        ContextMenu.cpp \
         ImageReader.cpp
 
 
@@ -342,13 +345,15 @@ am__objects_1 = \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SensorManager.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.$(OBJEXT) \
+	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.$(OBJEXT)
 am__objects_2 =
 am_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = $(am__objects_1) \
 	$(am__objects_2)
 am__objects_3 = \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.$(OBJEXT) \
-	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.$(OBJEXT)
+	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.$(OBJEXT) \
+	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.$(OBJEXT)
 nodist_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
 	$(am__objects_3)
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
@@ -361,30 +366,35 @@ libQuarter_la_DEPENDENCIES = devices/libdevices.la \
 am__objects_4 = libQuarter_la-Quarter.lo libQuarter_la-QuarterWidget.lo \
 	libQuarter_la-SensorManager.lo libQuarter_la-QuarterWidgetP.lo \
 	libQuarter_la-QuarterApplication.lo \
-	libQuarter_la-ImageReader.lo
+	libQuarter_la-ContextMenu.lo libQuarter_la-ImageReader.lo
 am_libQuarter_la_OBJECTS = $(am__objects_4) $(am__objects_2)
 am__objects_5 = libQuarter_la-moc_QuarterWidget.lo \
-	libQuarter_la-moc_SensorManager.lo
+	libQuarter_la-moc_SensorManager.lo \
+	libQuarter_la-moc_ContextMenu.lo
 nodist_libQuarter_la_OBJECTS = $(am__objects_5)
 libQuarter_la_OBJECTS = $(am_libQuarter_la_OBJECTS) \
 	$(nodist_libQuarter_la_OBJECTS)
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = \
+@AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Quarter.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidget.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SensorManager.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-ContextMenu.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-ImageReader.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-Quarter.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-QuarterApplication.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-QuarterWidget.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-QuarterWidgetP.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-SensorManager.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_ContextMenu.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_QuarterWidget.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_SensorManager.Plo
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
@@ -491,20 +501,24 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Quarter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SensorManager.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-ContextMenu.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-ImageReader.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-Quarter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-QuarterApplication.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-QuarterWidget.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-QuarterWidgetP.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-SensorManager.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_ContextMenu.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_QuarterWidget.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_SensorManager.Plo@am__quote@
 
@@ -709,6 +723,39 @@ Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.lo: QuarterApplica
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.lo `test -f 'QuarterApplication.cpp' || echo '$(srcdir)/'`QuarterApplication.cpp
 
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.o: ContextMenu.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.o `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenu.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.o `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.obj: ContextMenu.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.obj -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.obj `if test -f 'ContextMenu.cpp'; then $(CYGPATH_W) 'ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenu.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenu.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.obj `if test -f 'ContextMenu.cpp'; then $(CYGPATH_W) 'ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenu.cpp'; fi`
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.lo: ContextMenu.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.lo -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.lo `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenu.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.lo `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp
+
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.o: ImageReader.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Tpo" \
 @am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.o `test -f 'ImageReader.cpp' || echo '$(srcdir)/'`ImageReader.cpp; \
@@ -807,6 +854,39 @@ Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.lo: moc_SensorManag
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.lo `test -f 'moc_SensorManager.cpp' || echo '$(srcdir)/'`moc_SensorManager.cpp
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.o: moc_ContextMenu.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.o `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenu.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.o `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.obj: moc_ContextMenu.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.obj -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.obj `if test -f 'moc_ContextMenu.cpp'; then $(CYGPATH_W) 'moc_ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_ContextMenu.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenu.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.obj `if test -f 'moc_ContextMenu.cpp'; then $(CYGPATH_W) 'moc_ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_ContextMenu.cpp'; fi`
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.lo: moc_ContextMenu.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.lo -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.lo `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenu.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.lo `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp
 
 libQuarter_la-Quarter.o: Quarter.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-Quarter.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-Quarter.Tpo" \
@@ -973,6 +1053,39 @@ libQuarter_la-QuarterApplication.lo: QuarterApplication.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-QuarterApplication.lo `test -f 'QuarterApplication.cpp' || echo '$(srcdir)/'`QuarterApplication.cpp
 
+libQuarter_la-ContextMenu.o: ContextMenu.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-ContextMenu.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-ContextMenu.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-ContextMenu.o `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-ContextMenu.Tpo" "$(DEPDIR)/libQuarter_la-ContextMenu.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-ContextMenu.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenu.cpp' object='libQuarter_la-ContextMenu.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-ContextMenu.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-ContextMenu.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-ContextMenu.o `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp
+
+libQuarter_la-ContextMenu.obj: ContextMenu.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-ContextMenu.obj -MD -MP -MF "$(DEPDIR)/libQuarter_la-ContextMenu.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-ContextMenu.obj `if test -f 'ContextMenu.cpp'; then $(CYGPATH_W) 'ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenu.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-ContextMenu.Tpo" "$(DEPDIR)/libQuarter_la-ContextMenu.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-ContextMenu.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenu.cpp' object='libQuarter_la-ContextMenu.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-ContextMenu.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-ContextMenu.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-ContextMenu.obj `if test -f 'ContextMenu.cpp'; then $(CYGPATH_W) 'ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/ContextMenu.cpp'; fi`
+
+libQuarter_la-ContextMenu.lo: ContextMenu.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-ContextMenu.lo -MD -MP -MF "$(DEPDIR)/libQuarter_la-ContextMenu.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-ContextMenu.lo `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-ContextMenu.Tpo" "$(DEPDIR)/libQuarter_la-ContextMenu.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-ContextMenu.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='ContextMenu.cpp' object='libQuarter_la-ContextMenu.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-ContextMenu.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-ContextMenu.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-ContextMenu.lo `test -f 'ContextMenu.cpp' || echo '$(srcdir)/'`ContextMenu.cpp
+
 libQuarter_la-ImageReader.o: ImageReader.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-ImageReader.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-ImageReader.Tpo" \
 @am__fastdepCXX_TRUE@	  -c -o libQuarter_la-ImageReader.o `test -f 'ImageReader.cpp' || echo '$(srcdir)/'`ImageReader.cpp; \
@@ -1071,6 +1184,39 @@ libQuarter_la-moc_SensorManager.lo: moc_SensorManager.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-moc_SensorManager.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-moc_SensorManager.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-moc_SensorManager.lo `test -f 'moc_SensorManager.cpp' || echo '$(srcdir)/'`moc_SensorManager.cpp
+
+libQuarter_la-moc_ContextMenu.o: moc_ContextMenu.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-moc_ContextMenu.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-moc_ContextMenu.o `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Tpo" "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenu.cpp' object='libQuarter_la-moc_ContextMenu.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-moc_ContextMenu.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-moc_ContextMenu.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-moc_ContextMenu.o `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp
+
+libQuarter_la-moc_ContextMenu.obj: moc_ContextMenu.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-moc_ContextMenu.obj -MD -MP -MF "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-moc_ContextMenu.obj `if test -f 'moc_ContextMenu.cpp'; then $(CYGPATH_W) 'moc_ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_ContextMenu.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Tpo" "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenu.cpp' object='libQuarter_la-moc_ContextMenu.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-moc_ContextMenu.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-moc_ContextMenu.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-moc_ContextMenu.obj `if test -f 'moc_ContextMenu.cpp'; then $(CYGPATH_W) 'moc_ContextMenu.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_ContextMenu.cpp'; fi`
+
+libQuarter_la-moc_ContextMenu.lo: moc_ContextMenu.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-moc_ContextMenu.lo -MD -MP -MF "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-moc_ContextMenu.lo `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Tpo" "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_ContextMenu.cpp' object='libQuarter_la-moc_ContextMenu.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-moc_ContextMenu.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-moc_ContextMenu.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-moc_ContextMenu.lo `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -1382,6 +1528,9 @@ moc_QuarterWidget.cpp: $(top_srcdir)/include/Quarter/QuarterWidget.h
 
 moc_SensorManager.cpp: $(srcdir)/SensorManager.h
 	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/SensorManager.h`
+
+moc_ContextMenu.cpp: $(srcdir)/ContextMenu.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/ContextMenu.h`
 
 @BUILD_WITH_MSVC_TRUE@all-local: Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 

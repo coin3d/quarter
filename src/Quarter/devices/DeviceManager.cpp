@@ -33,6 +33,8 @@
 
 
 #include <assert.h>
+#include <QtCore/QEvent>
+#include <QtGui/QMouseEvent>
 #include <Inventor/events/SoLocation2Event.h>
 #include <Quarter/devices/DeviceManager.h>
 #include <Quarter/devices/DeviceHandler.h>
@@ -45,6 +47,7 @@ public:
   QList<DeviceHandler *> devices;
   QuarterWidget * quarterwidget;
   SbVec2s lastmousepos;
+  QPoint globalpos;
 };
 
 }}} // namespace
@@ -79,6 +82,11 @@ DeviceManager::~DeviceManager()
 const SoEvent *
 DeviceManager::translateEvent(QEvent * qevent)
 {
+  if (qevent->type() == QEvent::MouseMove) {
+    QMouseEvent * mouseevent = static_cast<QMouseEvent *>(qevent);
+    PRIVATE(this)->globalpos = mouseevent->globalPos();
+  }
+
   DeviceHandler * device;
   foreach(device, PRIVATE(this)->devices) {
     if (const SoEvent * soevent = device->translateEvent(qevent)) {
@@ -102,9 +110,18 @@ DeviceManager::getWidget(void) const
 }
 
 /*!
+  Returns the last mouse position in global coordinates
+*/
+const QPoint & 
+DeviceManager::getLastGlobalPosition(void) const
+{
+  return PRIVATE(this)->globalpos;
+}
+
+/*!
   Returns the last mouse position
 */
-SbVec2s
+const SbVec2s & 
 DeviceManager::getLastMousePosition(void) const
 {
   return PRIVATE(this)->lastmousepos;

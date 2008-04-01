@@ -52,9 +52,9 @@
 #include <Quarter/devices/MouseHandler.h>
 #include <Quarter/devices/KeyboardHandler.h>
 #include <Quarter/eventhandlers/EventManager.h>
-#include <Quarter/eventhandlers/ContextMenuHandler.h>
 #include <Quarter/eventhandlers/DragDropHandler.h>
 
+#include "ContextMenu.h"
 #include "QuarterWidgetP.h"
 
 using namespace SIM::Coin3D::Quarter;
@@ -81,6 +81,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this) = new QuarterWidgetP(this, sharewidget);
 
   PRIVATE(this)->scene = NULL;
+  PRIVATE(this)->contextmenu = NULL;
 
   PRIVATE(this)->sorendermanager = new SoRenderManager;
   PRIVATE(this)->soeventmanager = new SoEventManager;
@@ -111,9 +112,6 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   PRIVATE(this)->devicemanager->registerDevice(new MouseHandler);
   PRIVATE(this)->devicemanager->registerDevice(new KeyboardHandler);
-
-  PRIVATE(this)->contextmenuhandler = new ContextMenuHandler;
-  PRIVATE(this)->eventmanager->registerEventHandler(PRIVATE(this)->contextmenuhandler);
   PRIVATE(this)->eventmanager->registerEventHandler(new DragDropHandler);
 
   // set up a cache context for the default SoGLRenderAction
@@ -413,7 +411,10 @@ QuarterWidget::getBackgroundColor(void) const
 QMenu * 
 QuarterWidget::getContextMenu(void) const
 {
-  return PRIVATE(this)->contextmenuhandler->getContextMenu();
+  if (!PRIVATE(this)->contextmenu) {
+    PRIVATE(this)->contextmenu = new ContextMenu(this);
+  }
+  return PRIVATE(this)->contextmenu->getMenu();
 }
 
 #undef PRIVATE

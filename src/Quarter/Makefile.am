@@ -19,12 +19,14 @@ DEFAULT_INCLUDES = $(includes)
 
 BuiltSources = \
         moc_QuarterWidget.cpp \
-        moc_SensorManager.cpp
+        moc_SensorManager.cpp \
+        moc_ContextMenu.cpp
 
 PrivateHeaders = \
         SensorManager.h \
         ImageReader.h \
-        QuarterWidgetP.h
+        QuarterWidgetP.h \
+        ContextMenu.h
 
 RegularSources = \
         Quarter.cpp \
@@ -32,6 +34,7 @@ RegularSources = \
         SensorManager.cpp \
         QuarterWidgetP.cpp \
         QuarterApplication.cpp \
+        ContextMenu.cpp \
         ImageReader.cpp
 
 BUILT_SOURCES = $(BuiltSources)
@@ -123,6 +126,9 @@ moc_QuarterWidget.cpp: $(top_srcdir)/include/Quarter/QuarterWidget.h
 
 moc_SensorManager.cpp: $(srcdir)/SensorManager.h
 	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/SensorManager.h`
+
+moc_ContextMenu.cpp: $(srcdir)/ContextMenu.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/ContextMenu.h`
 
 if BUILD_WITH_MSVC
 all-local: Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib

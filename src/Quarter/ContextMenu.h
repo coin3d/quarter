@@ -41,10 +41,10 @@ class ContextMenuHandler;
 class ContextMenu : public QObject {
   Q_OBJECT
 public:
-  ContextMenu(QuarterWidget * quarterwidget);
+  ContextMenu(const QuarterWidget * quarterwidget);
   ~ContextMenu();
 
-  bool contextMenuEvent(QContextMenuEvent * event);
+  void exec(const QPoint & pos);
   QMenu * getMenu(void) const;
 
 public slots:
@@ -62,7 +62,7 @@ private:
   ContextMenuHandler * publ;
 
   SoRenderManager * rendermanager;
-  QuarterWidget * quarterwidget;
+  const QuarterWidget * quarterwidget;
 
   QList<RenderModePair *> rendermodes;
   QList<StereoModePair *> stereomodes;

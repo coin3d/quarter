@@ -28,6 +28,7 @@
 
 class QEvent;
 class SoEvent;
+class QPoint;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
@@ -45,7 +46,8 @@ public:
   void registerDevice(DeviceHandler * device);
   void unregisterDevice(DeviceHandler * device);
 
-  SbVec2s getLastMousePosition(void) const;
+  const SbVec2s & getLastMousePosition(void) const;
+  const QPoint & getLastGlobalPosition(void) const;
 
 private:
   class DeviceManagerP * pimpl;

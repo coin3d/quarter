@@ -222,8 +222,7 @@ target_alias = @target_alias@
 libeventhandlersinc_HEADERS = \
         DragDropHandler.h \
         EventManager.h \
-        EventHandler.h \
-        ContextMenuHandler.h
+        EventHandler.h
 
 
 @MAC_FRAMEWORK_TRUE@libeventhandlersincdir = $(MAC_FRAMEWORK_PREFIX)/$(MAC_FRAMEWORK_NAME).framework/Versions/$(MAC_FRAMEWORK_VERSION)/Headers/eventhandlers

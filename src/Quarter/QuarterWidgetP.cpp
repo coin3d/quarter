@@ -22,6 +22,7 @@
 
 #include "QuarterWidgetP.h"
 #include <Quarter/QuarterWidget.h>
+#include <Quarter/devices/DeviceManager.h>
 
 #include <QtGui/QCursor>
 #include <QtCore/QMap>
@@ -33,6 +34,8 @@
 #include <Inventor/lists/SbList.h>
 #include <Inventor/SoEventManager.h>
 #include <Inventor/scxml/SoScXMLStateMachine.h>
+
+#include "ContextMenu.h"
 
 #include <stdlib.h>
 
@@ -50,6 +53,7 @@ QuarterWidgetP::StateCursorMap * QuarterWidgetP::statecursormap = NULL;
 QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * sharewidget)
 {
   this->master = masterptr;
+  this->contextmenu = NULL;
   this->cachecontext = findCacheContext(masterptr, sharewidget);
 
   if (statecursormap == NULL) {
@@ -141,6 +145,13 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
   assert(thisp && thisp->master);
   if (enter) {
     SbName state(stateid);
+    if (state == SbName("contextmenurequest")) {
+      if (!thisp->contextmenu) {
+        thisp->contextmenu = new ContextMenu(thisp->master);
+      }
+      thisp->contextmenu->exec(thisp->devicemanager->getLastGlobalPosition());
+    }
+    printf("state = %s\n", state.getString());
     if (statecursormap->contains(state)) {
       QCursor cursor = statecursormap->value(state);
       thisp->master->setCursor(cursor);
