@@ -157,7 +157,7 @@ ContextMenu::getMenu(void) const
 }
       
 bool
-ContextMenu::contextMenuEvent(QMouseEvent * event)
+ContextMenu::contextMenuEvent(QContextMenuEvent * event)
 {
   SoEventManager * eventmanager = this->quarterwidget->getSoEventManager();
   const SbName popupevent("sim.coin3d.coin.PopupMenuOpen");

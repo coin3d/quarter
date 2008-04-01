@@ -29,6 +29,8 @@
 
 
 #include <Quarter/devices/DeviceHandler.h>
+#include <QtGui/QInputEvent>
+#include <Inventor/events/SoEvents.h>
 
 using namespace SIM::Coin3D::Quarter;
 
@@ -38,3 +40,18 @@ DeviceHandler::setManager(DeviceManager * manager)
   this->manager = manager;
 }
 
+void 
+DeviceHandler::setModifiers(SoEvent * soevent, QInputEvent * qevent)
+{
+  // FIXME: How do we get the time from the qevent? (20070306 frodo)
+  soevent->setTime(SbTime::getTimeOfDay());
+
+  // Note: On Mac OS X, the ControlModifier value corresponds to the
+  // Command keys on the Macintosh keyboard, and the MetaModifier
+  // value corresponds to the Control keys.
+  soevent->setShiftDown(qevent->modifiers() & Qt::ShiftModifier);
+  soevent->setAltDown(qevent->modifiers() & Qt::AltModifier);
+  soevent->setCtrlDown(qevent->modifiers() & Qt::ControlModifier);
+}
+
+#undef PRIVATE

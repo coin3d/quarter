@@ -44,7 +44,7 @@ public:
   ContextMenu(QuarterWidget * quarterwidget);
   ~ContextMenu();
 
-  bool contextMenuEvent(QMouseEvent * event);
+  bool contextMenuEvent(QContextMenuEvent * event);
   QMenu * getMenu(void) const;
 
 public slots:

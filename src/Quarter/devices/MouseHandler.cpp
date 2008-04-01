@@ -44,7 +44,8 @@ namespace SIM { namespace Coin3D { namespace Quarter {
 
 class MouseHandlerP {
 public:
-  MouseHandlerP(void) {
+  MouseHandlerP(MouseHandler * publ) {
+    this->publ = publ;
     this->location2 = new SoLocation2Event;
     this->mousebutton = new SoMouseButtonEvent;
     this->windowsize = SbVec2s(-1, -1);
@@ -60,11 +61,11 @@ public:
   const SoEvent * mouseButtonEvent(QMouseEvent * event);
 
   void resizeEvent(QResizeEvent * event);
-  void setModifiers(SoEvent * soevent, QInputEvent * qevent);
 
   class SoLocation2Event * location2;
   class SoMouseButtonEvent * mousebutton;
   SbVec2s windowsize;
+  MouseHandler * publ;
 };
 
 }}} // namespace
@@ -72,10 +73,11 @@ public:
 using namespace SIM::Coin3D::Quarter;
 
 #define PRIVATE(obj) obj->pimpl
+#define PUBLIC(obj) obj->publ
 
 MouseHandler::MouseHandler(void)
 {
-  PRIVATE(this) = new MouseHandlerP;
+  PRIVATE(this) = new MouseHandlerP(this);
 }
 
 MouseHandler::~MouseHandler()
@@ -106,16 +108,6 @@ MouseHandler::translateEvent(QEvent * event)
 }
 
 void
-MouseHandlerP::setModifiers(SoEvent * soevent, QInputEvent * qevent)
-{
-  // FIXME: How do we get the time from the qevent? (20070306 frodo)
-  soevent->setTime(SbTime::getTimeOfDay());
-  soevent->setShiftDown(qevent->modifiers() & Qt::ShiftModifier);
-  soevent->setCtrlDown(qevent->modifiers() & Qt::ControlModifier);
-  soevent->setAltDown(qevent->modifiers() & Qt::AltModifier);
-}
-
-void
 MouseHandlerP::resizeEvent(QResizeEvent * event)
 {
   this->windowsize = SbVec2s(event->size().width(),
@@ -125,7 +117,7 @@ MouseHandlerP::resizeEvent(QResizeEvent * event)
 const SoEvent *
 MouseHandlerP::mouseMoveEvent(QMouseEvent * event)
 {
-  MouseHandlerP::setModifiers(this->location2, event);
+  PUBLIC(this)->setModifiers(this->location2, event);
 
   assert(this->windowsize[1] != -1);
   SbVec2s pos(event->pos().x(), this->windowsize[1] - event->pos().y() - 1);
@@ -136,7 +128,7 @@ MouseHandlerP::mouseMoveEvent(QMouseEvent * event)
 const SoEvent *
 MouseHandlerP::mouseWheelEvent(QWheelEvent * event)
 {
-  MouseHandlerP::setModifiers(this->mousebutton, event);
+  PUBLIC(this)->setModifiers(this->mousebutton, event);
   this->mousebutton->setPosition(this->location2->getPosition());
 
   // QWheelEvent::delta() returns the distance that the wheel is
@@ -154,7 +146,7 @@ MouseHandlerP::mouseWheelEvent(QWheelEvent * event)
 const SoEvent *
 MouseHandlerP::mouseButtonEvent(QMouseEvent * event)
 {
-  MouseHandlerP::setModifiers(this->mousebutton, event);
+  PUBLIC(this)->setModifiers(this->mousebutton, event);
   this->mousebutton->setPosition(this->location2->getPosition());
 
   (event->type() == QEvent::MouseButtonPress) ?
@@ -181,3 +173,4 @@ MouseHandlerP::mouseButtonEvent(QMouseEvent * event)
 }
 
 #undef PRIVATE
+#undef PUBLIC

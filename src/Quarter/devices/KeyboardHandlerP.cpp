@@ -59,12 +59,9 @@ KeyboardHandlerP::keyEvent(QKeyEvent * qevent)
 {
   const Qt::KeyboardModifiers modifiers = qevent->modifiers();
 
-  this->keyboard->setTime(SbTime::getTimeOfDay());
-  SbVec2s mp = PUBLIC(this)->manager->getLastMousePosition();
-  this->keyboard->setPosition(PUBLIC(this)->manager->getLastMousePosition());
-  this->keyboard->setShiftDown(modifiers & Qt::ShiftModifier);
-  this->keyboard->setCtrlDown(modifiers & Qt::ControlModifier);
-  this->keyboard->setAltDown(modifiers & Qt::AltModifier);
+  SbVec2s pos = PUBLIC(this)->manager->getLastMousePosition();
+  this->keyboard->setPosition(pos);
+  PUBLIC(this)->setModifiers(this->keyboard, qevent);
 
   (qevent->type() == QEvent::KeyPress) ?
     this->keyboard->setState(SoButtonEvent::DOWN):
@@ -82,11 +79,15 @@ KeyboardHandlerP::keyEvent(QKeyEvent * qevent)
 
 #if QUARTER_DEBUG
   if (KeyboardHandlerP::debugKeyEvents()) {
+    SbString s;
+    this->keyboard->enumToString(this->keyboard->getKey(), s);
     SoDebugError::postInfo("KeyboardHandlerP::keyEvent",
-                           "qevent printable character %s", printable);
+                           "enum: '%s', pos: <%i %i>, printable: '%s'", 
+                           s.getString(), 
+                           pos[0], pos[1],
+                           printable);
   }
 #endif
-
   return this->keyboard;
 }
 
@@ -100,7 +101,6 @@ KeyboardHandlerP::initKeyMap(void)
   keyboardmap->insert(Qt::Key_Shift,   SoKeyboardEvent::LEFT_SHIFT);
   keyboardmap->insert(Qt::Key_Alt,     SoKeyboardEvent::LEFT_ALT);
   keyboardmap->insert(Qt::Key_Control, SoKeyboardEvent::LEFT_CONTROL);
-
   keyboardmap->insert(Qt::Key_0, SoKeyboardEvent::NUMBER_0);
   keyboardmap->insert(Qt::Key_1, SoKeyboardEvent::NUMBER_1);
   keyboardmap->insert(Qt::Key_2, SoKeyboardEvent::NUMBER_2);

@@ -75,14 +75,9 @@ ContextMenuHandler::getContextMenu(void) const
 bool
 ContextMenuHandler::handleEvent(QEvent * event)
 {
-  if (event->type() == QEvent::MouseButtonPress) {
-    QMouseEvent * mouseevent = (QMouseEvent *) event;
-    if (mouseevent->button() == Qt::RightButton) {
-      if (mouseevent->modifiers() & Qt::ControlModifier) {
-        (void) this->getContextMenu(); // make sure a context menu is created
-        return PRIVATE(this)->contextmenu->contextMenuEvent(mouseevent);
-      }
-    }
+  if (event->type() == QEvent::ContextMenu) {
+    (void) this->getContextMenu(); // make sure a context menu is created
+    return PRIVATE(this)->contextmenu->contextMenuEvent((QContextMenuEvent *)event);
   }
   return false;
 }

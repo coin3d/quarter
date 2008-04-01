@@ -24,9 +24,11 @@
 \**************************************************************************/
 
 #include <Quarter/Basic.h>
+#include <Inventor/SbVec2s.h>
 
 class QEvent;
 class SoEvent;
+class QInputEvent;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
@@ -44,6 +46,7 @@ public:
 
 protected:
   void setManager(DeviceManager * manager);
+  void setModifiers(SoEvent * soevent, QInputEvent * qevent);
 
   friend class DeviceManager;
   DeviceManager * manager;
