@@ -119,12 +119,13 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->sorendermanager->getGLRenderAction()->setCacheContext(this->getCacheContextId());
 
   // set up default cursors for the examiner navigation states
-  this->setStateCursor("rotate", Qt::OpenHandCursor);
-  this->setStateCursor("seek", Qt::CrossCursor);
-  this->setStateCursor("spin", Qt::ArrowCursor);
+  this->setStateCursor("interact", Qt::ArrowCursor);
+  this->setStateCursor("idle", Qt::OpenHandCursor);
+  this->setStateCursor("rotate", Qt::ClosedHandCursor);
   this->setStateCursor("pan", Qt::SizeAllCursor);
   this->setStateCursor("zoom", Qt::SizeVerCursor);
-  this->setStateCursor("idle", Qt::ArrowCursor);
+  this->setStateCursor("seek", Qt::CrossCursor);
+  this->setStateCursor("spin", Qt::OpenHandCursor);
 
   this->setMouseTracking(TRUE);
 

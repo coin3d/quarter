@@ -48,6 +48,8 @@ public:
   QMenu * getMenu(void) const;
 
 public slots:
+  void seek(bool);
+  void viewAll(bool);
   void changeRenderMode(QAction * action);
   void changeStereoMode(QAction * action);
   void changeTransparencyType(QAction * action);
@@ -70,6 +72,7 @@ private:
   QList<QAction *> stereomodeactions;
   QList<QAction *> transparencytypeactions;
 
+  QActionGroup * functionsgroup;
   QActionGroup * stereomodegroup;
   QActionGroup * rendermodegroup;
   QActionGroup * transparencytypegroup;
@@ -77,6 +80,7 @@ private:
   QMenu * contextmenu;
   QMenu * rendermenu;
   QMenu * stereomenu;
+  QMenu * functionsmenu;
   QMenu * transparencymenu;
 
 };

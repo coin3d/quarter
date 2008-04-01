@@ -46,10 +46,12 @@ ContextMenu::ContextMenu(QuarterWidget * quarterwidget)
   this->rendermanager = quarterwidget->getSoRenderManager();
 
   this->contextmenu = new QMenu;
+  this->functionsmenu = new QMenu("Functions");
   this->rendermenu = new QMenu("Render Mode");
   this->stereomenu = new QMenu("Stereo Mode");
   this->transparencymenu = new QMenu("Transparency Type");
 
+  this->functionsgroup = new QActionGroup(this);
   this->stereomodegroup = new QActionGroup(this);
   this->rendermodegroup = new QActionGroup(this);
   this->transparencytypegroup = new QActionGroup(this);
@@ -78,7 +80,7 @@ ContextMenu::ContextMenu(QuarterWidget * quarterwidget)
   this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_ADD, "sorted object sorted triangle add"));
   this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_BLEND, "sorted object sorted triangle blend"));
   this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_LAYERS_BLEND, "sorted layers blend"));
-    
+
   foreach(RenderModePair * rendermode, this->rendermodes) {
     QAction * action = new QAction(rendermode->second, this);
     action->setCheckable(true);
@@ -109,6 +111,17 @@ ContextMenu::ContextMenu(QuarterWidget * quarterwidget)
     this->transparencymenu->addAction(action);
   }
 
+  QAction * viewall = new QAction("View All", this);
+  QAction * seek = new QAction("Seek", this);
+  this->functionsmenu->addAction(viewall);
+  this->functionsmenu->addAction(seek);
+    
+  this->connect(seek, SIGNAL(triggered(bool)),
+                this, SLOT(seek(bool)));
+
+  this->connect(viewall, SIGNAL(triggered(bool)),
+                this, SLOT(viewAll(bool)));
+
   this->connect(this->rendermodegroup, SIGNAL(triggered(QAction *)),
                 this, SLOT(changeRenderMode(QAction *)));
     
@@ -118,7 +131,7 @@ ContextMenu::ContextMenu(QuarterWidget * quarterwidget)
   this->connect(this->transparencytypegroup, SIGNAL(triggered(QAction *)),
                 this, SLOT(changeTransparencyType(QAction *)));
     
-
+  this->contextmenu->addMenu(this->functionsmenu);
   this->contextmenu->addMenu(this->rendermenu);
   this->contextmenu->addMenu(this->stereomenu);
   this->contextmenu->addMenu(this->transparencymenu);
@@ -130,6 +143,7 @@ ContextMenu::~ContextMenu()
   foreach(StereoModePair * stereomode, this->stereomodes) delete stereomode;
   foreach(TransparencyTypePair * transparencytype, this->transparencytypes) delete transparencytype;
   
+  delete this->functionsmenu;
   delete this->rendermenu;
   delete this->stereomenu;
   delete this->transparencymenu;
@@ -145,17 +159,43 @@ ContextMenu::getMenu(void) const
 bool
 ContextMenu::contextMenuEvent(QMouseEvent * event)
 {
-  SoEventManager * soeventmanager = this->quarterwidget->getSoEventManager();
+  SoEventManager * eventmanager = this->quarterwidget->getSoEventManager();
   const SbName popupevent("sim.coin3d.coin.PopupMenuOpen");
-  for (int c = 0; c < soeventmanager->getNumSoScXMLStateMachines(); ++c) {
+  for (int c = 0; c < eventmanager->getNumSoScXMLStateMachines(); ++c) {
     SoScXMLStateMachine * sostatemachine =
-      soeventmanager->getSoScXMLStateMachine(c);
+      eventmanager->getSoScXMLStateMachine(c);
     sostatemachine->queueEvent(popupevent);
     sostatemachine->processEventQueue();
   }
 
   (void) this->contextmenu->exec(event->globalPos());
   return true;
+}
+
+void
+ContextMenu::seek(bool checked)
+{
+  SoEventManager * eventmanager = this->quarterwidget->getSoEventManager();
+  const SbName seekevent("sim.coin3d.coin.navigation.Seek");
+  for (int c = 0; c < eventmanager->getNumSoScXMLStateMachines(); ++c) {
+    SoScXMLStateMachine * sostatemachine =
+      eventmanager->getSoScXMLStateMachine(c);
+    sostatemachine->queueEvent(seekevent);
+    sostatemachine->processEventQueue();
+  }
+}
+
+void
+ContextMenu::viewAll(bool checked)
+{
+  SoEventManager * eventmanager = this->quarterwidget->getSoEventManager();
+  const SbName viewallevent("sim.coin3d.coin.navigation.ViewAll");
+  for (int c = 0; c < eventmanager->getNumSoScXMLStateMachines(); ++c) {
+    SoScXMLStateMachine * sostatemachine =
+      eventmanager->getSoScXMLStateMachine(c);
+    sostatemachine->queueEvent(viewallevent);
+    sostatemachine->processEventQueue();
+  }
 }
 
 void

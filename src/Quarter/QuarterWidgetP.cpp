@@ -146,7 +146,6 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
     QCursor cursor = statecursormap->value(SbName(stateid), Qt::ArrowCursor);
     thisp->master->setCursor(cursor);
   } else {
-    thisp->master->setCursor(Qt::ArrowCursor);
 //     SoDebugError::postInfo("QuarterWidget::stateChange",
 //                            "exiting state '%s'", stateid);
   }
