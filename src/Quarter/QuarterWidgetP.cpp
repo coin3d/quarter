@@ -140,14 +140,11 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
   QuarterWidgetP * thisp = static_cast<QuarterWidgetP *>(userdata);
   assert(thisp && thisp->master);
   if (enter) {
-//      SoDebugError::postInfo("QuarterWidget::stateChange",
-//                             "entering state '%s'", stateid);
-    // Arrow Cursor is used if no cursor is set for given stateid
-    QCursor cursor = statecursormap->value(SbName(stateid), Qt::ArrowCursor);
-    thisp->master->setCursor(cursor);
-  } else {
-//     SoDebugError::postInfo("QuarterWidget::stateChange",
-//                            "exiting state '%s'", stateid);
+    SbName state(stateid);
+    if (statecursormap->contains(state)) {
+      QCursor cursor = statecursormap->value(state);
+      thisp->master->setCursor(cursor);
+    }
   }
 }
 
