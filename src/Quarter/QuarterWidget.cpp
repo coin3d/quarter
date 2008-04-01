@@ -120,6 +120,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   // set up default cursors for the examiner navigation states
   this->setStateCursor("rotate", Qt::OpenHandCursor);
+  this->setStateCursor("seek", Qt::CrossCursor);
   this->setStateCursor("spin", Qt::ArrowCursor);
   this->setStateCursor("pan", Qt::SizeAllCursor);
   this->setStateCursor("zoom", Qt::SizeVerCursor);
