@@ -146,6 +146,11 @@ QuarterWidget::~QuarterWidget()
   delete PRIVATE(this);
 }
 
+/*!  
+  You can set the cursor you want to use for a given navigation
+  state. See the Coin documentation on navigation for information
+  about available states
+ */
 void 
 QuarterWidget::setStateCursor(const SbName & state, const QCursor & cursor)
 {
@@ -345,7 +350,7 @@ QuarterWidget::actualRedraw(void)
 }
 
 /*!
-
+  
  */
 void
 QuarterWidget::renderCB(void * closure, SoRenderManager *)
@@ -408,6 +413,9 @@ QuarterWidget::getBackgroundColor(void) const
                 SbClamp(int(bg[2] * 255.0), 0, 255));
 }
 
+/*!
+  Returns the context menu used by the widget.
+ */
 QMenu * 
 QuarterWidget::getContextMenu(void) const
 {
