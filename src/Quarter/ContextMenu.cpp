@@ -32,7 +32,6 @@
 
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/eventhandlers/EventManager.h>
-#include <Quarter/eventhandlers/ContextMenuHandler.h>
 
 using namespace SIM::Coin3D::Quarter;
 
