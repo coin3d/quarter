@@ -17,6 +17,8 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA= Quarter.pc
 
 EXTRA_DIST = \
+        README.MACOSX \
+        README.WIN32 \
 	Quarter.pc.in \
 	docs/quarter.doxygen.in \
         docs/doxygen/Coin_logo.png \
