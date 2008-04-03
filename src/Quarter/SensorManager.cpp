@@ -38,7 +38,6 @@ SensorManager::SensorManager(void)
 {
   this->mainthreadid = cc_thread_id();
   this->signalthread = new SignalThread();
-  this->signalthread->start();
 
   QObject::connect(this->signalthread, SIGNAL(triggerSignal()),
                    this, SLOT(sensorQueueChanged()));
