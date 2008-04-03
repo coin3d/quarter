@@ -1,236 +1,252 @@
-Installation Instructions
-*************************
 
-Copyright (C) 1994, 1995, 1996, 1999, 2000, 2001, 2002, 2004, 2005 Free
-Software Foundation, Inc.
+                          Install Instructions
 
-This file is free documentation; the Free Software Foundation gives
-unlimited permission to copy, distribute and modify it.
+                 Copyright 2001-2008  Systems in Motion
 
-Basic Installation
+                         http://www.coin3d.org/
+
+
+Introduction
+============
+
+This document contains instructions for those who have downloaded the
+Quarter source code and want to build the library and install it on
+their system.  It does not contain any information about installing
+binary distributions of Quarter.
+
+
+Cookbook Procedure
 ==================
 
-These are generic installation instructions.
+If you are impatient and just want a standard installation, you can go
+ahead and run through the following cookbook procedure.  If you get into
+trouble following it, please read through the rest of this document
+before contacting The Coin Team for technical support.  Remember to
+substitute "1.0.0" with the version identifier for the Quarter library you
+are building.
 
-   The `configure' shell script attempts to guess correct values for
-various system-dependent variables used during compilation.  It uses
-those values to create a `Makefile' in each directory of the package.
-It may also create one or more `.h' files containing system-dependent
-definitions.  Finally, it creates a shell script `config.status' that
-you can run in the future to recreate the current configuration, and a
-file `config.log' containing compiler output (useful mainly for
-debugging `configure').
+  # 1. Unpack source code and make a build directory somewhere:
 
-   It can also use an optional file (typically called `config.cache'
-and enabled with `--cache-file=config.cache' or simply `-C') that saves
-the results of its tests to speed up reconfiguring.  (Caching is
-disabled by default to prevent problems with accidental use of stale
-cache files.)
+    cd /tmp
+    gzip -cd Quarter-1.0.0.tar.gz | tar xvf -
+    mkdir quarter-build
 
-   If you need to do unusual things to compile the package, please try
-to figure out how `configure' could check whether to do them, and mail
-diffs or instructions to the address given in the `README' so they can
-be considered for the next release.  If you are using the cache, and at
-some point `config.cache' contains results you don't want to keep, you
-may remove or edit it.
+  # 2. Run configure from the build directory:
 
-   The file `configure.ac' (or `configure.in') is used to create
-`configure' by a program called `autoconf'.  You only need
-`configure.ac' if you want to change it or regenerate `configure' using
-a newer version of `autoconf'.
+    cd quarter-build
+    ../Quarter-1.0.0/configure
 
-The simplest way to compile this package is:
+  # 3. Build the Quarter library:
 
-  1. `cd' to the directory containing the package's source code and type
-     `./configure' to configure the package for your system.  If you're
-     using `csh' on an old version of System V, you might need to type
-     `sh ./configure' instead to prevent `csh' from trying to execute
-     `configure' itself.
+    make
 
-     Running `configure' takes awhile.  While running, it prints some
-     messages telling which features it is checking for.
+  # 4. Install the Quarter library:
 
-  2. Type `make' to compile the package.
+    make install
 
-  3. Optionally, type `make check' to run any self-tests that come with
-     the package.
+  # 5. Remove source and object files when you don't need them anymore:
 
-  4. Type `make install' to install the programs and any data files and
-     documentation.
+    cd ..
+    rm -rf quarter-build Quarter-1.0.0
 
-  5. You can remove the program binaries and object files from the
-     source code directory by typing `make clean'.  To also remove the
-     files that `configure' created (so you can compile the package for
-     a different kind of computer), type `make distclean'.  There is
-     also a `make maintainer-clean' target, but that is intended mainly
-     for the package's developers.  If you use it, you may have to get
-     all sorts of other programs in order to regenerate files that came
-     with the distribution.
 
-Compilers and Options
+The Build Environment
 =====================
 
-Some systems require unusual options for compilation or linking that the
-`configure' script does not know about.  Run `./configure --help' for
-details on some of the pertinent environment variables.
+Quarter uses GNU Autoconf, Automake and Libtool for the configuration,
+compilation, and installation procedures.  This means you need a POSIX
+shell environment and a decent "make" implementation.  You also need a
+compiler for C/C++.
 
-   You can give `configure' initial values for configuration parameters
-by setting variables in the command line or in the environment.  Here
-is an example:
+All unixes have Bourne shells that are close enough to the POSIX
+standard to be usable, and in the odd case where the vendor shell does
+not cut it, you can install the GNU Bourne Again Shell (bash) as a
+replacement.  Many unixes have poor make implementations wihtout
+proper support for VPATH and other features that GNU Automake depend
+on.  If you experience problems during the build phase, you might want
+to try using GNU make instead of the vendor make program.  Make sure
+it is first in the PATH and that $MAKE is not set to another make
+implementation.
 
-     ./configure CC=c89 CFLAGS=-O2 LIBS=-lposix
+On Microsoft Windows platforms, you need to install the Cygwin
+environment (www.cygwin.com) or something equivalent to get a POSIX
+shell and the extra utilities needed to get through the build procedure.
+For compilation, the Visual C++ compiler is used.  Using gcc may be
+fully possible but has not been tested yet, and disabling the VC++
+requirement needs special user intervention at configure time (see list
+of configure options below).
 
-   *Note Defining Variables::, for more details.
+The file INSTALL.GNU contains the standard, generic, installation
+instructions for the GNU build environment.
 
-Compiling For Multiple Architectures
-====================================
 
-You can compile the package for more than one kind of computer at the
-same time, by placing the object files for each architecture in their
-own directory.  To do this, you must use a version of `make' that
-supports the `VPATH' variable, such as GNU `make'.  `cd' to the
-directory where you want the object files and executables to go and run
-the `configure' script.  `configure' automatically checks for the
-source code in the directory that `configure' is in and in `..'.
+Configuration Options
+=====================
 
-   If you have to use a `make' that does not support the `VPATH'
-variable, you have to compile the package for one architecture at a
-time in the source code directory.  After you have installed the
-package for one architecture, use `make distclean' before reconfiguring
-for another architecture.
+--help
 
-Installation Names
-==================
+  Specifying this option will cause configure to list all its command
+  line options and exit.
 
-By default, `make install' installs the package's commands under
-`/usr/local/bin', include files under `/usr/local/include', etc.  You
-can specify an installation prefix other than `/usr/local' by giving
-`configure' the option `--prefix=PREFIX'.
+--version
 
-   You can specify separate installation prefixes for
-architecture-specific files and architecture-independent files.  If you
-pass the option `--exec-prefix=PREFIX' to `configure', the package uses
-PREFIX as the prefix for installing programs and libraries.
-Documentation and other data files still use the regular prefix.
+  This option will cause the configure script to display version
+  information about the package and the version of GNU Autoconf that
+  created the configure script.
 
-   In addition, if you use an unusual directory layout you can give
-options like `--bindir=DIR' to specify different values for particular
-kinds of files.  Run `configure --help' for a list of the directories
-you can set and what kinds of files go in them.
+--prefix=<PATH>
 
-   If the package supports it, you can cause programs to be installed
-with an extra prefix or suffix on their names by giving `configure' the
-option `--program-prefix=PREFIX' or `--program-suffix=SUFFIX'.
+  This option decides where the Quarter library is going to be
+  installed.  The default is usually /usr/local but can be set to
+  something else with this option.  Often used alternatives are /usr
+  and /opt/Quarter.
 
-Optional Features
-=================
+--without-framework
 
-Some packages pay attention to `--enable-FEATURE' options to
-`configure', where FEATURE indicates an optional part of the package.
-They may also pay attention to `--with-PACKAGE' options, where PACKAGE
-is something like `gnu-as' or `x' (for the X Window System).  The
-`README' should mention any `--enable-' and `--with-' options that the
-package recognizes.
+  On Mac OS X, the default behaviour is to install Quarter as a
+  framework so you can compile/link with it by using the compiler
+  option "-framework Quarter".  If you want to make a plain
+  installation into $prefix/{lib,include} instead, use this option.
 
-   For packages that use the X Window System, `configure' can usually
-find the X include and library files automatically, but if it doesn't,
-you can use the `configure' options `--x-includes=DIR' and
-`--x-libraries=DIR' to specify their locations.
+--with-framework
 
-Specifying the System Type
-==========================
+  To test the framework layout on non-Macs.
 
-There may be some features `configure' cannot figure out automatically,
-but needs to determine by the type of machine the package will run on.
-Usually, assuming the package is built to be run on the _same_
-architectures, `configure' can figure that out, but if it prints a
-message saying it cannot guess the machine type, give it the
-`--build=TYPE' option.  TYPE can either be a short name for the system
-type, such as `sun4', or a canonical name which has the form:
+--with-framework-prefix=PATH
 
-     CPU-COMPANY-SYSTEM
+  To install the framework into another directory than /Library/Frameworks,
+  use this option.  Note also the DESTDIR make variable.
 
-where SYSTEM can have one of these forms:
+--enable-shared --disable-shared
+--disable-static --enable-static
 
-     OS KERNEL-OS
+  On UNIX platforms, the default configuration is to create a shared
+  library of Quarter. The above options will change this behaviour. It is
+  for most UNIX platforms possible to create both shared and static
+  libraries at the same time.
 
-   See the file `config.sub' for the possible values of each field.  If
-`config.sub' isn't included in this package, then this package doesn't
-need to know the machine type.
+  On Windows platforms, the default configuration is to create a dynamic
+  loadable library (DLL) of Quarter.  It is *not* possible to create both
+  a DLL and a static library at the same time because the object files
+  are compiled differently in those two modes.  Enabling static will
+  automatically disable shared, but the -shared options has precedence
+  over the -static options.  Warning:  Do not first build one library
+  and then build the other in the same build directory - the object
+  files must the removed to avoid trouble.
 
-   If you are _building_ compiler tools for cross-compiling, you should
-use the option `--target=TYPE' to select the type of system they will
-produce code for.
+--enable-html
 
-   If you want to _use_ a cross compiler, that generates code for a
-platform different from the build platform, you should specify the
-"host" platform (i.e., that on which the generated programs will
-eventually be run) with `--host=TYPE'.
+  This option is used to enable the generation of HTML documentation for
+  the C++ classes Quarter consist of.
+  
+  There is no --htmldir option available for GNU autoconf scripts, but
+  you can specify the "htmldir" variable instead, like this:
 
-Sharing Defaults
+    configure --enable-html htmldir=doc/html
+
+  This will make HTML documentation be installed in ${prefix}/doc/html.
+  Absolute paths are also possible.
+
+  You need the "doxygen" utility to generate the HTML documentation.
+
+--disable-debug
+
+  This options turns off some run-time checking, warnings and asserts.
+  The default is to have them enabled.
+
+  Note that you also need to use the "--disable-symbols" option
+  described below to make a library which is as "slim" as possible, as
+  you would typically do for a release version of your software.
+
+--disable-symbols
+
+  This option turns off debug symbols.  Debug symbols are needed to
+  get call stacks if the library crashes, and to make it possible to
+  trace the code inside a debugger with enough information available
+  within that environment to match up with the sourcecode.  The
+  default is to have debug symbols enabled.
+
+--with-msvcrt=<crt>
+
+  This option sets which C library to link with for MS Visual C++ builds.
+  The options are (with aliases on the right):
+
+  * singlethread-static        [ /ml  | ml  | libc    ]
+    singlethread-static-debug  [ /mld | mld | libcd   ]
+    multithread-static         [ /mt  | mt  | libcmt  ]
+    multithread-static-debug   [ /mtd | mtd | libcmtd ]
+    multithread-dynamic        [ /md  | md  | msvcrt  ]
+    multithread-dynamic-debug  [ /mdd | mdd | msvcrtd ]
+
+  [*] default choice
+
+--with-doxygen=<PATH>
+
+  With this option, you can specify where doxygen is installed, in case
+  the configure script can not find it by doing a path search.
+
+--with-suffix=<string>
+
+  This option appends a suffix to the filename of the Quarter library.  It
+  can be used to e.g. append "_g" to a debug version of Quarter.
+
+CPPFLAGS="<string>"
+CFLAGS="<string>"
+CXXFLAGS="<string>"
+LDFLAGS="<string>"
+LIBS="<string>"
+
+  If you need to add command line flags to respectively the source code
+  preprocessor, the C compiler, the C++ compiler, and the linker, invoke
+  configure with an argument like one of the above.
+
+    [quarter]/configure CFLAGS="-ansi -pedantic" CXXFLAGS="-ansi -pedantic" [...]
+
+  This would cause compilation of both C and C++ files to be done with
+  the "-ansi" and "-pedantic" options.
+
+  You can also use this technique to add MSVC++ command line compiler
+  options, like e.g. CXXFLAGS="/WX" for treating warnings as errors.
+
+  You can also override other things like which compiler is used by
+  setting $CC, $CXX, $LD, $AR and $RANLIB amongst other variables.
+
+
+Build Options
+=============
+
+Although you take care of setting most configurable things when you run
+the configure script, there are a couple of things you can specify at
+the build phase.
+
+Parallel Builds 
+
+  If your build system has much available memory and perhaps multiple
+  processors, you can speed up the compilation by getting "make" to
+  compile multiple files at the same time.  This is (for GNU make)
+  specified through the "-j" option.  If you want four concurrent jobs
+  managed by make at all times, try starting the build like this:
+
+    make -j 4
+
+
+When Things Fail
 ================
 
-If you want to set default values for `configure' scripts to share, you
-can create a site shell script called `config.site' that gives default
-values for variables like `CC', `cache_file', and `prefix'.
-`configure' looks for `PREFIX/share/config.site' if it exists, then
-`PREFIX/etc/config.site' if it exists.  Or, you can set the
-`CONFIG_SITE' environment variable to the location of the site script.
-A warning: not all `configure' scripts look for a site script.
+If you experience configure/build/install problems beyond what can be
+resolved by following the instructions in this file and the relevant
+README files and the FAQ, you can ask for help on the mailing list
+<coin-discuss@coin3d.org> (subscribtion is needed for posting), or you
+can contact <coin-support@coin3d.org> for technical support.  Before
+asking, check that the subject hasn't been discussed and resolved
+already by looking through the coin-discuss web archive at
+http://auto.coin3d.org/coin-discuss/index.html
 
-Defining Variables
-==================
-
-Variables not defined in a site shell script can be set in the
-environment passed to `configure'.  However, some packages may run
-configure again during the build, and the customized values of these
-variables may be lost.  In order to avoid this problem, you should set
-them in the `configure' command line, using `VAR=value'.  For example:
-
-     ./configure CC=/usr/local2/bin/gcc
-
-causes the specified `gcc' to be used as the C compiler (unless it is
-overridden in the site shell script).  Here is a another example:
-
-     /bin/bash ./configure CONFIG_SHELL=/bin/bash
-
-Here the `CONFIG_SHELL=/bin/bash' operand causes subsequent
-configuration-related scripts to be executed by `/bin/bash'.
-
-`configure' Invocation
-======================
-
-`configure' recognizes the following options to control how it operates.
-
-`--help'
-`-h'
-     Print a summary of the options to `configure', and exit.
-
-`--version'
-`-V'
-     Print the version of Autoconf used to generate the `configure'
-     script, and exit.
-
-`--cache-file=FILE'
-     Enable the cache: use and save the results of the tests in FILE,
-     traditionally `config.cache'.  FILE defaults to `/dev/null' to
-     disable caching.
-
-`--config-cache'
-`-C'
-     Alias for `--cache-file=config.cache'.
-
-`--quiet'
-`--silent'
-`-q'
-     Do not print messages saying which checks are being made.  To
-     suppress all normal output, redirect it to `/dev/null' (any error
-     messages will still be shown).
-
-`--srcdir=DIR'
-     Look for the package's source code in directory DIR.  Usually
-     `configure' can determine that directory automatically.
-
-`configure' also accepts some other, not widely useful, options.  Run
-`configure --help' for more details.
-
+If you decide to send mail about the problem, you need to include all
+the information that is relevant to the problem with your description.
+This includes the file 'config.log' and the terminal output from around
+where things fail (the compiler output for the compilation that fails or
+the last lines of output from the configure script).  A description of
+the build environment you use may also be helpful, e.g. the compiler
+suite and versions of libraries and any system customizations that may
+be relevant to the problem.

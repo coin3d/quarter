@@ -1,0 +1,65 @@
+======================================================================
+==                  BUILDING QUARTER ON MAC OS X                    ==
+======================================================================
+
+Building Quarter should be straightforward: ./configure && make &&
+sudo make install. See the file INSTALL for details. If any of these
+stages fails, it's a bug in Quarter. Please let us know about this,
+and we will be happy to fix it.
+
+Please make sure that you have the latest version of Apple's developer
+tools installed before building Quarter.
+
+By default, Quarter will be set up as Mac OS X framework. Frameworks
+are a concept central to Mac OS X, packing a dynamic shared library
+with the necessary resources for this library, like header files,
+images, and documentation. You can link against a framework by using
+the "-framework" compiler option. 
+
+What this means, basically, is that instead of "cc
+-I/path/to/Coin/include -L/path/to/Coin/lib -lCoin -lGL -lGLU -o foo
+foo.cpp", the commandline for building applications against Coin would
+be something like this: "cc -framework Inventor -framework OpenGL -o
+foo foo.cpp"
+
+If you want to disable the creation of the framework and install
+Quarter as standalone shared library, you can use the configure option
+
+--without-framework
+
+which will install libQuarter.dylib into $prefix/lib and the headers
+into $prefix/include (/usr/local/lib and /usr/local/include by
+default).
+
+The Qt Designer Plugin
+======================
+
+Quarter comes with a plugin for Qt Designer. On Mac OS X, this plugin
+is installed by default in /usr/local/lib/designer. You'll have to set
+the environment variable QT_PLUGIN_PATH to point to this directory:
+
+export QT_PLUGIN_PATH=/usr/local/lib
+
+The plugin has to reside in a directory named 'plugins' and the envvar
+has to point to the directory above it, or Qt will not be able to find
+it.
+
+If you use the --prefix option with configure, the plugin will be
+installed in <prefix>/lib/designer.
+
+You can specify another install directory for the plugin by specifying
+--with-qt-designer-plugin-path=<path>.
+
+To verify that Quarter is installed properly, go to src/examples/ and
+run the examiner executable. If the examiner example fails with the
+assert 'could not find child QuarterWidget in ui file', double-check
+that you have set the correct QT_PLUGIN_PATH
+
+The Qt libtool problem
+======================
+
+If you have compiled and installed Qt yourself as a standalone shared
+library (not as a framework), the libtool archive files produced are
+usually buggy and can cause weird errors when linking the
+examples. Just go to the directory where you installed Qt and remove
+any *.la files there, you will not miss them.

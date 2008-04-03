@@ -1,0 +1,27 @@
+======================================================================
+==                  BUILDING QUARTER ON WINDOWS                     ==
+======================================================================
+
+Quarter can be compiled on Windows, with the use of Cygwin. See Coin's
+README.WIN32 for detailed information on building Coin with cygwin,
+that information goes for Quarter as well as Coin.
+
+There are a couple of things you need to be aware of. The binary
+distributions of Qt is usually built with the multithread-dynamic C
+library. In order for Coin, Qt and Quarter to work together, Coin and
+Quarter should be built with the same C-runtime as Qt.
+
+To specify which C library Coin should be linked against, you should
+use the --with-msvcrt=<crt> option. To specify multithread-dynamic,
+use --with-msvcrt=md. 
+
+If you want to build Quarter in release mode on windows, specify
+--disable-symbols and --disable-debug when running configure.
+
+If you want to link against Qt debug DLLs, specify --with-qt-debug.
+
+The Qt Designer Plugin
+======================
+
+Quarter comes with a plugin for Qt Designer. On Windows, this plugin
+is installed in $QTDIR/plugins/designer. 
