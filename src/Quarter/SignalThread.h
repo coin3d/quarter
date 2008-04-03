@@ -23,9 +23,9 @@
  *
 \**************************************************************************/
 
-#include <qthread.h>
-#include <qwaitcondition.h>
-#include <qmutex.h>
+#include <QtCore/QThread>
+#include <QtCore/QWaitCondition>
+#include <QtCore/QMutex>
 
 class SoQtP;
 
