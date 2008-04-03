@@ -388,15 +388,20 @@ QuarterWidget::event(QEvent * event)
 /*!
   Set backgroundcolor to a given QColor
 
-  Remember QColors are given in integers between 0 and 255, as opposed
-  to SbColor which is in [0,1]
+  Remember that QColors are given in integers between 0 and 255, as
+  opposed to SbColor4f which is in [0 ,1]. The default alpha value for
+  a QColor is 255, but you'll probably want to set it to zero before
+  using it as an OpenGL clear color.
  */
 void 
 QuarterWidget::setBackgroundColor(const QColor & color)
 {
-  PRIVATE(this)->sorendermanager->setBackgroundColor(SbColor(SbClamp(color.red() / 255.0, 0.0, 1.0),
-                                                             SbClamp(color.green() / 255.0, 0.0, 1.0),
-                                                             SbClamp(color.blue() / 255.0, 0.0, 1.0)));
+  SbColor4f bgcolor(SbClamp(color.red()   / 255.0, 0.0, 1.0),
+                    SbClamp(color.green() / 255.0, 0.0, 1.0),
+                    SbClamp(color.blue()  / 255.0, 0.0, 1.0),
+                    SbClamp(color.alpha() / 255.0, 0.0, 1.0));
+
+  PRIVATE(this)->sorendermanager->setBackgroundColor(bgcolor);
 }
 
 /*!  
@@ -406,11 +411,12 @@ QuarterWidget::setBackgroundColor(const QColor & color)
 QColor
 QuarterWidget::getBackgroundColor(void) const
 {
-  SbColor bg = PRIVATE(this)->sorendermanager->getBackgroundColor();
+  SbColor4f bg = PRIVATE(this)->sorendermanager->getBackgroundColor();
 
   return QColor(SbClamp(int(bg[0] * 255.0), 0, 255),
                 SbClamp(int(bg[1] * 255.0), 0, 255),
-                SbClamp(int(bg[2] * 255.0), 0, 255));
+                SbClamp(int(bg[2] * 255.0), 0, 255),
+                SbClamp(int(bg[3] * 255.0), 0, 255));
 }
 
 /*!
