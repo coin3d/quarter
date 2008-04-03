@@ -57,8 +57,6 @@ SensorManager::SensorManager(void)
   SoDB::getSensorManager()->setChangedCallback(SensorManager::sensorQueueChangedCB, this);
   SoDB::setRealTimeInterval(1.0 / 25.0);
   SoSceneManager::enableRealTimeUpdate(FALSE);
-
-  this->mainthreadid = cc_thread_id();
 }
 
 SensorManager::~SensorManager()
