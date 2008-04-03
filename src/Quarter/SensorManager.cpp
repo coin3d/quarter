@@ -28,12 +28,21 @@
 #include <Inventor/SbTime.h>
 #include <Inventor/SoSceneManager.h>
 #include <Inventor/nodekits/SoNodeKit.h>
+#include <Inventor/C/threads/thread.h>
+#include "SignalThread.h"
 
 using namespace SIM::Coin3D::Quarter;
 
 SensorManager::SensorManager(void)
   : inherited()
 {
+  this->mainthreadid = cc_thread_id();
+  this->signalthread = new SignalThread();
+  this->signalthread->start();
+
+  QObject::connect(this->signalthread, SIGNAL(triggerSignal()),
+                   this, SLOT(sensorQueueChanged()));
+
   this->idletimer = new QTimer;
   this->delaytimer = new QTimer;
   this->timerqueuetimer = new QTimer;
@@ -46,25 +55,47 @@ SensorManager::SensorManager(void)
   this->connect(this->delaytimer, SIGNAL(timeout(void)), this, SLOT(delayTimeout()));
   this->connect(this->timerqueuetimer, SIGNAL(timeout(void)), this, SLOT(timerQueueTimeout()));
 
-  SoDB::getSensorManager()->setChangedCallback(SensorManager::sensorQueueChanged, this);
+  SoDB::getSensorManager()->setChangedCallback(SensorManager::sensorQueueChangedCB, this);
   SoDB::setRealTimeInterval(1.0 / 25.0);
   SoSceneManager::enableRealTimeUpdate(FALSE);
+
+  this->mainthreadid = cc_thread_id();
 }
 
 SensorManager::~SensorManager()
 {
+  if (this->signalthread->isRunning()) {
+    this->signalthread->stopThread();
+    this->signalthread->wait();
+  }
+  delete this->signalthread;
   delete this->idletimer;
   delete this->delaytimer;
   delete this->timerqueuetimer;
 }
 
 void
-SensorManager::sensorQueueChanged(void * closure)
+SensorManager::sensorQueueChangedCB(void * closure)
 {
   SensorManager * thisp = (SensorManager * ) closure;
+
+  // if we get a callback from another thread, route the callback
+  // through SignalThread so that we receive the callback in the
+  // QApplication thread (needed since QTimer isn't thread safe)
+  if (cc_thread_id() != thisp->mainthreadid) {
+    if (!thisp->signalthread->isRunning()) thisp->signalthread->start();
+    thisp->signalthread->trigger();
+  }
+  else {
+    thisp->sensorQueueChanged();
+  }
+}
+
+void
+SensorManager::sensorQueueChanged(void)
+{
   SoSensorManager * sensormanager = SoDB::getSensorManager();
   assert(sensormanager);
-  assert(thisp);
 
   SbTime interval;
   if (sensormanager->isTimerSensorPending(interval)) {
@@ -72,30 +103,30 @@ SensorManager::sensorQueueChanged(void * closure)
     if (interval.getValue() <= 0.0) {
       interval.setValue(1.0/5000.0);
     }
-    if (!thisp->timerqueuetimer->isActive()) {
-      thisp->timerqueuetimer->start(interval.getMsecValue());
+    if (!this->timerqueuetimer->isActive()) {
+      this->timerqueuetimer->start(interval.getMsecValue());
     } else {
-      thisp->timerqueuetimer->setInterval(interval.getMsecValue());
+      this->timerqueuetimer->setInterval(interval.getMsecValue());
     }
-  } else if (thisp->timerqueuetimer->isActive()) {
-    thisp->timerqueuetimer->stop();
+  } else if (this->timerqueuetimer->isActive()) {
+    this->timerqueuetimer->stop();
   }
 
   if (sensormanager->isDelaySensorPending()) {
-    thisp->idletimer->start(0);
-
-    if (!thisp->delaytimer->isActive()) {
+    this->idletimer->start(0);
+    
+    if (!this->delaytimer->isActive()) {
       SbTime time = SoDB::getDelaySensorTimeout();
       if (time != SbTime::zero()) {
-        thisp->delaytimer->start(interval.getMsecValue());
+        this->delaytimer->start(interval.getMsecValue());
       }
     }
   } else {
-    if (thisp->idletimer->isActive()) {
-      thisp->idletimer->stop();
+    if (this->idletimer->isActive()) {
+      this->idletimer->stop();
     }
-    if (thisp->delaytimer->isActive()) {
-      thisp->delaytimer->stop();
+    if (this->delaytimer->isActive()) {
+      this->delaytimer->stop();
     }
   }
 }
@@ -105,14 +136,14 @@ SensorManager::idleTimeout(void)
 {
   SoDB::getSensorManager()->processTimerQueue();
   SoDB::getSensorManager()->processDelayQueue(TRUE);
-  SensorManager::sensorQueueChanged(this);
+  this->sensorQueueChanged();
 }
 
 void
 SensorManager::timerQueueTimeout(void)
 {
   SoDB::getSensorManager()->processTimerQueue();
-  SensorManager::sensorQueueChanged(this);
+  this->sensorQueueChanged();
 }
 
 void
@@ -120,5 +151,5 @@ SensorManager::delayTimeout(void)
 {
   SoDB::getSensorManager()->processTimerQueue();
   SoDB::getSensorManager()->processDelayQueue(FALSE);
-  SensorManager::sensorQueueChanged(this);
+  this->sensorQueueChanged();
 }

@@ -1,5 +1,5 @@
-#ifndef QUARTER_SENSORMANAGER_H
-#define QUARTER_SENSORMANAGER_H
+#ifndef QUARTER_SIGNALTHREAD_H
+#define QUARTER_SIGNALTHREAD_H
 
 /**************************************************************************\
  *
@@ -19,40 +19,39 @@
  *
  *  See <URL:http://www.coin3d.org/> for more information.
  *
- *  Systems in Motion AS, Bygdøy allé 5, N-0257 Oslo, NORWAY. (www.sim.no)
+ *  Systems in Motion AS, BygdÃ¸y allÃ© 5, N-0257 Oslo, NORWAY. (www.sim.no)
  *
 \**************************************************************************/
 
-#include <QtCore/QObject>
+#include <qthread.h>
+#include <qwaitcondition.h>
+#include <qmutex.h>
 
-class QTimer;
+class SoQtP;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class SignalThread;
-
-class SensorManager : public QObject {
+class SignalThread : public QThread {
   Q_OBJECT
-  typedef QObject inherited;
 public:
-  SensorManager(void);
-  ~SensorManager();
+  SignalThread(void);
+  virtual ~SignalThread();
 
-public slots:
-  void idleTimeout(void);
-  void delayTimeout(void);
-  void timerQueueTimeout(void);
-  void sensorQueueChanged(void);
+  virtual void run(void);
+  void trigger(void);
+  void stopThread(void);
+
+signals:
+
+  void triggerSignal(void);
 
 private:
-  static void sensorQueueChangedCB(void * closure);
-  QTimer * idletimer;
-  QTimer * delaytimer;
-  QTimer * timerqueuetimer;
-  unsigned long mainthreadid;
-  SignalThread * signalthread;
+  QWaitCondition waitcond;
+  QMutex mutex;
+  bool isstopped;
 };
 
 }}} // namespace
 
-#endif // QUARTER_SENSORMANAGER_H
+#endif // QUARTER_SIGNALTHREAD_H
+

@@ -1,6 +1,3 @@
-#ifndef QUARTER_SENSORMANAGER_H
-#define QUARTER_SENSORMANAGER_H
-
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
@@ -19,40 +16,52 @@
  *
  *  See <URL:http://www.coin3d.org/> for more information.
  *
- *  Systems in Motion AS, Bygdøy allé 5, N-0257 Oslo, NORWAY. (www.sim.no)
+ *  Systems in Motion AS, BygdÃ¸y allÃ© 5, N-0257 Oslo, NORWAY. (www.sim.no)
  *
 \**************************************************************************/
 
-#include <QtCore/QObject>
+#include "SignalThread.h"
 
-class QTimer;
+using namespace SIM::Coin3D::Quarter;
 
-namespace SIM { namespace Coin3D { namespace Quarter {
+SignalThread::SignalThread(void)
+  : isstopped(false)
+{  
+}
 
-class SignalThread;
+SignalThread::~SignalThread()
+{
+}
 
-class SensorManager : public QObject {
-  Q_OBJECT
-  typedef QObject inherited;
-public:
-  SensorManager(void);
-  ~SensorManager();
+void
+SignalThread::trigger(void)
+{
+  // lock first to make sure the QThread is actually waiting for a signal
+  this->mutex.lock();
+  this->waitcond.wakeOne();
+  this->mutex.unlock();
+}
 
-public slots:
-  void idleTimeout(void);
-  void delayTimeout(void);
-  void timerQueueTimeout(void);
-  void sensorQueueChanged(void);
+void
+SignalThread::stopThread(void)
+{
+  this->mutex.lock();
+  this->isstopped = true;
+  this->waitcond.wakeOne();
+  this->mutex.unlock();
+}
 
-private:
-  static void sensorQueueChangedCB(void * closure);
-  QTimer * idletimer;
-  QTimer * delaytimer;
-  QTimer * timerqueuetimer;
-  unsigned long mainthreadid;
-  SignalThread * signalthread;
-};
 
-}}} // namespace
-
-#endif // QUARTER_SENSORMANAGER_H
+void 
+SignalThread::run(void)
+{
+  this->mutex.lock();
+  while (!this->isstopped) {
+    // just wait, and trigger every time we receive a signal
+    this->waitcond.wait(&this->mutex);
+    if (!this->isstopped) {
+      emit triggerSignal();
+    }
+  }
+  this->mutex.unlock();
+}
