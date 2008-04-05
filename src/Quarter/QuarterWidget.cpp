@@ -303,9 +303,10 @@ QuarterWidget::viewAll(void)
   for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
     SoScXMLStateMachine * sostatemachine =
       PRIVATE(this)->soeventmanager->getSoScXMLStateMachine(c);
-    assert(sostatemachine->isActive());
-    sostatemachine->queueEvent(viewallevent);
-    sostatemachine->processEventQueue();
+    if (sostatemachine->isActive()) {
+      sostatemachine->queueEvent(viewallevent);
+      sostatemachine->processEventQueue();
+    }
   }
 }
 
