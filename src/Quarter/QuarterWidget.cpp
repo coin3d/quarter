@@ -103,7 +103,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   PRIVATE(this)->sorendermanager->setAutoClipping(SoRenderManager::VARIABLE_NEAR_PLANE);
   PRIVATE(this)->sorendermanager->setRenderCallback(QuarterWidget::renderCB, this);
-  PRIVATE(this)->sorendermanager->setBackgroundColor(SbColor(0.0f, 0.0f, 0.0f));
+  PRIVATE(this)->sorendermanager->setBackgroundColor(SbColor4f(0.0f, 0.0f, 0.0f, 0.0f));
   PRIVATE(this)->sorendermanager->activate();
   PRIVATE(this)->sorendermanager->addPreRenderCallback(QuarterWidgetP::prerendercb, PRIVATE(this));
   PRIVATE(this)->sorendermanager->addPostRenderCallback(QuarterWidgetP::postrendercb, PRIVATE(this));
