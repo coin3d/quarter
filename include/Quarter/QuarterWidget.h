@@ -46,6 +46,7 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   typedef QGLWidget inherited;
   Q_OBJECT
   Q_PROPERTY(QColor backgroundColor READ getBackgroundColor WRITE setBackgroundColor)
+  Q_PROPERTY(bool contextMenuEnabled READ contextMenuEnabled WRITE enableContextMenu)
 
 public:
   QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
@@ -61,6 +62,8 @@ public:
   void setBackgroundColor(const QColor & color);
   QColor getBackgroundColor(void) const;
   QMenu * getContextMenu(void) const;
+  void enableContextMenu(bool yes);
+  bool contextMenuEnabled(void) const;
 
   virtual void setSceneGraph(SoNode * root);
   virtual SoNode * getSceneGraph(void) const;

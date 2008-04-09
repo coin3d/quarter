@@ -82,6 +82,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   PRIVATE(this)->scene = NULL;
   PRIVATE(this)->contextmenu = NULL;
+  PRIVATE(this)->contextmenuenabled = true;
 
   PRIVATE(this)->sorendermanager = new SoRenderManager;
   PRIVATE(this)->soeventmanager = new SoEventManager;
@@ -430,6 +431,18 @@ QuarterWidget::getContextMenu(void) const
     PRIVATE(this)->contextmenu = new ContextMenu(this);
   }
   return PRIVATE(this)->contextmenu->getMenu();
+}
+
+bool
+QuarterWidget::contextMenuEnabled(void) const
+{
+  return PRIVATE(this)->contextmenuenabled;
+}
+
+void
+QuarterWidget::enableContextMenu(bool yes)
+{
+  PRIVATE(this)->contextmenuenabled = yes;
 }
 
 #undef PRIVATE

@@ -145,7 +145,7 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
   assert(thisp && thisp->master);
   if (enter) {
     SbName state(stateid);
-    if (state == SbName("contextmenurequest")) {
+    if (state == SbName("contextmenurequest") && thisp->contextmenuenabled) {
       if (!thisp->contextmenu) {
         thisp->contextmenu = new ContextMenu(thisp->master);
       }

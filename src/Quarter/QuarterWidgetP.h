@@ -63,6 +63,7 @@ public:
   SoDirectionalLight * headlight;
   QuarterWidgetP_cachecontext * cachecontext;
   ContextMenu * contextmenu;
+  bool contextmenuenabled;
 
   static void prerendercb(void * userdata, SoRenderManager * manager);
   static void postrendercb(void * userdata, SoRenderManager * manager);
