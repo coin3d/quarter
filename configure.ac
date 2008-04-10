@@ -152,10 +152,17 @@ AC_ARG_WITH([framework],
   * ) sim_ac_framework=false ;;
   esac])
 
+
 # don't allow name to be overrided - just toggled on/off
 sim_ac_framework_name="MAC_FRAMEWORK_NAME_DEFAULT"
 sim_ac_framework_prefix="MAC_FRAMEWORK_PREFIX_DEFAULT"
 sim_ac_framework_version="MAC_FRAMEWORK_VERSION_DEFAULT"
+
+AC_ARG_WITH([framework-prefix],
+  [  --with-framework-prefix=<path>  (default: "MAC_FRAMEWORK_PREFIX_DEFAULT")],
+  [sim_ac_framework_prefix="$withval"],
+  [sim_ac_framework_prefix="MAC_FRAMEWORK_PREFIX_DEFAULT"])
+
 
 # **************************************************************************
 # decide if we want to use pkg-config
@@ -442,8 +449,9 @@ if $sim_ac_framework && $sim_ac_coin_avail; then
     sim_ac_framework=false
   else
     sim_ac_have_inventor_framework=true
-    # Inventor.framework and Quarter.framework must be in the same location
-    sim_ac_framework_prefix=`dirname "${sim_ac_coin_frameworkdir}"`
+    if test x"$sim_ac_framework_prefix" = x""; then
+      sim_ac_framework_prefix=`dirname "${sim_ac_coin_frameworkdir}"`
+    fi
   fi
   SIM_AC_CONFIGURATION_SETTING([Framework Installation Prefix], [$sim_ac_framework_prefix])
 else
