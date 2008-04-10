@@ -141,11 +141,12 @@ QuarterWidgetP::postrendercb(void * userdata, SoRenderManager * manager)
 void
 QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine, const char * stateid, SbBool enter, SbBool)
 {
+  static const SbName contextmenurequest("contextmenurequest");
   QuarterWidgetP * thisp = static_cast<QuarterWidgetP *>(userdata);
   assert(thisp && thisp->master);
   if (enter) {
     SbName state(stateid);
-    if (state == SbName("contextmenurequest") && thisp->contextmenuenabled) {
+    if (thisp->contextmenuenabled && state == contextmenurequest) {
       if (!thisp->contextmenu) {
         thisp->contextmenu = new ContextMenu(thisp->master);
       }
