@@ -521,10 +521,9 @@ AC_SUBST([UNIX2WINPATH])
 AC_ARG_WITH(
   [qt-designer-plugin-path],
   [AC_HELP_STRING([--with-qt-designer-plugin-path=<path>],
-                  [specify qt designer plugin path])],
+                  [specify qt designer plugin path (must end with /designer)])],
   [QT_DESIGNER_PLUGIN_PATH=$withval]
-  SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path (overriden)], [$QT_DESIGNER_PLUGIN_PATH])
-  SIM_AC_CONFIGURATION_SETTING([don't forget to set QT_PLUGIN_PATH to], [$QT_DESIGNER_PLUGIN_PATH]),
+  SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path (overriden)], [$QT_DESIGNER_PLUGIN_PATH]),
   [QT_DESIGNER_PLUGIN_PATH=])
 
 
@@ -541,6 +540,7 @@ if test "x$QT_DESIGNER_PLUGIN_PATH" = x && $sim_ac_build_library; then
   if test "x$QT_DESIGNER_PLUGIN_PATH" = x; then 
     QT_DESIGNER_PLUGIN_PATH=`eval echo "${libdir}"`/designer
     SIM_AC_CONFIGURATION_WARNING([Qt Designer plugin directory was not resolved. Installing plugin in $QT_DESIGNER_PLUGIN_PATH])
+    SIM_AC_CONFIGURATION_WARNING([don't forget to set QT_PLUGIN_PATH to: `eval echo "${libdir}"`])
   fi
   SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path], [$QT_DESIGNER_PLUGIN_PATH])
 fi
