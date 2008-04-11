@@ -409,6 +409,8 @@ else
   sim_ac_have_qt_framework=false
 fi
 
+SIM_AC_CONFIGURATION_SETTING([Quarter version], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA])
+
 AM_CONDITIONAL([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
 AC_SUBST([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
 
@@ -503,7 +505,6 @@ fi
 
 # **************************************************************************
 
-SIM_AC_CONFIGURATION_SETTING([Quarter version], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA])
 SIM_AC_CONFIGURATION_SETTING([Quarter installation prefix], [$prefix])
 
 
@@ -522,7 +523,8 @@ AC_ARG_WITH(
   [AC_HELP_STRING([--with-qt-designer-plugin-path=<path>],
                   [specify qt designer plugin path])],
   [QT_DESIGNER_PLUGIN_PATH=$withval]
-  SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path (overriden)], [$QT_DESIGNER_PLUGIN_PATH]),
+  SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path (overriden)], [$QT_DESIGNER_PLUGIN_PATH])
+  SIM_AC_CONFIGURATION_SETTING([don't forget to set QT_PLUGIN_PATH to], [$QT_DESIGNER_PLUGIN_PATH]),
   [QT_DESIGNER_PLUGIN_PATH=])
 
 
@@ -533,17 +535,17 @@ if test "x$QT_DESIGNER_PLUGIN_PATH" = x && $sim_ac_build_library; then
   if $BUILD_WITH_MSVC; then
     QT_DESIGNER_PLUGIN_PATH=`qmake -query "QT_INSTALL_PLUGINS" | cygpath -u -f -`/designer
   else
+    QT_DESIGNER_PLUGIN_PATH=`qmake -query "QT_INSTALL_PLUGINS"`/designer
+  fi
+  # if we could not get the default location from qmake, use libdir
+  if test "x$QT_DESIGNER_PLUGIN_PATH" = x; then 
     QT_DESIGNER_PLUGIN_PATH=`eval echo "${libdir}"`/designer
+    SIM_AC_CONFIGURATION_WARNING([Qt Designer plugin directory was not resolved. Installing plugin in $QT_DESIGNER_PLUGIN_PATH])
   fi
-  
   SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path], [$QT_DESIGNER_PLUGIN_PATH])
-
-  if ! $BUILD_WITH_MSVC; then
-    SIM_AC_CONFIGURATION_SETTING([don't forget to set QT_PLUGIN_PATH to], [`eval echo "${libdir}"`])
-  fi
-
-  AC_SUBST([QT_DESIGNER_PLUGIN_PATH])
 fi
+  
+AC_SUBST([QT_DESIGNER_PLUGIN_PATH])
 
 QUARTER_RELEASE=
 

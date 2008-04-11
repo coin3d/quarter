@@ -23694,6 +23694,14 @@ else
 fi
 
 
+if test x"${sim_ac_configuration_settings+set}" = x"set"; then
+  sim_ac_configuration_settings="$sim_ac_configuration_settings|Quarter version:0.1.0a"
+else
+  sim_ac_configuration_settings="Quarter version:0.1.0a"
+fi
+
+
+
 
 if $sim_ac_have_qt_framework; then
   MAC_QT_FRAMEWORK_TRUE=
@@ -23812,13 +23820,6 @@ fi
 
 
 if test x"${sim_ac_configuration_settings+set}" = x"set"; then
-  sim_ac_configuration_settings="$sim_ac_configuration_settings|Quarter version:0.1.0a"
-else
-  sim_ac_configuration_settings="Quarter version:0.1.0a"
-fi
-
-
-if test x"${sim_ac_configuration_settings+set}" = x"set"; then
   sim_ac_configuration_settings="$sim_ac_configuration_settings|Quarter installation prefix:$prefix"
 else
   sim_ac_configuration_settings="Quarter installation prefix:$prefix"
@@ -23887,6 +23888,13 @@ else
   sim_ac_configuration_settings="Qt Designer plugin path (overriden):$QT_DESIGNER_PLUGIN_PATH"
 fi
 
+
+if test x"${sim_ac_configuration_settings+set}" = x"set"; then
+  sim_ac_configuration_settings="$sim_ac_configuration_settings|don't forget to set QT_PLUGIN_PATH to:$QT_DESIGNER_PLUGIN_PATH"
+else
+  sim_ac_configuration_settings="don't forget to set QT_PLUGIN_PATH to:$QT_DESIGNER_PLUGIN_PATH"
+fi
+
 else
   QT_DESIGNER_PLUGIN_PATH=
 fi;
@@ -23899,9 +23907,19 @@ if test "x$QT_DESIGNER_PLUGIN_PATH" = x && $sim_ac_build_library; then
   if $BUILD_WITH_MSVC; then
     QT_DESIGNER_PLUGIN_PATH=`qmake -query "QT_INSTALL_PLUGINS" | cygpath -u -f -`/designer
   else
-    QT_DESIGNER_PLUGIN_PATH=`eval echo "${libdir}"`/designer
+    QT_DESIGNER_PLUGIN_PATH=`qmake -query "QT_INSTALL_PLUGINS"`/designer
   fi
+  # if we could not get the default location from qmake, use libdir
+  if test "x$QT_DESIGNER_PLUGIN_PATH" = x; then
+    QT_DESIGNER_PLUGIN_PATH=`eval echo "${libdir}"`/designer
 
+if test x"${sim_ac_configuration_warnings+set}" = x"set"; then
+  sim_ac_configuration_warnings="$sim_ac_configuration_warnings|Qt Designer plugin directory was not resolved. Installing plugin in $QT_DESIGNER_PLUGIN_PATH"
+else
+  sim_ac_configuration_warnings="Qt Designer plugin directory was not resolved. Installing plugin in $QT_DESIGNER_PLUGIN_PATH"
+fi
+
+  fi
 
 if test x"${sim_ac_configuration_settings+set}" = x"set"; then
   sim_ac_configuration_settings="$sim_ac_configuration_settings|Qt Designer plugin path:$QT_DESIGNER_PLUGIN_PATH"
@@ -23909,19 +23927,9 @@ else
   sim_ac_configuration_settings="Qt Designer plugin path:$QT_DESIGNER_PLUGIN_PATH"
 fi
 
-
-  if ! $BUILD_WITH_MSVC; then
-
-if test x"${sim_ac_configuration_settings+set}" = x"set"; then
-  sim_ac_configuration_settings="$sim_ac_configuration_settings|don't forget to set QT_PLUGIN_PATH to:`eval echo "${libdir}"`"
-else
-  sim_ac_configuration_settings="don't forget to set QT_PLUGIN_PATH to:`eval echo "${libdir}"`"
 fi
 
-  fi
 
-
-fi
 
 QUARTER_RELEASE=
 
