@@ -365,6 +365,7 @@ QuarterWidget::renderCB(void * closure, SoRenderManager *)
   if (thisp->doubleBuffer()) {
     thisp->swapBuffers();
   }
+  thisp->doneCurrent();
 }
 
 /*! Translates Qt Events into Coin events and passes them on to the
