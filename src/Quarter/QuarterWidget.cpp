@@ -1,7 +1,7 @@
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
- *  Copyright (C) 1998-2007 by Systems in Motion.  All rights reserved.
+ *  Copyright (C) 1998-2008 by Systems in Motion.  All rights reserved.
  *
  *  This library is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License ("GPL") version 2
@@ -86,6 +86,12 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   PRIVATE(this)->sorendermanager = new SoRenderManager;
   PRIVATE(this)->soeventmanager = new SoEventManager;
+
+  //Mind the order of initialization as the XML state machine uses
+  //callbacks which depends on other state being initialized
+  PRIVATE(this)->eventmanager = new EventManager(this);
+  PRIVATE(this)->devicemanager = new DeviceManager(this);
+
   ScXMLStateMachine * statemachine =
     ScXML::readFile("coin:scxml/navigation/examiner.xml");
   if (statemachine &&
@@ -97,8 +103,6 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
     PRIVATE(this)->soeventmanager->addSoScXMLStateMachine(sostatemachine);
     sostatemachine->initialize();
   }
-  PRIVATE(this)->devicemanager = new DeviceManager(this);
-  PRIVATE(this)->eventmanager = new EventManager(this);
   PRIVATE(this)->headlight = new SoDirectionalLight;
   PRIVATE(this)->headlight->ref();
 
