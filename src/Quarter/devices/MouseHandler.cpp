@@ -140,6 +140,7 @@ MouseHandlerP::mouseWheelEvent(QWheelEvent * event)
     this->mousebutton->setButton(SoMouseButtonEvent::BUTTON4):
     this->mousebutton->setButton(SoMouseButtonEvent::BUTTON5);
 
+  this->mousebutton->setState(SoButtonEvent::DOWN);
   return this->mousebutton;
 }
 
