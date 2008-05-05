@@ -137,7 +137,7 @@ MouseHandlerP::mouseWheelEvent(QWheelEvent * event)
   // value indicates that the wheel was rotated backwards toward the
   // user.
   (event->delta() > 0) ?
-    this->mousebutton->setButton(SoMouseButtonEvent::BUTTON4):
+    this->mousebutton->setButton(SoMouseButtonEvent::BUTTON4) :
     this->mousebutton->setButton(SoMouseButtonEvent::BUTTON5);
 
   this->mousebutton->setState(SoButtonEvent::DOWN);
