@@ -43,7 +43,6 @@
 #include <Inventor/SoSceneManager.h>
 #include <Inventor/SoRenderManager.h>
 #include <Inventor/SoEventManager.h>
-#include <Inventor/navigation/SoNavigationSystem.h>
 #include <Inventor/scxml/ScXML.h>
 #include <Inventor/scxml/SoScXMLStateMachine.h>
 
