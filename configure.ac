@@ -188,6 +188,18 @@ if $sim_ac_framework; then
    sim_ac_enable_pkgconfig=false
 fi
 
+# Detect Mac OS X
+case $host_os in
+darwin* )
+  sim_ac_macosx=true
+  sim_ac_macosx_10_2ff=true
+  ;;
+* ) # not a Mac OS X
+  sim_ac_macosx=false
+  sim_ac_macosx_10_2ff=false 
+  ;;
+esac
+
 AC_SUBST([MAC_FRAMEWORK], [$sim_ac_framework])
 AC_SUBST([MAC_FRAMEWORK_NAME], [$sim_ac_framework_name])
 AC_SUBST([MAC_FRAMEWORK_PREFIX], [$sim_ac_framework_prefix])
