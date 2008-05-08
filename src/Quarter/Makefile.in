@@ -221,6 +221,13 @@ target_alias = @target_alias@
 
 SUBDIRS = devices eventhandlers
 
+# Add this to libQuarter_la_LDFLAGS (see below) to force twolevel
+# namespace libraries on Mac OS X. (This has been the way to do it
+# since Mac OS 10.2, but unfortunately the version of libtool we are
+# using defaults to flat_namespace.)
+@MACOSX_10_2FF_TRUE@LibtoolLinkArgs = -no-undefined -Wl,-twolevel_namespace -Wl,-undefined,error
+@MACOSX_10_2FF_FALSE@LibtoolLinkArgs = 
+
 @BUILD_WITH_MSVC_TRUE@includes = \
 @BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include \
 @BUILD_WITH_MSVC_TRUE@        -I$(QTDIR)/include/QtOpenGL \
@@ -307,7 +314,7 @@ libQuarter_la_CFLAGS = \
 
 
 libQuarter_la_LDFLAGS = \
-        $(COIN_USE_LDFLAGS) $(QT_USE_LDFLAGS)
+        $(LibtoolLinkArgs) $(COIN_USE_LDFLAGS) $(QT_USE_LDFLAGS)
 
 
 @BUILD_WITH_MSVC_TRUE@lib_LIBRARIES = Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
