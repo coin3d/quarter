@@ -1,4 +1,3 @@
-
 if BUILD_WITH_MSVC
 includes = \
         -I$(QTDIR)/include \
@@ -19,6 +18,15 @@ else
 QT_DESIGNER_INCLUDE = -I`$(UNIX2WINPATH) $(QT_USE_INCDIR)`/QtDesigner
 endif
 
+# Add this to libQuarterWidgetPlugin_la_LDFLAGS (see below) to force
+# twolevel namespace libraries on Mac OS X. This has been the way to
+# do it since Mac OS 10.2, but unfortunately the version of libtool we
+# are using defaults to flat_namespace. (No comment...)
+if MACOSX_10_2FF
+LibtoolLinkArgs = -no-undefined -Wl,-twolevel_namespace -Wl,-undefined,error
+else
+LibtoolLinkArgs = 
+endif
 
 PrivateHeaders = QuarterWidgetPlugin.h
 RegularSources = QuarterWidgetPlugin.cpp
@@ -69,7 +77,7 @@ libQuarterWidgetPlugin_la_CFLAGS = \
         $(PLUGIN_BUILD_CFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
 
 libQuarterWidgetPlugin_la_LDFLAGS = \
-        $(QT_USE_LDFLAGS) $(QUARTER_USE_LDFLAGS) $(COIN_USE_LDFLAGS) 
+        $(LibtoolLinkArgs) $(QT_USE_LDFLAGS) $(QUARTER_USE_LDFLAGS) $(COIN_USE_LDFLAGS) 
 
 libdir = $(QT_DESIGNER_PLUGIN_PATH)
 bindir = $(QT_DESIGNER_PLUGIN_PATH)
