@@ -4,7 +4,12 @@ SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS True)
 
 SET(COINDIR $ENV{COINDIR})
 
+# FIXME: Add support for static versions of Coin and merge these changes into the
+# CMakeMacros repository.
+# 2008-05-15, oyshole
 SET(COIN_NAMES Coin Coin3)
+SET(COIN_NAMES_DEBUG Coind Coin3d)
+
 IF(APPLE)
   # Coin installs as a framework named Inventor on MacOS
   SET(COIN_NAMES ${COIN_NAMES} Inventor)
@@ -12,7 +17,15 @@ ENDIF(APPLE)
 
 IF(COINDIR)
   # Look for Coin in environment variable COINDIR
-  FIND_LIBRARY(Coin_LIBRARY NAMES ${COIN_NAMES} PATHS ${COINDIR} PATH_SUFFIXES src bin lib .)
+  FIND_LIBRARY(Coin_LIBRARY_RELEASE NAMES ${COIN_NAMES} PATHS ${COINDIR} PATH_SUFFIXES src bin lib .)
+  FIND_LIBRARY(Coin_LIBRARY_DEBUG NAMES ${COIN_NAMES_DEBUG} PATHS ${COINDIR} PATH_SUFFIXES src bin lib .)
+  
+  IF (CMAKE_CONFIGURATION_TYPES OR CMAKE_BUILD_TYPE)
+    SET(Coin_LIBRARY optimized ${Coin_LIBRARY_RELEASE} debug ${Coin_LIBRARY_DEBUG})
+  ELSE (CMAKE_CONFIGURATION_TYPES OR CMAKE_BUILD_TYPE)
+	SET(Coin_LIBRARY ${Coin_LIBRARY_RELEASE})
+  ENDIF (CMAKE_CONFIGURATION_TYPES OR CMAKE_BUILD_TYPE)
+  
   FIND_PATH(Coin_INCLUDE_DIR Inventor/SbLinear.h PATHS ${COINDIR} PATH_SUFFIXES include .)
   
   IF (Coin_INCLUDE_DIR AND Coin_LIBRARY)
@@ -83,7 +96,7 @@ IF (Coin_FOUND AND WIN32)
       SET(Coin_DEFINES -DCOIN_NOT_DLL)
     ENDIF()
   ELSE()
-    MESSAGE(WARNING "Could not find Coin.pc, using -DCOIN_DLL. This may be wrong though...")
+    MESSAGE(STATUS "Could not find Coin.pc, using -DCOIN_DLL. This may be wrong though...")
     # Cross your fingers...
     SET(Coin_DEFINES -DCOIN_DLL)
   ENDIF()

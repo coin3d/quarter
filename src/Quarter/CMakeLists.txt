@@ -3,26 +3,75 @@ INCLUDE(SimQtMacros)
 SET(Library Quarter)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
-# Generate list of sources
-FILE(GLOB_RECURSE Sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
-# Mocs
-FILE(GLOB_RECURSE MocHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
-SIM_QT4_AUTO_WRAP_CPP(MocSources ${MocHeaders})
+# We R internal
+ADD_DEFINITIONS(-DQUARTER_INTERNAL)
 
-# Some convenient variables
-SET(AllSources ${Sources} ${MocSources})
+# Generate list of sources and headers for compilation
+FILE(GLOB_RECURSE Sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
+FILE(GLOB_RECURSE PublicHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
+FILE(GLOB_RECURSE PrivateHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ../../include/Quarter/*.h)
+
+# Find the headers that should be Moc'ed
+FILE(GLOB_RECURSE MocPrivateHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
+FILE(GLOB_RECURSE MocPublicHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ../../include/Quarter/*.h)
+
+# Moc both the public and private headers
+SIM_QT4_AUTO_WRAP_CPP(MocPrivateSources ${MocPrivateHeaders})
+SIM_QT4_AUTO_WRAP_CPP(MocPublicSources ${MocPublicHeaders})
+
+# Some convenient variables. The inclusion of the headers in the source variable is to force CMake to include the headers in VS project generation.
+SET(AllSources ${Sources} ${MocPublicSources} ${MocPrivateSources} ${PublicHeaders} ${PrivateHeaders})
 SET(AllLibs ${Coin_LIBRARY} ${QT_LIBRARIES} ${OPENGL_gl_LIBRARY})
 
-# What to build
-ADD_DEFINITIONS(-DQUARTER_INTERNAL)
-IF(WIN32)
+# Ensure export of DLL definitions on Windows
+IF(WIN32 AND NOT Quarter_BUILD_STATIC_LIBRARY)
   ADD_DEFINITIONS(-DQUARTER_MAKE_DLL)
-ENDIF(WIN32)
+ENDIF(WIN32 AND NOT Quarter_BUILD_STATIC_LIBRARY)
 
-# The library
-ADD_LIBRARY(${Library} ${AllSources})
-TARGET_LINK_LIBRARIES(${Library} ${AllLibs} MocsLib)
-ADD_DEPENDENCIES(${Library} MocsLib)
+# Add some files and filters to make the VS project more hierarchical and practical to work with
+IF(MSVC_IDE)
+  FILE(GLOB DeviceSources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} devices/*.cpp)
+  FILE(GLOB DeviceHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} devices/*.h)
+  FILE(GLOB PrivateDeviceHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ../../include/Quarter/devices/*.h)
 
-# Make install
-INSTALL(TARGETS Quarter DESTINATION lib/)
+  FILE(GLOB EventHandlerSources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} eventhandlers/*.cpp)
+  FILE(GLOB EventHandlerHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} eventhandlers/*.h)
+  FILE(GLOB PrivateEventHandlerHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ../../include/Quarter/eventhandlers/*.h)
+
+  SOURCE_GROUP("Source" REGULAR_EXPRESSION \\.cpp)
+  SOURCE_GROUP("Source\\Generated Moc files" REGULAR_EXPRESSION moc_*)
+  SOURCE_GROUP("Headers" REGULAR_EXPRESSION \\.h)
+  SOURCE_GROUP("Build" REGULAR_EXPRESSION \\.txt)
+  SOURCE_GROUP("Build\\Rules" REGULAR_EXPRESSION \\.rule)
+  SOURCE_GROUP("Source\\Devices" FILES ${DeviceSources})
+  SOURCE_GROUP("Source\\EventHandlers" FILES ${EventHandlerSources})
+  SOURCE_GROUP("Headers\\Devices" FILES ${DeviceHeaders})
+  SOURCE_GROUP("Headers\\Devices" FILES ${PrivateDeviceHeaders})
+  SOURCE_GROUP("Headers\\EventHandlers" FILES ${EventHandlerHeaders})
+  SOURCE_GROUP("Headers\\EventHandlers" FILES ${PrivateEventHandlerHeaders})
+ENDIF(MSVC_IDE)
+
+# Create the library
+IF(Quarter_BUILD_STATIC_LIBRARY)
+  ADD_LIBRARY(${Library} STATIC ${AllSources})
+ELSE(Quarter_BUILD_STATIC_LIBRARY)
+  ADD_LIBRARY(${Library} SHARED ${AllSources})
+  TARGET_LINK_LIBRARIES(${Library} ${AllLibs})
+ENDIF(Quarter_BUILD_STATIC_LIBRARY)
+
+#  Install configuration
+#
+# Quarter will be installed into the directory configured by CMAKE_INSTALL_PREFIX. This
+# defaults to /usr/local/ on UNIX and c:/Program Files/Quarter on Windows.
+#
+# On Windows, the namimg convention is as follows (ripped from the "Coin" way of doing stuff):
+# Dynamic Release: Quarter.dll and Quarter.lib
+# Dynamic Debug: Quarterd.dll and Quarterd.lib
+# Static Release: Quarters.lib
+# Static Debug: Quartersd.lib
+
+INSTALL(TARGETS ${Library}
+  RUNTIME DESTINATION bin
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+)
