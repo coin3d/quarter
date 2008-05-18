@@ -3,8 +3,22 @@ SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS True) # Avoid unneccesary code
 
 PROJECT(Quarter)
 
+MACRO(SIM_VS_GENERATE_BASIC_TREE)
+  SOURCE_GROUP("Source" REGULAR_EXPRESSION \\.cpp)
+  SOURCE_GROUP("Headers" REGULAR_EXPRESSION \\.h)
+  
+  SOURCE_GROUP("Source\\Generated Moc files" REGULAR_EXPRESSION moc_*)  
+  SOURCE_GROUP("Source\\Generated Qrc files" REGULAR_EXPRESSION [^\\.]qrc_*)  
+  SOURCE_GROUP("Resources" REGULAR_EXPRESSION .*\\.qrc)
+  
+  SOURCE_GROUP("Build" REGULAR_EXPRESSION \\.txt)
+  SOURCE_GROUP("Build\\Rules" REGULAR_EXPRESSION \\.rule)
+ENDMACRO()
+
 # Add an option to enable static builds 
 OPTION(Quarter_BUILD_STATIC_LIBRARY "Build static library instead of shared library (DLL, so etc..)" OFF)
+OPTION(Quarter_BUILD_PLUGIN "Build Quarter plugin for QT Designer" OFF)
+OPTION(Quarter_BUILD_EXAMPLES "Build Quarter example applications" OFF)
 
 # Set up the different flavors of postfixes and CRTs for Windows environments
 IF(WIN32)
@@ -34,6 +48,7 @@ FIND_PACKAGE(Coin REQUIRED)
 SET(QT_USE_QTDESIGNER true)
 SET(QT_USE_QTTEST true)
 SET(QT_USE_QTOPENGL true)
+SET(QT_USE_QTUITOOLS true)
 FIND_PACKAGE(Qt4 REQUIRED)
 INCLUDE(${QT_USE_FILE})
 
@@ -82,6 +97,15 @@ INSTALL(FILES ${PublicHeaders} DESTINATION "include/Quarter/")
 INSTALL(FILES ${PublicDeviceHeaders} DESTINATION "include/Quarter/devices")
 INSTALL(FILES ${PublicEventHandlerHeaders} DESTINATION "include/Quarter/eventhandlers")
 
+FIND_PACKAGE(Subversion)
+IF(Subversion_FOUND)
+  Subversion_WC_INFO(${PROJECT_SOURCE_DIR} Project)
+  MESSAGE("Current revision is ${Project_WC_REVISION}")
+  SET(Quarter_REVISION ${Project_WC_REVISION})
+ELSE()
+  SET(Quarter_REVISION "0")
+ENDIF()
+
 # Experimental support for CPack.
 # Tested with NSIS on Windows Vista.
 # 2008-05-15
@@ -89,11 +113,14 @@ INSTALL(FILES ${PublicEventHandlerHeaders} DESTINATION "include/Quarter/eventhan
 # Packaging options
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Quarter")
 SET(CPACK_PACKAGE_VENDOR "Kongsberg SIM")
-SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
 SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README")
+SET(CPACK_PACKAGE_INSTALL_REGISTRY_KEY "Quarter")
+SET(CPACK_PACKAGE_INSTALL_DIRECTORY "Quarter")
+
 # FIXME: Get versioning externally
 # 2008-05-15
 SET(CPACK_PACKAGE_VERSION_MAJOR "1")
 SET(CPACK_PACKAGE_VERSION_MINOR "0")
-SET(CPACK_PACKAGE_VERSION_PATCH "0")
+SET(CPACK_PACKAGE_VERSION_PATCH ${Quarter_REVISION})
+SET(CPACK_NSIS_MODIFY_PATH ON)
 INCLUDE(CPack)
