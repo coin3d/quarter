@@ -3,6 +3,8 @@ SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS True) # Avoid unneccesary code
 
 PROJECT(Quarter)
 
+# This is a convenience macro for generating better tree structures in VS solutions.
+# Running this in any directory will affect all libraries/executables at that location.
 MACRO(SIM_VS_GENERATE_BASIC_TREE)
   SOURCE_GROUP("Source" REGULAR_EXPRESSION \\.cpp)
   SOURCE_GROUP("Headers" REGULAR_EXPRESSION \\.h)
@@ -66,25 +68,6 @@ IF(MSVC)
   ADD_DEFINITIONS(-D_CRT_SECURE_NO_DEPRECATE)
 ENDIF()
 
-IF(NOT MSVC_IDE) # Not needed for the systems that support multiple configuration in one generated build
-  # Some stuff that can be specified through environment vars
-  IF($ENV{RELEASE})
-    MESSAGE(STATUS "Buildtype set to Release")
-    SET(CMAKE_BUILD_TYPE Release)
-    IF ()
-      SET(CMAKE_C_FLAGS_RELEASE -O3)
-      SET(CMAKE_CXX_FLAGS_RELEASE -O3)
-      # FIXME Have to disable some optimizations due to super-nasty casting. 20080329 larsm
-      ADD_DEFINITIONS(-fno-strict-aliasing)
-    ENDIF()  
-  ELSE()
-    MESSAGE(STATUS "Buildtype set to debug")
-    ENABLE_TESTING()
-    SET(CMAKE_BUILD_TYPE Debug)
-    ADD_DEFINITIONS(-DDEBUG)
-  ENDIF()
-ENDIF()
-
 # What to build
 ADD_SUBDIRECTORY(src)               
 
@@ -100,7 +83,6 @@ INSTALL(FILES ${PublicEventHandlerHeaders} DESTINATION "include/Quarter/eventhan
 FIND_PACKAGE(Subversion)
 IF(Subversion_FOUND)
   Subversion_WC_INFO(${PROJECT_SOURCE_DIR} Project)
-  MESSAGE("Current revision is ${Project_WC_REVISION}")
   SET(Quarter_REVISION ${Project_WC_REVISION})
 ELSE()
   SET(Quarter_REVISION "0")
@@ -116,9 +98,12 @@ SET(CPACK_PACKAGE_VENDOR "Kongsberg SIM")
 SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README")
 SET(CPACK_PACKAGE_INSTALL_REGISTRY_KEY "Quarter")
 SET(CPACK_PACKAGE_INSTALL_DIRECTORY "Quarter")
-
-# FIXME: Get versioning externally
-# 2008-05-15
+#Add a registry variable for detecting the link type on Win32 systems.
+IF(Quarter_BUILD_STATIC_LIBRARY)
+  SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "\ \ WriteRegStr\ SHCTX\ \\\"Software\\\\Kongsberg SIM\\\\Quarter\\\" \\\"Dynamic\\\" \\\"false\\\"")
+ELSE()
+  SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "\ \ WriteRegStr\ SHCTX\ \\\"Software\\\\Kongsberg SIM\\\\Quarter\\\" \\\"Dynamic\\\" \\\"true\\\"")
+ENDIF()
 SET(CPACK_PACKAGE_VERSION_MAJOR "1")
 SET(CPACK_PACKAGE_VERSION_MINOR "0")
 SET(CPACK_PACKAGE_VERSION_PATCH ${Quarter_REVISION})
