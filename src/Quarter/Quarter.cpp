@@ -178,4 +178,18 @@ Quarter::clean(void)
   self = NULL;
 }
 
+/*!
+  override lower refresh rate limit
+ */
+void
+Quarter::setTimerEpsilon(double sec)
+{
+  if (!self) {
+    fprintf(stderr, "Quarter is not initialized!\n");
+    return;
+  }
+
+  self->sensormanager->setTimerEpsilon(sec);
+}
+
 #undef PRIVATE

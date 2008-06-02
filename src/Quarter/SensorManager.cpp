@@ -57,6 +57,8 @@ SensorManager::SensorManager(void)
   SoDB::getSensorManager()->setChangedCallback(SensorManager::sensorQueueChangedCB, this);
   SoDB::setRealTimeInterval(1.0 / 25.0);
   SoSceneManager::enableRealTimeUpdate(FALSE);
+
+  this->timerEpsilon = 1.0 / 5000.0;
 }
 
 SensorManager::~SensorManager()
@@ -100,8 +102,8 @@ SensorManager::sensorQueueChanged(void)
   SbTime interval;
   if (sensormanager->isTimerSensorPending(interval)) {
     interval -= SbTime::getTimeOfDay();
-    if (interval.getValue() <= 0.0) {
-      interval.setValue(1.0/5000.0);
+    if (interval.getValue() < this->timerEpsilon) {
+      interval.setValue(this->timerEpsilon);
     }
     if (!this->timerqueuetimer->isActive()) {
       this->timerqueuetimer->start(interval.getMsecValue());
@@ -152,4 +154,10 @@ SensorManager::delayTimeout(void)
   SoDB::getSensorManager()->processTimerQueue();
   SoDB::getSensorManager()->processDelayQueue(FALSE);
   this->sensorQueueChanged();
+}
+
+void
+SensorManager::setTimerEpsilon(double sec)
+{
+  this->timerEpsilon = sec;
 }

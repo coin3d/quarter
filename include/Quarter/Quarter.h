@@ -31,6 +31,7 @@ class QUARTER_DLL_API Quarter {
 public:
   static void init(void);
   static void clean(void);
+  static void setTimerEpsilon(double sec);
 
 private:
   Quarter(void);

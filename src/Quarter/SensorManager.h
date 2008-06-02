@@ -43,6 +43,7 @@ public slots:
   void delayTimeout(void);
   void timerQueueTimeout(void);
   void sensorQueueChanged(void);
+  void setTimerEpsilon(double sec);
 
 private:
   static void sensorQueueChangedCB(void * closure);
@@ -51,6 +52,7 @@ private:
   QTimer * timerqueuetimer;
   unsigned long mainthreadid;
   SignalThread * signalthread;
+  double timerEpsilon;
 };
 
 }}} // namespace
