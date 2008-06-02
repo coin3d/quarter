@@ -6,6 +6,8 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 # We R internal
 ADD_DEFINITIONS(-DQUARTER_INTERNAL)
 
+FILE(GLOB CMakeCache RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_BINARY_DIR}/CMakeCache.txt)
+
 # Generate list of sources and headers for compilation
 FILE(GLOB_RECURSE Sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 FILE(GLOB_RECURSE PublicHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
@@ -20,7 +22,7 @@ SIM_QT4_AUTO_WRAP_CPP(MocPrivateSources ${MocPrivateHeaders})
 SIM_QT4_AUTO_WRAP_CPP(MocPublicSources ${MocPublicHeaders})
 
 # Some convenient variables. The inclusion of the headers in the source variable is to force CMake to include the headers in VS project generation.
-SET(AllSources ${Sources} ${MocPublicSources} ${MocPrivateSources} ${PublicHeaders} ${PrivateHeaders})
+SET(AllSources ${Sources} ${MocPublicSources} ${MocPrivateSources} ${PublicHeaders} ${PrivateHeaders} ${CMakeCache})
 SET(AllLibs ${Coin_LIBRARY} ${QT_LIBRARIES} ${OPENGL_gl_LIBRARY})
 
 # Ensure export of DLL definitions on Windows
