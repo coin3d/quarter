@@ -1,5 +1,5 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6) # Or does this work on 2.4? 2008-05-15, oyshole
-SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS True) # Avoid unneccesary code
+SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true) # Avoid unneccesary code
 
 PROJECT(Quarter)
 
@@ -23,6 +23,16 @@ OPTION(Quarter_BUILD_PLUGIN "Build Quarter plugin for QT Designer" OFF)
 OPTION(Quarter_BUILD_EXAMPLES "Build Quarter example applications" OFF)
 
 # Set up the different flavors of postfixes and CRTs for Windows environments
+#  Install configuration
+#
+# Quarter will be installed into the directory configured by CMAKE_INSTALL_PREFIX. This
+# defaults to /usr/local/ on UNIX and c:/Program Files/Quarter on Windows.
+#
+# On Windows, the namimg convention is as follows (ripped from the "Coin" way of doing stuff):
+# Dynamic Release: Quarter.dll and Quarter.lib
+# Dynamic Debug: Quarterd.dll and Quarterd.lib
+# Static Release: Quarters.lib
+# Static Debug: Quartersd.lib
 IF(WIN32)
   IF(Quarter_BUILD_STATIC_LIBRARY)
     SET(CMAKE_DEBUG_POSTFIX "sd")
@@ -80,6 +90,7 @@ INSTALL(FILES ${PublicHeaders} DESTINATION "include/Quarter/")
 INSTALL(FILES ${PublicDeviceHeaders} DESTINATION "include/Quarter/devices")
 INSTALL(FILES ${PublicEventHandlerHeaders} DESTINATION "include/Quarter/eventhandlers")
 
+#Drop this for now
 FIND_PACKAGE(Subversion)
 IF(Subversion_FOUND)
   Subversion_WC_INFO(${PROJECT_SOURCE_DIR} Project)
@@ -106,6 +117,6 @@ ELSE()
 ENDIF()
 SET(CPACK_PACKAGE_VERSION_MAJOR "1")
 SET(CPACK_PACKAGE_VERSION_MINOR "0")
-SET(CPACK_PACKAGE_VERSION_PATCH ${Quarter_REVISION})
-SET(CPACK_NSIS_MODIFY_PATH ON)
+SET(CPACK_PACKAGE_VERSION_PATCH "0")
+SET(CPACK_NSIS_MODIFY_PATH on)
 INCLUDE(CPack)
