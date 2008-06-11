@@ -96,15 +96,12 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
     ScXML::readFile("coin:scxml/navigation/examiner.xml");
   if (statemachine &&
       statemachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
-    SoDebugError::postInfo("QuarterWidget", "setting scxml navigation system");
     SoScXMLStateMachine * sostatemachine =
       static_cast<SoScXMLStateMachine *>(statemachine);
     statemachine->addStateChangeCallback(QuarterWidgetP::statechangecb, PRIVATE(this));
     PRIVATE(this)->soeventmanager->setNavigationSystem(NULL);
     PRIVATE(this)->soeventmanager->addSoScXMLStateMachine(sostatemachine);
     sostatemachine->initialize();
-  } else {
-    SoDebugError::postInfo("QuarterWidget", "statemachine: %p", statemachine);
   }
   PRIVATE(this)->headlight = new SoDirectionalLight;
   PRIVATE(this)->headlight->ref();
