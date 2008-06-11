@@ -43,9 +43,9 @@
 #include <Inventor/SoSceneManager.h>
 #include <Inventor/SoRenderManager.h>
 #include <Inventor/SoEventManager.h>
-#include <Inventor/navigation/SoNavigationSystem.h>
 #include <Inventor/scxml/ScXML.h>
 #include <Inventor/scxml/SoScXMLStateMachine.h>
+#include <Inventor/navigation/SoNavigationSystem.h>
 
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/devices/DeviceManager.h>
@@ -96,12 +96,15 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
     ScXML::readFile("coin:scxml/navigation/examiner.xml");
   if (statemachine &&
       statemachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
+    SoDebugError::postInfo("QuarterWidget", "setting scxml navigation system");
     SoScXMLStateMachine * sostatemachine =
       static_cast<SoScXMLStateMachine *>(statemachine);
     statemachine->addStateChangeCallback(QuarterWidgetP::statechangecb, PRIVATE(this));
     PRIVATE(this)->soeventmanager->setNavigationSystem(NULL);
     PRIVATE(this)->soeventmanager->addSoScXMLStateMachine(sostatemachine);
     sostatemachine->initialize();
+  } else {
+    SoDebugError::postInfo("QuarterWidget", "statemachine: %p", statemachine);
   }
   PRIVATE(this)->headlight = new SoDirectionalLight;
   PRIVATE(this)->headlight->ref();
@@ -271,15 +274,25 @@ QuarterWidget::getDeviceManager(void) const
 /*!
   Returns a pointer to the event manager
  */
-EventManager * 
+EventManager *
 QuarterWidget::getEventManager(void) const
 {
   return PRIVATE(this)->eventmanager;
 }
 
 /*!
+  Set the render manager for the widget.
+*/
+void
+QuarterWidget::setSoRenderManager(SoRenderManager * manager)
+{
+  // FIXME: free existing manager if it is the default one
+  PRIVATE(this)->sorendermanager = manager;
+}
+
+/*!
   Returns a pointer to the render manager
- */
+*/
 SoRenderManager *
 QuarterWidget::getSoRenderManager(void) const
 {
@@ -287,8 +300,18 @@ QuarterWidget::getSoRenderManager(void) const
 }
 
 /*!
+  Set the Coin event manager for the widget.
+*/
+void
+QuarterWidget::setSoEventManager(SoEventManager * manager)
+{
+  // FIXME: free existing manager if it is the default one
+  PRIVATE(this)->soeventmanager = manager;
+}
+
+/*!
   Returns a pointer to the event manager
- */
+*/
 SoEventManager *
 QuarterWidget::getSoEventManager(void) const
 {
