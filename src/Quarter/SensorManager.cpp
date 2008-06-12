@@ -1,7 +1,7 @@
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
- *  Copyright (C) 1998-2007 by Systems in Motion.  All rights reserved.
+ *  Copyright (C) 1998-2008 by Systems in Motion.  All rights reserved.
  *
  *  This library is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License ("GPL") version 2
@@ -55,10 +55,11 @@ SensorManager::SensorManager(void)
   this->connect(this->timerqueuetimer, SIGNAL(timeout(void)), this, SLOT(timerQueueTimeout()));
 
   SoDB::getSensorManager()->setChangedCallback(SensorManager::sensorQueueChangedCB, this);
+  this->timerEpsilon = 1.0 / 5000.0;
+
   SoDB::setRealTimeInterval(1.0 / 25.0);
   SoSceneManager::enableRealTimeUpdate(FALSE);
 
-  this->timerEpsilon = 1.0 / 5000.0;
 }
 
 SensorManager::~SensorManager()
