@@ -36,12 +36,14 @@ BuiltSources = \
 PrivateHeaders = \
         SensorManager.h \
         ImageReader.h \
+        QuarterP.h \
         QuarterWidgetP.h \
         ContextMenu.h \
         SignalThread.h
 
 RegularSources = \
         Quarter.cpp \
+        QuarterP.cpp \
         QuarterWidget.cpp \
         SensorManager.cpp \
         QuarterWidgetP.cpp \

@@ -126,47 +126,33 @@
 
 #include <Quarter/Quarter.h>
 #include "SensorManager.h"
-#include "devices/KeyboardHandlerP.h"
+
+#include "QuarterP.h"
 
 using namespace SIM::Coin3D::Quarter;
 
-static Quarter * self = NULL;
-
-Quarter::Quarter(void)
-{
-  this->sensormanager = new SensorManager;
-}
-
-Quarter::~Quarter()
-{
-  delete this->sensormanager;
-
-  if (KeyboardHandlerP::keyboardmap != NULL) {
-    KeyboardHandlerP::keyboardmap->clear();
-    KeyboardHandlerP::keypadmap->clear();
-    delete KeyboardHandlerP::keyboardmap;
-    delete KeyboardHandlerP::keypadmap;
-    KeyboardHandlerP::keyboardmap = NULL;
-    KeyboardHandlerP::keypadmap = NULL;
-  }
-}
+static QuarterP * self = NULL;
 
 /*!
   initialize Quarter, and implicitly Coin
  */
 void
-Quarter::init(void)
+Quarter::init(bool initCoin)
 {
   if (self) {
     fprintf(stderr, "Quarter is already initialized\n");
     return;
   }
 
-  SoDB::init();
-  SoNodeKit::init();
-  SoInteraction::init();
+  if (initCoin) {
+    SoDB::init();
+    SoNodeKit::init();
+    SoInteraction::init();
+  }
 
-  self = new Quarter;
+  self = new QuarterP;
+  self->initCoin = initCoin;
+  
 }
 
 /*!
@@ -176,8 +162,20 @@ void
 Quarter::clean(void)
 {
   assert(self);
+  bool initCoin = self->initCoin;
+
   delete self;
   self = NULL;
+
+  if (initCoin) {
+    //NOTE: Copied this from SoQt 20080617 BFG
+#if 0 // FIXME: These methods exist in TGS Inventor. We should add 
+      // them, and then call them from here. 20060210 kyrah
+    SoInteraction::finish();
+    SoNodeKit::finish();
+#endif
+    SoDB::finish();
+  }
 }
 
 /*!
@@ -193,5 +191,3 @@ Quarter::setTimerEpsilon(double sec)
 
   self->sensormanager->setTimerEpsilon(sec);
 }
-
-#undef PRIVATE

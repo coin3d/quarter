@@ -4,7 +4,7 @@
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
- *  Copyright (C) 1998-2007 by Systems in Motion.  All rights reserved.
+ *  Copyright (C) 1998-2008 by Systems in Motion.  All rights reserved.
  *
  *  This library is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License ("GPL") version 2
@@ -28,16 +28,12 @@
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class ImageReader;
-
 class QUARTER_DLL_API QuarterApplication : public QApplication {
   typedef QApplication inherited;
 public:
   QuarterApplication(int & argc, char ** argv);
   ~QuarterApplication();
 
- private:
-  ImageReader * imagereader;
 };
 
 }}} // namespace

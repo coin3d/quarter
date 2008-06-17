@@ -4,7 +4,7 @@
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
- *  Copyright (C) 1998-2007 by Systems in Motion.  All rights reserved.
+ *  Copyright (C) 1998-2008 by Systems in Motion.  All rights reserved.
  *
  *  This library is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License ("GPL") version 2
@@ -27,17 +27,10 @@
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class QUARTER_DLL_API Quarter {
-public:
-  static void init(void);
-  static void clean(void);
-  static void setTimerEpsilon(double sec);
-
-private:
-  Quarter(void);
-  ~Quarter();
-
-  class SensorManager * sensormanager;
+namespace Quarter {
+  void QUARTER_DLL_API init(bool initCoin = TRUE );
+  void QUARTER_DLL_API clean(void);
+  void QUARTER_DLL_API setTimerEpsilon(double sec);
 };
 
 }}} // namespace

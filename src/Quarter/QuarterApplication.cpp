@@ -1,7 +1,7 @@
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
- *  Copyright (C) 1998-2007 by Systems in Motion.  All rights reserved.
+ *  Copyright (C) 1998-2008 by Systems in Motion.  All rights reserved.
  *
  *  This library is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License ("GPL") version 2
@@ -34,7 +34,6 @@
 
 #include <Quarter/QuarterApplication.h>
 #include <Quarter/Quarter.h>
-#include "ImageReader.h"
 
 using namespace SIM::Coin3D::Quarter;
 
@@ -45,7 +44,6 @@ QuarterApplication::QuarterApplication(int & argc, char ** argv)
   : inherited(argc, argv)
 {
   Quarter::init();
-  this->imagereader = new ImageReader;
 }
 
 /*!
@@ -53,6 +51,5 @@ QuarterApplication::QuarterApplication(int & argc, char ** argv)
  */
 QuarterApplication::~QuarterApplication()
 {
-  delete this->imagereader;
   Quarter::clean();
 }
