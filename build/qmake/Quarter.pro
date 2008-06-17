@@ -21,6 +21,7 @@ SOURCES = \
           ../../src/Quarter/ContextMenu.cpp \
           ../../src/Quarter/ImageReader.cpp \
           ../../src/Quarter/Quarter.cpp \
+          ../../src/Quarter/QuarterP.cpp \
           ../../src/Quarter/QuarterApplication.cpp \
           ../../src/Quarter/QuarterWidget.cpp \
           ../../src/Quarter/QuarterWidgetP.cpp \
@@ -43,5 +44,6 @@ HEADERS = \
           ../../include/Quarter/eventhandlers/EventHandler.h \
           ../../include/Quarter/eventhandlers/EventManager.h \
           ../../include/Quarter/Quarter.h \
+          ../../include/Quarter/QuarterP.h \
           ../../include/Quarter/QuarterApplication.h \
           ../../include/Quarter/QuarterWidget.h
