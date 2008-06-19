@@ -141,9 +141,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 QuarterWidget::~QuarterWidget()
 {
   PRIVATE(this)->headlight->unref();
-  if (PRIVATE(this)->scene) {
-    PRIVATE(this)->scene->unref();
-  }
+  this->setSceneGraph(NULL);
   delete PRIVATE(this)->sorendermanager;
   delete PRIVATE(this)->soeventmanager;
   delete PRIVATE(this)->eventmanager;
@@ -208,7 +206,7 @@ QuarterWidget::setTransparencyType(SoGLRenderAction::TransparencyType type)
 void
 QuarterWidget::setSceneGraph(SoNode * node)
 {
-  if (node != NULL && node == PRIVATE(this)->scene) {
+  if (node == PRIVATE(this)->scene) {
     return;
   }
 
