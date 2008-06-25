@@ -38,6 +38,29 @@
 
 using namespace SIM::Coin3D::Quarter;
 
+static SoSeparator * create_background(void)
+{
+  SoSeparator * root = new SoSeparator;
+  SoText2 * text = new SoText2;
+  SoBaseColor * color = new SoBaseColor;
+  SoOrthographicCamera * orthocam = new SoOrthographicCamera;
+
+  text->string.setValue("Background Scene");
+  color->rgb.setValue(SbColor(1.0, 0.0, 0.0));
+
+  orthocam->height.setValue(1.0);
+  orthocam->nearDistance.setValue(0.0);
+  orthocam->farDistance.setValue(2.0);
+  orthocam->position = SbVec3f(0.0f, 0.2f, 1.0f);
+
+  root->addChild(orthocam);
+  root->addChild(color);
+  root->addChild(text);
+
+  return root;
+
+}
+
 // create a simple scene displaying some text to be super-imposed on
 // the normal scene graph
 static SoSeparator * create_superimposition(void)
@@ -52,7 +75,8 @@ static SoSeparator * create_superimposition(void)
 
   orthocam->height.setValue(1.0);
   orthocam->nearDistance.setValue(0.0);
-  orthocam->farDistance.setValue(1.0);
+  orthocam->farDistance.setValue(2.0);
+  orthocam->position = SbVec3f(0.0f, 0.0f, 1.0f);
 
   root->addChild(orthocam);
   root->addChild(color);
@@ -82,6 +106,13 @@ main(int argc, char ** argv)
   QuarterWidget * viewer = new QuarterWidget;
   viewer->setSceneGraph(root);
 
+  // Add some background text
+  SoSeparator * background = create_background();
+  background->ref();
+  (void)viewer->getSoRenderManager()->addSuperimposition(background,
+                                                         SoRenderManager::Superimposition::BACKGROUND);
+  
+
   // Add some super imposed text
   SoSeparator * superimposed = create_superimposition();
   superimposed->ref();
@@ -94,6 +125,7 @@ main(int argc, char ** argv)
   // Clean up resources.
   root->unref();
   superimposed->unref();
+  background->unref();
   delete viewer;
 
   return 0;
