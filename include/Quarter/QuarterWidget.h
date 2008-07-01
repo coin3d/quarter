@@ -49,6 +49,7 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   Q_PROPERTY(bool contextMenuEnabled READ contextMenuEnabled WRITE enableContextMenu)
 
 public:
+  QuarterWidget(const QGLFormat & format, QWidget * parent = 0, const QGLWidget * shareWidget = 0, Qt::WindowFlags f = 0);
   QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
   QuarterWidget(QGLContext * context, QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
   virtual ~QuarterWidget();
