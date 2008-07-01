@@ -32,6 +32,8 @@
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/QuarterApplication.h>
 
+#include <QMainWindow>
+
 using namespace SIM::Coin3D::Quarter;
 
 int
@@ -50,13 +52,16 @@ main(int argc, char ** argv)
   root->addChild(col);
 
   root->addChild(new SoCone);
+ 
+  QMainWindow * mainwin = new QMainWindow();
 
   // Create a QuarterWidget for displaying a Coin scene graph
-  QuarterWidget * viewer = new QuarterWidget;
+  QuarterWidget * viewer = new QuarterWidget(mainwin);
+  mainwin->setCentralWidget(viewer);
   viewer->setSceneGraph(root);
 
   // Pop up the QuarterWidget
-  viewer->show();
+  mainwin->show();
   // Loop until exit.
   app.exec();
   // Clean up resources.
