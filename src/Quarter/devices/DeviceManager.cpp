@@ -36,6 +36,7 @@
 #include <QtCore/QEvent>
 #include <QtGui/QMouseEvent>
 #include <Inventor/events/SoLocation2Event.h>
+#include <Inventor/events/SoMouseButtonEvent.h>
 #include <Quarter/devices/DeviceManager.h>
 #include <Quarter/devices/DeviceHandler.h>
 #include <Quarter/QuarterWidget.h>
@@ -91,7 +92,8 @@ DeviceManager::translateEvent(QEvent * qevent)
   foreach(device, PRIVATE(this)->devices) {
     if (const SoEvent * soevent = device->translateEvent(qevent)) {
       // cache mouse position so other devices can access it
-      if (soevent->getTypeId() == SoLocation2Event::getClassTypeId()) {
+      if (soevent->getTypeId() == SoLocation2Event::getClassTypeId() ||
+          soevent->getTypeId() == SoMouseButtonEvent::getClassTypeId()) {
         PRIVATE(this)->lastmousepos = soevent->getPosition();
       }
       return soevent;

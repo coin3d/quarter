@@ -122,6 +122,7 @@ MouseHandlerP::mouseMoveEvent(QMouseEvent * event)
   assert(this->windowsize[1] != -1);
   SbVec2s pos(event->pos().x(), this->windowsize[1] - event->pos().y() - 1);
   this->location2->setPosition(pos);
+  this->mousebutton->setPosition(pos);
   return this->location2;
 }
 
@@ -129,7 +130,9 @@ const SoEvent *
 MouseHandlerP::mouseWheelEvent(QWheelEvent * event)
 {
   PUBLIC(this)->setModifiers(this->mousebutton, event);
-  this->mousebutton->setPosition(this->location2->getPosition());
+  SbVec2s pos(event->pos().x(), this->windowsize[1] - event->pos().y() - 1);
+  this->location2->setPosition(pos);
+  this->mousebutton->setPosition(pos);
 
   // QWheelEvent::delta() returns the distance that the wheel is
   // rotated, in eights of a degree. A positive value indicates that
@@ -148,7 +151,9 @@ const SoEvent *
 MouseHandlerP::mouseButtonEvent(QMouseEvent * event)
 {
   PUBLIC(this)->setModifiers(this->mousebutton, event);
-  this->mousebutton->setPosition(this->location2->getPosition());
+  SbVec2s pos(event->pos().x(), this->windowsize[1] - event->pos().y() - 1);
+  this->location2->setPosition(pos);
+  this->mousebutton->setPosition(pos);
 
   (event->type() == QEvent::MouseButtonPress) ?
     this->mousebutton->setState(SoButtonEvent::DOWN):
