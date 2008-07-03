@@ -99,6 +99,15 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->eventmanager = new EventManager(this);
   PRIVATE(this)->devicemanager = new DeviceManager(this);
 
+  // set up default cursors for the examiner navigation states
+  this->setStateCursor("interact", Qt::ArrowCursor);
+  this->setStateCursor("idle", Qt::OpenHandCursor);
+  this->setStateCursor("rotate", Qt::ClosedHandCursor);
+  this->setStateCursor("pan", Qt::SizeAllCursor);
+  this->setStateCursor("zoom", Qt::SizeVerCursor);
+  this->setStateCursor("seek", Qt::CrossCursor);
+  this->setStateCursor("spin", Qt::OpenHandCursor);
+
   ScXMLStateMachine * statemachine =
     ScXML::readFile("coin:scxml/navigation/examiner.xml");
   if (statemachine &&
@@ -128,15 +137,6 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   // set up a cache context for the default SoGLRenderAction
   PRIVATE(this)->sorendermanager->getGLRenderAction()->setCacheContext(this->getCacheContextId());
-
-  // set up default cursors for the examiner navigation states
-  this->setStateCursor("interact", Qt::ArrowCursor);
-  this->setStateCursor("idle", Qt::OpenHandCursor);
-  this->setStateCursor("rotate", Qt::ClosedHandCursor);
-  this->setStateCursor("pan", Qt::SizeAllCursor);
-  this->setStateCursor("zoom", Qt::SizeVerCursor);
-  this->setStateCursor("seek", Qt::CrossCursor);
-  this->setStateCursor("spin", Qt::OpenHandCursor);
 
   this->setMouseTracking(TRUE);
 
