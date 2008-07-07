@@ -82,13 +82,9 @@ ENDIF()
 ADD_SUBDIRECTORY(src)               
 
 #Install the public headers
-FILE(GLOB PublicHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} include/Quarter/*.h)
-FILE(GLOB PublicDeviceHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} include/Quarter/devices/*.h)
-FILE(GLOB PublicEventHandlerHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} include/Quarter/eventhandlers/*.h)
-
-INSTALL(FILES ${PublicHeaders} DESTINATION "include/Quarter/")
-INSTALL(FILES ${PublicDeviceHeaders} DESTINATION "include/Quarter/devices")
-INSTALL(FILES ${PublicEventHandlerHeaders} DESTINATION "include/Quarter/eventhandlers")
+INSTALL(DIRECTORY include/Quarter/ DESTINATION include/Quarter
+        FILES_MATCHING PATTERN "*.h"
+        PATTERN ".svn" EXCLUDE)
 
 #Drop this for now
 FIND_PACKAGE(Subversion)
