@@ -168,12 +168,9 @@ Quarter::clean(void)
   self = NULL;
 
   if (initCoin) {
-    //NOTE: Copied this from SoQt 20080617 BFG
-#if 0 // FIXME: These methods exist in TGS Inventor. We should add 
-      // them, and then call them from here. 20060210 kyrah
-    SoInteraction::finish();
-    SoNodeKit::finish();
-#endif
+    // SoDB::finish() will clean up everything that has been
+    // initialized. There's no need to add SoNodeKit::finish() and
+    // SoInteraction::finish() like in TGS Inventor
     SoDB::finish();
   }
 }
