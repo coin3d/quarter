@@ -101,6 +101,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   // set up default cursors for the examiner navigation states
   this->setStateCursor("interact", Qt::ArrowCursor);
+  // this->setStateCursor("interact", Qt::OpenHandCursor);
   this->setStateCursor("idle", Qt::OpenHandCursor);
   this->setStateCursor("rotate", Qt::ClosedHandCursor);
   this->setStateCursor("pan", Qt::SizeAllCursor);
@@ -473,6 +474,23 @@ void
 QuarterWidget::enableContextMenu(bool yes)
 {
   PRIVATE(this)->contextmenuenabled = yes;
+}
+
+/*!
+  Convenience method that adds a state machine to the current
+  SoEventManager.  It also initializes the scene graph
+  root and active camera for the state machine, and finally it sets
+  up the default Quarter cursor handling.
+*/
+void 
+QuarterWidget::addStateMachine(SoScXMLStateMachine * statemachine)
+{
+  SoEventManager * em = this->getSoEventManager();
+  em->setNavigationSystem(NULL); // clear old navigation system
+  em->addSoScXMLStateMachine(statemachine);
+  statemachine->setSceneGraphRoot(this->getSoRenderManager()->getSceneGraph());
+  statemachine->setActiveCamera(this->getSoRenderManager()->getCamera());
+  statemachine->addStateChangeCallback(QuarterWidgetP::statechangecb, PRIVATE(this));
 }
 
 #undef PRIVATE

@@ -36,6 +36,7 @@ class SoCamera;
 class SoEventManager;
 class SoRenderManager;
 class SoDirectionalLight;
+class SoScXMLStateMachine;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
@@ -76,6 +77,8 @@ public:
   SoEventManager * getSoEventManager(void) const;
   void setSoRenderManager(SoRenderManager * manager);
   SoRenderManager * getSoRenderManager(void) const;
+
+  void addStateMachine(SoScXMLStateMachine * statemachine);
 
 public slots:
   virtual void viewAll(void);
