@@ -1,10 +1,12 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6) # Or does this work on 2.4? 2008-05-15, oyshole
-SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true) # Avoid unneccesary code
-
 PROJECT(Quarter)
+
+SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true) # Avoid unneccesary code
+SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMakeMacros/Modules/")
 
 # This is a convenience macro for generating better tree structures in VS solutions.
 # Running this in any directory will affect all libraries/executables at that location.
+# FIXME: Move to common SIM macros? kintel 20080721
 MACRO(SIM_VS_GENERATE_BASIC_TREE)
   SOURCE_GROUP("Source" REGULAR_EXPRESSION \\.cpp)
   SOURCE_GROUP("Headers" REGULAR_EXPRESSION \\.h)
@@ -19,7 +21,7 @@ ENDMACRO()
 
 # Add an option to enable static builds 
 OPTION(Quarter_BUILD_STATIC_LIBRARY "Build static library instead of shared library (DLL, so etc..)" OFF)
-OPTION(Quarter_BUILD_PLUGIN "Build Quarter plugin for QT Designer" OFF)
+OPTION(Quarter_BUILD_PLUGIN "Build Quarter plugin for Qt Designer" OFF)
 OPTION(Quarter_BUILD_EXAMPLES "Build Quarter example applications" OFF)
 
 # Set up the different flavors of postfixes and CRTs for Windows environments
@@ -28,7 +30,7 @@ OPTION(Quarter_BUILD_EXAMPLES "Build Quarter example applications" OFF)
 # Quarter will be installed into the directory configured by CMAKE_INSTALL_PREFIX. This
 # defaults to /usr/local/ on UNIX and c:/Program Files/Quarter on Windows.
 #
-# On Windows, the namimg convention is as follows (ripped from the "Coin" way of doing stuff):
+# On Windows, the naming convention is as follows (ripped from the "Coin" way of doing stuff):
 # Dynamic Release: Quarter.dll and Quarter.lib
 # Dynamic Debug: Quarterd.dll and Quarterd.lib
 # Static Release: Quarters.lib
@@ -49,11 +51,6 @@ IF(WIN32)
     SET(CMAKE_CXX_FLAGS "/MP4")
   ENDIF()
 ENDIF()
-
-# Directory contains necessary macros for finding Coin and some convenience moc macros.
-# FIXME: Make these macros SVN externals and move them to the build dir.
-# 2008-05-15, oyshole
-SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMakeMacros/Modules/")
 
 FIND_PACKAGE(OpenGL REQUIRED)
 FIND_PACKAGE(Coin REQUIRED)
