@@ -50,7 +50,6 @@ IF(MSVC_IDE)
 ENDIF(MSVC_IDE)
 
 # Create the library
-# FIXME: Support building as a framework on Mac OS X. kintel 20080707.
 IF(Quarter_BUILD_STATIC_LIBRARY)
   ADD_LIBRARY(${Library} STATIC ${AllSources})
 ELSE(Quarter_BUILD_STATIC_LIBRARY)

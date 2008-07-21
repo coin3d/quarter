@@ -44,6 +44,6 @@ HEADERS = \
           ../../include/Quarter/eventhandlers/EventHandler.h \
           ../../include/Quarter/eventhandlers/EventManager.h \
           ../../include/Quarter/Quarter.h \
-          ../../src/Quarter/QuarterP.h \
+          ../../include/Quarter/QuarterP.h \
           ../../include/Quarter/QuarterApplication.h \
           ../../include/Quarter/QuarterWidget.h
