@@ -201,6 +201,7 @@ ContextMenu::changeRenderMode(QAction * action)
 {
   QVariant rendermode = action->data();
   this->rendermanager->setRenderMode((SoRenderManager::RenderMode)rendermode.toInt());
+  this->rendermanager->scheduleRedraw();
 }
 
 void
@@ -208,6 +209,7 @@ ContextMenu::changeStereoMode(QAction * action)
 {
   QVariant stereomode = action->data();
   this->rendermanager->setStereoMode((SoRenderManager::StereoMode)stereomode.toInt());
+  this->rendermanager->scheduleRedraw();
 }
 
 void
@@ -218,6 +220,7 @@ ContextMenu::changeTransparencyType(QAction * action)
     (SoGLRenderAction::TransparencyType) transparencytype.toInt(); 
 
   ((QuarterWidget *)this->quarterwidget)->setTransparencyType(type);
+  this->rendermanager->scheduleRedraw();
 }
 
 #undef PUBLIC
