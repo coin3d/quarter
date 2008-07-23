@@ -87,12 +87,10 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 {
   PRIVATE(this) = new QuarterWidgetP(this, sharewidget);
 
-  PRIVATE(this)->scene = NULL;
-  PRIVATE(this)->contextmenu = NULL;
-  PRIVATE(this)->contextmenuenabled = true;
-
   PRIVATE(this)->sorendermanager = new SoRenderManager;
+  PRIVATE(this)->initialsorendermanager = true;
   PRIVATE(this)->soeventmanager = new SoEventManager;
+  PRIVATE(this)->initialsoeventmanager = true;
 
   //Mind the order of initialization as the XML state machine uses
   //callbacks which depends on other state being initialized
@@ -101,7 +99,6 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   // set up default cursors for the examiner navigation states
   this->setStateCursor("interact", Qt::ArrowCursor);
-  // this->setStateCursor("interact", Qt::OpenHandCursor);
   this->setStateCursor("idle", Qt::OpenHandCursor);
   this->setStateCursor("rotate", Qt::ClosedHandCursor);
   this->setStateCursor("pan", Qt::SizeAllCursor);
@@ -149,9 +146,10 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 QuarterWidget::~QuarterWidget()
 {
   PRIVATE(this)->headlight->unref();
+  PRIVATE(this)->headlight = NULL;
   this->setSceneGraph(NULL);
-  delete PRIVATE(this)->sorendermanager;
-  delete PRIVATE(this)->soeventmanager;
+  this->setSoRenderManager(NULL);
+  this->setSoEventManager(NULL);
   delete PRIVATE(this)->eventmanager;
   delete PRIVATE(this)->devicemanager;
   delete PRIVATE(this);
@@ -289,8 +287,26 @@ QuarterWidget::getEventManager(void) const
 void
 QuarterWidget::setSoRenderManager(SoRenderManager * manager)
 {
-  // FIXME: free existing manager if it is the default one
+  SbBool carrydata = FALSE;
+  SoNode * scene = NULL;
+  SoCamera * camera = NULL;
+  SbViewportRegion vp;
+  if (PRIVATE(this)->sorendermanager && (manager != NULL)) {
+    scene = PRIVATE(this)->sorendermanager->getSceneGraph();
+    camera = PRIVATE(this)->sorendermanager->getCamera();
+    vp = PRIVATE(this)->sorendermanager->getViewportRegion();
+    carrydata = TRUE;
+  }
+  if (PRIVATE(this)->initialsorendermanager) {
+    delete PRIVATE(this)->sorendermanager;
+    PRIVATE(this)->initialsorendermanager = FALSE;
+  }
   PRIVATE(this)->sorendermanager = manager;
+  if (carrydata) {
+    PRIVATE(this)->sorendermanager->setSceneGraph(scene);
+    PRIVATE(this)->sorendermanager->setCamera(camera);
+    PRIVATE(this)->sorendermanager->setViewportRegion(vp);
+  }
 }
 
 /*!
@@ -308,8 +324,26 @@ QuarterWidget::getSoRenderManager(void) const
 void
 QuarterWidget::setSoEventManager(SoEventManager * manager)
 {
-  // FIXME: free existing manager if it is the default one
+  SbBool carrydata = FALSE;
+  SoNode * scene = NULL;
+  SoCamera * camera = NULL;
+  SbViewportRegion vp;
+  if (PRIVATE(this)->soeventmanager && (manager != NULL)) {
+    scene = PRIVATE(this)->soeventmanager->getSceneGraph();
+    camera = PRIVATE(this)->soeventmanager->getCamera();
+    vp = PRIVATE(this)->soeventmanager->getViewportRegion();
+    carrydata = TRUE;
+  }
+  if (PRIVATE(this)->initialsoeventmanager) {
+    delete PRIVATE(this)->soeventmanager;
+    PRIVATE(this)->initialsoeventmanager = FALSE;
+  }
   PRIVATE(this)->soeventmanager = manager;
+  if (carrydata) {
+    PRIVATE(this)->soeventmanager->setSceneGraph(scene);
+    PRIVATE(this)->soeventmanager->setCamera(camera);
+    PRIVATE(this)->soeventmanager->setViewportRegion(vp);
+  }
 }
 
 /*!
