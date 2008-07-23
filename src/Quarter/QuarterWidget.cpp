@@ -223,7 +223,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
 
   SoCamera * camera = NULL;
   SoSeparator * superscene = NULL;
-  SbBool viewall = FALSE;
+  bool viewall = false;
 
   if (node) {
     node->ref();
@@ -238,7 +238,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
     if (!(camera = PRIVATE(this)->searchForCamera(node))) {
       camera = new SoPerspectiveCamera;
       superscene->addChild(camera);
-      viewall = TRUE;
+      viewall = true;
     }
 
     superscene->addChild(node);
@@ -287,7 +287,7 @@ QuarterWidget::getEventManager(void) const
 void
 QuarterWidget::setSoRenderManager(SoRenderManager * manager)
 {
-  SbBool carrydata = FALSE;
+  bool carrydata = false;
   SoNode * scene = NULL;
   SoCamera * camera = NULL;
   SbViewportRegion vp;
@@ -295,11 +295,11 @@ QuarterWidget::setSoRenderManager(SoRenderManager * manager)
     scene = PRIVATE(this)->sorendermanager->getSceneGraph();
     camera = PRIVATE(this)->sorendermanager->getCamera();
     vp = PRIVATE(this)->sorendermanager->getViewportRegion();
-    carrydata = TRUE;
+    carrydata = true;
   }
   if (PRIVATE(this)->initialsorendermanager) {
     delete PRIVATE(this)->sorendermanager;
-    PRIVATE(this)->initialsorendermanager = FALSE;
+    PRIVATE(this)->initialsorendermanager = false;
   }
   PRIVATE(this)->sorendermanager = manager;
   if (carrydata) {
@@ -324,7 +324,7 @@ QuarterWidget::getSoRenderManager(void) const
 void
 QuarterWidget::setSoEventManager(SoEventManager * manager)
 {
-  SbBool carrydata = FALSE;
+  bool carrydata = false;
   SoNode * scene = NULL;
   SoCamera * camera = NULL;
   SbViewportRegion vp;
@@ -332,11 +332,11 @@ QuarterWidget::setSoEventManager(SoEventManager * manager)
     scene = PRIVATE(this)->soeventmanager->getSceneGraph();
     camera = PRIVATE(this)->soeventmanager->getCamera();
     vp = PRIVATE(this)->soeventmanager->getViewportRegion();
-    carrydata = TRUE;
+    carrydata = true;
   }
   if (PRIVATE(this)->initialsoeventmanager) {
     delete PRIVATE(this)->soeventmanager;
-    PRIVATE(this)->initialsoeventmanager = FALSE;
+    PRIVATE(this)->initialsoeventmanager = false;
   }
   PRIVATE(this)->soeventmanager = manager;
   if (carrydata) {
