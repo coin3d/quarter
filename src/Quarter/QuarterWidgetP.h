@@ -53,13 +53,15 @@ public:
   SoCamera * searchForCamera(SoNode * root);
   uint32_t getCacheContextId(void) const;
 
-  QuarterWidget * master;
+  QuarterWidget * const master;
   SoNode * scene;
   SoSceneManager * scenemanager;
   DeviceManager * devicemanager;
   EventManager * eventmanager;
   SoRenderManager * sorendermanager;
   SoEventManager * soeventmanager;
+  bool initialsorendermanager;
+  bool initialsoeventmanager;
   SoDirectionalLight * headlight;
   QuarterWidgetP_cachecontext * cachecontext;
   ContextMenu * contextmenu;

@@ -51,13 +51,24 @@ static SbList <QuarterWidgetP_cachecontext *> * cachecontext_list = NULL;
 QuarterWidgetP::StateCursorMap * QuarterWidgetP::statecursormap = NULL;
 
 QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * sharewidget)
+: master(masterptr),
+  scene(NULL),
+  scenemanager(NULL),
+  devicemanager(NULL),
+  eventmanager(NULL),
+  sorendermanager(NULL),
+  soeventmanager(NULL),
+  initialsorendermanager(false),
+  initialsoeventmanager(false),
+  headlight(NULL),
+  cachecontext(NULL),
+  contextmenu(NULL),
+  contextmenuenabled(true)
 {
-  this->master = masterptr;
-  this->contextmenu = NULL;
   this->cachecontext = findCacheContext(masterptr, sharewidget);
 
-  if (statecursormap == NULL) {
-    statecursormap = new StateCursorMap;
+  if (QuarterWidgetP::statecursormap == NULL) {
+    QuarterWidgetP::statecursormap = new StateCursorMap;
   }
 }
 
