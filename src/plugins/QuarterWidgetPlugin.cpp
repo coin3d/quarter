@@ -165,7 +165,7 @@ QuarterWidgetPlugin::domXml(void) const
     "  <string>QuarterWidget</string>\n"
     " </property>\n"
     " <property name=\"whatsThis\" >\n"
-    "  <string>The QuarterWidget displays Open Inventor scene graphs.</string>\n"
+    "  <string>The QuarterWidget displays Coin3D scene graphs.</string>\n"
     " </property>\n"
     "</widget>\n";
 }
