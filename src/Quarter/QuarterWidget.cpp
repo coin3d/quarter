@@ -168,7 +168,7 @@ QuarterWidget::setStateCursor(const SbName & state, const QCursor & cursor)
 }
 
 /*!
-  Enable/disable the headlight. This wille toggle the SoDirectionalLigh::on
+  Enable/disable the headlight. This wille toggle the SoDirectionalLight::on
   field (returned from getHeadlight()).
 */
 void
