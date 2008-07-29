@@ -245,10 +245,10 @@ QuarterWidget::setSceneGraph(SoNode * node)
     node->unref();
   }
 
-  PRIVATE(this)->soeventmanager->setSceneGraph(superscene);
-  PRIVATE(this)->sorendermanager->setSceneGraph(superscene);
   PRIVATE(this)->soeventmanager->setCamera(camera);
   PRIVATE(this)->sorendermanager->setCamera(camera);
+  PRIVATE(this)->soeventmanager->setSceneGraph(superscene);
+  PRIVATE(this)->sorendermanager->setSceneGraph(superscene);
 
   if (viewall) { this->viewAll(); }
   if (superscene) { superscene->touch(); }
@@ -515,6 +515,8 @@ QuarterWidget::enableContextMenu(bool yes)
   SoEventManager.  It also initializes the scene graph
   root and active camera for the state machine, and finally it sets
   up the default Quarter cursor handling.
+
+  \sa removeStateMachine
 */
 void 
 QuarterWidget::addStateMachine(SoScXMLStateMachine * statemachine)
@@ -525,6 +527,19 @@ QuarterWidget::addStateMachine(SoScXMLStateMachine * statemachine)
   statemachine->setSceneGraphRoot(this->getSoRenderManager()->getSceneGraph());
   statemachine->setActiveCamera(this->getSoRenderManager()->getCamera());
   statemachine->addStateChangeCallback(QuarterWidgetP::statechangecb, PRIVATE(this));
+}
+
+/*!
+  Convenience method that removes a state machine to the current
+  SoEventManager.
+
+  /sa addStateMachine
+*/
+void 
+QuarterWidget::removeStateMachine(SoScXMLStateMachine * statemachine)
+{
+  SoEventManager * em = this->getSoEventManager();
+  em->removeSoScXMLStateMachine(statemachine);
 }
 
 #undef PRIVATE

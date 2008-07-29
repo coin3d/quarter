@@ -79,6 +79,7 @@ public:
   SoRenderManager * getSoRenderManager(void) const;
 
   void addStateMachine(SoScXMLStateMachine * statemachine);
+  void removeStateMachine(SoScXMLStateMachine * statemachine);
 
 public slots:
   virtual void viewAll(void);
