@@ -1,3 +1,4 @@
+#include "../../Quarter/devices/KeyboardHandlerP.h"
 #include "EventTranslation.h"
 
 #include <assert.h>
@@ -9,11 +10,6 @@
 #include <Inventor/events/SoLocation2Event.h>
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/nodes/SoEventCallback.h>
-
-#include <Quarter/Quarter.h>
-#include <Quarter/QuarterWidget.h>
-
-#include "../../Quarter/devices/KeyboardHandlerP.h"
 
 static SoEvent * currentevent = NULL;
 
@@ -96,6 +92,7 @@ EventTranslation::translateKeyboardEvents_data(void)
   modifiers += Qt::ControlModifier;
   modifiers += Qt::AltModifier;
 
+  QVERIFY(KeyboardHandlerP::keyboardmap != NULL);
   KeyboardHandlerP::KeyMap::const_iterator it =
     KeyboardHandlerP::keyboardmap->constBegin();
 

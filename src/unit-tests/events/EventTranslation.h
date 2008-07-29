@@ -4,6 +4,11 @@
 #include <QtGui>
 #include <QtTest/QtTest>
 
+#include <Quarter/Quarter.h>
+#include <Quarter/QuarterWidget.h>
+
+using namespace SIM::Coin3D::Quarter;
+
 class EventTranslation : public QObject {
   Q_OBJECT
 
