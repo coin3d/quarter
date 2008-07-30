@@ -106,6 +106,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   this->setStateCursor("seek", Qt::CrossCursor);
   this->setStateCursor("spin", Qt::OpenHandCursor);
 
+  // FIXME: This object appears to never be deleted. kintel 20080730
   ScXMLStateMachine * statemachine =
     ScXML::readFile("coin:scxml/navigation/examiner.xml");
   if (statemachine &&
@@ -226,8 +227,6 @@ QuarterWidget::setSceneGraph(SoNode * node)
   bool viewall = false;
 
   if (node) {
-    node->ref();
-
     PRIVATE(this)->scene = node;
     PRIVATE(this)->scene->ref();
 
@@ -242,7 +241,6 @@ QuarterWidget::setSceneGraph(SoNode * node)
     }
 
     superscene->addChild(node);
-    node->unref();
   }
 
   PRIVATE(this)->soeventmanager->setCamera(camera);
@@ -539,6 +537,8 @@ void
 QuarterWidget::removeStateMachine(SoScXMLStateMachine * statemachine)
 {
   SoEventManager * em = this->getSoEventManager();
+  statemachine->setSceneGraphRoot(NULL);
+  statemachine->setActiveCamera(NULL);
   em->removeSoScXMLStateMachine(statemachine);
 }
 
