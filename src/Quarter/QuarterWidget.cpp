@@ -122,7 +122,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->headlight->ref();
 
   PRIVATE(this)->sorendermanager->setAutoClipping(SoRenderManager::VARIABLE_NEAR_PLANE);
-  PRIVATE(this)->sorendermanager->setRenderCallback(QuarterWidget::renderCB, this);
+  PRIVATE(this)->sorendermanager->setRenderCallback(QuarterWidgetP::rendercb, this);
   PRIVATE(this)->sorendermanager->setBackgroundColor(SbColor4f(0.0f, 0.0f, 0.0f, 0.0f));
   PRIVATE(this)->sorendermanager->activate();
   PRIVATE(this)->sorendermanager->addPreRenderCallback(QuarterWidgetP::prerendercb, PRIVATE(this));
@@ -173,7 +173,7 @@ QuarterWidget::setStateCursor(const SbName & state, const QCursor & cursor)
   field (returned from getHeadlight()).
 */
 void
-QuarterWidget::enableHeadlight(const SbBool onoff)
+QuarterWidget::enableHeadlight(bool onoff)
 {
   PRIVATE(this)->headlight->on = onoff;
 }
@@ -413,23 +413,6 @@ QuarterWidget::actualRedraw(void)
   PRIVATE(this)->sorendermanager->render(TRUE, TRUE);
 }
 
-/*!
-  
- */
-void
-QuarterWidget::renderCB(void * closure, SoRenderManager *)
-{
-  assert(closure);
-  QuarterWidget * thisp = (QuarterWidget *) closure;
-
-  thisp->makeCurrent();
-  thisp->actualRedraw();
-  if (thisp->doubleBuffer()) {
-    thisp->swapBuffers();
-  }
-  thisp->doneCurrent();
-}
-
 /*! Translates Qt Events into Coin events and passes them on to the
   scenemanager for processing. If the event can not be translated or
   processed, it is forwarded to Qt and the method returns false. This
@@ -474,7 +457,7 @@ QuarterWidget::setBackgroundColor(const QColor & color)
   rendering the scene.
  */
 QColor
-QuarterWidget::getBackgroundColor(void) const
+QuarterWidget::backgroundColor(void) const
 {
   SbColor4f bg = PRIVATE(this)->sorendermanager->getBackgroundColor();
 
@@ -497,13 +480,13 @@ QuarterWidget::getContextMenu(void) const
 }
 
 bool
-QuarterWidget::contextMenuEnabled(void) const
+QuarterWidget::isContextMenuEnabled(void) const
 {
   return PRIVATE(this)->contextmenuenabled;
 }
 
 void
-QuarterWidget::enableContextMenu(bool yes)
+QuarterWidget::setContextMenuEnabled(bool yes)
 {
   PRIVATE(this)->contextmenuenabled = yes;
 }

@@ -125,6 +125,22 @@ QuarterWidgetP::findCacheContext(QuarterWidget * widget, const QGLWidget * share
   return cachecontext;
 }
 
+/*!
+  
+ */
+void
+QuarterWidgetP::rendercb(void * userdata, SoRenderManager *)
+{
+  QuarterWidget * thisp = static_cast<QuarterWidget *>(userdata);
+
+  thisp->makeCurrent();
+  thisp->actualRedraw();
+  if (thisp->doubleBuffer()) {
+    thisp->swapBuffers();
+  }
+  thisp->doneCurrent();
+}
+
 void
 QuarterWidgetP::prerendercb(void * userdata, SoRenderManager * manager)
 {

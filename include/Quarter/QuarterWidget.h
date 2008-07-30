@@ -46,26 +46,27 @@ class DeviceManager;
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   typedef QGLWidget inherited;
   Q_OBJECT
-  Q_PROPERTY(QColor backgroundColor READ getBackgroundColor WRITE setBackgroundColor)
-  Q_PROPERTY(bool contextMenuEnabled READ contextMenuEnabled WRITE enableContextMenu)
+  Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
+  Q_PROPERTY(bool contextMenuEnabled READ isContextMenuEnabled WRITE setContextMenuEnabled)
 
 public:
-  QuarterWidget(const QGLFormat & format, QWidget * parent = 0, const QGLWidget * shareWidget = 0, Qt::WindowFlags f = 0);
-  QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
-  QuarterWidget(QGLContext * context, QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
-  virtual ~QuarterWidget();
+  explicit QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
+  explicit QuarterWidget(QGLContext * context, QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
+  explicit QuarterWidget(const QGLFormat & format, QWidget * parent = 0, const QGLWidget * shareWidget = 0, Qt::WindowFlags f = 0);
+  ~QuarterWidget();
 
-  void setStateCursor(const SbName & state, const QCursor & cursor);
-  void enableHeadlight(const SbBool onoff);
-  SoDirectionalLight * getHeadlight(void);
-  uint32_t getCacheContextId(void) const;
+  void setBackgroundColor(const QColor & color);
+  QColor backgroundColor(void) const;
+  void setContextMenuEnabled(bool yes);
+  bool isContextMenuEnabled(void) const;
+  QMenu * getContextMenu(void) const;
 
   void setTransparencyType(SoGLRenderAction::TransparencyType type);
-  void setBackgroundColor(const QColor & color);
-  QColor getBackgroundColor(void) const;
-  QMenu * getContextMenu(void) const;
-  void enableContextMenu(bool yes);
-  bool contextMenuEnabled(void) const;
+  void enableHeadlight(bool onoff);
+  SoDirectionalLight * getHeadlight(void);
+
+  void setStateCursor(const SbName & state, const QCursor & cursor);
+  uint32_t getCacheContextId(void) const;
 
   virtual void setSceneGraph(SoNode * root);
   virtual SoNode * getSceneGraph(void) const;
@@ -90,8 +91,6 @@ protected:
   virtual void paintGL(void);
   virtual bool event(QEvent * event);
   virtual void actualRedraw(void);
-
-  static void renderCB(void * closure, SoRenderManager *);
 
 private:
   void constructor(const QGLWidget * sharewidget);
