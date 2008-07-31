@@ -40,7 +40,6 @@
 #include <Inventor/nodes/SoPerspectiveCamera.h>
 #include <Inventor/SbColor.h>
 
-#include <Inventor/SoSceneManager.h>
 #include <Inventor/SoRenderManager.h>
 #include <Inventor/SoEventManager.h>
 #include <Inventor/scxml/ScXML.h>
@@ -414,7 +413,7 @@ QuarterWidget::actualRedraw(void)
 }
 
 /*! Translates Qt Events into Coin events and passes them on to the
-  scenemanager for processing. If the event can not be translated or
+  event manager for processing. If the event can not be translated or
   processed, it is forwarded to Qt and the method returns false. This
   method could be overridden in a subclass in order to catch events of
   particular interest to the application programmer.
