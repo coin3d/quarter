@@ -28,16 +28,12 @@ using namespace SIM::Coin3D::Quarter;
 
 ImageReader::ImageReader(void)
 {
-#if COIN_MAJOR_VERSION >= 3
   SbImage::addReadImageCB(ImageReader::readImageCB, this);
-#endif // COIN_MAJOR_VERSION >= 3
 }
 
 ImageReader::~ImageReader(void)
 {
-#if COIN_MAJOR_VERSION >= 3
   SbImage::removeReadImageCB(ImageReader::readImageCB, this);
-#endif // COIN_MAJOR_VERSION >= 3
 }
 
 SbBool
