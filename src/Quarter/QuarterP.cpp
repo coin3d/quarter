@@ -17,6 +17,7 @@ QuarterP::~QuarterP()
   delete this->imagereader;
   delete this->sensormanager;
 
+  // FIXME: Why not use an atexit mechanism for this?
   if (KeyboardHandlerP::keyboardmap != NULL) {
     KeyboardHandlerP::keyboardmap->clear();
     KeyboardHandlerP::keypadmap->clear();
