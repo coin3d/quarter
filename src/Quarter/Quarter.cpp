@@ -140,6 +140,7 @@ void
 Quarter::init(bool initCoin)
 {
   if (self) {
+    // FIXME: Use SoDebugError
     fprintf(stderr, "Quarter is already initialized\n");
     return;
   }
