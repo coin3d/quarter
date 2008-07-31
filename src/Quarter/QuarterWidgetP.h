@@ -29,7 +29,6 @@
 
 class SoNode;
 class SoCamera;
-class SoSceneManager;
 class SoRenderManager;
 class SoEventManager;
 class SoDirectionalLight;
@@ -55,7 +54,6 @@ public:
 
   QuarterWidget * const master;
   SoNode * scene;
-  SoSceneManager * scenemanager;
   DeviceManager * devicemanager;
   EventManager * eventmanager;
   SoRenderManager * sorendermanager;

@@ -26,7 +26,6 @@
 
 #include <Inventor/SoDB.h>
 #include <Inventor/SbTime.h>
-#include <Inventor/SoSceneManager.h>
 #include <Inventor/nodekits/SoNodeKit.h>
 #include <Inventor/C/threads/thread.h>
 #include "SignalThread.h"
@@ -58,8 +57,7 @@ SensorManager::SensorManager(void)
   this->timerEpsilon = 1.0 / 5000.0;
 
   SoDB::setRealTimeInterval(1.0 / 25.0);
-  SoSceneManager::enableRealTimeUpdate(FALSE);
-
+  SoRenderManager::enableRealTimeUpdate(FALSE);
 }
 
 SensorManager::~SensorManager()

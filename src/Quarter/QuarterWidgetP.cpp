@@ -53,7 +53,6 @@ QuarterWidgetP::StateCursorMap * QuarterWidgetP::statecursormap = NULL;
 QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * sharewidget)
 : master(masterptr),
   scene(NULL),
-  scenemanager(NULL),
   devicemanager(NULL),
   eventmanager(NULL),
   sorendermanager(NULL),
