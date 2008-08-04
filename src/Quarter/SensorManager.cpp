@@ -26,6 +26,7 @@
 
 #include <Inventor/SoDB.h>
 #include <Inventor/SbTime.h>
+#include <Inventor/SoRenderManager.h>
 #include <Inventor/nodekits/SoNodeKit.h>
 #include <Inventor/C/threads/thread.h>
 #include "SignalThread.h"
