@@ -161,12 +161,6 @@ QuarterWidgetPlugin::domXml(void) const
     "   <height>100</height>\n"
     "  </rect>\n"
     " </property>\n"
-    " <property name=\"toolTip\" >\n"
-    "  <string>QuarterWidget</string>\n"
-    " </property>\n"
-    " <property name=\"whatsThis\" >\n"
-    "  <string>The QuarterWidget displays Coin3D scene graphs.</string>\n"
-    " </property>\n"
     "</widget>\n";
 }
 
