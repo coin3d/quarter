@@ -44,7 +44,6 @@
 #include <Inventor/SoEventManager.h>
 #include <Inventor/scxml/ScXML.h>
 #include <Inventor/scxml/SoScXMLStateMachine.h>
-#include <Inventor/navigation/SoNavigationSystem.h>
 
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/devices/DeviceManager.h>
@@ -113,7 +112,6 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
     SoScXMLStateMachine * sostatemachine =
       static_cast<SoScXMLStateMachine *>(statemachine);
     statemachine->addStateChangeCallback(QuarterWidgetP::statechangecb, PRIVATE(this));
-    PRIVATE(this)->soeventmanager->setNavigationSystem(NULL);
     PRIVATE(this)->soeventmanager->addSoScXMLStateMachine(sostatemachine);
     sostatemachine->initialize();
   }
@@ -358,9 +356,6 @@ QuarterWidget::getSoEventManager(void) const
 void
 QuarterWidget::viewAll(void)
 {
-  if (PRIVATE(this)->soeventmanager->getNavigationSystem()) {
-    PRIVATE(this)->soeventmanager->getNavigationSystem()->viewAll();
-  }
   const SbName viewallevent("sim.coin3d.coin.navigation.ViewAll");
   for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
     SoScXMLStateMachine * sostatemachine =
@@ -502,7 +497,6 @@ void
 QuarterWidget::addStateMachine(SoScXMLStateMachine * statemachine)
 {
   SoEventManager * em = this->getSoEventManager();
-  em->setNavigationSystem(NULL); // clear old navigation system
   em->addSoScXMLStateMachine(statemachine);
   statemachine->setSceneGraphRoot(this->getSoRenderManager()->getSceneGraph());
   statemachine->setActiveCamera(this->getSoRenderManager()->getCamera());
