@@ -68,7 +68,7 @@
   int
   main(int argc, char ** argv)
   {
-    // Initializes SoQt library (and implicitly also the Coin and Qt
+    // Initializes Quarter library (and implicitly also the Coin and Qt
     // libraries).
     QuarterApplication app(argc, argv);
 
