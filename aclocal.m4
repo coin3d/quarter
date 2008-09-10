@@ -82,7 +82,9 @@ EOF
 sim_ac_msc_version=`$CXXCPP $CPPFLAGS conftest.c 2>/dev/null | grep '^int VerMSC' | sed 's%^int VerMSC = %%' | sed 's% *;.*$%%'`
 
 sim_ac_msc_minor_version=0
-if test $sim_ac_msc_version -ge 1400; then
+if test $sim_ac_msc_version -ge 1500; then
+  sim_ac_msc_major_version=9
+elif test $sim_ac_msc_version -ge 1400; then
   sim_ac_msc_major_version=8
 elif test $sim_ac_msc_version -ge 1300; then
   sim_ac_msc_major_version=7

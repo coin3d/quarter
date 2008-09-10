@@ -23820,7 +23820,7 @@ else
       QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner${sim_ac_qt_suffix}4 -lQtXml${sim_ac_qt_suffix}4"
     fi
   else
-    QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner -lQtXml"
+    QT_USE_LIBS="-lQtUiTools -lQtDesigner -lQtXml $QT_USE_LIBS"
   fi
 fi
 
