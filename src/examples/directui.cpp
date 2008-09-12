@@ -32,8 +32,9 @@
 #include <Inventor/nodes/SoBaseColor.h>
 #include <Inventor/nodes/SoSeparator.h>
 
+#include <QtGui/QApplication>
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/QuarterApplication.h>
+#include <Quarter/Quarter.h>
 
 #include "ui_QuarterViewer.h"
 
@@ -42,8 +43,9 @@ using namespace SIM::Coin3D::Quarter;
 int
 main(int argc, char ** argv)
 {
+  QApplication app(argc, argv);
   // Initializes Quarter (and implicitly also Coin and Qt
-  QuarterApplication app(argc, argv);
+  Quarter::init();
 
   QWidget * viewer = new QWidget;
   Ui::QuarterViewer ui;
@@ -70,6 +72,7 @@ main(int argc, char ** argv)
   // Clean up resources.
   root->unref();
   delete viewer;
+  Quarter::clean();
 
   return 0;
 }

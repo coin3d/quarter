@@ -47,7 +47,6 @@ RegularSources = \
         QuarterWidget.cpp \
         SensorManager.cpp \
         QuarterWidgetP.cpp \
-        QuarterApplication.cpp \
         ContextMenu.cpp \
         ImageReader.cpp \
         SignalThread.cpp

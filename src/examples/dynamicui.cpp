@@ -35,13 +35,15 @@
 #include <Inventor/nodes/SoSeparator.h>
 
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/QuarterApplication.h>
+#include <Quarter/Quarter.h>
+#include <QtGui/QApplication>
 
 using namespace SIM::Coin3D::Quarter;
 
 int main(int argc, char *argv[])
 {
-  QuarterApplication app(argc, argv);
+  QApplication app(argc, argv);
+  Quarter::init();
 
   QFile file(":/QuarterViewer.ui");
   if (!file.open(QFile::ReadOnly)) {
@@ -75,6 +77,7 @@ int main(int argc, char *argv[])
   // Clean up resources.
   root->unref();
   delete widget;
+  Quarter::clean();
 
   return 0;
 }

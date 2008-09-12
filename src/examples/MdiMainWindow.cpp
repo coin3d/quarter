@@ -29,10 +29,14 @@
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDragEnterEvent>
 
+#include <Quarter/Quarter.h>
+
 using namespace SIM::Coin3D::Quarter;
 
 MdiMainWindow::MdiMainWindow(void)
 {
+  Quarter::init();
+
   this->firstwidget = 0;
   this->workspace = new QWorkspace;
   this->setCentralWidget(this->workspace);
@@ -64,7 +68,7 @@ MdiMainWindow::MdiMainWindow(void)
 
 MdiMainWindow::~MdiMainWindow()
 {
-
+  Quarter::clean();
 }
 
 void

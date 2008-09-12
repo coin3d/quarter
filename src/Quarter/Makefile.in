@@ -265,7 +265,6 @@ RegularSources = \
         QuarterWidget.cpp \
         SensorManager.cpp \
         QuarterWidgetP.cpp \
-        QuarterApplication.cpp \
         ContextMenu.cpp \
         ImageReader.cpp \
         SignalThread.cpp
@@ -357,7 +356,6 @@ am__objects_1 = \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidget.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SensorManager.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.$(OBJEXT) \
-	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SignalThread.$(OBJEXT)
@@ -380,10 +378,8 @@ libQuarter_la_DEPENDENCIES = devices/libdevices.la \
 	eventhandlers/libeventhandlers.la
 am__objects_4 = libQuarter_la-Quarter.lo libQuarter_la-QuarterP.lo \
 	libQuarter_la-QuarterWidget.lo libQuarter_la-SensorManager.lo \
-	libQuarter_la-QuarterWidgetP.lo \
-	libQuarter_la-QuarterApplication.lo \
-	libQuarter_la-ContextMenu.lo libQuarter_la-ImageReader.lo \
-	libQuarter_la-SignalThread.lo
+	libQuarter_la-QuarterWidgetP.lo libQuarter_la-ContextMenu.lo \
+	libQuarter_la-ImageReader.lo libQuarter_la-SignalThread.lo
 am_libQuarter_la_OBJECTS = $(am__objects_4) $(am__objects_2)
 am__objects_5 = libQuarter_la-moc_QuarterWidget.lo \
 	libQuarter_la-moc_SensorManager.lo \
@@ -398,7 +394,6 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Quarter.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterP.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidget.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.Po \
@@ -411,7 +406,6 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-ContextMenu.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-ImageReader.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-Quarter.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-QuarterApplication.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-QuarterP.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-QuarterWidget.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-QuarterWidgetP.Plo \
@@ -528,7 +522,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Quarter.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterP.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.Po@am__quote@
@@ -541,7 +534,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-ContextMenu.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-ImageReader.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-Quarter.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-QuarterApplication.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-QuarterP.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-QuarterWidget.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-QuarterWidgetP.Plo@am__quote@
@@ -752,39 +744,6 @@ Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.lo: QuarterWidgetP.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.lo `test -f 'QuarterWidgetP.cpp' || echo '$(srcdir)/'`QuarterWidgetP.cpp
-
-Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.o: QuarterApplication.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.o `test -f 'QuarterApplication.cpp' || echo '$(srcdir)/'`QuarterApplication.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterApplication.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.o `test -f 'QuarterApplication.cpp' || echo '$(srcdir)/'`QuarterApplication.cpp
-
-Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.obj: QuarterApplication.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.obj -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.obj `if test -f 'QuarterApplication.cpp'; then $(CYGPATH_W) 'QuarterApplication.cpp'; else $(CYGPATH_W) '$(srcdir)/QuarterApplication.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterApplication.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.obj `if test -f 'QuarterApplication.cpp'; then $(CYGPATH_W) 'QuarterApplication.cpp'; else $(CYGPATH_W) '$(srcdir)/QuarterApplication.cpp'; fi`
-
-Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.lo: QuarterApplication.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.lo -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.lo `test -f 'QuarterApplication.cpp' || echo '$(srcdir)/'`QuarterApplication.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterApplication.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterApplication.lo `test -f 'QuarterApplication.cpp' || echo '$(srcdir)/'`QuarterApplication.cpp
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.o: ContextMenu.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Tpo" \
@@ -1181,39 +1140,6 @@ libQuarter_la-QuarterWidgetP.lo: QuarterWidgetP.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-QuarterWidgetP.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-QuarterWidgetP.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-QuarterWidgetP.lo `test -f 'QuarterWidgetP.cpp' || echo '$(srcdir)/'`QuarterWidgetP.cpp
-
-libQuarter_la-QuarterApplication.o: QuarterApplication.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-QuarterApplication.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-QuarterApplication.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-QuarterApplication.o `test -f 'QuarterApplication.cpp' || echo '$(srcdir)/'`QuarterApplication.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-QuarterApplication.Tpo" "$(DEPDIR)/libQuarter_la-QuarterApplication.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-QuarterApplication.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterApplication.cpp' object='libQuarter_la-QuarterApplication.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-QuarterApplication.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-QuarterApplication.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-QuarterApplication.o `test -f 'QuarterApplication.cpp' || echo '$(srcdir)/'`QuarterApplication.cpp
-
-libQuarter_la-QuarterApplication.obj: QuarterApplication.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-QuarterApplication.obj -MD -MP -MF "$(DEPDIR)/libQuarter_la-QuarterApplication.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-QuarterApplication.obj `if test -f 'QuarterApplication.cpp'; then $(CYGPATH_W) 'QuarterApplication.cpp'; else $(CYGPATH_W) '$(srcdir)/QuarterApplication.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-QuarterApplication.Tpo" "$(DEPDIR)/libQuarter_la-QuarterApplication.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-QuarterApplication.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterApplication.cpp' object='libQuarter_la-QuarterApplication.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-QuarterApplication.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-QuarterApplication.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-QuarterApplication.obj `if test -f 'QuarterApplication.cpp'; then $(CYGPATH_W) 'QuarterApplication.cpp'; else $(CYGPATH_W) '$(srcdir)/QuarterApplication.cpp'; fi`
-
-libQuarter_la-QuarterApplication.lo: QuarterApplication.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-QuarterApplication.lo -MD -MP -MF "$(DEPDIR)/libQuarter_la-QuarterApplication.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-QuarterApplication.lo `test -f 'QuarterApplication.cpp' || echo '$(srcdir)/'`QuarterApplication.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-QuarterApplication.Tpo" "$(DEPDIR)/libQuarter_la-QuarterApplication.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-QuarterApplication.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='QuarterApplication.cpp' object='libQuarter_la-QuarterApplication.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-QuarterApplication.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-QuarterApplication.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-QuarterApplication.lo `test -f 'QuarterApplication.cpp' || echo '$(srcdir)/'`QuarterApplication.cpp
 
 libQuarter_la-ContextMenu.o: ContextMenu.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-ContextMenu.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-ContextMenu.Tpo" \

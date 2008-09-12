@@ -27,13 +27,12 @@
   Interface using Qt's QWorkspace class and Quarter's QuarterWidget.
  */
 
-#include <Quarter/QuarterApplication.h>
-using namespace SIM::Coin3D::Quarter;
 #include "MdiMainWindow.h"
+#include <QtGui/QApplication>
 
  int main(int argc, char *argv[])
  {
-   QuarterApplication app(argc, argv);
+   QApplication app(argc, argv);
    MdiMainWindow mainwin;
    mainwin.show();
    return app.exec();

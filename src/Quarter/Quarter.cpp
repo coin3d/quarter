@@ -56,21 +56,23 @@
   following code:
 
   \code
+  #include <QtGui/QApplication>
+
   #include <Inventor/nodes/SoBaseColor.h>
   #include <Inventor/nodes/SoCone.h>
   #include <Inventor/nodes/SoSeparator.h>
 
   #include <Quarter/QuarterWidget.h>
-  #include <Quarter/QuarterApplication.h>
 
   using namespace SIM::Coin3D::Quarter;
 
   int
   main(int argc, char ** argv)
   {
+    QApplication app(argc, argv);
     // Initializes Quarter library (and implicitly also the Coin and Qt
     // libraries).
-    QuarterApplication app(argc, argv);
+    Quarter::init();
 
     // Make a dead simple scene graph by using the Coin library, only
     // containing a single yellow cone under the scenegraph root.
@@ -94,6 +96,8 @@
     // Clean up resources.
     root->unref();
     delete viewer;
+    
+    Quarter::clean();
 
     return 0;
   }
