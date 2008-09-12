@@ -25,6 +25,8 @@
   example of a QuarterViewer without the use of ui files
  */
 
+#include <QtGui/QApplication>
+
 #include <Inventor/nodes/SoCone.h>
 #include <Inventor/nodes/SoBaseColor.h>
 #include <Inventor/nodes/SoSeparator.h>
@@ -34,7 +36,7 @@
 #include <Inventor/SoRenderManager.h>
 
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/QuarterApplication.h>
+#include <Quarter/Quarter.h>
 
 using namespace SIM::Coin3D::Quarter;
 
@@ -88,8 +90,9 @@ static SoSeparator * create_superimposition(void)
 int
 main(int argc, char ** argv)
 {
+  QApplication app(argc, argv);
   // Initializes Quarter (and implicitly also Coin and Qt
-  QuarterApplication app(argc, argv);
+  Quarter::init();
 
   // Make a dead simple scene graph by using the Coin library, only
   // containing a single yellow cone under the scenegraph root.
@@ -127,6 +130,7 @@ main(int argc, char ** argv)
   superimposed->unref();
   background->unref();
   delete viewer;
+  Quarter::clean();
 
   return 0;
 }

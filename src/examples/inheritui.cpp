@@ -27,8 +27,9 @@
   subclassing a generated class from an ui file
 */
 
+#include <QtGui/QApplication>
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/QuarterApplication.h>
+#include <Quarter/Quarter.h>
 
 #include "QuarterViewer.h"
 
@@ -37,8 +38,9 @@ using namespace SIM::Coin3D::Quarter;
 int
 main(int argc, char ** argv)
 {
+  QApplication app(argc, argv);
   // Initializes Quarter (and implicitly also Coin and Qt
-  QuarterApplication app(argc, argv);
+  Quarter::init();
 
   QuarterViewer * viewer = new QuarterViewer;
   // Pop up the viewer
@@ -47,5 +49,7 @@ main(int argc, char ** argv)
   app.exec();
   // Clean up resources.
   delete viewer;
+  Quarter::clean();
+
   return 0;
 }
