@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "quarter1", "quarter1.vcproj", "{ABA5F5A9-0B39-4FD2-9B8A-AD3CFAD25510}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "quarterplugin1", "quarterplugin1.vcproj", "{47EB6596-784F-4B37-A3FA-62DFBF67FC22}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "quarter1_install", "quarter1_install.vcproj", "{BF0EBEE9-A625-4853-94FB-2845A6F963DD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ABA5F5A9-0B39-4FD2-9B8A-AD3CFAD25510} = {ABA5F5A9-0B39-4FD2-9B8A-AD3CFAD25510}
+		{47EB6596-784F-4B37-A3FA-62DFBF67FC22} = {47EB6596-784F-4B37-A3FA-62DFBF67FC22}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "quarter1_uninstall", "quarter1_uninstall.vcproj", "{07BC186D-EE79-4FC9-A0A0-AE4BA3B8F26B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		DLL (Debug)|Win32 = DLL (Debug)|Win32
+		DLL (Release)|Win32 = DLL (Release)|Win32
+		LIB (Debug)|Win32 = LIB (Debug)|Win32
+		LIB (Release)|Win32 = LIB (Release)|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABA5F5A9-0B39-4FD2-9B8A-AD3CFAD25510}.DLL (Debug)|Win32.ActiveCfg = DLL (Debug)|Win32
+		{ABA5F5A9-0B39-4FD2-9B8A-AD3CFAD25510}.DLL (Debug)|Win32.Build.0 = DLL (Debug)|Win32
+		{ABA5F5A9-0B39-4FD2-9B8A-AD3CFAD25510}.DLL (Release)|Win32.ActiveCfg = DLL (Release)|Win32
+		{ABA5F5A9-0B39-4FD2-9B8A-AD3CFAD25510}.DLL (Release)|Win32.Build.0 = DLL (Release)|Win32
+		{ABA5F5A9-0B39-4FD2-9B8A-AD3CFAD25510}.LIB (Debug)|Win32.ActiveCfg = LIB (Debug)|Win32
+		{ABA5F5A9-0B39-4FD2-9B8A-AD3CFAD25510}.LIB (Debug)|Win32.Build.0 = LIB (Debug)|Win32
+		{ABA5F5A9-0B39-4FD2-9B8A-AD3CFAD25510}.LIB (Release)|Win32.ActiveCfg = LIB (Release)|Win32
+		{ABA5F5A9-0B39-4FD2-9B8A-AD3CFAD25510}.LIB (Release)|Win32.Build.0 = LIB (Release)|Win32
+		{47EB6596-784F-4B37-A3FA-62DFBF67FC22}.DLL (Debug)|Win32.ActiveCfg = DLL (Debug)|Win32
+		{47EB6596-784F-4B37-A3FA-62DFBF67FC22}.DLL (Debug)|Win32.Build.0 = DLL (Debug)|Win32
+		{47EB6596-784F-4B37-A3FA-62DFBF67FC22}.DLL (Release)|Win32.ActiveCfg = DLL (Release)|Win32
+		{47EB6596-784F-4B37-A3FA-62DFBF67FC22}.DLL (Release)|Win32.Build.0 = DLL (Release)|Win32
+		{47EB6596-784F-4B37-A3FA-62DFBF67FC22}.LIB (Debug)|Win32.ActiveCfg = LIB (Debug)|Win32
+		{47EB6596-784F-4B37-A3FA-62DFBF67FC22}.LIB (Debug)|Win32.Build.0 = LIB (Debug)|Win32
+		{47EB6596-784F-4B37-A3FA-62DFBF67FC22}.LIB (Release)|Win32.ActiveCfg = LIB (Release)|Win32
+		{47EB6596-784F-4B37-A3FA-62DFBF67FC22}.LIB (Release)|Win32.Build.0 = LIB (Release)|Win32
+		{BF0EBEE9-A625-4853-94FB-2845A6F963DD}.DLL (Debug)|Win32.ActiveCfg = DLL (Debug)|Win32
+		{BF0EBEE9-A625-4853-94FB-2845A6F963DD}.DLL (Debug)|Win32.Build.0 = DLL (Debug)|Win32
+		{BF0EBEE9-A625-4853-94FB-2845A6F963DD}.DLL (Release)|Win32.ActiveCfg = DLL (Release)|Win32
+		{BF0EBEE9-A625-4853-94FB-2845A6F963DD}.DLL (Release)|Win32.Build.0 = DLL (Release)|Win32
+		{BF0EBEE9-A625-4853-94FB-2845A6F963DD}.LIB (Debug)|Win32.ActiveCfg = LIB (Debug)|Win32
+		{BF0EBEE9-A625-4853-94FB-2845A6F963DD}.LIB (Debug)|Win32.Build.0 = LIB (Debug)|Win32
+		{BF0EBEE9-A625-4853-94FB-2845A6F963DD}.LIB (Release)|Win32.ActiveCfg = LIB (Release)|Win32
+		{BF0EBEE9-A625-4853-94FB-2845A6F963DD}.LIB (Release)|Win32.Build.0 = LIB (Release)|Win32
+		{07BC186D-EE79-4FC9-A0A0-AE4BA3B8F26B}.DLL (Debug)|Win32.ActiveCfg = DLL (Debug)|Win32
+		{07BC186D-EE79-4FC9-A0A0-AE4BA3B8F26B}.DLL (Debug)|Win32.Build.0 = DLL (Debug)|Win32
+		{07BC186D-EE79-4FC9-A0A0-AE4BA3B8F26B}.DLL (Release)|Win32.ActiveCfg = DLL (Release)|Win32
+		{07BC186D-EE79-4FC9-A0A0-AE4BA3B8F26B}.DLL (Release)|Win32.Build.0 = DLL (Release)|Win32
+		{07BC186D-EE79-4FC9-A0A0-AE4BA3B8F26B}.LIB (Debug)|Win32.ActiveCfg = LIB (Debug)|Win32
+		{07BC186D-EE79-4FC9-A0A0-AE4BA3B8F26B}.LIB (Debug)|Win32.Build.0 = LIB (Debug)|Win32
+		{07BC186D-EE79-4FC9-A0A0-AE4BA3B8F26B}.LIB (Release)|Win32.ActiveCfg = LIB (Release)|Win32
+		{07BC186D-EE79-4FC9-A0A0-AE4BA3B8F26B}.LIB (Release)|Win32.Build.0 = LIB (Release)|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
