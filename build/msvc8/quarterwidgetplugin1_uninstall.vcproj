@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="quarterplugin1_uninstall"
-	ProjectGUID="{9FB88DF6-08B8-4656-93BD-5E7A93C79EE9}"
+	Name="quarterwidgetplugin1_uninstall"
+	ProjectGUID="{D66FD024-2496-4D56-B943-D6CB718DA24D}"
 	Keyword="MakeFileProj"
 	>
 	<Platforms>
@@ -15,6 +15,29 @@
 	</ToolFiles>
 	<Configurations>
 		<Configuration
+			Name="LIB (Debug)|Win32"
+			OutputDirectory=".\StaticDebug"
+			IntermediateDirectory=".\StaticDebug"
+			ConfigurationType="0"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="..\misc\uninstall-plugin.bat lib debug msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\uninstall-plugin.bat lib debug msvc6 quarterwidgetplugin1 "
+				CleanCommandLine=""
+				Output="quarterwidgetplugin1_uninstall.exe"
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
 			Name="DLL (Debug)|Win32"
 			OutputDirectory=".\Debug"
 			IntermediateDirectory=".\Debug"
@@ -25,10 +48,10 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\uninstall-plugin.bat dll debug msvc6 quarterplugin1"
-				ReBuildCommandLine="..\misc\uninstall-plugin.bat dll debug msvc6 quarterplugin1 "
+				BuildCommandLine="..\misc\uninstall-plugin.bat dll debug msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\uninstall-plugin.bat dll debug msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
-				Output="quarterplugin1_uninstall.exe"
+				Output="quarterwidgetplugin1_uninstall.exe"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -48,10 +71,10 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\uninstall-plugin.bat dll release msvc6 quarterplugin1"
-				ReBuildCommandLine="..\misc\uninstall-plugin.bat dll release msvc6 quarterplugin1 "
+				BuildCommandLine="..\misc\uninstall-plugin.bat dll release msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\uninstall-plugin.bat dll release msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
-				Output="quarterplugin1_uninstall.exe"
+				Output="quarterwidgetplugin1_uninstall.exe"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -71,33 +94,10 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\uninstall-plugin.bat lib release msvc6 quarterplugin1"
-				ReBuildCommandLine="..\misc\uninstall-plugin.bat lib release msvc6 quarterplugin1 "
+				BuildCommandLine="..\misc\uninstall-plugin.bat lib release msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\uninstall-plugin.bat lib release msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
-				Output="quarterplugin1_uninstall.exe"
-				PreprocessorDefinitions=""
-				IncludeSearchPath=""
-				ForcedIncludes=""
-				AssemblySearchPath=""
-				ForcedUsingAssemblies=""
-				CompileAsManaged=""
-			/>
-		</Configuration>
-		<Configuration
-			Name="LIB (Debug)|Win32"
-			OutputDirectory=".\StaticDebug"
-			IntermediateDirectory=".\StaticDebug"
-			ConfigurationType="0"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
-			>
-			<Tool
-				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\uninstall-plugin.bat lib debug msvc6 quarterplugin1"
-				ReBuildCommandLine="..\misc\uninstall-plugin.bat lib debug msvc6 quarterplugin1 "
-				CleanCommandLine=""
-				Output="quarterplugin1_uninstall.exe"
+				Output="quarterwidgetplugin1_uninstall.exe"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""

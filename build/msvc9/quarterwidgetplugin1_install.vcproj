@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="quarterplugin1_uninstall"
-	ProjectGUID="{4E4E4F25-A0BC-401F-8D49-2434481201B6}"
+	Name="quarterwidgetplugin1_install"
+	ProjectGUID="{70844857-1FE6-4A45-8C09-3B775168AFC6}"
 	Keyword="MakeFileProj"
 	TargetFrameworkVersion="0"
 	>
@@ -26,10 +26,10 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\uninstall-plugin.bat dll debug msvc6 quarterplugin1"
-				ReBuildCommandLine="..\misc\uninstall-plugin.bat dll debug msvc6 quarterplugin1 "
+				BuildCommandLine="..\misc\install-plugin.bat dll debug msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\install-plugin.bat dll debug msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
-				Output="quarterplugin1_uninstall.exe"
+				Output="quarterwidgetplugin1_install.exe"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -49,10 +49,10 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\uninstall-plugin.bat dll release msvc6 quarterplugin1"
-				ReBuildCommandLine="..\misc\uninstall-plugin.bat dll release msvc6 quarterplugin1 "
+				BuildCommandLine="..\misc\install-plugin.bat dll release msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\install-plugin.bat dll release msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
-				Output="quarterplugin1_uninstall.exe"
+				Output="quarterwidgetplugin1_install.exe"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -72,10 +72,10 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\uninstall-plugin.bat lib release msvc6 quarterplugin1"
-				ReBuildCommandLine="..\misc\uninstall-plugin.bat lib release msvc6 quarterplugin1 "
+				BuildCommandLine="..\misc\install-plugin.bat lib release msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\install-plugin.bat lib release msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
-				Output="quarterplugin1_uninstall.exe"
+				Output="quarterwidgetplugin1_install.exe"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -95,10 +95,10 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\uninstall-plugin.bat lib debug msvc6 quarterplugin1"
-				ReBuildCommandLine="..\misc\uninstall-plugin.bat lib debug msvc6 quarterplugin1 "
+				BuildCommandLine="..\misc\install-plugin.bat lib debug msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\install-plugin.bat lib debug msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
-				Output="quarterplugin1_uninstall.exe"
+				Output="quarterwidgetplugin1_install.exe"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -116,7 +116,7 @@
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;bat"
 			>
 			<File
-				RelativePath="..\misc\uninstall-plugin.bat"
+				RelativePath="..\misc\install-plugin.bat"
 				>
 			</File>
 		</Filter>

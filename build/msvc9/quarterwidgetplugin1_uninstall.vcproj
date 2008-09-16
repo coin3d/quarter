@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="quarterplugin1_install"
-	ProjectGUID="{D856E275-A38C-4D06-ABF4-E6837F156ECB}"
+	Name="quarterwidgetplugin1_uninstall"
+	ProjectGUID="{6DA2C069-8477-467A-AFC1-C6C4138AF445}"
 	Keyword="MakeFileProj"
 	TargetFrameworkVersion="0"
 	>
@@ -16,6 +16,29 @@
 	</ToolFiles>
 	<Configurations>
 		<Configuration
+			Name="LIB (Debug)|Win32"
+			OutputDirectory=".\StaticDebug"
+			IntermediateDirectory=".\StaticDebug"
+			ConfigurationType="0"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="..\misc\uninstall-plugin.bat lib debug msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\uninstall-plugin.bat lib debug msvc6 quarterwidgetplugin1 "
+				CleanCommandLine=""
+				Output="quarterwidgetplugin1_uninstall.exe"
+				PreprocessorDefinitions=""
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
 			Name="DLL (Debug)|Win32"
 			OutputDirectory=".\Debug"
 			IntermediateDirectory=".\Debug"
@@ -26,10 +49,10 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-plugin.bat dll debug msvc6 quarterplugin1"
-				ReBuildCommandLine="..\misc\install-plugin.bat dll debug msvc6 quarterplugin1 "
+				BuildCommandLine="..\misc\uninstall-plugin.bat dll debug msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\uninstall-plugin.bat dll debug msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
-				Output="quarterplugin1_install.exe"
+				Output="quarterwidgetplugin1_uninstall.exe"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -49,10 +72,10 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-plugin.bat dll release msvc6 quarterplugin1"
-				ReBuildCommandLine="..\misc\install-plugin.bat dll release msvc6 quarterplugin1 "
+				BuildCommandLine="..\misc\uninstall-plugin.bat dll release msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\uninstall-plugin.bat dll release msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
-				Output="quarterplugin1_install.exe"
+				Output="quarterwidgetplugin1_uninstall.exe"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -72,33 +95,10 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-plugin.bat lib release msvc6 quarterplugin1"
-				ReBuildCommandLine="..\misc\install-plugin.bat lib release msvc6 quarterplugin1 "
+				BuildCommandLine="..\misc\uninstall-plugin.bat lib release msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\uninstall-plugin.bat lib release msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
-				Output="quarterplugin1_install.exe"
-				PreprocessorDefinitions=""
-				IncludeSearchPath=""
-				ForcedIncludes=""
-				AssemblySearchPath=""
-				ForcedUsingAssemblies=""
-				CompileAsManaged=""
-			/>
-		</Configuration>
-		<Configuration
-			Name="LIB (Debug)|Win32"
-			OutputDirectory=".\StaticDebug"
-			IntermediateDirectory=".\StaticDebug"
-			ConfigurationType="0"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
-			>
-			<Tool
-				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-plugin.bat lib debug msvc6 quarterplugin1"
-				ReBuildCommandLine="..\misc\install-plugin.bat lib debug msvc6 quarterplugin1 "
-				CleanCommandLine=""
-				Output="quarterplugin1_install.exe"
+				Output="quarterwidgetplugin1_uninstall.exe"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -116,7 +116,7 @@
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;bat"
 			>
 			<File
-				RelativePath="..\misc\install-plugin.bat"
+				RelativePath="..\misc\uninstall-plugin.bat"
 				>
 			</File>
 		</Filter>
