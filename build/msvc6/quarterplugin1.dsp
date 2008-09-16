@@ -35,18 +35,18 @@ RSC=rc.exe
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
-# PROP BASE Output_Dir "StaticRelease"
-# PROP BASE Intermediate_Dir "StaticRelease"
+# PROP BASE Output_Dir "PluginStaticRelease"
+# PROP BASE Intermediate_Dir "PluginStaticRelease"
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "StaticRelease"
-# PROP Intermediate_Dir "StaticRelease"
+# PROP Output_Dir "PluginStaticRelease"
+# PROP Intermediate_Dir "PluginStaticRelease"
 # PROP Target_Dir ""
 MTL=midl.exe
 CPP=cl.exe
-# ADD BASE CPP /nologo /MD /W3 /GX /O2 /Ob2 /Og /Oi /Oy /Gy /I "src" /I "data" /I "..\..\src" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_LIB" /D QUARTER_DEBUG=0  /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_INTERNAL" /YX /FD /Gs /c
-# ADD CPP /nologo /MD /W3 /GX /O2 /Ob2 /Og /Oi /Oy /Gy /I "src" /I "data" /I "..\..\src" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_LIB" /D QUARTER_DEBUG=0  /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_INTERNAL" /YX /FD /Gs /c
+# ADD BASE CPP /nologo /MD /W3 /GX /O2 /Ob2 /Og /Oi /Oy /Gy /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /I "$(QTDIR)\include\QtDesigner" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_LIB" /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_NOT_DLL" /D "QDESIGNER_EXPORT_WIDGETS" /YX /FD /Gs /c
+# ADD CPP /nologo /MD /W3 /GX /O2 /Ob2 /Og /Oi /Oy /Gy /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /I "$(QTDIR)\include\QtDesigner" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_LIB" /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_NOT_DLL" /D "QDESIGNER_EXPORT_WIDGETS" /YX /FD /Gs /c
 RSC=rc.exe
 # ADD BASE RSC /l 0x414 /d "NDEBUG"
 # ADD RSC /l 0x414 /d "NDEBUG"
@@ -61,18 +61,18 @@ LIB32=link.exe -lib
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 1
-# PROP BASE Output_Dir "StaticDebug"
-# PROP BASE Intermediate_Dir "StaticDebug"
+# PROP BASE Output_Dir "PluginStaticDebug"
+# PROP BASE Intermediate_Dir "PluginStaticDebug"
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "StaticDebug"
-# PROP Intermediate_Dir "StaticDebug"
+# PROP Output_Dir "PluginStaticDebug"
+# PROP Intermediate_Dir "PluginStaticDebug"
 # PROP Target_Dir ""
 MTL=midl.exe
 CPP=cl.exe
-# ADD BASE CPP /nologo /MD /W3 /GX /Od /I "src" /I "data" /I "..\..\src" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_LIB" /D QUARTER_DEBUG=1  /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_INTERNAL" /YX /FD /c
-# ADD CPP /nologo /MD /W3 /GX /Od /I "src" /I "data" /I "..\..\src" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_LIB" /D QUARTER_DEBUG=1  /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_INTERNAL" /YX /FD /c
+# ADD BASE CPP /nologo /MD /W3 /GX /Od /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /I "$(QTDIR)\include\QtDesigner" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_LIB" /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_NOT_DLL" /D "QDESIGNER_EXPORT_WIDGETS" /YX /FD /c
+# ADD CPP /nologo /MD /W3 /GX /Od /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /I "$(QTDIR)\include\QtDesigner" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_LIB" /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_NOT_DLL" /D "QDESIGNER_EXPORT_WIDGETS" /YX /FD /c
 RSC=rc.exe
 # ADD BASE RSC /l 0x414 /d "_DEBUG"
 # ADD RSC /l 0x414 /d "_DEBUG"
@@ -87,18 +87,18 @@ LIB32=link.exe -lib
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
-# PROP BASE Output_Dir "Release"
-# PROP BASE Intermediate_Dir "Release"
+# PROP BASE Output_Dir "PluginRelease"
+# PROP BASE Intermediate_Dir "PluginRelease"
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 0
-# PROP Output_Dir "Release"
-# PROP Intermediate_Dir "Release"
+# PROP Output_Dir "PluginRelease"
+# PROP Intermediate_Dir "PluginRelease"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 CPP=cl.exe
-# ADD BASE CPP /nologo /MD /W3 /GX /O2 /Og /Oi /Oy /Ob2 /Gy /I "src" /I "data" /I "..\..\src" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D QUARTER_DEBUG=0 /D "HAVE_CONFIG_H" /D "QUARTER_MAKE_DLL" /D "COIN_DLL" /D "QUARTER_INTERNAL" /YX /FD /Gs /c
-# ADD CPP /nologo /MD /W3 /GX /O2 /Og /Oi /Oy /Ob2 /Gy /I "src" /I "data" /I "..\..\src" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D QUARTER_DEBUG=0 /D "HAVE_CONFIG_H" /D "QUARTER_MAKE_DLL" /D "COIN_DLL" /D "QUARTER_INTERNAL" /YX /FD /Gs /c
+# ADD BASE CPP /nologo /MD /W3 /GX /O2 /Og /Oi /Oy /Ob2 /Gy /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /I "$(QTDIR)\include\QtDesigner" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "HAVE_CONFIG_H" /D "COIN_DLL" /D "QUARTER_DLL" /D "QDESIGNER_EXPORT_WIDGETS" /YX /FD /Gs /c
+# ADD CPP /nologo /MD /W3 /GX /O2 /Og /Oi /Oy /Ob2 /Gy /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /I "$(QTDIR)\include\QtDesigner" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "HAVE_CONFIG_H" /D "COIN_DLL" /D "QUARTER_DLL" /D "QDESIGNER_EXPORT_WIDGETS" /YX /FD /Gs /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
@@ -109,25 +109,25 @@ BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LINK32=link.exe
-# ADD BASE LINK32 $(QTDIR)\lib\QtOpenGL4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtCore4.lib $(COINDIR)\lib\coin3.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /machine:I386
-# ADD LINK32 $(QTDIR)\lib\QtOpenGL4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtCore4.lib $(COINDIR)\lib\coin3.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /machine:I386 /out:"quarterplugin1.dll" /opt:nowin98
+# ADD BASE LINK32 $(COINDIR)\lib\quarter1.lib $(QTDIR)\lib\QtOpenGL4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtCore4.lib $(COINDIR)\lib\coin3.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /machine:I386
+# ADD LINK32 $(COINDIR)\lib\quarter1.lib $(QTDIR)\lib\QtOpenGL4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtCore4.lib $(COINDIR)\lib\coin3.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /machine:I386 /out:"quarterplugin1.dll" /opt:nowin98
 # SUBTRACT LINK32 /pdb:none
 
 !ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Debug)"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 1
-# PROP BASE Output_Dir "Debug"
-# PROP BASE Intermediate_Dir "Debug"
+# PROP BASE Output_Dir "PluginDebug"
+# PROP BASE Intermediate_Dir "PluginDebug"
 # PROP BASE Target_Dir ""
 # PROP Use_MFC 0
 # PROP Use_Debug_Libraries 1
-# PROP Output_Dir "Debug"
-# PROP Intermediate_Dir "Debug"
+# PROP Output_Dir "PluginDebug"
+# PROP Intermediate_Dir "PluginDebug"
 # PROP Target_Dir ""
 CPP=cl.exe
-# ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "src" /I "data" /I "..\..\src" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D QUARTER_DEBUG=1 /D "HAVE_CONFIG_H" /D "QUARTER_MAKE_DLL" /D "COIN_DLL" /D "QUARTER_INTERNAL" /YX /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "src" /I "data" /I "..\..\src" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D QUARTER_DEBUG=1 /D "HAVE_CONFIG_H" /D "QUARTER_MAKE_DLL" /D "COIN_DLL" /D "QUARTER_INTERNAL" /YX /FD /GZ /c
+# ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /I "$(QTDIR)\include\QtDesigner" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "HAVE_CONFIG_H" /D "COIN_DLL" /D "QUARTER_DLL" /D "QDESIGNER_EXPORT_WIDGETS" /YX /FD /GZ /c
+# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /I "$(QTDIR)\include\QtDesigner" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "HAVE_CONFIG_H" /D "COIN_DLL" /D "QUARTER_DLL" /D "QDESIGNER_EXPORT_WIDGETS" /YX /FD /GZ /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
@@ -138,8 +138,8 @@ BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LINK32=link.exe
-# ADD BASE LINK32 $(QTDIR)\lib\QtOpenGLd4.lib $(QTDIR)\lib\QtGuid4.lib $(QTDIR)\lib\QtCored4.lib $(COINDIR)\lib\coin3d.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 $(QTDIR)\lib\QtOpenGLd4.lib $(QTDIR)\lib\QtGuid4.lib $(QTDIR)\lib\QtCored4.lib $(COINDIR)\lib\coin3d.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept /out:"quarterplugin1d.dll"
+# ADD BASE LINK32 $(COINDIR)\lib\quarter1d.lib $(QTDIR)\lib\QtOpenGLd4.lib $(QTDIR)\lib\QtGuid4.lib $(QTDIR)\lib\QtCored4.lib $(COINDIR)\lib\coin3d.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept
+# ADD LINK32 $(COINDIR)\lib\quarter1d.lib $(QTDIR)\lib\QtOpenGLd4.lib $(QTDIR)\lib\QtGuid4.lib $(QTDIR)\lib\QtCored4.lib $(COINDIR)\lib\coin3d.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept /out:"quarterplugin1d.dll"
 
 !ENDIF
 
@@ -177,6 +177,83 @@ SOURCE=..\..\AUTHORS
 # End Source File
 # End Group
 # Begin Group "Source Files"
+# Begin Source File
+
+SOURCE=..\..\src\plugins\QuarterWidgetPlugin.h
+
+!IF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Release)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\src\plugins\QuarterWidgetPlugin.h
+
+"src\plugins\moc_QuarterWidgetPlugin.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+        "$(QTDIR)"\bin\moc -I"$(QTDIR)"\include\QtDesigner -o src\plugins\moc_QuarterWidgetPlugin.cpp ..\..\src\plugins\QuarterWidgetPlugin.h
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Debug)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\src\plugins\QuarterWidgetPlugin.h
+
+"src\plugins\moc_QuarterWidgetPlugin.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+        "$(QTDIR)"\bin\moc -I"$(QTDIR)"\include\QtDesigner -o src\plugins\moc_QuarterWidgetPlugin.cpp ..\..\src\plugins\QuarterWidgetPlugin.h
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Release)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\src\plugins\QuarterWidgetPlugin.h
+
+"src\plugins\moc_QuarterWidgetPlugin.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+        "$(QTDIR)"\bin\moc -I"$(QTDIR)"\include\QtDesigner -o src\plugins\moc_QuarterWidgetPlugin.cpp ..\..\src\plugins\QuarterWidgetPlugin.h
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Debug)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\src\plugins\QuarterWidgetPlugin.h
+
+"src\plugins\moc_QuarterWidgetPlugin.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+        "$(QTDIR)"\bin\moc -I"$(QTDIR)"\include\QtDesigner -o src\plugins\moc_QuarterWidgetPlugin.cpp ..\..\src\plugins\QuarterWidgetPlugin.h
+
+# End Custom Build
+
+!ENDIF
+
+# End Source File
+# Begin Source File
+
+SOURCE=src\plugins\moc_QuarterWidgetPlugin.cpp
+!IF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Release)"
+# PROP Intermediate_Dir "PluginRelease"
+!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Debug)"
+# PROP Intermediate_Dir "PluginDebug"
+!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Release)"
+# PROP Intermediate_Dir "PluginStaticRelease"
+!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Debug)"
+# PROP Intermediate_Dir "PluginStaticDebug"
+!ENDIF
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\plugins\QuarterWidgetPlugin.cpp
+!IF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Release)"
+# PROP Intermediate_Dir "PluginRelease"
+!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Debug)"
+# PROP Intermediate_Dir "PluginDebug"
+!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Release)"
+# PROP Intermediate_Dir "PluginStaticRelease"
+!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Debug)"
+# PROP Intermediate_Dir "PluginStaticDebug"
+!ENDIF
+# End Source File
 # End Group
 # Begin Group "Public Headers"
 # End Group
