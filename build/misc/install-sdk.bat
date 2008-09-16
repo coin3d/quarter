@@ -47,8 +47,6 @@ exit
 
 :coindirexists
 
-rem Check %QTDIR% and stuff related to plugins\designer directory
-
 echo Installing to %COINDIR%
 
 rem **********************************************************************
@@ -78,18 +76,14 @@ goto installdllrelease
 xcopy %libname%d.dll %COINDIR%\bin\ /R /Y
 xcopy QuarterDebug\%libname%d.pdb %COINDIR%\bin\ /R /Y
 xcopy QuarterDebug\%libname%d.lib %COINDIR%\lib\ /R /Y
-rem FIXME install plugin
 goto binariesdone
 
 :installdllrelease
 xcopy %libname%.dll %COINDIR%\bin\ /R /Y
 xcopy QuarterRelease\%libname%.lib %COINDIR%\lib\ /R /Y
-rem FIXME install plugin
 goto binariesdone
 
 :installlib
-
-rem FIXME: static lib? is plugin relevant then?
 
 if "%2"=="debug" goto installlibdebug
 goto installlibrelease

@@ -15,18 +15,6 @@ Package=<4>
 
 ###############################################################################
 
-Project: "quarterplugin1"=.\quarterplugin1.dsp - Package Owner=<4>
-
-Package=<5>
-{{{
-}}}
-
-Package=<4>
-{{{
-}}}
-
-###############################################################################
-
 Project: "quarter1_install"=.\quarter1_install.dsp - Package Owner=<4>
 
 Package=<5>
@@ -37,13 +25,54 @@ Package=<4>
 {{{
     Begin Project Dependency
     Project_Dep_Name quarter1
-    Project_Dep_Name quarterplugin1
     End Project Dependency
 }}}
 
 ###############################################################################
 
 Project: "quarter1_uninstall"=.\quarter1_uninstall.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "quarterplugin1"=.\quarterplugin1.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name quarter1_install
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "quarterplugin1_install"=.\quarterplugin1_install.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name quarterplugin1
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "quarterplugin1_uninstall"=.\quarterplugin1_uninstall.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
