@@ -42,7 +42,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "quarterplugin1"=.\quarterplugin1.dsp - Package Owner=<4>
+Project: "quarterwidgetplugin1"=.\quarterwidgetplugin1.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -57,7 +57,7 @@ Package=<4>
 
 ###############################################################################
 
-Project: "quarterplugin1_install"=.\quarterplugin1_install.dsp - Package Owner=<4>
+Project: "quarterwidgetplugin1_install"=.\quarterwidgetplugin1_install.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
@@ -66,13 +66,13 @@ Package=<5>
 Package=<4>
 {{{
     Begin Project Dependency
-    Project_Dep_Name quarterplugin1
+    Project_Dep_Name quarterwidgetplugin1
     End Project Dependency
 }}}
 
 ###############################################################################
 
-Project: "quarterplugin1_uninstall"=.\quarterplugin1_uninstall.dsp - Package Owner=<4>
+Project: "quarterwidgetplugin1_uninstall"=.\quarterwidgetplugin1_uninstall.dsp - Package Owner=<4>
 
 Package=<5>
 {{{

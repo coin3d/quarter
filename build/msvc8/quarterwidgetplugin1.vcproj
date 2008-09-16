@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
-	Name="quarterplugin1"
-	ProjectGUID="{71289173-54EA-4C5C-94E0-3DF64D3E7A49}"
-	TargetFrameworkVersion="0"
+	Version="8.00"
+	Name="quarterwidgetplugin1"
+	ProjectGUID="{22FF0CD6-0D9F-41B3-B3C4-0E5FC6B28701}"
 	>
 	<Platforms>
 		<Platform
@@ -14,6 +13,101 @@
 	<ToolFiles>
 	</ToolFiles>
 	<Configurations>
+		<Configuration
+			Name="DLL (Debug)|Win32"
+			OutputDirectory=".\PluginDebug"
+			IntermediateDirectory=".\PluginDebug"
+			ConfigurationType="2"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="true"
+				SuppressStartupBanner="true"
+				TargetEnvironment="1"
+				TypeLibraryName=".\PluginDebug/quarterwidgetplugin1.tlb"
+				HeaderFileName=""
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\include,$(COINDIR)\include,$(COINDIR)\include\Inventor\annex,$(QTDIR)\include,$(QTDIR)\include\Qt,$(QTDIR)\include\QtDesigner"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;HAVE_CONFIG_H;COIN_DLL;QUARTER_DLL;QDESIGNER_EXPORT_WIDGETS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				PrecompiledHeaderFile=".\PluginDebug/quarterwidgetplugin1.pch"
+				AssemblerListingLocation=".\PluginDebug/"
+				ObjectFile=".\PluginDebug/"
+				ProgramDataBaseFileName=".\PluginDebug/"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="4"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="$(COINDIR)\lib\quarter1d.lib $(QTDIR)\lib\QtOpenGLd4.lib $(QTDIR)\lib\QtGuid4.lib $(QTDIR)\lib\QtCored4.lib $(COINDIR)\lib\coin3d.lib opengl32.lib winmm.lib"
+				OutputFile="quarterwidgetplugin1d.dll"
+				LinkIncremental="2"
+				SuppressStartupBanner="true"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile=".\PluginDebug/quarterwidgetplugin1d.pdb"
+				ImportLibrary=".\PluginDebug/quarterwidgetplugin1d.lib"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+				SuppressStartupBanner="true"
+				OutputFile=".\PluginDebug/quarterwidgetplugin1.bsc"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
 		<Configuration
 			Name="LIB (Debug)|Win32"
 			OutputDirectory=".\PluginStaticDebug"
@@ -44,7 +138,7 @@
 				AdditionalIncludeDirectories="..\..\include,$(COINDIR)\include,$(COINDIR)\include\Inventor\annex,$(QTDIR)\include,$(QTDIR)\include\Qt,$(QTDIR)\include\QtDesigner"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_LIB;HAVE_CONFIG_H;COIN_NOT_DLL;QUARTER_NOT_DLL;QDESIGNER_EXPORT_WIDGETS"
 				RuntimeLibrary="2"
-				PrecompiledHeaderFile=".\PluginStaticDebug/quarterplugin1.pch"
+				PrecompiledHeaderFile=".\PluginStaticDebug/quarterwidgetplugin1.pch"
 				AssemblerListingLocation=".\PluginStaticDebug/"
 				ObjectFile=".\PluginStaticDebug/"
 				ProgramDataBaseFileName=".\PluginStaticDebug/"
@@ -64,7 +158,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="quarterplugin1sd.lib"
+				OutputFile="quarterwidgetplugin1sd.lib"
 				SuppressStartupBanner="true"
 			/>
 			<Tool
@@ -76,7 +170,7 @@
 			<Tool
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
-				OutputFile=".\PluginStaticDebug/quarterplugin1.bsc"
+				OutputFile=".\PluginStaticDebug/quarterwidgetplugin1.bsc"
 			/>
 			<Tool
 				Name="VCFxCopTool"
@@ -112,12 +206,13 @@
 				MkTypLibCompatible="true"
 				SuppressStartupBanner="true"
 				TargetEnvironment="1"
-				TypeLibraryName=".\PluginRelease/quarterplugin1.tlb"
+				TypeLibraryName=".\PluginRelease/quarterwidgetplugin1.tlb"
 				HeaderFileName=""
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/Gs "
+				Optimization="4"
 				InlineFunctionExpansion="2"
 				EnableIntrinsicFunctions="true"
 				OmitFramePointers="true"
@@ -125,7 +220,7 @@
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;HAVE_CONFIG_H;COIN_DLL;QUARTER_DLL;QDESIGNER_EXPORT_WIDGETS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				PrecompiledHeaderFile=".\PluginRelease/quarterplugin1.pch"
+				PrecompiledHeaderFile=".\PluginRelease/quarterwidgetplugin1.pch"
 				AssemblerListingLocation=".\PluginRelease/"
 				ObjectFile=".\PluginRelease/"
 				ProgramDataBaseFileName=".\PluginRelease/"
@@ -146,14 +241,12 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="$(COINDIR)\lib\quarter1.lib $(QTDIR)\lib\QtOpenGL4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtCore4.lib $(COINDIR)\lib\coin3.lib opengl32.lib winmm.lib"
-				OutputFile="quarterplugin1.dll"
+				OutputFile="quarterwidgetplugin1.dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				ProgramDatabaseFile=".\PluginRelease/quarterplugin1.pdb"
+				ProgramDatabaseFile=".\PluginRelease/quarterwidgetplugin1.pdb"
 				OptimizeForWindows98="1"
-				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
-				ImportLibrary=".\PluginRelease/quarterplugin1.lib"
+				ImportLibrary=".\PluginRelease/quarterwidgetplugin1.lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -168,13 +261,16 @@
 			<Tool
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
-				OutputFile=".\PluginRelease/quarterplugin1.bsc"
+				OutputFile=".\PluginRelease/quarterwidgetplugin1.bsc"
 			/>
 			<Tool
 				Name="VCFxCopTool"
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -207,6 +303,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/Gs "
+				Optimization="4"
 				InlineFunctionExpansion="2"
 				EnableIntrinsicFunctions="true"
 				OmitFramePointers="true"
@@ -214,7 +311,7 @@
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_LIB;HAVE_CONFIG_H;COIN_NOT_DLL;QUARTER_NOT_DLL;QDESIGNER_EXPORT_WIDGETS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				PrecompiledHeaderFile=".\PluginStaticRelease/quarterplugin1.pch"
+				PrecompiledHeaderFile=".\PluginStaticRelease/quarterwidgetplugin1.pch"
 				AssemblerListingLocation=".\PluginStaticRelease/"
 				ObjectFile=".\PluginStaticRelease/"
 				ProgramDataBaseFileName=".\PluginStaticRelease/"
@@ -234,7 +331,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="quarterplugin1s.lib"
+				OutputFile="quarterwidgetplugin1s.lib"
 				SuppressStartupBanner="true"
 			/>
 			<Tool
@@ -246,104 +343,10 @@
 			<Tool
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
-				OutputFile=".\PluginStaticRelease/quarterplugin1.bsc"
+				OutputFile=".\PluginStaticRelease/quarterwidgetplugin1.bsc"
 			/>
 			<Tool
 				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="DLL (Debug)|Win32"
-			OutputDirectory=".\PluginDebug"
-			IntermediateDirectory=".\PluginDebug"
-			ConfigurationType="2"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC60.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				PreprocessorDefinitions="_DEBUG"
-				MkTypLibCompatible="true"
-				SuppressStartupBanner="true"
-				TargetEnvironment="1"
-				TypeLibraryName=".\PluginDebug/quarterplugin1.tlb"
-				HeaderFileName=""
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="..\..\include,$(COINDIR)\include,$(COINDIR)\include\Inventor\annex,$(QTDIR)\include,$(QTDIR)\include\Qt,$(QTDIR)\include\QtDesigner"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;HAVE_CONFIG_H;COIN_DLL;QUARTER_DLL;QDESIGNER_EXPORT_WIDGETS"
-				MinimalRebuild="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				PrecompiledHeaderFile=".\PluginDebug/quarterplugin1.pch"
-				AssemblerListingLocation=".\PluginDebug/"
-				ObjectFile=".\PluginDebug/"
-				ProgramDataBaseFileName=".\PluginDebug/"
-				WarningLevel="3"
-				SuppressStartupBanner="true"
-				DebugInformationFormat="4"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="_DEBUG"
-				Culture="1033"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="$(COINDIR)\lib\quarter1d.lib $(QTDIR)\lib\QtOpenGLd4.lib $(QTDIR)\lib\QtGuid4.lib $(QTDIR)\lib\QtCored4.lib $(COINDIR)\lib\coin3d.lib opengl32.lib winmm.lib"
-				OutputFile="quarterplugin1d.dll"
-				LinkIncremental="2"
-				SuppressStartupBanner="true"
-				GenerateDebugInformation="true"
-				ProgramDatabaseFile=".\PluginDebug/quarterplugin1d.pdb"
-				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
-				ImportLibrary=".\PluginDebug/quarterplugin1d.lib"
-				TargetMachine="1"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-				SuppressStartupBanner="true"
-				OutputFile=".\PluginDebug/quarterplugin1.bsc"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -389,6 +392,17 @@
 				RelativePath="src\plugins\moc_QuarterWidgetPlugin.cpp"
 				>
 				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="PluginDebug/"
+						ProgramDataBaseFileName="PluginDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="LIB (Debug)|Win32"
 					>
 					<Tool
@@ -419,17 +433,6 @@
 						PreprocessorDefinitions=""
 						ObjectFile="PluginStaticRelease/"
 						ProgramDataBaseFileName="PluginStaticRelease/"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DLL (Debug)|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						ObjectFile="PluginDebug/"
-						ProgramDataBaseFileName="PluginDebug/"
 					/>
 				</FileConfiguration>
 			</File>
@@ -437,6 +440,17 @@
 				RelativePath="..\..\src\plugins\QuarterWidgetPlugin.cpp"
 				>
 				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="PluginDebug/"
+						ProgramDataBaseFileName="PluginDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="LIB (Debug)|Win32"
 					>
 					<Tool
@@ -469,21 +483,20 @@
 						ProgramDataBaseFileName="PluginStaticRelease/"
 					/>
 				</FileConfiguration>
-				<FileConfiguration
-					Name="DLL (Debug)|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-						ObjectFile="PluginDebug/"
-						ProgramDataBaseFileName="PluginDebug/"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\..\src\plugins\QuarterWidgetPlugin.h"
 				>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="moc&apos;ing $(InputPath)"
+						CommandLine="&quot;$(QTDIR)&quot;\bin\moc -I&quot;$(QTDIR)&quot;\include\QtDesigner -o src\plugins\moc_QuarterWidgetPlugin.cpp ..\..\src\plugins\QuarterWidgetPlugin.h&#x0D;&#x0A;"
+						Outputs="src\plugins\moc_QuarterWidgetPlugin.cpp"
+					/>
+				</FileConfiguration>
 				<FileConfiguration
 					Name="LIB (Debug)|Win32"
 					>
@@ -506,16 +519,6 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="LIB (Release)|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="moc&apos;ing $(InputPath)"
-						CommandLine="&quot;$(QTDIR)&quot;\bin\moc -I&quot;$(QTDIR)&quot;\include\QtDesigner -o src\plugins\moc_QuarterWidgetPlugin.cpp ..\..\src\plugins\QuarterWidgetPlugin.h&#x0D;&#x0A;"
-						Outputs="src\plugins\moc_QuarterWidgetPlugin.cpp"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="DLL (Debug)|Win32"
 					>
 					<Tool
 						Name="VCCustomBuildTool"

@@ -1,26 +1,26 @@
-# Microsoft Developer Studio Project File - Name="quarterplugin1" - Package Owner=<4>
+# Microsoft Developer Studio Project File - Name="quarterwidgetplugin1" - Package Owner=<4>
 # Microsoft Developer Studio Generated Build File, Format Version 6.00
 # ** DO NOT EDIT **
 
 # TARGTYPE "Win32 (x86) Dynamic-Link Library" 0x0102
 
-CFG=quarterplugin1 - Win32 DLL (Release)
+CFG=quarterwidgetplugin1 - Win32 DLL (Release)
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE
-!MESSAGE NMAKE /f "quarterplugin1.mak".
+!MESSAGE NMAKE /f "quarterwidgetplugin1.mak".
 !MESSAGE
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE
-!MESSAGE NMAKE /f "quarterplugin1.mak" CFG="quarterplugin1 - Win32 DLL (Debug)"
+!MESSAGE NMAKE /f "quarterwidgetplugin1.mak" CFG="quarterwidgetplugin1 - Win32 DLL (Debug)"
 !MESSAGE
 !MESSAGE Possible choices for configuration are:
 !MESSAGE
-!MESSAGE "quarterplugin1 - Win32 LIB (Release)" (based on "Win32 (x86) Static Library")
-!MESSAGE "quarterplugin1 - Win32 LIB (Debug)" (based on "Win32 (x86) Static Library")
-!MESSAGE "quarterplugin1 - Win32 DLL (Release)" (based on "Win32 (x86) Dynamic-Link Library")
-!MESSAGE "quarterplugin1 - Win32 DLL (Debug)" (based on "Win32 (x86) Dynamic-Link Library")
+!MESSAGE "quarterwidgetplugin1 - Win32 LIB (Release)" (based on "Win32 (x86) Static Library")
+!MESSAGE "quarterwidgetplugin1 - Win32 LIB (Debug)" (based on "Win32 (x86) Static Library")
+!MESSAGE "quarterwidgetplugin1 - Win32 DLL (Release)" (based on "Win32 (x86) Dynamic-Link Library")
+!MESSAGE "quarterwidgetplugin1 - Win32 DLL (Debug)" (based on "Win32 (x86) Dynamic-Link Library")
 !MESSAGE
 
 # Begin Project
@@ -31,7 +31,7 @@ CPP=cl.exe
 MTL=midl.exe
 RSC=rc.exe
 
-!IF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Release)"
+!IF  "$(CFG)" == "quarterwidgetplugin1 - Win32 LIB (Release)"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
@@ -54,10 +54,10 @@ BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LIB32=link.exe -lib
-# ADD BASE LIB32 /nologo /machine:I386 /out:"quarterplugin1s.lib"
-# ADD LIB32 /nologo /machine:I386 /out:"quarterplugin1s.lib"
+# ADD BASE LIB32 /nologo /machine:I386 /out:"quarterwidgetplugin1s.lib"
+# ADD LIB32 /nologo /machine:I386 /out:"quarterwidgetplugin1s.lib"
 
-!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Debug)"
+!ELSEIF  "$(CFG)" == "quarterwidgetplugin1 - Win32 LIB (Debug)"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 1
@@ -80,10 +80,10 @@ BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LIB32=link.exe -lib
-# ADD BASE LIB32 /nologo /machine:I386 /out:"quarterplugin1sd.lib"
-# ADD LIB32 /nologo /machine:I386 /out:"quarterplugin1sd.lib"
+# ADD BASE LIB32 /nologo /machine:I386 /out:"quarterwidgetplugin1sd.lib"
+# ADD LIB32 /nologo /machine:I386 /out:"quarterwidgetplugin1sd.lib"
 
-!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Release)"
+!ELSEIF  "$(CFG)" == "quarterwidgetplugin1 - Win32 DLL (Release)"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
@@ -110,10 +110,10 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 $(COINDIR)\lib\quarter1.lib $(QTDIR)\lib\QtOpenGL4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtCore4.lib $(COINDIR)\lib\coin3.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /machine:I386
-# ADD LINK32 $(COINDIR)\lib\quarter1.lib $(QTDIR)\lib\QtOpenGL4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtCore4.lib $(COINDIR)\lib\coin3.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /machine:I386 /out:"quarterplugin1.dll" /opt:nowin98
+# ADD LINK32 $(COINDIR)\lib\quarter1.lib $(QTDIR)\lib\QtOpenGL4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtCore4.lib $(COINDIR)\lib\coin3.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /machine:I386 /out:"quarterwidgetplugin1.dll" /opt:nowin98
 # SUBTRACT LINK32 /pdb:none
 
-!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Debug)"
+!ELSEIF  "$(CFG)" == "quarterwidgetplugin1 - Win32 DLL (Debug)"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 1
@@ -139,16 +139,16 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 $(COINDIR)\lib\quarter1d.lib $(QTDIR)\lib\QtOpenGLd4.lib $(QTDIR)\lib\QtGuid4.lib $(QTDIR)\lib\QtCored4.lib $(COINDIR)\lib\coin3d.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 $(COINDIR)\lib\quarter1d.lib $(QTDIR)\lib\QtOpenGLd4.lib $(QTDIR)\lib\QtGuid4.lib $(QTDIR)\lib\QtCored4.lib $(COINDIR)\lib\coin3d.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept /out:"quarterplugin1d.dll"
+# ADD LINK32 $(COINDIR)\lib\quarter1d.lib $(QTDIR)\lib\QtOpenGLd4.lib $(QTDIR)\lib\QtGuid4.lib $(QTDIR)\lib\QtCored4.lib $(COINDIR)\lib\coin3d.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept /out:"quarterwidgetplugin1d.dll"
 
 !ENDIF
 
 # Begin Target
 
-# Name "quarterplugin1 - Win32 DLL (Release)"
-# Name "quarterplugin1 - Win32 DLL (Debug)"
-# Name "quarterplugin1 - Win32 LIB (Release)"
-# Name "quarterplugin1 - Win32 LIB (Debug)"
+# Name "quarterwidgetplugin1 - Win32 DLL (Release)"
+# Name "quarterwidgetplugin1 - Win32 DLL (Debug)"
+# Name "quarterwidgetplugin1 - Win32 LIB (Release)"
+# Name "quarterwidgetplugin1 - Win32 LIB (Debug)"
 # Begin Group "Documents"
 # PROP Default_Filter ";txt"
 # Begin Source File
@@ -181,7 +181,7 @@ SOURCE=..\..\AUTHORS
 
 SOURCE=..\..\src\plugins\QuarterWidgetPlugin.h
 
-!IF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Release)"
+!IF  "$(CFG)" == "quarterwidgetplugin1 - Win32 DLL (Release)"
 
 # PROP IgnoreDefaultTool 1
 #Begin Custom Build - moc'ing $(InputPath)
@@ -192,7 +192,7 @@ InputPath=..\..\src\plugins\QuarterWidgetPlugin.h
 
 # End Custom Build
 
-!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Debug)"
+!ELSEIF  "$(CFG)" == "quarterwidgetplugin1 - Win32 DLL (Debug)"
 
 # PROP IgnoreDefaultTool 1
 #Begin Custom Build - moc'ing $(InputPath)
@@ -203,7 +203,7 @@ InputPath=..\..\src\plugins\QuarterWidgetPlugin.h
 
 # End Custom Build
 
-!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Release)"
+!ELSEIF  "$(CFG)" == "quarterwidgetplugin1 - Win32 LIB (Release)"
 
 # PROP IgnoreDefaultTool 1
 #Begin Custom Build - moc'ing $(InputPath)
@@ -214,7 +214,7 @@ InputPath=..\..\src\plugins\QuarterWidgetPlugin.h
 
 # End Custom Build
 
-!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Debug)"
+!ELSEIF  "$(CFG)" == "quarterwidgetplugin1 - Win32 LIB (Debug)"
 
 # PROP IgnoreDefaultTool 1
 #Begin Custom Build - moc'ing $(InputPath)
@@ -231,26 +231,26 @@ InputPath=..\..\src\plugins\QuarterWidgetPlugin.h
 # Begin Source File
 
 SOURCE=src\plugins\moc_QuarterWidgetPlugin.cpp
-!IF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Release)"
+!IF  "$(CFG)" == "quarterwidgetplugin1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "PluginRelease"
-!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Debug)"
+!ELSEIF  "$(CFG)" == "quarterwidgetplugin1 - Win32 DLL (Debug)"
 # PROP Intermediate_Dir "PluginDebug"
-!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Release)"
+!ELSEIF  "$(CFG)" == "quarterwidgetplugin1 - Win32 LIB (Release)"
 # PROP Intermediate_Dir "PluginStaticRelease"
-!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Debug)"
+!ELSEIF  "$(CFG)" == "quarterwidgetplugin1 - Win32 LIB (Debug)"
 # PROP Intermediate_Dir "PluginStaticDebug"
 !ENDIF
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\src\plugins\QuarterWidgetPlugin.cpp
-!IF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Release)"
+!IF  "$(CFG)" == "quarterwidgetplugin1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "PluginRelease"
-!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 DLL (Debug)"
+!ELSEIF  "$(CFG)" == "quarterwidgetplugin1 - Win32 DLL (Debug)"
 # PROP Intermediate_Dir "PluginDebug"
-!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Release)"
+!ELSEIF  "$(CFG)" == "quarterwidgetplugin1 - Win32 LIB (Release)"
 # PROP Intermediate_Dir "PluginStaticRelease"
-!ELSEIF  "$(CFG)" == "quarterplugin1 - Win32 LIB (Debug)"
+!ELSEIF  "$(CFG)" == "quarterwidgetplugin1 - Win32 LIB (Debug)"
 # PROP Intermediate_Dir "PluginStaticDebug"
 !ENDIF
 # End Source File
