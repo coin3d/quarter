@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="quarter1_uninstall"
-	ProjectGUID="{26ADFED0-8A8B-4951-9CB4-F5E120C84B44}"
+	ProjectGUID="{2122D139-124D-41D0-B7D2-699F7A8A9816}"
 	Keyword="MakeFileProj"
 	>
 	<Platforms>
