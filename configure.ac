@@ -63,7 +63,6 @@ AC_PROG_LIBTOOL
 AC_LANG(C++)
 
 test "x$prefix" = xNONE && prefix=$ac_default_prefix
-test "x$exec_prefix" = xNONE && exec_prefix=`eval echo "${prefix}"`
 
 # *******************************************************************
 # disable build if you just want to generate doc.
