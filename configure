@@ -22180,9 +22180,8 @@ else
 fi;
 
 if $sim_ac_with_qt; then
-  if test -z "$sim_ac_qtdir"; then
-    # The Cygwin environment needs to invoke moc with a POSIX-style path.
-    # Extract the first word of "cygpath", so it can be a program name with args.
+  # The Cygwin environment needs to invoke moc with a POSIX-style path.
+  # Extract the first word of "cygpath", so it can be a program name with args.
 set dummy cygpath; ac_word=$2
 echo "$as_me:$LINENO: checking for $ac_word" >&5
 echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
@@ -22222,6 +22221,13 @@ else
 echo "${ECHO_T}no" >&6
 fi
 
+
+  if test -n "$sim_ac_qtdir"; then
+    if test $sim_ac_qt_cygpath != "false"; then
+      # Quote $sim_ac_qtdir in case it contains whitespace characters.
+      sim_ac_qtdir=`$sim_ac_qt_cygpath -u "$sim_ac_qtdir"`
+    fi
+  else
     if test $sim_ac_qt_cygpath = "false"; then
       sim_ac_qtdir=$QTDIR
     else
