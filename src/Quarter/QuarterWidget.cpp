@@ -39,6 +39,8 @@
 #include <Inventor/nodes/SoDirectionalLight.h>
 #include <Inventor/nodes/SoPerspectiveCamera.h>
 #include <Inventor/SbColor.h>
+#include <Inventor/sensors/SoSensorManager.h>
+#include <Inventor/SoDB.h>
 
 #include <Inventor/SoRenderManager.h>
 #include <Inventor/SoEventManager.h>
@@ -393,6 +395,14 @@ QuarterWidget::resizeGL(int width, int height)
 void
 QuarterWidget::paintGL(void)
 {
+  // We need to process the delay queue here since we don't know when
+  // paintGL() is called from Qt, and we might have some sensors waiting
+  // to trigger (the redraw sensor has a lower priority than a normal
+  // field sensor to guarantee that your sensor is processed before
+  // the next redraw).
+  if (SoDB::getSensorManager()->isDelaySensorPending()) {
+    SoDB::getSensorManager()->processDelayQueue(FALSE);
+  }
   // we need to render immediately here, and not do scheduleRedraw()
   // since Qt will swap the GL buffers after calling paintGL().
   this->actualRedraw();
