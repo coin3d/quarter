@@ -62,7 +62,8 @@ QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * shar
   headlight(NULL),
   cachecontext(NULL),
   contextmenu(NULL),
-  contextmenuenabled(true)
+  contextmenuenabled(true),
+  autoredrawenabled(true)
 {
   this->cachecontext = findCacheContext(masterptr, sharewidget);
 
@@ -132,12 +133,14 @@ QuarterWidgetP::rendercb(void * userdata, SoRenderManager *)
 {
   QuarterWidget * thisp = static_cast<QuarterWidget *>(userdata);
 
-  thisp->makeCurrent();
-  thisp->actualRedraw();
-  if (thisp->doubleBuffer()) {
-    thisp->swapBuffers();
+  if (thisp->pimpl->autoredrawenabled) {
+    thisp->makeCurrent();
+    thisp->actualRedraw();
+    if (thisp->doubleBuffer()) {
+      thisp->swapBuffers();
+    }
+    thisp->doneCurrent();
   }
-  thisp->doneCurrent();
 }
 
 void

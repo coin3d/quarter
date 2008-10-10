@@ -396,16 +396,20 @@ void
 QuarterWidget::paintGL(void)
 {
   // We need to process the delay queue here since we don't know when
-  // paintGL() is called from Qt, and we might have some sensors waiting
-  // to trigger (the redraw sensor has a lower priority than a normal
-  // field sensor to guarantee that your sensor is processed before
-  // the next redraw).
+  // paintGL() is called from Qt, and we might have some sensors
+  // waiting to trigger (the redraw sensor has a lower priority than a
+  // normal field sensor to guarantee that your sensor is processed
+  // before the next redraw). Disable autorendering while we do this
+  // to avoid recursive redraws.
+
+  PRIVATE(this)->autoredrawenabled = false;
   if (SoDB::getSensorManager()->isDelaySensorPending()) {
     SoDB::getSensorManager()->processDelayQueue(FALSE);
   }
   // we need to render immediately here, and not do scheduleRedraw()
   // since Qt will swap the GL buffers after calling paintGL().
   this->actualRedraw();
+  PRIVATE(this)->autoredrawenabled = true;
 }
 
 /*!
