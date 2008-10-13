@@ -401,10 +401,13 @@ QuarterWidget::paintGL(void)
   // normal field sensor to guarantee that your sensor is processed
   // before the next redraw). Disable autorendering while we do this
   // to avoid recursive redraws.
-
   PRIVATE(this)->autoredrawenabled = false;
   if (SoDB::getSensorManager()->isDelaySensorPending()) {
+    // processing the sensors might trigger a redraw in another
+    // context. Release this context temporarily
+    this->doneCurrent();
     SoDB::getSensorManager()->processDelayQueue(FALSE);
+    this->makeCurrent();
   }
   // we need to render immediately here, and not do scheduleRedraw()
   // since Qt will swap the GL buffers after calling paintGL().
