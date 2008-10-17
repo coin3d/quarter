@@ -22,20 +22,32 @@
 
 #include "MdiQuarterWidget.h"
 
+#include <QtGui/QLayout>
+#include <Quarter/QuarterWidget.h>
+using namespace SIM::Coin3D::Quarter;
+
 #include <Inventor/SoInput.h>
 #include <Inventor/nodes/SoSeparator.h>
 
 MdiQuarterWidget::MdiQuarterWidget(QWidget * parent, const QGLWidget * sharewidget)
-  : inherited(parent, sharewidget)
+  : inherited(parent)
 {
-
+  this->quarterwidget = new QuarterWidget(this, sharewidget);
+  this->layout()->addWidget(this->quarterwidget);
 }
 
 MdiQuarterWidget::~MdiQuarterWidget()
 {
-
+  if (this->quarterwidget) {
+    delete this->quarterwidget;
+  }
 }
 
+const QuarterWidget * 
+MdiQuarterWidget::quarterWidget(void) const
+{
+  return this->quarterwidget;
+}
 
 bool
 MdiQuarterWidget::loadFile(const QString & filename)
@@ -44,7 +56,7 @@ MdiQuarterWidget::loadFile(const QString & filename)
   if (in.openFile(filename.toLatin1().constData())) {
     SoSeparator * root = SoDB::readAll(&in);
     if (root) {
-      this->setSceneGraph(root);
+      this->quarterwidget->setSceneGraph(root);
       this->currentfile = filename;
       this->setWindowTitle(filename);
       return true;
@@ -63,4 +75,11 @@ QSize
 MdiQuarterWidget::minimumSizeHint(void) const
 {
   return QSize(640, 480);
+}
+
+void 
+MdiQuarterWidget::closeEvent(QCloseEvent * event)
+{
+  delete this->quarterwidget;
+  this->quarterwidget = NULL;
 }

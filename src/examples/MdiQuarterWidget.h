@@ -23,26 +23,34 @@
  *
 \**************************************************************************/
 
-#include <Quarter/QuarterWidget.h>
-using namespace SIM::Coin3D::Quarter;
-
 #include <QtCore/QSize>
+#include <QtGui/QMdiSubWindow>
+
+namespace SIM { namespace Coin3D { namespace Quarter {
+  class QuarterWidget;
+}}}
 
 class QString;
+using namespace SIM::Coin3D::Quarter;
 
-class MdiQuarterWidget : public QuarterWidget {
-  typedef QuarterWidget inherited;
+class MdiQuarterWidget : public QMdiSubWindow {
+  typedef QMdiSubWindow inherited;
 public:
   MdiQuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0);
   ~MdiQuarterWidget();
 
   bool loadFile(const QString & filename);
   const QString & currentFile(void) const;
+  const QuarterWidget * quarterWidget(void) const;
 
   virtual QSize minimumSizeHint(void) const;
 
+protected:
+  virtual void closeEvent(QCloseEvent * event);
+
 private:
   QString currentfile;
+  QuarterWidget * quarterwidget;
 };
 
 #endif // MDI_QUARTER_WIDGET_H
