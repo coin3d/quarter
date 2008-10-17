@@ -27,6 +27,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QDropEvent>
 #include <QtGui/QCloseEvent>
+#include <QtGui/QMdiArea>
 #include <QtGui/QDragEnterEvent>
 
 #include <Quarter/Quarter.h>
@@ -38,8 +39,8 @@ MdiMainWindow::MdiMainWindow(void)
   Quarter::init();
 
   this->firstwidget = 0;
-  this->workspace = new QWorkspace;
-  this->setCentralWidget(this->workspace);
+  this->mdiarea = new QMdiArea;
+  this->setCentralWidget(this->mdiarea);
   this->setAcceptDrops(true);
   this->setWindowTitle(tr("Quarter MDI example"));
 
@@ -58,12 +59,8 @@ MdiMainWindow::MdiMainWindow(void)
 
   this->connect(fileopenaction, SIGNAL(triggered()), this, SLOT(open()));
   this->connect(fileexitaction, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
-  this->connect(tileaction, SIGNAL(triggered()), this->workspace, SLOT(tile()));
-  this->connect(cascadeaction, SIGNAL(triggered()), this->workspace, SLOT(cascade()));
-
-  QSignalMapper * windowmapper = new QSignalMapper(this);
-  this->connect(windowmapper, SIGNAL(mapped(QWidget *)),
-                this->workspace, SLOT(setActiveWindow(QWidget *)));
+  this->connect(tileaction, SIGNAL(triggered()), this->mdiarea, SLOT(tileSubWindows()));
+  this->connect(cascadeaction, SIGNAL(triggered()), this->mdiarea, SLOT(cascadeSubWindows()));
 }
 
 MdiMainWindow::~MdiMainWindow()
@@ -91,7 +88,7 @@ MdiMainWindow::dropEvent(QDropEvent * event)
 void
 MdiMainWindow::closeEvent(QCloseEvent * event)
 {
-  this->workspace->closeAllWindows();
+  this->mdiarea->closeAllSubWindows();
 }
 
 void
@@ -106,7 +103,7 @@ MdiMainWindow::open(const QString & filename)
   if (!filename.isEmpty()) {
     MdiQuarterWidget * existing = this->findMdiChild(filename);
     if (existing) {
-      this->workspace->setActiveWindow(existing);
+      this->mdiarea->setActiveSubWindow(existing);
       return;
     }
     MdiQuarterWidget * child = this->createMdiChild();
@@ -123,7 +120,7 @@ MdiQuarterWidget *
 MdiMainWindow::findMdiChild(const QString & filename)
 {
   QString canonicalpath = QFileInfo(filename).canonicalFilePath();
-  foreach(QWidget * window, this->workspace->windowList()) {
+  foreach(QMdiSubWindow * window, this->mdiarea->subWindowList()) {
     MdiQuarterWidget * mdiwidget = (MdiQuarterWidget *) window;
     if (mdiwidget->currentFile() == canonicalpath) {
       return mdiwidget;
@@ -136,10 +133,10 @@ MdiQuarterWidget *
 MdiMainWindow::createMdiChild(void)
 {
   MdiQuarterWidget * widget = new MdiQuarterWidget(NULL, this->firstwidget);
-  this->workspace->addWindow(widget);
+  this->mdiarea->addSubWindow(widget);
 
   if (this->firstwidget = 0) {
-    this->firstwidget = widget;
+    this->firstwidget = (QGLWidget *) widget->quarterWidget();
   }
 
   return widget;

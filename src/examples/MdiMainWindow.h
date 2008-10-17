@@ -28,7 +28,7 @@
 
 class QString;
 class QGLWidget;
-class QWorkspace;
+class QMdiArea;
 class QDropEvent;
 class QCloseEvent;
 class MdiQuarterWidget;
@@ -55,7 +55,7 @@ private:
   MdiQuarterWidget * createMdiChild(void);
   MdiQuarterWidget * findMdiChild(const QString & filename);
 
-  QWorkspace * workspace;
+  QMdiArea * mdiarea;
   QGLWidget * firstwidget; // for context sharing
 };
 
