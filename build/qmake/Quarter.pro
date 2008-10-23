@@ -2,7 +2,7 @@ TARGET = Quarter
 TEMPLATE = lib
 
 CONFIG += dll
-VERSION = 0.1.0
+VERSION = 1.0.0
 QT += opengl
 
 include(coin.pro)
@@ -22,7 +22,6 @@ SOURCES = \
           ../../src/Quarter/ImageReader.cpp \
           ../../src/Quarter/Quarter.cpp \
           ../../src/Quarter/QuarterP.cpp \
-          ../../src/Quarter/QuarterApplication.cpp \
           ../../src/Quarter/QuarterWidget.cpp \
           ../../src/Quarter/QuarterWidgetP.cpp \
           ../../src/Quarter/SensorManager.cpp \
@@ -45,5 +44,4 @@ HEADERS = \
           ../../include/Quarter/eventhandlers/EventManager.h \
           ../../include/Quarter/Quarter.h \
           ../../src/Quarter/QuarterP.h \
-          ../../include/Quarter/QuarterApplication.h \
           ../../include/Quarter/QuarterWidget.h
