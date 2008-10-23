@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     SoInput in;
     SbBool ok = in.openFile(argv[1]);
     if (!ok) {
-      qFatal("could not open file %s\n", argv[1]);
+      qWarning("could not open file %s\n", argv[1]);
       exit(1);
     }
 
@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
   }
 
   if (root == NULL) {
-    qFatal("could not read file %s\n", argv[1]);
+    qWarning("could not read file %s\n", argv[1]);
     exit(1);
   }
 
