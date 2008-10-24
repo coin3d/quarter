@@ -31,6 +31,7 @@ namespace SIM { namespace Coin3D { namespace Quarter {
 }}}
 
 class QString;
+class QGLWidget;
 using namespace SIM::Coin3D::Quarter;
 
 class MdiQuarterWidget : public QMdiSubWindow {
