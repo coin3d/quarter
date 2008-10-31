@@ -1,5 +1,5 @@
-#ifndef QUARTER_MOUSEHANDLER_H
-#define QUARTER_MOUSEHANDLER_H
+#ifndef QUARTER_KEYBOARDHANDLERP_H
+#define QUARTER_KEYBOARDHANDLERP_H
 
 /**************************************************************************\
  *
@@ -23,26 +23,33 @@
  *
 \**************************************************************************/
 
-#include <Quarter/Basic.h>
-#include <Quarter/devices/DeviceHandler.h>
+#include <QtGui/QKeyEvent>
+#include <Inventor/events/SoKeyboardEvent.h>
 
-class QEvent;
 class SoEvent;
+template <class Key, class T> class QMap;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class QUARTER_DLL_API MouseHandler : public DeviceHandler {
+class Keyboard;
+
+class KeyboardP {
 public:
-  MouseHandler(void);
-  virtual ~MouseHandler();
+  KeyboardP(Keyboard * publ);
+  ~KeyboardP();
 
-  virtual const SoEvent * translateEvent(QEvent * event);
+  const SoEvent * keyEvent(QKeyEvent * event);
+  void initKeyMap(void);
+  static bool debugKeyEvents(void);
 
-private:
-  friend class MouseHandlerP;
-  class MouseHandlerP * pimpl;
+  typedef QMap<Qt::Key, SoKeyboardEvent::Key> KeyMap;
+  static KeyMap * keyboardmap;
+  static KeyMap * keypadmap;
+
+  SoKeyboardEvent * keyboard;
+  Keyboard * publ;
 };
 
 }}} // namespace
 
-#endif // QUARTER_MOUSEHANDLER_H
+#endif // QUARTER_KEYBOARDHANDLERP_H

@@ -30,6 +30,8 @@
 
 #include <assert.h>
 
+#include <QtCore/QEvent>
+
 #include <Inventor/SbViewportRegion.h>
 #include <Inventor/system/gl.h>
 #include <Inventor/events/SoEvents.h>
@@ -48,10 +50,9 @@
 #include <Inventor/scxml/SoScXMLStateMachine.h>
 
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/devices/DeviceManager.h>
 #include <Quarter/devices/MouseHandler.h>
 #include <Quarter/devices/KeyboardHandler.h>
-#include <Quarter/eventhandlers/EventManager.h>
+#include <Quarter/eventhandlers/EventFilter.h>
 #include <Quarter/eventhandlers/DragDropHandler.h>
 
 #include "ContextMenu.h"
@@ -94,8 +95,8 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   //Mind the order of initialization as the XML state machine uses
   //callbacks which depends on other state being initialized
-  PRIVATE(this)->eventmanager = new EventManager(this);
-  PRIVATE(this)->devicemanager = new DeviceManager(this);
+  PRIVATE(this)->eventfilter = new EventFilter(this);
+  PRIVATE(this)->dragdrophandler = new DragDropHandler(this);
 
   // set up default cursors for the examiner navigation states
   this->setStateCursor("interact", Qt::ArrowCursor);
@@ -129,10 +130,6 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   PRIVATE(this)->soeventmanager->setNavigationState(SoEventManager::MIXED_NAVIGATION);
 
-  PRIVATE(this)->devicemanager->registerDevice(new MouseHandler);
-  PRIVATE(this)->devicemanager->registerDevice(new KeyboardHandler);
-  PRIVATE(this)->eventmanager->registerEventHandler(new DragDropHandler);
-
   // set up a cache context for the default SoGLRenderAction
   PRIVATE(this)->sorendermanager->getGLRenderAction()->setCacheContext(this->getCacheContextId());
 
@@ -140,6 +137,8 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   // set focus policy to Strong by default
   this->setFocusPolicy(Qt::StrongFocus);
+  this->installEventFilter(PRIVATE(this)->eventfilter);
+  this->installEventFilter(PRIVATE(this)->dragdrophandler);
 }
 
 /*! destructor */
@@ -150,8 +149,7 @@ QuarterWidget::~QuarterWidget()
   this->setSceneGraph(NULL);
   this->setSoRenderManager(NULL);
   this->setSoEventManager(NULL);
-  delete PRIVATE(this)->eventmanager;
-  delete PRIVATE(this)->devicemanager;
+  delete PRIVATE(this)->eventfilter;
   delete PRIVATE(this);
 }
 
@@ -258,24 +256,6 @@ SoNode *
 QuarterWidget::getSceneGraph(void) const
 {
   return PRIVATE(this)->scene;
-}
-
-/*!
-  Returns a pointer to the device manager
- */
-DeviceManager *
-QuarterWidget::getDeviceManager(void) const
-{
-  return PRIVATE(this)->devicemanager;
-}
-
-/*!
-  Returns a pointer to the event manager
- */
-EventManager *
-QuarterWidget::getEventManager(void) const
-{
-  return PRIVATE(this)->eventmanager;
 }
 
 /*!
@@ -424,24 +404,13 @@ QuarterWidget::actualRedraw(void)
   PRIVATE(this)->sorendermanager->render(TRUE, TRUE);
 }
 
-/*! Translates Qt Events into Coin events and passes them on to the
-  event manager for processing. If the event can not be translated or
-  processed, it is forwarded to Qt and the method returns false. This
-  method could be overridden in a subclass in order to catch events of
-  particular interest to the application programmer.
- */
-bool
-QuarterWidget::event(QEvent * event)
+bool 
+QuarterWidget::processSoEvent(const SoEvent * event)
 {
-  if (PRIVATE(this)->eventmanager->handleEvent(event)) {
-    return true;
-  }
-
-  const SoEvent * soevent = PRIVATE(this)->devicemanager->translateEvent(event);
-  if (soevent && PRIVATE(this)->soeventmanager->processEvent(soevent)) {
-    return true;
-  }
-  return inherited::event(event);
+  return 
+    event && 
+    PRIVATE(this)->soeventmanager &&
+    PRIVATE(this)->soeventmanager->processEvent(event);
 }
 
 /*!

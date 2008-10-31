@@ -20,9 +20,8 @@
  *
 \**************************************************************************/
 
-#include "KeyboardHandlerP.h"
-#include <Quarter/devices/KeyboardHandler.h>
-#include <Quarter/devices/DeviceManager.h>
+#include "KeyboardP.h"
+#include <Quarter/devices/Keyboard.h>
 #include <QtCore/QMap>
 #include <Inventor/errors/SoDebugError.h>
 
@@ -30,7 +29,7 @@ using namespace SIM::Coin3D::Quarter;
 
 #define PUBLIC(obj) obj->publ
 
-KeyboardHandlerP::KeyboardHandlerP(KeyboardHandler * publ)
+KeyboardP::KeyboardP(Keyboard * publ)
 {
   PUBLIC(this) = publ;
   this->keyboard = new SoKeyboardEvent;
@@ -42,25 +41,24 @@ KeyboardHandlerP::KeyboardHandlerP(KeyboardHandler * publ)
   }
 }
 
-KeyboardHandlerP::~KeyboardHandlerP()
+KeyboardP::~KeyboardP()
 {
   delete this->keyboard;
 }
 
 bool
-KeyboardHandlerP::debugKeyEvents(void)
+KeyboardP::debugKeyEvents(void)
 {
   const char * env = coin_getenv("QUARTER_DEBUG_KEYEVENTS");
   return env && (atoi(env) > 0);
 }
 
 const SoEvent *
-KeyboardHandlerP::keyEvent(QKeyEvent * qevent)
+KeyboardP::keyEvent(QKeyEvent * qevent)
 {
   const Qt::KeyboardModifiers modifiers = qevent->modifiers();
 
-  SbVec2s pos = PUBLIC(this)->manager->getLastMousePosition();
-  this->keyboard->setPosition(pos);
+  this->keyboard->setPosition(PUBLIC(this)->mousepos);
   PUBLIC(this)->setModifiers(this->keyboard, qevent);
 
   (qevent->type() == QEvent::KeyPress) ?
@@ -78,24 +76,25 @@ KeyboardHandlerP::keyEvent(QKeyEvent * qevent)
   this->keyboard->setKey(sokey);
 
 #if QUARTER_DEBUG
-  if (KeyboardHandlerP::debugKeyEvents()) {
+  if (KeyboardP::debugKeyEvents()) {
     SbString s;
     this->keyboard->enumToString(this->keyboard->getKey(), s);
-    SoDebugError::postInfo("KeyboardHandlerP::keyEvent",
+    SoDebugError::postInfo("KeyboardP::keyEvent",
                            "enum: '%s', pos: <%i %i>, printable: '%s'", 
                            s.getString(), 
-                           pos[0], pos[1],
+                           PUBLIC(this)->mousepos[0], 
+                           PUBLIC(this)->mousepos[1],
                            printable);
   }
 #endif
   return this->keyboard;
 }
 
-KeyboardHandlerP::KeyMap * KeyboardHandlerP::keyboardmap = NULL;
-KeyboardHandlerP::KeyMap * KeyboardHandlerP::keypadmap = NULL;
+KeyboardP::KeyMap * KeyboardP::keyboardmap = NULL;
+KeyboardP::KeyMap * KeyboardP::keypadmap = NULL;
 
 void
-KeyboardHandlerP::initKeyMap(void)
+KeyboardP::initKeyMap(void)
 {
   // keyboard
   keyboardmap->insert(Qt::Key_Shift,   SoKeyboardEvent::LEFT_SHIFT);

@@ -40,7 +40,6 @@
 #include <Inventor/nodes/SoSeparator.h>
 
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/eventhandlers/EventManager.h>
 #include <stdlib.h>
 
 namespace SIM { namespace Coin3D { namespace Quarter {
@@ -55,6 +54,7 @@ public:
 
   QStringList suffixes;
   DragDropHandler * master;
+  QuarterWidget * quarterwidget;
 };
 
 }}} // namespace
@@ -64,9 +64,12 @@ public:
 
 using namespace SIM::Coin3D::Quarter;
 
-DragDropHandler::DragDropHandler(void)
+DragDropHandler::DragDropHandler(QuarterWidget * parent)
+  : QObject(parent)
 {
   PRIVATE(this) = new DragDropHandlerP(this);
+  PRIVATE(this)->quarterwidget = dynamic_cast<QuarterWidget *>(parent);
+  assert(PRIVATE(this)->quarterwidget);
   PRIVATE(this)->suffixes << "iv" << "wrl";
 }
 
@@ -79,8 +82,8 @@ DragDropHandler::~DragDropHandler()
   valid Inventor or VRML it opens the file, reads in the scenegraph
   and calls setSceneGraph on the QuarterWidget
  */
-bool
-DragDropHandler::handleEvent(QEvent * event)
+bool 
+DragDropHandler::eventFilter(QObject *, QEvent * event)
 {
   switch (event->type()) {
   case QEvent::DragEnter:
@@ -135,10 +138,9 @@ DragDropHandlerP::dropEvent(QDropEvent * event)
   root = SoDB::readAll(&in);
   if (root == NULL) return;
 
-  // get QuarterWidget and set new scenegraph
-  QuarterWidget * quarterwidget = (QuarterWidget *) PUBLIC(this)->manager->getWidget();
-  quarterwidget->setSceneGraph(root);
-  quarterwidget->updateGL();
+  // set new scenegraph
+  this->quarterwidget->setSceneGraph(root);
+  this->quarterwidget->updateGL();
 }
 
 #undef PRIVATE

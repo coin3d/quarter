@@ -23,19 +23,23 @@
  *
 \**************************************************************************/
 
+#include <QtCore/QObject>
 #include <Quarter/Basic.h>
-#include <Quarter/eventhandlers/EventHandler.h>
 
 class QEvent;
 class SoEvent;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class QUARTER_DLL_API DragDropHandler : public EventHandler {
+class QuarterWidget;
+
+class QUARTER_DLL_API DragDropHandler : public QObject {
 public:
-  DragDropHandler(void);
+  DragDropHandler(QuarterWidget * parent);
   virtual ~DragDropHandler();
-  virtual bool handleEvent(QEvent * event);
+
+protected:
+  virtual bool eventFilter(QObject *, QEvent * event);
 
 private:
   friend class DragDropHandlerP;

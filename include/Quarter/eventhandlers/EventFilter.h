@@ -1,5 +1,5 @@
-#ifndef QUARTER_KEYBOARDHANDLER_H
-#define QUARTER_KEYBOARDHANDLER_H
+#ifndef QUARTER_EVENTFILTER_H
+#define QUARTER_EVENTFILTER_H
 
 /**************************************************************************\
  *
@@ -24,25 +24,29 @@
 \**************************************************************************/
 
 #include <Quarter/Basic.h>
-#include <Quarter/devices/DeviceHandler.h>
+#include <QtCore/QObject>
 
 class QEvent;
-class SoEvent;
+class QPoint;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class QUARTER_DLL_API KeyboardHandler : public DeviceHandler {
-public:
-  KeyboardHandler(void);
-  virtual ~KeyboardHandler();
+class QUARTER_DLL_API EventFilter : public QObject {
+  Q_OBJECT
 
-  virtual const SoEvent * translateEvent(QEvent * event);
+public:
+  EventFilter(QObject * parent);
+  ~EventFilter();
+
+  const QPoint & globalMousePosition(void) const;
+
+protected:
+  bool eventFilter(QObject * obj, QEvent * event);
 
 private:
-  friend class KeyboardHandlerP;
-  class KeyboardHandlerP * pimpl;
+  class EventFilterP * pimpl;
 };
 
 }}} // namespace
 
-#endif // QUARTER_KEYBOARDHANDLER_H
+#endif // QUARTER_EVENTFILTER_H

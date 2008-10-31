@@ -234,13 +234,16 @@ target_alias = @target_alias@
 
 DEFAULT_INCLUDES = $(includes)
 
-BuiltSources = 
+BuiltSources = \
+        moc_EventFilter.cpp \
+        moc_DragDropHandler.cpp
+
+
 PrivateHeaders = 
 
 RegularSources = \
-        EventManager.cpp \
-        EventHandler.cpp \
-        DragDropHandler.cpp
+        DragDropHandler.cpp \
+        EventFilter.cpp
 
 
 BUILT_SOURCES = $(BuiltSources)
@@ -298,33 +301,37 @@ LIBRARIES = $(noinst_LIBRARIES)
 
 eventhandlers_lst_AR = $(AR) cru
 eventhandlers_lst_LIBADD =
-am__objects_1 = eventhandlers_lst-EventManager.$(OBJEXT) \
-	eventhandlers_lst-EventHandler.$(OBJEXT) \
-	eventhandlers_lst-DragDropHandler.$(OBJEXT)
+am__objects_1 = eventhandlers_lst-DragDropHandler.$(OBJEXT) \
+	eventhandlers_lst-EventFilter.$(OBJEXT)
 am__objects_2 =
 am_eventhandlers_lst_OBJECTS = $(am__objects_1) $(am__objects_2)
-nodist_eventhandlers_lst_OBJECTS = $(am__objects_2)
+am__objects_3 = eventhandlers_lst-moc_EventFilter.$(OBJEXT) \
+	eventhandlers_lst-moc_DragDropHandler.$(OBJEXT)
+nodist_eventhandlers_lst_OBJECTS = $(am__objects_3)
 eventhandlers_lst_OBJECTS = $(am_eventhandlers_lst_OBJECTS) \
 	$(nodist_eventhandlers_lst_OBJECTS)
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 
 libeventhandlers_la_LDFLAGS =
 libeventhandlers_la_LIBADD =
-am__objects_3 = libeventhandlers_la-EventManager.lo \
-	libeventhandlers_la-EventHandler.lo \
-	libeventhandlers_la-DragDropHandler.lo
-am_libeventhandlers_la_OBJECTS = $(am__objects_3) $(am__objects_2)
-nodist_libeventhandlers_la_OBJECTS = $(am__objects_2)
+am__objects_4 = libeventhandlers_la-DragDropHandler.lo \
+	libeventhandlers_la-EventFilter.lo
+am_libeventhandlers_la_OBJECTS = $(am__objects_4) $(am__objects_2)
+am__objects_5 = libeventhandlers_la-moc_EventFilter.lo \
+	libeventhandlers_la-moc_DragDropHandler.lo
+nodist_libeventhandlers_la_OBJECTS = $(am__objects_5)
 libeventhandlers_la_OBJECTS = $(am_libeventhandlers_la_OBJECTS) \
 	$(nodist_libeventhandlers_la_OBJECTS)
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/eventhandlers_lst-DragDropHandler.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/eventhandlers_lst-EventHandler.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/eventhandlers_lst-EventManager.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/eventhandlers_lst-EventFilter.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-DragDropHandler.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-EventHandler.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-EventManager.Plo
+@AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-EventFilter.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Plo
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) \
@@ -370,11 +377,13 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventhandlers_lst-DragDropHandler.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventhandlers_lst-EventHandler.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventhandlers_lst-EventManager.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventhandlers_lst-EventFilter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libeventhandlers_la-DragDropHandler.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libeventhandlers_la-EventHandler.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libeventhandlers_la-EventManager.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libeventhandlers_la-EventFilter.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Plo@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -412,72 +421,6 @@ distclean-depend:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
 
-eventhandlers_lst-EventManager.o: EventManager.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-EventManager.o -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-EventManager.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-EventManager.o `test -f 'EventManager.cpp' || echo '$(srcdir)/'`EventManager.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-EventManager.Tpo" "$(DEPDIR)/eventhandlers_lst-EventManager.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-EventManager.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventManager.cpp' object='eventhandlers_lst-EventManager.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-EventManager.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-EventManager.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-EventManager.o `test -f 'EventManager.cpp' || echo '$(srcdir)/'`EventManager.cpp
-
-eventhandlers_lst-EventManager.obj: EventManager.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-EventManager.obj -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-EventManager.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-EventManager.obj `if test -f 'EventManager.cpp'; then $(CYGPATH_W) 'EventManager.cpp'; else $(CYGPATH_W) '$(srcdir)/EventManager.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-EventManager.Tpo" "$(DEPDIR)/eventhandlers_lst-EventManager.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-EventManager.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventManager.cpp' object='eventhandlers_lst-EventManager.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-EventManager.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-EventManager.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-EventManager.obj `if test -f 'EventManager.cpp'; then $(CYGPATH_W) 'EventManager.cpp'; else $(CYGPATH_W) '$(srcdir)/EventManager.cpp'; fi`
-
-eventhandlers_lst-EventManager.lo: EventManager.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-EventManager.lo -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-EventManager.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-EventManager.lo `test -f 'EventManager.cpp' || echo '$(srcdir)/'`EventManager.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-EventManager.Tpo" "$(DEPDIR)/eventhandlers_lst-EventManager.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-EventManager.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventManager.cpp' object='eventhandlers_lst-EventManager.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-EventManager.Plo' tmpdepfile='$(DEPDIR)/eventhandlers_lst-EventManager.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-EventManager.lo `test -f 'EventManager.cpp' || echo '$(srcdir)/'`EventManager.cpp
-
-eventhandlers_lst-EventHandler.o: EventHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-EventHandler.o -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-EventHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-EventHandler.o `test -f 'EventHandler.cpp' || echo '$(srcdir)/'`EventHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-EventHandler.Tpo" "$(DEPDIR)/eventhandlers_lst-EventHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-EventHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventHandler.cpp' object='eventhandlers_lst-EventHandler.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-EventHandler.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-EventHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-EventHandler.o `test -f 'EventHandler.cpp' || echo '$(srcdir)/'`EventHandler.cpp
-
-eventhandlers_lst-EventHandler.obj: EventHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-EventHandler.obj -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-EventHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-EventHandler.obj `if test -f 'EventHandler.cpp'; then $(CYGPATH_W) 'EventHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/EventHandler.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-EventHandler.Tpo" "$(DEPDIR)/eventhandlers_lst-EventHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-EventHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventHandler.cpp' object='eventhandlers_lst-EventHandler.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-EventHandler.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-EventHandler.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-EventHandler.obj `if test -f 'EventHandler.cpp'; then $(CYGPATH_W) 'EventHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/EventHandler.cpp'; fi`
-
-eventhandlers_lst-EventHandler.lo: EventHandler.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-EventHandler.lo -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-EventHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-EventHandler.lo `test -f 'EventHandler.cpp' || echo '$(srcdir)/'`EventHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-EventHandler.Tpo" "$(DEPDIR)/eventhandlers_lst-EventHandler.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-EventHandler.Tpo"; exit 1; \
-@am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventHandler.cpp' object='eventhandlers_lst-EventHandler.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-EventHandler.Plo' tmpdepfile='$(DEPDIR)/eventhandlers_lst-EventHandler.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-EventHandler.lo `test -f 'EventHandler.cpp' || echo '$(srcdir)/'`EventHandler.cpp
-
 eventhandlers_lst-DragDropHandler.o: DragDropHandler.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-DragDropHandler.o -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-DragDropHandler.Tpo" \
 @am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-DragDropHandler.o `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp; \
@@ -511,71 +454,104 @@ eventhandlers_lst-DragDropHandler.lo: DragDropHandler.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-DragDropHandler.lo `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp
 
-libeventhandlers_la-EventManager.o: EventManager.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-EventManager.o -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-EventManager.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-EventManager.o `test -f 'EventManager.cpp' || echo '$(srcdir)/'`EventManager.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-EventManager.Tpo" "$(DEPDIR)/libeventhandlers_la-EventManager.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-EventManager.Tpo"; exit 1; \
+eventhandlers_lst-EventFilter.o: EventFilter.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-EventFilter.o -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-EventFilter.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-EventFilter.o `test -f 'EventFilter.cpp' || echo '$(srcdir)/'`EventFilter.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-EventFilter.Tpo" "$(DEPDIR)/eventhandlers_lst-EventFilter.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-EventFilter.Tpo"; exit 1; \
 @am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventManager.cpp' object='libeventhandlers_la-EventManager.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-EventManager.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-EventManager.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventFilter.cpp' object='eventhandlers_lst-EventFilter.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-EventFilter.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-EventFilter.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-EventManager.o `test -f 'EventManager.cpp' || echo '$(srcdir)/'`EventManager.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-EventFilter.o `test -f 'EventFilter.cpp' || echo '$(srcdir)/'`EventFilter.cpp
 
-libeventhandlers_la-EventManager.obj: EventManager.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-EventManager.obj -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-EventManager.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-EventManager.obj `if test -f 'EventManager.cpp'; then $(CYGPATH_W) 'EventManager.cpp'; else $(CYGPATH_W) '$(srcdir)/EventManager.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-EventManager.Tpo" "$(DEPDIR)/libeventhandlers_la-EventManager.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-EventManager.Tpo"; exit 1; \
+eventhandlers_lst-EventFilter.obj: EventFilter.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-EventFilter.obj -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-EventFilter.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-EventFilter.obj `if test -f 'EventFilter.cpp'; then $(CYGPATH_W) 'EventFilter.cpp'; else $(CYGPATH_W) '$(srcdir)/EventFilter.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-EventFilter.Tpo" "$(DEPDIR)/eventhandlers_lst-EventFilter.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-EventFilter.Tpo"; exit 1; \
 @am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventManager.cpp' object='libeventhandlers_la-EventManager.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-EventManager.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-EventManager.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventFilter.cpp' object='eventhandlers_lst-EventFilter.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-EventFilter.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-EventFilter.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-EventManager.obj `if test -f 'EventManager.cpp'; then $(CYGPATH_W) 'EventManager.cpp'; else $(CYGPATH_W) '$(srcdir)/EventManager.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-EventFilter.obj `if test -f 'EventFilter.cpp'; then $(CYGPATH_W) 'EventFilter.cpp'; else $(CYGPATH_W) '$(srcdir)/EventFilter.cpp'; fi`
 
-libeventhandlers_la-EventManager.lo: EventManager.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-EventManager.lo -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-EventManager.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-EventManager.lo `test -f 'EventManager.cpp' || echo '$(srcdir)/'`EventManager.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-EventManager.Tpo" "$(DEPDIR)/libeventhandlers_la-EventManager.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-EventManager.Tpo"; exit 1; \
+eventhandlers_lst-EventFilter.lo: EventFilter.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-EventFilter.lo -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-EventFilter.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-EventFilter.lo `test -f 'EventFilter.cpp' || echo '$(srcdir)/'`EventFilter.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-EventFilter.Tpo" "$(DEPDIR)/eventhandlers_lst-EventFilter.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-EventFilter.Tpo"; exit 1; \
 @am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventManager.cpp' object='libeventhandlers_la-EventManager.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-EventManager.Plo' tmpdepfile='$(DEPDIR)/libeventhandlers_la-EventManager.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventFilter.cpp' object='eventhandlers_lst-EventFilter.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-EventFilter.Plo' tmpdepfile='$(DEPDIR)/eventhandlers_lst-EventFilter.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-EventManager.lo `test -f 'EventManager.cpp' || echo '$(srcdir)/'`EventManager.cpp
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-EventFilter.lo `test -f 'EventFilter.cpp' || echo '$(srcdir)/'`EventFilter.cpp
 
-libeventhandlers_la-EventHandler.o: EventHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-EventHandler.o -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-EventHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-EventHandler.o `test -f 'EventHandler.cpp' || echo '$(srcdir)/'`EventHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-EventHandler.Tpo" "$(DEPDIR)/libeventhandlers_la-EventHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-EventHandler.Tpo"; exit 1; \
+eventhandlers_lst-moc_EventFilter.o: moc_EventFilter.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-moc_EventFilter.o -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-moc_EventFilter.o `test -f 'moc_EventFilter.cpp' || echo '$(srcdir)/'`moc_EventFilter.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Tpo" "$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Tpo"; exit 1; \
 @am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventHandler.cpp' object='libeventhandlers_la-EventHandler.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-EventHandler.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-EventHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_EventFilter.cpp' object='eventhandlers_lst-moc_EventFilter.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-moc_EventFilter.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-EventHandler.o `test -f 'EventHandler.cpp' || echo '$(srcdir)/'`EventHandler.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-moc_EventFilter.o `test -f 'moc_EventFilter.cpp' || echo '$(srcdir)/'`moc_EventFilter.cpp
 
-libeventhandlers_la-EventHandler.obj: EventHandler.cpp
-@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-EventHandler.obj -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-EventHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-EventHandler.obj `if test -f 'EventHandler.cpp'; then $(CYGPATH_W) 'EventHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/EventHandler.cpp'; fi`; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-EventHandler.Tpo" "$(DEPDIR)/libeventhandlers_la-EventHandler.Po"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-EventHandler.Tpo"; exit 1; \
+eventhandlers_lst-moc_EventFilter.obj: moc_EventFilter.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-moc_EventFilter.obj -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-moc_EventFilter.obj `if test -f 'moc_EventFilter.cpp'; then $(CYGPATH_W) 'moc_EventFilter.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_EventFilter.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Tpo" "$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Tpo"; exit 1; \
 @am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventHandler.cpp' object='libeventhandlers_la-EventHandler.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-EventHandler.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-EventHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_EventFilter.cpp' object='eventhandlers_lst-moc_EventFilter.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-moc_EventFilter.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-EventHandler.obj `if test -f 'EventHandler.cpp'; then $(CYGPATH_W) 'EventHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/EventHandler.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-moc_EventFilter.obj `if test -f 'moc_EventFilter.cpp'; then $(CYGPATH_W) 'moc_EventFilter.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_EventFilter.cpp'; fi`
 
-libeventhandlers_la-EventHandler.lo: EventHandler.cpp
-@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-EventHandler.lo -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-EventHandler.Tpo" \
-@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-EventHandler.lo `test -f 'EventHandler.cpp' || echo '$(srcdir)/'`EventHandler.cpp; \
-@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-EventHandler.Tpo" "$(DEPDIR)/libeventhandlers_la-EventHandler.Plo"; \
-@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-EventHandler.Tpo"; exit 1; \
+eventhandlers_lst-moc_EventFilter.lo: moc_EventFilter.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-moc_EventFilter.lo -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-moc_EventFilter.lo `test -f 'moc_EventFilter.cpp' || echo '$(srcdir)/'`moc_EventFilter.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Tpo" "$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Tpo"; exit 1; \
 @am__fastdepCXX_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventHandler.cpp' object='libeventhandlers_la-EventHandler.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-EventHandler.Plo' tmpdepfile='$(DEPDIR)/libeventhandlers_la-EventHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_EventFilter.cpp' object='eventhandlers_lst-moc_EventFilter.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-moc_EventFilter.Plo' tmpdepfile='$(DEPDIR)/eventhandlers_lst-moc_EventFilter.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-EventHandler.lo `test -f 'EventHandler.cpp' || echo '$(srcdir)/'`EventHandler.cpp
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-moc_EventFilter.lo `test -f 'moc_EventFilter.cpp' || echo '$(srcdir)/'`moc_EventFilter.cpp
+
+eventhandlers_lst-moc_DragDropHandler.o: moc_DragDropHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-moc_DragDropHandler.o -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-moc_DragDropHandler.o `test -f 'moc_DragDropHandler.cpp' || echo '$(srcdir)/'`moc_DragDropHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Tpo" "$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_DragDropHandler.cpp' object='eventhandlers_lst-moc_DragDropHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-moc_DragDropHandler.o `test -f 'moc_DragDropHandler.cpp' || echo '$(srcdir)/'`moc_DragDropHandler.cpp
+
+eventhandlers_lst-moc_DragDropHandler.obj: moc_DragDropHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-moc_DragDropHandler.obj -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-moc_DragDropHandler.obj `if test -f 'moc_DragDropHandler.cpp'; then $(CYGPATH_W) 'moc_DragDropHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_DragDropHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Tpo" "$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_DragDropHandler.cpp' object='eventhandlers_lst-moc_DragDropHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Po' tmpdepfile='$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-moc_DragDropHandler.obj `if test -f 'moc_DragDropHandler.cpp'; then $(CYGPATH_W) 'moc_DragDropHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_DragDropHandler.cpp'; fi`
+
+eventhandlers_lst-moc_DragDropHandler.lo: moc_DragDropHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -MT eventhandlers_lst-moc_DragDropHandler.lo -MD -MP -MF "$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o eventhandlers_lst-moc_DragDropHandler.lo `test -f 'moc_DragDropHandler.cpp' || echo '$(srcdir)/'`moc_DragDropHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Tpo" "$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_DragDropHandler.cpp' object='eventhandlers_lst-moc_DragDropHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.Plo' tmpdepfile='$(DEPDIR)/eventhandlers_lst-moc_DragDropHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(eventhandlers_lst_CPPFLAGS) $(CPPFLAGS) $(eventhandlers_lst_CXXFLAGS) $(CXXFLAGS) -c -o eventhandlers_lst-moc_DragDropHandler.lo `test -f 'moc_DragDropHandler.cpp' || echo '$(srcdir)/'`moc_DragDropHandler.cpp
 
 libeventhandlers_la-DragDropHandler.o: DragDropHandler.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-DragDropHandler.o -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-DragDropHandler.Tpo" \
@@ -609,6 +585,105 @@ libeventhandlers_la-DragDropHandler.lo: DragDropHandler.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-DragDropHandler.Plo' tmpdepfile='$(DEPDIR)/libeventhandlers_la-DragDropHandler.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-DragDropHandler.lo `test -f 'DragDropHandler.cpp' || echo '$(srcdir)/'`DragDropHandler.cpp
+
+libeventhandlers_la-EventFilter.o: EventFilter.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-EventFilter.o -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-EventFilter.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-EventFilter.o `test -f 'EventFilter.cpp' || echo '$(srcdir)/'`EventFilter.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-EventFilter.Tpo" "$(DEPDIR)/libeventhandlers_la-EventFilter.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-EventFilter.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventFilter.cpp' object='libeventhandlers_la-EventFilter.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-EventFilter.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-EventFilter.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-EventFilter.o `test -f 'EventFilter.cpp' || echo '$(srcdir)/'`EventFilter.cpp
+
+libeventhandlers_la-EventFilter.obj: EventFilter.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-EventFilter.obj -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-EventFilter.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-EventFilter.obj `if test -f 'EventFilter.cpp'; then $(CYGPATH_W) 'EventFilter.cpp'; else $(CYGPATH_W) '$(srcdir)/EventFilter.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-EventFilter.Tpo" "$(DEPDIR)/libeventhandlers_la-EventFilter.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-EventFilter.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventFilter.cpp' object='libeventhandlers_la-EventFilter.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-EventFilter.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-EventFilter.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-EventFilter.obj `if test -f 'EventFilter.cpp'; then $(CYGPATH_W) 'EventFilter.cpp'; else $(CYGPATH_W) '$(srcdir)/EventFilter.cpp'; fi`
+
+libeventhandlers_la-EventFilter.lo: EventFilter.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-EventFilter.lo -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-EventFilter.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-EventFilter.lo `test -f 'EventFilter.cpp' || echo '$(srcdir)/'`EventFilter.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-EventFilter.Tpo" "$(DEPDIR)/libeventhandlers_la-EventFilter.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-EventFilter.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='EventFilter.cpp' object='libeventhandlers_la-EventFilter.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-EventFilter.Plo' tmpdepfile='$(DEPDIR)/libeventhandlers_la-EventFilter.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-EventFilter.lo `test -f 'EventFilter.cpp' || echo '$(srcdir)/'`EventFilter.cpp
+
+libeventhandlers_la-moc_EventFilter.o: moc_EventFilter.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-moc_EventFilter.o -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-moc_EventFilter.o `test -f 'moc_EventFilter.cpp' || echo '$(srcdir)/'`moc_EventFilter.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Tpo" "$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_EventFilter.cpp' object='libeventhandlers_la-moc_EventFilter.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-moc_EventFilter.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-moc_EventFilter.o `test -f 'moc_EventFilter.cpp' || echo '$(srcdir)/'`moc_EventFilter.cpp
+
+libeventhandlers_la-moc_EventFilter.obj: moc_EventFilter.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-moc_EventFilter.obj -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-moc_EventFilter.obj `if test -f 'moc_EventFilter.cpp'; then $(CYGPATH_W) 'moc_EventFilter.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_EventFilter.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Tpo" "$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_EventFilter.cpp' object='libeventhandlers_la-moc_EventFilter.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-moc_EventFilter.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-moc_EventFilter.obj `if test -f 'moc_EventFilter.cpp'; then $(CYGPATH_W) 'moc_EventFilter.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_EventFilter.cpp'; fi`
+
+libeventhandlers_la-moc_EventFilter.lo: moc_EventFilter.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-moc_EventFilter.lo -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-moc_EventFilter.lo `test -f 'moc_EventFilter.cpp' || echo '$(srcdir)/'`moc_EventFilter.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Tpo" "$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_EventFilter.cpp' object='libeventhandlers_la-moc_EventFilter.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-moc_EventFilter.Plo' tmpdepfile='$(DEPDIR)/libeventhandlers_la-moc_EventFilter.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-moc_EventFilter.lo `test -f 'moc_EventFilter.cpp' || echo '$(srcdir)/'`moc_EventFilter.cpp
+
+libeventhandlers_la-moc_DragDropHandler.o: moc_DragDropHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-moc_DragDropHandler.o -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-moc_DragDropHandler.o `test -f 'moc_DragDropHandler.cpp' || echo '$(srcdir)/'`moc_DragDropHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Tpo" "$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_DragDropHandler.cpp' object='libeventhandlers_la-moc_DragDropHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-moc_DragDropHandler.o `test -f 'moc_DragDropHandler.cpp' || echo '$(srcdir)/'`moc_DragDropHandler.cpp
+
+libeventhandlers_la-moc_DragDropHandler.obj: moc_DragDropHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-moc_DragDropHandler.obj -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-moc_DragDropHandler.obj `if test -f 'moc_DragDropHandler.cpp'; then $(CYGPATH_W) 'moc_DragDropHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_DragDropHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Tpo" "$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_DragDropHandler.cpp' object='libeventhandlers_la-moc_DragDropHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Po' tmpdepfile='$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-moc_DragDropHandler.obj `if test -f 'moc_DragDropHandler.cpp'; then $(CYGPATH_W) 'moc_DragDropHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_DragDropHandler.cpp'; fi`
+
+libeventhandlers_la-moc_DragDropHandler.lo: moc_DragDropHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -MT libeventhandlers_la-moc_DragDropHandler.lo -MD -MP -MF "$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libeventhandlers_la-moc_DragDropHandler.lo `test -f 'moc_DragDropHandler.cpp' || echo '$(srcdir)/'`moc_DragDropHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Tpo" "$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_DragDropHandler.cpp' object='libeventhandlers_la-moc_DragDropHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.Plo' tmpdepfile='$(DEPDIR)/libeventhandlers_la-moc_DragDropHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libeventhandlers_la_CPPFLAGS) $(CPPFLAGS) $(libeventhandlers_la_CXXFLAGS) $(CXXFLAGS) -c -o libeventhandlers_la-moc_DragDropHandler.lo `test -f 'moc_DragDropHandler.cpp' || echo '$(srcdir)/'`moc_DragDropHandler.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -797,6 +872,12 @@ uninstall-am: uninstall-info-am
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags uninstall uninstall-am uninstall-info-am
 
+
+moc_EventFilter.cpp: $(top_srcdir)/include/Quarter/eventhandlers/EventFilter.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(top_srcdir)/include/Quarter/eventhandlers/EventFilter.h`
+
+moc_DragDropHandler.cpp: $(top_srcdir)/include/Quarter/eventhandlers/DragDropHandler.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(top_srcdir)/include/Quarter/eventhandlers/DragDropHandler.h`
 
 eventhandlers.lst: $(eventhandlers_lst_OBJECTS)
 	@echo "Linking $@..."; \
