@@ -248,7 +248,6 @@ if $sim_ac_enable_pkgconfig && $sim_ac_build_library; then
   PKG_CHECK_MODULES([Coin], [Coin], [
     COIN_USE_CPPFLAGS="$Coin_CFLAGS"
     COIN_USE_CXXFLAGS="$Coin_CFLAGS"
-    COIN_USE_LDFLAGS="$Coin_LIBS"
     COIN_USE_LIBS="$Coin_LIBS"
   
     SIM_AC_CONFIGURATION_SETTING([Coin version], [`$PKG_CONFIG --modversion Coin`])
