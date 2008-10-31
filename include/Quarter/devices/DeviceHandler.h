@@ -32,11 +32,9 @@ class QInputEvent;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class DeviceManager;
-
 class QUARTER_DLL_API DeviceHandler {
 public:
-  DeviceHandler(void) {}
+  DeviceHandler(void);
   virtual ~DeviceHandler() {}
 
   /*! Subclasses must override this method to provide custom event
@@ -44,12 +42,13 @@ public:
    */
   virtual const SoEvent * translateEvent(QEvent * event) = 0;
 
-protected:
-  void setManager(DeviceManager * manager);
+  void setMousePosition(const SbVec2s & pos);
+  void setWindowSize(const SbVec2s & size);
   void setModifiers(SoEvent * soevent, QInputEvent * qevent);
 
-  friend class DeviceManager;
-  DeviceManager * manager;
+protected:
+  SbVec2s mousepos;
+  SbVec2s windowsize;
 };
 
 }}} // namespace

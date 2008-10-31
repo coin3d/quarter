@@ -20,38 +20,50 @@
  *
 \**************************************************************************/
 
-/*!  \class SIM::Coin3D::Quarter::DeviceHandler DeviceHandler.h Quarter/devices/DeviceHandler.h
+/*!
+  \class SIM::Coin3D::Quarter::KeyboardHandler KeyboardHandler.h Quarter/devices/KeyboardHandler.h
 
-  \brief The DeviceHandler class is the base class for eventhandlers
-  such as the KeyboardHandler and MouseHandler. It can be subclassed
-  to create event handlers for other devices.
+  \brief The KeyboardHandler class provides translation of keyboard
+  events on the QuarterWidget. It is registered with the DeviceManager
+  by default.
 */
 
 
-#include <Quarter/devices/DeviceHandler.h>
-#include <QtGui/QInputEvent>
+#include <Quarter/devices/Keyboard.h>
+
+#include <QtCore/QEvent>
+#include <QtGui/QKeyEvent>
 #include <Inventor/events/SoEvents.h>
+#include <Inventor/events/SoKeyboardEvent.h>
+
+#include "KeyboardP.h"
 
 using namespace SIM::Coin3D::Quarter;
 
-void
-DeviceHandler::setManager(DeviceManager * manager)
+#define PRIVATE(obj) obj->pimpl
+
+Keyboard::Keyboard(void)
 {
-  this->manager = manager;
+  PRIVATE(this) = new KeyboardP(this);
 }
 
-void 
-DeviceHandler::setModifiers(SoEvent * soevent, QInputEvent * qevent)
+Keyboard::~Keyboard()
 {
-  // FIXME: How do we get the time from the qevent? (20070306 frodo)
-  soevent->setTime(SbTime::getTimeOfDay());
+  delete PRIVATE(this);
+}
 
-  // Note: On Mac OS X, the ControlModifier value corresponds to the
-  // Command keys on the Macintosh keyboard, and the MetaModifier
-  // value corresponds to the Control keys.
-  soevent->setShiftDown(qevent->modifiers() & Qt::ShiftModifier);
-  soevent->setAltDown(qevent->modifiers() & Qt::AltModifier);
-  soevent->setCtrlDown(qevent->modifiers() & Qt::ControlModifier);
+/*! Translates from QKeyEvents to SoKeyboardEvents
+ */
+const SoEvent *
+Keyboard::translateEvent(QEvent * event)
+{
+  switch (event->type()) {
+  case QEvent::KeyPress:
+  case QEvent::KeyRelease:
+    return PRIVATE(this)->keyEvent((QKeyEvent *) event);
+  default:
+    return NULL;
+  }
 }
 
 #undef PRIVATE

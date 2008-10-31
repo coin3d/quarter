@@ -28,13 +28,12 @@
   default.
 */
 
-#include <Quarter/devices/MouseHandler.h>
+#include <Quarter/devices/Mouse.h>
 
 #include <QtCore/QEvent>
 #include <QtCore/QSize>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QWheelEvent>
-#include <QtGui/QResizeEvent>
 
 #include <Inventor/SbVec2s.h>
 #include <Inventor/events/SoEvents.h>
@@ -42,16 +41,15 @@
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class MouseHandlerP {
+class MouseP {
 public:
-  MouseHandlerP(MouseHandler * publ) {
+  MouseP(Mouse * publ) {
     this->publ = publ;
     this->location2 = new SoLocation2Event;
     this->mousebutton = new SoMouseButtonEvent;
-    this->windowsize = SbVec2s(-1, -1);
   }
 
-  ~MouseHandlerP() {
+  ~MouseP() {
     delete this->location2;
     delete this->mousebutton;
   }
@@ -65,7 +63,7 @@ public:
   class SoLocation2Event * location2;
   class SoMouseButtonEvent * mousebutton;
   SbVec2s windowsize;
-  MouseHandler * publ;
+  Mouse * publ;
 };
 
 }}} // namespace
@@ -75,12 +73,12 @@ using namespace SIM::Coin3D::Quarter;
 #define PRIVATE(obj) obj->pimpl
 #define PUBLIC(obj) obj->publ
 
-MouseHandler::MouseHandler(void)
+Mouse::Mouse(void)
 {
-  PRIVATE(this) = new MouseHandlerP(this);
+  PRIVATE(this) = new MouseP(this);
 }
 
-MouseHandler::~MouseHandler()
+Mouse::~Mouse()
 {
   delete PRIVATE(this);
 }
@@ -89,7 +87,7 @@ MouseHandler::~MouseHandler()
   SoMouseButtonEvents
  */
 const SoEvent *
-MouseHandler::translateEvent(QEvent * event)
+Mouse::translateEvent(QEvent * event)
 {
   switch (event->type()) {
   case QEvent::MouseMove:
@@ -108,14 +106,14 @@ MouseHandler::translateEvent(QEvent * event)
 }
 
 void
-MouseHandlerP::resizeEvent(QResizeEvent * event)
+MouseP::resizeEvent(QResizeEvent * event)
 {
   this->windowsize = SbVec2s(event->size().width(),
                              event->size().height());
 }
 
 const SoEvent *
-MouseHandlerP::mouseMoveEvent(QMouseEvent * event)
+MouseP::mouseMoveEvent(QMouseEvent * event)
 {
   PUBLIC(this)->setModifiers(this->location2, event);
 
@@ -127,10 +125,10 @@ MouseHandlerP::mouseMoveEvent(QMouseEvent * event)
 }
 
 const SoEvent *
-MouseHandlerP::mouseWheelEvent(QWheelEvent * event)
+MouseP::mouseWheelEvent(QWheelEvent * event)
 {
   PUBLIC(this)->setModifiers(this->mousebutton, event);
-  SbVec2s pos(event->pos().x(), this->windowsize[1] - event->pos().y() - 1);
+  SbVec2s pos(event->pos().x(), PUBLIC(this)->windowsize[1] - event->pos().y() - 1);
   this->location2->setPosition(pos);
   this->mousebutton->setPosition(pos);
 
@@ -148,10 +146,10 @@ MouseHandlerP::mouseWheelEvent(QWheelEvent * event)
 }
 
 const SoEvent *
-MouseHandlerP::mouseButtonEvent(QMouseEvent * event)
+MouseP::mouseButtonEvent(QMouseEvent * event)
 {
   PUBLIC(this)->setModifiers(this->mousebutton, event);
-  SbVec2s pos(event->pos().x(), this->windowsize[1] - event->pos().y() - 1);
+  SbVec2s pos(event->pos().x(), PUBLIC(this)->windowsize[1] - event->pos().y() - 1);
   this->location2->setPosition(pos);
   this->mousebutton->setPosition(pos);
 
@@ -171,7 +169,7 @@ MouseHandlerP::mouseButtonEvent(QMouseEvent * event)
     break;
   default:
     this->mousebutton->setButton(SoMouseButtonEvent::ANY);
-    SoDebugError::postInfo("MouseHandler::mouseButtonEvent",
+    SoDebugError::postInfo("Mouse::mouseButtonEvent",
                            "Unhandled ButtonState = %x", event->button());
     break;
   }

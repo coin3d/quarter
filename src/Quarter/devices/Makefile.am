@@ -16,14 +16,13 @@ endif
 DEFAULT_INCLUDES = $(includes)
 
 PrivateHeaders = \
-        KeyboardHandlerP.h
+        KeyboardP.h
 
 RegularSources = \
-        DeviceManager.cpp \
-        MouseHandler.cpp \
-        KeyboardHandler.cpp \
-        DeviceHandler.cpp \
-        KeyboardHandlerP.cpp
+        Mouse.cpp \
+        Keyboard.cpp \
+        InputDevice.cpp \
+        KeyboardP.cpp
 
 libdevices_la_SOURCES = \
         $(RegularSources) $(PrivateHeaders)

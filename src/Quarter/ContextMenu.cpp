@@ -31,7 +31,6 @@
 #include <Inventor/scxml/SoScXMLStateMachine.h>
 
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/eventhandlers/EventManager.h>
 
 using namespace SIM::Coin3D::Quarter;
 

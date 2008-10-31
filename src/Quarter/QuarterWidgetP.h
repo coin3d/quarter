@@ -39,9 +39,9 @@ template <class Key, class T> class QMap;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class DeviceManager;
-class EventManager;
 class ContextMenu;
+class EventFilter;
+class DragDropHandler;
 
 class QuarterWidgetP {
 public:
@@ -54,8 +54,8 @@ public:
 
   QuarterWidget * const master;
   SoNode * scene;
-  DeviceManager * devicemanager;
-  EventManager * eventmanager;
+  EventFilter * eventfilter;
+  DragDropHandler * dragdrophandler;
   SoRenderManager * sorendermanager;
   SoEventManager * soeventmanager;
   bool initialsorendermanager;
@@ -70,6 +70,8 @@ public:
   static void prerendercb(void * userdata, SoRenderManager * manager);
   static void postrendercb(void * userdata, SoRenderManager * manager);
   static void statechangecb(void * userdata, ScXMLStateMachine * statemachine, const char * stateid, SbBool enter, SbBool success);
+
+  static bool debugEvents(void);
 
   typedef QMap<SbName, QCursor> StateCursorMap;
   static StateCursorMap * statecursormap;

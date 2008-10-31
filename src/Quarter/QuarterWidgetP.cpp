@@ -22,7 +22,7 @@
 
 #include "QuarterWidgetP.h"
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/devices/DeviceManager.h>
+#include <Quarter/eventhandlers/EventFilter.h>
 
 #include <QtGui/QCursor>
 #include <QtCore/QMap>
@@ -53,8 +53,7 @@ QuarterWidgetP::StateCursorMap * QuarterWidgetP::statecursormap = NULL;
 QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * sharewidget)
 : master(masterptr),
   scene(NULL),
-  devicemanager(NULL),
-  eventmanager(NULL),
+  eventfilter(NULL),
   sorendermanager(NULL),
   soeventmanager(NULL),
   initialsorendermanager(false),
@@ -179,7 +178,7 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
       if (!thisp->contextmenu) {
         thisp->contextmenu = new ContextMenu(thisp->master);
       }
-      thisp->contextmenu->exec(thisp->devicemanager->getLastGlobalPosition());
+      thisp->contextmenu->exec(thisp->eventfilter->globalMousePosition());
     }
     if (statecursormap->contains(state)) {
       QCursor cursor = statecursormap->value(state);
@@ -188,3 +187,9 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
   }
 }
 
+bool
+QuarterWidgetP::debugEvents(void)
+{
+  const char * env = coin_getenv("QUARTER_DEBUG_EVENTS");
+  return env && (atoi(env) > 0);
+}

@@ -40,9 +40,6 @@ class SoScXMLStateMachine;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class EventManager;
-class DeviceManager;
-
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   typedef QGLWidget inherited;
   Q_OBJECT
@@ -71,9 +68,6 @@ public:
   virtual void setSceneGraph(SoNode * root);
   virtual SoNode * getSceneGraph(void) const;
   
-  DeviceManager * getDeviceManager(void) const;
-  EventManager * getEventManager(void) const;
-
   void setSoEventManager(SoEventManager * manager);
   SoEventManager * getSoEventManager(void) const;
   void setSoRenderManager(SoRenderManager * manager);
@@ -82,6 +76,8 @@ public:
   void addStateMachine(SoScXMLStateMachine * statemachine);
   void removeStateMachine(SoScXMLStateMachine * statemachine);
 
+  virtual bool processSoEvent(const SoEvent * event);
+
 public slots:
   virtual void viewAll(void);
 
@@ -89,7 +85,6 @@ protected:
   virtual void resizeGL(int width, int height);
   virtual void initializeGL(void);
   virtual void paintGL(void);
-  virtual bool event(QEvent * event);
   virtual void actualRedraw(void);
 
 private:

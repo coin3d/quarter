@@ -15,13 +15,15 @@ endif
 
 DEFAULT_INCLUDES = $(includes)
 
-BuiltSources =
+BuiltSources = \
+        moc_EventFilter.cpp \
+        moc_DragDropHandler.cpp
+
 PrivateHeaders =
 
 RegularSources = \
-        EventManager.cpp \
-        EventHandler.cpp \
-        DragDropHandler.cpp
+        DragDropHandler.cpp \
+        EventFilter.cpp
 
 BUILT_SOURCES = $(BuiltSources)
 
@@ -62,6 +64,12 @@ noinst_LIBRARIES = eventhandlers.lst
 else
 noinst_LTLIBRARIES = libeventhandlers.la
 endif
+
+moc_EventFilter.cpp: $(top_srcdir)/include/Quarter/eventhandlers/EventFilter.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(top_srcdir)/include/Quarter/eventhandlers/EventFilter.h`
+
+moc_DragDropHandler.cpp: $(top_srcdir)/include/Quarter/eventhandlers/DragDropHandler.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(top_srcdir)/include/Quarter/eventhandlers/DragDropHandler.h`
 
 eventhandlers.lst: $(eventhandlers_lst_OBJECTS)
 	@echo "Linking $@..."; \

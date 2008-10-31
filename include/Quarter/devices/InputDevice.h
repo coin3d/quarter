@@ -1,3 +1,6 @@
+#ifndef QUARTER_INPUTDEVICE_H
+#define QUARTER_INPUTDEVICE_H
+
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
@@ -20,50 +23,34 @@
  *
 \**************************************************************************/
 
-/*!
-  \class SIM::Coin3D::Quarter::KeyboardHandler KeyboardHandler.h Quarter/devices/KeyboardHandler.h
+#include <Quarter/Basic.h>
+#include <Inventor/SbVec2s.h>
 
-  \brief The KeyboardHandler class provides translation of keyboard
-  events on the QuarterWidget. It is registered with the DeviceManager
-  by default.
-*/
+class QEvent;
+class SoEvent;
+class QInputEvent;
 
+namespace SIM { namespace Coin3D { namespace Quarter {
 
-#include <Quarter/devices/KeyboardHandler.h>
+class QUARTER_DLL_API InputDevice {
+public:
+  InputDevice(void);
+  virtual ~InputDevice() {}
 
-#include <QtCore/QEvent>
-#include <QtGui/QKeyEvent>
-#include <Inventor/events/SoEvents.h>
-#include <Inventor/events/SoKeyboardEvent.h>
+  /*! Subclasses must override this method to provide custom event
+    handling
+   */
+  virtual const SoEvent * translateEvent(QEvent * event) = 0;
 
-#include "KeyboardHandlerP.h"
+  void setMousePosition(const SbVec2s & pos);
+  void setWindowSize(const SbVec2s & size);
+  void setModifiers(SoEvent * soevent, QInputEvent * qevent);
 
-using namespace SIM::Coin3D::Quarter;
+protected:
+  SbVec2s mousepos;
+  SbVec2s windowsize;
+};
 
-#define PRIVATE(obj) obj->pimpl
+}}} // namespace
 
-KeyboardHandler::KeyboardHandler(void)
-{
-  PRIVATE(this) = new KeyboardHandlerP(this);
-}
-
-KeyboardHandler::~KeyboardHandler()
-{
-  delete PRIVATE(this);
-}
-
-/*! Translates from QKeyEvents to SoKeyboardEvents
- */
-const SoEvent *
-KeyboardHandler::translateEvent(QEvent * event)
-{
-  switch (event->type()) {
-  case QEvent::KeyPress:
-  case QEvent::KeyRelease:
-    return PRIVATE(this)->keyEvent((QKeyEvent *) event);
-  default:
-    return NULL;
-  }
-}
-
-#undef PRIVATE
+#endif // QUARTER_INPUTDEVICE_H

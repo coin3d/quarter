@@ -1,5 +1,5 @@
-#ifndef QUARTER_DEVICEMANAGER_H
-#define QUARTER_DEVICEMANAGER_H
+#ifndef QUARTER_MOUSE_H
+#define QUARTER_MOUSE_H
 
 /**************************************************************************\
  *
@@ -23,36 +23,26 @@
  *
 \**************************************************************************/
 
-#include <QtCore/QList>
 #include <Quarter/Basic.h>
+#include <Quarter/devices/InputDevice.h>
 
 class QEvent;
 class SoEvent;
-class QPoint;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class DeviceHandler;
-class QuarterWidget;
-
-class QUARTER_DLL_API DeviceManager {
+class QUARTER_DLL_API Mouse : public InputDevice {
 public:
-  DeviceManager(QuarterWidget * quarterwidget);
-  ~DeviceManager();
+  Mouse(void);
+  virtual ~Mouse();
 
-  const SoEvent * translateEvent(QEvent * event);
-  const QuarterWidget * getWidget(void) const;
-
-  void registerDevice(DeviceHandler * device);
-  void unregisterDevice(DeviceHandler * device);
-
-  const SbVec2s & getLastMousePosition(void) const;
-  const QPoint & getLastGlobalPosition(void) const;
+  virtual const SoEvent * translateEvent(QEvent * event);
 
 private:
-  class DeviceManagerP * pimpl;
+  friend class MouseP;
+  class MouseP * pimpl;
 };
 
 }}} // namespace
 
-#endif // QUARTER_DEVICEMANAGER_H
+#endif // QUARTER_MOUSEHANDLER_H
