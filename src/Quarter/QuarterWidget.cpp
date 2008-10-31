@@ -50,8 +50,6 @@
 #include <Inventor/scxml/SoScXMLStateMachine.h>
 
 #include <Quarter/QuarterWidget.h>
-#include <Quarter/devices/MouseHandler.h>
-#include <Quarter/devices/KeyboardHandler.h>
 #include <Quarter/eventhandlers/EventFilter.h>
 #include <Quarter/eventhandlers/DragDropHandler.h>
 
