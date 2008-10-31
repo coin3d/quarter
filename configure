@@ -19552,7 +19552,6 @@ echo "${ECHO_T}yes" >&6
 
     COIN_USE_CPPFLAGS="$Coin_CFLAGS"
     COIN_USE_CXXFLAGS="$Coin_CFLAGS"
-    COIN_USE_LDFLAGS="$Coin_LIBS"
     COIN_USE_LIBS="$Coin_LIBS"
 
 
