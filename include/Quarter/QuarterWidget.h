@@ -46,6 +46,8 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
   Q_PROPERTY(bool contextMenuEnabled READ contextMenuEnabled WRITE setContextMenuEnabled)
   Q_PROPERTY(bool headlightEnabled READ headlightEnabled WRITE setHeadlightEnabled)
+  Q_PROPERTY(bool clearZBuffer READ clearZBuffer WRITE setClearZBuffer)
+  Q_PROPERTY(bool clearWindow READ clearWindow WRITE setClearWindow)
   Q_PROPERTY(TransparencyType transparencyType READ transparencyType WRITE setTransparencyType)
   Q_ENUMS(TransparencyType)
 
@@ -79,6 +81,12 @@ public:
   bool headlightEnabled(void) const;
   void setHeadlightEnabled(bool onoff);
   SoDirectionalLight * getHeadlight(void);
+
+  bool clearZBuffer(void) const;
+  void setClearZBuffer(bool onoff);
+
+  bool clearWindow(void) const;
+  void setClearWindow(bool onoff);
 
   void setTransparencyType(TransparencyType type);
   TransparencyType transparencyType(void) const;
