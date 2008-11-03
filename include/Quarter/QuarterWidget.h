@@ -44,7 +44,8 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   typedef QGLWidget inherited;
   Q_OBJECT
   Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
-  Q_PROPERTY(bool contextMenuEnabled READ isContextMenuEnabled WRITE setContextMenuEnabled)
+  Q_PROPERTY(bool contextMenuEnabled READ contextMenuEnabled WRITE setContextMenuEnabled)
+  Q_PROPERTY(bool headlightEnabled READ headlightEnabled WRITE setHeadlightEnabled)
 
 public:
   explicit QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
@@ -54,13 +55,17 @@ public:
 
   void setBackgroundColor(const QColor & color);
   QColor backgroundColor(void) const;
+
   void setContextMenuEnabled(bool yes);
-  bool isContextMenuEnabled(void) const;
+  bool contextMenuEnabled(void) const;
+
   QMenu * getContextMenu(void) const;
 
-  void setTransparencyType(SoGLRenderAction::TransparencyType type);
-  void enableHeadlight(bool onoff);
+  bool headlightEnabled(void) const;
+  void setHeadlightEnabled(bool onoff);
   SoDirectionalLight * getHeadlight(void);
+
+  void setTransparencyType(SoGLRenderAction::TransparencyType type);
 
   void setStateCursor(const SbName & state, const QCursor & cursor);
   uint32_t getCacheContextId(void) const;

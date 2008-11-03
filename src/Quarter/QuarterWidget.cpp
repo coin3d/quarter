@@ -168,9 +168,15 @@ QuarterWidget::setStateCursor(const SbName & state, const QCursor & cursor)
   field (returned from getHeadlight()).
 */
 void
-QuarterWidget::enableHeadlight(bool onoff)
+QuarterWidget::setHeadlightEnabled(bool onoff)
 {
   PRIVATE(this)->headlight->on = onoff;
+}
+
+bool
+QuarterWidget::headlightEnabled(void) const
+{
+  return PRIVATE(this)->headlight->on.getValue();
 }
 
 /*!
@@ -458,7 +464,7 @@ QuarterWidget::getContextMenu(void) const
 }
 
 bool
-QuarterWidget::isContextMenuEnabled(void) const
+QuarterWidget::contextMenuEnabled(void) const
 {
   return PRIVATE(this)->contextmenuenabled;
 }
