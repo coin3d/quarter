@@ -1,7 +1,7 @@
 #include "QuarterP.h"
 #include "SensorManager.h"
 #include "ImageReader.h"
-#include "devices/KeyboardP.h"
+#include "KeyboardP.h"
 
 using namespace SIM::Coin3D::Quarter;
 

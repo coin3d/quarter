@@ -1,6 +1,4 @@
 
-SUBDIRS = devices eventhandlers
-
 # Add this to libQuarter_la_LDFLAGS (see below) to force twolevel
 # namespace libraries on Mac OS X. (This has been the way to do it
 # since Mac OS 10.2, but unfortunately the version of libtool we are
@@ -31,7 +29,9 @@ BuiltSources = \
         moc_QuarterWidget.cpp \
         moc_SensorManager.cpp \
         moc_ContextMenu.cpp \
-        moc_SignalThread.cpp
+        moc_SignalThread.cpp \
+        moc_EventFilter.cpp \
+        moc_DragDropHandler.cpp
 
 PrivateHeaders = \
         SensorManager.h \
@@ -39,7 +39,8 @@ PrivateHeaders = \
         QuarterP.h \
         QuarterWidgetP.h \
         ContextMenu.h \
-        SignalThread.h
+        SignalThread.h \
+        KeyboardP.h
 
 RegularSources = \
         Quarter.cpp \
@@ -49,7 +50,14 @@ RegularSources = \
         QuarterWidgetP.cpp \
         ContextMenu.cpp \
         ImageReader.cpp \
-        SignalThread.cpp
+        SignalThread.cpp \
+        DragDropHandler.cpp \
+        EventFilter.cpp \
+        Mouse.cpp \
+        Keyboard.cpp \
+        InputDevice.cpp \
+        KeyboardP.cpp
+
 
 BUILT_SOURCES = $(BuiltSources)
 
@@ -101,10 +109,10 @@ lib@nop@dir = $(MAC_FRAMEWORK_PREFIX)/$(MAC_FRAMEWORK_NAME).framework/Versions/$
 endif
 
 libQuarter_la_LIBADD = \
-        devices/libdevices.la eventhandlers/libeventhandlers.la $(COIN_USE_LIBS) $(QT_USE_LIBS)
+        $(COIN_USE_LIBS) $(QT_USE_LIBS)
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_LIBADD = \
-        devices/devices.lst eventhandlers/eventhandlers.lst $(COIN_USE_LIBS) $(QT_USE_LIBS)
+        $(COIN_USE_LIBS) $(QT_USE_LIBS)
 
 
 CLEANFILES = \
@@ -146,6 +154,12 @@ moc_ContextMenu.cpp: $(srcdir)/ContextMenu.h
 
 moc_SignalThread.cpp: $(srcdir)/SignalThread.h
 	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/SignalThread.h`
+
+moc_EventFilter.cpp: $(top_srcdir)/include/Quarter/eventhandlers/EventFilter.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(top_srcdir)/include/Quarter/eventhandlers/EventFilter.h`
+
+moc_DragDropHandler.cpp: $(top_srcdir)/include/Quarter/eventhandlers/DragDropHandler.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(top_srcdir)/include/Quarter/eventhandlers/DragDropHandler.h`
 
 if BUILD_WITH_MSVC
 all-local: Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
