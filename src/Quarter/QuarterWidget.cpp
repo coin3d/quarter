@@ -188,6 +188,30 @@ QuarterWidget::getHeadlight(void)
   return PRIVATE(this)->headlight;
 }
 
+bool 
+QuarterWidget::clearZBuffer(void) const
+{
+  return PRIVATE(this)->clearzbuffer;
+}
+
+void 
+QuarterWidget::setClearZBuffer(bool onoff)
+{
+  PRIVATE(this)->clearzbuffer = onoff;
+}
+
+bool 
+QuarterWidget::clearWindow(void) const
+{
+  return PRIVATE(this)->clearwindow;
+}
+
+void 
+QuarterWidget::setClearWindow(bool onoff)
+{
+  PRIVATE(this)->clearwindow = onoff;
+}
+
 /*!
   Returns the Coin cache context id for this widget.
 */
@@ -413,7 +437,8 @@ QuarterWidget::paintGL(void)
 void
 QuarterWidget::actualRedraw(void)
 {
-  PRIVATE(this)->sorendermanager->render(TRUE, TRUE);
+  PRIVATE(this)->sorendermanager->render(PRIVATE(this)->clearwindow,
+                                         PRIVATE(this)->clearzbuffer);
 }
 
 bool 

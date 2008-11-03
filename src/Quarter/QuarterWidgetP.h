@@ -65,6 +65,8 @@ public:
   ContextMenu * contextmenu;
   bool contextmenuenabled;
   bool autoredrawenabled;
+  bool clearzbuffer;
+  bool clearwindow;
   
   static void rendercb(void * userdata, SoRenderManager *);
   static void prerendercb(void * userdata, SoRenderManager * manager);
