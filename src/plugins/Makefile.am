@@ -30,7 +30,9 @@ endif
 
 PrivateHeaders = QuarterWidgetPlugin.h
 RegularSources = QuarterWidgetPlugin.cpp
-BuiltSources = moc_QuarterWidgetPlugin.cpp
+BuiltSources = \
+        moc_QuarterWidgetPlugin.cpp \
+        qrc_coinlogo.cpp
 
 BUILT_SOURCES = $(BuiltSources)
 
@@ -45,6 +47,10 @@ nodist_libQuarterWidgetPlugin_la_SOURCES = \
 
 nodist_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
         $(BuiltSources)
+
+EXTRA_DIST = \
+        coinlogo.qrc
+
 
 if BUILD_WITH_MSVC
 lib_LIBRARIES = QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
@@ -114,6 +120,8 @@ QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib: Makefile \
 moc_QuarterWidgetPlugin.cpp: $(srcdir)/QuarterWidgetPlugin.h
 	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/QuarterWidgetPlugin.h` $(DEFAULT_INCLUDES) $(QT_DESIGNER_INCLUDE)
 
+qrc_coinlogo.cpp: $(srcdir)/coinlogo.qrc
+	$(RCC) -name coinlogo -o $@ `$(UNIX2WINPATH) $(srcdir)/coinlogo.qrc`
 
 if BUILD_WITH_MSVC
 all-local: QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
