@@ -215,8 +215,8 @@ void
 ContextMenu::changeTransparencyType(QAction * action)
 {
   QVariant transparencytype = action->data();
-  SoGLRenderAction::TransparencyType type = 
-    (SoGLRenderAction::TransparencyType) transparencytype.toInt(); 
+  QuarterWidget::TransparencyType type = 
+    static_cast<QuarterWidget::TransparencyType>(transparencytype.toInt());
 
   ((QuarterWidget *)this->quarterwidget)->setTransparencyType(type);
   this->rendermanager->scheduleRedraw();
