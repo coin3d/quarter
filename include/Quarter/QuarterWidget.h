@@ -46,6 +46,8 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
   Q_PROPERTY(bool contextMenuEnabled READ contextMenuEnabled WRITE setContextMenuEnabled)
   Q_PROPERTY(bool headlightEnabled READ headlightEnabled WRITE setHeadlightEnabled)
+  Q_PROPERTY(TransparencyType transparencyType READ transparencyType WRITE setTransparencyType)
+  Q_ENUMS(TransparencyType)
 
 public:
   explicit QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
@@ -53,19 +55,33 @@ public:
   explicit QuarterWidget(const QGLFormat & format, QWidget * parent = 0, const QGLWidget * shareWidget = 0, Qt::WindowFlags f = 0);
   ~QuarterWidget();
 
+  enum TransparencyType {
+    SCREEN_DOOR = SoGLRenderAction::SCREEN_DOOR,
+    ADD = SoGLRenderAction::ADD,
+    DELAYED_ADD = SoGLRenderAction::DELAYED_ADD,
+    SORTED_OBJECT_ADD = SoGLRenderAction::SORTED_OBJECT_ADD,
+    BLEND = SoGLRenderAction::BLEND, 
+    DELAYED_BLEND = SoGLRenderAction::DELAYED_BLEND, 
+    SORTED_OBJECT_BLEND = SoGLRenderAction::SORTED_OBJECT_BLEND,
+    SORTED_OBJECT_SORTED_TRIANGLE_ADD = SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_ADD,
+    SORTED_OBJECT_SORTED_TRIANGLE_BLEND = SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_BLEND,
+    NONE = SoGLRenderAction::NONE,
+    SORTED_LAYERS_BLEND = SoGLRenderAction::SORTED_LAYERS_BLEND
+  };
+
   void setBackgroundColor(const QColor & color);
   QColor backgroundColor(void) const;
 
   void setContextMenuEnabled(bool yes);
   bool contextMenuEnabled(void) const;
-
   QMenu * getContextMenu(void) const;
 
   bool headlightEnabled(void) const;
   void setHeadlightEnabled(bool onoff);
   SoDirectionalLight * getHeadlight(void);
 
-  void setTransparencyType(SoGLRenderAction::TransparencyType type);
+  void setTransparencyType(TransparencyType type);
+  TransparencyType transparencyType(void) const;
 
   void setStateCursor(const SbName & state, const QCursor & cursor);
   uint32_t getCacheContextId(void) const;

@@ -201,11 +201,19 @@ QuarterWidget::getCacheContextId(void) const
   This method sets the transparency type to be used for the scene.
 */
 void
-QuarterWidget::setTransparencyType(SoGLRenderAction::TransparencyType type)
+QuarterWidget::setTransparencyType(TransparencyType type)
 {
   assert(PRIVATE(this)->sorendermanager);
-  PRIVATE(this)->sorendermanager->getGLRenderAction()->setTransparencyType(type);
+  PRIVATE(this)->sorendermanager->getGLRenderAction()->setTransparencyType((SoGLRenderAction::TransparencyType)type);
   PRIVATE(this)->sorendermanager->scheduleRedraw();
+}
+
+QuarterWidget::TransparencyType 
+QuarterWidget::transparencyType(void) const
+{
+  assert(PRIVATE(this)->sorendermanager);
+  SoGLRenderAction * action = PRIVATE(this)->sorendermanager->getGLRenderAction();
+  return static_cast<QuarterWidget::TransparencyType>(action->getTransparencyType());
 }
 
 /*!
