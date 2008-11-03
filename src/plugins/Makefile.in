@@ -244,7 +244,10 @@ DEFAULT_INCLUDES = $(includes)
 
 PrivateHeaders = QuarterWidgetPlugin.h
 RegularSources = QuarterWidgetPlugin.cpp
-BuiltSources = moc_QuarterWidgetPlugin.cpp
+BuiltSources = \
+        moc_QuarterWidgetPlugin.cpp \
+        qrc_coinlogo.cpp
+
 
 BUILT_SOURCES = $(BuiltSources)
 
@@ -262,6 +265,10 @@ nodist_libQuarterWidgetPlugin_la_SOURCES = \
 
 nodist_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
         $(BuiltSources)
+
+
+EXTRA_DIST = \
+        coinlogo.qrc
 
 
 @BUILD_WITH_MSVC_TRUE@lib_LIBRARIES = QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
@@ -326,7 +333,8 @@ am__objects_2 =
 am_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
 	$(am__objects_1) $(am__objects_2)
 am__objects_3 = \
-	QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.$(OBJEXT)
+	QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.$(OBJEXT) \
+	QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.$(OBJEXT)
 nodist_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
 	$(am__objects_3)
 QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
@@ -337,7 +345,8 @@ LTLIBRARIES = $(lib_LTLIBRARIES)
 libQuarterWidgetPlugin_la_DEPENDENCIES =
 am__objects_4 = libQuarterWidgetPlugin_la-QuarterWidgetPlugin.lo
 am_libQuarterWidgetPlugin_la_OBJECTS = $(am__objects_4) $(am__objects_2)
-am__objects_5 = libQuarterWidgetPlugin_la-moc_QuarterWidgetPlugin.lo
+am__objects_5 = libQuarterWidgetPlugin_la-moc_QuarterWidgetPlugin.lo \
+	libQuarterWidgetPlugin_la-qrc_coinlogo.lo
 nodist_libQuarterWidgetPlugin_la_OBJECTS = $(am__objects_5)
 libQuarterWidgetPlugin_la_OBJECTS = \
 	$(am_libQuarterWidgetPlugin_la_OBJECTS) \
@@ -347,8 +356,10 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = \
 @AMDEP_TRUE@	./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarterWidgetPlugin_la-QuarterWidgetPlugin.Plo \
-@AMDEP_TRUE@	./$(DEPDIR)/libQuarterWidgetPlugin_la-moc_QuarterWidgetPlugin.Plo
+@AMDEP_TRUE@	./$(DEPDIR)/libQuarterWidgetPlugin_la-moc_QuarterWidgetPlugin.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Plo
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) \
@@ -449,8 +460,10 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetPlugin.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarterWidgetPlugin_la-QuarterWidgetPlugin.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarterWidgetPlugin_la-moc_QuarterWidgetPlugin.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Plo@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -554,6 +567,39 @@ QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.l
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidgetPlugin.lo `test -f 'moc_QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`moc_QuarterWidgetPlugin.cpp
 
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.o: qrc_coinlogo.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.o -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.o `test -f 'qrc_coinlogo.cpp' || echo '$(srcdir)/'`qrc_coinlogo.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_coinlogo.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Po' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.o `test -f 'qrc_coinlogo.cpp' || echo '$(srcdir)/'`qrc_coinlogo.cpp
+
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.obj: qrc_coinlogo.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.obj -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.obj `if test -f 'qrc_coinlogo.cpp'; then $(CYGPATH_W) 'qrc_coinlogo.cpp'; else $(CYGPATH_W) '$(srcdir)/qrc_coinlogo.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_coinlogo.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Po' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.obj `if test -f 'qrc_coinlogo.cpp'; then $(CYGPATH_W) 'qrc_coinlogo.cpp'; else $(CYGPATH_W) '$(srcdir)/qrc_coinlogo.cpp'; fi`
+
+QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.lo: qrc_coinlogo.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.lo -MD -MP -MF "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.lo `test -f 'qrc_coinlogo.cpp' || echo '$(srcdir)/'`qrc_coinlogo.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Tpo" "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_coinlogo.cpp' object='QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.Plo' tmpdepfile='$(DEPDIR)/QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-qrc_coinlogo.lo `test -f 'qrc_coinlogo.cpp' || echo '$(srcdir)/'`qrc_coinlogo.cpp
+
 libQuarterWidgetPlugin_la-QuarterWidgetPlugin.o: QuarterWidgetPlugin.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarterWidgetPlugin_la_CPPFLAGS) $(CPPFLAGS) $(libQuarterWidgetPlugin_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarterWidgetPlugin_la-QuarterWidgetPlugin.o -MD -MP -MF "$(DEPDIR)/libQuarterWidgetPlugin_la-QuarterWidgetPlugin.Tpo" \
 @am__fastdepCXX_TRUE@	  -c -o libQuarterWidgetPlugin_la-QuarterWidgetPlugin.o `test -f 'QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`QuarterWidgetPlugin.cpp; \
@@ -619,6 +665,39 @@ libQuarterWidgetPlugin_la-moc_QuarterWidgetPlugin.lo: moc_QuarterWidgetPlugin.cp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarterWidgetPlugin_la-moc_QuarterWidgetPlugin.Plo' tmpdepfile='$(DEPDIR)/libQuarterWidgetPlugin_la-moc_QuarterWidgetPlugin.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarterWidgetPlugin_la_CPPFLAGS) $(CPPFLAGS) $(libQuarterWidgetPlugin_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarterWidgetPlugin_la-moc_QuarterWidgetPlugin.lo `test -f 'moc_QuarterWidgetPlugin.cpp' || echo '$(srcdir)/'`moc_QuarterWidgetPlugin.cpp
+
+libQuarterWidgetPlugin_la-qrc_coinlogo.o: qrc_coinlogo.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarterWidgetPlugin_la_CPPFLAGS) $(CPPFLAGS) $(libQuarterWidgetPlugin_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarterWidgetPlugin_la-qrc_coinlogo.o -MD -MP -MF "$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarterWidgetPlugin_la-qrc_coinlogo.o `test -f 'qrc_coinlogo.cpp' || echo '$(srcdir)/'`qrc_coinlogo.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Tpo" "$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_coinlogo.cpp' object='libQuarterWidgetPlugin_la-qrc_coinlogo.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Po' tmpdepfile='$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarterWidgetPlugin_la_CPPFLAGS) $(CPPFLAGS) $(libQuarterWidgetPlugin_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarterWidgetPlugin_la-qrc_coinlogo.o `test -f 'qrc_coinlogo.cpp' || echo '$(srcdir)/'`qrc_coinlogo.cpp
+
+libQuarterWidgetPlugin_la-qrc_coinlogo.obj: qrc_coinlogo.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarterWidgetPlugin_la_CPPFLAGS) $(CPPFLAGS) $(libQuarterWidgetPlugin_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarterWidgetPlugin_la-qrc_coinlogo.obj -MD -MP -MF "$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarterWidgetPlugin_la-qrc_coinlogo.obj `if test -f 'qrc_coinlogo.cpp'; then $(CYGPATH_W) 'qrc_coinlogo.cpp'; else $(CYGPATH_W) '$(srcdir)/qrc_coinlogo.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Tpo" "$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_coinlogo.cpp' object='libQuarterWidgetPlugin_la-qrc_coinlogo.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Po' tmpdepfile='$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarterWidgetPlugin_la_CPPFLAGS) $(CPPFLAGS) $(libQuarterWidgetPlugin_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarterWidgetPlugin_la-qrc_coinlogo.obj `if test -f 'qrc_coinlogo.cpp'; then $(CYGPATH_W) 'qrc_coinlogo.cpp'; else $(CYGPATH_W) '$(srcdir)/qrc_coinlogo.cpp'; fi`
+
+libQuarterWidgetPlugin_la-qrc_coinlogo.lo: qrc_coinlogo.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarterWidgetPlugin_la_CPPFLAGS) $(CPPFLAGS) $(libQuarterWidgetPlugin_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarterWidgetPlugin_la-qrc_coinlogo.lo -MD -MP -MF "$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarterWidgetPlugin_la-qrc_coinlogo.lo `test -f 'qrc_coinlogo.cpp' || echo '$(srcdir)/'`qrc_coinlogo.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Tpo" "$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='qrc_coinlogo.cpp' object='libQuarterWidgetPlugin_la-qrc_coinlogo.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.Plo' tmpdepfile='$(DEPDIR)/libQuarterWidgetPlugin_la-qrc_coinlogo.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarterWidgetPlugin_la_CPPFLAGS) $(CPPFLAGS) $(libQuarterWidgetPlugin_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarterWidgetPlugin_la-qrc_coinlogo.lo `test -f 'qrc_coinlogo.cpp' || echo '$(srcdir)/'`qrc_coinlogo.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -837,6 +916,9 @@ QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib: Makefile \
 
 moc_QuarterWidgetPlugin.cpp: $(srcdir)/QuarterWidgetPlugin.h
 	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/QuarterWidgetPlugin.h` $(DEFAULT_INCLUDES) $(QT_DESIGNER_INCLUDE)
+
+qrc_coinlogo.cpp: $(srcdir)/coinlogo.qrc
+	$(RCC) -name coinlogo -o $@ `$(UNIX2WINPATH) $(srcdir)/coinlogo.qrc`
 
 @BUILD_WITH_MSVC_TRUE@all-local: QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 
