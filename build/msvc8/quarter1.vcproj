@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="quarter1"
-	ProjectGUID="{CA15535E-9746-4739-8BB8-DEABECE9A72B}"
+	ProjectGUID="{BFA1F8BD-9CB7-40DF-807B-6D1FE8A51D91}"
 	>
 	<Platforms>
 		<Platform
@@ -246,6 +246,7 @@
 				SuppressStartupBanner="true"
 				ProgramDatabaseFile=".\QuarterRelease/quarter1.pdb"
 				OptimizeForWindows98="1"
+				SetChecksum="true"
 				ImportLibrary=".\QuarterRelease/quarter1.lib"
 				TargetMachine="1"
 			/>
@@ -482,6 +483,150 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\..\src\Quarter\DragDropHandler.cpp"
+				>
+				<FileConfiguration
+					Name="LIB (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\src\Quarter\EventFilter.cpp"
+				>
+				<FileConfiguration
+					Name="LIB (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\src\Quarter\EventHandler.cpp"
+				>
+				<FileConfiguration
+					Name="LIB (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\..\src\Quarter\ImageReader.cpp"
 				>
 				<FileConfiguration
@@ -534,7 +679,203 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\Quarter\InputDevice.cpp"
+				>
+				<FileConfiguration
+					Name="LIB (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\src\Quarter\Keyboard.cpp"
+				>
+				<FileConfiguration
+					Name="LIB (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\src\Quarter\KeyboardP.cpp"
+				>
+				<FileConfiguration
+					Name="LIB (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\src\Quarter\KeyboardP.h"
+				>
+			</File>
+			<File
 				RelativePath="src\Quarter\moc_ContextMenu.cpp"
+				>
+				<FileConfiguration
+					Name="LIB (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="src\Quarter\moc_EventFilter.cpp"
 				>
 				<FileConfiguration
 					Name="LIB (Debug)|Win32"
@@ -679,6 +1020,54 @@
 			</File>
 			<File
 				RelativePath="src\Quarter\moc_SignalThread.cpp"
+				>
+				<FileConfiguration
+					Name="LIB (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\src\Quarter\Mouse.cpp"
 				>
 				<FileConfiguration
 					Name="LIB (Debug)|Win32"
@@ -1109,404 +1498,6 @@
 					/>
 				</FileConfiguration>
 			</File>
-			<Filter
-				Name="devices"
-				Filter="c;cpp;ic;icc;h"
-				>
-				<File
-					RelativePath="..\..\src\Quarter\devices\DeviceHandler.cpp"
-					>
-					<FileConfiguration
-						Name="LIB (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticDebug/"
-							ProgramDataBaseFileName="QuarterStaticDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterDebug/"
-							ProgramDataBaseFileName="QuarterDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterRelease/"
-							ProgramDataBaseFileName="QuarterRelease/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="LIB (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticRelease/"
-							ProgramDataBaseFileName="QuarterStaticRelease/"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\src\Quarter\devices\DeviceManager.cpp"
-					>
-					<FileConfiguration
-						Name="LIB (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticDebug/"
-							ProgramDataBaseFileName="QuarterStaticDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterDebug/"
-							ProgramDataBaseFileName="QuarterDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterRelease/"
-							ProgramDataBaseFileName="QuarterRelease/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="LIB (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticRelease/"
-							ProgramDataBaseFileName="QuarterStaticRelease/"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\src\Quarter\devices\KeyboardHandler.cpp"
-					>
-					<FileConfiguration
-						Name="LIB (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticDebug/"
-							ProgramDataBaseFileName="QuarterStaticDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterDebug/"
-							ProgramDataBaseFileName="QuarterDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterRelease/"
-							ProgramDataBaseFileName="QuarterRelease/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="LIB (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticRelease/"
-							ProgramDataBaseFileName="QuarterStaticRelease/"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\src\Quarter\devices\KeyboardHandlerP.cpp"
-					>
-					<FileConfiguration
-						Name="LIB (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticDebug/"
-							ProgramDataBaseFileName="QuarterStaticDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterDebug/"
-							ProgramDataBaseFileName="QuarterDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterRelease/"
-							ProgramDataBaseFileName="QuarterRelease/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="LIB (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticRelease/"
-							ProgramDataBaseFileName="QuarterStaticRelease/"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\src\Quarter\devices\KeyboardHandlerP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Quarter\devices\MouseHandler.cpp"
-					>
-					<FileConfiguration
-						Name="LIB (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticDebug/"
-							ProgramDataBaseFileName="QuarterStaticDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterDebug/"
-							ProgramDataBaseFileName="QuarterDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterRelease/"
-							ProgramDataBaseFileName="QuarterRelease/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="LIB (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticRelease/"
-							ProgramDataBaseFileName="QuarterStaticRelease/"
-						/>
-					</FileConfiguration>
-				</File>
-			</Filter>
-			<Filter
-				Name="eventhandlers"
-				Filter="c;cpp;ic;icc;h"
-				>
-				<File
-					RelativePath="..\..\src\Quarter\eventhandlers\DragDropHandler.cpp"
-					>
-					<FileConfiguration
-						Name="LIB (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticDebug/"
-							ProgramDataBaseFileName="QuarterStaticDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterDebug/"
-							ProgramDataBaseFileName="QuarterDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterRelease/"
-							ProgramDataBaseFileName="QuarterRelease/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="LIB (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticRelease/"
-							ProgramDataBaseFileName="QuarterStaticRelease/"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\src\Quarter\eventhandlers\EventHandler.cpp"
-					>
-					<FileConfiguration
-						Name="LIB (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticDebug/"
-							ProgramDataBaseFileName="QuarterStaticDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterDebug/"
-							ProgramDataBaseFileName="QuarterDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterRelease/"
-							ProgramDataBaseFileName="QuarterRelease/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="LIB (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticRelease/"
-							ProgramDataBaseFileName="QuarterStaticRelease/"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath="..\..\src\Quarter\eventhandlers\EventManager.cpp"
-					>
-					<FileConfiguration
-						Name="LIB (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticDebug/"
-							ProgramDataBaseFileName="QuarterStaticDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Debug)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterDebug/"
-							ProgramDataBaseFileName="QuarterDebug/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="DLL (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterRelease/"
-							ProgramDataBaseFileName="QuarterRelease/"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="LIB (Release)|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							AdditionalIncludeDirectories=""
-							PreprocessorDefinitions=""
-							ObjectFile="QuarterStaticRelease/"
-							ProgramDataBaseFileName="QuarterStaticRelease/"
-						/>
-					</FileConfiguration>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Public Headers"
@@ -1571,15 +1562,15 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\Quarter\devices\DeviceManager.h"
+					RelativePath="..\..\include\Quarter\devices\InputDevice.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\Quarter\devices\KeyboardHandler.h"
+					RelativePath="..\..\include\Quarter\devices\Keyboard.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\Quarter\devices\MouseHandler.h"
+					RelativePath="..\..\include\Quarter\devices\Mouse.h"
 					>
 				</File>
 			</Filter>
@@ -1591,11 +1582,51 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\Quarter\eventhandlers\EventHandler.h"
+					RelativePath="..\..\include\Quarter\eventhandlers\EventFilter.h"
 					>
+					<FileConfiguration
+						Name="LIB (Debug)|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="moc&apos;ing $(InputPath)"
+							CommandLine="$(QTDIR)\bin\moc -o src\Quarter\moc_EventFilter.cpp ..\..\include\Quarter\eventhandlers\EventFilter.h&#x0D;&#x0A;"
+							Outputs="src\Quarter\moc_EventFilter.cpp"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DLL (Debug)|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="moc&apos;ing $(InputPath)"
+							CommandLine="$(QTDIR)\bin\moc -o src\Quarter\moc_EventFilter.cpp ..\..\include\Quarter\eventhandlers\EventFilter.h&#x0D;&#x0A;"
+							Outputs="src\Quarter\moc_EventFilter.cpp"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DLL (Release)|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="moc&apos;ing $(InputPath)"
+							CommandLine="$(QTDIR)\bin\moc -o src\Quarter\moc_EventFilter.cpp ..\..\include\Quarter\eventhandlers\EventFilter.h&#x0D;&#x0A;"
+							Outputs="src\Quarter\moc_EventFilter.cpp"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="LIB (Release)|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="moc&apos;ing $(InputPath)"
+							CommandLine="$(QTDIR)\bin\moc -o src\Quarter\moc_EventFilter.cpp ..\..\include\Quarter\eventhandlers\EventFilter.h&#x0D;&#x0A;"
+							Outputs="src\Quarter\moc_EventFilter.cpp"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\include\Quarter\eventhandlers\EventManager.h"
+					RelativePath="..\..\include\Quarter\eventhandlers\EventHandler.h"
 					>
 				</File>
 			</Filter>

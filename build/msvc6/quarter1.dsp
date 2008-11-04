@@ -109,8 +109,8 @@ BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LINK32=link.exe
-# ADD BASE LINK32 $(QTDIR)\lib\QtOpenGL4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtCore4.lib $(COINDIR)\lib\coin3.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /machine:I386
-# ADD LINK32 $(QTDIR)\lib\QtOpenGL4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtCore4.lib $(COINDIR)\lib\coin3.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /machine:I386 /out:"quarter1.dll" /opt:nowin98
+# ADD BASE LINK32 $(QTDIR)\lib\QtOpenGL4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtCore4.lib $(COINDIR)\lib\coin3.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /release /machine:I386
+# ADD LINK32 $(QTDIR)\lib\QtOpenGL4.lib $(QTDIR)\lib\QtGui4.lib $(QTDIR)\lib\QtCore4.lib $(COINDIR)\lib\coin3.lib opengl32.lib gdi32.lib winmm.lib user32.lib /nologo /dll /release /machine:I386 /out:"quarter1.dll" /opt:nowin98
 # SUBTRACT LINK32 /pdb:none
 
 !ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
@@ -398,6 +398,19 @@ SOURCE=src\Quarter\moc_SensorManager.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=src\Quarter\moc_EventFilter.cpp
+!IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
+# PROP Intermediate_Dir "QuarterRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
+# PROP Intermediate_Dir "QuarterDebug"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Release)"
+# PROP Intermediate_Dir "QuarterStaticRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Debug)"
+# PROP Intermediate_Dir "QuarterStaticDebug"
+!ENDIF
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\src\Quarter\SensorManager.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
@@ -499,11 +512,9 @@ SOURCE=..\..\src\Quarter\QuarterWidgetP.cpp
 # PROP Intermediate_Dir "QuarterStaticDebug"
 !ENDIF
 # End Source File
-# Begin Group "devices"
-# PROP Default_Filter "c;cpp;ic;icc;h"
 # Begin Source File
 
-SOURCE=..\..\src\Quarter\devices\DeviceManager.cpp
+SOURCE=..\..\src\Quarter\InputDevice.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
 !ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
@@ -516,7 +527,7 @@ SOURCE=..\..\src\Quarter\devices\DeviceManager.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\src\Quarter\devices\DeviceHandler.cpp
+SOURCE=..\..\src\Quarter\Keyboard.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
 !ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
@@ -529,7 +540,11 @@ SOURCE=..\..\src\Quarter\devices\DeviceHandler.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\src\Quarter\devices\KeyboardHandler.cpp
+SOURCE=..\..\src\Quarter\KeyboardP.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\Quarter\KeyboardP.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
 !ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
@@ -542,11 +557,7 @@ SOURCE=..\..\src\Quarter\devices\KeyboardHandler.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\src\Quarter\devices\KeyboardHandlerP.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\src\Quarter\devices\KeyboardHandlerP.cpp
+SOURCE=..\..\src\Quarter\Mouse.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
 !ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
@@ -559,23 +570,7 @@ SOURCE=..\..\src\Quarter\devices\KeyboardHandlerP.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\src\Quarter\devices\MouseHandler.cpp
-!IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
-# PROP Intermediate_Dir "QuarterRelease"
-!ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
-# PROP Intermediate_Dir "QuarterDebug"
-!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Release)"
-# PROP Intermediate_Dir "QuarterStaticRelease"
-!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Debug)"
-# PROP Intermediate_Dir "QuarterStaticDebug"
-!ENDIF
-# End Source File
-# End Group
-# Begin Group "eventhandlers"
-# PROP Default_Filter "c;cpp;ic;icc;h"
-# Begin Source File
-
-SOURCE=..\..\src\Quarter\eventhandlers\EventManager.cpp
+SOURCE=..\..\src\Quarter\EventFilter.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
 !ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
@@ -588,7 +583,7 @@ SOURCE=..\..\src\Quarter\eventhandlers\EventManager.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\src\Quarter\eventhandlers\EventHandler.cpp
+SOURCE=..\..\src\Quarter\EventHandler.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
 !ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
@@ -601,7 +596,7 @@ SOURCE=..\..\src\Quarter\eventhandlers\EventHandler.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\src\Quarter\eventhandlers\DragDropHandler.cpp
+SOURCE=..\..\src\Quarter\DragDropHandler.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
 !ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
@@ -612,7 +607,6 @@ SOURCE=..\..\src\Quarter\eventhandlers\DragDropHandler.cpp
 # PROP Intermediate_Dir "QuarterStaticDebug"
 !ENDIF
 # End Source File
-# End Group
 # End Group
 # Begin Group "Public Headers"
 # Set Default_Filter "h"
@@ -678,33 +672,80 @@ InputPath=..\..\include\Quarter\QuarterWidget.h
 # Begin Group "devices"
 # Begin Source File
 
-SOURCE=..\..\include\Quarter\devices\DeviceManager.h
-# End Source File
-# Begin Source File
-
 SOURCE=..\..\include\Quarter\devices\DeviceHandler.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\include\Quarter\devices\KeyboardHandler.h
+SOURCE=..\..\include\Quarter\devices\InputDevice.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\include\Quarter\devices\MouseHandler.h
+SOURCE=..\..\include\Quarter\devices\Keyboard.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\include\Quarter\devices\Mouse.h
 # End Source File
 # End Group
 # Begin Group "eventhandlers"
 # Begin Source File
 
-SOURCE=..\..\include\Quarter\eventhandlers\EventManager.h
+SOURCE=..\..\include\Quarter\eventhandlers\DragDropHandler.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\include\Quarter\eventhandlers\EventFilter.h
+
+!IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\include\Quarter\eventhandlers\EventFilter.h
+
+"src\Quarter\moc_EventFilter.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_EventFilter.cpp ..\..\include\Quarter\eventhandlers\EventFilter.h
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\include\Quarter\eventhandlers\EventFilter.h
+
+"src\Quarter\moc_EventFilter.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_EventFilter.cpp ..\..\include\Quarter\eventhandlers\EventFilter.h
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Release)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\include\Quarter\eventhandlers\EventFilter.h
+
+"src\Quarter\moc_EventFilter.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_EventFilter.cpp ..\..\include\Quarter\eventhandlers\EventFilter.h
+
+# End Custom Build
+  
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Debug)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\include\Quarter\eventhandlers\EventFilter.h
+
+"src\Quarter\moc_EventFilter.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_EventFilter.cpp ..\..\include\Quarter\eventhandlers\EventFilter.h
+
+# End Custom Build
+
+!ENDIF
+
 # End Source File
 # Begin Source File
 
 SOURCE=..\..\include\Quarter\eventhandlers\EventHandler.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\include\Quarter\eventhandlers\DragDropHandler.h
 # End Source File
 # End Group
 # End Group

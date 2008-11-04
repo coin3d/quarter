@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="quarterwidgetplugin1"
-	ProjectGUID="{C6B0EAC7-D428-4879-B425-229951AF4DC0}"
+	ProjectGUID="{3EB21D58-3606-4C99-86E2-FC0606D1F106}"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>

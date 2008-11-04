@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="quarterwidgetplugin1_install"
-	ProjectGUID="{A28BFBA6-7C39-46F8-867E-864B1405F410}"
+	ProjectGUID="{985CD175-88AD-48AE-96D6-3034A52018C2}"
 	Keyword="MakeFileProj"
 	>
 	<Platforms>

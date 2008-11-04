@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="quarter1_install"
-	ProjectGUID="{B0BA42E1-1F85-427C-B420-45439DC9E7CF}"
+	ProjectGUID="{8E7AB0C0-BE01-4CB3-8962-525B3B82551F}"
 	Keyword="MakeFileProj"
 	TargetFrameworkVersion="0"
 	>
