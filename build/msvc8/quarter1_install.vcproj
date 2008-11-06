@@ -25,8 +25,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-sdk.bat lib debug msvc6 quarter1"
-				ReBuildCommandLine="..\misc\install-sdk.bat lib debug msvc6 quarter1 "
+				BuildCommandLine="..\misc\install-sdk.bat lib debug msvc8 quarter1"
+				ReBuildCommandLine="..\misc\install-sdk.bat lib debug msvc8 quarter1 "
 				CleanCommandLine=""
 				Output="quarter1_install.exe"
 				PreprocessorDefinitions=""
@@ -48,8 +48,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-sdk.bat dll release msvc6 quarter1"
-				ReBuildCommandLine="..\misc\install-sdk.bat dll release msvc6 quarter1 "
+				BuildCommandLine="..\misc\install-sdk.bat dll release msvc8 quarter1"
+				ReBuildCommandLine="..\misc\install-sdk.bat dll release msvc8 quarter1 "
 				CleanCommandLine=""
 				Output="quarter1_install.exe"
 				PreprocessorDefinitions=""
@@ -71,8 +71,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-sdk.bat dll debug msvc6 quarter1"
-				ReBuildCommandLine="..\misc\install-sdk.bat dll debug msvc6 quarter1 "
+				BuildCommandLine="..\misc\install-sdk.bat dll debug msvc8 quarter1"
+				ReBuildCommandLine="..\misc\install-sdk.bat dll debug msvc8 quarter1 "
 				CleanCommandLine=""
 				Output="quarter1_install.exe"
 				PreprocessorDefinitions=""
@@ -94,8 +94,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-sdk.bat lib release msvc6 quarter1"
-				ReBuildCommandLine="..\misc\install-sdk.bat lib release msvc6 quarter1 "
+				BuildCommandLine="..\misc\install-sdk.bat lib release msvc8 quarter1"
+				ReBuildCommandLine="..\misc\install-sdk.bat lib release msvc8 quarter1 "
 				CleanCommandLine=""
 				Output="quarter1_install.exe"
 				PreprocessorDefinitions=""
