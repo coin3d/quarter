@@ -411,6 +411,19 @@ SOURCE=src\Quarter\moc_EventFilter.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=src\Quarter\moc_DragDropHandler.cpp
+!IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
+# PROP Intermediate_Dir "QuarterRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
+# PROP Intermediate_Dir "QuarterDebug"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Release)"
+# PROP Intermediate_Dir "QuarterStaticRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Debug)"
+# PROP Intermediate_Dir "QuarterStaticDebug"
+!ENDIF
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\src\Quarter\SensorManager.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
@@ -691,6 +704,53 @@ SOURCE=..\..\include\Quarter\devices\Mouse.h
 # Begin Source File
 
 SOURCE=..\..\include\Quarter\eventhandlers\DragDropHandler.h
+
+!IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\include\Quarter\eventhandlers\DragDropHandler.h
+
+"src\Quarter\moc_DragDropHandler.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_DragDropHandler.cpp ..\..\include\Quarter\eventhandlers\DragDropHandler.h
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\include\Quarter\eventhandlers\DragDropHandler.h
+
+"src\Quarter\moc_DragDropHandler.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_DragDropHandler.cpp ..\..\include\Quarter\eventhandlers\DragDropHandler.h
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Release)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\include\Quarter\eventhandlers\DragDropHandler.h
+
+"src\Quarter\moc_DragDropHandler.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_DragDropHandler.cpp ..\..\include\Quarter\eventhandlers\DragDropHandler.h
+
+# End Custom Build
+  
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Debug)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\include\Quarter\eventhandlers\DragDropHandler.h
+
+"src\Quarter\moc_DragDropHandler.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_DragDropHandler.cpp ..\..\include\Quarter\eventhandlers\DragDropHandler.h
+
+# End Custom Build
+
+!ENDIF
+
 # End Source File
 # Begin Source File
 

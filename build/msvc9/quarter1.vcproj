@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="quarter1"
-	ProjectGUID="{DE1F30C4-B2B3-413C-A7A4-7CC4D466F78F}"
+	ProjectGUID="{7A6C9434-5CE3-4C65-B10D-8B064E39612C}"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>
@@ -872,6 +872,54 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="src\Quarter\moc_DragDropHandler.cpp"
+				>
+				<FileConfiguration
+					Name="LIB (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="src\Quarter\moc_EventFilter.cpp"
 				>
 				<FileConfiguration
@@ -1577,6 +1625,46 @@
 				<File
 					RelativePath="..\..\include\Quarter\eventhandlers\DragDropHandler.h"
 					>
+					<FileConfiguration
+						Name="LIB (Debug)|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="moc&apos;ing $(InputPath)"
+							CommandLine="$(QTDIR)\bin\moc -o src\Quarter\moc_DragDropHandler.cpp ..\..\include\Quarter\eventhandlers\DragDropHandler.h&#x0D;&#x0A;"
+							Outputs="src\Quarter\moc_DragDropHandler.cpp"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DLL (Debug)|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="moc&apos;ing $(InputPath)"
+							CommandLine="$(QTDIR)\bin\moc -o src\Quarter\moc_DragDropHandler.cpp ..\..\include\Quarter\eventhandlers\DragDropHandler.h&#x0D;&#x0A;"
+							Outputs="src\Quarter\moc_DragDropHandler.cpp"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DLL (Release)|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="moc&apos;ing $(InputPath)"
+							CommandLine="$(QTDIR)\bin\moc -o src\Quarter\moc_DragDropHandler.cpp ..\..\include\Quarter\eventhandlers\DragDropHandler.h&#x0D;&#x0A;"
+							Outputs="src\Quarter\moc_DragDropHandler.cpp"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="LIB (Release)|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="moc&apos;ing $(InputPath)"
+							CommandLine="$(QTDIR)\bin\moc -o src\Quarter\moc_DragDropHandler.cpp ..\..\include\Quarter\eventhandlers\DragDropHandler.h&#x0D;&#x0A;"
+							Outputs="src\Quarter\moc_DragDropHandler.cpp"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\..\include\Quarter\eventhandlers\EventFilter.h"
