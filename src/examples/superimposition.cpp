@@ -111,14 +111,12 @@ main(int argc, char ** argv)
 
   // Add some background text
   SoSeparator * background = create_background();
-  background->ref();
   (void)viewer->getSoRenderManager()->addSuperimposition(background,
                                                          SoRenderManager::Superimposition::BACKGROUND);
   
 
   // Add some super imposed text
   SoSeparator * superimposed = create_superimposition();
-  superimposed->ref();
   (void)viewer->getSoRenderManager()->addSuperimposition(superimposed);
 
   // Pop up the QuarterWidget
@@ -127,8 +125,6 @@ main(int argc, char ** argv)
   app.exec();
   // Clean up resources.
   root->unref();
-  superimposed->unref();
-  background->unref();
   delete viewer;
   Quarter::clean();
 
