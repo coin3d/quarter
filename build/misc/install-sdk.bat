@@ -89,11 +89,11 @@ if "%2"=="debug" goto installlibdebug
 goto installlibrelease
 
 :installlibdebug
-xcopy QuarterStaticDebug\%libname%sd.lib %COINDIR%\lib\ /R /Y
+xcopy %libname%sd.lib %COINDIR%\lib\ /R /Y
 goto binariesdone
 
 :installlibrelease
-xcopy QuarterStaticRelease\%libname%s.lib %COINDIR%\lib\ /R /Y
+xcopy %libname%s.lib %COINDIR%\lib\ /R /Y
 goto binariesdone
 
 :binariesdone
