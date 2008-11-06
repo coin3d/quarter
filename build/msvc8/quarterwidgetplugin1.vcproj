@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="quarterwidgetplugin1"
-	ProjectGUID="{DD2AE32A-4A30-401D-BABF-97C7E99973F2}"
+	ProjectGUID="{A49E4BBD-E7C1-4140-A7A3-1163D59E8942}"
 	>
 	<Platforms>
 		<Platform
@@ -51,6 +51,7 @@
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
+				RuntimeTypeInfo="true"
 				PrecompiledHeaderFile=".\PluginDebug/quarterwidgetplugin1.pch"
 				AssemblerListingLocation=".\PluginDebug/"
 				ObjectFile=".\PluginDebug/"
@@ -138,6 +139,7 @@
 				AdditionalIncludeDirectories="..\..\include,$(COINDIR)\include,$(COINDIR)\include\Inventor\annex,$(QTDIR)\include,$(QTDIR)\include\Qt,$(QTDIR)\include\QtDesigner"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_LIB;HAVE_CONFIG_H;COIN_NOT_DLL;QUARTER_NOT_DLL;QT_PLUGIN;UNICODE;QT_LARGEFILE_SUPPORT;QT_CORE_LIB;QT_XML_LIB;QT_OPENGL_LIB;QT_GUI_LIB;QT_THREAD_SUPPORT;QDESIGNER_EXPORT_WIDGETS"
 				RuntimeLibrary="2"
+				RuntimeTypeInfo="true"
 				PrecompiledHeaderFile=".\PluginStaticDebug/quarterwidgetplugin1.pch"
 				AssemblerListingLocation=".\PluginStaticDebug/"
 				ObjectFile=".\PluginStaticDebug/"
@@ -220,6 +222,7 @@
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;HAVE_CONFIG_H;COIN_DLL;QUARTER_DLL;QT_PLUGIN;UNICODE;QT_LARGEFILE_SUPPORT;QT_NO_DEBUG;QT_CORE_LIB;QT_XML_LIB;QT_OPENGL_LIB;QT_GUI_LIB;QT_THREAD_SUPPORT;QDESIGNER_EXPORT_WIDGETS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
+				RuntimeTypeInfo="true"
 				PrecompiledHeaderFile=".\PluginRelease/quarterwidgetplugin1.pch"
 				AssemblerListingLocation=".\PluginRelease/"
 				ObjectFile=".\PluginRelease/"
@@ -311,6 +314,7 @@
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_LIB;HAVE_CONFIG_H;COIN_NOT_DLL;QUARTER_NOT_DLL;QT_PLUGIN;UNICODE;QT_LARGEFILE_SUPPORT;QT_NO_DEBUG;QT_CORE_LIB;QT_XML_LIB;QT_OPENGL_LIB;QT_GUI_LIB;QT_THREAD_SUPPORT;QDESIGNER_EXPORT_WIDGETS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
+				RuntimeTypeInfo="true"
 				PrecompiledHeaderFile=".\PluginStaticRelease/quarterwidgetplugin1.pch"
 				AssemblerListingLocation=".\PluginStaticRelease/"
 				ObjectFile=".\PluginStaticRelease/"

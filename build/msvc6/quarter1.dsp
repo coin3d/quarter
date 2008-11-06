@@ -45,8 +45,8 @@ RSC=rc.exe
 # PROP Target_Dir ""
 MTL=midl.exe
 CPP=cl.exe
-# ADD BASE CPP /nologo /MD /W3 /GX /O2 /Ob2 /Og /Oi /Oy /Gy /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_LIB" /D QUARTER_DEBUG=0  /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_INTERNAL" /YX /FD /Gs /c
-# ADD CPP /nologo /MD /W3 /GX /O2 /Ob2 /Og /Oi /Oy /Gy /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_LIB" /D QUARTER_DEBUG=0  /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_INTERNAL" /YX /FD /Gs /c
+# ADD BASE CPP /nologo /MD /W3 /GR /GX /O2 /Ob2 /Og /Oi /Oy /Gy /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_LIB" /D QUARTER_DEBUG=0  /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_INTERNAL" /YX /FD /Gs /c
+# ADD CPP /nologo /MD /W3 /GR /GX /O2 /Ob2 /Og /Oi /Oy /Gy /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_LIB" /D QUARTER_DEBUG=0  /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_INTERNAL" /YX /FD /Gs /c
 RSC=rc.exe
 # ADD BASE RSC /l 0x414 /d "NDEBUG"
 # ADD RSC /l 0x414 /d "NDEBUG"
@@ -71,8 +71,8 @@ LIB32=link.exe -lib
 # PROP Target_Dir ""
 MTL=midl.exe
 CPP=cl.exe
-# ADD BASE CPP /nologo /MD /W3 /GX /Od /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_LIB" /D QUARTER_DEBUG=1  /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_INTERNAL" /YX /FD /c
-# ADD CPP /nologo /MD /W3 /GX /Od /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_LIB" /D QUARTER_DEBUG=1  /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_INTERNAL" /YX /FD /c
+# ADD BASE CPP /nologo /MD /W3 /GR /GX /Od /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_LIB" /D QUARTER_DEBUG=1  /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_INTERNAL" /YX /FD /c
+# ADD CPP /nologo /MD /W3 /GR /GX /Od /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_LIB" /D QUARTER_DEBUG=1  /D "HAVE_CONFIG_H" /D "COIN_NOT_DLL" /D "QUARTER_INTERNAL" /YX /FD /c
 RSC=rc.exe
 # ADD BASE RSC /l 0x414 /d "_DEBUG"
 # ADD RSC /l 0x414 /d "_DEBUG"
@@ -97,8 +97,8 @@ LIB32=link.exe -lib
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 CPP=cl.exe
-# ADD BASE CPP /nologo /MD /W3 /GX /O2 /Og /Oi /Oy /Ob2 /Gy /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D QUARTER_DEBUG=0 /D "HAVE_CONFIG_H" /D "QUARTER_MAKE_DLL" /D "COIN_DLL" /D "QUARTER_INTERNAL" /YX /FD /Gs /c
-# ADD CPP /nologo /MD /W3 /GX /O2 /Og /Oi /Oy /Ob2 /Gy /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D QUARTER_DEBUG=0 /D "HAVE_CONFIG_H" /D "QUARTER_MAKE_DLL" /D "COIN_DLL" /D "QUARTER_INTERNAL" /YX /FD /Gs /c
+# ADD BASE CPP /nologo /MD /W3 /GR /GX /O2 /Og /Oi /Oy /Ob2 /Gy /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D QUARTER_DEBUG=0 /D "HAVE_CONFIG_H" /D "QUARTER_MAKE_DLL" /D "COIN_DLL" /D "QUARTER_INTERNAL" /YX /FD /Gs /c
+# ADD CPP /nologo /MD /W3 /GR /GX /O2 /Og /Oi /Oy /Ob2 /Gy /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D QUARTER_DEBUG=0 /D "HAVE_CONFIG_H" /D "QUARTER_MAKE_DLL" /D "COIN_DLL" /D "QUARTER_INTERNAL" /YX /FD /Gs /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
@@ -126,8 +126,8 @@ LINK32=link.exe
 # PROP Intermediate_Dir "QuarterDebug"
 # PROP Target_Dir ""
 CPP=cl.exe
-# ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D QUARTER_DEBUG=1 /D "HAVE_CONFIG_H" /D "QUARTER_MAKE_DLL" /D "COIN_DLL" /D "QUARTER_INTERNAL" /YX /FD /GZ /c
-# ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D QUARTER_DEBUG=1 /D "HAVE_CONFIG_H" /D "QUARTER_MAKE_DLL" /D "COIN_DLL" /D "QUARTER_INTERNAL" /YX /FD /GZ /c
+# ADD BASE CPP /nologo /MDd /W3 /Gm /GR /GX /ZI /Od /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D QUARTER_DEBUG=1 /D "HAVE_CONFIG_H" /D "QUARTER_MAKE_DLL" /D "COIN_DLL" /D "QUARTER_INTERNAL" /YX /FD /GZ /c
+# ADD CPP /nologo /MDd /W3 /Gm /GR /GX /ZI /Od /I "..\..\include" /I "$(COINDIR)\include" /I "$(COINDIR)\include\Inventor\annex" /I "$(QTDIR)\include" /I "$(QTDIR)\include\Qt" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D QUARTER_DEBUG=1 /D "HAVE_CONFIG_H" /D "QUARTER_MAKE_DLL" /D "COIN_DLL" /D "QUARTER_INTERNAL" /YX /FD /GZ /c
 MTL=midl.exe
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32

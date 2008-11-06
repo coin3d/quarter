@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="quarter1"
-	ProjectGUID="{524829BB-609D-4FAE-B1A0-8A96ECB848D5}"
+	ProjectGUID="{42A97CD4-CA22-4A43-AAAB-1B5416CB6A73}"
 	>
 	<Platforms>
 		<Platform
@@ -43,6 +43,7 @@
 				AdditionalIncludeDirectories="..\..\include,$(COINDIR)\include,$(COINDIR)\include\Inventor\annex,$(QTDIR)\include,$(QTDIR)\include\Qt"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_LIB;QUARTER_DEBUG=1;HAVE_CONFIG_H;COIN_NOT_DLL;QUARTER_INTERNAL"
 				RuntimeLibrary="2"
+				RuntimeTypeInfo="true"
 				PrecompiledHeaderFile=".\QuarterStaticDebug/quarter1.pch"
 				AssemblerListingLocation=".\QuarterStaticDebug/"
 				ObjectFile=".\QuarterStaticDebug/"
@@ -122,6 +123,7 @@
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
+				RuntimeTypeInfo="true"
 				PrecompiledHeaderFile=".\QuarterDebug/quarter1.pch"
 				AssemblerListingLocation=".\QuarterDebug/"
 				ObjectFile=".\QuarterDebug/"
@@ -220,6 +222,7 @@
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;QUARTER_DEBUG=0;HAVE_CONFIG_H;QUARTER_MAKE_DLL;COIN_DLL;QUARTER_INTERNAL"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
+				RuntimeTypeInfo="true"
 				PrecompiledHeaderFile=".\QuarterRelease/quarter1.pch"
 				AssemblerListingLocation=".\QuarterRelease/"
 				ObjectFile=".\QuarterRelease/"
@@ -312,6 +315,7 @@
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_LIB;QUARTER_DEBUG=0;HAVE_CONFIG_H;COIN_NOT_DLL;QUARTER_INTERNAL"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
+				RuntimeTypeInfo="true"
 				PrecompiledHeaderFile=".\QuarterStaticRelease/quarter1.pch"
 				AssemblerListingLocation=".\QuarterStaticRelease/"
 				ObjectFile=".\QuarterStaticRelease/"
