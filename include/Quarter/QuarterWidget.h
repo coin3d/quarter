@@ -107,6 +107,8 @@ public:
 
   virtual bool processSoEvent(const SoEvent * event);
 
+  virtual QSize minimumSizeHint(void) const;
+
 public slots:
   virtual void viewAll(void);
 

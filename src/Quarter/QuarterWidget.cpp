@@ -541,4 +541,10 @@ QuarterWidget::removeStateMachine(SoScXMLStateMachine * statemachine)
   em->removeSoScXMLStateMachine(statemachine);
 }
 
+QSize 
+QuarterWidget::minimumSizeHint(void) const
+{
+  return QSize(50, 50);
+}
+
 #undef PRIVATE
