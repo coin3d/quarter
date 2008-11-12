@@ -68,7 +68,7 @@ DragDropHandler::DragDropHandler(QuarterWidget * parent)
   : QObject(parent)
 {
   PRIVATE(this) = new DragDropHandlerP(this);
-  PRIVATE(this)->quarterwidget = dynamic_cast<QuarterWidget *>(parent);
+  PRIVATE(this)->quarterwidget = parent;
   assert(PRIVATE(this)->quarterwidget);
   PRIVATE(this)->suffixes << "iv" << "wrl";
 }
@@ -87,10 +87,10 @@ DragDropHandler::eventFilter(QObject *, QEvent * event)
 {
   switch (event->type()) {
   case QEvent::DragEnter:
-    PRIVATE(this)->dragEnterEvent((QDragEnterEvent *) event);
+    PRIVATE(this)->dragEnterEvent(dynamic_cast<QDragEnterEvent *>(event));
     return true;
   case QEvent::Drop:
-    PRIVATE(this)->dropEvent((QDropEvent *) event);
+    PRIVATE(this)->dropEvent(dynamic_cast<QDropEvent *>(event));
     return true;
   default:
     return false;

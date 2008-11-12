@@ -54,6 +54,7 @@
 #include <Quarter/eventhandlers/DragDropHandler.h>
 
 #include "ContextMenu.h"
+#include "AltKeyHandler.h"
 #include "QuarterWidgetP.h"
 
 using namespace SIM::Coin3D::Quarter;
@@ -136,6 +137,9 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   // set focus policy to Strong by default
   this->setFocusPolicy(Qt::StrongFocus);
   this->installEventFilter(PRIVATE(this)->eventfilter);
+#if 0 // temporarily disabled
+  this->installEventFilter(new AltKeyHandler(this));
+#endif
   this->installEventFilter(PRIVATE(this)->dragdrophandler);
 }
 
@@ -159,8 +163,16 @@ QuarterWidget::~QuarterWidget()
 void 
 QuarterWidget::setStateCursor(const SbName & state, const QCursor & cursor)
 {
+  assert(QuarterWidgetP::statecursormap);
   // will overwrite the value of an existing item
   QuarterWidgetP::statecursormap->insert(state, cursor);
+}
+
+QCursor
+QuarterWidget::stateCursor(const SbName & state)
+{
+  assert(QuarterWidgetP::statecursormap);
+  return QuarterWidgetP::statecursormap->value(state);
 }
 
 /*!

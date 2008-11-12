@@ -9680,9 +9680,15 @@ AC_ARG_WITH(
   [sim_ac_with_qt=true])
 
 if $sim_ac_with_qt; then
-  if test -z "$sim_ac_qtdir"; then
-    # The Cygwin environment needs to invoke moc with a POSIX-style path.
-    AC_PATH_PROG(sim_ac_qt_cygpath, cygpath, false)
+  # The Cygwin environment needs to invoke moc with a POSIX-style path.
+  AC_PATH_PROG(sim_ac_qt_cygpath, cygpath, false)
+
+  if test -n "$sim_ac_qtdir"; then
+    if test $sim_ac_qt_cygpath != "false"; then
+      # Quote $sim_ac_qtdir in case it contains whitespace characters.
+      sim_ac_qtdir=`$sim_ac_qt_cygpath -u "$sim_ac_qtdir"`
+    fi
+  else
     if test $sim_ac_qt_cygpath = "false"; then
       sim_ac_qtdir=$QTDIR
     else
