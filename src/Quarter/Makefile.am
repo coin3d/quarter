@@ -31,7 +31,8 @@ BuiltSources = \
         moc_ContextMenu.cpp \
         moc_SignalThread.cpp \
         moc_EventFilter.cpp \
-        moc_DragDropHandler.cpp
+        moc_DragDropHandler.cpp \
+        moc_AltKeyHandler.cpp
 
 PrivateHeaders = \
         SensorManager.h \
@@ -40,7 +41,8 @@ PrivateHeaders = \
         QuarterWidgetP.h \
         ContextMenu.h \
         SignalThread.h \
-        KeyboardP.h
+        KeyboardP.h \
+        AltKeyHandler.h
 
 RegularSources = \
         Quarter.cpp \
@@ -56,7 +58,8 @@ RegularSources = \
         Mouse.cpp \
         Keyboard.cpp \
         InputDevice.cpp \
-        KeyboardP.cpp
+        KeyboardP.cpp \
+        AltKeyHandler.cpp
 
 
 BUILT_SOURCES = $(BuiltSources)
@@ -160,6 +163,9 @@ moc_EventFilter.cpp: $(top_srcdir)/include/Quarter/eventhandlers/EventFilter.h
 
 moc_DragDropHandler.cpp: $(top_srcdir)/include/Quarter/eventhandlers/DragDropHandler.h
 	$(MOC) -o $@ `$(UNIX2WINPATH) $(top_srcdir)/include/Quarter/eventhandlers/DragDropHandler.h`
+
+moc_AltKeyHandler.cpp: $(srcdir)/AltKeyHandler.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/AltKeyHandler.h`
 
 if BUILD_WITH_MSVC
 all-local: Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib

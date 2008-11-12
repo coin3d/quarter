@@ -41,7 +41,7 @@ class SoScXMLStateMachine;
 namespace SIM { namespace Coin3D { namespace Quarter {
 
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
-  typedef QGLWidget inherited;
+  typedef QGLWidget inherited; 
   Q_OBJECT
   Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
   Q_PROPERTY(bool contextMenuEnabled READ contextMenuEnabled WRITE setContextMenuEnabled)
@@ -92,6 +92,8 @@ public:
   TransparencyType transparencyType(void) const;
 
   void setStateCursor(const SbName & state, const QCursor & cursor);
+  QCursor stateCursor(const SbName & state);
+
   uint32_t getCacheContextId(void) const;
 
   virtual void setSceneGraph(SoNode * root);
