@@ -180,6 +180,16 @@ AC_ARG_ENABLE(
     *) ;;
   esac])
 
+AC_ARG_WITH(
+  [pkgconfig],
+  [AC_HELP_STRING([--with-pkgconfig=string],
+                  [Specify pkgconfig directory that should be searched before the default path])],
+  [case $withval in
+   no | false ) sim_ac_enable_pkgconfig=false ;;
+   * ) WITH_PKG_CONFIG_PATH="$withval" ;;
+   esac],
+  [WITH_PKG_CONFIG_PATH=])
+
 # *******************************************************************
 
 if $sim_ac_framework; then
@@ -242,7 +252,7 @@ AC_SUBST(SUFFIX)
 # *******************************************************************
 # try to use pkg-config
 if $sim_ac_enable_pkgconfig && $sim_ac_build_library; then
-  PKG_CONFIG_PATH="${prefix}/lib/pkgconfig/:$PKG_CONFIG_PATH"
+  PKG_CONFIG_PATH="$WITH_PKG_CONFIG_PATH:${prefix}/lib/pkgconfig/:$PKG_CONFIG_PATH"
   export PKG_CONFIG_PATH
   
   PKG_CHECK_MODULES([Coin], [Coin], [
