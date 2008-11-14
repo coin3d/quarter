@@ -54,7 +54,9 @@
 #include <Quarter/eventhandlers/DragDropHandler.h>
 
 #include "ContextMenu.h"
+#if 0
 #include "AltKeyHandler.h"
+#endif
 #include "QuarterWidgetP.h"
 
 using namespace SIM::Coin3D::Quarter;
