@@ -80,8 +80,9 @@ MdiMainWindow::dropEvent(QDropEvent * event)
 {
   const QMimeData * mimedata = event->mimeData();
   if (mimedata->hasUrls()) {
-    QString path = mimedata->urls().takeFirst().path();
-    this->open(path);
+    foreach (QUrl url, mimedata->urls()) {
+      this->open(url.path());
+    }
   }
 }
 
