@@ -190,10 +190,3 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
     }
   }
 }
-
-bool
-QuarterWidgetP::debugEvents(void)
-{
-  const char * env = coin_getenv("QUARTER_DEBUG_EVENTS");
-  return env && (atoi(env) > 0);
-}
