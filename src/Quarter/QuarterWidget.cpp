@@ -55,7 +55,7 @@
 
 #include "ContextMenu.h"
 #if 0
-#include "AltKeyHandler.h"
+#include "InteractionMode.h"
 #endif
 #include "QuarterWidgetP.h"
 
@@ -98,6 +98,9 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   //callbacks which depends on other state being initialized
   PRIVATE(this)->eventfilter = new EventFilter(this);
   PRIVATE(this)->dragdrophandler = new DragDropHandler(this);
+#if 0
+  PRIVATE(this)->interactionmode = new InteractionMode(this);
+#endif
 
   // set up default cursors for the examiner navigation states
   this->setStateCursor("interact", Qt::ArrowCursor);
@@ -136,11 +139,13 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   this->setMouseTracking(TRUE);
 
-  // set focus policy to Strong by default
+  // Qt::StrongFocus means the widget will accept keyboard focus by
+  // both tabbing and clicking
   this->setFocusPolicy(Qt::StrongFocus);
+
   this->installEventFilter(PRIVATE(this)->eventfilter);
-#if 0 // temporarily disabled
-  this->installEventFilter(new AltKeyHandler(this));
+#if 0
+  this->installEventFilter(PRIVATE(this)->interactionmode);
 #endif
   this->installEventFilter(PRIVATE(this)->dragdrophandler);
 }
@@ -224,6 +229,43 @@ void
 QuarterWidget::setClearWindow(bool onoff)
 {
   PRIVATE(this)->clearwindow = onoff;
+}
+
+
+bool 
+QuarterWidget::interactionModeEnabled(void) const
+{
+#if 0
+  return PRIVATE(this)->interactionmode->enabled();
+#else
+  return false;
+#endif
+}
+
+void 
+QuarterWidget::setInteractionModeEnabled(bool onoff)
+{
+#if 0
+  PRIVATE(this)->interactionmode->setEnabled(onoff);
+#endif
+}
+
+bool 
+QuarterWidget::interactionModeOn(void) const
+{
+#if 0
+  return PRIVATE(this)->interactionmode->on();
+#else
+  return false;
+#endif
+}  
+
+void 
+QuarterWidget::setInteractionModeOn(bool onoff)
+{
+#if 0
+  PRIVATE(this)->interactionmode->setOn(onoff);
+#endif
 }
 
 /*!
@@ -481,6 +523,7 @@ QuarterWidget::setBackgroundColor(const QColor & color)
                     SbClamp(color.alpha() / 255.0, 0.0, 1.0));
 
   PRIVATE(this)->sorendermanager->setBackgroundColor(bgcolor);
+  PRIVATE(this)->sorendermanager->scheduleRedraw();
 }
 
 /*!  

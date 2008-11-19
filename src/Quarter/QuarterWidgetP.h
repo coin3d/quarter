@@ -42,6 +42,7 @@ namespace SIM { namespace Coin3D { namespace Quarter {
 class ContextMenu;
 class EventFilter;
 class DragDropHandler;
+class InteractionMode;
 
 class QuarterWidgetP {
 public:
@@ -55,6 +56,7 @@ public:
   QuarterWidget * const master;
   SoNode * scene;
   EventFilter * eventfilter;
+  InteractionMode * interactionmode;
   DragDropHandler * dragdrophandler;
   SoRenderManager * sorendermanager;
   SoEventManager * soeventmanager;
@@ -65,6 +67,7 @@ public:
   ContextMenu * contextmenu;
   bool contextmenuenabled;
   bool autoredrawenabled;
+  bool interactionmodeenabled;
   bool clearzbuffer;
   bool clearwindow;
   

@@ -1,4 +1,4 @@
-#include "AltKeyHandler.h"
+#include "InteractionMode.h"
 #include <QtCore/QCoreApplication>
 #include <QtGui/QKeyEvent>
 #include <QtGui/QFocusEvent>
@@ -10,7 +10,7 @@
 
 using namespace SIM::Coin3D::Quarter;
 
-AltKeyHandler::AltKeyHandler(QuarterWidget * quarterwidget)
+InteractionMode::InteractionMode(QuarterWidget * quarterwidget)
   : QObject(quarterwidget)
 {
   this->quarterwidget = quarterwidget;
@@ -18,16 +18,62 @@ AltKeyHandler::AltKeyHandler(QuarterWidget * quarterwidget)
   this->prevcursor = QCursor();
   this->prevnavstate = 
     this->quarterwidget->getSoEventManager()->getNavigationState();
+
+  this->isenabled = true;
 }
 
-AltKeyHandler::~AltKeyHandler()
+InteractionMode::~InteractionMode()
 {
 
+}
+
+void 
+InteractionMode::setEnabled(bool yes)
+{
+  this->isenabled = yes;
 }
 
 bool 
-AltKeyHandler::eventFilter(QObject * obj, QEvent * event)
+InteractionMode::enabled(void) const
 {
+  return this->isenabled;
+}
+
+void 
+InteractionMode::setOn(bool on)
+{
+  if (!this->isenabled) {
+    return;
+  }
+
+  SoEventManager * eventmanager = this->quarterwidget->getSoEventManager();
+
+  if (on) {
+    this->altkeydown = true;
+    this->prevnavstate = eventmanager->getNavigationState();
+    this->prevcursor = this->quarterwidget->cursor();
+    this->quarterwidget->setCursor(this->quarterwidget->stateCursor("interact")); 
+    eventmanager->setNavigationState(SoEventManager::NO_NAVIGATION);
+  } else {
+    this->altkeydown = false;
+    this->quarterwidget->setCursor(this->prevcursor); 
+    eventmanager->setNavigationState(this->prevnavstate);
+  }
+}
+ 
+bool 
+InteractionMode::on(void) const
+{
+  return this->altkeydown;
+}
+
+bool 
+InteractionMode::eventFilter(QObject * obj, QEvent * event)
+{
+  if (!this->isenabled) {
+    return false;
+  }
+
   assert(obj == this->quarterwidget);
 
   switch (event->type()) {
@@ -47,7 +93,7 @@ AltKeyHandler::eventFilter(QObject * obj, QEvent * event)
   process events so draggers and manipulators works
  */
 bool 
-AltKeyHandler::keyPressEvent(QKeyEvent * event)
+InteractionMode::keyPressEvent(QKeyEvent * event)
 {
   if (!event || 
       !(event->key() == Qt::Key_Alt) ||
@@ -55,26 +101,18 @@ AltKeyHandler::keyPressEvent(QKeyEvent * event)
     return false;
   }
 
-  this->altkeydown = true;
-  SoEventManager * eventmanager = this->quarterwidget->getSoEventManager();
-  this->prevnavstate = eventmanager->getNavigationState();
-  this->prevcursor = this->quarterwidget->cursor();
-  this->quarterwidget->setCursor(this->quarterwidget->stateCursor("interact")); 
-  eventmanager->setNavigationState(SoEventManager::NO_NAVIGATION);
+  this->setOn(true);
   return true;
 }
 
 bool 
-AltKeyHandler::keyReleaseEvent(QKeyEvent * event)
+InteractionMode::keyReleaseEvent(QKeyEvent * event)
 {
   if (!event || !(event->key() == Qt::Key_Alt)) { 
     return false; 
   }
 
-  this->altkeydown = false;
-  SoEventManager * eventmanager = this->quarterwidget->getSoEventManager();
-  this->quarterwidget->setCursor(this->prevcursor); 
-  eventmanager->setNavigationState(this->prevnavstate);
+  this->setOn(false);
   return true;
 }
 
@@ -82,7 +120,7 @@ AltKeyHandler::keyReleaseEvent(QKeyEvent * event)
   if we lose focus while alt is down, send an alt-release event
  */
 bool 
-AltKeyHandler::focusOutEvent(QFocusEvent * event)
+InteractionMode::focusOutEvent(QFocusEvent * event)
 {
   if (this->altkeydown) {
     QKeyEvent keyevent(QEvent::KeyRelease, Qt::Key_Alt, Qt::NoModifier);
