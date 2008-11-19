@@ -54,6 +54,7 @@ QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * shar
 : master(masterptr),
   scene(NULL),
   eventfilter(NULL),
+  interactionmode(NULL),
   sorendermanager(NULL),
   soeventmanager(NULL),
   initialsorendermanager(false),
@@ -63,6 +64,7 @@ QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * shar
   contextmenu(NULL),
   contextmenuenabled(true),
   autoredrawenabled(true),
+  interactionmodeenabled(false),
   clearzbuffer(true),
   clearwindow(true)
 {

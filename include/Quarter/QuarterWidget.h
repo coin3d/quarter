@@ -43,11 +43,15 @@ namespace SIM { namespace Coin3D { namespace Quarter {
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   typedef QGLWidget inherited; 
   Q_OBJECT
+
   Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
   Q_PROPERTY(bool contextMenuEnabled READ contextMenuEnabled WRITE setContextMenuEnabled)
   Q_PROPERTY(bool headlightEnabled READ headlightEnabled WRITE setHeadlightEnabled)
   Q_PROPERTY(bool clearZBuffer READ clearZBuffer WRITE setClearZBuffer)
   Q_PROPERTY(bool clearWindow READ clearWindow WRITE setClearWindow)
+  Q_PROPERTY(bool interactionModeEnabled READ interactionModeEnabled WRITE setInteractionModeEnabled);
+  Q_PROPERTY(bool interactionModeOn READ interactionModeOn WRITE setInteractionModeOn);
+
   Q_PROPERTY(TransparencyType transparencyType READ transparencyType WRITE setTransparencyType)
   Q_ENUMS(TransparencyType)
 
@@ -87,6 +91,12 @@ public:
 
   bool clearWindow(void) const;
   void setClearWindow(bool onoff);
+
+  bool interactionModeEnabled(void) const;
+  void setInteractionModeEnabled(bool onoff);
+
+  bool interactionModeOn(void) const;
+  void setInteractionModeOn(bool onoff);
 
   void setTransparencyType(TransparencyType type);
   TransparencyType transparencyType(void) const;

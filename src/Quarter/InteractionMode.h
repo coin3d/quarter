@@ -1,5 +1,5 @@
-#ifndef QUARTER_ALTKEYHANDLER_H
-#define QUARTER_ALTKEYHANDLER_H
+#ifndef QUARTER_INTERACTIONMODE_H
+#define QUARTER_INTERACTIONMODE_H
 
 /**************************************************************************\
  *
@@ -37,11 +37,17 @@ namespace SIM { namespace Coin3D { namespace Quarter {
 
 class QuarterWidget; 
 
-class QUARTER_DLL_API AltKeyHandler : public QObject {
+class QUARTER_DLL_API InteractionMode : public QObject {
   Q_OBJECT
 public:
-  AltKeyHandler(QuarterWidget * quarterwidget);
-  virtual ~AltKeyHandler();
+  InteractionMode(QuarterWidget * quarterwidget);
+  virtual ~InteractionMode();
+
+  void setEnabled(bool yes);
+  bool enabled(void) const;
+
+  void setOn(bool on);
+  bool on(void) const;
 
 protected:
   virtual bool eventFilter(QObject *, QEvent * event);
@@ -55,8 +61,9 @@ private:
   QuarterWidget * quarterwidget;
   bool altkeydown;
   SoEventManager::NavigationState prevnavstate;
+  bool isenabled;
 };
 
 }}} // namespace
 
-#endif // QUARTER_ALTKEYHANDLER_H
+#endif // QUARTER_INTERACTIONMODE_H
