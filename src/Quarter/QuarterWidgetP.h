@@ -76,8 +76,6 @@ public:
   static void postrendercb(void * userdata, SoRenderManager * manager);
   static void statechangecb(void * userdata, ScXMLStateMachine * statemachine, const char * stateid, SbBool enter, SbBool success);
 
-  static bool debugEvents(void);
-
   typedef QMap<SbName, QCursor> StateCursorMap;
   static StateCursorMap * statecursormap;
 
