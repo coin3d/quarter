@@ -23,9 +23,9 @@
 /*!
   \class SIM::Coin3D::Quarter::DragDropHandler DragDropHandler.h Quarter/devices/DragDropHandler.h
 
-  \brief The DragDropHandler class provides drag and drop
-  functionality to the QuarterWidget. It is not registered with the
-  DeviceManager by default.
+  \brief 
+  The DragDropHandler class provides drag and drop
+  functionality to the QuarterWidget. 
 */
 
 #include <Quarter/eventhandlers/DragDropHandler.h>

@@ -20,11 +20,11 @@
  *
 \**************************************************************************/
 
-/*!  \class SIM::Coin3D::Quarter::DeviceHandler DeviceHandler.h Quarter/devices/DeviceHandler.h
+/*!  \class SIM::Coin3D::Quarter::InputDevice InputDevice.h Quarter/devices/InputDevice.h
 
-  \brief The DeviceHandler class is the base class for eventhandlers
-  such as the KeyboardHandler and MouseHandler. It can be subclassed
-  to create event handlers for other devices.
+  \brief The InputDevice class is the base class for devices such as
+  the Keyboard and Mouse. It can be subclassed to support other
+  devices.
 */
 
 
@@ -39,13 +39,13 @@ InputDevice::InputDevice(void)
   this->mousepos = SbVec2s(0, 0);
 }
 
- void
+void
 InputDevice::setMousePosition(const SbVec2s & pos) 
- {
+{
   this->mousepos = pos;
- }
- 
- void 
+}
+
+void 
 InputDevice::setWindowSize(const SbVec2s & size)
 {
   this->windowsize = size;
