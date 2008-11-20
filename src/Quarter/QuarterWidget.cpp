@@ -192,6 +192,9 @@ QuarterWidget::setHeadlightEnabled(bool onoff)
   PRIVATE(this)->headlight->on = onoff;
 }
 
+/*! 
+  Returns true if the headlight is on, false if it is off
+ */
 bool
 QuarterWidget::headlightEnabled(void) const
 {
@@ -207,31 +210,58 @@ QuarterWidget::getHeadlight(void)
   return PRIVATE(this)->headlight;
 }
 
-bool 
-QuarterWidget::clearZBuffer(void) const
-{
-  return PRIVATE(this)->clearzbuffer;
-}
-
+/*!  
+  Specify if you want the z buffer to be cleared before
+  redraw. This is on by default.
+*/
 void 
 QuarterWidget::setClearZBuffer(bool onoff)
 {
   PRIVATE(this)->clearzbuffer = onoff;
 }
 
+/*! 
+  Returns true if the z buffer is cleared before rendering.
+*/
 bool 
-QuarterWidget::clearWindow(void) const
+QuarterWidget::clearZBuffer(void) const
 {
-  return PRIVATE(this)->clearwindow;
+  return PRIVATE(this)->clearzbuffer;
 }
 
+/*!  
+  Specify if you want the rendering buffer to be cleared before
+  rendering. This is on by default.
+ */
 void 
 QuarterWidget::setClearWindow(bool onoff)
 {
   PRIVATE(this)->clearwindow = onoff;
 }
 
+/*!  
+  Returns true if the rendering buffer is cleared before rendering.
+ */
+bool 
+QuarterWidget::clearWindow(void) const
+{
+  return PRIVATE(this)->clearwindow;
+}
 
+/*!
+  Enable/disable interaction mode
+ */
+void 
+QuarterWidget::setInteractionModeEnabled(bool onoff)
+{
+#if 0
+  PRIVATE(this)->interactionmode->setEnabled(onoff);
+#endif
+}
+
+/*!
+  Returns true if interaction mode is enabled, false otherwise.
+ */
 bool 
 QuarterWidget::interactionModeEnabled(void) const
 {
@@ -242,14 +272,20 @@ QuarterWidget::interactionModeEnabled(void) const
 #endif
 }
 
+/*!
+  Turn interaction mode on or off
+*/
 void 
-QuarterWidget::setInteractionModeEnabled(bool onoff)
+QuarterWidget::setInteractionModeOn(bool onoff)
 {
 #if 0
-  PRIVATE(this)->interactionmode->setEnabled(onoff);
+  PRIVATE(this)->interactionmode->setOn(onoff);
 #endif
 }
 
+/*!
+  Returns true if interaction mode is on.
+ */
 bool 
 QuarterWidget::interactionModeOn(void) const
 {
@@ -259,14 +295,6 @@ QuarterWidget::interactionModeOn(void) const
   return false;
 #endif
 }  
-
-void 
-QuarterWidget::setInteractionModeOn(bool onoff)
-{
-#if 0
-  PRIVATE(this)->interactionmode->setOn(onoff);
-#endif
-}
 
 /*!
   Returns the Coin cache context id for this widget.

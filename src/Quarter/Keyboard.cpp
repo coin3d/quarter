@@ -21,11 +21,10 @@
 \**************************************************************************/
 
 /*!
-  \class SIM::Coin3D::Quarter::KeyboardHandler KeyboardHandler.h Quarter/devices/KeyboardHandler.h
+  \class SIM::Coin3D::Quarter::Keyboard Keyboard.h Quarter/devices/Keyboard.h
 
-  \brief The KeyboardHandler class provides translation of keyboard
-  events on the QuarterWidget. It is registered with the DeviceManager
-  by default.
+  \brief The Keyboard class provides translation of keyboard events on
+  the QuarterWidget.
 */
 
 

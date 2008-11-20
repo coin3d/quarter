@@ -21,11 +21,10 @@
 \**************************************************************************/
 
 /*!
-  \class SIM::Coin3D::Quarter::MouseHandler MouseHandler.h Quarter/devices/MouseHandler.h
+  \class SIM::Coin3D::Quarter::Mouse Mouse.h Quarter/devices/Mouse.h
 
-  \brief The MouseHandler class provides translation of mouse events
-  on the QuarterWidget. It is registered with the DeviceManager by
-  default.
+  \brief The Mouse class provides translation of mouse events on the
+  QuarterWidget.
 */
 
 #include <Quarter/devices/Mouse.h>
