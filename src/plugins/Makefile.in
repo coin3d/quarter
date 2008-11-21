@@ -268,7 +268,8 @@ nodist_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
 
 
 EXTRA_DIST = \
-        coinlogo.qrc
+        coinlogo.qrc \
+        coinlogo.png
 
 
 @BUILD_WITH_MSVC_TRUE@lib_LIBRARIES = QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@.lib

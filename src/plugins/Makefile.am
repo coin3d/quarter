@@ -49,7 +49,8 @@ nodist_QuarterWidgetPlugin@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_SOURCES = \
         $(BuiltSources)
 
 EXTRA_DIST = \
-        coinlogo.qrc
+        coinlogo.qrc \
+        coinlogo.png
 
 
 if BUILD_WITH_MSVC
