@@ -120,7 +120,7 @@ SensorManager::sensorQueueChanged(void)
     if (!this->delaytimer->isActive()) {
       SbTime time = SoDB::getDelaySensorTimeout();
       if (time != SbTime::zero()) {
-        this->delaytimer->start(interval.getMsecValue());
+        this->delaytimer->start(time.getMsecValue());
       }
     }
   } else {
