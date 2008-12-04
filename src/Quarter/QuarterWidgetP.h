@@ -70,7 +70,7 @@ public:
   bool interactionmodeenabled;
   bool clearzbuffer;
   bool clearwindow;
-  
+
   static void rendercb(void * userdata, SoRenderManager *);
   static void prerendercb(void * userdata, SoRenderManager * manager);
   static void postrendercb(void * userdata, SoRenderManager * manager);

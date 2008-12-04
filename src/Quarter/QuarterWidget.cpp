@@ -516,6 +516,25 @@ QuarterWidget::paintGL(void)
 }
 
 /*!
+  Used for rendering the scene. Usually Coin/Quarter will automatically redraw
+  the scene graph at regular intervals, after the scene is modified.
+ 
+  However, if you want to disable this functionality and gain full control over
+  when the scene is rendered yourself, you can turn off autoredraw in the
+  render manager and render the scene by calling this method.
+*/
+void 
+QuarterWidget::redraw(void)
+{
+  this->makeCurrent();
+  this->actualRedraw();
+  if (this->doubleBuffer()) {
+    this->swapBuffers();
+  }
+  this->doneCurrent();
+}
+
+/*!
   Overridden from QGLWidget to render the scenegraph
  */
 void
