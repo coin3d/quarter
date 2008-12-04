@@ -86,6 +86,8 @@ public:
   void setHeadlightEnabled(bool onoff);
   SoDirectionalLight * getHeadlight(void);
 
+  void redraw(void);
+
   bool clearZBuffer(void) const;
   void setClearZBuffer(bool onoff);
 
