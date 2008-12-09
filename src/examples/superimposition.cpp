@@ -33,6 +33,12 @@
 #include <Inventor/nodes/SoOrthographicCamera.h>
 #include <Inventor/nodes/SoText2.h>
 #include <Inventor/nodes/SoTranslation.h>
+#include <Inventor/nodes/SoBaseColor.h>
+#include <Inventor/nodes/SoIndexedFaceSet.h>
+#include <Inventor/nodes/SoLightModel.h>
+#include <Inventor/nodes/SoCoordinate3.h>
+#include <Inventor/nodes/SoMaterialBinding.h>
+
 #include <Inventor/SoRenderManager.h>
 
 #include <Quarter/QuarterWidget.h>
@@ -42,22 +48,51 @@ using namespace SIM::Coin3D::Quarter;
 
 static SoSeparator * create_background(void)
 {
+  // create a gradient background
   SoSeparator * root = new SoSeparator;
-  SoText2 * text = new SoText2;
   SoBaseColor * color = new SoBaseColor;
   SoOrthographicCamera * orthocam = new SoOrthographicCamera;
 
-  text->string.setValue("Background Scene");
-  color->rgb.setValue(SbColor(1.0, 0.0, 0.0));
+  color->rgb.set1Value(0, SbColor(1.0, 0.0, 0.0));
+  color->rgb.set1Value(1, SbColor(1.0, 1.0, 0.0));
 
   orthocam->height.setValue(1.0);
+  orthocam->viewportMapping = SoCamera::LEAVE_ALONE;
   orthocam->nearDistance.setValue(0.0);
   orthocam->farDistance.setValue(2.0);
-  orthocam->position = SbVec3f(0.0f, 0.2f, 1.0f);
+  orthocam->position = SbVec3f(0.0f, 0.0f, 1.0f);
+
+  SoMaterialBinding * mb = new SoMaterialBinding;
+  mb->value = SoMaterialBinding::PER_VERTEX_INDEXED;
+
+  SoCoordinate3 * coords = new SoCoordinate3;
+  coords->point.set1Value(0, SbVec3f(-0.5f, -0.5f, 0.0f));
+  coords->point.set1Value(1, SbVec3f(0.5f, -0.5f, 0.0f));
+  coords->point.set1Value(2, SbVec3f(0.5f, 0.5f, 0.0f));
+  coords->point.set1Value(3, SbVec3f(-0.5f, 0.5f, 0.0f));
+
+  SoIndexedFaceSet * ifs = new SoIndexedFaceSet;
+  ifs->coordIndex.set1Value(0, 0);
+  ifs->coordIndex.set1Value(1, 1);
+  ifs->coordIndex.set1Value(2, 2);
+  ifs->coordIndex.set1Value(3, 3);
+  ifs->coordIndex.set1Value(4, -1);
+
+  ifs->materialIndex.set1Value(0, 0);
+  ifs->materialIndex.set1Value(1, 0);
+  ifs->materialIndex.set1Value(2, 1);
+  ifs->materialIndex.set1Value(3, 1);
+  ifs->materialIndex.set1Value(4, -1);
+
+  SoLightModel * lm = new SoLightModel;
+  lm->model = SoLightModel::BASE_COLOR;
 
   root->addChild(orthocam);
+  root->addChild(lm);
   root->addChild(color);
-  root->addChild(text);
+  root->addChild(mb);
+  root->addChild(coords);
+  root->addChild(ifs);
 
   return root;
 
