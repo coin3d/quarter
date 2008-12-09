@@ -86,8 +86,6 @@ public:
   void setHeadlightEnabled(bool onoff);
   SoDirectionalLight * getHeadlight(void);
 
-  void redraw(void);
-
   bool clearZBuffer(void) const;
   void setClearZBuffer(bool onoff);
 
@@ -125,6 +123,7 @@ public:
 
 public slots:
   virtual void viewAll(void);
+  void redraw(void);
 
 protected:
   virtual void resizeGL(int width, int height);
