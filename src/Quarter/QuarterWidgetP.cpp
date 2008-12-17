@@ -25,6 +25,7 @@
 #include <Quarter/eventhandlers/EventFilter.h>
 
 #include <QtGui/QCursor>
+#include <QtGui/QMenu>
 #include <QtCore/QMap>
 
 #include <Inventor/nodes/SoCamera.h>
@@ -66,7 +67,8 @@ QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * shar
   autoredrawenabled(true),
   interactionmodeenabled(false),
   clearzbuffer(true),
-  clearwindow(true)
+  clearwindow(true),
+  addactions(true)
 {
   this->cachecontext = findCacheContext(masterptr, sharewidget);
 
@@ -78,6 +80,9 @@ QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * shar
 QuarterWidgetP::~QuarterWidgetP()
 {
   this->cachecontext->widgetlist.removeItem((const QGLWidget*) this->master);
+  if (this->contextmenu) {
+    delete this->contextmenu;
+  }
 }
 
 SoCamera *
@@ -174,10 +179,7 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
   if (enter) {
     SbName state(stateid);
     if (thisp->contextmenuenabled && state == contextmenurequest) {
-      if (!thisp->contextmenu) {
-        thisp->contextmenu = new ContextMenu(thisp->master);
-      }
-      thisp->contextmenu->exec(thisp->eventfilter->globalMousePosition());
+      thisp->contextMenu()->exec(thisp->eventfilter->globalMousePosition());
     }
     if (statecursormap->contains(state)) {
       QCursor cursor = statecursormap->value(state);
@@ -185,3 +187,77 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
     }
   }
 }
+
+#define ADD_ACTION(enum, text, group, parent, list)     \
+  do {                                                  \
+    QAction * action = new QAction(text, parent);       \
+    action->setCheckable(true);                         \
+    action->setData(enum);                              \
+    action->setObjectName(text);                        \
+    action->setActionGroup(group);                      \
+    list.append(action);                                \
+  } while (0)
+
+
+QList<QAction *> 
+QuarterWidgetP::transparencyTypeActions(void) const
+{
+  if (this->transparencytypeactions.isEmpty()) {
+    this->transparencytypegroup = new QActionGroup(this->master);
+    ADD_ACTION(QuarterWidget::NONE, "none", transparencytypegroup, this->master, this->transparencytypeactions);
+    ADD_ACTION(QuarterWidget::SCREEN_DOOR, "screen door", transparencytypegroup, this->master, this->transparencytypeactions);
+    ADD_ACTION(QuarterWidget::ADD, "add", transparencytypegroup, this->master, this->transparencytypeactions);
+    ADD_ACTION(QuarterWidget::DELAYED_ADD, "delayed add", transparencytypegroup, this->master, this->transparencytypeactions);
+    ADD_ACTION(QuarterWidget::SORTED_OBJECT_ADD, "sorted object add", transparencytypegroup, this->master, this->transparencytypeactions);
+    ADD_ACTION(QuarterWidget::BLEND, "blend", transparencytypegroup, this->master, this->transparencytypeactions);
+    ADD_ACTION(QuarterWidget::DELAYED_BLEND, "delayed blend", transparencytypegroup, this->master, this->transparencytypeactions);
+    ADD_ACTION(QuarterWidget::SORTED_OBJECT_BLEND, "sorted object blend", transparencytypegroup, this->master, this->transparencytypeactions);
+    ADD_ACTION(QuarterWidget::SORTED_OBJECT_SORTED_TRIANGLE_ADD, "sorted object sorted triangle add", transparencytypegroup, this->master, this->transparencytypeactions);
+    ADD_ACTION(QuarterWidget::SORTED_OBJECT_SORTED_TRIANGLE_BLEND, "sorted object sorted triangle blend", transparencytypegroup, this->master, this->transparencytypeactions);
+    ADD_ACTION(QuarterWidget::SORTED_LAYERS_BLEND, "sorted layers blend", transparencytypegroup, this->master, this->transparencytypeactions);
+  } 
+  return this->transparencytypeactions;
+}
+
+QList<QAction *> 
+QuarterWidgetP::stereoModeActions(void) const
+{
+  if (this->stereomodeactions.isEmpty()) {
+    this->stereomodegroup = new QActionGroup(this->master);
+    ADD_ACTION(QuarterWidget::MONO, "mono", stereomodegroup, this->master, stereomodeactions);
+    ADD_ACTION(QuarterWidget::ANAGLYPH, "anaglyph", stereomodegroup, this->master, stereomodeactions);
+    ADD_ACTION(QuarterWidget::QUAD_BUFFER, "quad buffer", stereomodegroup, this->master, stereomodeactions);
+    ADD_ACTION(QuarterWidget::INTERLEAVED_ROWS, "interleaved rows", stereomodegroup, this->master, stereomodeactions);
+    ADD_ACTION(QuarterWidget::INTERLEAVED_COLUMNS, "interleaved columns", stereomodegroup, this->master, stereomodeactions);
+  }
+  return this->stereomodeactions;
+}
+
+QList<QAction *> 
+QuarterWidgetP::renderModeActions(void) const
+{
+  if (this->rendermodeactions.isEmpty()) {
+    this->rendermodegroup = new QActionGroup(this->master);
+    ADD_ACTION(QuarterWidget::AS_IS, "as is", rendermodegroup, this->master, rendermodeactions);
+    ADD_ACTION(QuarterWidget::WIREFRAME, "wireframe", rendermodegroup, this->master, rendermodeactions);
+    ADD_ACTION(QuarterWidget::WIREFRAME_OVERLAY, "wireframe overlay", rendermodegroup, this->master, rendermodeactions);
+    ADD_ACTION(QuarterWidget::POINTS, "points", rendermodegroup, this->master, rendermodeactions);
+    ADD_ACTION(QuarterWidget::HIDDEN_LINE, "hidden line", rendermodegroup, this->master, rendermodeactions);
+    ADD_ACTION(QuarterWidget::BOUNDING_BOX, "bounding box", rendermodegroup, this->master, rendermodeactions);
+  }
+  return this->rendermodeactions;
+}
+
+#undef ADD_ACTION
+
+QMenu *
+QuarterWidgetP::contextMenu(void)
+{
+  if (!this->contextmenu) {
+    this->contextmenu = new ContextMenu(this->master);
+  }
+
+  return this->contextmenu->getMenu();
+}
+
+

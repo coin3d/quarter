@@ -31,6 +31,11 @@
 #include "QuarterWidgetPlugin.h"
 
 #include <QtCore/QtPlugin>
+#include <QtDesigner/QDesignerActionEditorInterface>
+#include <QtDesigner/QDesignerFormEditorInterface>
+#include <QtCore/QList>
+#include <QtGui/QActionGroup>
+
 #include <Inventor/nodes/SoCube.h>
 #include <Quarter/Quarter.h>
 #include <Quarter/QuarterWidget.h>
@@ -43,7 +48,10 @@ class QuarterWidgetPluginP {
 public:
   QuarterWidgetPluginP(void) {}
   bool initialized;
+  bool manageactions;
   QGLWidget * firstwidget; // for context sharing
+  QDesignerFormEditorInterface * formeditor;
+  QList<QAction *> transparencytypeactions;
 };
 
 }}}} // namespace
@@ -63,7 +71,9 @@ QuarterWidgetPlugin::QuarterWidgetPlugin(QObject * parent)
 {
   PRIVATE(this) = new QuarterWidgetPluginP;
   PRIVATE(this)->initialized = false;
+  PRIVATE(this)->manageactions = true;
   PRIVATE(this)->firstwidget = 0;
+  PRIVATE(this)->formeditor = 0;
 }
 
 /*!
@@ -75,13 +85,15 @@ QuarterWidgetPlugin::~QuarterWidgetPlugin()
 }
 
 void
-QuarterWidgetPlugin::initialize(QDesignerFormEditorInterface *)
+QuarterWidgetPlugin::initialize(QDesignerFormEditorInterface * formeditor)
 {
   if (PRIVATE(this)->initialized) {
     return;
   }
 
   Quarter::init();
+
+  PRIVATE(this)->formeditor = formeditor;
   PRIVATE(this)->initialized = true;
 }
 
@@ -100,6 +112,36 @@ QuarterWidgetPlugin::createWidget(QWidget * parent)
     QObject::connect(widget, SIGNAL(destroyed(QObject*)),
                      this, SLOT(widgetDestroyed(QObject*)));
   }
+
+#if 0 
+  // Exposing actions to Qt Designer seems to be too buggy to be
+  // useful at the moment. On Mac OS X, when adding the actions to the
+  // menu, the text is not visible. On Windows, the text is visible,
+  // but the actions are not grouped, and does not display their
+  // checked/unchecked state. The grouping appears to be the
+  // problem. In addition to this, any UI file containing actions
+  // added this way seems to crash Qt Designer on both
+  // platforms. (20081215 frodo)
+
+  // expose actions to Qt Designer
+  if (PRIVATE(this)->formeditor) {
+    QDesignerActionEditorInterface * actioneditor = 
+      PRIVATE(this)->formeditor->actionEditor();
+
+    if (actioneditor && PRIVATE(this)->manageactions) {
+      foreach (QAction * action, widget->transparencyTypeActions()) {
+        actioneditor->manageAction(action);
+      }
+      foreach (QAction * action, widget->renderModeActions()) {
+        actioneditor->manageAction(action);
+      }
+      foreach (QAction * action, widget->stereoModeActions()) {
+        actioneditor->manageAction(action);
+      }
+      PRIVATE(this)->manageactions = false;
+    }
+  }
+#endif 
   widget->setSceneGraph(new SoCube);
   return widget;
 }
@@ -150,6 +192,7 @@ QuarterWidgetPlugin::widgetDestroyed(QObject * obj)
 QString
 QuarterWidgetPlugin::domXml(void) const
 {
+
   return
     "<widget class=\"SIM::Coin3D::Quarter::QuarterWidget\" \
              name=\"quarterWidget\">\n"

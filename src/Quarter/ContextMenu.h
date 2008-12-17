@@ -23,66 +23,36 @@
 #ifndef QUARTER_CONTEXTMENUHANDLERP_H
 #define QUARTER_CONTEXTMENUHANDLERP_H
 
-#include <QtCore/QPair>
 #include <QtCore/QObject>
-#include <QtGui/QActionGroup>
-#include <Inventor/SoRenderManager.h>
-#include <Inventor/actions/SoGLRenderAction.h>
 
 class QMenu;
 class QAction;
-class QMouseEvent;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
 class QuarterWidget;
-class ContextMenuHandler;
 
 class ContextMenu : public QObject {
   Q_OBJECT
 public:
-  ContextMenu(const QuarterWidget * quarterwidget);
+  ContextMenu(QuarterWidget * quarterwidget);
   ~ContextMenu();
 
-  void exec(const QPoint & pos);
   QMenu * getMenu(void) const;
 
 public slots:
-  void seek(bool);
-  void viewAll(bool);
   void changeRenderMode(QAction * action);
   void changeStereoMode(QAction * action);
   void changeTransparencyType(QAction * action);
 
 private:
-  typedef QPair<SoRenderManager::RenderMode, QString> RenderModePair;
-  typedef QPair<SoRenderManager::StereoMode, QString> StereoModePair;
-  typedef QPair<SoGLRenderAction::TransparencyType, QString> TransparencyTypePair;
-
-  ContextMenuHandler * publ;
-
-  SoRenderManager * rendermanager;
-  const QuarterWidget * quarterwidget;
-
-  QList<RenderModePair *> rendermodes;
-  QList<StereoModePair *> stereomodes;
-  QList<TransparencyTypePair *> transparencytypes;
-    
-  QList<QAction *> rendermodeactions;
-  QList<QAction *> stereomodeactions;
-  QList<QAction *> transparencytypeactions;
-
-  QActionGroup * functionsgroup;
-  QActionGroup * stereomodegroup;
-  QActionGroup * rendermodegroup;
-  QActionGroup * transparencytypegroup;
+  QuarterWidget * quarterwidget;
 
   QMenu * contextmenu;
   QMenu * rendermenu;
   QMenu * stereomenu;
   QMenu * functionsmenu;
   QMenu * transparencymenu;
-
 };
 
 }}} // namespace

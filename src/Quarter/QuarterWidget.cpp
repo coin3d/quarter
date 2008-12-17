@@ -31,6 +31,7 @@
 #include <assert.h>
 
 #include <QtCore/QEvent>
+#include <QtGui/QAction>
 
 #include <Inventor/SbViewportRegion.h>
 #include <Inventor/system/gl.h>
@@ -53,7 +54,6 @@
 #include <Quarter/eventhandlers/EventFilter.h>
 #include <Quarter/eventhandlers/DragDropHandler.h>
 
-#include "ContextMenu.h"
 #if 0
 #include "InteractionMode.h"
 #endif
@@ -112,7 +112,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   this->setStateCursor("spin", Qt::OpenHandCursor);
 
   // FIXME: This object appears to never be deleted. kintel 20080730
-  ScXMLStateMachine * statemachine =
+  ScXMLStateMachine * statemachine = 
     ScXML::readFile("coin:scxml/navigation/examiner.xml");
   if (statemachine &&
       statemachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
@@ -324,6 +324,36 @@ QuarterWidget::transparencyType(void) const
   return static_cast<QuarterWidget::TransparencyType>(action->getTransparencyType());
 }
 
+void 
+QuarterWidget::setRenderMode(RenderMode mode)
+{
+  assert(PRIVATE(this)->sorendermanager);
+  PRIVATE(this)->sorendermanager->setRenderMode(static_cast<SoRenderManager::RenderMode>(mode));
+  PRIVATE(this)->sorendermanager->scheduleRedraw();
+}
+
+QuarterWidget::RenderMode 
+QuarterWidget::renderMode(void) const
+{
+  assert(PRIVATE(this)->sorendermanager);
+  return static_cast<RenderMode>(PRIVATE(this)->sorendermanager->getRenderMode());
+}
+
+void 
+QuarterWidget::setStereoMode(StereoMode mode)
+{
+  assert(PRIVATE(this)->sorendermanager);
+  PRIVATE(this)->sorendermanager->setStereoMode(static_cast<SoRenderManager::StereoMode>(mode));
+  PRIVATE(this)->sorendermanager->scheduleRedraw();
+}
+
+QuarterWidget::StereoMode 
+QuarterWidget::stereoMode(void) const
+{
+  assert(PRIVATE(this)->sorendermanager);
+  return static_cast<StereoMode>(PRIVATE(this)->sorendermanager->getStereoMode());
+}
+
 /*!
   Sets the Inventor scenegraph to be rendered
  */
@@ -469,6 +499,20 @@ QuarterWidget::viewAll(void)
   }
 }
 
+void 
+QuarterWidget::seek(void)
+{
+  const SbName seekevent("sim.coin3d.coin.navigation.Seek");
+  for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
+    SoScXMLStateMachine * sostatemachine =
+      PRIVATE(this)->soeventmanager->getSoScXMLStateMachine(c);
+    if (sostatemachine->isActive()) {
+      sostatemachine->queueEvent(seekevent);
+      sostatemachine->processEventQueue();
+    }
+  }
+}
+
 /*!
   Overridden from QGLWidget to enable OpenGL depth buffer
  */
@@ -594,10 +638,7 @@ QuarterWidget::backgroundColor(void) const
 QMenu * 
 QuarterWidget::getContextMenu(void) const
 {
-  if (!PRIVATE(this)->contextmenu) {
-    PRIVATE(this)->contextmenu = new ContextMenu(this);
-  }
-  return PRIVATE(this)->contextmenu->getMenu();
+  return PRIVATE(this)->contextMenu();
 }
 
 bool
@@ -649,6 +690,24 @@ QSize
 QuarterWidget::minimumSizeHint(void) const
 {
   return QSize(50, 50);
+}
+
+QList<QAction *> 
+QuarterWidget::transparencyTypeActions(void) const
+{
+  return PRIVATE(this)->transparencyTypeActions();
+}
+
+QList<QAction *> 
+QuarterWidget::stereoModeActions(void) const
+{
+  return PRIVATE(this)->stereoModeActions();
+}
+
+QList<QAction *> 
+QuarterWidget::renderModeActions(void) const
+{
+  return PRIVATE(this)->renderModeActions();
 }
 
 #undef PRIVATE
