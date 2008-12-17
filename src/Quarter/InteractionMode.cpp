@@ -24,7 +24,7 @@ InteractionMode::InteractionMode(QuarterWidget * quarterwidget)
 
 InteractionMode::~InteractionMode()
 {
-
+  
 }
 
 void 

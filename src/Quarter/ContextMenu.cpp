@@ -24,8 +24,6 @@
 #include "ContextMenu.h"
 
 #include <QtGui/QMenu>
-#include <QtCore/QMap>
-#include <QtGui/QMouseEvent>
 
 #include <Inventor/SoEventManager.h>
 #include <Inventor/scxml/SoScXMLStateMachine.h>
@@ -34,113 +32,94 @@
 
 using namespace SIM::Coin3D::Quarter;
 
-#define PUBLIC(obj) obj->publ
-
-ContextMenu::ContextMenu(const QuarterWidget * quarterwidget)
+ContextMenu::ContextMenu(QuarterWidget * quarterwidget)
   : quarterwidget(quarterwidget)
 {
-  this->publ = publ;
-  
-  this->rendermanager = quarterwidget->getSoRenderManager();
-
   this->contextmenu = new QMenu;
   this->functionsmenu = new QMenu("Functions");
   this->rendermenu = new QMenu("Render Mode");
   this->stereomenu = new QMenu("Stereo Mode");
   this->transparencymenu = new QMenu("Transparency Type");
 
-  this->functionsgroup = new QActionGroup(this);
-  this->stereomodegroup = new QActionGroup(this);
-  this->rendermodegroup = new QActionGroup(this);
-  this->transparencytypegroup = new QActionGroup(this);
+  this->contextmenu->addMenu(functionsmenu);
+  this->contextmenu->addMenu(rendermenu);
+  this->contextmenu->addMenu(stereomenu);
+  this->contextmenu->addMenu(transparencymenu);
 
-  this->rendermodes.append(new RenderModePair(SoRenderManager::AS_IS, "as is"));
-  this->rendermodes.append(new RenderModePair(SoRenderManager::WIREFRAME, "wireframe"));
-  this->rendermodes.append(new RenderModePair(SoRenderManager::WIREFRAME_OVERLAY, "wireframe overlay"));
-  this->rendermodes.append(new RenderModePair(SoRenderManager::POINTS, "points"));
-  this->rendermodes.append(new RenderModePair(SoRenderManager::HIDDEN_LINE, "hidden line"));
-  this->rendermodes.append(new RenderModePair(SoRenderManager::BOUNDING_BOX, "bounding box"));
-    
-  this->stereomodes.append(new StereoModePair(SoRenderManager::MONO, "mono"));
-  this->stereomodes.append(new StereoModePair(SoRenderManager::ANAGLYPH, "anaglyph"));
-  this->stereomodes.append(new StereoModePair(SoRenderManager::QUAD_BUFFER, "quad buffer"));
-  this->stereomodes.append(new StereoModePair(SoRenderManager::INTERLEAVED_ROWS, "interleaved rows"));
-  this->stereomodes.append(new StereoModePair(SoRenderManager::INTERLEAVED_COLUMNS, "interleaved columns"));
-    
-  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::NONE, "none"));
-  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SCREEN_DOOR, "screen door"));
-  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::ADD, "add"));
-  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::DELAYED_ADD, "delayed add"));
-  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_ADD, "sorted object add"));
-  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::BLEND, "blend"));
-  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::DELAYED_BLEND, "delayed blend"));
-  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_BLEND, "sorted object blend"));
-  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_ADD, "sorted object sorted triangle add"));
-  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_BLEND, "sorted object sorted triangle blend"));
-  this->transparencytypes.append(new TransparencyTypePair(SoGLRenderAction::SORTED_LAYERS_BLEND, "sorted layers blend"));
+  SoRenderManager * sorendermanager = quarterwidget->getSoRenderManager();
 
-  foreach(RenderModePair * rendermode, this->rendermodes) {
-    QAction * action = new QAction(rendermode->second, this);
-    action->setCheckable(true);
-    action->setChecked(rendermanager->getRenderMode() == rendermode->first);
-    action->setData(rendermode->first);
-    this->rendermodeactions.append(action);
-    this->rendermodegroup->addAction(action);
-    this->rendermenu->addAction(action);
-  }
+  QActionGroup * rendermodegroup = NULL;
+  QActionGroup * stereomodegroup = NULL;
+  QActionGroup * transparencytypegroup = NULL;
+  
+  foreach (QAction * action, quarterwidget->renderModeActions()) {
+    if (!rendermodegroup) {
+      rendermodegroup = action->actionGroup();
+    } else {
+      assert(rendermodegroup && rendermodegroup == action->actionGroup());
+    }
     
-  foreach(StereoModePair * stereomode, this->stereomodes) {
-    QAction * action = new QAction(stereomode->second, this);
-    action->setCheckable(true);
-    action->setChecked(rendermanager->getStereoMode() == stereomode->first);
-    action->setData(stereomode->first);
-    this->stereomodeactions.append(action);
-    this->stereomodegroup->addAction(action);
-    this->stereomenu->addAction(action);
-  }
-    
-  foreach(TransparencyTypePair * transparencytype, this->transparencytypes) {
-    QAction * action = new QAction(transparencytype->second, this);
-    action->setCheckable(true);
-    action->setChecked(rendermanager->getGLRenderAction()->getTransparencyType() == transparencytype->first);
-    action->setData(transparencytype->first);
-    this->transparencytypeactions.append(action);
-    this->transparencytypegroup->addAction(action);
-    this->transparencymenu->addAction(action);
+    int rendermode = static_cast<QuarterWidget::RenderMode>(sorendermanager->getRenderMode());
+    int data = static_cast<QuarterWidget::RenderMode>(action->data().toInt());
+    action->setChecked(rendermode == data);
+    rendermenu->addAction(action);
   }
 
-  QAction * viewall = new QAction("View All", this);
-  QAction * seek = new QAction("Seek", this);
-  this->functionsmenu->addAction(viewall);
-  this->functionsmenu->addAction(seek);
-    
-  this->connect(seek, SIGNAL(triggered(bool)),
-                this, SLOT(seek(bool)));
+  foreach (QAction * action, quarterwidget->stereoModeActions()) {
+    if (!stereomodegroup) {
+      stereomodegroup = action->actionGroup();
+    } else {
+      assert(stereomodegroup && stereomodegroup == action->actionGroup());
+    }
 
-  this->connect(viewall, SIGNAL(triggered(bool)),
-                this, SLOT(viewAll(bool)));
+    int stereomode = static_cast<QuarterWidget::StereoMode>(sorendermanager->getStereoMode());
+    int data = static_cast<QuarterWidget::StereoMode>(action->data().toInt());
+    action->setChecked(stereomode == data);
+    stereomenu->addAction(action);
+  }
+  
+  foreach (QAction * action, quarterwidget->transparencyTypeActions()) {
+    if (!transparencytypegroup) {
+      transparencytypegroup = action->actionGroup();
+    } else {
+      assert(transparencytypegroup && transparencytypegroup == action->actionGroup());
+    }
 
-  this->connect(this->rendermodegroup, SIGNAL(triggered(QAction *)),
-                this, SLOT(changeRenderMode(QAction *)));
-    
-  this->connect(this->stereomodegroup, SIGNAL(triggered(QAction *)),
-                this, SLOT(changeStereoMode(QAction *)));
-    
-  this->connect(this->transparencytypegroup, SIGNAL(triggered(QAction *)),
-                this, SLOT(changeTransparencyType(QAction *)));
-    
-  this->contextmenu->addMenu(this->functionsmenu);
-  this->contextmenu->addMenu(this->rendermenu);
-  this->contextmenu->addMenu(this->stereomenu);
-  this->contextmenu->addMenu(this->transparencymenu);
+    SoGLRenderAction * renderaction = sorendermanager->getGLRenderAction();
+    int transparencytype = static_cast<SoGLRenderAction::TransparencyType>(renderaction->getTransparencyType());
+    int data = static_cast<SoGLRenderAction::TransparencyType>(action->data().toInt());
+    action->setChecked(transparencytype == data);
+    transparencymenu->addAction(action);
+  }
+  
+  QAction * viewall = new QAction("View All", quarterwidget);
+  QAction * seek = new QAction("Seek", quarterwidget);
+  functionsmenu->addAction(viewall);
+  functionsmenu->addAction(seek);
+  
+  QObject::connect(seek, SIGNAL(triggered()),
+                   this->quarterwidget, SLOT(seek()));
+  
+  QObject::connect(viewall, SIGNAL(triggered()),
+                   this->quarterwidget, SLOT(viewAll()));
+  
+  // FIXME: It would be ideal to expose these actiongroups to Qt
+  // Designer and be able to connect them to the appropriate slots on
+  // QuarterWidget, but this is not possible in Qt. Exposing every
+  // single action is supposed to work, but it doesn't at the
+  // moment. (20081215 frodo)
+  QObject::connect(rendermodegroup, SIGNAL(triggered(QAction *)),
+                   this, SLOT(changeRenderMode(QAction *)));
+  
+  QObject::connect(stereomodegroup, SIGNAL(triggered(QAction *)),
+                   this, SLOT(changeStereoMode(QAction *)));
+  
+  QObject::connect(transparencytypegroup, SIGNAL(triggered(QAction *)),
+                   this, SLOT(changeTransparencyType(QAction *)));
 }
       
 ContextMenu::~ContextMenu()
 {
-  foreach(RenderModePair * rendermode, this->rendermodes) delete rendermode;
-  foreach(StereoModePair * stereomode, this->stereomodes) delete stereomode;
-  foreach(TransparencyTypePair * transparencytype, this->transparencytypes) delete transparencytype;
-  
   delete this->functionsmenu;
   delete this->rendermenu;
   delete this->stereomenu;
@@ -153,73 +132,33 @@ ContextMenu::getMenu(void) const
 { 
   return this->contextmenu;
 }
-      
-void
-ContextMenu::exec(const QPoint & pos)
-{
-  SoEventManager * eventmanager = this->quarterwidget->getSoEventManager();
-  const SbName popupevent("sim.coin3d.coin.PopupMenuOpen");
-  for (int c = 0; c < eventmanager->getNumSoScXMLStateMachines(); ++c) {
-    SoScXMLStateMachine * sostatemachine =
-      eventmanager->getSoScXMLStateMachine(c);
-    sostatemachine->queueEvent(popupevent);
-    sostatemachine->processEventQueue();
-  }
-
-  (void) this->contextmenu->exec(pos);
-}
-
-void
-ContextMenu::seek(bool checked)
-{
-  SoEventManager * eventmanager = this->quarterwidget->getSoEventManager();
-  const SbName seekevent("sim.coin3d.coin.navigation.Seek");
-  for (int c = 0; c < eventmanager->getNumSoScXMLStateMachines(); ++c) {
-    SoScXMLStateMachine * sostatemachine =
-      eventmanager->getSoScXMLStateMachine(c);
-    sostatemachine->queueEvent(seekevent);
-    sostatemachine->processEventQueue();
-  }
-}
-
-void
-ContextMenu::viewAll(bool checked)
-{
-  SoEventManager * eventmanager = this->quarterwidget->getSoEventManager();
-  const SbName viewallevent("sim.coin3d.coin.navigation.ViewAll");
-  for (int c = 0; c < eventmanager->getNumSoScXMLStateMachines(); ++c) {
-    SoScXMLStateMachine * sostatemachine =
-      eventmanager->getSoScXMLStateMachine(c);
-    sostatemachine->queueEvent(viewallevent);
-    sostatemachine->processEventQueue();
-  }
-}
 
 void
 ContextMenu::changeRenderMode(QAction * action)
 {
-  QVariant rendermode = action->data();
-  this->rendermanager->setRenderMode((SoRenderManager::RenderMode)rendermode.toInt());
-  this->rendermanager->scheduleRedraw();
+  QuarterWidget::RenderMode mode = 
+    static_cast<QuarterWidget::RenderMode>(action->data().toInt());
+
+  this->quarterwidget->setRenderMode(mode);
+  this->quarterwidget->getSoRenderManager()->scheduleRedraw();
 }
 
 void
 ContextMenu::changeStereoMode(QAction * action)
 {
-  QVariant stereomode = action->data();
-  this->rendermanager->setStereoMode((SoRenderManager::StereoMode)stereomode.toInt());
-  this->rendermanager->scheduleRedraw();
+  QuarterWidget::StereoMode mode = 
+    static_cast<QuarterWidget::StereoMode>(action->data().toInt());
+
+  this->quarterwidget->setStereoMode(mode);
+  this->quarterwidget->getSoRenderManager()->scheduleRedraw();
 }
 
 void
 ContextMenu::changeTransparencyType(QAction * action)
 {
-  QVariant transparencytype = action->data();
   QuarterWidget::TransparencyType type = 
-    static_cast<QuarterWidget::TransparencyType>(transparencytype.toInt());
-
-  ((QuarterWidget *)this->quarterwidget)->setTransparencyType(type);
-  this->rendermanager->scheduleRedraw();
+    static_cast<QuarterWidget::TransparencyType>(action->data().toInt());
+  
+  this->quarterwidget->setTransparencyType(type);
+  this->quarterwidget->getSoRenderManager()->scheduleRedraw();
 }
-
-#undef PUBLIC

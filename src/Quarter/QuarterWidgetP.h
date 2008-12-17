@@ -26,6 +26,7 @@
 #include <Inventor/SbBasic.h>
 #include <Inventor/SbName.h>
 #include <QtGui/QCursor>
+#include <QtCore/QList>
 
 class SoNode;
 class SoCamera;
@@ -34,15 +35,18 @@ class SoEventManager;
 class SoDirectionalLight;
 class QuarterWidgetP_cachecontext;
 class QGLWidget;
+class QAction;
+class QActionGroup;
+class QMenu;
 class ScXMLStateMachine;
 template <class Key, class T> class QMap;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class ContextMenu;
 class EventFilter;
 class DragDropHandler;
 class InteractionMode;
+class ContextMenu;
 
 class QuarterWidgetP {
 public:
@@ -52,6 +56,11 @@ public:
 
   SoCamera * searchForCamera(SoNode * root);
   uint32_t getCacheContextId(void) const;
+  QMenu * contextMenu(void);
+
+  QList<QAction *> transparencyTypeActions(void) const;
+  QList<QAction *> renderModeActions(void) const;
+  QList<QAction *> stereoModeActions(void) const;
 
   QuarterWidget * const master;
   SoNode * scene;
@@ -64,13 +73,13 @@ public:
   bool initialsoeventmanager;
   SoDirectionalLight * headlight;
   QuarterWidgetP_cachecontext * cachecontext;
-  ContextMenu * contextmenu;
   bool contextmenuenabled;
   bool autoredrawenabled;
   bool interactionmodeenabled;
   bool clearzbuffer;
   bool clearwindow;
-
+  bool addactions;
+  
   static void rendercb(void * userdata, SoRenderManager *);
   static void prerendercb(void * userdata, SoRenderManager * manager);
   static void postrendercb(void * userdata, SoRenderManager * manager);
@@ -78,6 +87,16 @@ public:
 
   typedef QMap<SbName, QCursor> StateCursorMap;
   static StateCursorMap * statecursormap;
+
+  mutable QList<QAction *> transparencytypeactions;
+  mutable QList<QAction *> rendermodeactions;
+  mutable QList<QAction *> stereomodeactions;
+
+  mutable QActionGroup * transparencytypegroup;
+  mutable QActionGroup * stereomodegroup;
+  mutable QActionGroup * rendermodegroup;
+
+  mutable ContextMenu * contextmenu;
 
 private:
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);

@@ -26,6 +26,7 @@
 #include <QtOpenGL/QGLWidget>
 #include <Inventor/SbBasic.h>
 #include <Inventor/actions/SoGLRenderAction.h>
+#include <Inventor/SoRenderManager.h>
 #include <Quarter/Basic.h>
 #include <QtGui/QColor>
 
@@ -53,7 +54,12 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   Q_PROPERTY(bool interactionModeOn READ interactionModeOn WRITE setInteractionModeOn);
 
   Q_PROPERTY(TransparencyType transparencyType READ transparencyType WRITE setTransparencyType)
+  Q_PROPERTY(RenderMode renderMode READ renderMode WRITE setRenderMode)
+  Q_PROPERTY(StereoMode stereoMode READ stereoMode WRITE setStereoMode)
+
   Q_ENUMS(TransparencyType)
+  Q_ENUMS(RenderMode)
+  Q_ENUMS(StereoMode)
 
 public:
   explicit QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
@@ -74,6 +80,27 @@ public:
     NONE = SoGLRenderAction::NONE,
     SORTED_LAYERS_BLEND = SoGLRenderAction::SORTED_LAYERS_BLEND
   };
+
+  enum RenderMode {
+    AS_IS = SoRenderManager::AS_IS,
+    WIREFRAME = SoRenderManager::WIREFRAME,
+    WIREFRAME_OVERLAY = SoRenderManager::WIREFRAME_OVERLAY,
+    POINTS = SoRenderManager::POINTS,
+    HIDDEN_LINE = SoRenderManager::HIDDEN_LINE,
+    BOUNDING_BOX = SoRenderManager::BOUNDING_BOX
+  };
+
+  enum StereoMode {
+    MONO = SoRenderManager::MONO,
+    ANAGLYPH = SoRenderManager::ANAGLYPH,
+    QUAD_BUFFER = SoRenderManager::QUAD_BUFFER,
+    INTERLEAVED_ROWS = SoRenderManager::INTERLEAVED_ROWS,
+    INTERLEAVED_COLUMNS = SoRenderManager::INTERLEAVED_COLUMNS
+  };
+
+  TransparencyType transparencyType(void) const;
+  RenderMode renderMode(void) const;
+  StereoMode stereoMode(void) const;
 
   void setBackgroundColor(const QColor & color);
   QColor backgroundColor(void) const;
@@ -98,9 +125,6 @@ public:
   bool interactionModeOn(void) const;
   void setInteractionModeOn(bool onoff);
 
-  void setTransparencyType(TransparencyType type);
-  TransparencyType transparencyType(void) const;
-
   void setStateCursor(const SbName & state, const QCursor & cursor);
   QCursor stateCursor(const SbName & state);
 
@@ -118,12 +142,21 @@ public:
   void removeStateMachine(SoScXMLStateMachine * statemachine);
 
   virtual bool processSoEvent(const SoEvent * event);
-
   virtual QSize minimumSizeHint(void) const;
+
+  QList<QAction *> transparencyTypeActions(void) const;
+  QList<QAction *> stereoModeActions(void) const;
+  QList<QAction *> renderModeActions(void) const;
 
 public slots:
   virtual void viewAll(void);
+  virtual void seek(void);
+
   void redraw(void);
+
+  void setRenderMode(RenderMode mode);
+  void setStereoMode(StereoMode mode);
+  void setTransparencyType(TransparencyType type);
 
 protected:
   virtual void resizeGL(int width, int height);
