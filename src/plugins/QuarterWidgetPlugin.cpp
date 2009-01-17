@@ -113,7 +113,7 @@ QuarterWidgetPlugin::createWidget(QWidget * parent)
                      this, SLOT(widgetDestroyed(QObject*)));
   }
 
-#if 0 
+#if 0
   // Exposing actions to Qt Designer seems to be too buggy to be
   // useful at the moment. On Mac OS X, when adding the actions to the
   // menu, the text is not visible. On Windows, the text is visible,
@@ -125,7 +125,7 @@ QuarterWidgetPlugin::createWidget(QWidget * parent)
 
   // expose actions to Qt Designer
   if (PRIVATE(this)->formeditor) {
-    QDesignerActionEditorInterface * actioneditor = 
+    QDesignerActionEditorInterface * actioneditor =
       PRIVATE(this)->formeditor->actionEditor();
 
     if (actioneditor && PRIVATE(this)->manageactions) {
@@ -141,7 +141,7 @@ QuarterWidgetPlugin::createWidget(QWidget * parent)
       PRIVATE(this)->manageactions = false;
     }
   }
-#endif 
+#endif
   widget->setSceneGraph(new SoCube);
   return widget;
 }

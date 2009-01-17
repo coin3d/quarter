@@ -40,7 +40,7 @@ using namespace SIM::Coin3D::Quarter;
 int
 main(int argc, char ** argv)
 {
-  QApplication app(argc, argv); 
+  QApplication app(argc, argv);
   // Initializes Quarter (and implicitly also Coin and Qt
   Quarter::init();
 
@@ -54,7 +54,7 @@ main(int argc, char ** argv)
   root->addChild(col);
 
   root->addChild(new SoCone);
- 
+
   QMainWindow * mainwin = new QMainWindow();
 
   // Create a QuarterWidget for displaying a Coin scene graph

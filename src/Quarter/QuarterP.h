@@ -1,6 +1,6 @@
 #ifndef QUARTER_QUARTERP_H
 #define QUARTER_QUARTERP_H
- 
+
 namespace SIM { namespace Coin3D { namespace Quarter {
 
 class QuarterP {

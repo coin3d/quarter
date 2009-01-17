@@ -26,7 +26,7 @@ using namespace SIM::Coin3D::Quarter;
 
 SignalThread::SignalThread(void)
   : isstopped(false)
-{  
+{
 }
 
 SignalThread::~SignalThread()
@@ -52,7 +52,7 @@ SignalThread::stopThread(void)
 }
 
 
-void 
+void
 SignalThread::run(void)
 {
   this->mutex.lock();

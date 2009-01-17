@@ -36,4 +36,3 @@ EventHandler::setManager(EventManager * manager)
 {
   this->manager = manager;
 }
-

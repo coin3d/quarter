@@ -16,7 +16,7 @@ InteractionMode::InteractionMode(QuarterWidget * quarterwidget)
   this->quarterwidget = quarterwidget;
   this->altkeydown = false;
   this->prevcursor = QCursor();
-  this->prevnavstate = 
+  this->prevnavstate =
     this->quarterwidget->getSoEventManager()->getNavigationState();
 
   this->isenabled = true;
@@ -24,22 +24,22 @@ InteractionMode::InteractionMode(QuarterWidget * quarterwidget)
 
 InteractionMode::~InteractionMode()
 {
-  
+
 }
 
-void 
+void
 InteractionMode::setEnabled(bool yes)
 {
   this->isenabled = yes;
 }
 
-bool 
+bool
 InteractionMode::enabled(void) const
 {
   return this->isenabled;
 }
 
-void 
+void
 InteractionMode::setOn(bool on)
 {
   if (!this->isenabled) {
@@ -52,22 +52,22 @@ InteractionMode::setOn(bool on)
     this->altkeydown = true;
     this->prevnavstate = eventmanager->getNavigationState();
     this->prevcursor = this->quarterwidget->cursor();
-    this->quarterwidget->setCursor(this->quarterwidget->stateCursor("interact")); 
+    this->quarterwidget->setCursor(this->quarterwidget->stateCursor("interact"));
     eventmanager->setNavigationState(SoEventManager::NO_NAVIGATION);
   } else {
     this->altkeydown = false;
-    this->quarterwidget->setCursor(this->prevcursor); 
+    this->quarterwidget->setCursor(this->prevcursor);
     eventmanager->setNavigationState(this->prevnavstate);
   }
 }
- 
-bool 
+
+bool
 InteractionMode::on(void) const
 {
   return this->altkeydown;
 }
 
-bool 
+bool
 InteractionMode::eventFilter(QObject * obj, QEvent * event)
 {
   if (!this->isenabled) {
@@ -92,10 +92,10 @@ InteractionMode::eventFilter(QObject * obj, QEvent * event)
   when alt is pressed, override navigation and allow scenegraph to
   process events so draggers and manipulators works
  */
-bool 
+bool
 InteractionMode::keyPressEvent(QKeyEvent * event)
 {
-  if (!event || 
+  if (!event ||
       !(event->key() == Qt::Key_Alt) ||
       !(event->modifiers() & Qt::AltModifier)) {
     return false;
@@ -105,11 +105,11 @@ InteractionMode::keyPressEvent(QKeyEvent * event)
   return true;
 }
 
-bool 
+bool
 InteractionMode::keyReleaseEvent(QKeyEvent * event)
 {
-  if (!event || !(event->key() == Qt::Key_Alt)) { 
-    return false; 
+  if (!event || !(event->key() == Qt::Key_Alt)) {
+    return false;
   }
 
   this->setOn(false);
@@ -119,7 +119,7 @@ InteractionMode::keyReleaseEvent(QKeyEvent * event)
 /*
   if we lose focus while alt is down, send an alt-release event
  */
-bool 
+bool
 InteractionMode::focusOutEvent(QFocusEvent * event)
 {
   if (this->altkeydown) {

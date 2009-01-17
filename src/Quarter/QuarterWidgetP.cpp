@@ -134,13 +134,13 @@ QuarterWidgetP::findCacheContext(QuarterWidget * widget, const QGLWidget * share
 }
 
 /*!
-  
+
  */
 void
 QuarterWidgetP::rendercb(void * userdata, SoRenderManager *)
 {
   QuarterWidget * thisp = static_cast<QuarterWidget *>(userdata);
-  
+
   if (thisp->pimpl->autoredrawenabled) {
     thisp->redraw();
   }
@@ -199,7 +199,7 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
   } while (0)
 
 
-QList<QAction *> 
+QList<QAction *>
 QuarterWidgetP::transparencyTypeActions(void) const
 {
   if (this->transparencytypeactions.isEmpty()) {
@@ -215,11 +215,11 @@ QuarterWidgetP::transparencyTypeActions(void) const
     ADD_ACTION(QuarterWidget::SORTED_OBJECT_SORTED_TRIANGLE_ADD, "sorted object sorted triangle add", transparencytypegroup, this->master, this->transparencytypeactions);
     ADD_ACTION(QuarterWidget::SORTED_OBJECT_SORTED_TRIANGLE_BLEND, "sorted object sorted triangle blend", transparencytypegroup, this->master, this->transparencytypeactions);
     ADD_ACTION(QuarterWidget::SORTED_LAYERS_BLEND, "sorted layers blend", transparencytypegroup, this->master, this->transparencytypeactions);
-  } 
+  }
   return this->transparencytypeactions;
 }
 
-QList<QAction *> 
+QList<QAction *>
 QuarterWidgetP::stereoModeActions(void) const
 {
   if (this->stereomodeactions.isEmpty()) {
@@ -233,7 +233,7 @@ QuarterWidgetP::stereoModeActions(void) const
   return this->stereomodeactions;
 }
 
-QList<QAction *> 
+QList<QAction *>
 QuarterWidgetP::renderModeActions(void) const
 {
   if (this->rendermodeactions.isEmpty()) {
@@ -259,5 +259,3 @@ QuarterWidgetP::contextMenu(void)
 
   return this->contextmenu->getMenu();
 }
-
-

@@ -43,7 +43,7 @@ MdiQuarterWidget::~MdiQuarterWidget()
   }
 }
 
-const QuarterWidget * 
+const QuarterWidget *
 MdiQuarterWidget::quarterWidget(void) const
 {
   return this->quarterwidget;
@@ -77,7 +77,7 @@ MdiQuarterWidget::minimumSizeHint(void) const
   return QSize(640, 480);
 }
 
-void 
+void
 MdiQuarterWidget::closeEvent(QCloseEvent * event)
 {
   delete this->quarterwidget;

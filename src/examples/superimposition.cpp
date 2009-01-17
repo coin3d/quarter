@@ -148,7 +148,7 @@ main(int argc, char ** argv)
   SoSeparator * background = create_background();
   (void)viewer->getSoRenderManager()->addSuperimposition(background,
                                                          SoRenderManager::Superimposition::BACKGROUND);
-  
+
 
   // Add some super imposed text
   SoSeparator * superimposed = create_superimposition();

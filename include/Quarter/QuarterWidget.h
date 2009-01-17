@@ -42,7 +42,7 @@ class SoScXMLStateMachine;
 namespace SIM { namespace Coin3D { namespace Quarter {
 
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
-  typedef QGLWidget inherited; 
+  typedef QGLWidget inherited;
   Q_OBJECT
 
   Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
@@ -72,8 +72,8 @@ public:
     ADD = SoGLRenderAction::ADD,
     DELAYED_ADD = SoGLRenderAction::DELAYED_ADD,
     SORTED_OBJECT_ADD = SoGLRenderAction::SORTED_OBJECT_ADD,
-    BLEND = SoGLRenderAction::BLEND, 
-    DELAYED_BLEND = SoGLRenderAction::DELAYED_BLEND, 
+    BLEND = SoGLRenderAction::BLEND,
+    DELAYED_BLEND = SoGLRenderAction::DELAYED_BLEND,
     SORTED_OBJECT_BLEND = SoGLRenderAction::SORTED_OBJECT_BLEND,
     SORTED_OBJECT_SORTED_TRIANGLE_ADD = SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_ADD,
     SORTED_OBJECT_SORTED_TRIANGLE_BLEND = SoGLRenderAction::SORTED_OBJECT_SORTED_TRIANGLE_BLEND,
@@ -132,7 +132,7 @@ public:
 
   virtual void setSceneGraph(SoNode * root);
   virtual SoNode * getSceneGraph(void) const;
-  
+
   void setSoEventManager(SoEventManager * manager);
   SoEventManager * getSoEventManager(void) const;
   void setSoRenderManager(SoRenderManager * manager);

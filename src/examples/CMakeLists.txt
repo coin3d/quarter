@@ -2,7 +2,7 @@ ADD_DEFINITIONS(-DQUARTER_DLL)
 
 #QT4_WRAP_UI(QuarterViewerUi "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui")
 QT4_ADD_RESOURCES(QuarterViewerResources "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.qrc")
-ADD_CUSTOM_COMMAND(OUTPUT ui_QuarterViewer.h COMMAND uic	ARGS ${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui -o ${CMAKE_CURRENT_SOURCE_DIR}/ui_QuarterViewer.h DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui)
+ADD_CUSTOM_COMMAND(OUTPUT ui_QuarterViewer.h COMMAND uic       ARGS ${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui -o ${CMAKE_CURRENT_SOURCE_DIR}/ui_QuarterViewer.h DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui)
 
 #Minimal example
 ADD_EXECUTABLE(Example "${CMAKE_CURRENT_SOURCE_DIR}/minimal.cpp")
