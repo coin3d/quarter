@@ -1,7 +1,7 @@
 /**************************************************************************\
  *
  *  This file is part of the SIM Quarter extension library for Coin.
- *  Copyright (C) 1998-2007 by Systems in Motion.  All rights reserved.
+ *  Copyright (C) 1998-2009 by Systems in Motion.  All rights reserved.
  *
  *  This library is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License ("GPL") version 2
