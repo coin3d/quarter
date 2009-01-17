@@ -142,6 +142,8 @@ main(int argc, char ** argv)
 
   // Create a QuarterWidget for displaying a Coin scene graph
   QuarterWidget * viewer = new QuarterWidget;
+  //set default navigation mode file
+  viewer->setNavigationModeFile();
   viewer->setSceneGraph(root);
 
   // Add some background text

@@ -33,6 +33,8 @@ MdiQuarterWidget::MdiQuarterWidget(QWidget * parent, const QGLWidget * sharewidg
   : inherited(parent)
 {
   this->quarterwidget = new QuarterWidget(this, sharewidget);
+  //set default navigation mode file
+  this->quarterwidget->setNavigationModeFile();
   this->layout()->addWidget(this->quarterwidget);
 }
 

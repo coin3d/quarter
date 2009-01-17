@@ -27,6 +27,7 @@
 #include <Inventor/SbName.h>
 #include <QtGui/QCursor>
 #include <QtCore/QList>
+#include <QtCore/QUrl>
 
 class SoNode;
 class SoCamera;
@@ -79,6 +80,7 @@ public:
   bool clearzbuffer;
   bool clearwindow;
   bool addactions;
+  QUrl navigationModeFile;
 
   static void rendercb(void * userdata, SoRenderManager *);
   static void prerendercb(void * userdata, SoRenderManager * manager);

@@ -23,12 +23,14 @@
  *
 \**************************************************************************/
 
-#include <QtOpenGL/QGLWidget>
 #include <Inventor/SbBasic.h>
-#include <Inventor/actions/SoGLRenderAction.h>
 #include <Inventor/SoRenderManager.h>
-#include <Quarter/Basic.h>
+#include <Inventor/actions/SoGLRenderAction.h>
+
 #include <QtGui/QColor>
+#include <QtCore/QUrl>
+#include <QtOpenGL/QGLWidget>
+#include <Quarter/Basic.h>
 
 class QMenu;
 class SoNode;
@@ -41,10 +43,13 @@ class SoScXMLStateMachine;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
+const char DEFAULT_NAVIGATIONFILE []  = "coin:///scxml/navigation/examiner.xml";
+
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   typedef QGLWidget inherited;
   Q_OBJECT
 
+  Q_PROPERTY(QUrl navigationModeFile READ navigationModeFile WRITE setNavigationModeFile)
   Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
   Q_PROPERTY(bool contextMenuEnabled READ contextMenuEnabled WRITE setContextMenuEnabled)
   Q_PROPERTY(bool headlightEnabled READ headlightEnabled WRITE setHeadlightEnabled)
@@ -60,6 +65,7 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   Q_ENUMS(TransparencyType)
   Q_ENUMS(RenderMode)
   Q_ENUMS(StereoMode)
+
 
 public:
   explicit QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
@@ -104,6 +110,12 @@ public:
 
   void setBackgroundColor(const QColor & color);
   QColor backgroundColor(void) const;
+
+  void setNavigationModeFile(
+                          const QUrl & url =
+                          QUrl(DEFAULT_NAVIGATIONFILE)
+                          );
+  const QUrl & navigationModeFile(void) const;
 
   void setContextMenuEnabled(bool yes);
   bool contextMenuEnabled(void) const;

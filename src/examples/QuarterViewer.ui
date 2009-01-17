@@ -27,6 +27,11 @@
      <property name="whatsThis" >
       <string>The QuarterWidget displays Open Inventor scene graphs.</string>
      </property>
+     <property name="navigationModeFile" >
+      <url>
+       <string>coin:/scxml/navigation/examiner.xml</string>
+      </url>
+     </property>
     </widget>
    </item>
   </layout>

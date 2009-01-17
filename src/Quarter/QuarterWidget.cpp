@@ -31,6 +31,7 @@
 #include <assert.h>
 
 #include <QtCore/QEvent>
+#include <QtCore/QDebug>
 #include <QtGui/QAction>
 
 #include <Inventor/SbViewportRegion.h>
@@ -102,26 +103,6 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->interactionmode = new InteractionMode(this);
 #endif
 
-  // set up default cursors for the examiner navigation states
-  this->setStateCursor("interact", Qt::ArrowCursor);
-  this->setStateCursor("idle", Qt::OpenHandCursor);
-  this->setStateCursor("rotate", Qt::ClosedHandCursor);
-  this->setStateCursor("pan", Qt::SizeAllCursor);
-  this->setStateCursor("zoom", Qt::SizeVerCursor);
-  this->setStateCursor("seek", Qt::CrossCursor);
-  this->setStateCursor("spin", Qt::OpenHandCursor);
-
-  // FIXME: This object appears to never be deleted. kintel 20080730
-  ScXMLStateMachine * statemachine =
-    ScXML::readFile("coin:scxml/navigation/examiner.xml");
-  if (statemachine &&
-      statemachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
-    SoScXMLStateMachine * sostatemachine =
-      static_cast<SoScXMLStateMachine *>(statemachine);
-    statemachine->addStateChangeCallback(QuarterWidgetP::statechangecb, PRIVATE(this));
-    PRIVATE(this)->soeventmanager->addSoScXMLStateMachine(sostatemachine);
-    sostatemachine->initialize();
-  }
   PRIVATE(this)->headlight = new SoDirectionalLight;
   PRIVATE(this)->headlight->ref();
 
@@ -488,13 +469,16 @@ QuarterWidget::getSoEventManager(void) const
 void
 QuarterWidget::viewAll(void)
 {
-  const SbName viewallevent("sim.coin3d.coin.navigation.ViewAll");
-  for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
-    SoScXMLStateMachine * sostatemachine =
-      PRIVATE(this)->soeventmanager->getSoScXMLStateMachine(c);
-    if (sostatemachine->isActive()) {
-      sostatemachine->queueEvent(viewallevent);
-      sostatemachine->processEventQueue();
+  //FIXME: Make this work for arbitrary navigation systems - BFG 20090117
+  if (QUrl(DEFAULT_NAVIGATIONFILE) == PRIVATE(this)->navigationModeFile ) {
+    const SbName viewallevent("sim.coin3d.coin.navigation.ViewAll");
+    for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
+      SoScXMLStateMachine * sostatemachine =
+       PRIVATE(this)->soeventmanager->getSoScXMLStateMachine(c);
+      if (sostatemachine->isActive()) {
+       sostatemachine->queueEvent(viewallevent);
+       sostatemachine->processEventQueue();
+      }
     }
   }
 }
@@ -502,13 +486,16 @@ QuarterWidget::viewAll(void)
 void
 QuarterWidget::seek(void)
 {
-  const SbName seekevent("sim.coin3d.coin.navigation.Seek");
-  for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
-    SoScXMLStateMachine * sostatemachine =
-      PRIVATE(this)->soeventmanager->getSoScXMLStateMachine(c);
-    if (sostatemachine->isActive()) {
-      sostatemachine->queueEvent(seekevent);
-      sostatemachine->processEventQueue();
+  //FIXME: Make this work for arbitrary navigation systems - BFG 20090117
+  if (QUrl(DEFAULT_NAVIGATIONFILE) == PRIVATE(this)->navigationModeFile ) {
+    const SbName seekevent("sim.coin3d.coin.navigation.Seek");
+    for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
+      SoScXMLStateMachine * sostatemachine =
+       PRIVATE(this)->soeventmanager->getSoScXMLStateMachine(c);
+      if (sostatemachine->isActive()) {
+       sostatemachine->queueEvent(seekevent);
+       sostatemachine->processEventQueue();
+      }
     }
   }
 }
@@ -708,6 +695,71 @@ QList<QAction *>
 QuarterWidget::renderModeActions(void) const
 {
   return PRIVATE(this)->renderModeActions();
+}
+
+void
+QuarterWidget::setNavigationModeFile(const QUrl & url)
+{
+  QString filename;
+
+  if (url.scheme()=="coin") {
+    //Workaround for differences between url scheme, and Coin internal scheme.
+    filename = url.path();
+    if (filename[0]=='/') {
+      filename.remove(0,1);
+    }
+    filename = url.scheme()+':'+filename;
+  }
+  else if (url.scheme()=="file")
+    filename = url.toLocalFile();
+  else {
+    qDebug()<<url.scheme()<<"is not recognized";
+    return;
+  }
+
+
+  QByteArray filenametmp = filename.toLocal8Bit();
+
+  // FIXME: This object appears to never be deleted. kintel 20080730
+  ScXMLStateMachine * statemachine =
+    ScXML::readFile(filenametmp.data());
+  if (statemachine &&
+      statemachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
+    SoScXMLStateMachine * sostatemachine =
+      static_cast<SoScXMLStateMachine *>(statemachine);
+    statemachine->addStateChangeCallback(QuarterWidgetP::statechangecb, PRIVATE(this));
+    PRIVATE(this)->soeventmanager->addSoScXMLStateMachine(sostatemachine);
+    sostatemachine->initialize();
+  }
+  else {
+    qDebug()<<filename;
+    qDebug()<<"Unable to load"<<url;
+    return;
+  }
+
+  //If we have gotten this far, we have successfully loaded the
+  //navigation file, so we set the property
+  PRIVATE(this)->navigationModeFile = url;
+
+  if (QUrl(DEFAULT_NAVIGATIONFILE) == PRIVATE(this)->navigationModeFile ) {
+
+    // set up default cursors for the examiner navigation states
+    //FIXME: It may be overly restrictive to not do this for arbitrary
+    //navigation systems? - BFG 20090117
+    this->setStateCursor("interact", Qt::ArrowCursor);
+    this->setStateCursor("idle", Qt::OpenHandCursor);
+    this->setStateCursor("rotate", Qt::ClosedHandCursor);
+    this->setStateCursor("pan", Qt::SizeAllCursor);
+    this->setStateCursor("zoom", Qt::SizeVerCursor);
+    this->setStateCursor("seek", Qt::CrossCursor);
+    this->setStateCursor("spin", Qt::OpenHandCursor);
+  }
+}
+
+const QUrl &
+QuarterWidget::navigationModeFile() const
+{
+  return PRIVATE(this)->navigationModeFile;
 }
 
 #undef PRIVATE
