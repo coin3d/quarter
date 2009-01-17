@@ -112,7 +112,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   this->setStateCursor("spin", Qt::OpenHandCursor);
 
   // FIXME: This object appears to never be deleted. kintel 20080730
-  ScXMLStateMachine * statemachine = 
+  ScXMLStateMachine * statemachine =
     ScXML::readFile("coin:scxml/navigation/examiner.xml");
   if (statemachine &&
       statemachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
@@ -162,12 +162,12 @@ QuarterWidget::~QuarterWidget()
   delete PRIVATE(this);
 }
 
-/*!  
+/*!
   You can set the cursor you want to use for a given navigation
   state. See the Coin documentation on navigation for information
   about available states
  */
-void 
+void
 QuarterWidget::setStateCursor(const SbName & state, const QCursor & cursor)
 {
   assert(QuarterWidgetP::statecursormap);
@@ -192,7 +192,7 @@ QuarterWidget::setHeadlightEnabled(bool onoff)
   PRIVATE(this)->headlight->on = onoff;
 }
 
-/*! 
+/*!
   Returns true if the headlight is on, false if it is off
  */
 bool
@@ -210,39 +210,39 @@ QuarterWidget::getHeadlight(void)
   return PRIVATE(this)->headlight;
 }
 
-/*!  
+/*!
   Specify if you want the z buffer to be cleared before
   redraw. This is on by default.
 */
-void 
+void
 QuarterWidget::setClearZBuffer(bool onoff)
 {
   PRIVATE(this)->clearzbuffer = onoff;
 }
 
-/*! 
+/*!
   Returns true if the z buffer is cleared before rendering.
 */
-bool 
+bool
 QuarterWidget::clearZBuffer(void) const
 {
   return PRIVATE(this)->clearzbuffer;
 }
 
-/*!  
+/*!
   Specify if you want the rendering buffer to be cleared before
   rendering. This is on by default.
  */
-void 
+void
 QuarterWidget::setClearWindow(bool onoff)
 {
   PRIVATE(this)->clearwindow = onoff;
 }
 
-/*!  
+/*!
   Returns true if the rendering buffer is cleared before rendering.
  */
-bool 
+bool
 QuarterWidget::clearWindow(void) const
 {
   return PRIVATE(this)->clearwindow;
@@ -251,7 +251,7 @@ QuarterWidget::clearWindow(void) const
 /*!
   Enable/disable interaction mode
  */
-void 
+void
 QuarterWidget::setInteractionModeEnabled(bool onoff)
 {
 #if 0
@@ -262,7 +262,7 @@ QuarterWidget::setInteractionModeEnabled(bool onoff)
 /*!
   Returns true if interaction mode is enabled, false otherwise.
  */
-bool 
+bool
 QuarterWidget::interactionModeEnabled(void) const
 {
 #if 0
@@ -275,7 +275,7 @@ QuarterWidget::interactionModeEnabled(void) const
 /*!
   Turn interaction mode on or off
 */
-void 
+void
 QuarterWidget::setInteractionModeOn(bool onoff)
 {
 #if 0
@@ -286,7 +286,7 @@ QuarterWidget::setInteractionModeOn(bool onoff)
 /*!
   Returns true if interaction mode is on.
  */
-bool 
+bool
 QuarterWidget::interactionModeOn(void) const
 {
 #if 0
@@ -294,7 +294,7 @@ QuarterWidget::interactionModeOn(void) const
 #else
   return false;
 #endif
-}  
+}
 
 /*!
   Returns the Coin cache context id for this widget.
@@ -316,7 +316,7 @@ QuarterWidget::setTransparencyType(TransparencyType type)
   PRIVATE(this)->sorendermanager->scheduleRedraw();
 }
 
-QuarterWidget::TransparencyType 
+QuarterWidget::TransparencyType
 QuarterWidget::transparencyType(void) const
 {
   assert(PRIVATE(this)->sorendermanager);
@@ -324,7 +324,7 @@ QuarterWidget::transparencyType(void) const
   return static_cast<QuarterWidget::TransparencyType>(action->getTransparencyType());
 }
 
-void 
+void
 QuarterWidget::setRenderMode(RenderMode mode)
 {
   assert(PRIVATE(this)->sorendermanager);
@@ -332,14 +332,14 @@ QuarterWidget::setRenderMode(RenderMode mode)
   PRIVATE(this)->sorendermanager->scheduleRedraw();
 }
 
-QuarterWidget::RenderMode 
+QuarterWidget::RenderMode
 QuarterWidget::renderMode(void) const
 {
   assert(PRIVATE(this)->sorendermanager);
   return static_cast<RenderMode>(PRIVATE(this)->sorendermanager->getRenderMode());
 }
 
-void 
+void
 QuarterWidget::setStereoMode(StereoMode mode)
 {
   assert(PRIVATE(this)->sorendermanager);
@@ -347,7 +347,7 @@ QuarterWidget::setStereoMode(StereoMode mode)
   PRIVATE(this)->sorendermanager->scheduleRedraw();
 }
 
-QuarterWidget::StereoMode 
+QuarterWidget::StereoMode
 QuarterWidget::stereoMode(void) const
 {
   assert(PRIVATE(this)->sorendermanager);
@@ -499,7 +499,7 @@ QuarterWidget::viewAll(void)
   }
 }
 
-void 
+void
 QuarterWidget::seek(void)
 {
   const SbName seekevent("sim.coin3d.coin.navigation.Seek");
@@ -562,12 +562,12 @@ QuarterWidget::paintGL(void)
 /*!
   Used for rendering the scene. Usually Coin/Quarter will automatically redraw
   the scene graph at regular intervals, after the scene is modified.
- 
+
   However, if you want to disable this functionality and gain full control over
   when the scene is rendered yourself, you can turn off autoredraw in the
   render manager and render the scene by calling this method.
 */
-void 
+void
 QuarterWidget::redraw(void)
 {
   this->makeCurrent();
@@ -588,11 +588,11 @@ QuarterWidget::actualRedraw(void)
                                          PRIVATE(this)->clearzbuffer);
 }
 
-bool 
+bool
 QuarterWidget::processSoEvent(const SoEvent * event)
 {
-  return 
-    event && 
+  return
+    event &&
     PRIVATE(this)->soeventmanager &&
     PRIVATE(this)->soeventmanager->processEvent(event);
 }
@@ -605,7 +605,7 @@ QuarterWidget::processSoEvent(const SoEvent * event)
   a QColor is 255, but you'll probably want to set it to zero before
   using it as an OpenGL clear color.
  */
-void 
+void
 QuarterWidget::setBackgroundColor(const QColor & color)
 {
   SbColor4f bgcolor(SbClamp(color.red()   / 255.0, 0.0, 1.0),
@@ -617,7 +617,7 @@ QuarterWidget::setBackgroundColor(const QColor & color)
   PRIVATE(this)->sorendermanager->scheduleRedraw();
 }
 
-/*!  
+/*!
   Returns color used for clearing the rendering area before
   rendering the scene.
  */
@@ -635,7 +635,7 @@ QuarterWidget::backgroundColor(void) const
 /*!
   Returns the context menu used by the widget.
  */
-QMenu * 
+QMenu *
 QuarterWidget::getContextMenu(void) const
 {
   return PRIVATE(this)->contextMenu();
@@ -661,7 +661,7 @@ QuarterWidget::setContextMenuEnabled(bool yes)
 
   \sa removeStateMachine
 */
-void 
+void
 QuarterWidget::addStateMachine(SoScXMLStateMachine * statemachine)
 {
   SoEventManager * em = this->getSoEventManager();
@@ -677,7 +677,7 @@ QuarterWidget::addStateMachine(SoScXMLStateMachine * statemachine)
 
   /sa addStateMachine
 */
-void 
+void
 QuarterWidget::removeStateMachine(SoScXMLStateMachine * statemachine)
 {
   SoEventManager * em = this->getSoEventManager();
@@ -686,25 +686,25 @@ QuarterWidget::removeStateMachine(SoScXMLStateMachine * statemachine)
   em->removeSoScXMLStateMachine(statemachine);
 }
 
-QSize 
+QSize
 QuarterWidget::minimumSizeHint(void) const
 {
   return QSize(50, 50);
 }
 
-QList<QAction *> 
+QList<QAction *>
 QuarterWidget::transparencyTypeActions(void) const
 {
   return PRIVATE(this)->transparencyTypeActions();
 }
 
-QList<QAction *> 
+QList<QAction *>
 QuarterWidget::stereoModeActions(void) const
 {
   return PRIVATE(this)->stereoModeActions();
 }
 
-QList<QAction *> 
+QList<QAction *>
 QuarterWidget::renderModeActions(void) const
 {
   return PRIVATE(this)->renderModeActions();

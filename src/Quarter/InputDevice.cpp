@@ -40,18 +40,18 @@ InputDevice::InputDevice(void)
 }
 
 void
-InputDevice::setMousePosition(const SbVec2s & pos) 
+InputDevice::setMousePosition(const SbVec2s & pos)
 {
   this->mousepos = pos;
 }
 
-void 
+void
 InputDevice::setWindowSize(const SbVec2s & size)
 {
   this->windowsize = size;
 }
 
-void 
+void
 InputDevice::setModifiers(SoEvent * soevent, QInputEvent * qevent)
 {
   // FIXME: How do we get the time from the qevent? (20070306 frodo)

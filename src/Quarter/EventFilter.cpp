@@ -56,7 +56,7 @@ public:
     }
   }
 
-  void mouseEvent(QMouseEvent * event) 
+  void mouseEvent(QMouseEvent * event)
   {
     assert(this->windowsize[1] != -1);
     this->globalmousepos = event->globalPos();
@@ -75,7 +75,7 @@ public:
 
 using namespace SIM::Coin3D::Quarter;
 
-EventFilter::EventFilter(QObject * parent) 
+EventFilter::EventFilter(QObject * parent)
   : QObject(parent)
 {
   PRIVATE(this) = new EventFilterP;
@@ -101,7 +101,7 @@ EventFilter::~EventFilter()
   translated or processed, it is forwarded to Qt and the method
   returns false.
  */
-bool 
+bool
 EventFilter::eventFilter(QObject * obj, QEvent * qevent)
 {
   // make sure every device has updated screen size and mouse position
@@ -130,7 +130,7 @@ EventFilter::eventFilter(QObject * obj, QEvent * qevent)
   return false;
 }
 
-const QPoint & 
+const QPoint &
 EventFilter::globalMousePosition(void) const
 {
   return PRIVATE(this)->globalmousepos;

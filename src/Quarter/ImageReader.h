@@ -34,10 +34,10 @@ class ImageReader {
 public:
   ImageReader(void);
   ~ImageReader(void);
-  
+
   SbBool readImage(const SbString & filename, SbImage * image) const;
-  
-private: 
+
+private:
   static SbBool readImageCB(const SbString & filename, SbImage * image, void * closure);
 };
 

@@ -116,7 +116,7 @@ SensorManager::sensorQueueChanged(void)
 
   if (sensormanager->isDelaySensorPending()) {
     this->idletimer->start(0);
-    
+
     if (!this->delaytimer->isActive()) {
       SbTime time = SoDB::getDelaySensorTimeout();
       if (time != SbTime::zero()) {

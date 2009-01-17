@@ -9,16 +9,16 @@ PROJECT(Quarter)
 MACRO(SIM_VS_GENERATE_BASIC_TREE)
   SOURCE_GROUP("Source" REGULAR_EXPRESSION \\.cpp)
   SOURCE_GROUP("Headers" REGULAR_EXPRESSION \\.h)
-  
-  SOURCE_GROUP("Source\\Generated Moc files" REGULAR_EXPRESSION moc_*)  
-  SOURCE_GROUP("Source\\Generated Qrc files" REGULAR_EXPRESSION [^\\.]qrc_*)  
+
+  SOURCE_GROUP("Source\\Generated Moc files" REGULAR_EXPRESSION moc_*)
+  SOURCE_GROUP("Source\\Generated Qrc files" REGULAR_EXPRESSION [^\\.]qrc_*)
   SOURCE_GROUP("Resources" REGULAR_EXPRESSION .*\\.qrc)
-  
+
   SOURCE_GROUP("Build" REGULAR_EXPRESSION \\.txt)
   SOURCE_GROUP("Build\\Rules" REGULAR_EXPRESSION \\.rule)
 ENDMACRO()
 
-# Add an option to enable static builds 
+# Add an option to enable static builds
 OPTION(Quarter_BUILD_STATIC_LIBRARY "Build static library instead of shared library (DLL, so etc..)" OFF)
 OPTION(Quarter_BUILD_PLUGIN "Build Quarter plugin for QT Designer" OFF)
 OPTION(Quarter_BUILD_EXAMPLES "Build Quarter example applications" OFF)
@@ -38,7 +38,7 @@ IF(WIN32)
   IF(Quarter_BUILD_STATIC_LIBRARY)
     SET(CMAKE_DEBUG_POSTFIX "sd")
     SET(CMAKE_RELEASE_POSTFIX "s") #NB! Undocumented variable, could be deprecated
-    #Don't use dynamic runtime in static builds.    
+    #Don't use dynamic runtime in static builds.
     SET(CMAKE_CXX_FLAGS_RELEASE "/MT")
     SET(CMAKE_CXX_FLAGS_DEBUG "/MTd")
   ELSE()
@@ -75,7 +75,7 @@ IF(MSVC)
 ENDIF()
 
 # What to build
-ADD_SUBDIRECTORY(src)               
+ADD_SUBDIRECTORY(src)
 
 #Install the public headers
 INSTALL(DIRECTORY include/Quarter/ DESTINATION include/Quarter

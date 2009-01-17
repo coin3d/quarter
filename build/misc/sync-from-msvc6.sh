@@ -8,4 +8,3 @@ rm -f *.vcproj
 
 cp ../msvc6/*.dsw .
 cp ../msvc6/*.dsp .
-

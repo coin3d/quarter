@@ -80,9 +80,9 @@ KeyboardP::keyEvent(QKeyEvent * qevent)
     SbString s;
     this->keyboard->enumToString(this->keyboard->getKey(), s);
     SoDebugError::postInfo("KeyboardP::keyEvent",
-                           "enum: '%s', pos: <%i %i>, printable: '%s'", 
-                           s.getString(), 
-                           PUBLIC(this)->mousepos[0], 
+                           "enum: '%s', pos: <%i %i>, printable: '%s'",
+                           s.getString(),
+                           PUBLIC(this)->mousepos[0],
                            PUBLIC(this)->mousepos[1],
                            printable);
   }

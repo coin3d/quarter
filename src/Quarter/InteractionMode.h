@@ -35,7 +35,7 @@ class QFocusEvent;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
-class QuarterWidget; 
+class QuarterWidget;
 
 class QUARTER_DLL_API InteractionMode : public QObject {
   Q_OBJECT
@@ -56,7 +56,7 @@ private:
   bool keyPressEvent(QKeyEvent * event);
   bool keyReleaseEvent(QKeyEvent * event);
   bool focusOutEvent(QFocusEvent * event);
-  
+
   QCursor prevcursor;
   QuarterWidget * quarterwidget;
   bool altkeydown;

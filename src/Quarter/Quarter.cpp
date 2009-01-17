@@ -96,7 +96,7 @@
     // Clean up resources.
     root->unref();
     delete viewer;
-    
+
     Quarter::clean();
 
     return 0;
@@ -157,7 +157,7 @@ Quarter::init(bool initCoin)
 
   self = new QuarterP;
   self->initCoin = initCoin;
-  
+
 }
 
 /*!
