@@ -113,6 +113,9 @@ QuarterWidgetPlugin::createWidget(QWidget * parent)
                      this, SLOT(widgetDestroyed(QObject*)));
   }
 
+  //Make a reasonable default visible in designer
+  widget->setNavigationModeFile();
+
 #if 0
   // Exposing actions to Qt Designer seems to be too buggy to be
   // useful at the moment. On Mac OS X, when adding the actions to the
