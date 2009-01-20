@@ -35,6 +35,7 @@
 #include <Inventor/lists/SbList.h>
 #include <Inventor/SoEventManager.h>
 #include <Inventor/scxml/SoScXMLStateMachine.h>
+#include <Inventor/misc/SoContextHandler.h>
 
 #include "ContextMenu.h"
 
@@ -44,8 +45,8 @@ using namespace SIM::Coin3D::Quarter;
 
 class QuarterWidgetP_cachecontext {
 public:
-  SbList <const QGLWidget *> widgetlist;
   uint32_t id;
+  SbList <const QGLWidget *> widgetlist;
 };
 
 static SbList <QuarterWidgetP_cachecontext *> * cachecontext_list = NULL;
@@ -79,7 +80,7 @@ QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * shar
 
 QuarterWidgetP::~QuarterWidgetP()
 {
-  this->cachecontext->widgetlist.removeItem((const QGLWidget*) this->master);
+  removeFromCacheContext(this->cachecontext, this->master);
   if (this->contextmenu) {
     delete this->contextmenu;
   }
@@ -131,6 +132,28 @@ QuarterWidgetP::findCacheContext(QuarterWidget * widget, const QGLWidget * share
   cachecontext_list->append(cachecontext);
 
   return cachecontext;
+}
+
+void 
+QuarterWidgetP::removeFromCacheContext(QuarterWidgetP_cachecontext * context, const QGLWidget * widget)
+{
+  context->widgetlist.removeItem((const QGLWidget*) widget);
+  
+  if (context->widgetlist.getLength() == 0) { // last context in this share group?
+    assert(cachecontext_list);
+    
+    for (int i = 0; i < cachecontext_list->getLength(); i++) {
+      if ((*cachecontext_list)[i] == context) {
+        cachecontext_list->removeFast(i);
+        // set the context while calling destructingContext() (might trigger OpenGL calls)
+        const_cast<QGLWidget*> (widget)->makeCurrent();
+        SoContextHandler::destructingContext(context->id);
+        const_cast<QGLWidget*> (widget)->doneCurrent();
+        delete context;
+        return;
+      }
+    }
+  }
 }
 
 /*!
