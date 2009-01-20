@@ -100,10 +100,11 @@ public:
 
   mutable ContextMenu * contextmenu;
 
-private:
+ private:
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);
+  static void removeFromCacheContext(QuarterWidgetP_cachecontext * context, const QGLWidget * widget);
 };
-
+ 
 #endif // QUARTER_QUARTERWIDGETP_H
 
 }}} // namespace
