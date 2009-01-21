@@ -38,6 +38,7 @@
 #include <Inventor/misc/SoContextHandler.h>
 
 #include "ContextMenu.h"
+#include "QuarterP.h"
 
 #include <stdlib.h>
 
@@ -50,7 +51,6 @@ public:
 };
 
 static SbList <QuarterWidgetP_cachecontext *> * cachecontext_list = NULL;
-QuarterWidgetP::StateCursorMap * QuarterWidgetP::statecursormap = NULL;
 
 QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * sharewidget)
 : master(masterptr),
@@ -73,9 +73,6 @@ QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * shar
 {
   this->cachecontext = findCacheContext(masterptr, sharewidget);
 
-  if (QuarterWidgetP::statecursormap == NULL) {
-    QuarterWidgetP::statecursormap = new StateCursorMap;
-  }
 }
 
 QuarterWidgetP::~QuarterWidgetP()
@@ -134,14 +131,14 @@ QuarterWidgetP::findCacheContext(QuarterWidget * widget, const QGLWidget * share
   return cachecontext;
 }
 
-void 
+void
 QuarterWidgetP::removeFromCacheContext(QuarterWidgetP_cachecontext * context, const QGLWidget * widget)
 {
   context->widgetlist.removeItem((const QGLWidget*) widget);
-  
+
   if (context->widgetlist.getLength() == 0) { // last context in this share group?
     assert(cachecontext_list);
-    
+
     for (int i = 0; i < cachecontext_list->getLength(); i++) {
       if ((*cachecontext_list)[i] == context) {
         cachecontext_list->removeFast(i);
@@ -204,8 +201,8 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
     if (thisp->contextmenuenabled && state == contextmenurequest) {
       thisp->contextMenu()->exec(thisp->eventfilter->globalMousePosition());
     }
-    if (statecursormap->contains(state)) {
-      QCursor cursor = statecursormap->value(state);
+    if (QuarterP::statecursormap->contains(state)) {
+      QCursor cursor = QuarterP::statecursormap->value(state);
       thisp->master->setCursor(cursor);
     }
   }

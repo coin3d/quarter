@@ -87,9 +87,6 @@ public:
   static void postrendercb(void * userdata, SoRenderManager * manager);
   static void statechangecb(void * userdata, ScXMLStateMachine * statemachine, const char * stateid, SbBool enter, SbBool success);
 
-  typedef QMap<SbName, QCursor> StateCursorMap;
-  static StateCursorMap * statecursormap;
-
   mutable QList<QAction *> transparencytypeactions;
   mutable QList<QAction *> rendermodeactions;
   mutable QList<QAction *> stereomodeactions;
@@ -104,7 +101,7 @@ public:
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);
   static void removeFromCacheContext(QuarterWidgetP_cachecontext * context, const QGLWidget * widget);
 };
- 
+
 #endif // QUARTER_QUARTERWIDGETP_H
 
 }}} // namespace
