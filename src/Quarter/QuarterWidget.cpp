@@ -59,6 +59,7 @@
 #include "InteractionMode.h"
 #endif
 #include "QuarterWidgetP.h"
+#include "QuarterP.h"
 
 using namespace SIM::Coin3D::Quarter;
 
@@ -151,16 +152,16 @@ QuarterWidget::~QuarterWidget()
 void
 QuarterWidget::setStateCursor(const SbName & state, const QCursor & cursor)
 {
-  assert(QuarterWidgetP::statecursormap);
+  assert(QuarterP::statecursormap);
   // will overwrite the value of an existing item
-  QuarterWidgetP::statecursormap->insert(state, cursor);
+  QuarterP::statecursormap->insert(state, cursor);
 }
 
 QCursor
 QuarterWidget::stateCursor(const SbName & state)
 {
-  assert(QuarterWidgetP::statecursormap);
-  return QuarterWidgetP::statecursormap->value(state);
+  assert(QuarterP::statecursormap);
+  return QuarterP::statecursormap->value(state);
 }
 
 /*!
