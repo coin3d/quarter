@@ -20025,7 +20025,7 @@ fi
 
 # *******************************************************************
 # pkg-config did not work, or we did not want to use it
-if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_coin_failed; then
+if test x"$sim_ac_build_library" = x"true" && (test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_coin_failed); then
   if $sim_ac_build_library; then
 
 echo "$as_me:$LINENO: checking for X" >&5
