@@ -470,16 +470,13 @@ QuarterWidget::getSoEventManager(void) const
 void
 QuarterWidget::viewAll(void)
 {
-  //FIXME: Make this work for arbitrary navigation systems - BFG 20090117
-  if (QUrl(DEFAULT_NAVIGATIONFILE) == PRIVATE(this)->navigationModeFile ) {
-    const SbName viewallevent("sim.coin3d.coin.navigation.ViewAll");
-    for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
-      SoScXMLStateMachine * sostatemachine =
-       PRIVATE(this)->soeventmanager->getSoScXMLStateMachine(c);
-      if (sostatemachine->isActive()) {
-       sostatemachine->queueEvent(viewallevent);
-       sostatemachine->processEventQueue();
-      }
+  const SbName viewallevent("sim.coin3d.coin.navigation.ViewAll");
+  for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
+    SoScXMLStateMachine * sostatemachine =
+      PRIVATE(this)->soeventmanager->getSoScXMLStateMachine(c);
+    if (sostatemachine->isActive()) {
+      sostatemachine->queueEvent(viewallevent);
+      sostatemachine->processEventQueue();
     }
   }
 }
@@ -487,16 +484,13 @@ QuarterWidget::viewAll(void)
 void
 QuarterWidget::seek(void)
 {
-  //FIXME: Make this work for arbitrary navigation systems - BFG 20090117
-  if (QUrl(DEFAULT_NAVIGATIONFILE) == PRIVATE(this)->navigationModeFile ) {
-    const SbName seekevent("sim.coin3d.coin.navigation.Seek");
-    for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
-      SoScXMLStateMachine * sostatemachine =
-       PRIVATE(this)->soeventmanager->getSoScXMLStateMachine(c);
-      if (sostatemachine->isActive()) {
-       sostatemachine->queueEvent(seekevent);
-       sostatemachine->processEventQueue();
-      }
+  const SbName seekevent("sim.coin3d.coin.navigation.Seek");
+  for (int c = 0; c < PRIVATE(this)->soeventmanager->getNumSoScXMLStateMachines(); ++c) {
+    SoScXMLStateMachine * sostatemachine =
+      PRIVATE(this)->soeventmanager->getSoScXMLStateMachine(c);
+    if (sostatemachine->isActive()) {
+      sostatemachine->queueEvent(seekevent);
+      sostatemachine->processEventQueue();
     }
   }
 }
