@@ -27,7 +27,6 @@
   will be automatically picked up by Qt Designer.
 */
 
-
 #include "QuarterWidgetPlugin.h"
 
 #include <QtCore/QtPlugin>
@@ -56,16 +55,24 @@ public:
 
 }}}} // namespace
 
-using namespace SIM::Coin3D::Quarter;
-using namespace SIM::Coin3D::Quarter::QtDesigner;
+
 
 #define PRIVATE(obj) obj->pimpl
 
 #endif // DOXYGEN_SKIP_THIS
 
+using namespace SIM::Coin3D::Quarter;
+using namespace SIM::Coin3D::Quarter::QtDesigner;
+
 /*!
-  constructor
- */
+  \class SIM::Coin3D::Quarter::QtDesigner::QuarterWidgetPlugin QuarterWidgetPlugin.h
+
+  \brief The QuarterWidgetPlugin makes the QuarterWidget available to QT designer.
+*/
+
+/*!
+  \brief constructor
+*/
 QuarterWidgetPlugin::QuarterWidgetPlugin(QObject * parent)
   : QObject(parent)
 {

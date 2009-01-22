@@ -463,6 +463,7 @@ WARN_LOGFILE           =
 INPUT = @path_tag@@quarter_src_dir@/include/Quarter/Basic.h \
         @path_tag@@quarter_src_dir@/include/Quarter/QuarterWidget.h \
         @path_tag@@quarter_src_dir@/include/Quarter/Quarter.h \
+        @path_tag@@quarter_src_dir@/include/Quarter/eventhandlers/EventFilter.h \
         @path_tag@@quarter_src_dir@/include/Quarter/eventhandlers/EventHandler.h \
         @path_tag@@quarter_src_dir@/include/Quarter/eventhandlers/DragDropHandler.h \
         @path_tag@@quarter_src_dir@/include/Quarter/devices/InputDevice.h \
@@ -475,6 +476,7 @@ INPUT = @path_tag@@quarter_src_dir@/include/Quarter/Basic.h \
         @path_tag@@quarter_src_dir@/src/Quarter/Mouse.cpp \
         @path_tag@@quarter_src_dir@/src/Quarter/EventFilter.cpp \
         @path_tag@@quarter_src_dir@/src/Quarter/DragDropHandler.cpp \
+        @path_tag@@quarter_src_dir@/src/plugins/QuarterWidgetPlugin.h \
         @path_tag@@quarter_src_dir@/src/plugins/QuarterWidgetPlugin.cpp \
         @path_tag@@quarter_src_dir@/src/examples/minimal.cpp \
         @path_tag@@quarter_src_dir@/src/examples/directui.cpp \
