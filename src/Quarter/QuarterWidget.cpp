@@ -63,6 +63,16 @@
 
 using namespace SIM::Coin3D::Quarter;
 
+/*!
+  \enum SIM::Coin3D::Quarter::QuarterWidget::TransparencyType
+
+  Various settings for how to do rendering of transparent objects in
+  the scene. Some of the settings will provide faster rendering, while
+  others gives you better quality rendering.
+
+  See \ref SoGLRenderAction::TransparencyType for a full descrition
+*/
+
 #define PRIVATE(obj) obj->pimpl
 
 /*! constructor */
