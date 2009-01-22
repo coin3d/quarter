@@ -348,7 +348,7 @@ fi
 
 # *******************************************************************
 # pkg-config did not work, or we did not want to use it
-if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_coin_failed; then
+if test x"$sim_ac_build_library" = x"true" && (test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_coin_failed); then
   if $sim_ac_build_library; then
     SIM_AC_CHECK_HEADER_GL([
       CPPFLAGS="$CPPFLAGS $sim_ac_gl_cppflags"
