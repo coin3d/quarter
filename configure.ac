@@ -133,6 +133,30 @@ esac
 
 AC_SUBST(path_tag)
 
+# *******************************************************************
+# Include projects we depend on for crossreferencing and inheritance tracking
+
+# First Coin
+
+sim_ac_cointag_fileloc=""
+
+AC_ARG_WITH([cointag],
+  [  --with-cointag=<path>  (default: NONE)],
+  [sim_ac_cointag_fileloc="$withval"],
+  [sim_ac_cointag_fileloc=""])
+
+AC_SUBST([COIN_TAG_FILE], [$sim_ac_cointag_fileloc])
+
+# Then Qt
+sim_ac_qttag_fileloc=""
+
+AC_ARG_WITH([qttag],
+  [  --with-qttag=<path>  (default: NONE)],
+  [sim_ac_qttag_fileloc="$withval"],
+  [sim_ac_qttag_fileloc=""])
+
+AC_SUBST([QT_TAG_FILE], [$sim_ac_qttag_fileloc])
+
 # **************************************************************************
 # decide if we want to build Mac OS X framework
 
