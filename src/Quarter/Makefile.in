@@ -250,7 +250,8 @@ BuiltSources = \
         moc_SignalThread.cpp \
         moc_EventFilter.cpp \
         moc_DragDropHandler.cpp \
-        moc_InteractionMode.cpp
+        moc_InteractionMode.cpp \
+        moc_FocusHandler.cpp
 
 
 PrivateHeaders = \
@@ -261,7 +262,8 @@ PrivateHeaders = \
         ContextMenu.h \
         SignalThread.h \
         KeyboardP.h \
-        InteractionMode.h
+        InteractionMode.h \
+        FocusHandler.h
 
 
 RegularSources = \
@@ -279,7 +281,8 @@ RegularSources = \
         Keyboard.cpp \
         InputDevice.cpp \
         KeyboardP.cpp \
-        InteractionMode.cpp
+        InteractionMode.cpp \
+        FocusHandler.cpp
 
 
 BUILT_SOURCES = $(BuiltSources)
@@ -376,7 +379,8 @@ am__objects_1 = \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Keyboard.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-InputDevice.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-KeyboardP.$(OBJEXT) \
-	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-InteractionMode.$(OBJEXT)
+	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-InteractionMode.$(OBJEXT) \
+	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.$(OBJEXT)
 am__objects_2 =
 am_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = $(am__objects_1) \
 	$(am__objects_2)
@@ -387,7 +391,8 @@ am__objects_3 = \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SignalThread.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_EventFilter.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_DragDropHandler.$(OBJEXT) \
-	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_InteractionMode.$(OBJEXT)
+	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_InteractionMode.$(OBJEXT) \
+	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.$(OBJEXT)
 nodist_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
 	$(am__objects_3)
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS = \
@@ -403,7 +408,7 @@ am__objects_4 = libQuarter_la-Quarter.lo libQuarter_la-QuarterP.lo \
 	libQuarter_la-DragDropHandler.lo libQuarter_la-EventFilter.lo \
 	libQuarter_la-Mouse.lo libQuarter_la-Keyboard.lo \
 	libQuarter_la-InputDevice.lo libQuarter_la-KeyboardP.lo \
-	libQuarter_la-InteractionMode.lo
+	libQuarter_la-InteractionMode.lo libQuarter_la-FocusHandler.lo
 am_libQuarter_la_OBJECTS = $(am__objects_4) $(am__objects_2)
 am__objects_5 = libQuarter_la-moc_QuarterWidget.lo \
 	libQuarter_la-moc_SensorManager.lo \
@@ -411,7 +416,8 @@ am__objects_5 = libQuarter_la-moc_QuarterWidget.lo \
 	libQuarter_la-moc_SignalThread.lo \
 	libQuarter_la-moc_EventFilter.lo \
 	libQuarter_la-moc_DragDropHandler.lo \
-	libQuarter_la-moc_InteractionMode.lo
+	libQuarter_la-moc_InteractionMode.lo \
+	libQuarter_la-moc_FocusHandler.lo
 nodist_libQuarter_la_OBJECTS = $(am__objects_5)
 libQuarter_la_OBJECTS = $(am_libQuarter_la_OBJECTS) \
 	$(nodist_libQuarter_la_OBJECTS)
@@ -421,6 +427,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-DragDropHandler.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-EventFilter.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-InputDevice.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-InteractionMode.Po \
@@ -436,6 +443,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_DragDropHandler.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_EventFilter.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_InteractionMode.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.Po \
@@ -443,6 +451,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-ContextMenu.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-DragDropHandler.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-EventFilter.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-FocusHandler.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-ImageReader.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-InputDevice.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-InteractionMode.Plo \
@@ -458,6 +467,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_ContextMenu.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_DragDropHandler.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_EventFilter.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_FocusHandler.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_InteractionMode.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_QuarterWidget.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_SensorManager.Plo \
@@ -562,6 +572,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-DragDropHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-EventFilter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ImageReader.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-InputDevice.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-InteractionMode.Po@am__quote@
@@ -577,6 +588,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_DragDropHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_EventFilter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_InteractionMode.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_SensorManager.Po@am__quote@
@@ -584,6 +596,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-ContextMenu.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-DragDropHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-EventFilter.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-FocusHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-ImageReader.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-InputDevice.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-InteractionMode.Plo@am__quote@
@@ -599,6 +612,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_ContextMenu.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_DragDropHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_EventFilter.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_FocusHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_InteractionMode.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_QuarterWidget.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_SensorManager.Plo@am__quote@
@@ -1135,6 +1149,39 @@ Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-InteractionMode.lo: InteractionMode.c
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-InteractionMode.lo `test -f 'InteractionMode.cpp' || echo '$(srcdir)/'`InteractionMode.cpp
 
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.o: FocusHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.o `test -f 'FocusHandler.cpp' || echo '$(srcdir)/'`FocusHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='FocusHandler.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.o `test -f 'FocusHandler.cpp' || echo '$(srcdir)/'`FocusHandler.cpp
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.obj: FocusHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.obj -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.obj `if test -f 'FocusHandler.cpp'; then $(CYGPATH_W) 'FocusHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/FocusHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='FocusHandler.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.obj `if test -f 'FocusHandler.cpp'; then $(CYGPATH_W) 'FocusHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/FocusHandler.cpp'; fi`
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.lo: FocusHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.lo -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.lo `test -f 'FocusHandler.cpp' || echo '$(srcdir)/'`FocusHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='FocusHandler.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-FocusHandler.lo `test -f 'FocusHandler.cpp' || echo '$(srcdir)/'`FocusHandler.cpp
+
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.o: moc_QuarterWidget.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.Tpo" \
 @am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_QuarterWidget.o `test -f 'moc_QuarterWidget.cpp' || echo '$(srcdir)/'`moc_QuarterWidget.cpp; \
@@ -1365,6 +1412,39 @@ Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_InteractionMode.lo: moc_Interacti
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_InteractionMode.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_InteractionMode.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_InteractionMode.lo `test -f 'moc_InteractionMode.cpp' || echo '$(srcdir)/'`moc_InteractionMode.cpp
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.o: moc_FocusHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.o `test -f 'moc_FocusHandler.cpp' || echo '$(srcdir)/'`moc_FocusHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_FocusHandler.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.o `test -f 'moc_FocusHandler.cpp' || echo '$(srcdir)/'`moc_FocusHandler.cpp
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.obj: moc_FocusHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.obj -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.obj `if test -f 'moc_FocusHandler.cpp'; then $(CYGPATH_W) 'moc_FocusHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_FocusHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_FocusHandler.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.obj `if test -f 'moc_FocusHandler.cpp'; then $(CYGPATH_W) 'moc_FocusHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_FocusHandler.cpp'; fi`
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.lo: moc_FocusHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.lo -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.lo `test -f 'moc_FocusHandler.cpp' || echo '$(srcdir)/'`moc_FocusHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_FocusHandler.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_FocusHandler.lo `test -f 'moc_FocusHandler.cpp' || echo '$(srcdir)/'`moc_FocusHandler.cpp
 
 libQuarter_la-Quarter.o: Quarter.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-Quarter.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-Quarter.Tpo" \
@@ -1861,6 +1941,39 @@ libQuarter_la-InteractionMode.lo: InteractionMode.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-InteractionMode.lo `test -f 'InteractionMode.cpp' || echo '$(srcdir)/'`InteractionMode.cpp
 
+libQuarter_la-FocusHandler.o: FocusHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-FocusHandler.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-FocusHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-FocusHandler.o `test -f 'FocusHandler.cpp' || echo '$(srcdir)/'`FocusHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-FocusHandler.Tpo" "$(DEPDIR)/libQuarter_la-FocusHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-FocusHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='FocusHandler.cpp' object='libQuarter_la-FocusHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-FocusHandler.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-FocusHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-FocusHandler.o `test -f 'FocusHandler.cpp' || echo '$(srcdir)/'`FocusHandler.cpp
+
+libQuarter_la-FocusHandler.obj: FocusHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-FocusHandler.obj -MD -MP -MF "$(DEPDIR)/libQuarter_la-FocusHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-FocusHandler.obj `if test -f 'FocusHandler.cpp'; then $(CYGPATH_W) 'FocusHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/FocusHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-FocusHandler.Tpo" "$(DEPDIR)/libQuarter_la-FocusHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-FocusHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='FocusHandler.cpp' object='libQuarter_la-FocusHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-FocusHandler.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-FocusHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-FocusHandler.obj `if test -f 'FocusHandler.cpp'; then $(CYGPATH_W) 'FocusHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/FocusHandler.cpp'; fi`
+
+libQuarter_la-FocusHandler.lo: FocusHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-FocusHandler.lo -MD -MP -MF "$(DEPDIR)/libQuarter_la-FocusHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-FocusHandler.lo `test -f 'FocusHandler.cpp' || echo '$(srcdir)/'`FocusHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-FocusHandler.Tpo" "$(DEPDIR)/libQuarter_la-FocusHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-FocusHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='FocusHandler.cpp' object='libQuarter_la-FocusHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-FocusHandler.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-FocusHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-FocusHandler.lo `test -f 'FocusHandler.cpp' || echo '$(srcdir)/'`FocusHandler.cpp
+
 libQuarter_la-moc_QuarterWidget.o: moc_QuarterWidget.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-moc_QuarterWidget.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-moc_QuarterWidget.Tpo" \
 @am__fastdepCXX_TRUE@	  -c -o libQuarter_la-moc_QuarterWidget.o `test -f 'moc_QuarterWidget.cpp' || echo '$(srcdir)/'`moc_QuarterWidget.cpp; \
@@ -2091,6 +2204,39 @@ libQuarter_la-moc_InteractionMode.lo: moc_InteractionMode.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-moc_InteractionMode.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-moc_InteractionMode.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-moc_InteractionMode.lo `test -f 'moc_InteractionMode.cpp' || echo '$(srcdir)/'`moc_InteractionMode.cpp
+
+libQuarter_la-moc_FocusHandler.o: moc_FocusHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-moc_FocusHandler.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-moc_FocusHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-moc_FocusHandler.o `test -f 'moc_FocusHandler.cpp' || echo '$(srcdir)/'`moc_FocusHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-moc_FocusHandler.Tpo" "$(DEPDIR)/libQuarter_la-moc_FocusHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-moc_FocusHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_FocusHandler.cpp' object='libQuarter_la-moc_FocusHandler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-moc_FocusHandler.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-moc_FocusHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-moc_FocusHandler.o `test -f 'moc_FocusHandler.cpp' || echo '$(srcdir)/'`moc_FocusHandler.cpp
+
+libQuarter_la-moc_FocusHandler.obj: moc_FocusHandler.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-moc_FocusHandler.obj -MD -MP -MF "$(DEPDIR)/libQuarter_la-moc_FocusHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-moc_FocusHandler.obj `if test -f 'moc_FocusHandler.cpp'; then $(CYGPATH_W) 'moc_FocusHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_FocusHandler.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-moc_FocusHandler.Tpo" "$(DEPDIR)/libQuarter_la-moc_FocusHandler.Po"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-moc_FocusHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_FocusHandler.cpp' object='libQuarter_la-moc_FocusHandler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-moc_FocusHandler.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-moc_FocusHandler.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-moc_FocusHandler.obj `if test -f 'moc_FocusHandler.cpp'; then $(CYGPATH_W) 'moc_FocusHandler.cpp'; else $(CYGPATH_W) '$(srcdir)/moc_FocusHandler.cpp'; fi`
+
+libQuarter_la-moc_FocusHandler.lo: moc_FocusHandler.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-moc_FocusHandler.lo -MD -MP -MF "$(DEPDIR)/libQuarter_la-moc_FocusHandler.Tpo" \
+@am__fastdepCXX_TRUE@	  -c -o libQuarter_la-moc_FocusHandler.lo `test -f 'moc_FocusHandler.cpp' || echo '$(srcdir)/'`moc_FocusHandler.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-moc_FocusHandler.Tpo" "$(DEPDIR)/libQuarter_la-moc_FocusHandler.Plo"; \
+@am__fastdepCXX_TRUE@	else rm -f "$(DEPDIR)/libQuarter_la-moc_FocusHandler.Tpo"; exit 1; \
+@am__fastdepCXX_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='moc_FocusHandler.cpp' object='libQuarter_la-moc_FocusHandler.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-moc_FocusHandler.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-moc_FocusHandler.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-moc_FocusHandler.lo `test -f 'moc_FocusHandler.cpp' || echo '$(srcdir)/'`moc_FocusHandler.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -2325,6 +2471,9 @@ moc_DragDropHandler.cpp: $(top_srcdir)/include/Quarter/eventhandlers/DragDropHan
 
 moc_InteractionMode.cpp: $(srcdir)/InteractionMode.h
 	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/InteractionMode.h`
+
+moc_FocusHandler.cpp: $(srcdir)/FocusHandler.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/FocusHandler.h`
 
 @BUILD_WITH_MSVC_TRUE@all-local: Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
 
