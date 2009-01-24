@@ -56,6 +56,7 @@
 #include <Quarter/eventhandlers/DragDropHandler.h>
 
 #include "InteractionMode.h"
+#include "FocusHandler.h"
 #include "QuarterWidgetP.h"
 #include "QuarterP.h"
 
@@ -109,6 +110,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->eventfilter = new EventFilter(this);
   PRIVATE(this)->dragdrophandler = new DragDropHandler(this);
   PRIVATE(this)->interactionmode = new InteractionMode(this);
+  PRIVATE(this)->focushandler = new FocusHandler(this);
 
   PRIVATE(this)->headlight = new SoDirectionalLight;
   PRIVATE(this)->headlight->ref();
@@ -134,6 +136,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   this->installEventFilter(PRIVATE(this)->eventfilter);
   this->installEventFilter(PRIVATE(this)->interactionmode);
   this->installEventFilter(PRIVATE(this)->dragdrophandler);
+  this->installEventFilter(PRIVATE(this)->focushandler);
 }
 
 /*! destructor */
