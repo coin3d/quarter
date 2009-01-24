@@ -43,6 +43,7 @@ class SoScXMLStateMachine;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
+class EventFilter;
 const char DEFAULT_NAVIGATIONFILE []  = "coin:///scxml/navigation/examiner.xml";
 
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
@@ -149,6 +150,8 @@ public:
   SoEventManager * getSoEventManager(void) const;
   void setSoRenderManager(SoRenderManager * manager);
   SoRenderManager * getSoRenderManager(void) const;
+
+  EventFilter * getEventFilter(void) const;
 
   void addStateMachine(SoScXMLStateMachine * statemachine);
   void removeStateMachine(SoScXMLStateMachine * statemachine);

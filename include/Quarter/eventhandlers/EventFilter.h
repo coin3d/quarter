@@ -31,12 +31,17 @@ class QPoint;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
+class InputDevice;
+
 class QUARTER_DLL_API EventFilter : public QObject {
   Q_OBJECT
 
 public:
   EventFilter(QObject * parent);
   ~EventFilter();
+
+  void registerInputDevice(InputDevice * device);
+  void unregisterInputDevice(InputDevice * device);
 
   const QPoint & globalMousePosition(void) const;
 

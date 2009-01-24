@@ -457,6 +457,15 @@ QuarterWidget::getSoEventManager(void) const
 }
 
 /*!
+  Returns a pointer to the event filter
+ */
+EventFilter * 
+QuarterWidget::getEventFilter(void) const
+{
+  return PRIVATE(this)->eventfilter;
+}
+
+/*!
   Reposition the current camera to display the entire scene
  */
 void
