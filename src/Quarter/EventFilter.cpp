@@ -96,6 +96,27 @@ EventFilter::~EventFilter()
   delete PRIVATE(this);
 }
 
+/*!
+  Adds a device for event translation
+ */
+void 
+EventFilter::registerInputDevice(InputDevice * device)
+{
+  PRIVATE(this)->devices += device;
+}
+
+/*!
+  Removes a device from event translation
+ */
+void 
+EventFilter::unregisterInputDevice(InputDevice * device)
+{
+  int i = PRIVATE(this)->devices.indexOf(device);
+  if (i != -1) {
+    PRIVATE(this)->devices.removeAt(i);
+  }
+}
+
 /*! Translates Qt Events into Coin events and passes them on to the
   event QuarterWidget for processing. If the event can not be
   translated or processed, it is forwarded to Qt and the method
@@ -130,6 +151,9 @@ EventFilter::eventFilter(QObject * obj, QEvent * qevent)
   return false;
 }
 
+/*!
+  Returns mouse position in global coordinates
+ */
 const QPoint &
 EventFilter::globalMousePosition(void) const
 {
