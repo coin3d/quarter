@@ -55,9 +55,7 @@
 #include <Quarter/eventhandlers/EventFilter.h>
 #include <Quarter/eventhandlers/DragDropHandler.h>
 
-#if 0
 #include "InteractionMode.h"
-#endif
 #include "QuarterWidgetP.h"
 #include "QuarterP.h"
 
@@ -110,9 +108,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   //callbacks which depends on other state being initialized
   PRIVATE(this)->eventfilter = new EventFilter(this);
   PRIVATE(this)->dragdrophandler = new DragDropHandler(this);
-#if 0
   PRIVATE(this)->interactionmode = new InteractionMode(this);
-#endif
 
   PRIVATE(this)->headlight = new SoDirectionalLight;
   PRIVATE(this)->headlight->ref();
@@ -136,9 +132,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   this->setFocusPolicy(Qt::StrongFocus);
 
   this->installEventFilter(PRIVATE(this)->eventfilter);
-#if 0
   this->installEventFilter(PRIVATE(this)->interactionmode);
-#endif
   this->installEventFilter(PRIVATE(this)->dragdrophandler);
 }
 
@@ -246,9 +240,7 @@ QuarterWidget::clearWindow(void) const
 void
 QuarterWidget::setInteractionModeEnabled(bool onoff)
 {
-#if 0
   PRIVATE(this)->interactionmode->setEnabled(onoff);
-#endif
 }
 
 /*!
@@ -257,11 +249,7 @@ QuarterWidget::setInteractionModeEnabled(bool onoff)
 bool
 QuarterWidget::interactionModeEnabled(void) const
 {
-#if 0
   return PRIVATE(this)->interactionmode->enabled();
-#else
-  return false;
-#endif
 }
 
 /*!
@@ -270,9 +258,7 @@ QuarterWidget::interactionModeEnabled(void) const
 void
 QuarterWidget::setInteractionModeOn(bool onoff)
 {
-#if 0
   PRIVATE(this)->interactionmode->setOn(onoff);
-#endif
 }
 
 /*!
@@ -281,11 +267,7 @@ QuarterWidget::setInteractionModeOn(bool onoff)
 bool
 QuarterWidget::interactionModeOn(void) const
 {
-#if 0
   return PRIVATE(this)->interactionmode->on();
-#else
-  return false;
-#endif
 }
 
 /*!
