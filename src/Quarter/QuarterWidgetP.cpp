@@ -36,6 +36,7 @@
 #include <Inventor/SoEventManager.h>
 #include <Inventor/scxml/SoScXMLStateMachine.h>
 #include <Inventor/misc/SoContextHandler.h>
+#include <Inventor/C/glue/gl.h>
 
 #include "ContextMenu.h"
 #include "QuarterP.h"
@@ -141,6 +142,8 @@ QuarterWidgetP::removeFromCacheContext(QuarterWidgetP_cachecontext * context, co
 
     for (int i = 0; i < cachecontext_list->getLength(); i++) {
       if ((*cachecontext_list)[i] == context) {
+        // fetch the cc_glglue context instance as a workaround for a bug fixed in Coin r12818
+        (void) cc_glglue_instance(context->id);
         cachecontext_list->removeFast(i);
         // set the context while calling destructingContext() (might trigger OpenGL calls)
         const_cast<QGLWidget*> (widget)->makeCurrent();
