@@ -24,6 +24,7 @@
 
 #include <QtGui/QLayout>
 #include <Quarter/QuarterWidget.h>
+#include <Quarter/eventhandlers/DragDropHandler.h>
 using namespace SIM::Coin3D::Quarter;
 
 #include <Inventor/SoInput.h>
@@ -33,6 +34,7 @@ MdiQuarterWidget::MdiQuarterWidget(QWidget * parent, const QGLWidget * sharewidg
   : inherited(parent)
 {
   this->quarterwidget = new QuarterWidget(this, sharewidget);
+  this->quarterwidget->installEventFilter(new DragDropHandler(this->quarterwidget));
   //set default navigation mode file
   this->quarterwidget->setNavigationModeFile();
   this->layout()->addWidget(this->quarterwidget);

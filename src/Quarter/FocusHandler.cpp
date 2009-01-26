@@ -20,7 +20,7 @@
  *
 \**************************************************************************/
 
-#include "FocusHandler.h"
+#include <Quarter/eventhandlers/FocusHandler.h>
 #include <Quarter/QuarterWidget.h>
 #include <QtCore/QEvent>
 #include <Inventor/SoEventManager.h>

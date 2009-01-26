@@ -43,8 +43,7 @@ PrivateHeaders = \
         ContextMenu.h \
         SignalThread.h \
         KeyboardP.h \
-        InteractionMode.h \
-        FocusHandler.h
+        InteractionMode.h
 
 RegularSources = \
         Quarter.cpp \
@@ -170,8 +169,8 @@ moc_DragDropHandler.cpp: $(top_srcdir)/include/Quarter/eventhandlers/DragDropHan
 moc_InteractionMode.cpp: $(srcdir)/InteractionMode.h
 	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/InteractionMode.h`
 
-moc_FocusHandler.cpp: $(srcdir)/FocusHandler.h
-	$(MOC) -o $@ `$(UNIX2WINPATH) $(srcdir)/FocusHandler.h`
+moc_FocusHandler.cpp: $(top_srcdir)/include/Quarter/eventhandlers/FocusHandler.h
+	$(MOC) -o $@ `$(UNIX2WINPATH) $(top_srcdir)/include/Quarter/eventhandlers/FocusHandler.h`
 
 if BUILD_WITH_MSVC
 all-local: Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@.lib
