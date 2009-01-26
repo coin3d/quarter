@@ -141,7 +141,10 @@ AC_SUBST(path_tag)
 sim_ac_cointag_fileloc=""
 
 AC_ARG_WITH([cointag],
-  [  --with-cointag=<path>  (default: NONE)],
+[  --with-cointag=<path to tagfile>@<:@=Documentation url/path@:>@
+                                   (default: NONE) cross references
+                                   documentation against the given 
+                                   doxygen tagfile],
   [sim_ac_cointag_fileloc="$withval"],
   [sim_ac_cointag_fileloc=""])
 
@@ -151,6 +154,10 @@ AC_SUBST([COIN_TAG_FILE], [$sim_ac_cointag_fileloc])
 sim_ac_qttag_fileloc=""
 
 AC_ARG_WITH([qttag],
+[  --with-qttag=<path to tagfile>@<:@=Documentation url/path@:>@
+                                (default: NONE) cross references
+                                documentation against the given 
+                                doxygen tagfile],
   [  --with-qttag=<path>  (default: NONE)],
   [sim_ac_qttag_fileloc="$withval"],
   [sim_ac_qttag_fileloc=""])
