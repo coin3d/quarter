@@ -112,10 +112,7 @@ public:
   void setBackgroundColor(const QColor & color);
   QColor backgroundColor(void) const;
 
-  void setNavigationModeFile(
-                          const QUrl & url =
-                          QUrl(DEFAULT_NAVIGATIONFILE)
-                          );
+  void setNavigationModeFile(const QUrl & url = QUrl(DEFAULT_NAVIGATIONFILE));
   const QUrl & navigationModeFile(void) const;
 
   void setContextMenuEnabled(bool yes);
