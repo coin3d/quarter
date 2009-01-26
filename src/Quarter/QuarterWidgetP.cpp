@@ -142,11 +142,11 @@ QuarterWidgetP::removeFromCacheContext(QuarterWidgetP_cachecontext * context, co
 
     for (int i = 0; i < cachecontext_list->getLength(); i++) {
       if ((*cachecontext_list)[i] == context) {
-        // fetch the cc_glglue context instance as a workaround for a bug fixed in Coin r12818
+        // set the context while calling destructingContext() (might trigger OpenGL calls)
         const_cast<QGLWidget*> (widget)->makeCurrent();
+        // fetch the cc_glglue context instance as a workaround for a bug fixed in Coin r12818
         (void) cc_glglue_instance(context->id);
         cachecontext_list->removeFast(i);
-        // set the context while calling destructingContext() (might trigger OpenGL calls)
         SoContextHandler::destructingContext(context->id);
         const_cast<QGLWidget*> (widget)->doneCurrent();
         delete context;
