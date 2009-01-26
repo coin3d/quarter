@@ -47,19 +47,19 @@
 #define PACKAGE_NAME "Quarter"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Quarter 0.1.0a"
+#define PACKAGE_STRING "Quarter 1.0.1a"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "quarter"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.1.0a"
+#define PACKAGE_VERSION "1.0.1a"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "0.1.0a"
+#define VERSION "1.0.1a"
 
 /* Define to 1 if the X Window System is missing or not being used. */
 /* #undef X_DISPLAY_MISSING */
