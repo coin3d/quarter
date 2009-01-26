@@ -23,8 +23,7 @@
 /*!
   \class SIM::Coin3D::Quarter::DragDropHandler DragDropHandler.h Quarter/devices/DragDropHandler.h
 
-  \brief
-  The DragDropHandler class provides drag and drop
+  \brief The DragDropHandler event filter provides drag and drop
   functionality to the QuarterWidget.
 */
 
