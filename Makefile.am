@@ -25,6 +25,7 @@ EXTRA_DIST = \
         cfg/wrapmsvc.exe \
         cfg/errors.txt \
         cfg/doxy4win.pl \
+        build/README.txt \
         build/misc/create-directories.bat \
         build/misc/install-headers.bat \
         build/misc/install-sdk.bat \
