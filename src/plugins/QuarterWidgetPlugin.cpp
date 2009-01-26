@@ -91,6 +91,11 @@ QuarterWidgetPlugin::~QuarterWidgetPlugin()
   delete PRIVATE(this);
 }
 
+/*!
+  Initializes the plugin
+
+  \see QDesignerFormEditorInterface::initialize
+*/
 void
 QuarterWidgetPlugin::initialize(QDesignerFormEditorInterface * formeditor)
 {
@@ -106,12 +111,20 @@ QuarterWidgetPlugin::initialize(QDesignerFormEditorInterface * formeditor)
   PRIVATE(this)->initialized = true;
 }
 
+/*!
+  \retval bool wether the initalize function has been called at least once.
+*/
 bool
 QuarterWidgetPlugin::isInitialized(void) const
 {
   return PRIVATE(this)->initialized;
 }
 
+/*!
+  Creates a QuarterWidget initialized for the formloader
+
+  \see QDesignerFormEditorInterface::createWidget
+*/
 QWidget *
 QuarterWidgetPlugin::createWidget(QWidget * parent)
 {
@@ -158,36 +171,56 @@ QuarterWidgetPlugin::createWidget(QWidget * parent)
   return widget;
 }
 
+/*!
+  Name of the widget
+
+  \see QDesignerCustomWidgetInterface::name
+*/
 QString
 QuarterWidgetPlugin::name(void) const
 {
   return "SIM::Coin3D::Quarter::QuarterWidget";
 }
 
+/*!
+  See \ref QDesignerCustomWidgetInterface::group
+*/
 QString
 QuarterWidgetPlugin::group(void) const
 {
   return "Display Widgets [Coin3D]";
 }
 
+/*!
+  See \ref QDesignerCustomWidgetInterface::icon
+*/
 QIcon
 QuarterWidgetPlugin::icon(void) const
 {
   return QIcon(":/coinlogo.png");
 }
 
+/*!
+  See \ref QDesignerCustomWidgetInterface::toolTip
+*/
 QString
 QuarterWidgetPlugin::toolTip(void) const
 {
   return "";
 }
 
+/*!
+  See \ref QDesignerCustomWidgetInterface::whatsThis
+*/
 QString
 QuarterWidgetPlugin::whatsThis(void) const
 {
   return "";
 }
 
+/*!
+  See \ref QDesignerCustomWidgetInterface::isContainer
+*/
 bool
 QuarterWidgetPlugin::isContainer(void) const
 {
@@ -201,6 +234,9 @@ QuarterWidgetPlugin::widgetDestroyed(QObject * obj)
   if (widget == PRIVATE(this)->firstwidget) PRIVATE(this)->firstwidget = NULL;
 }
 
+/*!
+  See \ref QDesignerCustomWidgetInterface::domXml
+*/
 QString
 QuarterWidgetPlugin::domXml(void) const
 {
@@ -219,6 +255,9 @@ QuarterWidgetPlugin::domXml(void) const
     "</widget>\n";
 }
 
+/*!
+  See \ref QDesignerCustomWidgetInterface::includeFile
+*/
 QString
 QuarterWidgetPlugin::includeFile(void) const
 {

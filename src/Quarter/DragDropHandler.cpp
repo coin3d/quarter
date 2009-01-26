@@ -64,6 +64,11 @@ public:
 
 using namespace SIM::Coin3D::Quarter;
 
+/*!
+  Constructor
+
+  \sa QObject::QObject(QObject *)
+*/
 DragDropHandler::DragDropHandler(QuarterWidget * parent)
   : QObject(parent)
 {
@@ -78,7 +83,8 @@ DragDropHandler::~DragDropHandler()
   delete PRIVATE(this);
 }
 
-/*! Detects a QDragEnterEvent and if the event is the dropping of a
+/*!
+  Detects a QDragEnterEvent and if the event is the dropping of a
   valid Inventor or VRML it opens the file, reads in the scenegraph
   and calls setSceneGraph on the QuarterWidget
  */
