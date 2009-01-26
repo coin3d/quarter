@@ -2,8 +2,25 @@ This document describes the process of making a new release of the Quarter
 library.
 
 Remember to include these points:
-o When tagging the release in Subversion, make sure to edit the externals property
-  to include the correct version of CMakeMacros. This probably includes creating a
-  new tag in CMakeMacros first.
+
+* Copy trunk to the corresponding tag, and do the rest of the changes
+  in the tag
+
+* When tagging the release in Subversion, make sure to edit the
+  externals property to include the correct version of CMakeMacros.
+  This probably includes modifying the svn:externals to point to a
+  specific revision of the externals eg:
   $ svn propedit svn:externals  .
-  CMakeMacros https://svn.coin3d.org/repos/CMakeMacros/tags/newtag
+  CMakeMacros https://svn.coin3d.org/repos/CMakeMacros/trunk
+
+  should change to:
+  CMakeMacros -r <the current revision>   https://svn.coin3d.org/repos/CMakeMacros/trunk
+
+  Remember to this for every external
+
+* Update configure.ac in the tag with release version and commit
+
+* Update configure.ac in trunk to point to next release version, but
+  in alpha
+
+* Commit and feel good!
