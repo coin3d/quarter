@@ -98,6 +98,8 @@ QuarterWidgetPlugin::initialize(QDesignerFormEditorInterface * formeditor)
     return;
   }
 
+  coin_setenv("COIN_DONT_INFORM_INDIRECT_RENDERING","1",FALSE);
+
   Quarter::init();
 
   PRIVATE(this)->formeditor = formeditor;
