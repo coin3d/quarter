@@ -46,6 +46,7 @@
 #include <Inventor/sensors/SoSensorManager.h>
 #include <Inventor/SoDB.h>
 
+#include <Inventor/SbBasic.h>
 #include <Inventor/SoRenderManager.h>
 #include <Inventor/SoEventManager.h>
 #include <Inventor/scxml/ScXML.h>
@@ -69,8 +70,32 @@ using namespace SIM::Coin3D::Quarter;
   the scene. Some of the settings will provide faster rendering, while
   others gives you better quality rendering.
 
-  See \ref SoGLRenderAction::TransparencyType for a full descrition
+  See \ref SoGLRenderAction::TransparencyType for a full descrition of the modes
 */
+
+/*!
+  \enum SIM::Coin3D::Quarter::QuarterWidget::RenderMode
+
+  Sets how rendering of primitives is done.
+
+  See \ref SoRenderManager::RenderMode for a full descrition of the modes
+*/
+
+/*!
+  \enum SIM::Coin3D::Quarter::QuarterWidget::StereoMode
+
+  Sets how stereo rendering is performed.
+
+  See \ref SoRenderManager::StereoMode for a full descrition of the modes
+*/
+
+  enum StereoMode {
+    MONO = SoRenderManager::MONO,
+    ANAGLYPH = SoRenderManager::ANAGLYPH,
+    QUAD_BUFFER = SoRenderManager::QUAD_BUFFER,
+    INTERLEAVED_ROWS = SoRenderManager::INTERLEAVED_ROWS,
+    INTERLEAVED_COLUMNS = SoRenderManager::INTERLEAVED_COLUMNS
+  };
 
 #define PRIVATE(obj) obj->pimpl
 
@@ -168,12 +193,24 @@ QuarterWidget::setStateCursor(const SbName & state, const QCursor & cursor)
   QuarterP::statecursormap->insert(state, cursor);
 }
 
+/*!
+  Maps a state to a cursor
+
+  \param[in] state Named state in the statemachine
+  \retval Cursor corresponding to the given state
+*/
 QCursor
 QuarterWidget::stateCursor(const SbName & state)
 {
   assert(QuarterP::statecursormap);
   return QuarterP::statecursormap->value(state);
 }
+
+/*!
+  \property QuarterWidget::headlightEnabled
+
+  \copydetails QuarterWidget::setHeadlightEnabled
+*/
 
 /*!
   Enable/disable the headlight. This wille toggle the SoDirectionalLight::on
@@ -204,6 +241,12 @@ QuarterWidget::getHeadlight(void)
 }
 
 /*!
+  \property QuarterWidget::clearZBuffer
+  
+  \copydetails QuarterWidget::setClearZBuffer
+*/
+
+/*!
   Specify if you want the z buffer to be cleared before
   redraw. This is on by default.
 */
@@ -223,6 +266,12 @@ QuarterWidget::clearZBuffer(void) const
 }
 
 /*!
+  \property QuarterWidget::clearWindow
+
+  \copydetails QuarterWidget::setClearWindow
+*/
+
+/*!
   Specify if you want the rendering buffer to be cleared before
   rendering. This is on by default.
  */
@@ -234,7 +283,7 @@ QuarterWidget::setClearWindow(bool onoff)
 
 /*!
   Returns true if the rendering buffer is cleared before rendering.
- */
+*/
 bool
 QuarterWidget::clearWindow(void) const
 {
@@ -242,8 +291,16 @@ QuarterWidget::clearWindow(void) const
 }
 
 /*!
-  Enable/disable interaction mode
- */
+  \property QuarterWidget::interactionModeEnabled
+  
+  \copydetails QuarterWidget::setInteractionModeEnabled
+*/
+
+/*!
+  Enable/disable interaction mode.
+
+  Specifies wether you may use the alt-key to enter interaction mode.
+*/
 void
 QuarterWidget::setInteractionModeEnabled(bool onoff)
 {
@@ -260,7 +317,13 @@ QuarterWidget::interactionModeEnabled(void) const
 }
 
 /*!
-  Turn interaction mode on or off
+  \property QuarterWidget::interactionModeOn
+
+  \copydetails QuarterWidget::setInteractionModeOn
+*/
+
+/*!
+  Turn interaction mode on or off. 
 */
 void
 QuarterWidget::setInteractionModeOn(bool onoff)
@@ -287,7 +350,13 @@ QuarterWidget::getCacheContextId(void) const
 }
 
 /*!
-  This method sets the transparency type to be used for the scene.
+  \property QuarterWidget::transparencyType
+
+  \copydetails QuarterWidget::setTransparencyType
+*/
+
+/*!
+  Sets the transparency type to be used for the scene.
 */
 void
 QuarterWidget::setTransparencyType(TransparencyType type)
@@ -297,6 +366,9 @@ QuarterWidget::setTransparencyType(TransparencyType type)
   PRIVATE(this)->sorendermanager->scheduleRedraw();
 }
 
+/*!
+  \retval The current \ref TransparencyType
+*/
 QuarterWidget::TransparencyType
 QuarterWidget::transparencyType(void) const
 {
@@ -305,6 +377,15 @@ QuarterWidget::transparencyType(void) const
   return static_cast<QuarterWidget::TransparencyType>(action->getTransparencyType());
 }
 
+/*!
+  \property QuarterWidget::renderMode
+
+  \copydetails QuarterWidget::setRenderMode
+*/
+
+/*!
+  \copydoc RenderMode
+*/
 void
 QuarterWidget::setRenderMode(RenderMode mode)
 {
@@ -313,6 +394,9 @@ QuarterWidget::setRenderMode(RenderMode mode)
   PRIVATE(this)->sorendermanager->scheduleRedraw();
 }
 
+/*!
+  \retval The current \ref RenderMode
+*/
 QuarterWidget::RenderMode
 QuarterWidget::renderMode(void) const
 {
@@ -320,6 +404,15 @@ QuarterWidget::renderMode(void) const
   return static_cast<RenderMode>(PRIVATE(this)->sorendermanager->getRenderMode());
 }
 
+/*!
+  \property QuarterWidget::stereoMode
+
+  \copydetails QuarterWidget::setStereoMode
+*/
+
+/*!
+  \copydoc StereoMode
+*/
 void
 QuarterWidget::setStereoMode(StereoMode mode)
 {
@@ -328,6 +421,10 @@ QuarterWidget::setStereoMode(StereoMode mode)
   PRIVATE(this)->sorendermanager->scheduleRedraw();
 }
 
+
+/*!
+  \retval The current \ref StereoMode
+*/
 QuarterWidget::StereoMode
 QuarterWidget::stereoMode(void) const
 {
@@ -489,6 +586,10 @@ QuarterWidget::viewAll(void)
   }
 }
 
+/*!
+  Sets the current camera in seekmode, if supported by the underlying navigation system.
+  Camera typically seeks towards what the mouse is pointing at.
+*/
 void
 QuarterWidget::seek(void)
 {
@@ -578,6 +679,12 @@ QuarterWidget::actualRedraw(void)
                                          PRIVATE(this)->clearzbuffer);
 }
 
+/*!
+  Passes an event to the eventmanager.
+
+  \param[in] event to pass
+  \retval Returns true if the event was successfully processed
+*/
 bool
 QuarterWidget::processSoEvent(const SoEvent * event)
 {
@@ -586,6 +693,11 @@ QuarterWidget::processSoEvent(const SoEvent * event)
     PRIVATE(this)->soeventmanager &&
     PRIVATE(this)->soeventmanager->processEvent(event);
 }
+
+/*!
+  \property QuarterWidget::backgroundColor
+  \copydoc QuarterWidget::setBackgroundColor
+*/
 
 /*!
   Set backgroundcolor to a given QColor
@@ -624,19 +736,33 @@ QuarterWidget::backgroundColor(void) const
 
 /*!
   Returns the context menu used by the widget.
- */
+*/
 QMenu *
 QuarterWidget::getContextMenu(void) const
 {
   return PRIVATE(this)->contextMenu();
 }
 
+/*!
+  \retval Is context menu enabled?
+*/
 bool
 QuarterWidget::contextMenuEnabled(void) const
 {
   return PRIVATE(this)->contextmenuenabled;
 }
 
+/*!
+  \property QuarterWidget::contextMenuEnabled
+  
+  \copydetails QuarterWidget::setContextMenuEnabled
+*/
+
+/*!
+  Controls the display of the contextmenu
+
+  \param[in] yes Context menu on?
+*/
 void
 QuarterWidget::setContextMenuEnabled(bool yes)
 {
@@ -676,6 +802,9 @@ QuarterWidget::removeStateMachine(SoScXMLStateMachine * statemachine)
   em->removeSoScXMLStateMachine(statemachine);
 }
 
+/*!
+  See \ref QWidget::minimumSizeHint
+ */
 QSize
 QuarterWidget::minimumSizeHint(void) const
 {
@@ -700,11 +829,32 @@ QuarterWidget::renderModeActions(void) const
   return PRIVATE(this)->renderModeActions();
 }
 
+/*!
+  \property QuarterWidget::navigationModeFile
+
+  An url to a navigation mode file which is a scxml file which defines
+  the possible states for the Coin navigation system
+
+  Supports:
+  \li \b coin for internal coinresources
+  \li \b file for filesystem path to resources
+
+  \sa scxml
+*/
+
+/*!
+  Removes any navigationModeFile set.
+*/
 void
 QuarterWidget::resetNavigationModeFile(void) {
   this->setNavigationModeFile(QUrl());
 }
 
+/*!
+  Sets a navigation mode file. Supports the schemes "coin" and "file"
+  
+  \param[in] url Url to the resource
+*/
 void
 QuarterWidget::setNavigationModeFile(const QUrl & url)
 {
@@ -787,8 +937,11 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
   }
 }
 
+/*!
+  \retval The current navigationModeFile
+*/
 const QUrl &
-QuarterWidget::navigationModeFile() const
+QuarterWidget::navigationModeFile(void) const
 {
   return PRIVATE(this)->navigationModeFile;
 }
