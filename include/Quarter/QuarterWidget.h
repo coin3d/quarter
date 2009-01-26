@@ -50,7 +50,7 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   typedef QGLWidget inherited;
   Q_OBJECT
 
-  Q_PROPERTY(QUrl navigationModeFile READ navigationModeFile WRITE setNavigationModeFile)
+    Q_PROPERTY(QUrl navigationModeFile READ navigationModeFile WRITE setNavigationModeFile RESET resetNavigationModeFile)
   Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
   Q_PROPERTY(bool contextMenuEnabled READ contextMenuEnabled WRITE setContextMenuEnabled)
   Q_PROPERTY(bool headlightEnabled READ headlightEnabled WRITE setHeadlightEnabled)
@@ -112,6 +112,7 @@ public:
   void setBackgroundColor(const QColor & color);
   QColor backgroundColor(void) const;
 
+  void resetNavigationModeFile(void);
   void setNavigationModeFile(const QUrl & url = QUrl(DEFAULT_NAVIGATIONFILE));
   const QUrl & navigationModeFile(void) const;
 

@@ -159,7 +159,7 @@ QuarterWidget::~QuarterWidget()
   You can set the cursor you want to use for a given navigation
   state. See the Coin documentation on navigation for information
   about available states
- */
+*/
 void
 QuarterWidget::setStateCursor(const SbName & state, const QCursor & cursor)
 {
@@ -700,7 +700,10 @@ QuarterWidget::renderModeActions(void) const
   return PRIVATE(this)->renderModeActions();
 }
 
-#include <iostream>
+void
+QuarterWidget::resetNavigationModeFile(void) {
+  this->setNavigationModeFile(QUrl());
+}
 
 void
 QuarterWidget::setNavigationModeFile(const QUrl & url)
@@ -730,6 +733,7 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
     if (PRIVATE(this)->currentStateMachine) {
       this->removeStateMachine(PRIVATE(this)->currentStateMachine.get());
       PRIVATE(this)->currentStateMachine.reset();
+      PRIVATE(this)->navigationModeFile = url;
     }
     return;
   }
