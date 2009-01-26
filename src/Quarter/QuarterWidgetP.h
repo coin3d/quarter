@@ -28,6 +28,7 @@
 #include <QtGui/QCursor>
 #include <QtCore/QList>
 #include <QtCore/QUrl>
+#include <boost/shared_ptr.hpp>
 
 class SoNode;
 class SoCamera;
@@ -40,6 +41,7 @@ class QAction;
 class QActionGroup;
 class QMenu;
 class ScXMLStateMachine;
+class SoScXMLStateMachine;
 template <class Key, class T> class QMap;
 
 namespace SIM { namespace Coin3D { namespace Quarter {
@@ -83,6 +85,7 @@ public:
   bool clearwindow;
   bool addactions;
   QUrl navigationModeFile;
+  boost::shared_ptr<SoScXMLStateMachine> currentStateMachine;
 
   static void rendercb(void * userdata, SoRenderManager *);
   static void prerendercb(void * userdata, SoRenderManager * manager);
