@@ -806,18 +806,33 @@ QuarterWidget::minimumSizeHint(void) const
   return QSize(50, 50);
 }
 
+/*!  Returns a list of grouped actions that corresponds to the
+  TransparencyType enum. If you want to create a menu in your
+  application that controls the transparency type used in
+  QuarterWidget, add these actions to the menu.
+ */
 QList<QAction *>
 QuarterWidget::transparencyTypeActions(void) const
 {
   return PRIVATE(this)->transparencyTypeActions();
 }
 
+/*!  Returns a list of grouped actions that corresponds to the
+  StereoMode enum. If you want to create a menu in your
+  application that controls the stereo mode used in
+  QuarterWidget, add these actions to the menu.
+ */
 QList<QAction *>
 QuarterWidget::stereoModeActions(void) const
 {
   return PRIVATE(this)->stereoModeActions();
 }
 
+/*!  Returns a list of grouped actions that corresponds to the
+  RenderMode enum. If you want to create a menu in your
+  application that controls the render mode type used in
+  QuarterWidget, add these actions to the menu.
+ */
 QList<QAction *>
 QuarterWidget::renderModeActions(void) const
 {
