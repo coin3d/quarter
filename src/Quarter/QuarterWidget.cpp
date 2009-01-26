@@ -702,11 +702,14 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
   QString filename;
 
   if (url.scheme()=="coin") {
-    //Workaround for differences between url scheme, and Coin internal scheme.
     filename = url.path();
+#if (COIN_MAJOR_VERSION==3) && (COIN_MINOR_VERSION==0)
+    //Workaround for differences between url scheme, and Coin internal
+    //scheme in Coin 3.0.
     if (filename[0]=='/') {
       filename.remove(0,1);
     }
+#endif
     filename = url.scheme()+':'+filename;
   }
   else if (url.scheme()=="file")
