@@ -27,7 +27,7 @@ Release 1.0.0
 =============
 
 Release 1.0.0 is the first major release. Quarter 1.0 is only usable
-with Coin-3.0 and Qt-4.x
+with Coin-3.x and Qt-4.x
 
 See the file NEWS for the summary of changes, and the file ChangeLog for
 the detailed list.

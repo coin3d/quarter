@@ -2,9 +2,55 @@
 ==                  BUILDING QUARTER ON WINDOWS                     ==
 ======================================================================
 
-Quarter can be compiled on Windows, with the use of Cygwin. See Coin's
-README.WIN32 for detailed information on building Coin with cygwin,
-that information goes for Quarter as well as Coin.
+Microsoft Visual Studio
+=======================
+
+The source code archive for Quarter comes with Microsoft Visual Studio
+files for building and installing the Quarter library and the Qt
+Designer Plugin.  Visual Studio 6, Visual Studio 7/7.1, Visual Studio
+8, and Visual Studio 9 are supported.  For later versions in the
+future, you can probably just "upgrade" one of these to get a working
+set for that version as well.  Visual Studio 6 will not be supported
+(at the C++ language level) for very much longer.
+
+A separate target "quarter1_install" is provided for copying the built
+Quarter library and the Qt Designer Plugin into the directory provided
+in the COINDIR environment variable.  Set it to e.g. "C:\Coin3D" or
+wherever you want the Quarter SDK to reside by using
+
+  Control Panel => System => Advanced => Environment Variables
+
+and make sure you create that directory before starting the build of
+that target - if the variable isn't set or the directory doesn't
+exist, the installation will break and you won't get a functional SDK.
+Using the source hierarchy as the SDK is not recommended - let Quarter
+be installed, and use COINDIR from your other projects that use Coin
+and Quarter.
+
+A target is also provided for installing the Qt Designer Plugin,
+"quarterwidgetplugin1_install". The plugin is copied into the
+$QTDIR/plugins/designer directory.
+
+For Microsoft Visual Studio 6, you will find the complete build file setup
+in the directory "build/msvc6/".  Select the dsw file.
+
+For Microsoft Visual Studio 7/7.1, you will find the complete build file setup
+in the directory build/msvc7/.  Select the sln file.
+
+For Microsoft Visual Studio 8, you will find the complete build file setup
+in the directory build/msvc8/.  Select the sln file.
+
+For Microsoft Visual Studio 9, you will find the complete build file setup
+in the directory build/msvc9/.  Select the sln file.
+
+
+============================================================================
+==              OLD INFORMATION ON CYGWIN-BASED BUILDS BELOW              ==
+============================================================================
+
+Quarter can also be compiled on Windows with the use of Cygwin. See
+Coin's README.WIN32 for detailed information on building Coin with
+cygwin, that information goes for Quarter as well as Coin.
 
 There are a couple of things you need to be aware of. The binary
 distributions of Qt is usually built with the multithread-dynamic C
@@ -20,8 +66,5 @@ If you want to build Quarter in release mode on windows, specify
 
 If you want to link against Qt debug DLLs, specify --with-qt-debug.
 
-The Qt Designer Plugin
-======================
-
-Quarter comes with a plugin for Qt Designer. On Windows, this plugin
-is installed in $QTDIR/plugins/designer. 
+The Qt Designer Plugin is placed in $QTDIR/plugins/designer by default
+when using cygwin.
