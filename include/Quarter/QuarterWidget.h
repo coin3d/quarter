@@ -72,7 +72,7 @@ public:
   explicit QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
   explicit QuarterWidget(QGLContext * context, QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
   explicit QuarterWidget(const QGLFormat & format, QWidget * parent = 0, const QGLWidget * shareWidget = 0, Qt::WindowFlags f = 0);
-  ~QuarterWidget();
+  virtual ~QuarterWidget();
 
   enum TransparencyType {
     SCREEN_DOOR = SoGLRenderAction::SCREEN_DOOR,
