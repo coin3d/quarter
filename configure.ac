@@ -779,6 +779,7 @@ AC_CONFIG_FILES([
 	include/Quarter/Makefile
 	include/Quarter/devices/Makefile
 	include/Quarter/eventhandlers/Makefile
+        include/boost/Makefile
 	src/Makefile
 	src/Quarter/Makefile
 	src/examples/Makefile
