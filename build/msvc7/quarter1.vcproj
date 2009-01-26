@@ -444,7 +444,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\src\Quarter\EventHandler.cpp">
+				RelativePath="..\..\src\Quarter\FocusHandler.cpp">
 				<FileConfiguration
 					Name="LIB (Debug)|Win32">
 					<Tool
@@ -570,6 +570,87 @@
 						PreprocessorDefinitions=""
 						ObjectFile="QuarterStaticRelease/"
 						ProgramDataBaseFileName="QuarterStaticRelease/"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\src\Quarter\InteractionMode.cpp">
+				<FileConfiguration
+					Name="LIB (Debug)|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;QUARTER_DEBUG=1;HAVE_CONFIG_H;QUARTER_MAKE_DLL;COIN_DLL;QUARTER_INTERNAL;$(NoInherit)"
+						BasicRuntimeChecks="3"
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;QUARTER_DEBUG=0;HAVE_CONFIG_H;QUARTER_MAKE_DLL;COIN_DLL;QUARTER_INTERNAL;$(NoInherit)"
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\src\Quarter\InteractionMode.h">
+				<FileConfiguration
+					Name="LIB (Debug)|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="moc&apos;ing $(InputPath)"
+						CommandLine="&quot;$(QTDIR)&quot;\bin\moc -o src\Quarter\moc_InteractionMode.cpp ..\..\src\Quarter\InteractionMode.h
+"
+						Outputs="src\Quarter\moc_InteractionMode.cpp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="moc&apos;ing $(InputPath)"
+						CommandLine="&quot;$(QTDIR)&quot;\bin\moc -o src\Quarter\moc_InteractionMode.cpp ..\..\src\Quarter\InteractionMode.h
+"
+						Outputs="src\Quarter\moc_InteractionMode.cpp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="moc&apos;ing $(InputPath)"
+						CommandLine="&quot;$(QTDIR)&quot;\bin\moc -o src\Quarter\moc_InteractionMode.cpp ..\..\src\Quarter\InteractionMode.h
+"
+						Outputs="src\Quarter\moc_InteractionMode.cpp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="moc&apos;ing $(InputPath)"
+						CommandLine="&quot;$(QTDIR)&quot;\bin\moc -o src\Quarter\moc_InteractionMode.cpp ..\..\src\Quarter\InteractionMode.h
+"
+						Outputs="src\Quarter\moc_InteractionMode.cpp"/>
 				</FileConfiguration>
 			</File>
 			<File
@@ -745,6 +826,90 @@
 			</File>
 			<File
 				RelativePath="src\Quarter\moc_EventFilter.cpp">
+				<FileConfiguration
+					Name="LIB (Debug)|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;QUARTER_DEBUG=1;HAVE_CONFIG_H;QUARTER_MAKE_DLL;COIN_DLL;QUARTER_INTERNAL;$(NoInherit)"
+						BasicRuntimeChecks="3"
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;QUARTER_DEBUG=0;HAVE_CONFIG_H;QUARTER_MAKE_DLL;COIN_DLL;QUARTER_INTERNAL;$(NoInherit)"
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="src\Quarter\moc_FocusHandler.cpp">
+				<FileConfiguration
+					Name="LIB (Debug)|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;QUARTER_DEBUG=1;HAVE_CONFIG_H;QUARTER_MAKE_DLL;COIN_DLL;QUARTER_INTERNAL;$(NoInherit)"
+						BasicRuntimeChecks="3"
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;QUARTER_DEBUG=0;HAVE_CONFIG_H;QUARTER_MAKE_DLL;COIN_DLL;QUARTER_INTERNAL;$(NoInherit)"
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="src\Quarter\moc_InteractionMode.cpp">
 				<FileConfiguration
 					Name="LIB (Debug)|Win32">
 					<Tool
@@ -1436,7 +1601,43 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\include\Quarter\eventhandlers\EventHandler.h">
+					RelativePath="..\..\include\Quarter\eventhandlers\FocusHandler.h">
+					<FileConfiguration
+						Name="LIB (Debug)|Win32">
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="moc&apos;ing $(InputPath)"
+							CommandLine="&quot;$(QTDIR)&quot;\bin\moc -o src\Quarter\moc_FocusHandler.cpp ..\..\include\Quarter\eventhandlers\FocusHandler.h
+"
+							Outputs="src\Quarter\moc_FocusHandler.cpp"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DLL (Debug)|Win32">
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="moc&apos;ing $(InputPath)"
+							CommandLine="&quot;$(QTDIR)&quot;\bin\moc -o src\Quarter\moc_FocusHandler.cpp ..\..\include\Quarter\eventhandlers\FocusHandler.h
+"
+							Outputs="src\Quarter\moc_FocusHandler.cpp"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="DLL (Release)|Win32">
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="moc&apos;ing $(InputPath)"
+							CommandLine="&quot;$(QTDIR)&quot;\bin\moc -o src\Quarter\moc_FocusHandler.cpp ..\..\include\Quarter\eventhandlers\FocusHandler.h
+"
+							Outputs="src\Quarter\moc_FocusHandler.cpp"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="LIB (Release)|Win32">
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="moc&apos;ing $(InputPath)"
+							CommandLine="&quot;$(QTDIR)&quot;\bin\moc -o src\Quarter\moc_FocusHandler.cpp ..\..\include\Quarter\eventhandlers\FocusHandler.h
+"
+							Outputs="src\Quarter\moc_FocusHandler.cpp"/>
+					</FileConfiguration>
 				</File>
 			</Filter>
 		</Filter>

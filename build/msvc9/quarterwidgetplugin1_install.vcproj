@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="quarterwidgetplugin1_install"
-	ProjectGUID="{56D08DDA-8BD4-4A97-B76B-9FA938DD0F82}"
+	ProjectGUID="{D44A2DCE-8ED7-40FB-8E38-B5B3E7120C0F}"
 	Keyword="MakeFileProj"
 	TargetFrameworkVersion="0"
 	>
@@ -26,8 +26,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-plugin.bat dll debug msvc9 quarterwidgetplugin1"
-				ReBuildCommandLine="..\misc\install-plugin.bat dll debug msvc9 quarterwidgetplugin1 "
+				BuildCommandLine="..\misc\install-plugin.bat dll debug msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\install-plugin.bat dll debug msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
 				Output="quarterwidgetplugin1_install.exe"
 				PreprocessorDefinitions=""
@@ -49,8 +49,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-plugin.bat dll release msvc9 quarterwidgetplugin1"
-				ReBuildCommandLine="..\misc\install-plugin.bat dll release msvc9 quarterwidgetplugin1 "
+				BuildCommandLine="..\misc\install-plugin.bat dll release msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\install-plugin.bat dll release msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
 				Output="quarterwidgetplugin1_install.exe"
 				PreprocessorDefinitions=""
@@ -72,8 +72,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-plugin.bat lib release msvc9 quarterwidgetplugin1"
-				ReBuildCommandLine="..\misc\install-plugin.bat lib release msvc9 quarterwidgetplugin1 "
+				BuildCommandLine="..\misc\install-plugin.bat lib release msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\install-plugin.bat lib release msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
 				Output="quarterwidgetplugin1_install.exe"
 				PreprocessorDefinitions=""
@@ -95,8 +95,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-plugin.bat lib debug msvc9 quarterwidgetplugin1"
-				ReBuildCommandLine="..\misc\install-plugin.bat lib debug msvc9 quarterwidgetplugin1 "
+				BuildCommandLine="..\misc\install-plugin.bat lib debug msvc6 quarterwidgetplugin1"
+				ReBuildCommandLine="..\misc\install-plugin.bat lib debug msvc6 quarterwidgetplugin1 "
 				CleanCommandLine=""
 				Output="quarterwidgetplugin1_install.exe"
 				PreprocessorDefinitions=""

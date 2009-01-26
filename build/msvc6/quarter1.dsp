@@ -424,6 +424,19 @@ SOURCE=src\Quarter\moc_DragDropHandler.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=src\Quarter\moc_FocusHandler.cpp
+!IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
+# PROP Intermediate_Dir "QuarterRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
+# PROP Intermediate_Dir "QuarterDebug"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Release)"
+# PROP Intermediate_Dir "QuarterStaticRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Debug)"
+# PROP Intermediate_Dir "QuarterStaticDebug"
+!ENDIF
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\src\Quarter\SensorManager.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
@@ -468,6 +481,83 @@ SOURCE=..\..\src\Quarter\ImageReader.h
 # Begin Source File
 
 SOURCE=..\..\src\Quarter\ImageReader.cpp
+!IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
+# PROP Intermediate_Dir "QuarterRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
+# PROP Intermediate_Dir "QuarterDebug"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Release)"
+# PROP Intermediate_Dir "QuarterStaticRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Debug)"
+# PROP Intermediate_Dir "QuarterStaticDebug"
+!ENDIF
+# End Source File
+# Begin Source File
+
+SOURCE=src\Quarter\moc_InteractionMode.cpp
+!IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
+# PROP Intermediate_Dir "QuarterRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
+# PROP Intermediate_Dir "QuarterDebug"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Release)"
+# PROP Intermediate_Dir "QuarterStaticRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Debug)"
+# PROP Intermediate_Dir "QuarterStaticDebug"
+!ENDIF
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\Quarter\InteractionMode.h
+
+!IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\src\Quarter\InteractionMode.h
+
+"src\Quarter\moc_InteractionMode.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_InteractionMode.cpp ..\..\src\Quarter\InteractionMode.h
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\src\Quarter\InteractionMode.h
+
+"src\Quarter\moc_InteractionMode.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_InteractionMode.cpp ..\..\src\Quarter\InteractionMode.h
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Release)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\src\Quarter\InteractionMode.h
+
+"src\Quarter\moc_InteractionMode.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_InteractionMode.cpp ..\..\src\Quarter\InteractionMode.h
+
+# End Custom Build
+  
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Debug)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\src\Quarter\InteractionMode.h
+
+"src\Quarter\moc_InteractionMode.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_InteractionMode.cpp ..\..\src\Quarter\InteractionMode.h
+
+# End Custom Build
+
+!ENDIF
+
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\Quarter\InteractionMode.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
 !ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
@@ -596,7 +686,7 @@ SOURCE=..\..\src\Quarter\EventFilter.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\src\Quarter\EventHandler.cpp
+SOURCE=..\..\src\Quarter\DragDropHandler.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
 !ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
@@ -609,7 +699,7 @@ SOURCE=..\..\src\Quarter\EventHandler.cpp
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\src\Quarter\DragDropHandler.cpp
+SOURCE=..\..\src\Quarter\FocusHandler.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
 !ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
@@ -754,6 +844,57 @@ InputPath=..\..\include\Quarter\eventhandlers\DragDropHandler.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\include\Quarter\eventhandlers\FocusHandler.h
+
+!IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\include\Quarter\eventhandlers\FocusHandler.h
+
+"src\Quarter\moc_FocusHandler.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_FocusHandler.cpp ..\..\include\Quarter\eventhandlers\FocusHandler.h
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\include\Quarter\eventhandlers\FocusHandler.h
+
+"src\Quarter\moc_FocusHandler.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_FocusHandler.cpp ..\..\include\Quarter\eventhandlers\FocusHandler.h
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Release)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\include\Quarter\eventhandlers\FocusHandler.h
+
+"src\Quarter\moc_FocusHandler.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_FocusHandler.cpp ..\..\include\Quarter\eventhandlers\FocusHandler.h
+
+# End Custom Build
+  
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Debug)"
+
+# PROP IgnoreDefaultTool 1
+#Begin Custom Build - moc'ing $(InputPath)
+InputPath=..\..\include\Quarter\eventhandlers\FocusHandler.h
+
+"src\Quarter\moc_FocusHandler.cpp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	$(QTDIR)\bin\moc -o src\Quarter\moc_FocusHandler.cpp ..\..\include\Quarter\eventhandlers\FocusHandler.h
+
+# End Custom Build
+
+!ENDIF
+
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\include\Quarter\eventhandlers\EventFilter.h
 
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
@@ -802,10 +943,6 @@ InputPath=..\..\include\Quarter\eventhandlers\EventFilter.h
 
 !ENDIF
 
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\include\Quarter\eventhandlers\EventHandler.h
 # End Source File
 # End Group
 # End Group
