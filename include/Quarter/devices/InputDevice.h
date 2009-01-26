@@ -37,9 +37,10 @@ public:
   InputDevice(void);
   virtual ~InputDevice() {}
 
-  /*! Subclasses must override this method to provide custom event
+  /*!
+    Subclasses must override this method to provide custom event
     handling
-   */
+  */
   virtual const SoEvent * translateEvent(QEvent * event) = 0;
 
   void setMousePosition(const SbVec2s & pos);

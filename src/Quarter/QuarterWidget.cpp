@@ -237,7 +237,7 @@ QuarterWidget::getHeadlight(void)
 
 /*!
   \property QuarterWidget::clearZBuffer
-  
+
   \copydetails QuarterWidget::setClearZBuffer
 */
 
@@ -287,7 +287,7 @@ QuarterWidget::clearWindow(void) const
 
 /*!
   \property QuarterWidget::interactionModeEnabled
-  
+
   \copydetails QuarterWidget::setInteractionModeEnabled
 */
 
@@ -318,7 +318,7 @@ QuarterWidget::interactionModeEnabled(void) const
 */
 
 /*!
-  Turn interaction mode on or off. 
+  Turn interaction mode on or off.
 */
 void
 QuarterWidget::setInteractionModeOn(bool onoff)
@@ -749,7 +749,7 @@ QuarterWidget::contextMenuEnabled(void) const
 
 /*!
   \property QuarterWidget::contextMenuEnabled
-  
+
   \copydetails QuarterWidget::setContextMenuEnabled
 */
 
@@ -862,7 +862,7 @@ QuarterWidget::resetNavigationModeFile(void) {
 
 /*!
   Sets a navigation mode file. Supports the schemes "coin" and "file"
-  
+
   \param[in] url Url to the resource
 */
 void
