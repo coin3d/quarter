@@ -142,6 +142,10 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 /*! destructor */
 QuarterWidget::~QuarterWidget()
 {
+  if (PRIVATE(this)->currentStateMachine) {
+    this->removeStateMachine(PRIVATE(this)->currentStateMachine.get());
+    PRIVATE(this)->currentStateMachine.reset();
+  }
   PRIVATE(this)->headlight->unref();
   PRIVATE(this)->headlight = NULL;
   this->setSceneGraph(NULL);
@@ -462,7 +466,7 @@ QuarterWidget::getSoEventManager(void) const
 /*!
   Returns a pointer to the event filter
  */
-EventFilter * 
+EventFilter *
 QuarterWidget::getEventFilter(void) const
 {
   return PRIVATE(this)->eventfilter;
@@ -696,6 +700,8 @@ QuarterWidget::renderModeActions(void) const
   return PRIVATE(this)->renderModeActions();
 }
 
+#include <iostream>
+
 void
 QuarterWidget::setNavigationModeFile(const QUrl & url)
 {
@@ -703,37 +709,56 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
 
   if (url.scheme()=="coin") {
     filename = url.path();
-#if (COIN_MAJOR_VERSION==3) && (COIN_MINOR_VERSION==0)
+    //FIXME: This conditional needs to be implemented when the
+    //CoinResources systems if working
+#if 0
+    //#if (COIN_MAJOR_VERSION==3) && (COIN_MINOR_VERSION==0)
+#endif
     //Workaround for differences between url scheme, and Coin internal
     //scheme in Coin 3.0.
     if (filename[0]=='/') {
       filename.remove(0,1);
     }
+#if 0
+    //#endif
 #endif
     filename = url.scheme()+':'+filename;
   }
   else if (url.scheme()=="file")
     filename = url.toLocalFile();
+  else if (url.isEmpty()) {
+    if (PRIVATE(this)->currentStateMachine) {
+      this->removeStateMachine(PRIVATE(this)->currentStateMachine.get());
+      PRIVATE(this)->currentStateMachine.reset();
+    }
+    return;
+  }
   else {
     qDebug()<<url.scheme()<<"is not recognized";
     return;
   }
 
-
   QByteArray filenametmp = filename.toLocal8Bit();
 
-  // FIXME: This object appears to never be deleted. kintel 20080730
-  ScXMLStateMachine * statemachine =
+  ScXMLStateMachine * stateMachine =
     ScXML::readFile(filenametmp.data());
-  if (statemachine &&
-      statemachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
-    SoScXMLStateMachine * sostatemachine =
-      static_cast<SoScXMLStateMachine *>(statemachine);
-    statemachine->addStateChangeCallback(QuarterWidgetP::statechangecb, PRIVATE(this));
-    PRIVATE(this)->soeventmanager->addSoScXMLStateMachine(sostatemachine);
+
+  if (stateMachine &&
+      stateMachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
+    boost::shared_ptr<SoScXMLStateMachine>
+      sostatemachine(
+                   static_cast<SoScXMLStateMachine *>(stateMachine)
+                   );
+    if (PRIVATE(this)->currentStateMachine) {
+      this->removeStateMachine(PRIVATE(this)->currentStateMachine.get());
+    }
+    this->addStateMachine(sostatemachine.get());
     sostatemachine->initialize();
+    PRIVATE(this)->currentStateMachine=sostatemachine;
   }
   else {
+    if (stateMachine)
+      delete stateMachine;
     qDebug()<<filename;
     qDebug()<<"Unable to load"<<url;
     return;
