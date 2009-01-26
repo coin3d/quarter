@@ -47,9 +47,7 @@ template <class Key, class T> class QMap;
 namespace SIM { namespace Coin3D { namespace Quarter {
 
 class EventFilter;
-class DragDropHandler;
 class InteractionMode;
-class FocusHandler;
 class ContextMenu;
 
 class QuarterWidgetP {
@@ -70,8 +68,6 @@ public:
   SoNode * scene;
   EventFilter * eventfilter;
   InteractionMode * interactionmode;
-  FocusHandler * focushandler;
-  DragDropHandler * dragdrophandler;
   SoRenderManager * sorendermanager;
   SoEventManager * soeventmanager;
   bool initialsorendermanager;

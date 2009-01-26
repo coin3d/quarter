@@ -448,6 +448,7 @@ INPUT = @path_tag@@quarter_src_dir@/include/Quarter/Basic.h \
         @path_tag@@quarter_src_dir@/include/Quarter/Quarter.h \
         @path_tag@@quarter_src_dir@/include/Quarter/eventhandlers/EventFilter.h \
         @path_tag@@quarter_src_dir@/include/Quarter/eventhandlers/DragDropHandler.h \
+        @path_tag@@quarter_src_dir@/include/Quarter/eventhandlers/FocusHandler.h \
         @path_tag@@quarter_src_dir@/include/Quarter/devices/InputDevice.h \
         @path_tag@@quarter_src_dir@/include/Quarter/devices/Keyboard.h \
         @path_tag@@quarter_src_dir@/include/Quarter/devices/Mouse.h \
@@ -458,6 +459,7 @@ INPUT = @path_tag@@quarter_src_dir@/include/Quarter/Basic.h \
         @path_tag@@quarter_src_dir@/src/Quarter/Mouse.cpp \
         @path_tag@@quarter_src_dir@/src/Quarter/EventFilter.cpp \
         @path_tag@@quarter_src_dir@/src/Quarter/DragDropHandler.cpp \
+        @path_tag@@quarter_src_dir@/src/Quarter/FocusHandler.cpp \
         @path_tag@@quarter_src_dir@/src/plugins/QuarterWidgetPlugin.h \
         @path_tag@@quarter_src_dir@/src/plugins/QuarterWidgetPlugin.cpp \
         @path_tag@@quarter_src_dir@/src/examples/minimal.cpp \

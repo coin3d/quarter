@@ -37,6 +37,7 @@
 
 #include <Quarter/Quarter.h>
 #include <Quarter/QuarterWidget.h>
+#include <Quarter/eventhandlers/DragDropHandler.h>
 
 using namespace SIM::Coin3D::Quarter;
 
@@ -57,6 +58,9 @@ int main(int argc, char *argv[])
   // Get the QuarterWidget
   QuarterWidget * viewer = qFindChild<QuarterWidget *>(widget, "QuarterWidget");
   assert(viewer && "could not find child QuarterWidget in ui file");
+
+  // make viewer support drag and drop of Inventor files
+  viewer->installEventFilter(new DragDropHandler(viewer));
 
   // Make a dead simple scene graph by using the Coin library, only
   // containing a single yellow cone under the scenegraph root.
