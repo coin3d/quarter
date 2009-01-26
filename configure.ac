@@ -158,7 +158,6 @@ AC_ARG_WITH([qttag],
                                 (default: NONE) cross references
                                 documentation against the given 
                                 doxygen tagfile],
-  [  --with-qttag=<path>  (default: NONE)],
   [sim_ac_qttag_fileloc="$withval"],
   [sim_ac_qttag_fileloc=""])
 

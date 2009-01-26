@@ -19184,9 +19184,9 @@ sim_ac_qttag_fileloc=""
 # Check whether --with-qttag or --without-qttag was given.
 if test "${with_qttag+set}" = set; then
   withval="$with_qttag"
-    --with-qttag=<path>  (default: NONE)
-else
   sim_ac_qttag_fileloc="$withval"
+else
+  sim_ac_qttag_fileloc=""
 fi;
 
 QT_TAG_FILE=$sim_ac_qttag_fileloc
