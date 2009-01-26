@@ -44,7 +44,7 @@ public:
 
   void setMousePosition(const SbVec2s & pos);
   void setWindowSize(const SbVec2s & size);
-  void setModifiers(SoEvent * soevent, QInputEvent * qevent);
+  void setModifiers(SoEvent * soevent, const QInputEvent * qevent);
 
 protected:
   SbVec2s mousepos;

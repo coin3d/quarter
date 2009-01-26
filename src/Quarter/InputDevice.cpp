@@ -52,7 +52,7 @@ InputDevice::setWindowSize(const SbVec2s & size)
 }
 
 void
-InputDevice::setModifiers(SoEvent * soevent, QInputEvent * qevent)
+InputDevice::setModifiers(SoEvent * soevent, const QInputEvent * qevent)
 {
   // FIXME: How do we get the time from the qevent? (20070306 frodo)
   soevent->setTime(SbTime::getTimeOfDay());
