@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="quarterwidgetplugin1_uninstall"
-	ProjectGUID="{1FDFE6E8-FBA9-41F8-A7EE-0E983D94FADF}"
+	ProjectGUID="{405001D3-8CA2-4AD3-B5A2-498209BE483A}"
 	Keyword="MakeFileProj"
 	>
 	<Platforms>

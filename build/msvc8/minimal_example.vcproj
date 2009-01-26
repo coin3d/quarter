@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="minimal_example"
-	ProjectGUID="{5FC103C5-4A25-415C-8116-64D6561723C2}"
+	ProjectGUID="{517E8631-DF43-4825-B166-F9FB93D489E8}"
 	>
 	<Platforms>
 		<Platform

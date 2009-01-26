@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="quarter1_install"
-	ProjectGUID="{151CEDC5-4DCE-495A-89BD-416C6D00EE1C}"
+	ProjectGUID="{533351BF-4140-4698-973D-91328AE148F7}"
 	Keyword="MakeFileProj"
 	TargetFrameworkVersion="0"
 	>
@@ -26,8 +26,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-sdk.bat lib debug msvc9 quarter1"
-				ReBuildCommandLine="..\misc\install-sdk.bat lib debug msvc9 quarter1 "
+				BuildCommandLine="..\misc\install-sdk.bat lib debug msvc6 quarter1"
+				ReBuildCommandLine="..\misc\install-sdk.bat lib debug msvc6 quarter1 "
 				CleanCommandLine=""
 				Output="quarter1_install.exe"
 				PreprocessorDefinitions=""
@@ -49,8 +49,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-sdk.bat dll release msvc9 quarter1"
-				ReBuildCommandLine="..\misc\install-sdk.bat dll release msvc9 quarter1 "
+				BuildCommandLine="..\misc\install-sdk.bat dll release msvc6 quarter1"
+				ReBuildCommandLine="..\misc\install-sdk.bat dll release msvc6 quarter1 "
 				CleanCommandLine=""
 				Output="quarter1_install.exe"
 				PreprocessorDefinitions=""
@@ -72,8 +72,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-sdk.bat dll debug msvc9 quarter1"
-				ReBuildCommandLine="..\misc\install-sdk.bat dll debug msvc9 quarter1 "
+				BuildCommandLine="..\misc\install-sdk.bat dll debug msvc6 quarter1"
+				ReBuildCommandLine="..\misc\install-sdk.bat dll debug msvc6 quarter1 "
 				CleanCommandLine=""
 				Output="quarter1_install.exe"
 				PreprocessorDefinitions=""
@@ -95,8 +95,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="..\misc\install-sdk.bat lib release msvc9 quarter1"
-				ReBuildCommandLine="..\misc\install-sdk.bat lib release msvc9 quarter1 "
+				BuildCommandLine="..\misc\install-sdk.bat lib release msvc6 quarter1"
+				ReBuildCommandLine="..\misc\install-sdk.bat lib release msvc6 quarter1 "
 				CleanCommandLine=""
 				Output="quarter1_install.exe"
 				PreprocessorDefinitions=""
