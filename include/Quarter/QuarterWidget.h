@@ -146,6 +146,7 @@ public:
 
   void setSoEventManager(SoEventManager * manager);
   SoEventManager * getSoEventManager(void) const;
+
   void setSoRenderManager(SoRenderManager * manager);
   SoRenderManager * getSoRenderManager(void) const;
 
