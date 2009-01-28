@@ -497,6 +497,11 @@ QuarterWidget::setSoRenderManager(SoRenderManager * manager)
     vp = PRIVATE(this)->sorendermanager->getViewportRegion();
     carrydata = true;
   }
+
+  // ref before deleting the old scene manager to avoid that the nodes are deleted
+  if (scene) scene->ref();
+  if (camera) camera->ref();
+  
   if (PRIVATE(this)->initialsorendermanager) {
     delete PRIVATE(this)->sorendermanager;
     PRIVATE(this)->initialsorendermanager = false;
@@ -507,6 +512,9 @@ QuarterWidget::setSoRenderManager(SoRenderManager * manager)
     PRIVATE(this)->sorendermanager->setCamera(camera);
     PRIVATE(this)->sorendermanager->setViewportRegion(vp);
   }
+
+  if (scene) scene->unref();
+  if (camera) camera->unref();
 }
 
 /*!
@@ -534,6 +542,11 @@ QuarterWidget::setSoEventManager(SoEventManager * manager)
     vp = PRIVATE(this)->soeventmanager->getViewportRegion();
     carrydata = true;
   }
+
+  // ref before deleting the old scene manager to avoid that the nodes are deleted
+  if (scene) scene->ref();
+  if (camera) camera->ref();
+
   if (PRIVATE(this)->initialsoeventmanager) {
     delete PRIVATE(this)->soeventmanager;
     PRIVATE(this)->initialsoeventmanager = false;
@@ -544,6 +557,9 @@ QuarterWidget::setSoEventManager(SoEventManager * manager)
     PRIVATE(this)->soeventmanager->setCamera(camera);
     PRIVATE(this)->soeventmanager->setViewportRegion(vp);
   }
+
+  if (scene) scene->unref();
+  if (camera) camera->unref();
 }
 
 /*!
