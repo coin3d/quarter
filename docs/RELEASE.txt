@@ -23,4 +23,12 @@ Remember to include these points:
 * Update configure.ac in trunk to point to next release version, but
   in alpha
 
+* Bootstrap both trunk and tag.
+
+* Run unittests
+
+* Test example programs, and at least a few others.
+
+* Test that doc generation looks reasonable..
+
 * Commit and feel good!
