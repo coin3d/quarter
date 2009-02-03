@@ -108,13 +108,6 @@ QuarterWidgetPlugin::initialize(QDesignerFormEditorInterface * formeditor)
   PRIVATE(this)->formeditor = formeditor;
   PRIVATE(this)->initialized = true;
 
-  if (PRIVATE(this)->formeditor) {
-    // FIXME: if formeditor is set, we assume that Qt Designer is
-    // loading the plugin and disable some warnings in Coin that
-    // appear because a gl context is not properly initialized at this
-    // point. Need to find an actual fix for this  (20090126 frodo)
-    coin_setenv("COIN_DONT_INFORM_INDIRECT_RENDERING","1",FALSE);
-  }
 }
 
 /*!
