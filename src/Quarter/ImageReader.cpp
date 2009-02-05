@@ -22,6 +22,7 @@
 
 #include "ImageReader.h"
 #include <Inventor/SbImage.h>
+#include <Inventor/errors/SoDebugError.h>
 #include <QtGui/QImage>
 
 using namespace SIM::Coin3D::Quarter;
