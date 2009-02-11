@@ -71,6 +71,7 @@ QtCoinCompatibility::SbImageToQImage(const SbImage & sbimage, QImage & img)
     format=QImage::Format_Indexed8;
   }
   img = QImage(size,format);
+  assert(img.size()==size);
   if (nc==1) {
     QVector<QRgb> clut;
     for (int i=0;i<256;++i) {
