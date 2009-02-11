@@ -37,8 +37,6 @@ public:
   ~ImageReader(void);
 
   SbBool readImage(const SbString & filename, SbImage & image) const;
-  static void QImageToSbImage(const QImage &, SbImage & );
-  static void SbImageToQImage(const SbImage &, QImage & );
 
 private:
   static SbBool readImageCB(const SbString & filename, SbImage * image, void * closure);
