@@ -26,42 +26,43 @@ endif
 DEFAULT_INCLUDES = $(includes)
 
 BuiltSources = \
+        moc_ContextMenu.cpp \
+        moc_DragDropHandler.cpp \
+        moc_EventFilter.cpp \
+        moc_FocusHandler.cpp \
+        moc_InteractionMode.cpp \
         moc_QuarterWidget.cpp \
         moc_SensorManager.cpp \
-        moc_ContextMenu.cpp \
-        moc_SignalThread.cpp \
-        moc_EventFilter.cpp \
-        moc_DragDropHandler.cpp \
-        moc_InteractionMode.cpp \
-        moc_FocusHandler.cpp
+        moc_SignalThread.cpp
 
 PrivateHeaders = \
-        SensorManager.h \
+        ContextMenu.h \
         ImageReader.h \
+        InteractionMode.h \
+        KeyboardP.h \
         QuarterP.h \
         QuarterWidgetP.h \
-        ContextMenu.h \
-        SignalThread.h \
-        KeyboardP.h \
-        InteractionMode.h
+        SensorManager.h \
+        SignalThread.h
 
 RegularSources = \
+        ContextMenu.cpp \
+        DragDropHandler.cpp \
+        EventFilter.cpp \
+        FocusHandler.cpp \
+        ImageReader.cpp \
+        InputDevice.cpp \
+        InteractionMode.cpp \
+        Keyboard.cpp \
+        KeyboardP.cpp \
+        Mouse.cpp \
+        QtCoinCompatibility.cpp \
         Quarter.cpp \
         QuarterP.cpp \
         QuarterWidget.cpp \
-        SensorManager.cpp \
         QuarterWidgetP.cpp \
-        ContextMenu.cpp \
-        ImageReader.cpp \
-        SignalThread.cpp \
-        DragDropHandler.cpp \
-        EventFilter.cpp \
-        Mouse.cpp \
-        Keyboard.cpp \
-        InputDevice.cpp \
-        KeyboardP.cpp \
-        InteractionMode.cpp \
-        FocusHandler.cpp
+        SensorManager.cpp \
+        SignalThread.cpp
 
 
 BUILT_SOURCES = $(BuiltSources)
