@@ -960,6 +960,7 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
     this->setStateCursor("rotate", Qt::ClosedHandCursor);
     this->setStateCursor("pan", Qt::SizeAllCursor);
     this->setStateCursor("zoom", Qt::SizeVerCursor);
+    this->setStateCursor("dolly", Qt::SizeVerCursor);
     this->setStateCursor("seek", Qt::CrossCursor);
     this->setStateCursor("spin", Qt::OpenHandCursor);
   }
