@@ -1,6 +1,7 @@
 #include <Quarter/QtCoinCompatibility.h>
 #include <Inventor/SbImage.h>
 #include <QtGui/QImage>
+#include <Inventor/errors/SoDebugError.h>
 
 using namespace SIM::Coin3D::Quarter;
 
