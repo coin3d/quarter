@@ -56,7 +56,7 @@ QtCoinCompatibility::SbImageToQImage(const SbImage & sbimage, QImage & img)
   QSize size(ivsize[0],ivsize[1]);
   assert(src && "Empty image");
   if (nc!=3&&nc!=1&&nc!=4) {
-    SoDebugError::postWarning(__FUNCTION__,
+    SoDebugError::postWarning("QtCoinCompatibility::SbImageToQImage",
                         "Implementation not tested for 3 colors or more"
                            );
   }
