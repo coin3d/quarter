@@ -133,6 +133,7 @@ QuarterWidgetPlugin::createWidget(QWidget * parent)
     QObject::connect(widget, SIGNAL(destroyed(QObject*)),
                      this, SLOT(widgetDestroyed(QObject*)));
   }
+
   //Make a reasonable default visible in designer
   widget->setNavigationModeFile();
 
