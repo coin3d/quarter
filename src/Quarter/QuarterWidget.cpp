@@ -28,29 +28,32 @@
   management and event handling.
 */
 
-#include <assert.h>
+#include <cassert>
 
+#include <QtCore/QFile>
 #include <QtCore/QEvent>
 #include <QtCore/QDebug>
 #include <QtGui/QAction>
 
-#include <Inventor/SbViewportRegion.h>
-#include <Inventor/system/gl.h>
-#include <Inventor/events/SoEvents.h>
-#include <Inventor/nodes/SoNode.h>
-#include <Inventor/nodes/SoCamera.h>
-#include <Inventor/nodes/SoSeparator.h>
-#include <Inventor/nodes/SoDirectionalLight.h>
-#include <Inventor/nodes/SoPerspectiveCamera.h>
-#include <Inventor/SbColor.h>
-#include <Inventor/sensors/SoSensorManager.h>
-#include <Inventor/SoDB.h>
-
 #include <Inventor/SbBasic.h>
-#include <Inventor/SoRenderManager.h>
+#include <Inventor/SbByteBuffer.h>
+#include <Inventor/SbColor.h>
+#include <Inventor/SbViewportRegion.h>
+#include <Inventor/SoDB.h>
 #include <Inventor/SoEventManager.h>
+#include <Inventor/SoRenderManager.h>
+
+#include <Inventor/events/SoEvents.h>
+#include <Inventor/misc/CoinResources.h>
+#include <Inventor/nodes/SoCamera.h>
+#include <Inventor/nodes/SoDirectionalLight.h>
+#include <Inventor/nodes/SoNode.h>
+#include <Inventor/nodes/SoPerspectiveCamera.h>
+#include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/scxml/ScXML.h>
 #include <Inventor/scxml/SoScXMLStateMachine.h>
+#include <Inventor/sensors/SoSensorManager.h>
+#include <Inventor/system/gl.h>
 
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/eventhandlers/EventFilter.h>
@@ -429,7 +432,7 @@ QuarterWidget::stereoMode(void) const
 
 /*!
   Sets the Inventor scenegraph to be rendered
- */
+*/
 void
 QuarterWidget::setSceneGraph(SoNode * node)
 {
@@ -887,11 +890,12 @@ void
 QuarterWidget::setNavigationModeFile(const QUrl & url)
 {
   QString filename;
+  SbByteBuffer navigationMode;
 
   if (url.scheme()=="coin") {
     filename = url.path();
     //FIXME: This conditional needs to be implemented when the
-    //CoinResources systems if working
+    //CoinResources systems is working
 #if 0
     //#if (COIN_MAJOR_VERSION==3) && (COIN_MINOR_VERSION==0)
 #endif
@@ -904,9 +908,14 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
     //#endif
 #endif
     filename = url.scheme()+':'+filename;
+    navigationMode = CoinResources::get(filename.toLatin1().constData());
   }
-  else if (url.scheme()=="file")
+  else if (url.scheme()=="file") {
     filename = url.toLocalFile();
+    QFile file(filename);
+    QByteArray ba = file.readAll();
+    navigationMode = SbByteBuffer(ba.size(),ba.constData());
+  }
   else if (url.isEmpty()) {
     if (PRIVATE(this)->currentStateMachine) {
       this->removeStateMachine(PRIVATE(this)->currentStateMachine.get());
@@ -923,7 +932,62 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
   QByteArray filenametmp = filename.toLocal8Bit();
 
   ScXMLStateMachine * stateMachine =
-    ScXML::readFile(filenametmp.data());
+    ScXML::readFile(filenametmp.constData());
+
+  if (stateMachine &&
+      stateMachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
+    boost::shared_ptr<SoScXMLStateMachine>
+      sostatemachine(
+                   static_cast<SoScXMLStateMachine *>(stateMachine)
+                   );
+    if (PRIVATE(this)->currentStateMachine) {
+      this->removeStateMachine(PRIVATE(this)->currentStateMachine.get());
+    }
+    this->addStateMachine(sostatemachine.get());
+    sostatemachine->initialize();
+    PRIVATE(this)->currentStateMachine = sostatemachine;
+  }
+  else {
+    if (stateMachine)
+      delete stateMachine;
+    qDebug()<<filename;
+    qDebug()<<"Unable to load"<<url;
+    return;
+  }
+
+  //If we have gotten this far, we have successfully loaded the
+  //navigation file, so we set the property
+  PRIVATE(this)->navigationModeFile = url;
+  PRIVATE(this)->navigationMode = navigationMode;
+
+  if (QUrl(DEFAULT_NAVIGATIONFILE) == PRIVATE(this)->navigationModeFile ) {
+
+    // set up default cursors for the examiner navigation states
+    //FIXME: It may be overly restrictive to not do this for arbitrary
+    //navigation systems? - BFG 20090117
+    this->setStateCursor("interact", Qt::ArrowCursor);
+    this->setStateCursor("idle", Qt::OpenHandCursor);
+    this->setStateCursor("rotate", Qt::ClosedHandCursor);
+    this->setStateCursor("pan", Qt::SizeAllCursor);
+    this->setStateCursor("zoom", Qt::SizeVerCursor);
+    this->setStateCursor("dolly", Qt::SizeVerCursor);
+    this->setStateCursor("seek", Qt::CrossCursor);
+    this->setStateCursor("spin", Qt::OpenHandCursor);
+  }
+}
+
+/*!
+  Sets an ScXML navigation mode.
+
+  \param[in] navMode Contents of the ScXML file
+*/
+void
+QuarterWidget::setNavigationMode(const QString & navMode)
+{
+  QByteArray tempBuffer = navMode.toUtf8();
+  SbByteBuffer navigationMode = SbByteBuffer(tempBuffer.size(),tempBuffer.constData());
+  ScXMLStateMachine * stateMachine =
+    ScXML::readBuffer(navigationMode);
 
   if (stateMachine &&
       stateMachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
@@ -941,14 +1005,13 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
   else {
     if (stateMachine)
       delete stateMachine;
-    qDebug()<<filename;
-    qDebug()<<"Unable to load"<<url;
     return;
   }
 
   //If we have gotten this far, we have successfully loaded the
   //navigation file, so we set the property
-  PRIVATE(this)->navigationModeFile = url;
+  PRIVATE(this)->navigationModeFile = QUrl("memory://");
+  PRIVATE(this)->navigationMode = navigationMode;
 
   if (QUrl(DEFAULT_NAVIGATIONFILE) == PRIVATE(this)->navigationModeFile ) {
 
@@ -973,6 +1036,15 @@ const QUrl &
 QuarterWidget::navigationModeFile(void) const
 {
   return PRIVATE(this)->navigationModeFile;
+}
+
+/*!
+  \retval The current navigationMode contents
+*/
+QString
+QuarterWidget::navigationMode(void) const
+{
+  return QByteArray(PRIVATE(this)->navigationMode.constData(),PRIVATE(this)->navigationMode.size());
 }
 
 #undef PRIVATE
