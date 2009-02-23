@@ -24,10 +24,13 @@
 \**************************************************************************/
 
 #include <Inventor/SbBasic.h>
-#include <Inventor/SbName.h>
-#include <QtGui/QCursor>
+#include <Inventor/SbBasic.h>
+#include <Inventor/SbByteBuffer.h>
+
 #include <QtCore/QList>
 #include <QtCore/QUrl>
+#include <QtGui/QCursor>
+
 #include <boost/shared_ptr.hpp>
 
 class SoNode;
@@ -82,6 +85,7 @@ public:
   bool addactions;
   QUrl navigationModeFile;
   boost::shared_ptr<SoScXMLStateMachine> currentStateMachine;
+  SbByteBuffer navigationMode;
 
   static void rendercb(void * userdata, SoRenderManager *);
   static void prerendercb(void * userdata, SoRenderManager * manager);

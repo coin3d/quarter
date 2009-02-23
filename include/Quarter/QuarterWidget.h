@@ -51,6 +51,11 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   Q_OBJECT
 
   Q_PROPERTY(QUrl navigationModeFile READ navigationModeFile WRITE setNavigationModeFile RESET resetNavigationModeFile)
+
+  //This property should really be designable, but the UI is so
+  //awkward that we need to avoid this until we get a proper way of
+  //customizing the propertyeditor.
+  Q_PROPERTY(QString navigationMode READ navigationMode WRITE setNavigationMode DESIGNABLE false)
   Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor)
   Q_PROPERTY(bool contextMenuEnabled READ contextMenuEnabled WRITE setContextMenuEnabled)
   Q_PROPERTY(bool headlightEnabled READ headlightEnabled WRITE setHeadlightEnabled)
@@ -115,6 +120,9 @@ public:
   void resetNavigationModeFile(void);
   void setNavigationModeFile(const QUrl & url = QUrl(DEFAULT_NAVIGATIONFILE));
   const QUrl & navigationModeFile(void) const;
+
+  void setNavigationMode(const QString & navMode);
+  QString navigationMode(void) const;
 
   void setContextMenuEnabled(bool yes);
   bool contextMenuEnabled(void) const;
