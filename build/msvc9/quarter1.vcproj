@@ -680,6 +680,58 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\Quarter\QtCoinCompatibility.cpp"
+				>
+				<FileConfiguration
+					Name="LIB (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticDebug/"
+						ProgramDataBaseFileName="QuarterStaticDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Debug)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterDebug/"
+						ProgramDataBaseFileName="QuarterDebug/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="DLL (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterRelease/"
+						ProgramDataBaseFileName="QuarterRelease/"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="LIB (Release)|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AdditionalIncludeDirectories=""
+						PreprocessorDefinitions=""
+						ObjectFile="QuarterStaticRelease/"
+						ProgramDataBaseFileName="QuarterStaticRelease/"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\src\Quarter\QtCoinCompatibility.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\Quarter\InputDevice.cpp"
 				>
 				<FileConfiguration
