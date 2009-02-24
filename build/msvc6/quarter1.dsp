@@ -493,6 +493,23 @@ SOURCE=..\..\src\Quarter\ImageReader.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\src\Quarter\QtCoinCompatibility.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\Quarter\QtCoinCompatibility.cpp
+!IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
+# PROP Intermediate_Dir "QuarterRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
+# PROP Intermediate_Dir "QuarterDebug"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Release)"
+# PROP Intermediate_Dir "QuarterStaticRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Debug)"
+# PROP Intermediate_Dir "QuarterStaticDebug"
+!ENDIF
+# End Source File
+# Begin Source File
+
 SOURCE=src\Quarter\moc_InteractionMode.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
