@@ -80,6 +80,7 @@ public:
   bool clearzbuffer;
   bool clearwindow;
   bool addactions;
+  bool processdelayqueue;
   QUrl navigationModeFile;
   boost::shared_ptr<SoScXMLStateMachine> currentStateMachine;
 

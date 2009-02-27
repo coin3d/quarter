@@ -128,6 +128,7 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->initialsorendermanager = true;
   PRIVATE(this)->soeventmanager = new SoEventManager;
   PRIVATE(this)->initialsoeventmanager = true;
+  PRIVATE(this)->processdelayqueue = true;
 
   //Mind the order of initialization as the XML state machine uses
   //callbacks which depends on other state being initialized
@@ -642,14 +643,20 @@ void
 QuarterWidget::paintGL(void)
 {
   assert(this->isValid() && "No valid GL context found!");
-  // We need to process the delay queue here since we don't know when
-  // paintGL() is called from Qt, and we might have some sensors
+  // We might have to process the delay queue here since we don't know
+  // if paintGL() is called from Qt, and we might have some sensors
   // waiting to trigger (the redraw sensor has a lower priority than a
   // normal field sensor to guarantee that your sensor is processed
   // before the next redraw). Disable autorendering while we do this
   // to avoid recursive redraws.
+
+  // We set the PRIVATE(this)->processdelayqueue = false in redraw()
+  // to avoid processing the delay queue when paintGL() is triggered
+  // by us, and we don't want to process the delay queue in those
+  // cases
+
   PRIVATE(this)->autoredrawenabled = false;
-  if (SoDB::getSensorManager()->isDelaySensorPending()) {
+  if (PRIVATE(this)->processdelayqueue && SoDB::getSensorManager()->isDelaySensorPending()) {
     // processing the sensors might trigger a redraw in another
     // context. Release this context temporarily
     this->doneCurrent();
@@ -661,6 +668,10 @@ QuarterWidget::paintGL(void)
   // since Qt will swap the GL buffers after calling paintGL().
   this->actualRedraw();
   PRIVATE(this)->autoredrawenabled = true;
+  
+  // process the delay queue the next time we enter this function,
+  // unless we get here after a call to redraw().
+  PRIVATE(this)->processdelayqueue = true;
 }
 
 /*!
@@ -674,12 +685,10 @@ QuarterWidget::paintGL(void)
 void
 QuarterWidget::redraw(void)
 {
-  this->makeCurrent();
-  this->actualRedraw();
-  if (this->doubleBuffer()) {
-    this->swapBuffers();
-  }
-  this->doneCurrent();
+  // we're triggering the next painGL(). Set a flag to remember this
+  // to avoid that we process the delay queue in paintGL()
+  PRIVATE(this)->processdelayqueue = false;
+  this->updateGL();
 }
 
 /*!
