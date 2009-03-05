@@ -71,7 +71,10 @@ KeyboardP::keyEvent(QKeyEvent * qevent)
     keypadmap->value(qkey, SoKeyboardEvent::ANY) :
     keyboardmap->value(qkey, SoKeyboardEvent::ANY);
 
-  const char * printable = qevent->text().toAscii().constData();
+  //Need to use a temporary to avoid reference becoming deleted before
+  //we get a hold of it.
+  QByteArray tmp = qevent->text().toAscii();
+  const char * printable = tmp.constData();
   this->keyboard->setPrintableCharacter(*printable);
   this->keyboard->setKey(sokey);
 
