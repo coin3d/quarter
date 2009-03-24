@@ -652,6 +652,25 @@ fi
 QUARTER_USE_LDFLAGS="-L../Quarter"
 QUARTER_USE_LIBS="-lQuarter"
 
+# check if compiler/linker handles __declspec()
+sim_ac_win32_declspec_available=false
+AC_MSG_CHECKING([for __declspec() support])
+AC_TRY_LINK(
+ [],
+ [__declspec(dllimport) int foo;],
+ [sim_ac_win32_declspec_available=true
+  AC_MSG_RESULT([available])],
+ [AC_MSG_RESULT([not available])])
+
+if $sim_ac_win32_declspec_available; then
+  if $QUARTER_STATIC; then
+    QUARTER_USE_CPPFLAGS="-DQUARTER_NOT_DLL"
+  else
+    QUARTER_BUILD_CPPFLAGS="-DQUARTER_MAKE_DLL $QUARTER_BUILD_CPPFLAGS"
+    QUARTER_USE_CPPFLAGS="-DQUARTER_DLL"
+  fi
+fi
+
 # Quarter
 if $BUILD_WITH_MSVC; then
   rm -f vc80.pdb
@@ -667,12 +686,9 @@ if $BUILD_WITH_MSVC; then
   if $QUARTER_STATIC; then
     QUARTER_LIBFLAGS="-LIB /INCREMENTAL:NO $QUARTER_LIBFLAGS"
     QUARTER_LIBFLAGS="$QUARTER_LIBFLAGS /OUT:Quarter${QUARTER_MAJOR_VERSION}${SUFFIX}.lib"
-    QUARTER_USE_CPPFLAGS="-DQUARTER_NOT_DLL"
   else
     QUARTER_LIBFLAGS="-DLL /INCREMENTAL:NO $QUARTER_LIBFLAGS"
     QUARTER_LIBFLAGS="$QUARTER_LIBFLAGS /OUT:Quarter${QUARTER_MAJOR_VERSION}${SUFFIX}.dll"
-    QUARTER_BUILD_CPPFLAGS="-DQUARTER_MAKE_DLL $QUARTER_BUILD_CPPFLAGS"
-    QUARTER_USE_CPPFLAGS="-DQUARTER_DLL"
   fi
 
   if $QUARTER_RELEASE; then

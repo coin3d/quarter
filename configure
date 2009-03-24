@@ -24478,6 +24478,69 @@ fi
 QUARTER_USE_LDFLAGS="-L../Quarter"
 QUARTER_USE_LIBS="-lQuarter"
 
+# check if compiler/linker handles __declspec()
+sim_ac_win32_declspec_available=false
+echo "$as_me:$LINENO: checking for __declspec() support" >&5
+echo $ECHO_N "checking for __declspec() support... $ECHO_C" >&6
+cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+int
+main ()
+{
+__declspec(dllimport) int foo;
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  sim_ac_win32_declspec_available=true
+  echo "$as_me:$LINENO: result: available" >&5
+echo "${ECHO_T}available" >&6
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+echo "$as_me:$LINENO: result: not available" >&5
+echo "${ECHO_T}not available" >&6
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+
+if $sim_ac_win32_declspec_available; then
+  if $QUARTER_STATIC; then
+    QUARTER_USE_CPPFLAGS="-DQUARTER_NOT_DLL"
+  else
+    QUARTER_BUILD_CPPFLAGS="-DQUARTER_MAKE_DLL $QUARTER_BUILD_CPPFLAGS"
+    QUARTER_USE_CPPFLAGS="-DQUARTER_DLL"
+  fi
+fi
+
 # Quarter
 if $BUILD_WITH_MSVC; then
   rm -f vc80.pdb
@@ -24493,12 +24556,9 @@ if $BUILD_WITH_MSVC; then
   if $QUARTER_STATIC; then
     QUARTER_LIBFLAGS="-LIB /INCREMENTAL:NO $QUARTER_LIBFLAGS"
     QUARTER_LIBFLAGS="$QUARTER_LIBFLAGS /OUT:Quarter${QUARTER_MAJOR_VERSION}${SUFFIX}.lib"
-    QUARTER_USE_CPPFLAGS="-DQUARTER_NOT_DLL"
   else
     QUARTER_LIBFLAGS="-DLL /INCREMENTAL:NO $QUARTER_LIBFLAGS"
     QUARTER_LIBFLAGS="$QUARTER_LIBFLAGS /OUT:Quarter${QUARTER_MAJOR_VERSION}${SUFFIX}.dll"
-    QUARTER_BUILD_CPPFLAGS="-DQUARTER_MAKE_DLL $QUARTER_BUILD_CPPFLAGS"
-    QUARTER_USE_CPPFLAGS="-DQUARTER_DLL"
   fi
 
   if $QUARTER_RELEASE; then
