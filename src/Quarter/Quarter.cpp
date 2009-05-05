@@ -90,6 +90,10 @@
     QuarterWidget * viewer = new QuarterWidget;
     viewer->setSceneGraph(root);
 
+    // make the viewer react to input events similar to the good old
+    // ExaminerViewer
+    viewer->setNavigationModeFile(QUrl("coin:///scxml/navigation/examiner.xml"));
+
     // Pop up the QuarterWidget
     viewer->show();
     // Loop until exit.

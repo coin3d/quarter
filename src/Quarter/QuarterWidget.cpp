@@ -813,7 +813,7 @@ QuarterWidget::addStateMachine(SoScXMLStateMachine * statemachine)
   Convenience method that removes a state machine to the current
   SoEventManager.
 
-  /sa addStateMachine
+  \sa addStateMachine
 */
 void
 QuarterWidget::removeStateMachine(SoScXMLStateMachine * statemachine)
