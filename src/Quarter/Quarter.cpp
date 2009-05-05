@@ -62,6 +62,7 @@
   #include <Inventor/nodes/SoCone.h>
   #include <Inventor/nodes/SoSeparator.h>
 
+  #include <Quarter/Quarter.h>
   #include <Quarter/QuarterWidget.h>
 
   using namespace SIM::Coin3D::Quarter;
