@@ -519,7 +519,19 @@ QuarterWidget::setSoRenderManager(SoRenderManager * manager)
 }
 
 /*!
-  Returns a pointer to the render manager
+  Returns a pointer to the render manager.
+
+  If you want to modify the GL format for an existing QuarterWidget, you can
+  set up a new GL context for the widget and reinitialize the render manager,
+  e.g.:
+
+  \code
+  QGLContext * context = new QGLContext(QGLFormat(QGL::SampleBuffers), viewer);
+  if (context->create()) {
+    viewer->setContext(context);
+    viewer->getSoRenderManager()->reinitialize();
+  }
+  \endcode
 */
 SoRenderManager *
 QuarterWidget::getSoRenderManager(void) const
