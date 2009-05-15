@@ -93,13 +93,10 @@ Mouse::translateEvent(QEvent * event)
     return PRIVATE(this)->mouseMoveEvent((QMouseEvent *) event);
   case QEvent::MouseButtonPress:
   case QEvent::MouseButtonRelease:
-
-    // FIXME: this is not sufficient, as dblclicks needs to be
-    // translated to a string of 4 Coin events; press, release, press,
-    // release. see also the FIXME in EventFilter::eventFilter() about
-    // this.  -mortene.
-//   case QEvent::MouseButtonDblClick:
-
+    // a dblclick event comes in a series of press, release, dblclick,
+    // release, so we can simply treat it as an ordinary press event.
+    // -mortene.
+  case QEvent::MouseButtonDblClick:
     return PRIVATE(this)->mouseButtonEvent((QMouseEvent *) event);
   case QEvent::Wheel:
     return PRIVATE(this)->mouseWheelEvent((QWheelEvent *) event);
@@ -159,7 +156,8 @@ MouseP::mouseButtonEvent(QMouseEvent * event)
   this->location2->setPosition(pos);
   this->mousebutton->setPosition(pos);
 
-  (event->type() == QEvent::MouseButtonPress) ?
+  ((event->type() == QEvent::MouseButtonPress) ||
+   (event->type() == QEvent::MouseButtonDblClick)) ?
     this->mousebutton->setState(SoButtonEvent::DOWN):
     this->mousebutton->setState(SoButtonEvent::UP);
 

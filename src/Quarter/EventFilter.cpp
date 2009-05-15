@@ -143,11 +143,6 @@ EventFilter::eventFilter(QObject * obj, QEvent * qevent)
 
   // translate QEvent into SoEvent and see if it is handled by scene
   // graph
-  //
-  // FIXME: MouseButtonDblClick needs special attention, as we need to
-  // send a series of events into the scene graph in that case (since
-  // there's no subclass of SoEvent in Coin for doubleclicks); press,
-  // release, press, release.  -mortene.
   foreach(InputDevice * device, PRIVATE(this)->devices) {
     const SoEvent * soevent = device->translateEvent(qevent);
     if (soevent && PRIVATE(this)->quarterwidget->processSoEvent(soevent)) {
