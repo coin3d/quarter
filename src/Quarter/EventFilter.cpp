@@ -46,7 +46,7 @@ public:
   QPoint globalmousepos;
   SbVec2s windowsize;
 
-  void resizeEvent(QResizeEvent * event)
+  void trackWindowSize(QResizeEvent * event)
   {
     this->windowsize = SbVec2s(event->size().width(),
                                event->size().height());
@@ -56,7 +56,7 @@ public:
     }
   }
 
-  void mouseEvent(QMouseEvent * event)
+  void trackPointerPosition(QMouseEvent * event)
   {
     assert(this->windowsize[1] != -1);
     this->globalmousepos = event->globalPos();
@@ -131,10 +131,11 @@ EventFilter::eventFilter(QObject * obj, QEvent * qevent)
   case QEvent::MouseMove:
   case QEvent::MouseButtonPress:
   case QEvent::MouseButtonRelease:
-    PRIVATE(this)->mouseEvent(dynamic_cast<QMouseEvent *>(qevent));
+  case QEvent::MouseButtonDblClick:
+    PRIVATE(this)->trackPointerPosition(dynamic_cast<QMouseEvent *>(qevent));
     break;
   case QEvent::Resize:
-    PRIVATE(this)->resizeEvent(dynamic_cast<QResizeEvent *>(qevent));
+    PRIVATE(this)->trackWindowSize(dynamic_cast<QResizeEvent *>(qevent));
     break;
   default:
     break;
@@ -142,6 +143,11 @@ EventFilter::eventFilter(QObject * obj, QEvent * qevent)
 
   // translate QEvent into SoEvent and see if it is handled by scene
   // graph
+  //
+  // FIXME: MouseButtonDblClick needs special attention, as we need to
+  // send a series of events into the scene graph in that case (since
+  // there's no subclass of SoEvent in Coin for doubleclicks); press,
+  // release, press, release.  -mortene.
   foreach(InputDevice * device, PRIVATE(this)->devices) {
     const SoEvent * soevent = device->translateEvent(qevent);
     if (soevent && PRIVATE(this)->quarterwidget->processSoEvent(soevent)) {
