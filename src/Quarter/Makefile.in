@@ -225,7 +225,7 @@ target_alias = @target_alias@
 # namespace libraries on Mac OS X. (This has been the way to do it
 # since Mac OS 10.2, but unfortunately the version of libtool we are
 # using defaults to flat_namespace.)
-@MACOSX_10_2FF_TRUE@LibtoolLinkArgs = -no-undefined -Wl,-twolevel_namespace -Wl,-undefined,error
+@MACOSX_10_2FF_TRUE@LibtoolLinkArgs = -Wl,-twolevel_namespace -Wl,-undefined,error
 @MACOSX_10_2FF_FALSE@LibtoolLinkArgs = 
 
 @BUILD_WITH_MSVC_TRUE@includes = \
@@ -330,6 +330,7 @@ libQuarter_la_CFLAGS = \
 
 
 libQuarter_la_LDFLAGS = \
+        -no-undefined \
         $(LibtoolLinkArgs) $(COIN_USE_LDFLAGS) $(QT_USE_LDFLAGS)
 
 
