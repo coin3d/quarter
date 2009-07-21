@@ -23976,7 +23976,12 @@ fi;
 # get the plugin path for Qt Designer
 
 if test "x$QT_DESIGNER_PLUGIN_PATH" = x && $sim_ac_build_library; then
-  if $BUILD_WITH_MSVC; then
+  case $host_os in
+    cygwin | mingw32) sim_ac_qt_windows=true ;;
+    *) sim_ac_qt_windows=false ;;
+  esac
+
+  if $sim_ac_qt_windows; then
     QT_DESIGNER_PLUGIN_PATH=`qmake -query "QT_INSTALL_PLUGINS" | cygpath -u -f -`/designer
   else
     QT_DESIGNER_PLUGIN_PATH=`qmake -query "QT_INSTALL_PLUGINS"`/designer
