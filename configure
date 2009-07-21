@@ -23867,7 +23867,12 @@ if $sim_ac_have_qt_framework; then
   QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtScript -Wl,-framework,QtDesigner -lQtUiTools"
   QT_USE_INCDIR=${sim_ac_qt_framework_dir}
 else
-  if $BUILD_WITH_MSVC; then
+  case $host_os in
+    cygwin | mingw32) sim_ac_qt_windows=true ;;
+    *) sim_ac_qt_windows=false ;;
+  esac
+
+  if $sim_ac_qt_windows; then
 
     sim_ac_qt_suffix=
     if $sim_ac_qt_debug; then
@@ -23879,6 +23884,7 @@ else
     else
       QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner${sim_ac_qt_suffix}4 -lQtXml${sim_ac_qt_suffix}4"
     fi
+
   else
     QT_USE_LIBS="-lQtUiTools -lQtDesigner -lQtXml $QT_USE_LIBS"
   fi
