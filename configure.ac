@@ -544,9 +544,9 @@ else
     fi
 
     if $QUARTER_STATIC; then
-      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner${sim_ac_qt_suffix} -lQtXml${sim_ac_qt_suffix}"
+      QT_USE_LIBS="-lQtUiTools${sim_ac_qt_suffix} $QT_USE_LIBS -lQtDesigner${sim_ac_qt_suffix} -lQtXml${sim_ac_qt_suffix}"
     else
-      QT_USE_LIBS="$QT_USE_LIBS -lQtUiTools -lQtDesigner${sim_ac_qt_suffix}4 -lQtXml${sim_ac_qt_suffix}4"
+      QT_USE_LIBS="-lQtUiTools${sim_ac_qt_suffix} $QT_USE_LIBS -lQtDesigner${sim_ac_qt_suffix}4 -lQtXml${sim_ac_qt_suffix}4"
     fi
 
   else
