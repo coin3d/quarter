@@ -4,7 +4,7 @@
 # since Mac OS 10.2, but unfortunately the version of libtool we are
 # using defaults to flat_namespace.)
 if MACOSX_10_2FF
-LibtoolLinkArgs = -no-undefined -Wl,-twolevel_namespace -Wl,-undefined,error
+LibtoolLinkArgs = -Wl,-twolevel_namespace -Wl,-undefined,error
 else
 LibtoolLinkArgs = 
 endif
@@ -100,6 +100,7 @@ libQuarter_la_CFLAGS = \
         $(QUARTER_BUILD_CFLAGS) $(COIN_USE_CFLAGS) $(QT_USE_CFLAGS)
 
 libQuarter_la_LDFLAGS = \
+        -no-undefined \
         $(LibtoolLinkArgs) $(COIN_USE_LDFLAGS) $(QT_USE_LDFLAGS)
 
 
