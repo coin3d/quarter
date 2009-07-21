@@ -23,7 +23,7 @@ endif
 # do it since Mac OS 10.2, but unfortunately the version of libtool we
 # are using defaults to flat_namespace. (No comment...)
 if MACOSX_10_2FF
-LibtoolLinkArgs = -no-undefined -Wl,-twolevel_namespace -Wl,-undefined,error
+LibtoolLinkArgs = -Wl,-twolevel_namespace -Wl,-undefined,error
 else
 LibtoolLinkArgs = 
 endif
@@ -84,6 +84,7 @@ libQuarterWidgetPlugin_la_CFLAGS = \
         $(PLUGIN_BUILD_CFLAGS) $(COIN_USE_CPPFLAGS) $(QT_USE_CPPFLAGS)
 
 libQuarterWidgetPlugin_la_LDFLAGS = \
+        -no-undefined \
         $(LibtoolLinkArgs) $(QT_USE_LDFLAGS) $(QUARTER_USE_LDFLAGS) $(COIN_USE_LDFLAGS) 
 
 libdir = $(QT_DESIGNER_PLUGIN_PATH)
