@@ -128,7 +128,7 @@
   \subpage examiner
 */
 
-
+#include <cstdio>
 #include <Inventor/SoDB.h>
 #include <Inventor/nodekits/SoNodeKit.h>
 #include <Inventor/SoInteraction.h>
