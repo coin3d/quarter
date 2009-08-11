@@ -58,6 +58,7 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   Q_PROPERTY(bool clearWindow READ clearWindow WRITE setClearWindow)
   Q_PROPERTY(bool interactionModeEnabled READ interactionModeEnabled WRITE setInteractionModeEnabled)
   Q_PROPERTY(bool interactionModeOn READ interactionModeOn WRITE setInteractionModeOn)
+  Q_PROPERTY(bool renderWhenHidden READ renderWhenHidden WRITE setRenderWhenHidden)
 
   Q_PROPERTY(TransparencyType transparencyType READ transparencyType WRITE setTransparencyType)
   Q_PROPERTY(RenderMode renderMode READ renderMode WRITE setRenderMode)
@@ -135,6 +136,9 @@ public:
 
   bool interactionModeOn(void) const;
   void setInteractionModeOn(bool onoff);
+
+  bool renderWhenHidden(void) const;
+  void setRenderWhenHidden(bool onoff);
 
   void setStateCursor(const SbName & state, const QCursor & cursor);
   QCursor stateCursor(const SbName & state);

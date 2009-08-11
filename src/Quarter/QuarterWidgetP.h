@@ -81,6 +81,7 @@ public:
   bool clearwindow;
   bool addactions;
   bool processdelayqueue;
+  bool renderwhenhidden;
   QUrl navigationModeFile;
   boost::shared_ptr<SoScXMLStateMachine> currentStateMachine;
 
