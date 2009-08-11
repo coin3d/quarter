@@ -337,30 +337,6 @@ QuarterWidget::interactionModeOn(void) const
 }
 
 /*!
-  \property QuarterWidget::renderWhenHidden
-
-  \copydetails QuarterWidget::setRenderWhenHidden
-*/
-
-/*!
-  Enable or disable rendering when the widget is hidden.
-*/
-void
-QuarterWidget::setRenderWhenHidden(bool onoff)
-{
-  PRIVATE(this)->renderwhenhidden = onoff;
-}
-
-/*!
-  Returns true if the widget should render while it is hidden.
- */
-bool
-QuarterWidget::renderWhenHidden(void) const
-{
-  return PRIVATE(this)->renderwhenhidden;
-}
-
-/*!
   Returns the Coin cache context id for this widget.
 */
 uint32_t
@@ -721,7 +697,6 @@ QuarterWidget::paintGL(void)
 void
 QuarterWidget::redraw(void)
 {
-  if (!this->isVisible() && !PRIVATE(this)->renderwhenhidden) return;
   // we're triggering the next paintGL(). Set a flag to remember this
   // to avoid that we process the delay queue in paintGL()
   PRIVATE(this)->processdelayqueue = false;
