@@ -148,6 +148,7 @@ static QuarterP * self = NULL;
 void
 Quarter::init(bool initCoin)
 {
+  COMPILE_ONLY_BEFORE(2,0,0,"Should not be encapsulated in double Quarter namespace");
   if (self) {
     // FIXME: Use SoDebugError
     fprintf(stderr, "Quarter is already initialized\n");
@@ -171,6 +172,7 @@ Quarter::init(bool initCoin)
 void
 Quarter::clean(void)
 {
+  COMPILE_ONLY_BEFORE(2,0,0,"Should not be encapsulated in double Quarter namespace");
   assert(self);
   bool initCoin = self->initCoin;
 
@@ -191,6 +193,7 @@ Quarter::clean(void)
 void
 Quarter::setTimerEpsilon(double sec)
 {
+  COMPILE_ONLY_BEFORE(2,0,0,"Should not be encapsulated in double Quarter namespace");
   if (!self) {
     fprintf(stderr, "Quarter is not initialized!\n");
     return;
