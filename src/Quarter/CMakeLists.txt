@@ -23,7 +23,7 @@ SIM_QT4_AUTO_WRAP_CPP(MocPublicSources ${MocPublicHeaders})
 
 # Some convenient variables. The inclusion of the headers in the source variable is to force CMake to include the headers in VS project generation.
 SET(AllSources ${Sources} ${MocPublicSources} ${MocPrivateSources} ${PublicHeaders} ${PrivateHeaders} ${CMakeCache})
-SET(AllLibs ${Coin_LIBRARY} ${QT_LIBRARIES} ${OPENGL_gl_LIBRARY})
+SET(AllLibs ${Coin_LIBRARY} ${QT_LIBRARIES})
 
 # Ensure export of DLL definitions on Windows
 IF(WIN32 AND NOT Quarter_BUILD_STATIC_LIBRARY)
