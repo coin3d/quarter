@@ -17,7 +17,6 @@ AC_INIT([Quarter], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA],
 
 AC_CONFIG_SRCDIR(src/Quarter/Quarter.cpp)
 AC_CONFIG_AUX_DIR(cfg)
-AM_CONFIG_HEADER(config.h)
 
 # *******************************************************************
 # If the Microsoft Visual C++ cl.exe compiler is available, set us up for
@@ -45,6 +44,19 @@ AC_SUBST([QUARTER_BETA_VERSION], [QUARTER_BETA])
 AC_SUBST([QUARTER_VERSION], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA])
 
 VERSION=$QUARTER_VERSION
+
+AC_DEFINE_UNQUOTED([QUARTER_MAJOR_VERSION], [$QUARTER_MAJOR_VERSION],
+  [define this to the libQuarter major version number])
+AC_DEFINE_UNQUOTED([QUARTER_MINOR_VERSION], [$QUARTER_MINOR_VERSION],
+  [define this to the libQuarter minor version number])
+AC_DEFINE_UNQUOTED([QUARTER_MICRO_VERSION], [$QUARTER_MICRO_VERSION],
+  [define this to the libQuarter release version number])
+AC_DEFINE_UNQUOTED([QUARTER_VERSION], ["QUARTER_VERSION"],
+  [define this to the full libQuarter major.minor.micro version number])
+
+
+AM_CONFIG_HEADER(config.h)
+
 
 AM_INIT_AUTOMAKE(Quarter, $QUARTER_VERSION)
 AM_MAINTAINER_MODE

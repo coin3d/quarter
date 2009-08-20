@@ -20,7 +20,8 @@ includes = \
 else
 includes = \
         -I$(top_srcdir)/include \
-        -I$(top_srcdir)/src/Quarter
+        -I$(top_srcdir)/src/Quarter \
+        -I$(top_builddir)
 endif
 
 DEFAULT_INCLUDES = $(includes)
