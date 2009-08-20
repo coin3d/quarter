@@ -2,6 +2,8 @@
 #define QUARTER_QUARTERP_H
 #include <Inventor/SbName.h>
 #include <QtGui/QCursor>
+#include <boost/static_assert.hpp>
+#include <config.h>
 
 template <class Key, class T> class QMap;
 
@@ -22,5 +24,8 @@ class QuarterP {
 };
 
 }}};
+
+#define COMPILE_ONLY_BEFORE(MAJOR,MINOR,MICRO,REASON) \
+  BOOST_STATIC_ASSERT( (QUARTER_MAJOR_VERSION < MAJOR) || (QUARTER_MAJOR_VERSION == MAJOR && ((QUARTER_MINOR_VERSION < MINOR) || ( QUARTER_MINOR_VERSION == MINOR && (QUARTER_MICRO_VERSION < MICRO )))))
 
 #endif //QUARTER_QUARTERP_H
