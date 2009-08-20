@@ -238,7 +238,8 @@ target_alias = @target_alias@
 
 @BUILD_WITH_MSVC_FALSE@includes = \
 @BUILD_WITH_MSVC_FALSE@        -I$(top_srcdir)/include \
-@BUILD_WITH_MSVC_FALSE@        -I$(top_srcdir)/src/Quarter
+@BUILD_WITH_MSVC_FALSE@        -I$(top_srcdir)/src/Quarter \
+@BUILD_WITH_MSVC_FALSE@        -I$(top_builddir)
 
 
 DEFAULT_INCLUDES = $(includes)
