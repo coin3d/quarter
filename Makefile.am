@@ -13,6 +13,8 @@ endif
 
 SUBDIRS = include $(HTMLDIR) $(SRCDIRS)
 
+include include/Makefile.inc
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA= Quarter.pc
 
@@ -63,7 +65,9 @@ EXTRA_DIST = \
         build/msvc9/quarter1.vcproj \
         build/msvc9/quarter1_install.vcproj \
         build/msvc9/quarter1_uninstall.vcproj \
-        build/msvc9/quarterwidgetplugin1.vcproj
+        build/msvc9/quarterwidgetplugin1.vcproj \
+	$(BOOST_HEADER_FILES)
+
 
 DISTCLEANFILES = docs/quarter.doxygen
 
