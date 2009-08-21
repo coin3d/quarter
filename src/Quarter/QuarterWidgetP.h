@@ -28,7 +28,6 @@
 #include <QtGui/QCursor>
 #include <QtCore/QList>
 #include <QtCore/QUrl>
-#include <boost/shared_ptr.hpp>
 
 class SoNode;
 class SoCamera;
@@ -82,7 +81,7 @@ public:
   bool addactions;
   bool processdelayqueue;
   QUrl navigationModeFile;
-  boost::shared_ptr<SoScXMLStateMachine> currentStateMachine;
+  SoScXMLStateMachine * currentStateMachine;
 
   static void rendercb(void * userdata, SoRenderManager *);
   static void prerendercb(void * userdata, SoRenderManager * manager);

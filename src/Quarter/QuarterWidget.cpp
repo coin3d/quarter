@@ -164,8 +164,8 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 QuarterWidget::~QuarterWidget()
 {
   if (PRIVATE(this)->currentStateMachine) {
-    this->removeStateMachine(PRIVATE(this)->currentStateMachine.get());
-    PRIVATE(this)->currentStateMachine.reset();
+    this->removeStateMachine(PRIVATE(this)->currentStateMachine);
+    delete PRIVATE(this)->currentStateMachine;
   }
   PRIVATE(this)->headlight->unref();
   PRIVATE(this)->headlight = NULL;
@@ -930,8 +930,9 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
     filename = url.toLocalFile();
   else if (url.isEmpty()) {
     if (PRIVATE(this)->currentStateMachine) {
-      this->removeStateMachine(PRIVATE(this)->currentStateMachine.get());
-      PRIVATE(this)->currentStateMachine.reset();
+      this->removeStateMachine(PRIVATE(this)->currentStateMachine);
+      delete PRIVATE(this)->currentStateMachine;
+      PRIVATE(this)->currentStateMachine = NULL;
       PRIVATE(this)->navigationModeFile = url;
     }
     return;
@@ -948,16 +949,15 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
 
   if (stateMachine &&
       stateMachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
-    boost::shared_ptr<SoScXMLStateMachine>
-      sostatemachine(
-                   static_cast<SoScXMLStateMachine *>(stateMachine)
-                   );
+    SoScXMLStateMachine * newsm = 
+      static_cast<SoScXMLStateMachine *>(stateMachine);
     if (PRIVATE(this)->currentStateMachine) {
-      this->removeStateMachine(PRIVATE(this)->currentStateMachine.get());
+      this->removeStateMachine(PRIVATE(this)->currentStateMachine);
+      delete PRIVATE(this)->currentStateMachine;
     }
-    this->addStateMachine(sostatemachine.get());
-    sostatemachine->initialize();
-    PRIVATE(this)->currentStateMachine=sostatemachine;
+    this->addStateMachine(newsm);
+    newsm->initialize();
+    PRIVATE(this)->currentStateMachine = newsm;
   }
   else {
     if (stateMachine)
