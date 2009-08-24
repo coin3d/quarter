@@ -63,8 +63,7 @@ EXTRA_DIST = \
         build/msvc9/quarter1.vcproj \
         build/msvc9/quarter1_install.vcproj \
         build/msvc9/quarter1_uninstall.vcproj \
-        build/msvc9/quarterwidgetplugin1.vcproj \
-	$(BOOST_HEADER_FILES)
+        build/msvc9/quarterwidgetplugin1.vcproj
 
 
 DISTCLEANFILES = docs/quarter.doxygen
