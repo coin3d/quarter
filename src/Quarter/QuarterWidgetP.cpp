@@ -70,7 +70,8 @@ QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * shar
   interactionmodeenabled(false),
   clearzbuffer(true),
   clearwindow(true),
-  addactions(true)
+  addactions(true),
+  initialized(false)
 {
   this->cachecontext = findCacheContext(masterptr, sharewidget);
 
@@ -191,6 +192,13 @@ QuarterWidgetP::postrendercb(void * userdata, SoRenderManager * manager)
     SoScXMLStateMachine * statemachine = evman->getSoScXMLStateMachine(c);
     statemachine->postGLRender();
   }
+  if (thisp->master->doubleBuffer()) {
+    if (thisp->master->autoBufferSwap())
+      thisp->master->swapBuffers();
+  } else {
+    glFlush();
+  }
+
 }
 
 void
@@ -211,6 +219,7 @@ QuarterWidgetP::statechangecb(void * userdata, ScXMLStateMachine * statemachine,
   }
 }
 
+//Avoid macros
 #define ADD_ACTION(enum, text, group, parent, list)     \
   do {                                                  \
     QAction * action = new QAction(text, parent);       \

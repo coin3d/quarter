@@ -80,6 +80,7 @@ public:
   bool clearwindow;
   bool addactions;
   bool processdelayqueue;
+  bool initialized;
   QUrl navigationModeFile;
   SoScXMLStateMachine * currentStateMachine;
 

@@ -502,7 +502,7 @@ QuarterWidget::setSoRenderManager(SoRenderManager * manager)
   // ref before deleting the old scene manager to avoid that the nodes are deleted
   if (scene) scene->ref();
   if (camera) camera->ref();
-  
+
   if (PRIVATE(this)->initialsorendermanager) {
     delete PRIVATE(this)->sorendermanager;
     PRIVATE(this)->initialsorendermanager = false;
@@ -635,6 +635,7 @@ void
 QuarterWidget::initializeGL(void)
 {
   glEnable(GL_DEPTH_TEST);
+  PRIVATE(this)->initialized = true;
 }
 
 /*!
@@ -646,6 +647,22 @@ QuarterWidget::resizeGL(int width, int height)
   SbViewportRegion vp(width, height);
   PRIVATE(this)->sorendermanager->setViewportRegion(vp);
   PRIVATE(this)->soeventmanager->setViewportRegion(vp);
+}
+
+void QuarterWidget::glDraw(void) {
+  if (!isValid())
+    return;
+  makeCurrent();
+#ifndef QT_OPENGL_ES
+  if (this->context()->device()->devType() == QInternal::Pixmap)
+    glDrawBuffer(GL_FRONT);
+#endif
+  if (!PRIVATE(this)->initialized) {
+    glInit();
+    resizeGL(this->context()->device()->width(), this->context()->device()->height()); // New context needs this "resize"
+  }
+  doneCurrent();
+  paintGL();
 }
 
 /*!
@@ -667,20 +684,10 @@ QuarterWidget::paintGL(void)
   // by us, and we don't want to process the delay queue in those
   // cases
 
-  PRIVATE(this)->autoredrawenabled = false;
-  if (PRIVATE(this)->processdelayqueue && SoDB::getSensorManager()->isDelaySensorPending()) {
-    // processing the sensors might trigger a redraw in another
-    // context. Release this context temporarily
-    this->doneCurrent();
-    SoDB::getSensorManager()->processDelayQueue(FALSE);
-    this->makeCurrent();
-  }
+  PRIVATE(this)->processdelayqueue = true;
   assert(this->isValid() && "No valid GL context found!");
-  // we need to render immediately here, and not do scheduleRedraw()
-  // since Qt will swap the GL buffers after calling paintGL().
-  this->actualRedraw();
-  PRIVATE(this)->autoredrawenabled = true;
-  
+  PRIVATE(this)->sorendermanager->scheduleRedraw();
+
   // process the delay queue the next time we enter this function,
   // unless we get here after a call to redraw().
   PRIVATE(this)->processdelayqueue = true;
@@ -697,10 +704,7 @@ QuarterWidget::paintGL(void)
 void
 QuarterWidget::redraw(void)
 {
-  // we're triggering the next paintGL(). Set a flag to remember this
-  // to avoid that we process the delay queue in paintGL()
-  PRIVATE(this)->processdelayqueue = false;
-  this->updateGL();
+  this->actualRedraw();
 }
 
 /*!
@@ -709,8 +713,11 @@ QuarterWidget::redraw(void)
 void
 QuarterWidget::actualRedraw(void)
 {
+  makeCurrent();
   PRIVATE(this)->sorendermanager->render(PRIVATE(this)->clearwindow,
                                          PRIVATE(this)->clearzbuffer);
+  this->doneCurrent();
+
 }
 
 /*!
@@ -949,7 +956,7 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
 
   if (stateMachine &&
       stateMachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
-    SoScXMLStateMachine * newsm = 
+    SoScXMLStateMachine * newsm =
       static_cast<SoScXMLStateMachine *>(stateMachine);
     if (PRIVATE(this)->currentStateMachine) {
       this->removeStateMachine(PRIVATE(this)->currentStateMachine);
