@@ -26,6 +26,9 @@
  */
 
 #include <Inventor/nodes/SoCone.h>
+#include <Inventor/nodes/SoComplexity.h>
+#include <Inventor/nodes/SoCoordinate4.h>
+#include <Inventor/nodes/SoNurbsCurve.h>
 #include <Inventor/nodes/SoBaseColor.h>
 #include <Inventor/nodes/SoSeparator.h>
 
@@ -37,6 +40,69 @@
 
 using namespace SIM::Coin3D::Quarter;
 
+static SoSeparator *
+createSurface()
+
+{
+
+       SoSeparator* sep_spline = new SoSeparator();
+
+       sep_spline->ref();
+
+
+
+       float pts[7][4] = {
+
+             {0.0, -5.0, 0.0, 1.0},
+
+             {2.5, -2.5, 0.0, 0.5},
+
+             {2.5, -0.66987, 0.0, 1.0},
+
+             {0.0, 1.94013, 0.0, 0.5},
+
+             {-2.5, -0.66987, 0.0, 1.0},
+
+             {-2.5, -2.5, 0.0, 0.5},
+
+             {0.0, -5.0, 0.0, 1.0}
+
+       };
+
+       float knots[10] = {0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.0, 3.0, 3.0, 3.0};
+
+
+
+       SoComplexity *complexity = new SoComplexity;
+
+       SoCoordinate4 *controlPts = new SoCoordinate4;
+
+       SoNurbsCurve *curve = new SoNurbsCurve;
+
+
+
+       complexity->value.setValue(1.0);
+
+
+
+       controlPts->point.setValues(0,7,pts);
+
+       curve->numControlPoints = 7;
+
+       curve->knotVector.setValues(0, 10, knots);
+
+       sep_spline->addChild(complexity);
+
+       sep_spline->addChild(controlPts);
+
+       sep_spline->addChild(curve);
+
+       sep_spline->unrefNoDelete();
+
+       return sep_spline;
+
+}
+
 int
 main(int argc, char ** argv)
 {
@@ -46,14 +112,15 @@ main(int argc, char ** argv)
 
   // Make a dead simple scene graph by using the Coin library, only
   // containing a single yellow cone under the scenegraph root.
-  SoSeparator * root = new SoSeparator;
+  //SoSeparator * root = new SoSeparator;
+  SoSeparator * root = createSurface();
   root->ref();
 
   SoBaseColor * col = new SoBaseColor;
   col->rgb = SbColor(1, 1, 0);
   root->addChild(col);
 
-  root->addChild(new SoCone);
+  //root->addChild(new SoCone);
 
   QMainWindow * mainwin = new QMainWindow();
 

@@ -13,8 +13,6 @@ endif
 
 SUBDIRS = include $(HTMLDIR) $(SRCDIRS)
 
-include include/Makefile.inc
-
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA= Quarter.pc
 
