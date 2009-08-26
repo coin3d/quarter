@@ -175,7 +175,6 @@ public slots:
 protected:
   virtual void resizeGL(int width, int height);
   virtual void initializeGL(void);
-  virtual void glDraw(void);
   virtual void paintGL(void);
   virtual void actualRedraw(void);
 
