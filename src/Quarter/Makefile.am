@@ -14,17 +14,13 @@ includes = \
         -I$(QTDIR)/include \
         -I$(QTDIR)/include/QtOpenGL \
         -I$(QTDIR)/include/QtGui \
-        -I$(QTDIR)/include/QtCore \
-        -I$(top_srcdir)/include \
-        -I$(top_srcdir)/src/Quarter
-else
-includes = \
+        -I$(QTDIR)/include/QtCore
+endif
+
+DEFAULT_INCLUDES = $(includes) \
         -I$(top_srcdir)/include \
         -I$(top_srcdir)/src/Quarter \
         -I$(top_builddir)
-endif
-
-DEFAULT_INCLUDES = $(includes)
 
 BuiltSources = \
         moc_ContextMenu.cpp \
