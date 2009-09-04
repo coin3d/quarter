@@ -135,6 +135,8 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
   PRIVATE(this)->eventfilter = new EventFilter(this);
   PRIVATE(this)->interactionmode = new InteractionMode(this);
 
+  PRIVATE(this)->currentStateMachine = NULL;
+
   PRIVATE(this)->headlight = new SoDirectionalLight;
   PRIVATE(this)->headlight->ref();
 
@@ -158,6 +160,9 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   this->installEventFilter(PRIVATE(this)->eventfilter);
   this->installEventFilter(PRIVATE(this)->interactionmode);
+
+
+
 }
 
 /*! destructor */
