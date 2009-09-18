@@ -21,7 +21,7 @@ endif
 DEFAULT_INCLUDES = $(includes)
 
 if MAC_QT_FRAMEWORK
-QT_UITOOLS_INCLUDE = -I/usr/include/QtUiTools
+QT_UITOOLS_INCLUDE = -I$(QT_USE_INCDIR)/../include -I$(QT_USE_INCDIR)/../include/QtUiTools
 else
 QT_UITOOLS_INCLUDE = -I$(QT_USE_INCDIR)/QtUiTools
 endif
