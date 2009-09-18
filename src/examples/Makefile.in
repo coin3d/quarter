@@ -241,7 +241,7 @@ target_alias = @target_alias@
 
 DEFAULT_INCLUDES = $(includes)
 
-@MAC_QT_FRAMEWORK_TRUE@QT_UITOOLS_INCLUDE = -I/usr/include/QtUiTools
+@MAC_QT_FRAMEWORK_TRUE@QT_UITOOLS_INCLUDE = -I$(QT_USE_INCDIR)/../include -I$(QT_USE_INCDIR)/../include/QtUiTools
 @MAC_QT_FRAMEWORK_FALSE@QT_UITOOLS_INCLUDE = -I$(QT_USE_INCDIR)/QtUiTools
 
 noinst_PROGRAMS = minimal dynamicui directui inheritui superimposition examiner mdi
