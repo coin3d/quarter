@@ -55,6 +55,18 @@
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "1.0.1a"
 
+/* define this to the libQuarter major version number */
+#define QUARTER_MAJOR_VERSION 1
+
+/* define this to the libQuarter release version number */
+#define QUARTER_MICRO_VERSION 0
+
+/* define this to the libQuarter minor version number */
+#define QUARTER_MINOR_VERSION 1
+
+/* define this to the full libQuarter major.minor.micro version number */
+#define QUARTER_VERSION 1.0.1
+
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
