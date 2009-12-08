@@ -26,6 +26,16 @@
   \brief The QuarterWidget class is the main class in Quarter. It
   provides a widget for Coin rendering. It provides scenegraph
   management and event handling.
+
+  If you want to modify the GL format for an existing QuarterWidget, you can
+  set up a new GL context for the widget, e.g.:
+
+  \code
+  QGLContext * context = new QGLContext(QGLFormat(QGL::SampleBuffers), viewer);
+  if (context->create()) {
+    viewer->setContext(context);
+  }
+  \endcode
 */
 
 #include <assert.h>
@@ -525,18 +535,6 @@ QuarterWidget::setSoRenderManager(SoRenderManager * manager)
 
 /*!
   Returns a pointer to the render manager.
-
-  If you want to modify the GL format for an existing QuarterWidget, you can
-  set up a new GL context for the widget and reinitialize the render manager,
-  e.g.:
-
-  \code
-  QGLContext * context = new QGLContext(QGLFormat(QGL::SampleBuffers), viewer);
-  if (context->create()) {
-    viewer->setContext(context);
-    viewer->getSoRenderManager()->reinitialize();
-  }
-  \endcode
 */
 SoRenderManager *
 QuarterWidget::getSoRenderManager(void) const
@@ -634,12 +632,17 @@ QuarterWidget::seek(void)
 }
 
 /*!
-  Overridden from QGLWidget to enable OpenGL depth buffer
+  This function will be called whenever the GLContext changes, 
+  for instance when the widget is reparented. 
+  
+  Overridden from QGLWidget to enable OpenGL depth buffer 
+  and reinitialize the SoRenderManager.
  */
 void
 QuarterWidget::initializeGL(void)
 {
   glEnable(GL_DEPTH_TEST);
+  this->getSoRenderManager()->reinitialize();
 }
 
 /*!
