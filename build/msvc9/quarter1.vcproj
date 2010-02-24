@@ -218,7 +218,7 @@
 				InlineFunctionExpansion="2"
 				EnableIntrinsicFunctions="true"
 				OmitFramePointers="true"
-				AdditionalIncludeDirectories="..\..\include,$(COINDIR)\include,$(COINDIR)\include\Inventor\annex,$(QTDIR)\include,$(QTDIR)\include\Qt"
+				AdditionalIncludeDirectories=".;..\..\include,$(COINDIR)\include,$(COINDIR)\include\Inventor\annex,$(QTDIR)\include,$(QTDIR)\include\Qt"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;QUARTER_DEBUG=0;HAVE_CONFIG_H;QUARTER_MAKE_DLL;COIN_DLL;QUARTER_INTERNAL"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
