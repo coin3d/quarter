@@ -18,6 +18,10 @@ AC_INIT([Quarter], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA],
 AC_CONFIG_SRCDIR(src/Quarter/Quarter.cpp)
 AC_CONFIG_AUX_DIR(cfg)
 
+# **************************************************************************
+
+AC_CANONICAL_SYSTEM
+
 # *******************************************************************
 # If the Microsoft Visual C++ cl.exe compiler is available, set us up for
 # compiling with it and to generate an MSWindows .dll file.
