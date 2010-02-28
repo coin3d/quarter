@@ -463,13 +463,13 @@ if test x"$sim_ac_enable_pkgconfig" = x"false" || $sim_ac_pkgconfig_check_qt_fai
     QT_USE_INCDIR="$sim_ac_qtdir/include"
   fi
 else
-  sim_ac_have_qt_framework=false
+  sim_cv_have_qt_framework=false
 fi
 
 SIM_AC_CONFIGURATION_SETTING([Quarter version], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA])
 
-AM_CONDITIONAL([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
-AC_SUBST([MAC_QT_FRAMEWORK], [$sim_ac_have_qt_framework])
+AM_CONDITIONAL([MAC_QT_FRAMEWORK], [$sim_cv_have_qt_framework])
+AC_SUBST([MAC_QT_FRAMEWORK], [$sim_cv_have_qt_framework])
 
 AC_SUBST([COIN_USE_CPPFLAGS])
 AC_SUBST([COIN_USE_CXXFLAGS])
@@ -538,7 +538,7 @@ esac
 
 # **************************************************************************
 # we use some extra libs in Quarter FIXME: clean up this mess! (20071116 frodo)
-if $sim_ac_have_qt_framework; then
+if $sim_cv_have_qt_framework; then
   QT_USE_INCDIR=${sim_ac_qt_framework_dir}
   QT_USE_LIBS="$QT_USE_LIBS -Wl,-framework,QtXml -Wl,-framework,QtScript -Wl,-framework,QtDesigner -L${sim_ac_qt_framework_dir} -lQtUiTools"
 else
