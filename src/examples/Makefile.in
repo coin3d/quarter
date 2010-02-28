@@ -36,7 +36,9 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+build_triplet = @build@
 host_triplet = @host@
+target_triplet = @target@
 noinst_PROGRAMS = minimal$(EXEEXT) dynamicui$(EXEEXT) \
 	directui$(EXEEXT) inheritui$(EXEEXT) superimposition$(EXEEXT) \
 	examiner$(EXEEXT) mdi$(EXEEXT)
@@ -334,7 +336,11 @@ sim_ac_qt_cygpath = @sim_ac_qt_cygpath@
 sim_ac_relative_src_dir = @sim_ac_relative_src_dir@
 sim_ac_relative_src_dir_p = @sim_ac_relative_src_dir_p@
 sysconfdir = @sysconfdir@
+target = @target@
 target_alias = @target_alias@
+target_cpu = @target_cpu@
+target_os = @target_os@
+target_vendor = @target_vendor@
 @BUILD_WITH_MSVC_FALSE@includes = \
 @BUILD_WITH_MSVC_FALSE@        -I$(top_builddir)/include \
 @BUILD_WITH_MSVC_FALSE@        -I$(top_srcdir)/include \

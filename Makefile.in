@@ -34,7 +34,9 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+build_triplet = @build@
 host_triplet = @host@
+target_triplet = @target@
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/Quarter.pc.in \
 	$(srcdir)/config.h.in $(top_srcdir)/configure AUTHORS COPYING \
@@ -285,7 +287,11 @@ sim_ac_qt_cygpath = @sim_ac_qt_cygpath@
 sim_ac_relative_src_dir = @sim_ac_relative_src_dir@
 sim_ac_relative_src_dir_p = @sim_ac_relative_src_dir_p@
 sysconfdir = @sysconfdir@
+target = @target@
 target_alias = @target_alias@
+target_cpu = @target_cpu@
+target_os = @target_os@
+target_vendor = @target_vendor@
 @BUILD_HTMLPAGES_FALSE@HTMLDIR = 
 @BUILD_HTMLPAGES_TRUE@HTMLDIR = html
 @BUILD_LIBRARY_FALSE@SRCDIRS = 

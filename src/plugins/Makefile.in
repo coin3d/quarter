@@ -37,7 +37,9 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+build_triplet = @build@
 host_triplet = @host@
+target_triplet = @target@
 subdir = src/plugins
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -322,7 +324,11 @@ sim_ac_qt_cygpath = @sim_ac_qt_cygpath@
 sim_ac_relative_src_dir = @sim_ac_relative_src_dir@
 sim_ac_relative_src_dir_p = @sim_ac_relative_src_dir_p@
 sysconfdir = @sysconfdir@
+target = @target@
 target_alias = @target_alias@
+target_cpu = @target_cpu@
+target_os = @target_os@
+target_vendor = @target_vendor@
 @BUILD_WITH_MSVC_FALSE@includes = \
 @BUILD_WITH_MSVC_FALSE@        -I$(top_srcdir)/include \
 @BUILD_WITH_MSVC_FALSE@        -I$(top_srcdir)/src/Quarter

@@ -34,7 +34,9 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+build_triplet = @build@
 host_triplet = @host@
+target_triplet = @target@
 subdir = include/Quarter/devices
 DIST_COMMON = $(libdevicesinc_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -262,7 +264,11 @@ sim_ac_qt_cygpath = @sim_ac_qt_cygpath@
 sim_ac_relative_src_dir = @sim_ac_relative_src_dir@
 sim_ac_relative_src_dir_p = @sim_ac_relative_src_dir_p@
 sysconfdir = @sysconfdir@
+target = @target@
 target_alias = @target_alias@
+target_cpu = @target_cpu@
+target_os = @target_os@
+target_vendor = @target_vendor@
 libdevicesinc_HEADERS = \
         InputDevice.h \
         Keyboard.h \
