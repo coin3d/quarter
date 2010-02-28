@@ -95,9 +95,6 @@ AM_CONDITIONAL(BUILD_LIBRARY, $sim_ac_build_library)
 # *******************************************************************
 # Do we want to build the documentation?
 
-AC_ARG_VAR([htmldir],
-           [destination for HTML docs (default ${datadir}/Quarter/html)])
-
 AC_ARG_ENABLE(html,
   AC_HELP_STRING([--enable-html], [build and install Quarter HTML documentation]),
   [case $enableval in
@@ -107,14 +104,12 @@ AC_ARG_ENABLE(html,
   [want_html=no])
 
 case $htmldir in
-"")
-  htmldir="$datadir/Quarter/html"
-  ;;
 /*)
   # do nothing - absolute path
   ;;
 *)
-  htmldir="\${prefix}/$htmldir"
+  # expand $docdir and append /html
+  htmldir=`eval echo ${docdir}`/html
   ;;
 esac
 
@@ -506,6 +501,7 @@ AC_SUBST([PLUGIN_BUILD_LIBFLAGS])
 # if we want Mac OS X framework, check if Coin is installed as a framework
 sim_ac_have_inventor_framework=false
 
+frameworkdir=
 if $sim_ac_framework && $sim_ac_coin_avail; then
   sim_ac_coin_frameworkdir=`$sim_ac_coin_configcmd --frameworkdir 2>/dev/null`
   if test x"$sim_ac_coin_frameworkdir" = x""; then
@@ -516,11 +512,14 @@ if $sim_ac_framework && $sim_ac_coin_avail; then
     if test x"$sim_ac_framework_prefix" = x""; then
       sim_ac_framework_prefix=`dirname "${sim_ac_coin_frameworkdir}"`
     fi
+    frameworkdir=${sim_ac_framework_prefix}/${sim_ac_framework_name}.framework
   fi
   SIM_AC_CONFIGURATION_SETTING([Framework Installation Prefix], [$sim_ac_framework_prefix])
 else
   sim_ac_framework=false
 fi
+
+AC_SUBST([frameworkdir])
 
 # **************************************************************************
 # Figure out if library should be built static or dynamic.
@@ -652,6 +651,9 @@ fi
 
 # **************************************************************************
 # Compiler control.
+
+# Make it possible for the user to turn off optimization flags
+SIM_AC_COMPILER_OPTIMIZATION
 
 SIM_AC_COMPILE_DEBUG([
   CPPFLAGS="$CPPFLAGS -DQUARTER_DEBUG=1"
