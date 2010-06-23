@@ -954,7 +954,7 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
   QByteArray filenametmp = filename.toLocal8Bit();
   ScXMLStateMachine * stateMachine = NULL;
 
-  if (filenametmp.beginsWith("coin:")){
+  if (filenametmp.startsWith("coin:")){
     stateMachine = ScXML::readFile(filenametmp.data());
   }
   else {
