@@ -42,6 +42,7 @@
 
 #include <QtCore/QEvent>
 #include <QtCore/QDebug>
+#include <QtCore/QFile>
 #include <QtGui/QAction>
 
 #include <Inventor/SbViewportRegion.h>
@@ -951,9 +952,20 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
   }
 
   QByteArray filenametmp = filename.toLocal8Bit();
+  ScXMLStateMachine * stateMachine = NULL;
 
-  ScXMLStateMachine * stateMachine =
-    ScXML::readFile(filenametmp.data());
+  if (filenametmp.beginsWith("coin:")){
+    stateMachine = ScXML::readFile(filenametmp.data());
+  }
+  else {
+    //Use Qt to read the file in case it is a Qt resource
+    QFile file(filenametmp);
+    if (file.open(QIODevice::ReadOnly)){
+      QByteArray fileContents = file.readAll();
+      stateMachine = ScXML::readBuffer(fileContents.constData());
+      file.close();
+    }
+  }
 
   if (stateMachine &&
       stateMachine->isOfType(SoScXMLStateMachine::getClassTypeId())) {
