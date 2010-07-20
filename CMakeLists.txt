@@ -2,7 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6) # Or does this work on 2.4? 2008-05-15, oysh
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true) # Avoid unneccesary code
 
 PROJECT(Quarter)
-SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/SIMCMakeMacros/Modules/")
+SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/SIMCMakeMacros/")
 
 # This is a convenience macro for generating better tree structures in VS solutions.
 # Running this in any directory will affect all libraries/executables at that location.
@@ -83,16 +83,7 @@ ADD_SUBDIRECTORY(src)
 #Install the public headers
 INSTALL(DIRECTORY include/Quarter/ DESTINATION include/Quarter
         FILES_MATCHING PATTERN "*.h"
-        PATTERN ".svn" EXCLUDE)
-
-#Drop this for now
-FIND_PACKAGE(Subversion)
-IF(Subversion_FOUND)
-  Subversion_WC_INFO(${PROJECT_SOURCE_DIR} Project)
-  SET(Quarter_REVISION ${Project_WC_REVISION})
-ELSE()
-  SET(Quarter_REVISION "0")
-ENDIF()
+        PATTERN ".hg" EXCLUDE)
 
 # Experimental support for CPack.
 # Tested with NSIS on Windows Vista.
