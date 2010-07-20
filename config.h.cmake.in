@@ -1,0 +1,8 @@
+/* define this to the Quarter major version number */
+#define QUARTER_MAJOR_VERSION @QUARTER_MAJOR_VERSION@
+
+/* define this to the Quarter release version number */
+#define QUARTER_MICRO_VERSION @QUARTER_MICRO_VERSION@
+
+/* define this to the Quarter minor version number */
+#define QUARTER_MINOR_VERSION @QUARTER_MINOR_VERSION@
