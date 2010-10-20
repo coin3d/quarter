@@ -98,6 +98,8 @@ public:
 
   mutable ContextMenu * contextmenu;
 
+  static bool nativeEventFilter(void * message, long * result);
+
  private:
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);
   static void removeFromCacheContext(QuarterWidgetP_cachecontext * context, const QGLWidget * widget);

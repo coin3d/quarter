@@ -36,6 +36,7 @@
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/devices/Mouse.h>
 #include <Quarter/devices/Keyboard.h>
+#include <Quarter/devices/SpaceNavigatorDevice.h>
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 
@@ -88,6 +89,11 @@ EventFilter::EventFilter(QObject * parent)
 
   PRIVATE(this)->devices += new Mouse;
   PRIVATE(this)->devices += new Keyboard;
+
+#ifdef HAVE_SPACENAV_LIB
+  PRIVATE(this)->devices += new SpaceNavigatorDevice;
+#endif // HAVE_SPACENAV_LIB
+
 }
 
 EventFilter::~EventFilter()

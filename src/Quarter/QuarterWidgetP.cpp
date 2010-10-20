@@ -24,6 +24,7 @@
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/eventhandlers/EventFilter.h>
 
+#include <QApplication>
 #include <QtGui/QCursor>
 #include <QtGui/QMenu>
 #include <QtCore/QMap>
@@ -38,6 +39,7 @@
 #include <Inventor/misc/SoContextHandler.h>
 #include <Inventor/C/glue/gl.h>
 
+#include "NativeEvent.h"
 #include "ContextMenu.h"
 #include "QuarterP.h"
 
@@ -74,6 +76,9 @@ QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * shar
 {
   this->cachecontext = findCacheContext(masterptr, sharewidget);
 
+  // FIXME: Centralize this as only one custom event filter can be
+  // added to an application. (20101019 handegar)
+  qApp->setEventFilter(QuarterWidgetP::nativeEventFilter);
 }
 
 QuarterWidgetP::~QuarterWidgetP()
@@ -282,3 +287,29 @@ QuarterWidgetP::contextMenu(void)
 
   return this->contextmenu->getMenu();
 }
+
+
+bool 
+QuarterWidgetP::nativeEventFilter(void * message, long * result)
+{
+#ifdef HAVE_SPACENAV_LIB
+  XEvent * event = (XEvent *) message;
+  if (event->type == ClientMessage) {
+    // FIXME: I dont really like this, but the original XEvent will
+    // die before reaching the destination within the Qt system. To
+    // avoid this, we'll have to make a copy. We should try to find a
+    // workaround for this. (20101020 handegar)
+
+    // The copy will automatically be deleted when the NativeEvent dies.
+    XEvent * copy = (XEvent *) malloc(sizeof(XEvent));
+    memcpy(copy, event, sizeof(XEvent));
+    NativeEvent * ne = new NativeEvent(copy);
+
+    qApp->postEvent(QApplication::focusWidget(), ne);
+    return true;
+  }
+#endif // HAVE_SPACENAV_LIB
+
+  return false;
+}
+
