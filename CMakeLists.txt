@@ -63,6 +63,12 @@ SET(QT_USE_QTUITOOLS true)
 FIND_PACKAGE(Qt4 REQUIRED)
 INCLUDE(${QT_USE_FILE})
 
+
+FIND_PACKAGE(Spacenav)
+IF (Spacenav_FOUND)
+INCLUDE_DIRECTORIES(${Spacenav_INCLUDE_DIR})
+ENDIF(Spacenav_FOUND)
+
 # FIXME: Is this really necessary? Shouldnt the link directories be sorted out by the package scripts.
 # 2008-05-15, oyshole
 LINK_DIRECTORIES(${QT_LIB_DIR} ${Coin_LIB_DIR} ${OPENGL_gl_DIRECTORY})

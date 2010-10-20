@@ -1,0 +1,179 @@
+/**************************************************************************\
+ *
+ *  This file is part of the SIM Quarter extension library for Coin.
+ *  Copyright (C) 1998-2010 by Systems in Motion.  All rights reserved.
+ *
+ *  This library is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License ("GPL") version 2
+ *  as published by the Free Software Foundation.  See the file COPYING
+ *  at the root directory of this source distribution for additional
+ *  information about the GNU GPL.
+ *
+ *  For using SIM Quarter with software that can not be combined with
+ *  the GNU GPL, and for taking advantage of the additional benefits of
+ *  our support services, please contact Systems in Motion about acquiring
+ *  a Coin Professional Edition License.
+ *
+ *  See <URL:http://www.coin3d.org/> for more information.
+ *
+ *  Kongsberg Oil & Gas Technologies, Bygdoy Alle 5, 0257 Oslo, NORWAY.
+ *  http://www.sim.no/  sales@sim.no  coin-support@coin3d.org
+ *
+\**************************************************************************/
+
+#include <Quarter/devices/SpaceNavigatorDevice.h>
+
+#include <QApplication>
+#include <QX11Info>
+#include <QWidget>
+#include <QtCore/QEvent>
+
+#include <Inventor/events/SoEvent.h>
+#include <Inventor/events/SoMotion3Event.h>
+#include <Inventor/events/SoSpaceballButtonEvent.h>
+
+#include "NativeEvent.h"
+
+#ifdef HAVE_SPACENAV_LIB
+#include <spnav.h>
+#endif //HAVE_SPACENAV_LIB
+
+#include <cstdio>
+
+
+namespace SIM { namespace Coin3D { namespace Quarter {
+class SpaceNavigatorDeviceP {
+public:
+  SpaceNavigatorDeviceP(SpaceNavigatorDevice * master) {
+    this->master = master;
+    this->hasdevice = false;
+    this->windowid = 0;
+    this->motionevent = new SoMotion3Event;
+    this->buttonevent = new SoSpaceballButtonEvent;
+  }
+  ~SpaceNavigatorDeviceP() {
+    delete this->motionevent;
+    delete this->buttonevent;
+  }
+
+  static bool customEventFilter(void * message, long * result);
+
+  SpaceNavigatorDevice * master;
+  bool hasdevice;
+  WId windowid;
+
+  SoMotion3Event * motionevent;
+  SoSpaceballButtonEvent * buttonevent;
+
+};
+}}}
+
+
+#define PRIVATE(obj) obj->pimpl
+using namespace SIM::Coin3D::Quarter;
+
+SpaceNavigatorDevice::SpaceNavigatorDevice()
+{  
+  PRIVATE(this) = new SpaceNavigatorDeviceP(this);
+  
+#ifdef HAVE_SPACENAV_LIB
+  PRIVATE(this)->hasdevice = 
+    spnav_x11_open(QX11Info::display(), PRIVATE(this)->windowid) == -1 ? false : true;
+  
+  // FIXME: Use a debugmessage mechanism instead? (20101020 handegar)
+  if (!PRIVATE(this)->hasdevice) {
+    fprintf(stderr, "Quarter:: Could not hook up to Spacenav device.\n");
+  }
+
+#endif // HAVE_SPACENAV_LIB
+}
+
+
+SpaceNavigatorDevice::~SpaceNavigatorDevice()
+{
+  delete PRIVATE(this);
+}
+
+
+const SoEvent * 
+SpaceNavigatorDevice::translateEvent(QEvent * event)
+{
+  SoEvent * ret = NULL;
+
+#ifdef HAVE_SPACENAV_LIB
+  NativeEvent * ce = dynamic_cast<NativeEvent *>(event);
+  if (ce && ce->getEvent()) {
+    XEvent * xev = ce->getEvent();
+
+    spnav_event spev;
+    if(spnav_x11_event(xev, &spev)) {
+      if(spev.type == SPNAV_EVENT_MOTION) {        
+        // Add rotation
+        const SbRotation oldrot = PRIVATE(this)->motionevent->getRotation();
+        const float axislen = sqrt(spev.motion.rx*spev.motion.rx + 
+                                   spev.motion.ry*spev.motion.ry + 
+                                   spev.motion.rz*spev.motion.rz);        
+        
+	const float half_angle = axislen * 0.5 * 0.001;
+	const float sin_half = sin(half_angle);
+        SbRotation newrot((spev.motion.rx / axislen) * sin_half,
+                          (spev.motion.ry / axislen) * sin_half,
+                          (spev.motion.rz / axislen) * sin_half,
+                          cos(half_angle));
+        PRIVATE(this)->motionevent->setRotation(oldrot*newrot);
+        
+        // Add translation
+        SbVec3f pos = PRIVATE(this)->motionevent->getTranslation();
+        pos[0] += spev.motion.x * 0.001;
+        pos[1] += spev.motion.y * 0.001;
+        pos[2] += spev.motion.z * 0.001;
+        PRIVATE(this)->motionevent->setTranslation(pos);
+       
+        ret = PRIVATE(this)->motionevent;
+      } 
+      else if (spev.type == SPNAV_EVENT_BUTTON){
+        if(spev.button.press) {
+          PRIVATE(this)->buttonevent->setState(SoButtonEvent::DOWN);
+          switch(spev.button.bnum) {
+          case 0: PRIVATE(this)->buttonevent->setButton(SoSpaceballButtonEvent::BUTTON1);
+            break;
+          case 1: PRIVATE(this)->buttonevent->setButton(SoSpaceballButtonEvent::BUTTON2);
+            break;
+          case 2: PRIVATE(this)->buttonevent->setButton(SoSpaceballButtonEvent::BUTTON3);
+            break;
+          case 3: PRIVATE(this)->buttonevent->setButton(SoSpaceballButtonEvent::BUTTON4);
+            break;
+          case 4: PRIVATE(this)->buttonevent->setButton(SoSpaceballButtonEvent::BUTTON5);
+            break;
+          case 5: PRIVATE(this)->buttonevent->setButton(SoSpaceballButtonEvent::BUTTON6);
+            break;
+          case 6: PRIVATE(this)->buttonevent->setButton(SoSpaceballButtonEvent::BUTTON7);
+            break;
+          case 7: PRIVATE(this)->buttonevent->setButton(SoSpaceballButtonEvent::BUTTON8);
+            break;
+          default:
+            // FIXME: Which button corresponds to the
+            // SoSpaceballButtonEvent::PICK enum? (20101020 handegar)
+            break;
+          }          
+        }
+        else {
+          PRIVATE(this)->buttonevent->setState(SoButtonEvent::UP);
+        }
+
+        ret = PRIVATE(this)->buttonevent;
+      }
+      else {
+        // Unknown Spacenav event.
+        assert(0 && "Unknown event type");
+      }
+    }
+  }
+#endif // HAVE_SPACENAV_LIB
+
+  return ret;
+}
+
+
+#undef PRIVATE
+#undef PUBLIC

@@ -171,9 +171,6 @@ QuarterWidget::constructor(const QGLWidget * sharewidget)
 
   this->installEventFilter(PRIVATE(this)->eventfilter);
   this->installEventFilter(PRIVATE(this)->interactionmode);
-
-
-
 }
 
 /*! destructor */
@@ -721,6 +718,7 @@ QuarterWidget::actualRedraw(void)
   PRIVATE(this)->sorendermanager->render(PRIVATE(this)->clearwindow,
                                          PRIVATE(this)->clearzbuffer);
 }
+
 
 /*!
   Passes an event to the eventmanager.
