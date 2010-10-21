@@ -250,3 +250,31 @@ the last lines of output from the configure script).  A description of
 the build environment you use may also be helpful, e.g. the compiler
 suite and versions of libraries and any system customizations that may
 be relevant to the problem.
+
+
+
+3DConnexion Space Navigator support
+===================================
+
+The Space navigator support in Quarter relies on the spacenav library
+[http://spacenav.sourceforge.net]. Only Linux is support at the moment
+as the 3DConnexion driver relies on X11 for sending events. The
+autodetection of spacenav is only available when configuring with
+CMAKE. It is however possible to enable this support when using
+AutoTools as well [*].
+
+Please note: The spacenav mechanism needs to grap X11 events directly
+from the source and has therefore installed an event listener on the
+QApplication instance using the
+QCoreApplication::setEventFilter(EventFilter filter) method. Only one
+such listener can exist for an QApplication, so if your application
+also does this, the spacenav mechanism will be disabled.
+
+
+
+[*] Declaring the HAVE_SPACENAV_LIB #define enables the spacenav
+code. Setting the CPPFLAGS and the LDFLAGS before configuring will
+enable make to include the proper spacenav files when compiling and
+linking. E.g. something like this CPPFLAGS="-DHAVE_SPACENAV_LIB
+-I/spacenav/include/dir/" LDFLAGS="-L/spacenav/lib/dir -lspnav". NB:
+this is not properly tested, though. Use CMAKE if possible.
