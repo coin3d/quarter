@@ -109,24 +109,22 @@ SpaceNavigatorDevice::translateEvent(QEvent * event)
     if(spnav_x11_event(xev, &spev)) {
       if(spev.type == SPNAV_EVENT_MOTION) {        
         // Add rotation
-        const SbRotation oldrot = PRIVATE(this)->motionevent->getRotation();
         const float axislen = sqrt(spev.motion.rx*spev.motion.rx + 
                                    spev.motion.ry*spev.motion.ry + 
                                    spev.motion.rz*spev.motion.rz);        
         
 	const float half_angle = axislen * 0.5 * 0.001;
 	const float sin_half = sin(half_angle);
-        SbRotation newrot((spev.motion.rx / axislen) * sin_half,
-                          (spev.motion.ry / axislen) * sin_half,
-                          (spev.motion.rz / axislen) * sin_half,
-                          cos(half_angle));
-        PRIVATE(this)->motionevent->setRotation(oldrot*newrot);
+        SbRotation rot((spev.motion.rx / axislen) * sin_half,
+                       (spev.motion.ry / axislen) * sin_half,
+                       (spev.motion.rz / axislen) * sin_half,
+                       cos(half_angle));
+        PRIVATE(this)->motionevent->setRotation(rot);
         
         // Add translation
-        SbVec3f pos = PRIVATE(this)->motionevent->getTranslation();
-        pos[0] += spev.motion.x * 0.001;
-        pos[1] += spev.motion.y * 0.001;
-        pos[2] += spev.motion.z * 0.001;
+        SbVec3f pos(spev.motion.x * 0.001,
+                    spev.motion.y * 0.001,
+                    spev.motion.z * 0.001);
         PRIVATE(this)->motionevent->setTranslation(pos);
        
         ret = PRIVATE(this)->motionevent;
