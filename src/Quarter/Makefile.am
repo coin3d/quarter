@@ -40,7 +40,9 @@ PrivateHeaders = \
         QuarterP.h \
         QuarterWidgetP.h \
         SensorManager.h \
-        SignalThread.h
+        SignalThread.h \
+        NativeEvent.h \
+        SpaceNavigatorDevice.h
 
 RegularSources = \
         ContextMenu.cpp \
@@ -59,7 +61,10 @@ RegularSources = \
         QuarterWidget.cpp \
         QuarterWidgetP.cpp \
         SensorManager.cpp \
-        SignalThread.cpp
+        SignalThread.cpp \
+        NativeEvent.cpp \
+        SpaceNavigatorDevice.cpp
+
 
 
 BUILT_SOURCES = $(BuiltSources)
