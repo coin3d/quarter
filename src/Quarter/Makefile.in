@@ -43,23 +43,7 @@ target_triplet = @target@
 subdir = src/Quarter
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/../simacros/bin/../cfg/m4/coin.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/compile_debug.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/compile_symbols.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/configuration_summary.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/doxygen_detection.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/errors.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/exit.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/gendsp.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/misc_compiler.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/opengl.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/pkg.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/qt.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/sim.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/sourcedir.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/wrapmsvc.m4 \
-	$(top_srcdir)/../simacros/bin/../cfg/m4/x11.m4 \
-	$(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
@@ -89,7 +73,9 @@ am__objects_1 = Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-ContextMenu.$(OBJEXT)
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidget.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.$(OBJEXT) \
 	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SensorManager.$(OBJEXT) \
-	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SignalThread.$(OBJEXT)
+	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SignalThread.$(OBJEXT) \
+	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.$(OBJEXT) \
+	Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.$(OBJEXT)
 am__objects_2 =
 am_Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_OBJECTS =  \
 	$(am__objects_1) $(am__objects_2)
@@ -118,7 +104,9 @@ am__objects_4 = libQuarter_la-ContextMenu.lo \
 	libQuarter_la-Mouse.lo libQuarter_la-QtCoinCompatibility.lo \
 	libQuarter_la-Quarter.lo libQuarter_la-QuarterP.lo \
 	libQuarter_la-QuarterWidget.lo libQuarter_la-QuarterWidgetP.lo \
-	libQuarter_la-SensorManager.lo libQuarter_la-SignalThread.lo
+	libQuarter_la-SensorManager.lo libQuarter_la-SignalThread.lo \
+	libQuarter_la-NativeEvent.lo \
+	libQuarter_la-SpaceNavigatorDevice.lo
 am_libQuarter_la_OBJECTS = $(am__objects_4) $(am__objects_2)
 am__objects_5 = libQuarter_la-moc_ContextMenu.lo \
 	libQuarter_la-moc_DragDropHandler.lo \
@@ -143,6 +131,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Keyboard.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-KeyboardP.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Mouse.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QtCoinCompatibility.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Quarter.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterP.Po \
@@ -150,6 +139,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SensorManager.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SignalThread.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_DragDropHandler.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_EventFilter.Po \
@@ -168,6 +158,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-Keyboard.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-KeyboardP.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-Mouse.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-NativeEvent.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-QtCoinCompatibility.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-Quarter.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-QuarterP.Plo \
@@ -175,6 +166,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-QuarterWidgetP.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-SensorManager.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-SignalThread.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_ContextMenu.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_DragDropHandler.Plo \
 @AMDEP_TRUE@	./$(DEPDIR)/libQuarter_la-moc_EventFilter.Plo \
@@ -441,7 +433,9 @@ PrivateHeaders = \
         QuarterP.h \
         QuarterWidgetP.h \
         SensorManager.h \
-        SignalThread.h
+        SignalThread.h \
+        NativeEvent.h \
+        SpaceNavigatorDevice.h
 
 RegularSources = \
         ContextMenu.cpp \
@@ -460,7 +454,9 @@ RegularSources = \
         QuarterWidget.cpp \
         QuarterWidgetP.cpp \
         SensorManager.cpp \
-        SignalThread.cpp
+        SignalThread.cpp \
+        NativeEvent.cpp \
+        SpaceNavigatorDevice.cpp
 
 BUILT_SOURCES = $(BuiltSources)
 libQuarter_la_SOURCES = \
@@ -627,6 +623,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Keyboard.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-KeyboardP.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Mouse.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QtCoinCompatibility.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-Quarter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterP.Po@am__quote@
@@ -634,6 +631,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-QuarterWidgetP.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SensorManager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SignalThread.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_DragDropHandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_EventFilter.Po@am__quote@
@@ -652,6 +650,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-Keyboard.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-KeyboardP.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-Mouse.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-NativeEvent.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-QtCoinCompatibility.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-Quarter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-QuarterP.Plo@am__quote@
@@ -659,6 +658,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-QuarterWidgetP.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-SensorManager.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-SignalThread.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_ContextMenu.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_DragDropHandler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libQuarter_la-moc_EventFilter.Plo@am__quote@
@@ -1099,6 +1099,54 @@ Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SignalThread.lo: SignalThread.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SignalThread.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SignalThread.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SignalThread.lo `test -f 'SignalThread.cpp' || echo '$(srcdir)/'`SignalThread.cpp
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.o: NativeEvent.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Tpo" -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.o `test -f 'NativeEvent.cpp' || echo '$(srcdir)/'`NativeEvent.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Po"; else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='NativeEvent.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.o `test -f 'NativeEvent.cpp' || echo '$(srcdir)/'`NativeEvent.cpp
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.obj: NativeEvent.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.obj -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Tpo" -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.obj `if test -f 'NativeEvent.cpp'; then $(CYGPATH_W) 'NativeEvent.cpp'; else $(CYGPATH_W) '$(srcdir)/NativeEvent.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Po"; else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='NativeEvent.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.obj `if test -f 'NativeEvent.cpp'; then $(CYGPATH_W) 'NativeEvent.cpp'; else $(CYGPATH_W) '$(srcdir)/NativeEvent.cpp'; fi`
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.lo: NativeEvent.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.lo -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Tpo" -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.lo `test -f 'NativeEvent.cpp' || echo '$(srcdir)/'`NativeEvent.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Plo"; else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='NativeEvent.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-NativeEvent.lo `test -f 'NativeEvent.cpp' || echo '$(srcdir)/'`NativeEvent.cpp
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.o: SpaceNavigatorDevice.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Tpo" -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.o `test -f 'SpaceNavigatorDevice.cpp' || echo '$(srcdir)/'`SpaceNavigatorDevice.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Po"; else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='SpaceNavigatorDevice.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.o `test -f 'SpaceNavigatorDevice.cpp' || echo '$(srcdir)/'`SpaceNavigatorDevice.cpp
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.obj: SpaceNavigatorDevice.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.obj -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Tpo" -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.obj `if test -f 'SpaceNavigatorDevice.cpp'; then $(CYGPATH_W) 'SpaceNavigatorDevice.cpp'; else $(CYGPATH_W) '$(srcdir)/SpaceNavigatorDevice.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Po"; else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='SpaceNavigatorDevice.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Po' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.obj `if test -f 'SpaceNavigatorDevice.cpp'; then $(CYGPATH_W) 'SpaceNavigatorDevice.cpp'; else $(CYGPATH_W) '$(srcdir)/SpaceNavigatorDevice.cpp'; fi`
+
+Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.lo: SpaceNavigatorDevice.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.lo -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Tpo" -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.lo `test -f 'SpaceNavigatorDevice.cpp' || echo '$(srcdir)/'`SpaceNavigatorDevice.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Tpo" "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Plo"; else rm -f "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='SpaceNavigatorDevice.cpp' object='Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.Plo' tmpdepfile='$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-SpaceNavigatorDevice.lo `test -f 'SpaceNavigatorDevice.cpp' || echo '$(srcdir)/'`SpaceNavigatorDevice.cpp
 
 Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.o: moc_ContextMenu.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CPPFLAGS) $(CPPFLAGS) $(Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib_CXXFLAGS) $(CXXFLAGS) -MT Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.o -MD -MP -MF "$(DEPDIR)/Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.Tpo" -c -o Quarter@QUARTER_MAJOR_VERSION@@SUFFIX@_lib-moc_ContextMenu.o `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp; \
@@ -1699,6 +1747,54 @@ libQuarter_la-SignalThread.lo: SignalThread.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-SignalThread.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-SignalThread.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-SignalThread.lo `test -f 'SignalThread.cpp' || echo '$(srcdir)/'`SignalThread.cpp
+
+libQuarter_la-NativeEvent.o: NativeEvent.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-NativeEvent.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-NativeEvent.Tpo" -c -o libQuarter_la-NativeEvent.o `test -f 'NativeEvent.cpp' || echo '$(srcdir)/'`NativeEvent.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-NativeEvent.Tpo" "$(DEPDIR)/libQuarter_la-NativeEvent.Po"; else rm -f "$(DEPDIR)/libQuarter_la-NativeEvent.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='NativeEvent.cpp' object='libQuarter_la-NativeEvent.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-NativeEvent.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-NativeEvent.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-NativeEvent.o `test -f 'NativeEvent.cpp' || echo '$(srcdir)/'`NativeEvent.cpp
+
+libQuarter_la-NativeEvent.obj: NativeEvent.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-NativeEvent.obj -MD -MP -MF "$(DEPDIR)/libQuarter_la-NativeEvent.Tpo" -c -o libQuarter_la-NativeEvent.obj `if test -f 'NativeEvent.cpp'; then $(CYGPATH_W) 'NativeEvent.cpp'; else $(CYGPATH_W) '$(srcdir)/NativeEvent.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-NativeEvent.Tpo" "$(DEPDIR)/libQuarter_la-NativeEvent.Po"; else rm -f "$(DEPDIR)/libQuarter_la-NativeEvent.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='NativeEvent.cpp' object='libQuarter_la-NativeEvent.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-NativeEvent.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-NativeEvent.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-NativeEvent.obj `if test -f 'NativeEvent.cpp'; then $(CYGPATH_W) 'NativeEvent.cpp'; else $(CYGPATH_W) '$(srcdir)/NativeEvent.cpp'; fi`
+
+libQuarter_la-NativeEvent.lo: NativeEvent.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-NativeEvent.lo -MD -MP -MF "$(DEPDIR)/libQuarter_la-NativeEvent.Tpo" -c -o libQuarter_la-NativeEvent.lo `test -f 'NativeEvent.cpp' || echo '$(srcdir)/'`NativeEvent.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-NativeEvent.Tpo" "$(DEPDIR)/libQuarter_la-NativeEvent.Plo"; else rm -f "$(DEPDIR)/libQuarter_la-NativeEvent.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='NativeEvent.cpp' object='libQuarter_la-NativeEvent.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-NativeEvent.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-NativeEvent.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-NativeEvent.lo `test -f 'NativeEvent.cpp' || echo '$(srcdir)/'`NativeEvent.cpp
+
+libQuarter_la-SpaceNavigatorDevice.o: SpaceNavigatorDevice.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-SpaceNavigatorDevice.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Tpo" -c -o libQuarter_la-SpaceNavigatorDevice.o `test -f 'SpaceNavigatorDevice.cpp' || echo '$(srcdir)/'`SpaceNavigatorDevice.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Tpo" "$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Po"; else rm -f "$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='SpaceNavigatorDevice.cpp' object='libQuarter_la-SpaceNavigatorDevice.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-SpaceNavigatorDevice.o `test -f 'SpaceNavigatorDevice.cpp' || echo '$(srcdir)/'`SpaceNavigatorDevice.cpp
+
+libQuarter_la-SpaceNavigatorDevice.obj: SpaceNavigatorDevice.cpp
+@am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-SpaceNavigatorDevice.obj -MD -MP -MF "$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Tpo" -c -o libQuarter_la-SpaceNavigatorDevice.obj `if test -f 'SpaceNavigatorDevice.cpp'; then $(CYGPATH_W) 'SpaceNavigatorDevice.cpp'; else $(CYGPATH_W) '$(srcdir)/SpaceNavigatorDevice.cpp'; fi`; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Tpo" "$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Po"; else rm -f "$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='SpaceNavigatorDevice.cpp' object='libQuarter_la-SpaceNavigatorDevice.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Po' tmpdepfile='$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-SpaceNavigatorDevice.obj `if test -f 'SpaceNavigatorDevice.cpp'; then $(CYGPATH_W) 'SpaceNavigatorDevice.cpp'; else $(CYGPATH_W) '$(srcdir)/SpaceNavigatorDevice.cpp'; fi`
+
+libQuarter_la-SpaceNavigatorDevice.lo: SpaceNavigatorDevice.cpp
+@am__fastdepCXX_TRUE@	if $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-SpaceNavigatorDevice.lo -MD -MP -MF "$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Tpo" -c -o libQuarter_la-SpaceNavigatorDevice.lo `test -f 'SpaceNavigatorDevice.cpp' || echo '$(srcdir)/'`SpaceNavigatorDevice.cpp; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Tpo" "$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Plo"; else rm -f "$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='SpaceNavigatorDevice.cpp' object='libQuarter_la-SpaceNavigatorDevice.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	depfile='$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.Plo' tmpdepfile='$(DEPDIR)/libQuarter_la-SpaceNavigatorDevice.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -c -o libQuarter_la-SpaceNavigatorDevice.lo `test -f 'SpaceNavigatorDevice.cpp' || echo '$(srcdir)/'`SpaceNavigatorDevice.cpp
 
 libQuarter_la-moc_ContextMenu.o: moc_ContextMenu.cpp
 @am__fastdepCXX_TRUE@	if $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libQuarter_la_CPPFLAGS) $(CPPFLAGS) $(libQuarter_la_CXXFLAGS) $(CXXFLAGS) -MT libQuarter_la-moc_ContextMenu.o -MD -MP -MF "$(DEPDIR)/libQuarter_la-moc_ContextMenu.Tpo" -c -o libQuarter_la-moc_ContextMenu.o `test -f 'moc_ContextMenu.cpp' || echo '$(srcdir)/'`moc_ContextMenu.cpp; \
