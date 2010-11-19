@@ -30,7 +30,7 @@ IF (Spacenav_FOUND)
 ENDIF(Spacenav_FOUND)
 
 
-SET(AllLibs ${Coin_LIBRARY} ${QT_LIBRARIES} ${Extra_libraries})
+SET(AllLibs ${Coin_LIBRARY} ${QT_LIBRARIES} ${OpenGL_LIBRARY} ${Extra_libraries})
 
 
 
