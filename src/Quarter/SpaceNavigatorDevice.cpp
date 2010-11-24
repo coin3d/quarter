@@ -24,7 +24,6 @@
 #include <Quarter/devices/SpaceNavigatorDevice.h>
 
 #include <QApplication>
-#include <QX11Info>
 #include <QWidget>
 #include <QtCore/QEvent>
 
@@ -35,6 +34,7 @@
 #include "NativeEvent.h"
 
 #ifdef HAVE_SPACENAV_LIB
+#include <QX11Info>
 #include <spnav.h>
 #endif //HAVE_SPACENAV_LIB
 
@@ -73,13 +73,13 @@ public:
 using namespace SIM::Coin3D::Quarter;
 
 SpaceNavigatorDevice::SpaceNavigatorDevice()
-{  
+{
   PRIVATE(this) = new SpaceNavigatorDeviceP(this);
-  
+
 #ifdef HAVE_SPACENAV_LIB
-  PRIVATE(this)->hasdevice = 
+  PRIVATE(this)->hasdevice =
     spnav_x11_open(QX11Info::display(), PRIVATE(this)->windowid) == -1 ? false : true;
-  
+
   // FIXME: Use a debugmessage mechanism instead? (20101020 handegar)
   if (!PRIVATE(this)->hasdevice) {
     fprintf(stderr, "Quarter:: Could not hook up to Spacenav device.\n");
@@ -95,7 +95,7 @@ SpaceNavigatorDevice::~SpaceNavigatorDevice()
 }
 
 
-const SoEvent * 
+const SoEvent *
 SpaceNavigatorDevice::translateEvent(QEvent * event)
 {
   SoEvent * ret = NULL;
@@ -107,12 +107,12 @@ SpaceNavigatorDevice::translateEvent(QEvent * event)
 
     spnav_event spev;
     if(spnav_x11_event(xev, &spev)) {
-      if(spev.type == SPNAV_EVENT_MOTION) {        
+      if(spev.type == SPNAV_EVENT_MOTION) {
         // Add rotation
-        const float axislen = sqrt(spev.motion.rx*spev.motion.rx + 
-                                   spev.motion.ry*spev.motion.ry + 
-                                   spev.motion.rz*spev.motion.rz);        
-        
+        const float axislen = sqrt(spev.motion.rx*spev.motion.rx +
+                                   spev.motion.ry*spev.motion.ry +
+                                   spev.motion.rz*spev.motion.rz);
+
 	const float half_angle = axislen * 0.5 * 0.001;
 	const float sin_half = sin(half_angle);
         SbRotation rot((spev.motion.rx / axislen) * sin_half,
@@ -120,15 +120,15 @@ SpaceNavigatorDevice::translateEvent(QEvent * event)
                        (spev.motion.rz / axislen) * sin_half,
                        cos(half_angle));
         PRIVATE(this)->motionevent->setRotation(rot);
-        
+
         // Add translation
         SbVec3f pos(spev.motion.x * 0.001,
                     spev.motion.y * 0.001,
                     spev.motion.z * 0.001);
         PRIVATE(this)->motionevent->setTranslation(pos);
-       
+
         ret = PRIVATE(this)->motionevent;
-      } 
+      }
       else if (spev.type == SPNAV_EVENT_BUTTON){
         if(spev.button.press) {
           PRIVATE(this)->buttonevent->setState(SoButtonEvent::DOWN);
@@ -153,7 +153,7 @@ SpaceNavigatorDevice::translateEvent(QEvent * event)
             // FIXME: Which button corresponds to the
             // SoSpaceballButtonEvent::PICK enum? (20101020 handegar)
             break;
-          }          
+          }
         }
         else {
           PRIVATE(this)->buttonevent->setState(SoButtonEvent::UP);
