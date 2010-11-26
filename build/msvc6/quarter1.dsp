@@ -690,6 +690,19 @@ SOURCE=..\..\src\Quarter\Mouse.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\..\src\Quarter\SpaceNavigatorDevice.cpp
+!IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
+# PROP Intermediate_Dir "QuarterRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 DLL (Debug)"
+# PROP Intermediate_Dir "QuarterDebug"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Release)"
+# PROP Intermediate_Dir "QuarterStaticRelease"
+!ELSEIF  "$(CFG)" == "quarter1 - Win32 LIB (Debug)"
+# PROP Intermediate_Dir "QuarterStaticDebug"
+!ENDIF
+# End Source File
+# Begin Source File
+
 SOURCE=..\..\src\Quarter\EventFilter.cpp
 !IF  "$(CFG)" == "quarter1 - Win32 DLL (Release)"
 # PROP Intermediate_Dir "QuarterRelease"
@@ -805,6 +818,10 @@ SOURCE=..\..\include\Quarter\devices\Keyboard.h
 # Begin Source File
 
 SOURCE=..\..\include\Quarter\devices\Mouse.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\include\Quarter\devices\SpaceNavigatorDevice.h
 # End Source File
 # End Group
 # Begin Group "eventhandlers"

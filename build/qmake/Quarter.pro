@@ -25,7 +25,8 @@ SOURCES = \
           ../../src/Quarter/QuarterWidget.cpp \
           ../../src/Quarter/QuarterWidgetP.cpp \
           ../../src/Quarter/SensorManager.cpp \
-          ../../src/Quarter/SignalThread.cpp 
+          ../../src/Quarter/SignalThread.cpp \
+          ../../src/Quarter/SpaceNavigatorDevice.cpp 
 
 HEADERS = \
           ../../src/Quarter/ContextMenu.h \
@@ -42,6 +43,7 @@ HEADERS = \
           ../../include/Quarter/devices/InputDevice.h \
           ../../include/Quarter/devices/Keyboard.h \
           ../../include/Quarter/devices/Mouse.h \
+          ../../include/Quarter/devices/SpaceNavigatorDevice.h \
           ../../include/Quarter/eventhandlers/DragDropHandler.h \
           ../../include/Quarter/eventhandlers/EventFilter.h \
           ../../include/Quarter/eventhandlers/FocusHandler.h 
