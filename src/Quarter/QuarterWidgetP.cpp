@@ -24,7 +24,7 @@
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/eventhandlers/EventFilter.h>
 
-#include <QApplication>
+#include <QtGui/QApplication>
 #include <QtGui/QCursor>
 #include <QtGui/QMenu>
 #include <QtCore/QMap>
