@@ -24,8 +24,8 @@
  *
 \**************************************************************************/
 
-#include <QObject>
-#include <QEvent>
+#include <QtCore/QObject>
+#include <QtCore/QEvent>
 
 #ifdef HAVE_SPACENAV_LIB
 #include <X11/Xlib.h>
