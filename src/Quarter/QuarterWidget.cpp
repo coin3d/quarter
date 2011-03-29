@@ -960,7 +960,7 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
     QFile file(filenametmp);
     if (file.open(QIODevice::ReadOnly)){
       QByteArray fileContents = file.readAll();
-      stateMachine = ScXML::readBuffer(fileContents.constData());
+      stateMachine = ScXML::readBuffer(SbByteBuffer(fileContents.size(), fileContents.constData()));
       file.close();
     }
   }
