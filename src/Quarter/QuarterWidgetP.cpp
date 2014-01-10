@@ -34,10 +34,10 @@
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/eventhandlers/EventFilter.h>
 
-#include <QtGui/QApplication>
-#include <QtGui/QCursor>
-#include <QtGui/QMenu>
-#include <QtCore/QMap>
+#include <QApplication>
+#include <QCursor>
+#include <QMenu>
+#include <QMap>
 
 #include <Inventor/nodes/SoCamera.h>
 #include <Inventor/nodes/SoNode.h>
