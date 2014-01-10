@@ -7,11 +7,10 @@ FILE(GLOB_RECURSE Sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 FILE(GLOB_RECURSE Headers RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
 FILE(GLOB_RECURSE Resources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.qrc)
 
-SIM_QT4_AUTO_WRAP_CPP(MocSources ${Headers})
 QT4_ADD_RESOURCES(ResourceSources ${Resources})
 
 # Some convenient variables. The inclusion of the headers in the source variable is to force CMake to include the headers in VS project generation.
-SET(AllSources ${Sources} ${MocSources} ${ResourceSources} ${Headers})
+SET(AllSources ${Sources} ${ResourceSources} ${Headers})
 SET(AllLibs ${Coin_LIBRARY} ${QT_LIBRARIES} ${OPENGL_gl_LIBRARY} Quarter)
 
 ADD_LIBRARY(${Library} SHARED ${AllSources})

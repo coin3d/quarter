@@ -28,13 +28,11 @@ ADD_EXECUTABLE(InheritUIExample "${CMAKE_CURRENT_SOURCE_DIR}/inheritui.cpp"
 TARGET_LINK_LIBRARIES(InheritUIExample Quarter)
 
 #Multiple document interface example
-SIM_QT4_AUTO_WRAP_CPP(MocSources "${CMAKE_CURRENT_SOURCE_DIR}/MdiMainWindow.h")
 ADD_EXECUTABLE(MDIExample "${CMAKE_CURRENT_SOURCE_DIR}/mdi.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/MdiMainWindow.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/MdiMainWindow.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/MdiQuarterWidget.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/MdiQuarterWidget.h"
-  ${MocSources}
 )
 TARGET_LINK_LIBRARIES(MDIExample Quarter)
 
