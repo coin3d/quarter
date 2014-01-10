@@ -38,7 +38,7 @@
 */
 
 #include <QtUiTools/QUiLoader>
-#include <QtCore/QFile>
+#include <QFile>
 
 #include <Inventor/nodes/SoCone.h>
 #include <Inventor/nodes/SoBaseColor.h>
@@ -46,7 +46,7 @@
 
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/Quarter.h>
-#include <QtGui/QApplication>
+#include <QApplication>
 
 using namespace SIM::Coin3D::Quarter;
 
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
   file.close();
 
   // Get the QuarterWidget
-  QuarterWidget * viewer = qFindChild<QuarterWidget *>(widget, "QuarterWidget");
+  QuarterWidget * viewer = widget->findChild<QuarterWidget *>("QuarterWidget");
   assert(viewer && "could not find child QuarterWidget in ui file");
 
   // Make a dead simple scene graph by using the Coin library, only

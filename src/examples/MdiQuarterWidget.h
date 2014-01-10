@@ -33,8 +33,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \**************************************************************************/
 
-#include <QtCore/QSize>
-#include <QtGui/QMdiSubWindow>
+#include <QSize>
+#include <QMdiSubWindow>
 
 namespace SIM { namespace Coin3D { namespace Quarter {
   class QuarterWidget;
