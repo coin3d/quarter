@@ -33,8 +33,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \**************************************************************************/
 
-#include <QtCore/QObject>
-#include <QtCore/QEvent>
+#include <QObject>
+#include <QEvent>
 
 #ifdef HAVE_SPACENAV_LIB
 #include <X11/Xlib.h>
