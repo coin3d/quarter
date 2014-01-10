@@ -35,7 +35,7 @@
   example of a QuarterViewer without the use of ui files
  */
 
-#include <QtGui/QApplication>
+#include <QApplication>
 
 #include <Inventor/nodes/SoCone.h>
 #include <Inventor/nodes/SoBaseColor.h>

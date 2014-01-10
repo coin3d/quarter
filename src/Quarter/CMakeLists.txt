@@ -1,7 +1,6 @@
 INCLUDE(SimMSVC)
 
 SET(Library Quarter)
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
 # We R internal
 ADD_DEFINITIONS(-DQUARTER_INTERNAL)
@@ -12,10 +11,6 @@ FILE(GLOB CMakeCache RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_BINARY_DIR}/CM
 FILE(GLOB_RECURSE Sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 FILE(GLOB_RECURSE PublicHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
 FILE(GLOB_RECURSE PrivateHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ../../include/Quarter/*.h)
-
-# Find the headers that should be Moc'ed
-FILE(GLOB_RECURSE MocPrivateHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
-FILE(GLOB_RECURSE MocPublicHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ../../include/Quarter/*.h)
 
 # Some convenient variables. The inclusion of the headers in the source variable is to force CMake to include the headers in VS project generation.
 SET(AllSources ${Sources} ${PublicHeaders} ${PrivateHeaders} ${CMakeCache})

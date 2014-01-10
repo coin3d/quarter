@@ -37,9 +37,9 @@
   Inventor files
 */
 
-#include <QtGui/QApplication>
-#include <QtUiTools/QUiLoader>
-#include <QtCore/QFile>
+#include <QApplication>
+#include <QUiLoader>
+#include <QFile>
 
 #include <Inventor/nodes/SoCone.h>
 #include <Inventor/nodes/SoBaseColor.h>
@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
   file.close();
 
   // Get the QuarterWidget
-  QuarterWidget * viewer = qFindChild<QuarterWidget *>(widget, "QuarterWidget");
+  QuarterWidget * viewer = widget->findChild<QuarterWidget *>("QuarterWidget");
   assert(viewer && "could not find child QuarterWidget in ui file");
 
   // make viewer support drag and drop of Inventor files
