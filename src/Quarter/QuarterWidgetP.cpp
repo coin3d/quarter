@@ -86,9 +86,11 @@ QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * shar
 {
   this->cachecontext = findCacheContext(masterptr, sharewidget);
 
+#if (QT_VERSION < 0x050000)
   // FIXME: Centralize this as only one custom event filter can be
   // added to an application. (20101019 handegar)
   qApp->setEventFilter(QuarterWidgetP::nativeEventFilter);
+#endif
 }
 
 QuarterWidgetP::~QuarterWidgetP()
