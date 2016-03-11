@@ -54,9 +54,9 @@ ENDIF(MSVC_IDE)
 IF(Quarter_BUILD_STATIC_LIBRARY)
   ADD_LIBRARY(${Library} STATIC ${AllSources})
 ELSE(Quarter_BUILD_STATIC_LIBRARY)
-  ADD_LIBRARY(${Library} SHARED ${AllSources})
-  TARGET_LINK_LIBRARIES(${Library} ${AllLibs})
+  ADD_LIBRARY(${Library} SHARED ${AllSources})  
 ENDIF(Quarter_BUILD_STATIC_LIBRARY)
+TARGET_LINK_LIBRARIES(${Library} ${AllLibs})
 
 #  Install configuration
 #
