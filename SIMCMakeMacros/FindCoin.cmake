@@ -4,22 +4,28 @@
 # FIXME: Rewrite this to be more standards compliant
 # See http://www.cmake.org/cgi-bin/viewcvs.cgi/Modules/readme.txt?root=CMake&view=markup
 # Look at FindVTK for an example of how to solve the location mess we have in Coin
+# https://github.com/LuaDist/cmake/blob/master/Modules/FindVTK.cmake This is already outdated:
+# https://github.com/Kitware/CMake/blob/master/Help/module/FindVTK.rst
 
 # FIXME: Document. Returns Coin_INCLUDE_DIR, Coin_DEFINES, Coin_LIBRAR(Y|IES)
 # Note: Due to limiting CMake support for Mac OS X, we cannot assume that Coin_INCLUDE_DIR
 # is an actual path pointing to the actual header files (it usually points to the 
 # framework itself), so don't use this to do anything fancy in client CMakeLists.txt files.
 
-SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS True)
+# See if CoinConfig.cmake has been registered or Coin_DIR was set properly.
+find_package(Coin ${PACKAGE_FIND_VERSION} QUIET NO_MODULE)
+# If not, fall back to the legacy methods below.
 
-IF(USE_SIM_FIND)
+IF(USE_SIM_FIND AND NOT Coin_FOUND)
   # FIXME: Experimental find mechanism. Should be tested on several platforms with several
   # configurations and someone extended before becomming the one and only thing. 20081105 larsm
   INCLUDE(SimFind)
   SIM_FIND(Coin RELEASELIBNAMES Coin Coin3 Coin3s Coin4
                   DEBUGLIBNAMES Coind Coin3d Coin4d
                   INCLUDEFILE Inventor/SbLinear.h)
-ELSE(USE_SIM_FIND)
+ENDIF()
+
+IF(NOT Coin_FOUND)
   IF(NOT COINDIR)
     SET(COINDIR $ENV{COINDIR})
     IF(COINDIR)
@@ -148,4 +154,4 @@ ELSE(USE_SIM_FIND)
     ENDIF()
   ENDIF()
 
-ENDIF(USE_SIM_FIND)
+ENDIF()
