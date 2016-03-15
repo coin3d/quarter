@@ -1,5 +1,3 @@
-INCLUDE(SimMSVC)
-
 SET(Library Quarter)
 
 # We R internal
