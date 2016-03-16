@@ -43,7 +43,7 @@
 #include <QtDesigner/QDesignerActionEditorInterface>
 #include <QtDesigner/QDesignerFormEditorInterface>
 #include <QtCore/QList>
-#include <QtGui/QActionGroup>
+#include <QActionGroup>
 
 #include <Inventor/nodes/SoCube.h>
 #include <Quarter/Quarter.h>
@@ -251,17 +251,19 @@ QuarterWidgetPlugin::domXml(void) const
 {
 
   return
-    "<widget class=\"SIM::Coin3D::Quarter::QuarterWidget\" \
-             name=\"quarterWidget\">\n"
-    " <property name=\"geometry\">\n"
-    "  <rect>\n"
-    "   <x>0</x>\n"
-    "   <y>0</y>\n"
-    "   <width>100</width>\n"
-    "   <height>100</height>\n"
-    "  </rect>\n"
-    " </property>\n"
-    "</widget>\n";
+    "<ui language=\"c++\">\n"
+    " <widget class=\"SIM::Coin3D::Quarter::QuarterWidget\" \
+              name=\"quarterWidget\">\n"
+    "  <property name=\"geometry\">\n"
+    "   <rect>\n"
+    "    <x>0</x>\n"
+    "    <y>0</y>\n"
+    "    <width>100</width>\n"
+    "    <height>100</height>\n"
+    "   </rect>\n"
+    "  </property>\n"
+    " </widget>\n"
+    "</ui>\n";
 }
 
 /*!
@@ -273,6 +275,8 @@ QuarterWidgetPlugin::includeFile(void) const
   return "Quarter/QuarterWidget.h";
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 Q_EXPORT_PLUGIN2(quarterwidget, QuarterWidgetPlugin)
+#endif
 
 #undef PRIVATE
