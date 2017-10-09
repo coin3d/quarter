@@ -4,6 +4,8 @@ SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true) # Avoid unneccesary code
 PROJECT(Quarter)
 SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/SIMCMakeMacros/")
 
+include(GNUInstallDirs)
+
 # This is a convenience macro for generating better tree structures in VS solutions.
 # Running this in any directory will affect all libraries/executables at that location.
 MACRO(SIM_VS_GENERATE_BASIC_TREE)
