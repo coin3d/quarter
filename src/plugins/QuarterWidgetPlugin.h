@@ -33,7 +33,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \**************************************************************************/
 
-#include <QDesignerCustomWidgetInterface>
+#include <QtCore/qglobal.h>
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#  include <QtUiPlugin/QDesignerCustomWidgetInterface>
+#else
+#  include <QDesignerCustomWidgetInterface>
+#endif
 
 namespace SIM { namespace Coin3D { namespace Quarter { namespace QtDesigner {
 
