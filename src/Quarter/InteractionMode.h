@@ -33,8 +33,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \**************************************************************************/
 
-#include <QtCore/QObject>
-#include <QtGui/QCursor>
+#include <QObject>
+#include <QCursor>
 #include <Quarter/Basic.h>
 #include <Inventor/SoEventManager.h>
 

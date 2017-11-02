@@ -39,11 +39,11 @@
 
 #include "QuarterWidgetPlugin.h"
 
-#include <QtCore/QtPlugin>
+#include <QtPlugin>
 #include <QtDesigner/QDesignerActionEditorInterface>
 #include <QtDesigner/QDesignerFormEditorInterface>
-#include <QtCore/QList>
-#include <QtGui/QActionGroup>
+#include <QList>
+#include <QActionGroup>
 
 #include <Inventor/nodes/SoCube.h>
 #include <Quarter/Quarter.h>
@@ -273,6 +273,9 @@ QuarterWidgetPlugin::includeFile(void) const
   return "Quarter/QuarterWidget.h";
 }
 
+#if (QT_VERSION >= 0x050000)
+#else
 Q_EXPORT_PLUGIN2(quarterwidget, QuarterWidgetPlugin)
+#endif
 
 #undef PRIVATE

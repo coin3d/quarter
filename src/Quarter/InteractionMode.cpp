@@ -1,7 +1,7 @@
 #include "InteractionMode.h"
-#include <QtCore/QCoreApplication>
-#include <QtGui/QKeyEvent>
-#include <QtGui/QFocusEvent>
+#include <QCoreApplication>
+#include <QKeyEvent>
+#include <QFocusEvent>
 #include <Quarter/QuarterWidget.h>
 
 /*

@@ -37,9 +37,9 @@
 #include <Inventor/SoRenderManager.h>
 #include <Inventor/actions/SoGLRenderAction.h>
 
-#include <QtGui/QColor>
-#include <QtCore/QUrl>
-#include <QtOpenGL/QGLWidget>
+#include <QColor>
+#include <QUrl>
+#include <QGLWidget>
 #include <Quarter/Basic.h>
 
 class QMenu;

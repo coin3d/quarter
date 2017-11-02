@@ -35,9 +35,9 @@
 
 #include <Inventor/SbBasic.h>
 #include <Inventor/SbName.h>
-#include <QtGui/QCursor>
-#include <QtCore/QList>
-#include <QtCore/QUrl>
+#include <QCursor>
+#include <QList>
+#include <QUrl>
 
 class SoNode;
 class SoCamera;

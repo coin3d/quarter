@@ -36,8 +36,9 @@
 
 #include <Quarter/eventhandlers/EventFilter.h>
 
-#include <QtCore/QEvent>
-#include <QtGui/QMouseEvent>
+#include <QEvent>
+#include <QMouseEvent>
+#include <QGuiApplication>
 
 #include <Inventor/SoEventManager.h>
 #include <Inventor/events/SoLocation2Event.h>
@@ -73,6 +74,8 @@ public:
     this->globalmousepos = event->globalPos();
 
     SbVec2s mousepos(event->pos().x(), this->windowsize[1] - event->pos().y() - 1);
+    // the following corrects for high-dpi displays (e.g., mac retina)
+    mousepos *= ((QGuiApplication*)QGuiApplication::instance())->devicePixelRatio();
     foreach(InputDevice * device, this->devices) {
       device->setMousePosition(mousepos);
     }

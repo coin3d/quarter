@@ -33,7 +33,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \**************************************************************************/
 
-#include <QtGui/QKeyEvent>
+#include <QKeyEvent>
 #include <Inventor/events/SoKeyboardEvent.h>
 
 class SoEvent;

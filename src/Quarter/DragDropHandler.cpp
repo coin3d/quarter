@@ -39,11 +39,12 @@
 
 #include <Quarter/eventhandlers/DragDropHandler.h>
 
-#include <QtCore/QUrl>
-#include <QtCore/QFileInfo>
-#include <QtCore/QStringList>
-#include <QtGui/QDragEnterEvent>
-#include <QtGui/QDropEvent>
+#include <QUrl>
+#include <QFileInfo>
+#include <QStringList>
+#include <QDragEnterEvent>
+#include <QDropEvent>
+#include <QMimeData>
 
 #include <Inventor/SoInput.h>
 #include <Inventor/nodes/SoSeparator.h>
