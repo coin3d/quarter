@@ -31,7 +31,7 @@
 \**************************************************************************/
 
 #include <Quarter/devices/InputDevice.h>
-#include <QtGui/QInputEvent>
+#include <QInputEvent>
 #include <Inventor/events/SoEvents.h>
 
 using namespace SIM::Coin3D::Quarter;

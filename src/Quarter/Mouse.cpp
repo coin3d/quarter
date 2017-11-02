@@ -39,10 +39,10 @@
 
 #include <Quarter/devices/Mouse.h>
 
-#include <QtCore/QEvent>
-#include <QtCore/QSize>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QWheelEvent>
+#include <QEvent>
+#include <QSize>
+#include <QWheelEvent>
+#include <QGuiApplication>
 
 #include <Inventor/SbVec2s.h>
 #include <Inventor/events/SoEvents.h>
@@ -132,6 +132,8 @@ MouseP::mouseMoveEvent(QMouseEvent * event)
 
   assert(this->windowsize[1] != -1);
   SbVec2s pos(event->pos().x(), this->windowsize[1] - event->pos().y() - 1);
+  // the following corrects for high-dpi displays (e.g., mac retina)
+  pos *= ((QGuiApplication*)QGuiApplication::instance())->devicePixelRatio();
   this->location2->setPosition(pos);
   this->mousebutton->setPosition(pos);
   return this->location2;
@@ -142,6 +144,8 @@ MouseP::mouseWheelEvent(QWheelEvent * event)
 {
   PUBLIC(this)->setModifiers(this->mousebutton, event);
   SbVec2s pos(event->pos().x(), PUBLIC(this)->windowsize[1] - event->pos().y() - 1);
+  // the following corrects for high-dpi displays (e.g., mac retina)
+  pos *= ((QGuiApplication*)QGuiApplication::instance())->devicePixelRatio();
   this->location2->setPosition(pos);
   this->mousebutton->setPosition(pos);
 
@@ -163,6 +167,8 @@ MouseP::mouseButtonEvent(QMouseEvent * event)
 {
   PUBLIC(this)->setModifiers(this->mousebutton, event);
   SbVec2s pos(event->pos().x(), PUBLIC(this)->windowsize[1] - event->pos().y() - 1);
+  // the following corrects for high-dpi displays (e.g., mac retina)
+  pos *= ((QGuiApplication*)QGuiApplication::instance())->devicePixelRatio();
   this->location2->setPosition(pos);
   this->mousebutton->setPosition(pos);
 

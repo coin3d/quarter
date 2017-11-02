@@ -34,10 +34,10 @@
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/eventhandlers/EventFilter.h>
 
-#include <QtGui/QApplication>
-#include <QtGui/QCursor>
-#include <QtGui/QMenu>
-#include <QtCore/QMap>
+#include <QApplication>
+#include <QCursor>
+#include <QMenu>
+#include <QMap>
 
 #include <Inventor/nodes/SoCamera.h>
 #include <Inventor/nodes/SoNode.h>
@@ -88,7 +88,11 @@ QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * shar
 
   // FIXME: Centralize this as only one custom event filter can be
   // added to an application. (20101019 handegar)
+
+#if (QT_VERSION >= 0x050000)
+#else
   qApp->setEventFilter(QuarterWidgetP::nativeEventFilter);
+#endif
 }
 
 QuarterWidgetP::~QuarterWidgetP()

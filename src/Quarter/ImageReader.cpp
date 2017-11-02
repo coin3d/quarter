@@ -33,7 +33,7 @@
 #include "ImageReader.h"
 #include <Inventor/SbImage.h>
 #include <Inventor/errors/SoDebugError.h>
-#include <QtGui/QImage>
+#include <QImage>
 
 #include <Quarter/QtCoinCompatibility.h>
 

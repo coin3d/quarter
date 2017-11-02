@@ -40,8 +40,8 @@
 
 #include <Quarter/devices/Keyboard.h>
 
-#include <QtCore/QEvent>
-#include <QtGui/QKeyEvent>
+#include <QEvent>
+#include <QKeyEvent>
 #include <Inventor/events/SoEvents.h>
 #include <Inventor/events/SoKeyboardEvent.h>
 

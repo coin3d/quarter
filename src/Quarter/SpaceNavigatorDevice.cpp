@@ -32,9 +32,9 @@
 
 #include <Quarter/devices/SpaceNavigatorDevice.h>
 
-#include <QtGui/QApplication>
-#include <QtGui/QWidget>
-#include <QtCore/QEvent>
+#include <QApplication>
+#include <QWidget>
+#include <QEvent>
 
 #include <Inventor/events/SoEvent.h>
 #include <Inventor/events/SoMotion3Event.h>

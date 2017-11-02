@@ -35,6 +35,8 @@
 
 #include "ui_QuarterViewer.h"
 
+QT_BEGIN_NAMESPACE
+
 class QuarterViewer : public QWidget {
 public:
   QuarterViewer(QWidget * parent = 0);
@@ -44,5 +46,7 @@ private:
   Ui::QuarterViewer ui;
   class SoSeparator * root;
 };
+
+QT_END_NAMESPACE
 
 #endif // QUARTER_QUARTERVIEWER_H

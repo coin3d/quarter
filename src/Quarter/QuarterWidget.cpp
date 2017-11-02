@@ -50,10 +50,10 @@
 
 #include <assert.h>
 
-#include <QtCore/QEvent>
-#include <QtCore/QDebug>
-#include <QtCore/QFile>
-#include <QtGui/QAction>
+#include <QEvent>
+#include <QDebug>
+#include <QFile>
+#include <QAction>
 
 #include <Inventor/SbViewportRegion.h>
 #include <Inventor/system/gl.h>
