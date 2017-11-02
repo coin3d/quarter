@@ -33,6 +33,7 @@
 #include <Quarter/devices/InputDevice.h>
 #include <QInputEvent>
 #include <Inventor/events/SoEvents.h>
+#include <Quarter/QuarterWidget.h>
 
 using namespace SIM::Coin3D::Quarter;
 
@@ -44,7 +45,8 @@ using namespace SIM::Coin3D::Quarter;
   devices.
 */
 
-InputDevice::InputDevice(void)
+InputDevice::InputDevice(QuarterWidget* quart) :
+    quarter(quart)
 {
   this->mousepos = SbVec2s(0, 0);
 }

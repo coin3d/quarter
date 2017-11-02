@@ -51,7 +51,8 @@ using namespace SIM::Coin3D::Quarter;
 
 #define PRIVATE(obj) obj->pimpl
 
-Keyboard::Keyboard(void)
+Keyboard::Keyboard(QuarterWidget* quart) :
+  InputDevice(quart)
 {
   PRIVATE(this) = new KeyboardP(this);
 }

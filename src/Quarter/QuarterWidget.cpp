@@ -54,7 +54,10 @@
 #include <QDebug>
 #include <QFile>
 #include <QAction>
-
+#if (QT_VERSION >= 0x050600)
+#  include <QWindow>
+#  include <QGuiApplication>
+#endif
 #include <Inventor/SbViewportRegion.h>
 #include <Inventor/system/gl.h>
 #include <Inventor/events/SoEvents.h>
@@ -453,6 +456,24 @@ QuarterWidget::stereoMode(void) const
 }
 
 /*!
+  \property QuarterWidget::devicePixelRatio
+
+  \copydetails QuarterWidget::devicePixelRatio
+*/
+
+/*!
+  The ratio between logical and physical pixel sizes -- obtained from the window that
+  the widget is located within, and updated whenver any change occurs, emitting a
+  devicePixelRatioChanged signal.  Only available for version Qt 5.6 and above (will be
+  1.0 for all previous versions).
+*/
+qreal
+QuarterWidget::devicePixelRatio(void) const
+{
+  return PRIVATE(this)->device_pixel_ratio;
+}
+
+/*!
   Sets the Inventor scenegraph to be rendered
  */
 void
@@ -654,12 +675,43 @@ QuarterWidget::initializeGL(void)
   this->getSoRenderManager()->reinitialize();
 }
 
+bool
+QuarterWidget::updateDevicePixelRatio(void) {
+#if (QT_VERSION >= 0x050600)
+  qreal dev_pix_ratio = 1.0;
+  QWidget* winwidg = window();
+  QWindow* win = NULL;
+  if(winwidg) {
+    win = winwidg->windowHandle();
+  }
+  if(win) {
+    dev_pix_ratio = win->devicePixelRatio();
+  }
+  else {
+    dev_pix_ratio = ((QGuiApplication*)QGuiApplication::instance())->devicePixelRatio();
+  }
+  if(PRIVATE(this)->device_pixel_ratio != dev_pix_ratio) {
+    PRIVATE(this)->device_pixel_ratio = dev_pix_ratio;
+    emit devicePixelRatioChanged(dev_pix_ratio);
+    return true;
+  }
+#endif
+  return false;
+}
+
 /*!
   Overridden from QGLWidget to resize the Coin scenegraph
  */
 void
 QuarterWidget::resizeGL(int width, int height)
 {
+#if (QT_VERSION >= 0x050600)
+  updateDevicePixelRatio();
+  qreal dev_pix_ratio = devicePixelRatio();
+  width = (int)(dev_pix_ratio * width);
+  height = (int)(dev_pix_ratio * height);
+#endif
+
   SbViewportRegion vp(width, height);
   PRIVATE(this)->sorendermanager->setViewportRegion(vp);
   PRIVATE(this)->soeventmanager->setViewportRegion(vp);
@@ -671,6 +723,17 @@ QuarterWidget::resizeGL(int width, int height)
 void
 QuarterWidget::paintGL(void)
 {
+#if (QT_VERSION >= 0x050600)
+  if(updateDevicePixelRatio()) {
+    qreal dev_pix_ratio = devicePixelRatio();
+    int width = (int)(dev_pix_ratio * this->width());
+    int height = (int)(dev_pix_ratio * this->height());
+    SbViewportRegion vp(width, height);
+    PRIVATE(this)->sorendermanager->setViewportRegion(vp);
+    PRIVATE(this)->soeventmanager->setViewportRegion(vp);
+  }
+#endif
+
   assert(this->isValid() && "No valid GL context found!");
   // We might have to process the delay queue here since we don't know
   // if paintGL() is called from Qt, and we might have some sensors
