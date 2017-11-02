@@ -72,6 +72,7 @@
 #include <Inventor/SoEventManager.h>
 #include <Inventor/scxml/ScXML.h>
 #include <Inventor/scxml/SoScXMLStateMachine.h>
+#include <Inventor/SbByteBuffer.h>
 
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/eventhandlers/EventFilter.h>
