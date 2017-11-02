@@ -72,6 +72,7 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   Q_PROPERTY(TransparencyType transparencyType READ transparencyType WRITE setTransparencyType)
   Q_PROPERTY(RenderMode renderMode READ renderMode WRITE setRenderMode)
   Q_PROPERTY(StereoMode stereoMode READ stereoMode WRITE setStereoMode)
+  Q_PROPERTY(qreal devicePixelRatio READ devicePixelRatio NOTIFY devicePixelRatioChanged)
 
   Q_ENUMS(TransparencyType)
   Q_ENUMS(RenderMode)
@@ -121,6 +122,8 @@ public:
 
   void setBackgroundColor(const QColor & color);
   QColor backgroundColor(void) const;
+
+  qreal devicePixelRatio(void) const;
 
   void resetNavigationModeFile(void);
   void setNavigationModeFile(const QUrl & url = QUrl(DEFAULT_NAVIGATIONFILE));
@@ -182,11 +185,15 @@ public slots:
   void setStereoMode(StereoMode mode);
   void setTransparencyType(TransparencyType type);
 
+signals:
+  void devicePixelRatioChanged(qreal dev_pixel_ratio);
+
 protected:
   virtual void resizeGL(int width, int height);
   virtual void initializeGL(void);
   virtual void paintGL(void);
   virtual void actualRedraw(void);
+  virtual bool updateDevicePixelRatio(void);
 
 private:
   void constructor(const QGLWidget * sharewidget);
