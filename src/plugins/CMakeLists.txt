@@ -36,5 +36,6 @@ else()
   )
   install(TARGETS ${Library}
     RUNTIME DESTINATION "${QT_INSTALL_PLUGINS}/designer"
+    LIBRARY DESTINATION "${QT_INSTALL_PLUGINS}/designer"
   )
 endif()
