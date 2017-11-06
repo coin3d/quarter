@@ -1,8 +1,9 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6) # Or does this work on 2.4? 2008-05-15, oyshole
-SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true) # Avoid unneccesary code
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 
 PROJECT(Quarter)
 SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/SIMCMakeMacros/")
+
+include(GNUInstallDirs)
 
 # This is a convenience macro for generating better tree structures in VS solutions.
 # Running this in any directory will affect all libraries/executables at that location.
@@ -55,13 +56,23 @@ IF(WIN32)
 ENDIF()
 
 FIND_PACKAGE(OpenGL REQUIRED)
-FIND_PACKAGE(Coin REQUIRED) # FIXME: The results of this macro is not cached.
+FIND_PACKAGE(Coin 4.0.0 REQUIRED)
+# Install Quarter alongside Coin.
+SET(CMAKE_INSTALL_PREFIX "${COINDIR}" CACHE PATH "Install path prefix" FORCE)
+
 SET(QT_USE_QTDESIGNER true)
 SET(QT_USE_QTTEST true)
 SET(QT_USE_QTOPENGL true)
 SET(QT_USE_QTUITOOLS true)
-FIND_PACKAGE(Qt4 REQUIRED)
-INCLUDE(${QT_USE_FILE})
+SET(CMAKE_AUTOMOC true)
+SET(CMAKE_INCLUDE_CURRENT_DIR true)
+FIND_PACKAGE(Qt5 COMPONENTS UiTools OpenGL Designer)
+IF(Qt5_FOUND)
+  SET(QT_LIBRARIES Qt5::UiTools Qt5::OpenGL Qt5::Designer)
+ELSE(Qt5_FOUND)
+  FIND_PACKAGE(Qt4 REQUIRED)
+  INCLUDE(${QT_USE_FILE})
+ENDIF(Qt5_FOUND)
 
 
 FIND_PACKAGE(Spacenav)
@@ -71,6 +82,10 @@ ENDIF(Spacenav_FOUND)
 
 # FIXME: Is this really necessary? Shouldnt the link directories be sorted out by the package scripts.
 # 2008-05-15, oyshole
+# From the docs:
+# Note that this command is rarely necessary. Library locations returned by find_package() and find_library() are absolute paths.
+# Pass these absolute library file paths directly to the target_link_libraries() command. CMake will ensure the linker finds them.
+# 2016-03-14, Bastiaan Veelo
 LINK_DIRECTORIES(${QT_LIB_DIR} ${Coin_LIB_DIR} ${OPENGL_gl_DIRECTORY})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include/)
 INCLUDE_DIRECTORIES(${QT_INCLUDE_DIR} ${Coin_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})

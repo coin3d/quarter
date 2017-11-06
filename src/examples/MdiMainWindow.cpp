@@ -33,12 +33,15 @@
 #include "MdiMainWindow.h"
 #include "MdiQuarterWidget.h"
 
-#include <QtGui/QtGui>
-#include <QtGui/QAction>
-#include <QtGui/QDropEvent>
-#include <QtGui/QCloseEvent>
-#include <QtGui/QMdiArea>
-#include <QtGui/QDragEnterEvent>
+#include <QtGui>
+#include <QAction>
+#include <QDropEvent>
+#include <QCloseEvent>
+#include <QMdiArea>
+#include <QDragEnterEvent>
+#include <QMenuBar>
+#include <QFileDialog>
+#include <QStatusBar>
 
 #include <Quarter/Quarter.h>
 

@@ -1,8 +1,13 @@
 ADD_DEFINITIONS(-DQUARTER_DLL)
 
 #QT4_WRAP_UI(QuarterViewerUi "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui")
-QT4_ADD_RESOURCES(QuarterViewerResources "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.qrc")
-ADD_CUSTOM_COMMAND(OUTPUT ui_QuarterViewer.h COMMAND uic       ARGS ${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui -o ${CMAKE_CURRENT_SOURCE_DIR}/ui_QuarterViewer.h DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui)
+IF(Qt5_FOUND)
+QT5_ADD_RESOURCES(QuarterViewerResources "${CMAKE_CURRENT_SOURCE_DIR}/quarterviewer.qrc")
+QT5_WRAP_UI(QuarterViewerUi "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui")
+ELSE(Qt5_FOUND)
+QT4_ADD_RESOURCES(QuarterViewerResources "${CMAKE_CURRENT_SOURCE_DIR}/quarterviewer.qrc")
+QT4_WRAP_UI(QuarterViewerUi "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui")
+ENDIF(Qt5_FOUND)
 
 #Minimal example
 ADD_EXECUTABLE(Example "${CMAKE_CURRENT_SOURCE_DIR}/minimal.cpp")
@@ -13,7 +18,7 @@ ADD_EXECUTABLE(DynamicUILoaderExample "${CMAKE_CURRENT_SOURCE_DIR}/dynamicui.cpp
 TARGET_LINK_LIBRARIES(DynamicUILoaderExample Quarter)
 
 #Direct UI loader example
-ADD_EXECUTABLE(DirectUILoaderExample "${CMAKE_CURRENT_SOURCE_DIR}/directui.cpp" ui_QuarterViewer.h)
+ADD_EXECUTABLE(DirectUILoaderExample "${CMAKE_CURRENT_SOURCE_DIR}/directui.cpp" ${QuarterViewerUi})
 TARGET_LINK_LIBRARIES(DirectUILoaderExample Quarter)
 
 #Examiner example
@@ -24,17 +29,15 @@ TARGET_LINK_LIBRARIES(ExaminerExample Quarter)
 ADD_EXECUTABLE(InheritUIExample "${CMAKE_CURRENT_SOURCE_DIR}/inheritui.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.h"
-  ui_QuarterViewer.h)
+  ${QuarterViewerUi})
 TARGET_LINK_LIBRARIES(InheritUIExample Quarter)
 
 #Multiple document interface example
-SIM_QT4_AUTO_WRAP_CPP(MocSources "${CMAKE_CURRENT_SOURCE_DIR}/MdiMainWindow.h")
 ADD_EXECUTABLE(MDIExample "${CMAKE_CURRENT_SOURCE_DIR}/mdi.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/MdiMainWindow.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/MdiMainWindow.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/MdiQuarterWidget.cpp"
   "${CMAKE_CURRENT_SOURCE_DIR}/MdiQuarterWidget.h"
-  ${MocSources}
 )
 TARGET_LINK_LIBRARIES(MDIExample Quarter)
 

@@ -32,7 +32,7 @@
 
 #include "MdiQuarterWidget.h"
 
-#include <QtGui/QLayout>
+#include <QLayout>
 #include <Quarter/QuarterWidget.h>
 #include <Quarter/eventhandlers/DragDropHandler.h>
 using namespace SIM::Coin3D::Quarter;
