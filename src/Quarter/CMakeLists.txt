@@ -1,7 +1,4 @@
-INCLUDE(SimQtMacros)
-
 SET(Library Quarter)
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
 # We R internal
 ADD_DEFINITIONS(-DQUARTER_INTERNAL)
@@ -13,16 +10,8 @@ FILE(GLOB_RECURSE Sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 FILE(GLOB_RECURSE PublicHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
 FILE(GLOB_RECURSE PrivateHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ../../include/Quarter/*.h)
 
-# Find the headers that should be Moc'ed
-FILE(GLOB_RECURSE MocPrivateHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
-FILE(GLOB_RECURSE MocPublicHeaders RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ../../include/Quarter/*.h)
-
-# Moc both the public and private headers
-SIM_QT4_AUTO_WRAP_CPP(MocPrivateSources ${MocPrivateHeaders})
-SIM_QT4_AUTO_WRAP_CPP(MocPublicSources ${MocPublicHeaders})
-
 # Some convenient variables. The inclusion of the headers in the source variable is to force CMake to include the headers in VS project generation.
-SET(AllSources ${Sources} ${MocPublicSources} ${MocPrivateSources} ${PublicHeaders} ${PrivateHeaders} ${CMakeCache})
+SET(AllSources ${Sources} ${PublicHeaders} ${PrivateHeaders} ${CMakeCache})
 
 
 IF (Spacenav_FOUND)
@@ -63,9 +52,9 @@ ENDIF(MSVC_IDE)
 IF(Quarter_BUILD_STATIC_LIBRARY)
   ADD_LIBRARY(${Library} STATIC ${AllSources})
 ELSE(Quarter_BUILD_STATIC_LIBRARY)
-  ADD_LIBRARY(${Library} SHARED ${AllSources})
-  TARGET_LINK_LIBRARIES(${Library} ${AllLibs})
+  ADD_LIBRARY(${Library} SHARED ${AllSources})  
 ENDIF(Quarter_BUILD_STATIC_LIBRARY)
+TARGET_LINK_LIBRARIES(${Library} ${AllLibs})
 
 #  Install configuration
 #
@@ -79,7 +68,7 @@ ENDIF(Quarter_BUILD_STATIC_LIBRARY)
 # Static Debug: Quartersd.lib
 
 INSTALL(TARGETS ${Library}
-  RUNTIME DESTINATION bin
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )

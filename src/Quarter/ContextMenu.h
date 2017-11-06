@@ -33,7 +33,7 @@
 #ifndef QUARTER_CONTEXTMENUHANDLERP_H
 #define QUARTER_CONTEXTMENUHANDLERP_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class QMenu;
 class QAction;
