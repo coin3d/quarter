@@ -6,6 +6,7 @@ DESCRIPTION "Coin 3D integration library"
 )
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/SIMCMakeMacros/")
 
+include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
 
 # This is a convenience macro for generating better tree structures in VS solutions.
@@ -115,6 +116,39 @@ ADD_SUBDIRECTORY(src)
 INSTALL(DIRECTORY include/Quarter/ DESTINATION include/Quarter COMPONENT development
         FILES_MATCHING PATTERN "*.h"
         PATTERN ".hg" EXCLUDE)
+##############################################################################
+# Generates config
+
+configure_package_config_file(
+  ${PROJECT_NAME}Config.cmake.in ${PROJECT_NAME}Config.cmake
+  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
+)
+
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
+  COMPONENT development
+)
+
+write_basic_package_version_file(
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+  VERSION ${PROJECT_VERSION}
+  COMPATIBILITY ExactVersion
+)
+
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
+  COMPONENT development
+)
+
+# install(
+# 	EXPORT ${PROJECT_NAME}
+# 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
+# 	NAMESPACE ${PROJECT_NAME}::
+# 	FILE ${PROJECT_NAME}Export.cmake
+# 	COMPONENT development
+# )
 
 # Experimental support for CPack.
 # Tested with NSIS on Windows Vista.
