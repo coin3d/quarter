@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.7.2)
 
-project(Quarter VERSION 1.0.1)
+project(Quarter
+VERSION 1.0.1
+DESCRIPTION "Coin 3D integration library"
+)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/SIMCMakeMacros/")
 
 include(GNUInstallDirs)
@@ -109,7 +112,7 @@ INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/)
 ADD_SUBDIRECTORY(src)
 
 #Install the public headers
-INSTALL(DIRECTORY include/Quarter/ DESTINATION include/Quarter
+INSTALL(DIRECTORY include/Quarter/ DESTINATION include/Quarter COMPONENT development
         FILES_MATCHING PATTERN "*.h"
         PATTERN ".hg" EXCLUDE)
 
