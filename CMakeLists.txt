@@ -150,6 +150,15 @@ install(
 # 	COMPONENT development
 # )
 
+# ############################################################################
+# New CPACK section, please see the README file inside cpack.d directory.
+add_subdirectory(cpack.d)
+
+# ############################################################################
+# Legacy cmake statements, packagers should refer and populate the cpack.d 
+# drop-in directory
+# ############################################################################
+
 # Experimental support for CPack.
 # Tested with NSIS on Windows Vista.
 # 2008-05-15

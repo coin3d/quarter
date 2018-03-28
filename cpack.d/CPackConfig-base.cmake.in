@@ -1,0 +1,45 @@
+##############################################################################
+# CPACK Configuration base
+# This configuration file should be included
+
+##############################################################################
+# CPACK base settings
+#
+# If invoked _with_ parameter "LOWCASE" the CPACK_PACKAGE_NAME will be set to
+# the PROJECT_NAME lower case.
+#
+# If invoked __without__ any parameter, the CPACK_PACKAGE_NAME will be set to
+# the PROJECT_NAME without any case modification
+#
+# All the other CPACK_* settings are project specific and not related to 
+# the target OS. The only exceptions are CPACK_GENERATOR and 
+# CPACK_PACKAGE_FILE_NAME that __are OS specific__ and - as such - must be 
+# defined elsewhere.
+macro(package_basics)
+  if ("${ARGV0}" STREQUAL "LOWCASE")
+    string(TOLOWER "@PROJECT_NAME@" _lower_case_name_)
+    set(CPACK_PACKAGE_NAME "${_lower_case_name_}")
+  else()
+    set(CPACK_PACKAGE_NAME "@PROJECT_NAME@")
+  endif()
+  set(PROJECT_URL                         "https://bitbucket.org/Coin3D/${_lower_case_name_}")
+  set(CPACK_CMAKE_GENERATOR               "@CMAKE_GENERATOR@")
+  set(CPACK_INSTALL_CMAKE_PROJECTS        "@PROJECT_BINARY_DIR@;@PROJECT_NAME@;ALL;/")
+  set(CPACK_COMPONENT_DEVELOPMENT_DEPENDS "runtime")
+  set(CPACK_PACKAGE_DESCRIPTION_FILE      "@CMAKE_CURRENT_SOURCE_DIR@/readme-file.txt")
+  set(CPACK_PACKAGE_DESCRIPTION_SUMMARY   "@PROJECT_DESCRIPTION@")
+  if(@Quarter_BUILD_EXAMPLES@)
+    set(CPACK_PACKAGE_RELOCATABLE OFF)
+    set(CPACK_COMPONENTS_ALL "runtime;development;examples")
+  else()
+    set(CPACK_PACKAGE_RELOCATABLE ON)
+    set(CPACK_COMPONENTS_ALL "runtime;development")
+  endif()
+  set(CPACK_PACKAGE_VERSION_MAJOR       "@PROJECT_VERSION_MAJOR@")
+  set(CPACK_PACKAGE_VERSION_MINOR       "@PROJECT_VERSION_MINOR@")
+  set(CPACK_PACKAGE_VERSION_PATCH       "@PROJECT_VERSION_PATCH@")
+  set(CPACK_PACKAGE_VERSION             "@PROJECT_VERSION@")
+  set(CPACK_RESOURCE_FILE_LICENSE       "@PROJECT_SOURCE_DIR@/COPYING")
+  set(CPACK_RESOURCE_FILE_README        "@PROJECT_SOURCE_DIR@/README")
+  set(CPACK_PACKAGE_CONTACT             "coin-support@coin3d.org")
+endmacro(package_basics)

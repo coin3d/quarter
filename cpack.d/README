@@ -1,0 +1,107 @@
+Introduction
+============
+
+This directory is aimed to decouple project building from packaging since 
+maintainer rules are generally independent from the developer ones and 
+strongly OS specific.
+
+So the idea is to provide space for deploying CPack template files (postfixed 
+with '*.cmake.in'), automatically configured during the usual cmake project 
+building.
+
+The results will be available in the corresponding binary directory as 
+complete CPack configuration file (postfixed with '*.cmake') usable by cpack 
+as usual:
+
+`cpack --config <build root>/cpack.d/CPackConfig-<name>.cmake`
+
+How to build a new os specific package
+======================================
+
+The initial directory structure in the source project directory is the 
+following:
+
+    <source root>
+    |
+    ├── cpack.d
+    |   ├── CMakeLists.txt                (template auto config definition)
+    |   ├── CPackConfig-base.cmake.in     (base config usable by all)
+    |   ├── CPackConfig-fedora.cmake.in   (os specific template for Fedora)
+    |   ├── fedora_post_uninstall.sh      (helper file for fedora)
+    |   ├── README                        (this readme)
+    |   └── readme-file.txt               (readme text file referred in the 'base' configs)
+    |
+
+Step one: new template definition
+------------------------------------
+
+Assuming you want to add a new template for Debian:9, create and fill a new 
+member in the cpack.d directory named CPackConfig-debian.cmake.in (the only important
+part is the postfix `.cmake.in`. There is no mandatory rule to follow, below a possible 
+skeleton to be further filled:
+
+    ##############################################################################
+    # CPACK Configuration for Linux Debian 9 amd64 architecture
+
+    cmake_policy(SET CMP0012 NEW)
+    
+    # this will include a number of predefined helper macros
+    include("@CMAKE_CURRENT_BINARY_DIR@/CPackConfig-base.cmake")
+    
+    # this macro initializes a number of project specific and os 'agnostic' attributes
+    package_basics(LOWCASE)
+
+    # this macro define a component package according to Debian specifications for
+    # COMPONENT NAME, SECTION and FILE NAME termination (third optional argument)
+    macro(component COMPONENT SECTION)
+      if (${ARGC} GREATER 2)
+        set(CPACK_DEBIAN_${COMPONENT}_PACKAGE_NAME "${CPACK_PACKAGE_NAME}-${ARGV2}")
+      else()
+        set(CPACK_DEBIAN_${COMPONENT}_PACKAGE_NAME "${CPACK_PACKAGE_NAME}")
+      endif()
+      set(CPACK_DEBIAN_${COMPONENT}_FILE_NAME    "${CPACK_DEBIAN_${COMPONENT}_PACKAGE_NAME}_${CPACK_PACKAGE_VERSION}-0_@DEB_ARCH@.deb")
+      set(CPACK_DEBIAN_${COMPONENT}_PACKAGE_SECTION   ${SECTION})
+    endmacro(component)
+    
+    set(CPACK_GENERATOR             "DEB")
+    set(CPACK_PACKAGE_FILE_NAME     "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-0.amd64.deb")
+    set(CPACK_RPM_COMPONENT_INSTALL "ON")
+    set(CPACK_RPM_PACKAGE_LICENSE   "BSD")
+    set(CPACK_RPM_PACKAGE_URL       "@PROJECT_URL@")
+
+    component(RUNTIME libs)
+    component(DEVELOPMENT libdevel dev)
+    component(examples doc examples)
+
+Now the directory structure is:
+
+    <source root>
+    |
+    ├── cpack.d
+    |   ├── CMakeLists.txt  
+    |   ├── CPackConfig-base.cmake.in 
+    |   ├── CPackConfig-debian.cmake.in   (our new template for Debian)
+    |   ├── CPackConfig-fedora.cmake.in   
+    |   ├── fedora_post_uninstall.sh    
+    |   ├── README                      
+    |   └── readme-file.txt             
+    |
+
+Step two: package creation
+--------------------------
+
+After building the project with usual cmake commands, the build directory structure will be:
+
+```
+<build root>
+|
+├── cpack.d
+|   ├── CPackConfig-base.cmake        
+|   ├── CPackConfig-debian.cmake      (our new config for Debian)
+|   ├── CPackConfig-fedora.cmake      
+|
+```
+
+in order to create all the Debian component packages just 'cd' into the binary cpack.d and execute
+
+`cpack --configure CPackConfig-debian.cmake`
