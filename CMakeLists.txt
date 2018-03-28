@@ -27,9 +27,6 @@ ENDMACRO()
 OPTION(Quarter_BUILD_STATIC_LIBRARY "Build static library instead of shared library (DLL, so etc..)" OFF)
 OPTION(Quarter_BUILD_PLUGIN "Build Quarter plugin for QT Designer" OFF)
 OPTION(Quarter_BUILD_EXAMPLES "Build Quarter example applications" OFF)
-if(Quarter_BUILD_EXAMPLES)
-  set(QUARTER_INSTALL_EXAMPLEDIR "/opt/${PROJECT_NAME}/examples")
-endif(Quarter_BUILD_EXAMPLES)
 
 # Set up the different flavors of postfixes and CRTs for Windows environments
 #  Install configuration
@@ -164,6 +161,7 @@ add_subdirectory(cpack.d)
 # 2008-05-15
 
 # Packaging options
+set(CPACK_COMPONENTS_ALL "runtime;development")
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Quarter")
 SET(CPACK_PACKAGE_VENDOR "Kongsberg SIM")
 SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README")
@@ -182,7 +180,4 @@ SET(CPACK_PACKAGE_VERSION_PATCH ${QUARTER_VERSION_PATCH})
 SET(CPACK_NSIS_MODIFY_PATH on)
 # RPM
 set(CPACK_RPM_COMPONENT_INSTALL ON)
-if(Quarter_BUILD_EXAMPLES)
-  set(CPACK_PACKAGE_RELOCATABLE OFF)
-endif(Quarter_BUILD_EXAMPLES)
 INCLUDE(CPack)
