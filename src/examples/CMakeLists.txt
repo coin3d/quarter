@@ -1,50 +1,47 @@
-ADD_DEFINITIONS(-DQUARTER_DLL)
+if(Qt5_FOUND)
+	QT5_ADD_RESOURCES(QuarterViewerResources quarterviewer.qrc)
+	QT5_WRAP_UI(QuarterViewerUi QuarterViewer.ui)
+	QT5_WRAP_CPP(MocHeaders MdiMainWindow.h)
+else()
+	QT4_ADD_RESOURCES(QuarterViewerResources quarterviewer.qrc)
+	QT4_WRAP_UI(QuarterViewerUi QuarterViewer.ui)
+	QT4_WRAP_CPP(MocHeaders MdiMainWindow.h)
+endif()
 
-#QT4_WRAP_UI(QuarterViewerUi "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui")
-IF(Qt5_FOUND)
-QT5_ADD_RESOURCES(QuarterViewerResources "${CMAKE_CURRENT_SOURCE_DIR}/quarterviewer.qrc")
-QT5_WRAP_UI(QuarterViewerUi "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui")
-ELSE(Qt5_FOUND)
-QT4_ADD_RESOURCES(QuarterViewerResources "${CMAKE_CURRENT_SOURCE_DIR}/quarterviewer.qrc")
-QT4_WRAP_UI(QuarterViewerUi "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.ui")
-ENDIF(Qt5_FOUND)
+# Minimal example
+add_executable(Example minimal.cpp)
+target_link_libraries(Example Quarter)
 
-#Minimal example
-ADD_EXECUTABLE(Example "${CMAKE_CURRENT_SOURCE_DIR}/minimal.cpp")
-TARGET_LINK_LIBRARIES(Example Quarter)
+# Dynamic UI Loader example
+add_executable(DynamicUILoaderExample dynamicui.cpp ${QuarterViewerResources})
+target_link_libraries(DynamicUILoaderExample Quarter)
 
-#Dynamic UI Loader example
-ADD_EXECUTABLE(DynamicUILoaderExample "${CMAKE_CURRENT_SOURCE_DIR}/dynamicui.cpp" ${QuarterViewerResources})
-TARGET_LINK_LIBRARIES(DynamicUILoaderExample Quarter)
+# Direct UI loader example
+add_executable(DirectUILoaderExample directui.cpp ${QuarterViewerUi})
+target_link_libraries(DirectUILoaderExample Quarter)
 
-#Direct UI loader example
-ADD_EXECUTABLE(DirectUILoaderExample "${CMAKE_CURRENT_SOURCE_DIR}/directui.cpp" ${QuarterViewerUi})
-TARGET_LINK_LIBRARIES(DirectUILoaderExample Quarter)
+# Examiner example
+add_executable(ExaminerExample examiner.cpp ${QuarterViewerResources})
+target_link_libraries(ExaminerExample Quarter)
 
-#Examiner example
-ADD_EXECUTABLE(ExaminerExample "${CMAKE_CURRENT_SOURCE_DIR}/examiner.cpp" ${QuarterViewerResources})
-TARGET_LINK_LIBRARIES(ExaminerExample Quarter)
-
-#Inherit UI example
-ADD_EXECUTABLE(InheritUIExample "${CMAKE_CURRENT_SOURCE_DIR}/inheritui.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/QuarterViewer.h"
-  ${QuarterViewerUi})
-TARGET_LINK_LIBRARIES(InheritUIExample Quarter)
-
-#Multiple document interface example
-ADD_EXECUTABLE(MDIExample "${CMAKE_CURRENT_SOURCE_DIR}/mdi.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/MdiMainWindow.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/MdiMainWindow.h"
-  "${CMAKE_CURRENT_SOURCE_DIR}/MdiQuarterWidget.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/MdiQuarterWidget.h"
+# Inherit UI example
+add_executable(InheritUIExample inheritui.cpp
+	QuarterViewer.cpp
+	QuarterViewer.h
+	${QuarterViewerUi}
 )
-TARGET_LINK_LIBRARIES(MDIExample Quarter)
+target_link_libraries(InheritUIExample Quarter)
 
-#Superimposition example
-#Examiner example
-ADD_EXECUTABLE(SuperImpositionExample "${CMAKE_CURRENT_SOURCE_DIR}/superimposition.cpp")
-TARGET_LINK_LIBRARIES(SuperImpositionExample Quarter)
+# Multiple document interface example
+add_executable(MDIExample mdi.cpp
+	MdiMainWindow.cpp
+	MdiMainWindow.h
+	MdiQuarterWidget.cpp
+	MdiQuarterWidget.h
+	${MocHeaders}
+)
+target_link_libraries(MDIExample Quarter)
 
-#Generate the tree structure in the VS Projects.
-SIM_VS_GENERATE_BASIC_TREE()
+# Superimposition example
+add_executable(SuperImpositionExample superimposition.cpp)
+target_link_libraries(SuperImpositionExample Quarter)
