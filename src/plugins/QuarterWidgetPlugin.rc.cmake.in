@@ -1,0 +1,38 @@
+1 TYPELIB "QuarterWidgetPlugin.rc"
+
+1 VERSIONINFO
+ FILEVERSION @PROJECT_VERSION_MAJOR@, @PROJECT_VERSION_MINOR@, @PROJECT_VERSION_PATCH@, 0
+ PRODUCTVERSION @PROJECT_VERSION_MAJOR@, @PROJECT_VERSION_MINOR@, @PROJECT_VERSION_PATCH@, 0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Kongsberg Oil & Gas Technologies AS"
+            VALUE "FileDescription", "A QtDesigner Plugin for Quarter Gui-toolkit binding for Coin3D, 3D graphics rendering library - www.coin3d.org"
+            VALUE "FileVersion","@PROJECT_VERSION_MAJOR@, @PROJECT_VERSION_MINOR@, @PROJECT_VERSION_PATCH@, @QUARTER_BETA_VERSION@"
+            VALUE "InternalName", "QuarterWidgetPlugin"
+            VALUE "LegalCopyright", "Copyright (c) @QUARTER_BUILD_YEAR@ Kongsberg Oil & Gas Technologies AS"
+#ifdef _DEBUG
+            VALUE "OriginalFilename", "QuarterWidgetPlugin@PROJECT_VERSION_MAJOR@d.dll"
+#else
+            VALUE "OriginalFilename", "QuarterWidgetPlugin@PROJECT_VERSION_MAJOR@.dll"
+#endif
+            VALUE "ProductName", "Coin3D"
+            VALUE "ProductVersion","@PROJECT_VERSION_MAJOR@, @PROJECT_VERSION_MINOR@, @PROJECT_VERSION_PATCH@, @QUARTER_BETA_VERSION@"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
