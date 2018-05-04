@@ -3,7 +3,7 @@ branches:
   only:
   - AppVeyorCI
 #shallow clone does not work when subrepos are involved!
-#shallow_clone: true
+#shallow_clone: true 
 environment:
   matrix:
     #- APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
