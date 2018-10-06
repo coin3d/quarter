@@ -1,11 +1,11 @@
 if(Qt5_FOUND)
-	QT5_ADD_RESOURCES(QuarterViewerResources quarterviewer.qrc)
-	QT5_WRAP_UI(QuarterViewerUi QuarterViewer.ui)
-	QT5_WRAP_CPP(MocHeaders MdiMainWindow.h)
+  QT5_ADD_RESOURCES(QuarterViewerResources quarterviewer.qrc)
+  QT5_WRAP_UI(QuarterViewerUi QuarterViewer.ui)
+  QT5_WRAP_CPP(MocHeaders MdiMainWindow.h)
 else()
-	QT4_ADD_RESOURCES(QuarterViewerResources quarterviewer.qrc)
-	QT4_WRAP_UI(QuarterViewerUi QuarterViewer.ui)
-	QT4_WRAP_CPP(MocHeaders MdiMainWindow.h)
+  QT4_ADD_RESOURCES(QuarterViewerResources quarterviewer.qrc)
+  QT4_WRAP_UI(QuarterViewerUi QuarterViewer.ui)
+  QT4_WRAP_CPP(MocHeaders MdiMainWindow.h)
 endif()
 
 # Minimal example
@@ -26,19 +26,19 @@ target_link_libraries(ExaminerExample Quarter)
 
 # Inherit UI example
 add_executable(InheritUIExample inheritui.cpp
-	QuarterViewer.cpp
-	QuarterViewer.h
-	${QuarterViewerUi}
+  QuarterViewer.cpp
+  QuarterViewer.h
+  ${QuarterViewerUi}
 )
 target_link_libraries(InheritUIExample Quarter)
 
 # Multiple document interface example
 add_executable(MDIExample mdi.cpp
-	MdiMainWindow.cpp
-	MdiMainWindow.h
-	MdiQuarterWidget.cpp
-	MdiQuarterWidget.h
-	${MocHeaders}
+  MdiMainWindow.cpp
+  MdiMainWindow.h
+  MdiQuarterWidget.cpp
+  MdiQuarterWidget.h
+  ${MocHeaders}
 )
 target_link_libraries(MDIExample Quarter)
 

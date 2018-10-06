@@ -1,53 +1,75 @@
 version: 1.0.0-{branch}-ci-{build}
+
 branches:
   only:
-  - AppVeyorCI
+  - default
+
 #shallow clone does not work when subrepos are involved!
 #shallow_clone: true 
+
 environment:
+  BITBUCKET_LOGIN_ID: coin-support@coin3d.org
+  BITBUCKET_CREDENTIALS:
+    secure: klDv0GkxxTy1F5PBcgsXlg==
+
   matrix:
     #- APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
     #  CMAKE_GENERATOR: 'Unix Makefiles'
-    #  configuration: Release
-    #  platform: x86
     #  CMAKE_CONFIGURATION: Release
     #  CMAKE_PLATFORM: x86
     #  CMAKE_ARCH_FLAGS: -m32
     #  COMPILER_ID: gcc5
+    #  configuration: Release
+    #  platform: x86
     ##  QT_DIR: C:\Qt\5.10.1\msvc2015
+
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
       CMAKE_GENERATOR: 'Unix Makefiles'
-      configuration: Release
-      platform: x64
       CMAKE_CONFIGURATION: Release
       CMAKE_PLATFORM: x64
       CMAKE_ARCH_FLAGS: -m64
       COMPILER_ID: gcc5
+      configuration: Release
+      platform: x64
     #  QT_DIR: C:\Qt\5.10.1\msvc2015
+
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       CMAKE_GENERATOR: 'Visual Studio 14 2015'
+      CMAKE_CONFIGURATION: Release
+      CMAKE_PLATFORM: x86
+      COMPILER_ID: msvc14
       configuration: Release
       platform: x86
-      COMPILER_ID: msvc14
       QT_DIR: C:\Qt\5.10.1\msvc2015
+
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       CMAKE_GENERATOR: 'Visual Studio 14 2015 Win64'
+      CMAKE_CONFIGURATION: Release
+      CMAKE_PLATFORM: x64
+      COMPILER_ID: msvc14
       configuration: Release
       platform: x64
-      COMPILER_ID: msvc14
       QT_DIR: C:\Qt\5.10.1\msvc2015_64
+
     #- APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
     #  CMAKE_GENERATOR: 'Visual Studio 15 2017'
+    #  CMAKE_CONFIGURATION: Release
+    #  CMAKE_PLATFORM: x86
+    #  COMPILER_ID: msvc17
     #  configuration: Release
     #  platform: x86
-    #  COMPILER_ID: msvc17
-    ##  QT_DIR: C:\Qt\5.10.1\msvc2017
+    #  QT_DIR: C:\Qt\5.10.1\msvc2015
+    #  # according to https://forum.qt.io/topic/80583/prebuild-qt-32-bit-versions-for-visual-studio-2017/13 VS2017 is binary compatible with VS2015 and therefore we use Qt 32-bit from msvc2015
+
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       CMAKE_GENERATOR: 'Visual Studio 15 2017 Win64'
+      CMAKE_CONFIGURATION: Release
+      CMAKE_PLATFORM: x64
+      COMPILER_ID: msvc17
       configuration: Release
       platform: x64
-      COMPILER_ID: msvc17
       QT_DIR: C:\Qt\5.10.1\msvc2017_64
+
 install:
   - sh: |
       if [ "$CMAKE_PLATFORM" == "x86" ]
@@ -61,65 +83,89 @@ install:
         sudo apt-get install qt5-default -y
         sudo apt-get install qttools5-dev -y
       fi
+      sudo apt-get install doxygen -y
       sudo apt-get install gcc-multilib -y
       sudo apt-get install g++-multilib -y
   - sh: qtchooser -l
   - sh: which moc
   - sh: which uic
+  - cmd: |
+      set PATH=%APPVEYOR_BUILD_FOLDER%\downloads\doxygen-1.8.14;%PATH%
+
 before_build:
   - cmd: |
-      pwd
-      set DOWNLOAD_FILE_SUPERGLU=superglu-1.3.0-%COMPILER_ID%-%PLATFORM%-%CONFIGURATION%.zip
-      set DOWNLOAD_ADDRESS_SUPERGLU=https://ci.appveyor.com/api/projects/VolkerEnderlein/superglu/artifacts/%DOWNLOAD_FILE_SUPERGLU%
-      curl -fsSL -G -o "%DOWNLOAD_FILE_SUPERGLU%" "%DOWNLOAD_ADDRESS_SUPERGLU%" --data-urlencode "branch=AppVeyorCI" --data-urlencode "job=Environment: APPVEYOR_BUILD_WORKER_IMAGE=%APPVEYOR_BUILD_WORKER_IMAGE%, CMAKE_GENERATOR=%CMAKE_GENERATOR%, configuration=%CONFIGURATION%, platform=%PLATFORM%, COMPILER_ID=%COMPILER_ID%"
-      set DOWNLOAD_FILE_COIN=coin-4.0.0-%COMPILER_ID%-%PLATFORM%-%CONFIGURATION%.zip
-      set DOWNLOAD_ADDRESS_COIN=https://ci.appveyor.com/api/projects/VolkerEnderlein/coin/artifacts/%DOWNLOAD_FILE_COIN%
-      curl -fsSL -G -o "%DOWNLOAD_FILE_COIN%" "%DOWNLOAD_ADDRESS_COIN%" --data-urlencode "branch=AppVeyorCI" --data-urlencode "job=Environment: APPVEYOR_BUILD_WORKER_IMAGE=%APPVEYOR_BUILD_WORKER_IMAGE%, CMAKE_GENERATOR=%CMAKE_GENERATOR%, configuration=%CONFIGURATION%, platform=%PLATFORM%, COMPILER_ID=%COMPILER_ID%"
       mkdir %APPVEYOR_BUILD_FOLDER%\downloads
+      set DOWNLOAD_FILE_DOXYGEN=doxygen-1.8.14.windows.x64.bin.zip
+      set DOWNLOAD_ADDRESS_DOXYGEN=http://ftp.stack.nl/pub/users/dimitri/%DOWNLOAD_FILE_DOXYGEN%
+      curl -fsSL -G -o "%DOWNLOAD_FILE_DOXYGEN%" "%DOWNLOAD_ADDRESS_DOXYGEN%"
+      7z x %DOWNLOAD_FILE_DOXYGEN% -o%APPVEYOR_BUILD_FOLDER%\downloads\doxygen-1.8.14
+      doxygen --version
+      set DOWNLOAD_FILE_SUPERGLU=superglu-1.3.0-%COMPILER_ID%-%CMAKE_PLATFORM%-%CMAKE_CONFIGURATION%.zip
+      set DOWNLOAD_ADDRESS_SUPERGLU=https://ci.appveyor.com/api/projects/%APPVEYOR_ACCOUNT_NAME%/superglu/artifacts/%DOWNLOAD_FILE_SUPERGLU%
+      curl -fsSL -G -o "%DOWNLOAD_FILE_SUPERGLU%" "%DOWNLOAD_ADDRESS_SUPERGLU%" --data-urlencode "branch=default" --data-urlencode "job=Environment: APPVEYOR_BUILD_WORKER_IMAGE=%APPVEYOR_BUILD_WORKER_IMAGE%, CMAKE_GENERATOR=%CMAKE_GENERATOR%, CMAKE_CONFIGURATION=%CMAKE_CONFIGURATION%, CMAKE_PLATFORM=%CMAKE_PLATFORM%, COMPILER_ID=%COMPILER_ID%, configuration=%CMAKE_CONFIGURATION%, platform=%CMAKE_PLATFORM%"
+      set DOWNLOAD_FILE_COIN=coin-4.0.0-%COMPILER_ID%-%CMAKE_PLATFORM%-%CMAKE_CONFIGURATION%.zip
+      set DOWNLOAD_ADDRESS_COIN=https://ci.appveyor.com/api/projects/%APPVEYOR_ACCOUNT_NAME%/coin/artifacts/%DOWNLOAD_FILE_COIN%
+      curl -fsSL -G -o "%DOWNLOAD_FILE_COIN%"     "%DOWNLOAD_ADDRESS_COIN%"     --data-urlencode "branch=default" --data-urlencode "job=Environment: APPVEYOR_BUILD_WORKER_IMAGE=%APPVEYOR_BUILD_WORKER_IMAGE%, CMAKE_GENERATOR=%CMAKE_GENERATOR%, CMAKE_CONFIGURATION=%CMAKE_CONFIGURATION%, CMAKE_PLATFORM=%CMAKE_PLATFORM%, COMPILER_ID=%COMPILER_ID%, configuration=%CMAKE_CONFIGURATION%, platform=%CMAKE_PLATFORM%"
       7z x %DOWNLOAD_FILE_SUPERGLU% -o%APPVEYOR_BUILD_FOLDER%\downloads
-      7z x %DOWNLOAD_FILE_COIN% -o%APPVEYOR_BUILD_FOLDER%\downloads
-  - cmd: cmake -H. -Bbuild -G "%CMAKE_GENERATOR%" -DCMAKE_CONFIGURATION_TYPES=%CONFIGURATION% -DCMAKE_TRY_COMPILE_CONFIGURATION=%CONFIGURATION% -DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%\Coin3D -DCMAKE_PREFIX_PATH=%APPVEYOR_BUILD_FOLDER%\downloads\Coin3D;%QT_DIR%
+      7z x %DOWNLOAD_FILE_COIN%     -o%APPVEYOR_BUILD_FOLDER%\downloads
+      cmake -H. -Bbuild -G "%CMAKE_GENERATOR%" -DCMAKE_CONFIGURATION_TYPES=%CMAKE_CONFIGURATION% -DCMAKE_TRY_COMPILE_CONFIGURATION=%CMAKE_CONFIGURATION% -DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%\Coin3D -DCMAKE_PREFIX_PATH=%APPVEYOR_BUILD_FOLDER%\downloads\Coin3D;%QT_DIR%
   - sh: |
-      pwd
       DOWNLOAD_FILE_SUPERGLU=superglu-1.3.0-$COMPILER_ID-$CMAKE_PLATFORM-$CMAKE_CONFIGURATION.tar.gz
-      DOWNLOAD_ADDRESS_SUPERGLU=https://ci.appveyor.com/api/projects/VolkerEnderlein/superglu/artifacts/$DOWNLOAD_FILE_SUPERGLU
-      curl -fsSL -G -o "$DOWNLOAD_FILE_SUPERGLU" "$DOWNLOAD_ADDRESS_SUPERGLU" --data-urlencode "branch=AppVeyorCI" --data-urlencode "job=Environment: APPVEYOR_BUILD_WORKER_IMAGE=$APPVEYOR_BUILD_WORKER_IMAGE, CMAKE_GENERATOR=$CMAKE_GENERATOR, configuration=$CMAKE_CONFIGURATION, platform=$CMAKE_PLATFORM, CMAKE_CONFIGURATION=$CMAKE_CONFIGURATION, CMAKE_PLATFORM=$CMAKE_PLATFORM, CMAKE_ARCH_FLAGS=$CMAKE_ARCH_FLAGS, COMPILER_ID=$COMPILER_ID"
+      DOWNLOAD_ADDRESS_SUPERGLU=https://ci.appveyor.com/api/projects/$APPVEYOR_ACCOUNT_NAME/superglu/artifacts/$DOWNLOAD_FILE_SUPERGLU
+      curl -fsSL -G -o "$DOWNLOAD_FILE_SUPERGLU"  "$DOWNLOAD_ADDRESS_SUPERGLU"  --data-urlencode "branch=default" --data-urlencode "job=Environment: APPVEYOR_BUILD_WORKER_IMAGE=$APPVEYOR_BUILD_WORKER_IMAGE, CMAKE_GENERATOR=$CMAKE_GENERATOR, CMAKE_CONFIGURATION=$CMAKE_CONFIGURATION, CMAKE_PLATFORM=$CMAKE_PLATFORM, CMAKE_ARCH_FLAGS=$CMAKE_ARCH_FLAGS, COMPILER_ID=$COMPILER_ID, configuration=$CMAKE_CONFIGURATION, platform=$CMAKE_PLATFORM"
       DOWNLOAD_FILE_COIN=coin-4.0.0-$COMPILER_ID-$CMAKE_PLATFORM-$CMAKE_CONFIGURATION.tar.gz
-      DOWNLOAD_ADDRESS_COIN=https://ci.appveyor.com/api/projects/VolkerEnderlein/coin/artifacts/$DOWNLOAD_FILE_COIN
-      curl -fsSL -G -o "$DOWNLOAD_FILE_COIN" "$DOWNLOAD_ADDRESS_COIN" --data-urlencode "branch=AppVeyorCI" --data-urlencode "job=Environment: APPVEYOR_BUILD_WORKER_IMAGE=$APPVEYOR_BUILD_WORKER_IMAGE, CMAKE_GENERATOR=$CMAKE_GENERATOR, configuration=$CMAKE_CONFIGURATION, platform=$CMAKE_PLATFORM, CMAKE_CONFIGURATION=$CMAKE_CONFIGURATION, CMAKE_PLATFORM=$CMAKE_PLATFORM, CMAKE_ARCH_FLAGS=$CMAKE_ARCH_FLAGS, COMPILER_ID=$COMPILER_ID"
+      DOWNLOAD_ADDRESS_COIN=https://ci.appveyor.com/api/projects/$APPVEYOR_ACCOUNT_NAME/coin/artifacts/$DOWNLOAD_FILE_COIN
+      curl -fsSL -G -o "$DOWNLOAD_FILE_COIN"      "$DOWNLOAD_ADDRESS_COIN"      --data-urlencode "branch=default" --data-urlencode "job=Environment: APPVEYOR_BUILD_WORKER_IMAGE=$APPVEYOR_BUILD_WORKER_IMAGE, CMAKE_GENERATOR=$CMAKE_GENERATOR, CMAKE_CONFIGURATION=$CMAKE_CONFIGURATION, CMAKE_PLATFORM=$CMAKE_PLATFORM, CMAKE_ARCH_FLAGS=$CMAKE_ARCH_FLAGS, COMPILER_ID=$COMPILER_ID, configuration=$CMAKE_CONFIGURATION, platform=$CMAKE_PLATFORM"
       mkdir $APPVEYOR_BUILD_FOLDER/downloads
       tar -xzvf $DOWNLOAD_FILE_SUPERGLU -C $APPVEYOR_BUILD_FOLDER/downloads
-      tar -xzvf $DOWNLOAD_FILE_COIN -C $APPVEYOR_BUILD_FOLDER/downloads
+      tar -xzvf $DOWNLOAD_FILE_COIN     -C $APPVEYOR_BUILD_FOLDER/downloads
       export CFLAGS=$CMAKE_ARCH_FLAGS
       export CXXFLAGS=$CMAKE_ARCH_FLAGS
-  - sh: cmake -H. -Bbuild -G "$CMAKE_GENERATOR" -DCMAKE_BUILD_TYPE=$CMAKE_CONFIGURATION -DCMAKE_INSTALL_PREFIX=$APPVEYOR_BUILD_FOLDER/Coin3D -DCMAKE_PREFIX_PATH=$APPVEYOR_BUILD_FOLDER/downloads/Coin3D
+      cmake -H. -Bbuild -G "$CMAKE_GENERATOR" -DCMAKE_BUILD_TYPE=$CMAKE_CONFIGURATION -DCMAKE_INSTALL_PREFIX=$APPVEYOR_BUILD_FOLDER/Coin3D -DCMAKE_PREFIX_PATH=$APPVEYOR_BUILD_FOLDER/downloads/Coin3D
+
 build_script:
-  - cmd: cmake --build build --target ALL_BUILD --config %CONFIGURATION% -- /nologo /verbosity:minimal /maxcpucount
-  #- cmd: cmake --build build --target RUN_TESTS --config %CONFIGURATION%
-  - cmd: cmake --build build --target INSTALL --config %CONFIGURATION%
-  - sh: cmake --build build --target all --config $CMAKE_CONFIGURATION -- -j4
-  #- sh: cmake --build build --target test --config $CMAKE_CONFIGURATION
-  - sh: cmake --build build --target install --config $CMAKE_CONFIGURATION
-test_script:
-  - cmd: cd build
-  - cmd: ctest -C %CONFIGURATION% -VV
-  - sh: cd build
-  - sh: ctest -C $CMAKE_CONFIGURATION -VV
+  - cmd: |
+      set BUILD_TOOL_OPTIONS=/nologo /verbosity:minimal /maxcpucount
+      cmake --build build --target ALL_BUILD --config %CMAKE_CONFIGURATION% -- %BUILD_TOOL_OPTIONS%
+      cmake --build build --target INSTALL   --config %CMAKE_CONFIGURATION% -- %BUILD_TOOL_OPTIONS%
+  - sh: |
+      BUILD_TOOL_OPTIONS=-j4
+      cmake --build build --target all       --config $CMAKE_CONFIGURATION -- $BUILD_TOOL_OPTIONS
+      cmake --build build --target install   --config $CMAKE_CONFIGURATION -- $BUILD_TOOL_OPTIONS
+
 after_build:
   - cmd: |
       cd %APPVEYOR_BUILD_FOLDER%
-      set BUILD_ARCHIVE=%APPVEYOR_PROJECT_NAME%-1.0.0-%COMPILER_ID%-%PLATFORM%-%CONFIGURATION%.zip
-      7z a %BUILD_ARCHIVE% Coin3D
+      set BUILD_ARCHIVE=%APPVEYOR_PROJECT_NAME%-1.0.0-%COMPILER_ID%-%CMAKE_PLATFORM%-%CMAKE_CONFIGURATION%.zip
+      7z a -tzip %BUILD_ARCHIVE% Coin3D
       appveyor PushArtifact %BUILD_ARCHIVE%
   - sh: |
       cd $APPVEYOR_BUILD_FOLDER
       BUILD_ARCHIVE=$APPVEYOR_PROJECT_NAME-1.0.0-$COMPILER_ID-$CMAKE_PLATFORM-$CMAKE_CONFIGURATION.tar.gz
       tar -czvf $BUILD_ARCHIVE Coin3D/*
       appveyor PushArtifact $BUILD_ARCHIVE
+
+#test_script:
+#  - cmd: |
+#      cd build
+#      ctest -C %CMAKE_CONFIGURATION% -VV
+#  - sh: |
+#      cd build
+#      ctest -C $CMAKE_CONFIGURATION -VV
+
+on_success:
+  - cmd: |
+      cd %APPVEYOR_BUILD_FOLDER%
+      curl --user %BITBUCKET_LOGIN_ID%:%BITBUCKET_CREDENTIALS% https://api.bitbucket.org/2.0/repositories/%APPVEYOR_ACCOUNT_NAME%/%APPVEYOR_PROJECT_SLUG%/downloads --form files=@%BUILD_ARCHIVE%
+  - sh: |
+      cd $APPVEYOR_BUILD_FOLDER
+      curl --user $BITBUCKET_LOGIN_ID:$BITBUCKET_CREDENTIALS   https://api.bitbucket.org/2.0/repositories/$APPVEYOR_ACCOUNT_NAME/$APPVEYOR_PROJECT_SLUG/downloads   --form files=\@$BUILD_ARCHIVE
+
 notifications:
   - provider: Email
     to:
-    - volkerenderlein@hotmail.com
+    - '{{commitAuthorEmail}}'
+    - coin-support@coin3d.org
     on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
