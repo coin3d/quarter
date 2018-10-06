@@ -1,40 +1,42 @@
-SET(Library QuarterWidgetPlugin)
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
-
-ADD_DEFINITIONS(-DQUARTER_DLL)
-
-FILE(GLOB_RECURSE Sources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
-FILE(GLOB_RECURSE Headers RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h)
-FILE(GLOB_RECURSE Resources RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.qrc)
-
 if(Qt5_FOUND)
-  QT5_ADD_RESOURCES(ResourceSources ${Resources})
+  # If this directory is not explicitly included build fails with message "error: Undefined interface"
+  include_directories(${Qt5Designer_INCLUDE_DIRS})
+  QT5_ADD_RESOURCES(ResourceSources QuarterWidgetPlugin.qrc coinlogo.qrc)
+  QT5_WRAP_CPP(MocHeaders QuarterWidgetPlugin.h)
 else()
-  QT4_ADD_RESOURCES(ResourceSources ${Resources})
+  # If this directory is not explicitly included build fails with message "error: Undefined interface"
+  include_directories(${QtDesigner_INCLUDE_DIRS})
+  QT4_ADD_RESOURCES(ResourceSources QuarterWidgetPlugin.qrc coinlogo.qrc)
+  QT4_WRAP_CPP(MocHeaders QuarterWidgetPlugin.h)
 endif()
 
-# Some convenient variables. The inclusion of the headers in the source variable is to force CMake to include the headers in VS project generation.
-SET(AllSources ${Sources} ${ResourceSources} ${Headers})
-SET(AllLibs ${Coin_LIBRARY} ${QT_LIBRARIES} ${OPENGL_gl_LIBRARY} Quarter)
+# ############################################################################
+# Create the QtDesigner plugin
+# ############################################################################
 
-ADD_LIBRARY(${Library} SHARED ${AllSources})
-TARGET_LINK_LIBRARIES(${Library} ${AllLibs})
+add_library(QuarterWidgetPlugin SHARED QuarterWidgetPlugin.cpp QuarterWidgetPlugin.h ${ResourceSources} ${MocHeaders})
+if(WIN32)
+  configure_file(QuarterWidgetPlugin.rc.cmake.in QuarterWidgetPlugin.rc)
+  target_sources(QuarterWidgetPlugin PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/QuarterWidgetPlugin.rc")
+endif()
+target_link_libraries(QuarterWidgetPlugin Coin::Coin ${QT_LIBRARIES} ${OPENGL_gl_LIBRARY} Quarter)
 
-SIM_VS_GENERATE_BASIC_TREE()
+set_target_properties(QuarterWidgetPlugin PROPERTIES VERSION ${QUARTER_VERSION} SOVERSION ${QUARTER_SO_VERSION})
 
-#Install the designer plugin
+# ############################################################################
+# Install the QtDesigner plugin
+# ############################################################################
+
 if(QT_PLUGINS_DIR)
   # Legacy FindQt4.
-  install(TARGETS ${Library}
-    RUNTIME DESTINATION "${QT_PLUGINS_DIR}/designer"
-  )
+  install(TARGETS QuarterWidgetPlugin RUNTIME DESTINATION "${QT_PLUGINS_DIR}/designer")
 else()
   # Call qmake to query the plugin installation directory.
   get_target_property(QT_QMAKE_EXECUTABLE Qt5::qmake LOCATION)
   execute_process(COMMAND ${QT_QMAKE_EXECUTABLE} -query QT_INSTALL_PLUGINS
     OUTPUT_VARIABLE QT_INSTALL_PLUGINS OUTPUT_STRIP_TRAILING_WHITESPACE
   )
-  install(TARGETS ${Library}
+  install(TARGETS QuarterWidgetPlugin
     RUNTIME DESTINATION "${QT_INSTALL_PLUGINS}/designer" COMPONENT development
     LIBRARY DESTINATION "${QT_INSTALL_PLUGINS}/designer" COMPONENT development
   )

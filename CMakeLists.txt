@@ -1,158 +1,297 @@
-cmake_minimum_required(VERSION 3.7.2)
+cmake_minimum_required(VERSION 3.0)
 
-project(Quarter
-VERSION 1.0.1
-DESCRIPTION "Coin 3D integration library"
-)
-set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/SIMCMakeMacros/")
+set(QUARTER_MAJOR_VERSION 1)
+set(QUARTER_MINOR_VERSION 0)
+set(QUARTER_MICRO_VERSION 1)
+set(QUARTER_BETA_VERSION a)
+set(QUARTER_VERSION ${QUARTER_MAJOR_VERSION}.${QUARTER_MINOR_VERSION}.${QUARTER_MICRO_VERSION}${QUARTER_BETA_VERSION})
 
+project(Quarter VERSION ${QUARTER_MAJOR_VERSION}.${QUARTER_MINOR_VERSION}.${QUARTER_MICRO_VERSION} LANGUAGES CXX)
+string(TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWER)
+
+# ############################################################################
+# these will be removed after upgrading CMake minimum version to 3.9.6
+set(PROJECT_DESCRIPTION "Coin 3D integration library")
+# ############################################################################
+
+string(TIMESTAMP QUARTER_BUILD_YEAR "%Y")
+math(EXPR QUARTER_SO_VERSION ${PROJECT_VERSION_MAJOR}*20)
+set(VERSION ${QUARTER_VERSION})
+
+if(POLICY CMP0072)
+  # get rid of OpenGL GLVND warning from CMake 3.11
+  cmake_policy(SET CMP0072 NEW)
+endif()
+
+# ############################################################################
+# Prevent in-source builds, as they often cause severe build problems
+# ############################################################################
+
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
+  message(FATAL_ERROR "${CMAKE_PROJECT_NAME} requires an out of source build. Please create a separate build directory and run 'cmake <path_to_${CMAKE_PROJECT_NAME}> [options]' from there.")
+endif()
+
+# ############################################################################
+# Include necessary submodules
+# ############################################################################
+
+include(CMakeDependentOption)
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
 
-# This is a convenience macro for generating better tree structures in VS solutions.
-# Running this in any directory will affect all libraries/executables at that location.
-MACRO(SIM_VS_GENERATE_BASIC_TREE)
-  SOURCE_GROUP("Source" REGULAR_EXPRESSION \\.cpp)
-  SOURCE_GROUP("Headers" REGULAR_EXPRESSION \\.h)
+# ############################################################################
+# Provide options to customise the build
+# ############################################################################
 
-  SOURCE_GROUP("Source\\Generated Moc files" REGULAR_EXPRESSION moc_*)
-  SOURCE_GROUP("Source\\Generated Qrc files" REGULAR_EXPRESSION [^\\.]qrc_*)
-  SOURCE_GROUP("Resources" REGULAR_EXPRESSION .*\\.qrc)
+option(QUARTER_BUILD_SHARED_LIBS "Build shared libraries" ON)
+option(QUARTER_USE_QT5 "Prefer Qt5 over Qt4 if available" ON)
+option(QUARTER_BUILD_PLUGIN "Build Quarter plugin for QT Designer" ON)
+option(QUARTER_BUILD_EXAMPLES "Build Quarter example applications" ON)
+option(QUARTER_BUILD_DOCUMENTATION "Build and install API documentation (requires Doxygen)." ON)
+cmake_dependent_option(QUARTER_BUILD_INTERNAL_DOCUMENTATION "Document internal code not part of the API." OFF "QUARTER_BUILD_DOCUMENTATION" OFF)
+cmake_dependent_option(QUARTER_BUILD_DOC_MAN "Build So${Gui} man pages." OFF "QUARTER_BUILD_DOCUMENTATION" OFF)
+cmake_dependent_option(QUARTER_BUILD_DOC_QTHELP "Build QtHelp documentation." OFF "QUARTER_BUILD_DOCUMENTATION" OFF)
+cmake_dependent_option(QUARTER_BUILD_DOC_CHM "Build compressed HTML help manual (requires HTML help compiler)" OFF "QUARTER_BUILD_DOCUMENTATION" OFF)
 
-  SOURCE_GROUP("Build" REGULAR_EXPRESSION \\.txt)
-  SOURCE_GROUP("Build\\Rules" REGULAR_EXPRESSION \\.rule)
-ENDMACRO()
+# ############################################################################
+# Find all necessary and optional SoQt dependencies
+# ############################################################################
 
-# Add an option to enable static builds
-OPTION(Quarter_BUILD_STATIC_LIBRARY "Build static library instead of shared library (DLL, so etc..)" OFF)
-OPTION(Quarter_BUILD_PLUGIN "Build Quarter plugin for QT Designer" OFF)
-OPTION(Quarter_BUILD_EXAMPLES "Build Quarter example applications" OFF)
+# Fail early if one of the required packages cannot be found
 
-# Set up the different flavors of postfixes and CRTs for Windows environments
-#  Install configuration
-#
-# Quarter will be installed into the directory configured by CMAKE_INSTALL_PREFIX. This
-# defaults to /usr/local/ on UNIX and c:/Program Files/Quarter on Windows.
-#
-# On Windows, the namimg convention is as follows (ripped from the "Coin" way of doing stuff):
-# Dynamic Release: Quarter.dll and Quarter.lib
-# Dynamic Debug: Quarterd.dll and Quarterd.lib
-# Static Release: Quarters.lib
-# Static Debug: Quartersd.lib
-IF(WIN32)
-  IF(Quarter_BUILD_STATIC_LIBRARY)
-    SET(CMAKE_DEBUG_POSTFIX "sd")
-    SET(CMAKE_RELEASE_POSTFIX "s") #NB! Undocumented variable, could be deprecated
-        
-    #Don't use dynamic runtime in static builds.
-    STRING(REPLACE "/MDd" "/MTd" CMAKE_CXX_FLAGS_RELEASE ${CMAKE_CXX_FLAGS_RELEASE})
-    STRING(REPLACE "/MDd" "/MTd" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
-    STRING(REPLACE "/MD" "/MT" CMAKE_CXX_FLAGS_RELEASE ${CMAKE_CXX_FLAGS_RELEASE})
-    STRING(REPLACE "/MD" "/MT" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
-  ELSE()
-    SET(CMAKE_DEBUG_POSTFIX "d")
-  ENDIF()
+find_package(OpenGL REQUIRED)
+find_package(Coin REQUIRED)
+#find_package(superglu REQUIRED)
+find_package(Spacenav)
 
-  # Enable single project multithread compilation for VS2008
-  IF(MSVC_VERSION EQUAL 1500)
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP4")
-  ENDIF()
-ENDIF()
+if(QUARTER_USE_QT5)
+  find_package(Qt5 COMPONENTS UiTools OpenGL Designer REQUIRED)
+endif()
 
-FIND_PACKAGE(OpenGL REQUIRED)
-FIND_PACKAGE(Coin 4.0.0 REQUIRED)
-# Install Quarter alongside Coin.
-SET(CMAKE_INSTALL_PREFIX "${COINDIR}" CACHE PATH "Install path prefix" FORCE)
+if(Qt5_FOUND)
+  set(QT_LIBRARIES ${Qt5UiTools_LIBRARIES} ${Qt5OpenGL_LIBRARIES} ${Qt5Designer_LIBRARIES})
+  string(REGEX REPLACE "^([0-9]+)\\.[0-9]+\\.[0-9]+.*" "\\1" QT_VERSION_MAJOR "${Qt5Core_VERSION_STRING}")
+  string(REGEX REPLACE "^[0-9]+\\.([0-9])+\\.[0-9]+.*" "\\1" QT_VERSION_MINOR "${Qt5Core_VERSION_STRING}")
+  string(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.([0-9]+).*" "\\1" QT_VERSION_PATCH "${Qt5Core_VERSION_STRING}")
+  set(PACKAGE_ADDITIONAL_REQUIREMENTS "Qt5UiTools, Qt5OpenGL, Qt5Designer")
+else()
+  set(QT_USE_QTDESIGNER true)
+  set(QT_USE_QTTEST true)
+  set(QT_USE_QTOPENGL true)
+  set(QT_USE_QTUITOOLS true)
+  set(QT_USE_IMPORTED_TARGETS ON)
+  find_package(Qt4 COMPONENTS QtUiTools QtOpenGL QtDesigner REQUIRED)
+  include(${QT_USE_FILE})
+  set(PACKAGE_ADDITIONAL_REQUIREMENTS "QtUiTools, QtOpenGL, QtDesigner")
+endif()
 
-SET(QT_USE_QTDESIGNER true)
-SET(QT_USE_QTTEST true)
-SET(QT_USE_QTOPENGL true)
-SET(QT_USE_QTUITOOLS true)
-SET(CMAKE_AUTOMOC true)
-SET(CMAKE_INCLUDE_CURRENT_DIR true)
-FIND_PACKAGE(Qt5 COMPONENTS UiTools OpenGL Designer)
-IF(Qt5_FOUND)
-  SET(QT_LIBRARIES Qt5::UiTools Qt5::OpenGL Qt5::Designer)
-ELSE(Qt5_FOUND)
-  FIND_PACKAGE(Qt4 REQUIRED)
-  INCLUDE(${QT_USE_FILE})
-ENDIF(Qt5_FOUND)
+# ##########################################################################
+# Setup build environment
+# ##########################################################################
 
+if(NOT CMAKE_BUILD_TYPE)
+  # Has no effect for multi configuration generators (VisualStudio, Xcode).
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose type of build, options are Debug, Release, RelWithDebInfo, MinSizeRel." FORCE)
+endif()
+# Set common output directories for all targets built.
+# First for the generic no-config case (e.g. with mingw)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+# Second, for multi-config builds (e.g. msvc)
+foreach (_config ${CMAKE_CONFIGURATION_TYPES})
+  string(TOUPPER ${_config} _config)
+  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${_config} "${CMAKE_BINARY_DIR}/lib")
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${_config} "${CMAKE_BINARY_DIR}/lib")
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${_config} "${CMAKE_BINARY_DIR}/bin")
+endforeach()
 
-FIND_PACKAGE(Spacenav)
-IF (Spacenav_FOUND)
-INCLUDE_DIRECTORIES(${Spacenav_INCLUDE_DIR})
-ENDIF(Spacenav_FOUND)
+if(WIN32)
+  if(MINGW)
+    set(QUARTER_DEFAULT_SHARED_POSTFIX "")
+    set(QUARTER_DEFAULT_STATIC_POSTFIX "")
+  else()
+    # On Windows the major version number is part of the library name
+    set(QUARTER_DEFAULT_SHARED_POSTFIX ${PROJECT_VERSION_MAJOR})
+    set(QUARTER_DEFAULT_STATIC_POSTFIX ${PROJECT_VERSION_MAJOR}s)
+  endif()
+  if(QUARTER_BUILD_SHARED_LIBS)
+    set(QUARTER_DEFAULT_POSTFIX ${QUARTER_DEFAULT_SHARED_POSTFIX})
+  else()
+    set(QUARTER_DEFAULT_POSTFIX ${QUARTER_DEFAULT_STATIC_POSTFIX})
+  endif()
+  set(CMAKE_RELEASE_POSTFIX ${QUARTER_DEFAULT_POSTFIX})
+  set(CMAKE_MINSIZEREL_POSTFIX ${QUARTER_DEFAULT_POSTFIX})
+  set(CMAKE_RELWITHDEBINFO_POSTFIX ${QUARTER_DEFAULT_POSTFIX})
+  set(CMAKE_DEBUG_POSTFIX ${QUARTER_DEFAULT_POSTFIX}d)
+elseif(APPLE)
+else()
+endif()
 
-# FIXME: Is this really necessary? Shouldnt the link directories be sorted out by the package scripts.
-# 2008-05-15, oyshole
-# From the docs:
-# Note that this command is rarely necessary. Library locations returned by find_package() and find_library() are absolute paths.
-# Pass these absolute library file paths directly to the target_link_libraries() command. CMake will ensure the linker finds them.
-# 2016-03-14, Bastiaan Veelo
-LINK_DIRECTORIES(${QT_LIB_DIR} ${Coin_LIB_DIR} ${OPENGL_gl_DIRECTORY})
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include/)
-INCLUDE_DIRECTORIES(${QT_INCLUDE_DIR} ${Coin_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
+set(CMAKE_INCLUDE_CURRENT_DIR true)
 
-ADD_DEFINITIONS(${Coin_DEFINES})
-ADD_DEFINITIONS(${QT_DEFINITIONS})
+configure_file(config.h.cmake.in config.h @ONLY)
 
-IF(MSVC)
-  MESSAGE(STATUS "MSVC Version: " ${MSVC_VERSION})
-  ADD_DEFINITIONS(-D_CRT_SECURE_NO_DEPRECATE)
-ENDIF()
+set(INST_HDRS
+  "${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}/Basic.h"
+  "${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}/QtCoinCompatibility.h"
+  "${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}/Quarter.h"
+  "${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}/QuarterWidget.h"
+)
 
-# config.h
-CONFIGURE_FILE(config.h.cmake.in config.h @ONLY)
-INCLUDE_DIRECTORIES(${PROJECT_BINARY_DIR}/)
+set(INST_DEVICES_HDRS
+  "${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}/devices/InputDevice.h"
+  "${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}/devices/Keyboard.h"
+  "${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}/devices/Mouse.h"
+  "${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}/devices/SpaceNavigatorDevice.h"
+)
 
-# What to build
-ADD_SUBDIRECTORY(src)
+set(INST_EVENTHANDLERS_HDRS
+  "${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}/eventhandlers/DragDropHandler.h"
+  "${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}/eventhandlers/EventFilter.h"
+  "${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}/eventhandlers/FocusHandler.h"
+)
 
-#Install the public headers
-INSTALL(DIRECTORY include/Quarter/ DESTINATION include/Quarter COMPONENT development
-        FILES_MATCHING PATTERN "*.h"
-        PATTERN ".hg" EXCLUDE)
-##############################################################################
-# Generates config
+set(QUARTER_PUBLIC_HDRS ${INST_HDRS} ${INST_DEVICES_HDRS} ${INST_EVENTHANDLERS_HDRS})
 
-configure_package_config_file(
-  ${PROJECT_NAME}Config.cmake.in ${PROJECT_NAME}Config.cmake
+# ############################################################################
+# Setup targets in subdirectories
+# ############################################################################
+
+add_subdirectory(src)
+
+# ############################################################################
+# Add a target to generate API documentation with Doxygen
+# ############################################################################
+
+if(QUARTER_BUILD_DOCUMENTATION)
+  find_package(Doxygen)
+  if(NOT DOXYGEN_FOUND)
+    message(FATAL_ERROR "Doxygen is needed to build the documentation.")
+  endif()
+
+# ############################################################################
+# Setup documentation options
+# ############################################################################
+  set(GENERATE_HTMLHELP NO)
+  set(DOXYGEN_GENERATE_MAN NO)
+  set(GENERATE_QHP NO)
+  set(GENERATE_TREEVIEW YES)
+  set(HHC_PROGRAM)
+  if(WIN32)
+    if(QUARTER_BUILD_DOC_CHM)
+      find_program(HHC_PROGRAM NAMES hhc.exe PATHS "C:/Program Files/HTML Help Workshop" "C:/Program Files (x86)/HTML Help Workshop" DOC "HTML Help Compiler program")
+      if(NOT HHC_PROGRAM)
+        message(FATAL_ERROR "Missing program HTML Help Compiler")
+      else()
+        set(GENERATE_HTMLHELP YES)
+        set(GENERATE_TREEVIEW NO)
+        mark_as_advanced(HHC_PROGRAM)
+      endif()
+    endif()
+  else()
+    if(QUARTER_BUILD_DOC_MAN)
+      set(DOXYGEN_GENERATE_MAN YES)
+    endif()
+  endif()
+  if(QUARTER_BUILD_DOC_QTHELP)
+    find_program(QHG_LOCATION NAMES qhelpgenerator qhelpgenerator-qt5 DOC "Qt qhelpgenerator")
+    if(NOT QHG_LOCATION)
+      message(FATAL_ERROR "Missing program Qt qhelpgenerator")
+    else()
+      set(GENERATE_QHP YES)
+      mark_as_advanced(QHG_LOCATION)
+    endif()
+  endif()
+
+  set(DOXYGEN_INTERNAL_DOCS NO)
+  set(DOXYGEN_EXTRACT_PRIVATE NO)
+  set(DOXYGEN_WARN_IF_UNDOCUMENTED YES)
+  set(DOXYGEN_EXCLUDE)
+
+  set(DOXYFILE "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile")
+  set(DOXYGEN_OUTPUT "${CMAKE_BINARY_DIR}/html/index.html")
+  configure_file("${CMAKE_SOURCE_DIR}/docs/quarter.doxygen.cmake.in" ${DOXYFILE} @ONLY)
+
+# ############################################################################
+# Setup documentation targets
+# ############################################################################
+  add_custom_command(
+    OUTPUT ${DOXYGEN_OUTPUT}
+    COMMAND ${CMAKE_COMMAND} -E echo_append "Generating API documentation with Doxygen "
+    COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYFILE}
+    COMMAND ${CMAKE_COMMAND} -E echo "done."
+    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+    DEPENDS ${DOXYFILE}
+  )
+  add_custom_target(documentation ALL DEPENDS ${DOXYGEN_OUTPUT})
+
+# ############################################################################
+# Install built documentation files
+# ############################################################################
+  install(DIRECTORY "${CMAKE_BINARY_DIR}/html" DESTINATION ${CMAKE_INSTALL_DOCDIR} COMPONENT documentation REGEX ".*\\.(chm|qch)" EXCLUDE)
+  if(GENERATE_HTMLHELP)
+    install(FILES "${CMAKE_BINARY_DIR}/html/${PROJECT_NAME}.chm" DESTINATION ${CMAKE_INSTALL_DOCDIR} COMPONENT documentation)
+  endif()
+  if(GENERATE_QHP)
+    install(FILES "${CMAKE_BINARY_DIR}/html/${PROJECT_NAME}.qch" DESTINATION ${CMAKE_INSTALL_DOCDIR} COMPONENT documentation)
+  endif()
+  if(DOXYGEN_GENERATE_MAN)
+    install(DIRECTORY "${CMAKE_BINARY_DIR}/man/man3" DESTINATION ${CMAKE_INSTALL_MANDIR} COMPONENT documentation)
+    message(STATUS "CMAKE_INSTALL_MANDIR ${CMAKE_INSTALL_MANDIR}")
+  endif()
+endif()
+
+# ############################################################################
+# Install headers
+# ############################################################################
+
+install(FILES ${INST_HDRS}               DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}               COMPONENT development)
+install(FILES ${INST_DEVICES_HDRS}       DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/devices       COMPONENT development)
+install(FILES ${INST_EVENTHANDLERS_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/eventhandlers COMPONENT development)
+
+# ############################################################################
+# Install pkgconfig file and CMake config package
+# ############################################################################
+
+if(UNIX OR MINGW)
+  configure_file("${CMAKE_SOURCE_DIR}/${PROJECT_NAME}.pc.cmake.in" ${PROJECT_NAME}.pc @ONLY)
+  install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc" DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+endif()
+
+configure_package_config_file(${PROJECT_NAME_LOWER}-config.cmake.in ${PROJECT_NAME_LOWER}-config.cmake
   INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
 )
 
-install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
-  COMPONENT development
-)
-
-write_basic_package_version_file(
-  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+write_basic_package_version_file("${CMAKE_BINARY_DIR}/${PROJECT_NAME_LOWER}-config-version.cmake"
   VERSION ${PROJECT_VERSION}
   COMPATIBILITY ExactVersion
 )
 
-install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+# To make the component usable not only from the install directory but also from the build directory
+export(
+  TARGETS ${PROJECT_NAME}
+  FILE ${PROJECT_NAME_LOWER}-export.cmake
+)
+
+install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME_LOWER}-config.cmake" "${CMAKE_BINARY_DIR}/${PROJECT_NAME_LOWER}-config-version.cmake"
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
   COMPONENT development
 )
 
-# install(
-# 	EXPORT ${PROJECT_NAME}
-# 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
-# 	NAMESPACE ${PROJECT_NAME}::
-# 	FILE ${PROJECT_NAME}Export.cmake
-# 	COMPONENT development
-# )
+install(EXPORT ${PROJECT_NAME}
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
+  NAMESPACE ${PROJECT_NAME}::
+  FILE ${PROJECT_NAME_LOWER}-export.cmake
+  COMPONENT development
+)
 
 # ############################################################################
 # New CPACK section, please see the README file inside cpack.d directory.
 add_subdirectory(cpack.d)
 
 # ############################################################################
-# Legacy cmake statements, packagers should refer and populate the cpack.d 
+# Legacy cmake statements, packagers should consider to populate the cpack.d
 # drop-in directory
 # ############################################################################
 
@@ -162,22 +301,23 @@ add_subdirectory(cpack.d)
 
 # Packaging options
 set(CPACK_COMPONENTS_ALL "runtime;development")
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Quarter")
-SET(CPACK_PACKAGE_VENDOR "Kongsberg SIM")
-SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README")
-SET(CPACK_PACKAGE_INSTALL_REGISTRY_KEY "Quarter")
-SET(CPACK_PACKAGE_INSTALL_DIRECTORY "Quarter")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY ${PROJECT_NAME})
+set(CPACK_PACKAGE_VENDOR "Kongsberg SIM")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README")
+set(CPACK_PACKAGE_INSTALL_REGISTRY_KEY ${PROJECT_NAME})
+set(CPACK_PACKAGE_INSTALL_DIRECTORY ${PROJECT_NAME})
 #Add a registry variable for detecting the link type on Win32 systems.
-IF(Quarter_BUILD_STATIC_LIBRARY)
-  SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "\ \ WriteRegStr\ SHCTX\ \\\"Software\\\\Kongsberg SIM\\\\Quarter\\\" \\\"Dynamic\\\" \\\"false\\\"")
-ELSE()
-  SET(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "\ \ WriteRegStr\ SHCTX\ \\\"Software\\\\Kongsberg SIM\\\\Quarter\\\" \\\"Dynamic\\\" \\\"true\\\"")
-ENDIF()
-SET(CPACK_PACKAGE_VERSION_MAJOR ${QUARTER_VERSION_MAJOR})
-SET(CPACK_PACKAGE_VERSION_MINOR ${QUARTER_VERSION_MINOR})
-SET(CPACK_PACKAGE_VERSION_PATCH ${QUARTER_VERSION_PATCH})
+if(QUARTER_BUILD_SHARED_LIBS)
+  set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "\ \ WriteRegStr\ SHCTX\ \\\"Software\\\\Kongsberg SIM\\\\Quarter\\\" \\\"Dynamic\\\" \\\"true\\\"")
+else()
+  set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "\ \ WriteRegStr\ SHCTX\ \\\"Software\\\\Kongsberg SIM\\\\Quarter\\\" \\\"Dynamic\\\" \\\"false\\\"")
+endif()
+set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
 # NSIS
-SET(CPACK_NSIS_MODIFY_PATH on)
+set(CPACK_NSIS_MODIFY_PATH on)
 # RPM
 set(CPACK_RPM_COMPONENT_INSTALL ON)
-INCLUDE(CPack)
+
+include(CPack)
