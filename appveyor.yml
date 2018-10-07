@@ -131,7 +131,9 @@ build_script:
   - sh: |
       BUILD_TOOL_OPTIONS=-j4
       cmake --build build --target all       --config $CMAKE_CONFIGURATION -- $BUILD_TOOL_OPTIONS
-      cmake --build build --target install   --config $CMAKE_CONFIGURATION -- $BUILD_TOOL_OPTIONS
+      sudo make install
+#      We need to use sudo command as we are trying to install to a Qt system directory. Following command will not work!
+#      cmake --build build --target install   --config $CMAKE_CONFIGURATION -- $BUILD_TOOL_OPTIONS
 
 after_build:
   - cmd: |
