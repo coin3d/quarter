@@ -149,7 +149,7 @@ MdiMainWindow::createMdiChild(void)
   MdiQuarterWidget * widget = new MdiQuarterWidget(NULL, this->firstwidget);
   this->mdiarea->addSubWindow(widget);
 
-  if (this->firstwidget = 0) {
+  if (this->firstwidget == 0) {
     this->firstwidget = (QGLWidget *) widget->quarterWidget();
   }
 
