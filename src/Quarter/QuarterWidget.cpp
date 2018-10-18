@@ -94,7 +94,7 @@ using namespace SIM::Coin3D::Quarter;
   the scene. Some of the settings will provide faster rendering, while
   others gives you better quality rendering.
 
-  See \ref SoGLRenderAction::TransparencyType for a full descrition of the modes
+  See \ref SoGLRenderAction::TransparencyType for a full description of the modes
 */
 
 /*!
@@ -102,7 +102,7 @@ using namespace SIM::Coin3D::Quarter;
 
   Sets how rendering of primitives is done.
 
-  See \ref SoRenderManager::RenderMode for a full descrition of the modes
+  See \ref SoRenderManager::RenderMode for a full description of the modes
 */
 
 /*!
@@ -110,7 +110,7 @@ using namespace SIM::Coin3D::Quarter;
 
   Sets how stereo rendering is performed.
 
-  See \ref SoRenderManager::StereoMode for a full descrition of the modes
+  See \ref SoRenderManager::StereoMode for a full description of the modes
 */
 
   enum StereoMode {
@@ -236,7 +236,7 @@ QuarterWidget::stateCursor(const SbName & state)
 */
 
 /*!
-  Enable/disable the headlight. This wille toggle the SoDirectionalLight::on
+  Enable/disable the headlight. This will toggle the SoDirectionalLight::on
   field (returned from getHeadlight()).
 */
 void
@@ -322,7 +322,7 @@ QuarterWidget::clearWindow(void) const
 /*!
   Enable/disable interaction mode.
 
-  Specifies wether you may use the alt-key to enter interaction mode.
+  Specifies whether you may use the alt-key to enter interaction mode.
 */
 void
 QuarterWidget::setInteractionModeEnabled(bool onoff)
@@ -457,13 +457,11 @@ QuarterWidget::stereoMode(void) const
 
 /*!
   \property QuarterWidget::devicePixelRatio
-
-  \copydetails QuarterWidget::devicePixelRatio
 */
 
 /*!
   The ratio between logical and physical pixel sizes -- obtained from the window that
-  the widget is located within, and updated whenver any change occurs, emitting a
+  the widget is located within, and updated whenever any change occurs, emitting a
   devicePixelRatioChanged signal.  Only available for version Qt 5.6 and above (will be
   1.0 for all previous versions).
 */

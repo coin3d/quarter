@@ -170,6 +170,8 @@ if(QUARTER_BUILD_DOCUMENTATION)
     message(FATAL_ERROR "Doxygen is needed to build the documentation.")
   endif()
 
+  set(DOXYGEN_TAGFILES "${Coin_DOC_DIR}/html/Coin.tag=${Coin_DOC_DIR}/html")
+
 # ############################################################################
 # Setup documentation options
 # ############################################################################
