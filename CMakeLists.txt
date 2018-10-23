@@ -291,35 +291,3 @@ install(EXPORT ${PROJECT_NAME}
 # ############################################################################
 # New CPACK section, please see the README file inside cpack.d directory.
 add_subdirectory(cpack.d)
-
-# ############################################################################
-# Legacy cmake statements, packagers should consider to populate the cpack.d
-# drop-in directory
-# ############################################################################
-
-# Experimental support for CPack.
-# Tested with NSIS on Windows Vista.
-# 2008-05-15
-
-# Packaging options
-set(CPACK_COMPONENTS_ALL "runtime;development")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY ${PROJECT_NAME})
-set(CPACK_PACKAGE_VENDOR "Kongsberg SIM")
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/README")
-set(CPACK_PACKAGE_INSTALL_REGISTRY_KEY ${PROJECT_NAME})
-set(CPACK_PACKAGE_INSTALL_DIRECTORY ${PROJECT_NAME})
-#Add a registry variable for detecting the link type on Win32 systems.
-if(QUARTER_BUILD_SHARED_LIBS)
-  set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "\ \ WriteRegStr\ SHCTX\ \\\"Software\\\\Kongsberg SIM\\\\Quarter\\\" \\\"Dynamic\\\" \\\"true\\\"")
-else()
-  set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "\ \ WriteRegStr\ SHCTX\ \\\"Software\\\\Kongsberg SIM\\\\Quarter\\\" \\\"Dynamic\\\" \\\"false\\\"")
-endif()
-set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
-set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
-set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
-# NSIS
-set(CPACK_NSIS_MODIFY_PATH on)
-# RPM
-set(CPACK_RPM_COMPONENT_INSTALL ON)
-
-include(CPack)
