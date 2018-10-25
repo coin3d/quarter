@@ -1,26 +1,69 @@
-set(@PROJECT_NAME@_VERSION       "@PROJECT_VERSION@")
-set(@PROJECT_NAME@_VERSION_MAJOR "@PROJECT_VERSION_MAJOR@")
-set(@PROJECT_NAME@_VERSION_MINOR "@PROJECT_VERSION_MINOR@")
-set(@PROJECT_NAME@_VERSION_PATCH "@PROJECT_VERSION_PATCH@")
+# CMake package configuration file for @PROJECT_NAME@
+#
+# Defines the target "@PROJECT_NAME@::@PROJECT_NAME@"
+#
+# Add the following lines to your CMakeLists.txt to depend on @PROJECT_NAME@
+#
+#    find_package(@PROJECT_NAME@ REQUIRED)
+#    target_link_libraries(my_target_name @PROJECT_NAME@::@PROJECT_NAME@)
+#
+# Additionally you may one of the following variables (or their corresponding
+# upper case version) that are also defined.
+#
+# @PROJECT_NAME@_COMPILE_DEFINITIONS
+# @PROJECT_NAME@_DEFINITIONS
+# @PROJECT_NAME@_INCLUDE_DIRS
+# @PROJECT_NAME@_INCLUDE_DIR
+# @PROJECT_NAME@_LIBRARY
+# @PROJECT_NAME@_LIBRARIES
+# @PROJECT_NAME@_LIBRARY_DIRS
+# @PROJECT_NAME@_LIBRARY_DIR
+#
+# However, in most cases using the @PROJECT_NAME@::@PROJECT_NAME@ target is sufficient,
+# and you won't need these variables.
 
 @PACKAGE_INIT@
 
 include(CMakeFindDependencyMacro)
-include(GNUInstallDirs)
 
-find_dependency(Coin)
-find_dependency(Qt5UiTools)
-find_dependency(Qt5OpenGL)
-find_dependency(Qt5Designer)
+find_dependency(Coin REQUIRED)
 
-# include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@Export.cmake")
+set(_have_qt5 "@Qt5_FOUND@")
+set(_have_qt4 "@Qt4_FOUND@")
+if(_have_qt5)
+  find_dependency(Qt5UiTools REQUIRED)
+  find_dependency(Qt5OpenGL REQUIRED)
+  find_dependency(Qt5Designer REQUIRED)
+elseif(_have_qt4)
+  find_dependency(Qt4 REQUIRED)
+endif()
 
-# Ensure export of DLL definitions on Windows
-IF(WIN32 AND NOT @Quarter_BUILD_STATIC_LIBRARY@)
-  ADD_DEFINITIONS(-DQUARTER_MAKE_DLL)
-ENDIF(WIN32 AND NOT @Quarter_BUILD_STATIC_LIBRARY@)
+include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME_LOWER@-export.cmake")
 
-set(@PROJECT_NAME@_INCLUDE_DIRS "${PACKAGE_PREFIX_DIR}/@CMAKE_INSTALL_INCLUDEDIR@")
+get_property(@PROJECT_NAME@_COMPILE_DEFINITIONS TARGET @PROJECT_NAME@::@PROJECT_NAME@ PROPERTY INTERFACE_COMPILE_DEFINITIONS)
+foreach(_def ${@PROJECT_NAME@_COMPILE_DEFINITIONS})
+  list(APPEND @PROJECT_NAME@_DEFINITIONS -D${_def})
+endforeach()
+
+get_property(@PROJECT_NAME@_INCLUDE_DIRS TARGET @PROJECT_NAME@::@PROJECT_NAME@ PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+set(@PROJECT_NAME@_INCLUDE_DIR ${@PROJECT_NAME@_INCLUDE_DIRS})
+set(@PROJECT_NAME@_LIBRARY @PROJECT_NAME@::@PROJECT_NAME@)
+get_property(@PROJECT_NAME@_LIBRARIES TARGET @PROJECT_NAME@::@PROJECT_NAME@ PROPERTY INTERFACE_LINK_LIBRARIES)
+set(@PROJECT_NAME@_LIBRARIES @PROJECT_NAME@::@PROJECT_NAME@ ${@PROJECT_NAME@_LIBRARIES})
 set(@PROJECT_NAME@_LIBRARY_DIRS "${PACKAGE_PREFIX_DIR}/@CMAKE_INSTALL_LIBDIR@")
-set(@PROJECT_NAME@_LIBRARIES "@PROJECT_NAME@")
+set(@PROJECT_NAME@_LIBRARY_DIR ${@PROJECT_NAME@_LIBRARY_DIRS})
 
+# For backwards compatibility define upper case versions of output variables
+foreach(_var
+  @PROJECT_NAME@_COMPILE_DEFINITIONS
+  @PROJECT_NAME@_DEFINITIONS
+  @PROJECT_NAME@_INCLUDE_DIRS
+  @PROJECT_NAME@_INCLUDE_DIR
+  @PROJECT_NAME@_LIBRARY
+  @PROJECT_NAME@_LIBRARIES
+  @PROJECT_NAME@_LIBRARY_DIRS
+  @PROJECT_NAME@_LIBRARY_DIR
+  )
+  string(TOUPPER ${_var} _uppercase_var)
+  set(${_uppercase_var} ${${_var}})
+endforeach()
