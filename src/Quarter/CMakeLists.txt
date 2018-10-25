@@ -62,27 +62,53 @@ endif()
 # FIXME: Support building as a framework on Mac OS X. kintel 20080707.
 # ############################################################################
 
+if(WIN32)
+  if(MINGW)
+    set(QUARTER_DEFAULT_SHARED_POSTFIX "")
+    set(QUARTER_DEFAULT_STATIC_POSTFIX "")
+  else()
+    # On Windows the major version number is part of the library name
+    set(QUARTER_DEFAULT_SHARED_POSTFIX ${PROJECT_VERSION_MAJOR})
+    set(QUARTER_DEFAULT_STATIC_POSTFIX ${PROJECT_VERSION_MAJOR}s)
+  endif()
+  if(QUARTER_BUILD_SHARED_LIBS)
+    set(QUARTER_DEFAULT_POSTFIX ${QUARTER_DEFAULT_SHARED_POSTFIX})
+  else()
+    set(QUARTER_DEFAULT_POSTFIX ${QUARTER_DEFAULT_STATIC_POSTFIX})
+  endif()
+  set(CMAKE_RELEASE_POSTFIX ${QUARTER_DEFAULT_POSTFIX})
+  set(CMAKE_MINSIZEREL_POSTFIX ${QUARTER_DEFAULT_POSTFIX})
+  set(CMAKE_RELWITHDEBINFO_POSTFIX ${QUARTER_DEFAULT_POSTFIX})
+  set(CMAKE_DEBUG_POSTFIX ${QUARTER_DEFAULT_POSTFIX}d)
+elseif(APPLE)
+else()
+  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+endif()
+
 if(QUARTER_BUILD_SHARED_LIBS)
   add_library(${PROJECT_NAME} SHARED ${QUARTER_SRCS} ${QUARTER_PRIVATE_HDRS} ${INST_HDRS} ${INST_EVENTHANDLERS_HDRS} ${MOC_HDRS})
-  target_compile_definitions(${PROJECT_NAME} INTERFACE QUARTER_DLL)
-  if(WIN32)
-    configure_file(${PROJECT_NAME}.rc.cmake.in ${PROJECT_NAME}.rc)
-    target_sources(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.rc")
-    target_compile_definitions(${PROJECT_NAME} PRIVATE QUARTER_MAKE_DLL)
-  endif()
 else()
   add_library(${PROJECT_NAME} STATIC ${QUARTER_SRCS} ${QUARTER_PRIVATE_HDRS} ${QUARTER_PUBLIC_HDRS} ${MOC_HDRS})
-  target_compile_definitions(${PROJECT_NAME} INTERFACE QUARTER_NOT_DLL)
 endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${QUARTER_VERSION} SOVERSION ${QUARTER_SO_VERSION})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE HAVE_CONFIG_H QUARTER_INTERNAL QUARTER_DEBUG=$<CONFIG:Debug>)
-if(MSVC)
-  target_compile_definitions(${PROJECT_NAME} PRIVATE _CRT_NONSTDC_NO_DEPRECATE _CRT_SECURE_NO_DEPRECATE _CRT_SECURE_NO_WARNINGS _USE_MATH_DEFINES)
-  if(NOT QUARTER_BUILD_SHARED_LIBS)
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Z7")                       # Override default /Zi to embed
-    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /Z7")     # debugging info in the .lib.
+
+if(WIN32)
+  if(MSVC)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE _CRT_NONSTDC_NO_DEPRECATE _CRT_SECURE_NO_DEPRECATE _CRT_SECURE_NO_WARNINGS _USE_MATH_DEFINES)
+  endif()
+  if(QUARTER_BUILD_SHARED_LIBS)
+    configure_file(${PROJECT_NAME}.rc.cmake.in ${PROJECT_NAME}.rc)
+    target_sources(${PROJECT_NAME} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.rc")
+    target_compile_definitions(${PROJECT_NAME} PRIVATE QUARTER_MAKE_DLL INTERFACE QUARTER_DLL)
+  else()
+    target_compile_definitions(${PROJECT_NAME} INTERFACE QUARTER_NOT_DLL)
+    if(MSVC)
+      set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Z7")                       # Override default /Zi to embed
+      set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /Z7")     # debugging info in the .lib.
+    endif()
   endif()
 endif()
 
@@ -95,7 +121,7 @@ target_include_directories(${PROJECT_NAME}
     ${OPENGL_INCLUDE_DIR}
 )
 
-target_link_libraries(${PROJECT_NAME} Coin::Coin ${QT_LIBRARIES} ${OPENGL_LIBRARY} ${Extra_libraries})
+target_link_libraries(${PROJECT_NAME} Coin::Coin ${OPENGL_LIBRARY} ${QT_LIBRARIES} ${Extra_libraries})
 
 # ############################################################################
 # Install targets
