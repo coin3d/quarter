@@ -18,7 +18,7 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "Kongsberg Oil & Gas Technologies AS"
-            VALUE "FileDescription", "A QtDesigner Plugin for Quarter Gui-toolkit binding for Coin3D, 3D graphics rendering library - www.coin3d.org"
+            VALUE "FileDescription", "A QtDesigner Plugin for Quarter Gui-toolkit binding for Coin3D, 3D graphics rendering library - www.bitbucket.org/Coin3D"
             VALUE "FileVersion","@PROJECT_VERSION_MAJOR@, @PROJECT_VERSION_MINOR@, @PROJECT_VERSION_PATCH@, @QUARTER_BETA_VERSION@"
             VALUE "InternalName", "QuarterWidgetPlugin"
             VALUE "LegalCopyright", "Copyright (c) @QUARTER_BUILD_YEAR@ Kongsberg Oil & Gas Technologies AS"
