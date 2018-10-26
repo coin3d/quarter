@@ -61,7 +61,6 @@ cmake_dependent_option(QUARTER_BUILD_DOC_CHM "Build compressed HTML help manual 
 
 find_package(OpenGL REQUIRED)
 find_package(Coin REQUIRED)
-#find_package(superglu REQUIRED)
 find_package(Spacenav)
 
 if(QUARTER_USE_QT5)
@@ -105,28 +104,6 @@ foreach (_config ${CMAKE_CONFIGURATION_TYPES})
   set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${_config} "${CMAKE_BINARY_DIR}/lib")
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${_config} "${CMAKE_BINARY_DIR}/bin")
 endforeach()
-
-if(WIN32)
-  if(MINGW)
-    set(QUARTER_DEFAULT_SHARED_POSTFIX "")
-    set(QUARTER_DEFAULT_STATIC_POSTFIX "")
-  else()
-    # On Windows the major version number is part of the library name
-    set(QUARTER_DEFAULT_SHARED_POSTFIX ${PROJECT_VERSION_MAJOR})
-    set(QUARTER_DEFAULT_STATIC_POSTFIX ${PROJECT_VERSION_MAJOR}s)
-  endif()
-  if(QUARTER_BUILD_SHARED_LIBS)
-    set(QUARTER_DEFAULT_POSTFIX ${QUARTER_DEFAULT_SHARED_POSTFIX})
-  else()
-    set(QUARTER_DEFAULT_POSTFIX ${QUARTER_DEFAULT_STATIC_POSTFIX})
-  endif()
-  set(CMAKE_RELEASE_POSTFIX ${QUARTER_DEFAULT_POSTFIX})
-  set(CMAKE_MINSIZEREL_POSTFIX ${QUARTER_DEFAULT_POSTFIX})
-  set(CMAKE_RELWITHDEBINFO_POSTFIX ${QUARTER_DEFAULT_POSTFIX})
-  set(CMAKE_DEBUG_POSTFIX ${QUARTER_DEFAULT_POSTFIX}d)
-elseif(APPLE)
-else()
-endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR true)
 
