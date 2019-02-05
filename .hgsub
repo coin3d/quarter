@@ -1,1 +1,1 @@
-cpack.d = https://bitbucket.org/coin3d/cpack.d
+cpack.d = ../cpack.d
