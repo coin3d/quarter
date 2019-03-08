@@ -28,8 +28,8 @@ include(CMakeFindDependencyMacro)
 
 find_dependency(Coin REQUIRED)
 
-set(_have_qt5 "@Qt5_FOUND@")
-set(_have_qt4 "@Qt4_FOUND@")
+set(_have_qt5 @Qt5_FOUND@)
+set(_have_qt4 @Qt4_FOUND@)
 if(_have_qt5)
   find_dependency(Qt5UiTools REQUIRED)
   find_dependency(Qt5OpenGL REQUIRED)
@@ -45,12 +45,15 @@ foreach(_def ${@PROJECT_NAME@_COMPILE_DEFINITIONS})
   list(APPEND @PROJECT_NAME@_DEFINITIONS -D${_def})
 endforeach()
 
+set(@PROJECT_NAME@_VERSION @VERSION@)
+
 get_property(@PROJECT_NAME@_INCLUDE_DIRS TARGET @PROJECT_NAME@::@PROJECT_NAME@ PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
 set(@PROJECT_NAME@_INCLUDE_DIR ${@PROJECT_NAME@_INCLUDE_DIRS})
 set(@PROJECT_NAME@_LIBRARY @PROJECT_NAME@::@PROJECT_NAME@)
 get_property(@PROJECT_NAME@_LIBRARIES TARGET @PROJECT_NAME@::@PROJECT_NAME@ PROPERTY INTERFACE_LINK_LIBRARIES)
 set(@PROJECT_NAME@_LIBRARIES @PROJECT_NAME@::@PROJECT_NAME@ ${@PROJECT_NAME@_LIBRARIES})
-set(@PROJECT_NAME@_LIBRARY_DIRS "${PACKAGE_PREFIX_DIR}/@CMAKE_INSTALL_LIBDIR@")
+
+set_and_check(@PROJECT_NAME@_LIBRARY_DIRS "@PACKAGE_CMAKE_INSTALL_LIBDIR@")
 set(@PROJECT_NAME@_LIBRARY_DIR ${@PROJECT_NAME@_LIBRARY_DIRS})
 
 # For backwards compatibility define upper case versions of output variables
@@ -63,6 +66,7 @@ foreach(_var
   @PROJECT_NAME@_LIBRARIES
   @PROJECT_NAME@_LIBRARY_DIRS
   @PROJECT_NAME@_LIBRARY_DIR
+  @PROJECT_NAME@_VERSION
   )
   string(TOUPPER ${_var} _uppercase_var)
   set(${_uppercase_var} ${${_var}})
