@@ -121,7 +121,7 @@ target_include_directories(${PROJECT_NAME}
     ${OPENGL_INCLUDE_DIR}
 )
 
-target_link_libraries(${PROJECT_NAME} Coin::Coin ${OPENGL_LIBRARY} ${QT_LIBRARIES} ${Extra_libraries})
+target_link_libraries(${PROJECT_NAME} PUBLIC Coin::Coin ${OPENGL_gl_LIBRARY} ${QUARTER_QT_TARGETS} ${Extra_libraries})
 
 # ############################################################################
 # Install targets
