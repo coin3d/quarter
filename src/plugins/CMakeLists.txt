@@ -19,7 +19,7 @@ if(WIN32)
   configure_file(QuarterWidgetPlugin.rc.cmake.in QuarterWidgetPlugin.rc)
   target_sources(QuarterWidgetPlugin PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/QuarterWidgetPlugin.rc")
 endif()
-target_link_libraries(QuarterWidgetPlugin Coin::Coin ${QT_LIBRARIES} ${OPENGL_gl_LIBRARY} Quarter)
+target_link_libraries(QuarterWidgetPlugin PUBLIC Quarter ${QUARTER_PLUGIN_QT_TARGETS})
 
 set_target_properties(QuarterWidgetPlugin PROPERTIES VERSION ${QUARTER_VERSION} SOVERSION ${QUARTER_SO_VERSION})
 
