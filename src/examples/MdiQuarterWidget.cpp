@@ -52,9 +52,8 @@ MdiQuarterWidget::MdiQuarterWidget(QWidget * parent, const QGLWidget * sharewidg
 
 MdiQuarterWidget::~MdiQuarterWidget()
 {
-  if (this->quarterwidget) {
-    delete this->quarterwidget;
-  }
+  delete this->quarterwidget;
+  this->quarterwidget = NULL;
 }
 
 const QuarterWidget *

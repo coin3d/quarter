@@ -54,7 +54,6 @@ ImageReader::readImage(const SbString & filename, SbImage & sbimage) const
 {
   QImage image;
   if (image.load(filename.getString())) {
-    int c;
     int w = image.width();
     int h = image.height();
 
