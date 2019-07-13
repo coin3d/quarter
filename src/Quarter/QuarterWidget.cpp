@@ -1050,8 +1050,8 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
     PRIVATE(this)->currentStateMachine = newsm;
   }
   else {
-    if (stateMachine)
-      delete stateMachine;
+    delete stateMachine;
+	stateMachine = NULL;
     qDebug()<<filename;
     qDebug()<<"Unable to load"<<url;
     return;
