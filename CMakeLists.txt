@@ -1,5 +1,19 @@
 cmake_minimum_required(VERSION 3.0)
 
+function(report_prepare)
+  set(multiValueArgs IF_APPLE IF_WIN32)
+  cmake_parse_arguments(REPORT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
+  if (REPORT_IF_APPLE AND APPLE)
+    list(APPEND res ${REPORT_IF_APPLE})
+  endif()
+  if (REPORT_IF_WIN32 AND WIN32)
+    list(APPEND res ${REPORT_IF_WIN32})
+  endif()
+  list(APPEND res ${REPORT_UNPARSED_ARGUMENTS})
+  list(APPEND PACKAGE_OPTIONS ${res})
+  set(PACKAGE_OPTIONS "${PACKAGE_OPTIONS}" PARENT_SCOPE)
+endfunction(report_prepare)
+
 set(QUARTER_MAJOR_VERSION 1)
 set(QUARTER_MINOR_VERSION 0)
 set(QUARTER_MICRO_VERSION 1)
@@ -52,6 +66,18 @@ cmake_dependent_option(QUARTER_BUILD_INTERNAL_DOCUMENTATION "Document internal c
 cmake_dependent_option(QUARTER_BUILD_DOC_MAN "Build So${Gui} man pages." OFF "QUARTER_BUILD_DOCUMENTATION" OFF)
 cmake_dependent_option(QUARTER_BUILD_DOC_QTHELP "Build QtHelp documentation." OFF "QUARTER_BUILD_DOCUMENTATION" OFF)
 cmake_dependent_option(QUARTER_BUILD_DOC_CHM "Build compressed HTML help manual (requires HTML help compiler)" OFF "QUARTER_BUILD_DOCUMENTATION" OFF)
+
+report_prepare(
+  QUARTER_BUILD_SHARED_LIBS
+  QUARTER_USE_QT5
+  QUARTER_BUILD_PLUGIN
+  QUARTER_BUILD_EXAMPLES
+  QUARTER_BUILD_DOCUMENTATION
+  QUARTER_BUILD_INTERNAL_DOCUMENTATION
+  QUARTER_BUILD_DOC_MAN
+  QUARTER_BUILD_DOC_QTHELP
+  QUARTER_BUILD_DOC_CHM
+)
 
 # ############################################################################
 # Find all necessary and optional SoQt dependencies
