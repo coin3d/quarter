@@ -1,0 +1,3 @@
+[submodule "cpack.d"]
+	path = cpack.d
+	url = https://github.com/coin3d/cpack.d
