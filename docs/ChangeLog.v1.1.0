@@ -1,0 +1,1376 @@
+2019-11-09 14:58 +0100  Giampiero Gabbiani  <giampiero@gabbiani.org>  (9bbefd5bb7c7 [tip])
+
+	* .hgsubstate:
+	Updated to last cpack.d for centOS and RHEL support
+
+2019-10-13 12:01 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (7b0e7e8ead86)
+
+	* .hgsubstate:
+	Aligned with last cpack.d commit
+
+2019-09-17 20:28 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (86a9fd42b243)
+
+	* appveyor.yml:
+	Only use the generic Qt version (major.minor) in appveyor scripts.
+
+2019-09-16 07:34 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (2bc784e97830)
+
+	* .hgsubstate, CMakeLists.txt:
+	cpack.d update and report setup
+
+2019-07-13 21:45 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (6b75cfc74312)
+
+	* Merged in VolkerEnderlein/quarter/pvs_analysis (pull request #30)
+
+	Fixed checking of null pointers for delete operators and warnings
+	from PVS analysis.
+
+2019-07-13 21:45 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (9c254399f288 <pvs_analysis>)
+
+	* Close branch pvs_analysis
+
+2019-07-13 23:42 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (3b0899865b47 <pvs_analysis>)
+
+	* src/Quarter/ImageReader.cpp, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/examples/MdiQuarterWidget.cpp:
+	Fixed checking of null pointers for delete operators and warnings
+	from PVS analysis.
+
+2019-07-09 21:11 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (fcc69ccdc195)
+
+	* Merged in VolkerEnderlein/quarter/minimize_deps (pull request #29)
+
+	Minimized Qt dependencies.
+
+2019-07-09 21:11 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (7c805f7ea286 <minimize_deps>)
+
+	* Close branch minimize_deps
+
+2019-07-09 23:08 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (0a07bb640dd4 <minimize_deps>)
+
+	* CMakeLists.txt, src/Quarter/CMakeLists.txt,
+	src/examples/CMakeLists.txt, src/plugins/CMakeLists.txt:
+	Minimized Qt dependencies. Quarter need not to be dependent on
+	QtDesigner and QtUiTools.
+
+2019-07-02 21:53 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (98e078e75c82)
+
+	* appveyor.yml:
+	Streamlined AppVeyor script with other repos.
+
+2019-06-28 09:17 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (182d030c8f51)
+
+	* Merged Coin3D/quarter into default
+
+2019-06-25 01:02 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (8bce79edac16)
+
+	* .hgsubstate:
+	Updated cpack.d
+
+2019-06-20 21:24 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (4796cc274c21)
+
+	* appveyor.yml:
+	Removed superfluous parameters from AppVeyor build matrix.
+
+2019-06-20 18:04 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (dc9b3bce86d6)
+
+	* appveyor.yml:
+	Added another missing architecture flag.
+
+2019-06-20 17:50 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (d72d68862fbe)
+
+	* appveyor.yml:
+	Added missing architecture flag.
+
+2019-06-19 21:12 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (769ca82b3d8b)
+
+	* appveyor.yml:
+	Fixed AppVeyor script for CMAKE_ARCHITECTURE variable.
+
+2019-06-19 21:35 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (455162c4ec6a)
+
+	* docs/quarter.doxygen.cmake.in:
+	Fixed QtHelp namespace amd virtual folder
+
+2019-06-19 21:18 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (ca03ce37e439)
+
+	* .hgsubstate:
+	Updated cpack.d subrepo.
+
+2019-06-12 20:38 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (f3ba33ee4ade)
+
+	* CMakeLists.txt:
+	Inverted default value for option COIN_BUILD_DOCUMENTATION for
+	better out of the box build experience.
+
+2019-03-08 22:14 +0100  Volker Enderlein  <volkerenderlein@hotmail.com>  (d812f7d6f1a9)
+
+	* CMakeLists.txt, quarter-config.cmake.in, src/Quarter/CMakeLists.txt:
+	Removed superfluous $<INSTALL_PREFIX>. Used PATH_VARS for
+	transferring information to package config file.
+
+2019-02-05 23:38 +0100  Giampiero Gabbiani  <giampiero@gabbiani.org>  (d9ae56772358)
+
+	* .hgsubstate:
+	updated .hgsubstate
+
+2019-02-05 22:44 +0100  Volker Enderlein  <volkerenderlein@hotmail.com>  (5b7f64f791bf)
+
+	* .hgsub:
+	Set relative path to suprepository cpack.d
+
+2018-12-23 15:56 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (a957012f837e)
+
+	* Merged in VolkerEnderlein/quarter/addsource-ci (pull request #24)
+
+	Added source package creation to appveyor.
+
+2018-11-10 18:32 +0000  Giampiero Gabbiani  <giampiero@gabbiani.org>  (e69becf2b98c)
+
+	* bitbucket-pipelines.yml: new file.
+	* Merged in ggabbiani/quarter-fork/new-pipeline (pull request #23)
+
+	Bitbucket pipeline implemented for Debian 9, Fedora 28 and Ubuntu
+	18.
+
+2018-11-10 18:32 +0000  Giampiero Gabbiani  <giampiero@gabbiani.org>  (84f708247f66 <new-pipeline>)
+
+	* Close branch new-pipeline
+
+2018-11-10 19:09 +0100  Giampiero Gabbiani  <giampiero@gabbiani.org>  (a7bf8e8854d4 <new-pipeline>)
+
+	* bitbucket-pipelines.yml: new file.
+	* bitbucket-pipelines.yml:
+	first import
+
+2018-12-23 15:56 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (f8f77b5a1ad2 <addsource-ci>)
+
+	* Close branch addsource-ci
+
+2018-12-23 16:42 +0100  Volker Enderlein  <volkerenderlein@hotmail.com>  (426024b00f61 <addsource-ci>)
+
+	* appveyor.yml:
+	Added source package creation to appveyor. Updated doxygen address.
+
+2018-10-27 17:22 +0000  Giampiero Gabbiani  <giampiero@gabbiani.org>  (db48030266fe)
+
+	* Merged in ggabbiani/quarter-fork/cpack.d-move (pull request #22)
+
+	cpack.d moved from ggabbiani to coin3d
+
+2018-10-27 17:22 +0000  Giampiero Gabbiani  <giampiero@gabbiani.org>  (43e31d9c1404 <cpack.d-move>)
+
+	* Close branch cpack.d-move
+
+2018-10-27 10:07 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (7d1dd065b242 <cpack.d-move>)
+
+	* .hgsub, .hgsubstate:
+	cpack.d moved from ggabbiani to coin3d
+
+2018-10-26 22:25 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (a90518d8c2ac)
+
+	* CMakeLists.txt:
+	Merged in VolkerEnderlein/quarter/configpackage (pull request #21)
+
+	Configpackage
+
+	Approved-by: Giampiero Gabbiani <giampiero@gabbiani.org>
+
+2018-10-26 22:25 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (51fdfb286a30 <configpackage>)
+
+	* Close branch configpackage
+
+2018-10-25 23:04 +0000  Giampiero Gabbiani  <giampiero@gabbiani.org>  (d6c1c539e24b)
+
+	* .hgsub, .hgsubstate, packaging/description-summary.txt: new file.
+	* cpack.d/CMakeLists.txt, cpack.d/CPackConfig-base.cmake.in, cpack.d
+	/CPackConfig-fedora.cmake.in, cpack.d/README,
+	cpack.d/fedora_post_uninstall.sh, cpack.d/readme-file.txt: deleted
+	file.
+	* cpack.d/CMakeLists.txt, cpack.d/CPackConfig-base.cmake.in, cpack.d
+	/CPackConfig-fedora.cmake.in, cpack.d/README,
+	cpack.d/fedora_post_uninstall.sh, cpack.d/readme-file.txt:
+	Merged in ggabbiani/quarter-fork/sub-cpack.d (pull request #20)
+
+	Sub cpack.d
+
+	Approved-by: Volker Enderlein <volkerenderlein@hotmail.com>
+
+2018-10-25 23:04 +0000  Giampiero Gabbiani  <giampiero@gabbiani.org>  (9d5838db95cb <sub-cpack.d>)
+
+	* Close branch sub-cpack.d
+
+2018-10-24 01:53 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (c1a6f1239ee3 <sub-cpack.d>)
+
+	* CMakeLists.txt:
+	removed cpack coding
+
+2018-10-24 01:18 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (c175534503bd <sub-cpack.d>)
+
+	* .hgsub, .hgsubstate: new file.
+	* .hgsub, .hgsubstate:
+	added cpack.d sub repo
+
+2018-10-24 01:17 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (9a92035517aa <sub-cpack.d>)
+
+	* CMakeLists.txt:
+	fixed HTMLHELP and QHP file names
+
+2018-10-24 01:16 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (07198f2d7f52 <sub-cpack.d>)
+
+	* docs/quarter.doxygen.cmake.in:
+	aligned tag file name to qth and html template
+
+2018-10-24 01:14 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (2830ba371d48 <sub-cpack.d>)
+
+	* packaging/description-summary.txt: new file.
+	* packaging/description-summary.txt:
+	first import
+
+2018-10-24 00:55 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (95dfff57bf32 <sub-cpack.d>)
+
+	* cpack.d/CMakeLists.txt, cpack.d/CPackConfig-base.cmake.in, cpack.d
+	/CPackConfig-fedora.cmake.in, cpack.d/README,
+	cpack.d/fedora_post_uninstall.sh, cpack.d/readme-file.txt: deleted
+	file.
+	* cpack.d/CMakeLists.txt, cpack.d/CPackConfig-base.cmake.in, cpack.d
+	/CPackConfig-fedora.cmake.in, cpack.d/README,
+	cpack.d/fedora_post_uninstall.sh, cpack.d/readme-file.txt:
+	removed local cpack.d
+
+2018-10-25 23:19 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (388247ec5887 <configpackage>)
+
+	* src/Quarter/Quarter.rc.cmake.in,
+	src/plugins/QuarterWidgetPlugin.rc.cmake.in:
+	Provided correct web address for Coin3D in rc file.
+
+2018-10-25 22:22 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (184face871ca <configpackage>)
+
+	* CMakeLists.txt, src/Quarter/CMakeLists.txt:
+	Synchronized layout of CMake script with other packages of Coin3D.
+
+2018-10-25 22:22 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (44e9a16c6bae <configpackage>)
+
+	* quarter-config.cmake.in:
+	Updated config package.
+
+2018-10-18 18:34 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (07e794463bd8)
+
+	* Merged in VolkerEnderlein/quarter/tagfileissue (pull request #19)
+
+	Fixed wrong name of tag file.
+
+2018-10-18 18:34 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (9ed3bba22ab7 <tagfileissue>)
+
+	* Close branch tagfileissue
+
+2018-10-18 20:29 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (bd824aedc700 <tagfileissue>)
+
+	* docs/quarter.doxygen.cmake.in:
+	Fixed wrong name of tag file.
+
+2018-10-18 16:32 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (c6190fbb4dd8)
+
+	* Merged in VolkerEnderlein/quarter/docissues (pull request #18)
+
+	Enabled usage of math constants for MSVC. Miscellaneous
+	documentation fixes.
+
+2018-10-18 16:27 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (2c118a8191ec)
+
+	* Merged in VolkerEnderlein/quarter/examplefix (pull request #17)
+
+	Fixed wrong assignment instead of comparison in conditional
+	statement.
+
+2018-10-18 16:32 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (1f46a13aa973 <docissues>)
+
+	* Close branch docissues
+
+2018-10-18 16:27 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (80490061c9af <examplefix>)
+
+	* Close branch examplefix
+
+2018-10-17 23:46 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (cae3b3c2f952 <examplefix>)
+
+	* src/examples/MdiMainWindow.cpp:
+	Fixed wrong assignment instead of comparison in conditional
+	statement.
+
+2018-10-17 21:11 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (02c49e268f6b <docissues>)
+
+	* docs/quarter.doxygen.cmake.in:
+	Updated and condensed Doxyfile.
+
+2018-10-17 21:11 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (255247783b8e <docissues>)
+
+	* CMakeLists.txt:
+	Added tag file for crossreferences.
+
+2018-10-17 21:09 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (0fe1a5a812f3 <docissues>)
+
+	* src/Quarter/CMakeLists.txt:
+	Added _USE_MATH_DEFINES for MSVC.
+
+2018-10-17 21:08 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (25c528ad238a <docissues>)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Fixed documentation issues.
+
+2018-10-07 10:02 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (5e4bf5f9de21)
+
+	* Merged in VolkerEnderlein/quarter/appveyorinstall_2 (pull request
+	#16)
+
+	Fixed installation issue on Ubuntu image, again.
+
+2018-10-07 10:02 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (29a4b476f789 <appveyorinstall_2>)
+
+	* Close branch appveyorinstall_2
+
+2018-10-07 12:00 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (d8031d07e434 <appveyorinstall_2>)
+
+	* appveyor.yml:
+	Fixed installation issue on Ubuntu image.
+
+2018-10-07 09:22 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (b29f9470ab72)
+
+	* Merged in VolkerEnderlein/quarter/sudoinstall (pull request #15)
+
+	Fixed AppVeyor installation issue on Ubuntu image.
+
+2018-10-07 09:22 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (b8ad25c4201f <sudoinstall>)
+
+	* Close branch sudoinstall
+
+2018-10-07 11:19 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (cbecaec0a5fa <sudoinstall>)
+
+	* appveyor.yml:
+	Fixed installation issue on Ubuntu image.
+
+2018-10-07 11:19 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (b4ee1edde7a9 <sudoinstall>)
+
+	* docs/quarter.doxygen.cmake.in:
+	Fixed wrong image path in doxyfile.
+
+2018-10-06 23:04 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (94cb01dfe6e4)
+
+	* Quarter.pc.cmake.in, appveyor.yml, docs/quarter.doxygen.cmake.in,
+	quarter-config.cmake.in, src/Quarter/Quarter.rc.cmake.in,
+	src/plugins/QuarterWidgetPlugin.rc.cmake.in: new file.
+	* QuarterConfig.cmake.in: deleted file.
+	* QuarterConfig.cmake.in:
+	Merged in VolkerEnderlein/quarter/docandstreamline (pull request
+	#14)
+
+	Enable AppVeyor CI. Synchronized CMake scripts with other projects.
+
+2018-10-06 23:04 +0000  Volker Enderlein  <volkerenderlein@hotmail.com>  (26ab24dbe6e5 <docandstreamline>)
+
+	* Close branch docandstreamline
+
+2018-10-07 00:59 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (7731864f3b8d <docandstreamline>)
+
+	* Quarter.pc.cmake.in, docs/quarter.doxygen.cmake.in, quarter-
+	config.cmake.in: new file.
+	* Quarter-config.cmake.in: deleted file.
+	* CMakeLists.txt, Quarter-config.cmake.in, Quarter.pc.cmake.in,
+	appveyor.yml, docs/doxygen/Coin_logo.png, docs/doxygen/footer.html,
+	docs/doxygen/header.html, docs/doxygen/stylesheet.css,
+	docs/quarter.doxygen.cmake.in, quarter-config.cmake.in,
+	src/CMakeLists.txt, src/Quarter/CMakeLists.txt,
+	src/examples/CMakeLists.txt, src/plugins/CMakeLists.txt:
+	Enabled documentation. Streamlined with other projects.
+
+2018-05-05 00:32 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (463a79b5f089 <AppVeyorCI>)
+
+	* appveyor.yml:
+	Needed to install qttools5-dev package on build machine.
+
+2018-05-05 00:22 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (9b950e278af5 <AppVeyorCI>)
+
+	* src/Quarter/Quarter.rc.cmake.in,
+	src/plugins/QuarterWidgetPlugin.rc.cmake.in: new file.
+	* src/Quarter/Quarter.rc.cmake.in,
+	src/plugins/QuarterWidgetPlugin.rc.cmake.in:
+	Added MSVC resource configuration files.
+
+2018-05-05 00:16 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (91ac4d4b2227 <AppVeyorCI>)
+
+	* appveyor.yml:
+	Run build first time.
+
+2018-05-05 00:11 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (5d6bad833d7b <AppVeyorCI>)
+
+	* appveyor.yml: new file.
+	* appveyor.yml:
+	Added AppVeyor build script.
+
+2018-05-05 00:07 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (4ea169082b58)
+
+	* Quarter-config.cmake.in: new file.
+	* QuarterConfig.cmake.in: deleted file.
+	* CMakeLists.txt, Quarter-config.cmake.in, QuarterConfig.cmake.in,
+	src/CMakeLists.txt, src/Quarter/CMakeLists.txt,
+	src/examples/CMakeLists.txt, src/plugins/CMakeLists.txt:
+	Updated CMake files.
+
+2018-03-28 19:46 +0000  Bastiaan Veelo  <Bastiaan@SARC.nl>  (4040ac7a14cf)
+
+	* Merged in ggabbiani/quarter/fix-cpack (pull request #13)
+
+	fixed missing relocation after previous commit
+
+2018-03-28 21:38 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (0fb4790b1ba4 <fix-cpack>)
+
+	* cpack.d/CPackConfig-base.cmake.in:
+	fixed missing relocation after previous commit
+
+2018-03-28 19:36 +0000  Bastiaan Veelo  <Bastiaan@SARC.nl>  (8fcf7528543f)
+
+	* QuarterConfig.cmake.in, cpack.d/CMakeLists.txt, cpack.d/CPackConfig-
+	base.cmake.in, cpack.d/CPackConfig-fedora.cmake.in, cpack.d/README,
+	cpack.d/fedora_post_uninstall.sh, cpack.d/readme-file.txt: new file.
+	* Merged in ggabbiani/quarter/fix-cpack (pull request #12)
+
+	Fix cpack
+
+2018-03-28 21:30 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (960560e0440f <fix-cpack>)
+
+	* CMakeLists.txt, cpack.d/CPackConfig-base.cmake.in,
+	src/examples/CMakeLists.txt:
+	removed QUARTER_INSTALL_EXAMPLEDIR and CPACK_PACKAGE_RELOCATABLE
+	related stuff packaged components set to runtime and development
+	only (no examples in both legacy and new cpack.d) removed install
+	target from examples
+
+2018-03-28 15:55 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (624204102b64 <fix-cpack>)
+
+	* cpack.d/CMakeLists.txt, cpack.d/CPackConfig-base.cmake.in, cpack.d
+	/CPackConfig-fedora.cmake.in, cpack.d/README,
+	cpack.d/fedora_post_uninstall.sh, cpack.d/readme-file.txt: new file.
+	* CMakeLists.txt, cpack.d/CMakeLists.txt, cpack.d/CPackConfig-
+	base.cmake.in, cpack.d/CPackConfig-fedora.cmake.in, cpack.d/README,
+	cpack.d/fedora_post_uninstall.sh, cpack.d/readme-file.txt:
+	new cpack implementation
+
+2018-03-28 09:41 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (0b3b5a7dfb31 <fix-cpack>)
+
+	* QuarterConfig.cmake.in: new file.
+	* CMakeLists.txt, QuarterConfig.cmake.in:
+	added generation of QuarterConfig.cmake and
+	QuarterConfigVersion.cmake
+
+2018-03-28 02:02 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (5d0babc2bd6e <fix-cpack>)
+
+	* CMakeLists.txt, src/Quarter/CMakeLists.txt,
+	src/examples/CMakeLists.txt, src/plugins/CMakeLists.txt:
+	assigned component development, runtime and examples to the targets
+
+2018-03-28 01:48 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (63e365be23b5 <fix-cpack>)
+
+	* CMakeLists.txt, src/examples/CMakeLists.txt:
+	fixed examples [re]location
+
+2018-03-28 01:34 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (66a9e6638d48 <fix-cpack>)
+
+	* CMakeLists.txt, config.h.cmake.in:
+	fixed project versions
+
+2018-03-17 21:12 +0000  Bastiaan Veelo  <Bastiaan@SARC.nl>  (023b3cec5149)
+
+	* bitbucket-pipelines.yml: deleted file.
+	* bitbucket-pipelines.yml:
+	Building does not work because CMake cannot find Coin. Probably need
+	to deploy Coin first and add an install step for Coin here.
+
+2018-03-17 21:03 +0000  Bastiaan Veelo  <Bastiaan@SARC.nl>  (cbfb2a58aa67)
+
+	* bitbucket-pipelines.yml: new file.
+	* bitbucket-pipelines.yml:
+	Initial Bitbucket Pipelines configuration
+
+2017-11-06 12:25 +0000  Bastiaan Veelo  <Bastiaan@SARC.nl>  (6ba84de1db1d)
+
+	* Merged in veelo/quarter/highdpi (pull request #11)
+
+	Reintegrates the work on high DPI (retina display) from
+	https://grey.colorado.edu/emergent/index.php/Coin3d, courtesy
+	Randall O'Reilly. Changes from grey.colorado.quarter r2 in support
+	of Qt5.
+
+	grey.colorado.quarter r3: Linux compile fix.
+
+	grey.colorado.quarter r8: Qualify the Qt5 QtGuiApplication fixes for
+	highdpi.
+
+	grey.colorado.quarter r33: Robust updating of devicePixelRatio --
+	need to check in every render as that is the best place to get every
+	change -- works perfectly now.
+
+2017-11-06 12:25 +0000  Bastiaan Veelo  <Bastiaan@SARC.nl>  (e6a915fa2627 <highdpi>)
+
+	* Close branch highdpi
+
+2017-11-03 00:42 +0100  Bastiaan Veelo  <Bastiaan@Veelo.net>  (0decaed55a4e <highdpi>)
+
+	* include/Quarter/QuarterWidget.h,
+	include/Quarter/devices/InputDevice.h,
+	include/Quarter/devices/Keyboard.h, include/Quarter/devices/Mouse.h,
+	include/Quarter/devices/SpaceNavigatorDevice.h,
+	src/Quarter/EventFilter.cpp, src/Quarter/InputDevice.cpp,
+	src/Quarter/Keyboard.cpp, src/Quarter/Mouse.cpp,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h, src/Quarter/SpaceNavigatorDevice.cpp:
+	grey.colorado.quarter r33: Robust updating of devicePixelRatio --
+	need to check in every render as that is the best place to get every
+	change -- works perfectly now.
+
+2017-11-06 12:26 +0100  Bastiaan Veelo  <Bastiaan@Veelo.net>  (1adf694176dd <highdpi>)
+
+	* src/Quarter/QuarterWidgetP.cpp, src/plugins/QuarterWidgetPlugin.cpp:
+	Merge grey.colorado.quarter upto r8.
+
+2017-11-03 00:05 +0100  Bastiaan Veelo  <Bastiaan@Veelo.net>  (5434e51c6411 <grey.colorado>)
+
+	* src/Quarter/EventFilter.cpp, src/Quarter/Mouse.cpp:
+	grey.colorado.quarter r8: Qualify the Qt5 QtGuiApplication fixes for
+	highdpi.
+
+2017-11-03 00:01 +0100  Bastiaan Veelo  <Bastiaan@Veelo.net>  (1836f771cad2 <grey.colorado>)
+
+	* src/Quarter/QuarterWidget.cpp:
+	grey.colorado.quarter r3: Linux compile fix.
+
+2017-11-02 23:59 +0100  Bastiaan Veelo  <Bastiaan@Veelo.net>  (2564fea7262c <grey.colorado>)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/ContextMenu.cpp,
+	src/Quarter/DragDropHandler.cpp, src/Quarter/EventFilter.cpp,
+	src/Quarter/ImageReader.cpp, src/Quarter/InputDevice.cpp,
+	src/Quarter/InteractionMode.cpp, src/Quarter/InteractionMode.h,
+	src/Quarter/Keyboard.cpp, src/Quarter/KeyboardP.cpp,
+	src/Quarter/KeyboardP.h, src/Quarter/Mouse.cpp,
+	src/Quarter/QtCoinCompatibility.cpp, src/Quarter/QuarterP.h,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h, src/Quarter/SpaceNavigatorDevice.cpp,
+	src/examples/QuarterViewer.h, src/examples/dynamicui.cpp,
+	src/examples/minimal.cpp, src/plugins/QuarterWidgetPlugin.cpp:
+	Changes from grey.colorado.quarter r2 in support of Qt5.
+
+2017-11-05 20:58 +0100  Bastiaan Veelo  <Bastiaan@SARC.nl>  (4342838b5fe1)
+
+	* Merged CMake into default. Changes are backwards compatible, to it's
+	OK.
+
+2017-11-05 20:58 +0100  Bastiaan Veelo  <Bastiaan@SARC.nl>  (4b103e52436b <CMake>)
+
+	* Close branch CMake
+
+2017-11-03 11:31 +0100  Bastiaan Veelo  <Bastiaan@SARC.nl>  (966487b5ba94 <CMake>)
+
+	* CMakeLists.txt:
+	Merged default into CMake
+
+2017-10-09 23:12 +0000  Bastiaan Veelo  <Bastiaan@SARC.nl>  (9174224b9583)
+
+	* Merged in ggabbiani/quarter-fedora26/fedora26 (pull request #10)
+
+	Quarter on Fedora 26
+
+2017-10-10 00:55 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (5f565926c50b <fedora26>)
+
+	* src/plugins/QuarterWidgetPlugin.h:
+	Fixed for compiling the plugin under qt5 on Fedora
+
+2017-10-10 00:51 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (4f7f474089e6 <fedora26>)
+
+	* src/plugins/CMakeLists.txt:
+	fixed configuration for target designer plugin library.
+
+2017-10-10 00:50 +0200  Giampiero Gabbiani  <giampiero@gabbiani.org>  (472de6cd2694 <fedora26>)
+
+	* CMakeLists.txt, src/Quarter/CMakeLists.txt:
+	The installation path for the Quarter library was always set to
+	CMAKE_INSTALL_PREFIX/lib that is not always correct for linux
+	systems with x86_64 architecture. Now the path for the
+	RUNTIME|LIBRARY|ARCHIVE Quarter library targets is left to the
+	underlying CMAKE_INSTALL_{BIN,LIB,LIB}DIR variables as initialized
+	from the inclusion of GNUInstallDirs cmake macro.
+
+2017-10-09 11:51 +0200  Bastiaan Veelo  <Bastiaan@SARC.nl>  (a6c55d8cd001 <CMake>)
+
+	* Merged default into CMake
+
+2017-10-09 09:40 +0000  Bastiaan Veelo  <Bastiaan@SARC.nl>  (3615c1d4b7d6)
+
+	* src/Quarter/CMakeLists.txt:
+	Merged in veelo/quarter/unused_include (pull request #7)
+
+	Do not include unused macro's.
+
+2017-10-09 09:40 +0000  Bastiaan Veelo  <Bastiaan@SARC.nl>  (1f9f75226cf2 <unused_include>)
+
+	* Close branch unused_include
+
+2016-03-15 22:26 +0100  Bastiaan Veelo  <Bastiaan@Veelo.net>  (0d98f356c065 <unused_include>)
+
+	* src/Quarter/CMakeLists.txt:
+	Do not include unused macro's.
+
+2017-10-09 09:40 +0000  Bastiaan Veelo  <Bastiaan@SARC.nl>  (d7ebb84431ca)
+
+	* Merged in veelo/quarter/Qt5_plugin (pull request #8)
+
+	Qt5 support for the Qt Designer plugin.
+
+2016-03-16 14:04 +0100  Bastiaan Veelo  <Bastiaan@Veelo.net>  (f249e7520727 <Qt5_plugin>)
+
+	* src/plugins/CMakeLists.txt, src/plugins/QuarterWidgetPlugin.cpp,
+	src/plugins/QuarterWidgetPlugin.h:
+	Qt5 support for the Qt Designer plugin.
+
+2016-03-15 18:31 +0100  Bastiaan Veelo  <Bastiaan@Veelo.net>  (06687e2d3509 <CMake>)
+
+	* CMakeLists.txt, SIMCMakeMacros/FindCoin.cmake:
+	Use the newly added CoinConfig.cmake and CoinConfigVersion.cmake
+	files to configure linking to Coin.
+
+	The location of these files can be hinted by defining Coin_DIR to
+	the Coin installation directory. If these files are not found,
+	configuration falls back to the legacy methods.
+
+	Other changes:
+
+	SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true) is superfluous in 2.6.0.
+
+2017-09-27 12:02 +0000  Bastiaan Veelo  <Bastiaan@SARC.nl>  (20a1788fd3f3)
+
+	* Merged in Unril/quarter/Unril/edit-cmakeliststxt-while-compiling-as-
+	st-1457723649112 (pull request #5)
+
+	Edit CMakeLists.txt
+
+	Approved-by: Bastiaan Veelo <Bastiaan@SARC.nl>
+
+2016-03-11 19:14 +0000  Nikolay Fedorov  <unril@live.ru>  (f1caaa480b68 <Unril/edit-cmakeliststxt-while-compiling-as-st-1457723649112>)
+
+	* src/Quarter/CMakeLists.txt:
+	Edit CMakeLists.txt While compiling as static lib it does not add Qt
+	includes to project.
+
+2016-02-08 09:29 +0000  Bastiaan Veelo  <Bastiaan@SARC.nl>  (bab5f24952fa <CMake>)
+
+	* Created new branch CMake
+
+2014-01-10 19:27 +0100  Christian Bühler  <christian.buehler@ipoplan.de>  (198bb5e5df0c)
+
+	* CMakeLists.txt, src/Quarter/CMakeLists.txt,
+	src/examples/CMakeLists.txt, src/examples/MdiMainWindow.cpp,
+	src/examples/MdiMainWindow.h, src/examples/MdiQuarterWidget.cpp,
+	src/examples/MdiQuarterWidget.h, src/examples/directui.cpp,
+	src/examples/dynamicui.cpp, src/examples/examiner.cpp,
+	src/examples/inheritui.cpp, src/examples/mdi.cpp,
+	src/examples/minimal.cpp, src/examples/superimposition.cpp:
+	fix examples for Qt5
+
+2014-01-10 15:13 +0100  Christian Bühler  <christian.buehler@ipoplan.de>  (beef8ee990e9)
+
+	* CMakeLists.txt:
+	for Windows builds, we need to link against Qt5::OpenGL
+
+2014-01-10 14:57 +0100  Christian Bühler  <christian.buehler@ipoplan.de>  (f9cf4fb23499)
+
+	* CMakeLists.txt:
+	do not fail if Qt5 does not exist
+
+2014-01-10 14:26 +0100  Christian Bühler  <christian.buehler@ipoplan.de>  (97c2615a0bea)
+
+	* CMakeLists.txt, src/Quarter/QuarterWidgetP.cpp:
+	enable building with Qt5
+
+2014-01-10 14:26 +0100  Christian Bühler  <christian.buehler@ipoplan.de>  (c8db1cda05d2)
+
+	* SIMCMakeMacros/SimQtMacros.cmake: deleted file.
+	* SIMCMakeMacros/SimQtMacros.cmake, src/Quarter/CMakeLists.txt:
+	SimQtMacros.cmake not needed any more
+
+2014-01-10 14:17 +0100  Christian Bühler  <christian.buehler@ipoplan.de>  (0885860a5dac)
+
+	* src/Quarter/KeyboardP.cpp:
+	use toLatin1 instead of toAscii
+
+2014-01-10 14:16 +0100  Christian Bühler  <christian.buehler@ipoplan.de>  (1c908bad316c)
+
+	* include/Quarter/eventhandlers/DragDropHandler.h,
+	include/Quarter/eventhandlers/EventFilter.h,
+	src/Quarter/ContextMenu.cpp, src/Quarter/ContextMenu.h,
+	src/Quarter/DragDropHandler.cpp, src/Quarter/NativeEvent.h,
+	src/Quarter/QuarterP.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h,
+	src/Quarter/SpaceNavigatorDevice.cpp:
+	fix includes
+
+2014-01-10 13:55 +0100  Christian Bühler  <christian.buehler@ipoplan.de>  (e670fcdf2e69)
+
+	* CMakeLists.txt, SIMCMakeMacros/SimQtMacros.cmake,
+	src/Quarter/CMakeLists.txt, src/examples/CMakeLists.txt,
+	src/plugins/CMakeLists.txt:
+	use CMAKE_AUTOMOC
+
+2011-12-05 00:37 +0100  Marius Kintel  <marius@kintel.net>  (a941589f50f9)
+
+	* cfg/gendsp.pl.in:
+	fixed issue #5
+
+2011-12-04 22:46 +0100  Marius Kintel  <marius@kintel.net>  (787a3436ca79)
+
+	* COPYING:
+	fixed issue #5
+
+2011-12-03 16:20 +0100  Marius Kintel  <marius@kintel.net>  (c3c2b40e12c8)
+
+	* include/Quarter/Basic.h, include/Quarter/QtCoinCompatibility.h,
+	include/Quarter/Quarter.h, include/Quarter/QuarterWidget.h,
+	include/Quarter/devices/InputDevice.h,
+	include/Quarter/devices/Keyboard.h, include/Quarter/devices/Mouse.h,
+	include/Quarter/devices/SpaceNavigatorDevice.h,
+	include/Quarter/eventhandlers/DragDropHandler.h,
+	include/Quarter/eventhandlers/EventFilter.h,
+	include/Quarter/eventhandlers/FocusHandler.h,
+	src/Quarter/ContextMenu.cpp, src/Quarter/ContextMenu.h,
+	src/Quarter/DragDropHandler.cpp, src/Quarter/EventFilter.cpp,
+	src/Quarter/FocusHandler.cpp, src/Quarter/ImageReader.cpp,
+	src/Quarter/ImageReader.h, src/Quarter/InputDevice.cpp,
+	src/Quarter/InteractionMode.h, src/Quarter/Keyboard.cpp,
+	src/Quarter/KeyboardP.cpp, src/Quarter/KeyboardP.h,
+	src/Quarter/Mouse.cpp, src/Quarter/NativeEvent.cpp,
+	src/Quarter/NativeEvent.h, src/Quarter/Quarter.cpp,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h, src/Quarter/SensorManager.cpp,
+	src/Quarter/SensorManager.h, src/Quarter/SignalThread.cpp,
+	src/Quarter/SignalThread.h, src/Quarter/SpaceNavigatorDevice.cpp,
+	src/examples/MdiMainWindow.cpp, src/examples/MdiMainWindow.h,
+	src/examples/MdiQuarterWidget.cpp, src/examples/MdiQuarterWidget.h,
+	src/examples/QuarterViewer.cpp, src/examples/QuarterViewer.h,
+	src/examples/directui.cpp, src/examples/dynamicui.cpp,
+	src/examples/examiner.cpp, src/examples/inheritui.cpp,
+	src/examples/mdi.cpp, src/examples/minimal.cpp,
+	src/examples/superimposition.cpp,
+	src/plugins/QuarterWidgetPlugin.cpp,
+	src/plugins/QuarterWidgetPlugin.h:
+	Updated license headers to BSD
+
+2011-03-29 14:37 +0200  Øystein Hole  <oyshole@sim.no>  (20831eac5e58)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Safer explicit size construction of the SbByteBuffer instance.
+
+2010-11-26 11:59 +0100  Thomas Hammer  <thammer@sim.no>  (7364b57b1e2c)
+
+	* build/misc/install-headers.bat, build/misc/uninstall-headers.bat,
+	build/msvc6/quarter1.dsp, build/msvc7/quarter1.vcproj,
+	build/msvc8/quarter1.vcproj, build/msvc9/quarter1.vcproj,
+	build/qmake/Quarter.pro:
+	Added the new SpaceNavigatorDevice to build files.
+
+2010-11-26 11:44 +0100  Thomas Hammer  <thammer@sim.no>  (196419d811b3)
+
+	* src/Quarter/NativeEvent.h, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/SpaceNavigatorDevice.cpp:
+	Build fixes - correct path for includes.
+
+2010-11-24 15:09 +0100  Lars Moastuen  <larsm@sim.no>  (5be5ac31121a)
+
+	* src/Quarter/SpaceNavigatorDevice.cpp:
+	Non-X11 buildfix (#include <QX11Info>). Not a proper fix imo, should
+	be fixed in CMakeLists.txt. Should SpaceNaviagorDevice be put in a
+	separated sublibrary?
+
+2010-11-19 08:07 +0100  Lars Moastuen  <larsm@sim.no>  (55bb27d050a2)
+
+	* src/Quarter/CMakeLists.txt:
+	Casefix.
+
+2010-11-19 08:00 +0100  Lars Moastuen  <larsm@sim.no>  (63c848702fd2)
+
+	* src/Quarter/CMakeLists.txt:
+	Specify to link with OpenGL (Visual Studio 10 64 bit fix).
+
+2010-10-21 13:57 +0200  Øystein Handegard  <handegar@sim.no>  (3f70de7911b2)
+
+	* INSTALL:
+	Spelling
+
+2010-10-21 09:52 +0200  Øystein Handegard  <handegar@sim.no>  (2fb967f022d9)
+
+	* INSTALL:
+	Added a tiny doc-segment for the Space Navigator support.
+
+2010-10-21 09:33 +0200  Øystein Handegard  <handegar@sim.no>  (44d805263e9a)
+
+	* Makefile.in, aclocal.m4, cfg/csubst.exe, cfg/gendsp.pl.in,
+	cfg/wrapmsvc.exe, html/Makefile.in, include/Makefile.in,
+	include/Quarter/Makefile.in, include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/examples/Makefile.in, src/plugins/Makefile.in:
+	Bootstrap
+
+2010-10-21 09:21 +0200  Øystein Handegard  <handegar@sim.no>  (2b3b5ac7dd55)
+
+	* src/Quarter/SpaceNavigatorDevice.cpp:
+	Dont accumulate rotation and translation.
+
+2010-10-20 15:28 +0200  Øystein Handegard  <handegar@sim.no>  (dfb88eb09d0c)
+
+	* SIMCMakeMacros/FindSpacenav.cmake,
+	include/Quarter/devices/SpaceNavigatorDevice.h,
+	src/Quarter/NativeEvent.cpp, src/Quarter/NativeEvent.h,
+	src/Quarter/SpaceNavigatorDevice.cpp: new file.
+	* CMakeLists.txt, SIMCMakeMacros/FindSpacenav.cmake,
+	SIMCMakeMacros/SimFind.cmake,
+	include/Quarter/devices/SpaceNavigatorDevice.h,
+	src/Quarter/CMakeLists.txt, src/Quarter/EventFilter.cpp,
+	src/Quarter/NativeEvent.cpp, src/Quarter/NativeEvent.h,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h, src/Quarter/SpaceNavigatorDevice.cpp:
+	New 3DConnexion Space Navigator support using the Spacenav
+	opensource library.
+
+2010-07-20 16:32 +0200  Lars Moastuen  <larsm@sim.no>  (15ace3f985ac)
+
+	* config.h.cmake.in: new file.
+	* CMakeLists.txt, config.h.cmake.in:
+	CMake fixes. Now generates config.h (stripped version, but most of
+	the file is garbage).
+
+2010-07-20 15:13 +0200  Lars Moastuen  <larsm@sim.no>  (ec3d85a56e6d)
+
+	* SIMCMakeMacros/FindCoin.cmake, SIMCMakeMacros/README,
+	SIMCMakeMacros/SimArguments.cmake, SIMCMakeMacros/SimFind.cmake,
+	SIMCMakeMacros/SimMSVC.cmake, SIMCMakeMacros/SimQtMacros.cmake: new
+	file.
+	* CMakeLists.txt, SIMCMakeMacros/FindCoin.cmake,
+	SIMCMakeMacros/README, SIMCMakeMacros/SimArguments.cmake,
+	SIMCMakeMacros/SimFind.cmake, SIMCMakeMacros/SimMSVC.cmake,
+	SIMCMakeMacros/SimQtMacros.cmake:
+	Forked CMake macros from internal repositories and brushed up the
+	Quarter CMake buildspecification.
+
+2010-06-23 13:19 +0200  Terje Wiesener  <wiesener@sim.no>  (03477b3c12cb)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Fix typo bug
+
+2010-06-23 12:58 +0200  Terje Wiesener  <wiesener@sim.no>  (402f594591f4)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Support Qt resource paths in navigation file urls
+
+2010-03-22 14:51 +0100  Tamer Fahmy  <tamer@sim.no>  (3f6b33d95360)
+
+	* docs/doxygen/footer.html, docs/doxygen/header.html:
+	update URLs.
+
+2010-03-22 14:25 +0100  Tamer Fahmy  <tamer@sim.no>  (d29a2cb9b1be)
+
+	* docs/doxygen/stylesheet.css, docs/quarter.doxygen.in:
+	enable custom header/footer and disable borders around images.
+
+2010-03-22 14:16 +0100  Tamer Fahmy  <tamer@sim.no>  (b3f91fbc44de)
+
+	* docs/doxygen/footer.html, docs/doxygen/header.html,
+	docs/doxygen/stylesheet.css, docs/quarter.doxygen.in:
+	sync doxygen template with Coin and enable html style sheet.
+
+2010-02-28 15:59 +0100  Tamer Fahmy  <tamer@sim.no>  (1504c4a91921)
+
+	* Makefile.in, configure, html/Makefile.in, include/Makefile.in,
+	include/Quarter/Makefile.in, include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.in:
+	bootstrap.
+
+2010-02-28 15:58 +0100  Tamer Fahmy  <tamer@sim.no>  (5116b6b2f607)
+
+	* configure.ac:
+	invoke AC_CANONICAL_SYSTEM before the msvc compiler check to get the
+	$host environment variable set, as otherwise the following wrapmsvc
+	check falsely bails out on not being run in a cygwin enviroment.
+
+2010-02-28 15:15 +0100  Tamer Fahmy  <tamer@sim.no>  (02e1411ca421)
+
+	* configure, configure.ac:
+	fix recently introduced implicit framework detection build bug on
+	non-mac platforms through an autoconf variable name change in
+	simacros.
+
+2010-02-28 15:02 +0100  Tamer Fahmy  <tamer@sim.no>  (9785d7aefca0)
+
+	* Makefile.in, aclocal.m4, cfg/config.guess, cfg/config.sub,
+	cfg/ltmain.sh, config.h.in, configure, html/Makefile.in,
+	include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.in:
+	bootstrap with updated compatible autotools versions.
+
+2010-02-28 15:00 +0100  Tamer Fahmy  <tamer@sim.no>  (a242272eea86)
+
+	* Quarter.pc.in:
+	change autoconf datadir to datarootdir and add htmldir and
+	frameworkdir.
+
+2010-02-28 15:00 +0100  Tamer Fahmy  <tamer@sim.no>  (9080321bb28d)
+
+	* configure.ac:
+	autoconf provides htmldir. make sure to append html to an expanded
+	docdir variable. gather and substitute frameworkdir.
+
+2010-02-24 14:17 +0100  Jostein  <josteint@sim.no>  (9f6bbad23759)
+
+	* build/msvc9/quarter1.vcproj:
+	compile fix for msvc9 release
+
+2010-02-20 23:00 +0100  Tamer Fahmy  <tamer@sim.no>  (4b3dcc18cbc2)
+
+	* Makefile.in, aclocal.m4, cfg/config.guess, cfg/config.sub,
+	cfg/ltmain.sh, config.h.in, configure, html/Makefile.in,
+	include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.in:
+	bootstrap with currently used autotools version.
+
+2010-02-20 22:55 +0100  Tamer Fahmy  <tamer@sim.no>  (f634adf4e76c)
+
+	* ChangeLog: new file.
+	* ChangeLog:
+	added ChangeLog placeholder.
+
+2010-01-28 18:36 +0100  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (04789309aac1)
+
+	* Makefile.in, aclocal.m4, configure, html/Makefile.in,
+	include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.in:
+	Bootstrap.
+
+2010-01-20 14:45 +0100  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (cb4b044ac6be)
+
+	* Makefile.in, aclocal.m4, cfg/config.guess, cfg/config.sub,
+	cfg/ltmain.sh, config.h.in, html/Makefile.in, include/Makefile.in,
+	include/Quarter/Makefile.in, include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.in:
+	Bootstrap with updated autotools toolchain.
+
+2009-12-08 16:29 +0100  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (0024d2c81280)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Branch merge.
+
+2009-12-08 16:28 +0100  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (7e2bab8b774f)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Avoid using cursor only available from Qt 4.2 and onward, when
+	compiling with an older version.
+
+2009-10-23 16:34 +0200  Terje Wiesener  <wiesener@sim.no>  (46d0fca31535)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Bugfix: Always reinitialize the SoRenderManager when the gl context
+	is (re-)initialized
+
+2009-10-23 15:50 +0200  Terje Wiesener  <wiesener@sim.no>  (90bfa6eeee2f)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Revert previous patch, was using outdated API
+
+2009-10-23 14:48 +0200  Terje Wiesener  <wiesener@sim.no>  (ac3fa0a8fb93)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Bugfix: Always reinitialize the SoRenderManager when the gl context
+	is (re-)initialized
+
+2009-10-23 14:32 +0200  wiesener  <wiesener>  (d78b99cbe0bf)
+
+	* build/msvc9/config-debug.h, build/msvc9/config-release.h,
+	build/msvc9/quarter1.vcproj:
+	MSVC9 build fixes
+
+2009-09-26 08:38 +0000  convert-repo  <convert-repo>  (adfb27df5ae1)
+
+	* .hgtags: new file.
+	* .hgtags:
+	update tags
+
+2009-09-18 19:59 +0000  Peder Blekken  <pederb@sim.no>  (20cf19ff3ae5)
+
+	* configure, configure.ac, src/examples/Makefile.am,
+	src/examples/Makefile.in:
+	Mac OS X Qt detection fixes.
+
+2009-09-04 14:21 +0000  Eigil Samset  <eigils@sim.no>  (533aa5866595)
+
+	* src/Quarter/QuarterWidget.cpp:
+	added initialization of currentStateMachine data member
+
+2009-08-27 09:23 +0000  Tamer Fahmy  <tamer@sim.no>  (7fa1f4f5bddc)
+
+	* src/Quarter/Makefile.am, src/Quarter/Makefile.in:
+	fix omitted top builddir include for msvc environments.
+
+2009-08-26 17:00 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (0accccbae79a)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	Revert 656, avoid introducing trouble on Windows.
+
+2009-08-24 11:18 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (bc6e83e2dd3e)
+
+	* Makefile.in:
+	Bootstrap.
+
+2009-08-24 11:18 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (e9cc619f3e53)
+
+	* Makefile.am:
+	More boost removal.
+
+2009-08-24 11:17 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (4a5bba73b14b)
+
+	* src/examples/minimal.cpp:
+	Revert erroneous commit.
+
+2009-08-24 11:16 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (059b045e1b22)
+
+	* Makefile.am, src/Quarter/QuarterP.h, src/examples/minimal.cpp:
+	Remove all boost dependencies. Also remove the generationscripts for
+	boost headers.
+
+2009-08-24 11:01 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (447d8039e872)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	Avoid unneccessary redraws when moving window around. Fixes
+	COIN-173.
+
+2009-08-24 10:44 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (71faf274171d)
+
+	* cfg/errors.txt:
+	Bootstrap.
+
+2009-08-21 12:37 +0000  Morten Eriksen  <mortene@sim.no>  (31b74e225cff)
+
+	* src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.h:
+	clean-up: no need to use a boost shared_ptr, kick the habit
+
+2009-08-20 17:27 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (5417f516f72d)
+
+	* Makefile.in:
+	Bootstrap.
+
+2009-08-20 17:26 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (4a3432bc3f42)
+
+	* include/Makefile.inc: new file.
+	* include/Makefile.in, include/Makefile.inc:
+	Switch to boost tr1.
+
+2009-08-20 17:26 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (582028b2e427)
+
+	* configure:
+	Bootstrap.
+
+2009-08-20 17:25 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (53b8bd087b32)
+
+	* Makefile.am, configure.ac, include/Makefile.am:
+	Make the buildsystem independent of the boost subdirectory.
+
+2009-08-20 17:10 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (264a72cd4e2b)
+
+	* src/Quarter/Quarter.cpp, src/Quarter/QuarterP.h:
+	Introduce the COMPILE_ONLY_BEFORE macro to Quarter. Make sure
+	COIN-192 is not forgotten when bumping Major revision.
+
+2009-08-20 17:09 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (969b71a3389a)
+
+	* aclocal.m4, config.h.in, configure, src/Quarter/Makefile.in:
+	Bootstrap
+
+2009-08-20 17:09 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (248560342de0)
+
+	* configure.ac, src/Quarter/Makefile.am:
+	Make Quarter Version number available from config.h. And config.h
+	available as private include.
+
+2009-08-20 17:07 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (e4490dbf279b)
+
+	* cfg/errors.txt:
+	Bootstrap.
+
+2009-08-20 14:31 +0000  Lars Moastuen  <larsm@sim.no>  (bc8c3f974b3b)
+
+	* src/Quarter/CMakeLists.txt:
+	Don't link against OpenGL - caused link issues on some platforms.
+
+2009-08-18 15:11 +0000  Lars Moastuen  <larsm@sim.no>  (7ee9c47737ba)
+
+	* CMakeLists.txt:
+	Replace single arguments rather than all CXX_FLAGS. Replacing all
+	flags could lead to exceptions being disabled (resulting in a link
+	error to boost::throw_exception).
+
+2009-08-11 15:11 +0000  Terje Wiesener  <wiesener@sim.no>  (4eb3c551512e)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	revert previous commit, not working as intented
+
+2009-08-11 14:22 +0000  Terje Wiesener  <wiesener@sim.no>  (b47330c9dcec)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	Allow controlling whether or not to render while hidden
+
+2009-07-24 12:46 +0000  Morten Eriksen  <mortene@sim.no>  (56f75bbd0762)
+
+	* src/Quarter/Quarter.cpp:
+	build: compile fix. problem reported by Per Inge Mathisen.
+
+2009-07-21 17:27 +0000  Tamer Fahmy  <tamer@sim.no>  (b518864c64ac)
+
+	* configure:
+	bootstrap.
+
+2009-07-21 17:27 +0000  Tamer Fahmy  <tamer@sim.no>  (ec03f7ecae9e)
+
+	* configure.ac:
+	the preprocessor directives are also OS and not compiler specific.
+	(fixes Qt plugin loading mechanism for MinGW Qt designer)
+
+2009-07-21 16:41 +0000  Tamer Fahmy  <tamer@sim.no>  (81a9e46a9b23)
+
+	* configure:
+	bootstrap.
+
+2009-07-21 16:41 +0000  Tamer Fahmy  <tamer@sim.no>  (2aeb765e8cd3)
+
+	* configure.ac:
+	the link order matters on mingw32 for QtUiTools being a static lib.
+	Furthermore, add qt_suffix for QtUiTools as debug builds are
+	provided.
+
+2009-07-21 15:56 +0000  Tamer Fahmy  <tamer@sim.no>  (9b579c7e02ea)
+
+	* configure:
+	bootstrap.
+
+2009-07-21 15:56 +0000  Tamer Fahmy  <tamer@sim.no>  (fc1089c3a7d6)
+
+	* configure.ac:
+	another wacky OS vs. compiler check replacement to end up with a
+	consistent designer windows path.
+
+2009-07-21 15:47 +0000  Tamer Fahmy  <tamer@sim.no>  (a506376c9846)
+
+	* src/Quarter/Makefile.in, src/plugins/Makefile.in:
+	bootstrap.
+
+2009-07-21 15:47 +0000  Tamer Fahmy  <tamer@sim.no>  (65a18feb198e)
+
+	* src/Quarter/Makefile.am, src/plugins/Makefile.am:
+	add missing -no-undefined libtool flag to allow for shared libs on
+	mingw32.
+
+2009-07-21 15:28 +0000  Tamer Fahmy  <tamer@sim.no>  (9b92d45aceff)
+
+	* cfg/errors.txt, cfg/wrapmsvc.exe, configure:
+	bootstrap.
+
+2009-07-21 15:28 +0000  Tamer Fahmy  <tamer@sim.no>  (e2d1f75b0866)
+
+	* configure.ac:
+	check for OS instead of compiler to end up with correct Qt library
+	naming convention for Windows. (MinGW fix)
+
+2009-07-16 13:33 +0000  Rolv Seehuus  <rolvs@sim.no>  (361f6cdf5cdb)
+
+	* CMakeLists.txt:
+	To be able to chain the builds in other CMake projects, use
+	PROJECT_SOURCE_DIR instead of CMAKE_SOURCE_DIR.
+
+2009-06-09 15:19 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (89877e9e09f6)
+
+	* docs/quarter.doxygen.in:
+	Generate tag file by default.
+
+2009-05-15 13:04 +0000  Morten Eriksen  <mortene@sim.no>  (3e38194ddedb)
+
+	* src/Quarter/EventFilter.cpp, src/Quarter/Mouse.cpp:
+	bugfix: handle dblclick events. thanks to Bastiaan Veelo for the
+	report and original patch.
+
+2009-05-15 12:46 +0000  Morten Eriksen  <mortene@sim.no>  (a7e0312558ed)
+
+	* src/Quarter/EventFilter.cpp, src/Quarter/Mouse.cpp:
+	bug: FIXME notes about the ignored Qt dblclicks
+
+2009-05-05 12:13 +0000  Tarjei Kvamme Løset  <tarjei@sim.no>  (e22f16e20e4f)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Added a protip.
+
+2009-05-05 11:22 +0000  Morten Eriksen  <mortene@sim.no>  (c7fa0670d8d3)
+
+	* src/Quarter/Quarter.cpp, src/Quarter/QuarterWidget.cpp:
+	doc: make basic example a little more useful by adding a navigation
+	mode
+
+2009-05-05 11:10 +0000  Morten Eriksen  <mortene@sim.no>  (ad06af60b55b)
+
+	* src/Quarter/Quarter.cpp:
+	doc: correct basic example
+
+2009-03-24 19:17 +0000  Tamer Fahmy  <tamer@sim.no>  (022be265c8f2)
+
+	* aclocal.m4, configure, configure.ac:
+	Compiler/Linker __declspec check to include DLL define in config
+	scripts.
+
+2009-03-05 18:55 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (fe51fa7ff523)
+
+	* src/Quarter/KeyboardP.cpp:
+	Bugfix: Buffer went out of scope, while we kept a reference.
+
+2009-02-27 23:53 +0000  Peder Blekken  <pederb@sim.no>  (0ad42547d288)
+
+	* src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.h:
+	Do rendering the proper Qt way, by calling updateGL(). Thanks to
+	Kyrah for nagging me to do this ;)
+
+2009-02-24 11:30 +0000  Thomas Hammer  <thammer@sim.no>  (38421df7f259)
+
+	* build/msvc6/quarter1.dsp, build/msvc7/quarter1.vcproj,
+	build/msvc8/quarter1.vcproj, build/msvc9/quarter1.vcproj:
+	Updated msvc project files to include QtCoinCompatibility.cpp/.h.
+
+2009-02-23 13:51 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (a2dcf5bd5d64)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.h, src/plugins/QuarterWidgetPlugin.cpp:
+	Reverting wrong branch.
+
+2009-02-23 13:37 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (351af490bc5e)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.h, src/plugins/QuarterWidgetPlugin.cpp:
+	Set navigationmode directly.
+
+2009-02-17 19:18 +0000  Tamer Fahmy  <tamer@sim.no>  (5fd86ef69b60)
+
+	* aclocal.m4, configure:
+	bootstrap. (config summary echo fix)
+
+2009-02-17 00:34 +0000  Tamer Fahmy  <tamer@sim.no>  (c19899fdfb96)
+
+	* src/Quarter/QtCoinCompatibility.cpp:
+	fix gcc'ism.
+
+2009-02-16 20:57 +0000  Terje Wiesener  <wiesener@sim.no>  (611e4c38f500)
+
+	* src/Quarter/QtCoinCompatibility.cpp:
+	msvc compile fix
+
+2009-02-14 19:58 +0000  Lars J. Aas  <larsa@sim.no>  (f219598e1ab3)
+
+	* src/Quarter/QuarterWidget.cpp:
+	use same cursor as 'zoom' for 'dolly'
+
+2009-02-11 14:37 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (e6b081c7e81b)
+
+	* src/Quarter/QtCoinCompatibility.cpp:
+	Assert on what is basically an out of memory error.
+
+2009-02-11 13:29 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (426fc6610e16)
+
+	* include/Quarter/QtCoinCompatibility.h,
+	src/Quarter/QtCoinCompatibility.cpp: new file.
+	* include/Quarter/QtCoinCompatibility.h,
+	src/Quarter/QtCoinCompatibility.cpp:
+	Remember to commit the new files.
+
+2009-02-11 13:26 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (3e3426abb177)
+
+	* include/Quarter/Makefile.am, include/Quarter/Makefile.in,
+	src/Quarter/ImageReader.cpp, src/Quarter/ImageReader.h,
+	src/Quarter/Makefile.am, src/Quarter/Makefile.in:
+	New public functions QtCoinCompatibility.
+
+2009-02-10 15:54 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (c71dae77b2e4)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Inserting assert to try to detect strange noContext bug.
+
+2009-02-05 10:50 +0000  Frode Øijord  <frodo@sim.no>  (c04b0d9b29a3)
+
+	* src/Quarter/ImageReader.cpp:
+	compile fix
+
+2009-02-04 16:26 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (4daa54623e03)
+
+	* src/Quarter/ImageReader.cpp, src/Quarter/ImageReader.h:
+	Make general purpose conversion functions available. Using private
+	API until we have a little bit more testing.
+
+2009-02-03 10:39 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (8418308a8e78)
+
+	* src/plugins/QuarterWidgetPlugin.cpp:
+	Workaround should not be necessary after Coin updates.
+
+2009-02-03 10:39 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (ea7344b7a77c)
+
+	* docs/RELEASE.txt:
+	Update to release procedure.
+
+2009-02-03 10:28 +0000  Lars J. Aas  <larsa@sim.no>  (580984ed0464)
+
+	* cfg/doxy4win.pl:
+	sync
+
+2009-02-03 10:21 +0000  Lars J. Aas  <larsa@sim.no>  (fac704cca698)
+
+	* configure:
+	bootstrap
+
+2009-01-28 13:14 +0000  Peder Blekken  <pederb@sim.no>  (e96e54787b3e)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Fix potential bug when carrying nodes to the new render/event
+	manager.
+
+2009-01-26 21:44 +0000  Frode Øijord  <frodo@sim.no>  (81f36e428bf4)
+
+	* include/Quarter/devices/DeviceHandler.h: deleted file.
+	* include/Quarter/devices/DeviceHandler.h:
+	remove unused file
+
+2009-01-26 21:43 +0000  Frode Øijord  <frodo@sim.no>  (21bbb18539c2)
+
+	* build/qmake/Quarter.pro:
+	update .pro files
+
+2009-01-26 21:32 +0000  Lars J. Aas  <larsa@sim.no>  (eaaf7cca2efb)
+
+	* NEWS, build/msvc6/config-debug.h, build/msvc6/config-release.h,
+	build/msvc7/config-debug.h, build/msvc7/config-release.h,
+	build/msvc8/config-debug.h, build/msvc8/config-release.h,
+	build/msvc9/config-debug.h, build/msvc9/config-release.h,
+	configure.ac:
+	Quarter 1.0.0 build systems sync
+

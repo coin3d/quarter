@@ -1,0 +1,2852 @@
+2009-01-26 21:18 +0000  Frode Øijord  <frodo@sim.no>  (e41f230c86f9 [quarter-1_0_0])
+
+	* configure, configure.ac, include/Makefile.am, include/Makefile.in:
+	add boost dir to dist target
+
+2009-01-26 21:05 +0000  Frode Øijord  <frodo@sim.no>  (3dc3433032c9)
+
+	* src/plugins/QuarterWidgetPlugin.cpp:
+	workaround to kill some warnings
+
+2009-01-26 20:54 +0000  Frode Øijord  <frodo@sim.no>  (57e1fdf9cf7d)
+
+	* Makefile.in, cfg/doxy4win.pl, configure, configure.ac:
+	turn on exceptions
+
+2009-01-26 20:46 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (8370c490d9e5)
+
+	* docs/quarter.doxygen.in:
+	Aim a little higher for the next release. Concludes COIN-62.
+
+2009-01-26 20:45 +0000  Frode Øijord  <frodo@sim.no>  (eb71cc890910)
+
+	* src/Quarter/DragDropHandler.cpp, src/Quarter/FocusHandler.cpp:
+	more doc
+
+2009-01-26 20:39 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (8b0efc390066)
+
+	* cfg/doxy4win.pl:
+	Remove trailing line.
+
+2009-01-26 20:35 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (867fbbe635af)
+
+	* src/Quarter/DragDropHandler.cpp,
+	src/plugins/QuarterWidgetPlugin.cpp:
+	Complete documentation!!!
+
+2009-01-26 20:21 +0000  Lars J. Aas  <larsa@sim.no>  (12c0dc852acd)
+
+	* Makefile.am:
+	dist fix
+
+2009-01-26 20:20 +0000  Lars J. Aas  <larsa@sim.no>  (86eaf3ac48a1)
+
+	* build/README.txt: new file.
+	* build/README.txt:
+	Explanation for how to use the Visual Studio project files
+
+2009-01-26 20:13 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (f98d06cdc683)
+
+	* include/Quarter/devices/InputDevice.h, src/Quarter/InputDevice.cpp,
+	src/Quarter/QuarterWidget.cpp:
+	Full doc for InputDevice.
+
+2009-01-26 20:10 +0000  Lars J. Aas  <larsa@sim.no>  (88783b1ba744)
+
+	* build/msvc6/quarter1.dsp, build/msvc7/quarter1.sln,
+	build/msvc7/quarter1.vcproj, build/msvc7/quarter1_install.vcproj,
+	build/msvc7/quarterwidgetplugin1_install.vcproj,
+	build/msvc8/minimal_example.vcproj, build/msvc8/quarter1.sln,
+	build/msvc8/quarter1.vcproj, build/msvc8/quarter1_install.vcproj,
+	build/msvc8/quarter1_uninstall.vcproj,
+	build/msvc8/quarterwidgetplugin1.vcproj,
+	build/msvc8/quarterwidgetplugin1_install.vcproj,
+	build/msvc8/quarterwidgetplugin1_uninstall.vcproj,
+	build/msvc9/minimal_example.vcproj, build/msvc9/quarter1.sln,
+	build/msvc9/quarter1.vcproj, build/msvc9/quarter1_install.vcproj,
+	build/msvc9/quarter1_uninstall.vcproj,
+	build/msvc9/quarterwidgetplugin1.vcproj,
+	build/msvc9/quarterwidgetplugin1_install.vcproj,
+	build/msvc9/quarterwidgetplugin1_uninstall.vcproj:
+	Updated Visual Studio project files
+
+2009-01-26 19:56 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (83b7f986a632)
+
+	* docs/RELEASE.txt:
+	Update to RELEASE procedure.
+
+2009-01-26 19:42 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (33735a8468c7)
+
+	* include/Quarter/devices/InputDevice.h, src/Quarter/InputDevice.cpp:
+	Making pure input parameter const.
+
+2009-01-26 19:35 +0000  Frode Øijord  <frodo@sim.no>  (3a414acbebb9)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	added a little more doc
+
+2009-01-26 19:27 +0000  Frode Øijord  <frodo@sim.no>  (24380e51b945)
+
+	* include/Quarter/eventhandlers/FocusHandler.h: new file.
+	* src/Quarter/FocusHandler.h: deleted file.
+	* docs/quarter.doxygen.in,
+	include/Quarter/eventhandlers/FocusHandler.h,
+	include/Quarter/eventhandlers/Makefile.am,
+	include/Quarter/eventhandlers/Makefile.in,
+	src/Quarter/FocusHandler.cpp, src/Quarter/FocusHandler.h,
+	src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.h,
+	src/examples/MdiQuarterWidget.cpp, src/examples/examiner.cpp:
+	make focushandler public and leave it to the user to install it.
+	Same for drag'n drop handler.
+
+2009-01-26 19:22 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (492171b78134)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Full doc -3 functions for QuarterWidget.
+
+2009-01-26 18:07 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (b3cd79080adb)
+
+	* include/Quarter/QuarterWidget.h:
+	More typos.
+
+2009-01-26 18:04 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (86d3a9abb819)
+
+	* include/Quarter/QuarterWidget.h:
+	Removing superfluous ';'
+
+2009-01-26 18:02 +0000  Lars J. Aas  <larsa@sim.no>  (0fbf6d9d791d)
+
+	* include/Quarter/QuarterWidget.h:
+	cosmetics
+
+2009-01-26 17:45 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (c06e845b7352)
+
+	* AUTHORS, include/Quarter/QuarterWidget.h,
+	src/Quarter/QuarterWidget.cpp:
+	Property reset, and bugfix.
+
+2009-01-26 17:45 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (ac3f71bb9d3c)
+
+	* src/plugins/QuarterWidgetPlugin.cpp:
+	Make coin in designer stop complaining about not having a context.
+
+2009-01-26 16:27 +0000  Peder Blekken  <pederb@sim.no>  (a24d15662b91)
+
+	* src/Quarter/QuarterWidgetP.cpp:
+	Reorder comments to make more sense.
+
+2009-01-26 16:25 +0000  Peder Blekken  <pederb@sim.no>  (80ccc76602ae)
+
+	* src/Quarter/QuarterWidgetP.cpp:
+	Bugfix. Call makeCurrent() before cc_glglue_instance().
+
+2009-01-26 16:10 +0000  Frode Øijord  <frodo@sim.no>  (2feccc48bd6f)
+
+	* AUTHORS, README, README.WIN32:
+	updated some doc files
+
+2009-01-26 15:28 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (c6ab4856ad7b)
+
+	* src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.h:
+	Track statemachines, and reset properly. Make it possible to change
+	modes on the fly.
+
+2009-01-26 13:42 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (215383fa3794)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Workaround for early coin 3 naming scheme.
+
+2009-01-26 13:39 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (d6b77a9717b8)
+
+	* include/Quarter/QuarterWidget.h:
+	Make QuarterWidget destructor virtual.
+
+2009-01-26 10:22 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (9099ac1683a2)
+
+	* docs/quarter.doxygen.in:
+	Don't generate docs for classes which are removed. Upgrade doxygen
+	configuration syntax to doxygen 1.5.8.
+
+2009-01-26 10:08 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (c03091aae1fb)
+
+	* configure, configure.ac:
+	Typo in last commit.
+
+2009-01-26 10:05 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (81b088ac5a8c)
+
+	* configure, configure.ac, docs/quarter.doxygen.in:
+	Feble attempt at documenting some configure options. Better
+	integration of STL classes in doc, if applicable. Bootstrap.
+
+2009-01-26 09:10 +0000  Frode Øijord  <frodo@sim.no>  (c3a48a46abd5)
+
+	* include/Quarter/QuarterWidget.h:
+	fix some ugly formatting
+
+2009-01-25 18:49 +0000  Peder Blekken  <pederb@sim.no>  (30d08ea61bfd)
+
+	* src/Quarter/QuarterWidgetP.cpp:
+	Add a workaround for a bug in Coin's cc_glglue.
+
+2009-01-24 20:29 +0000  Frode Øijord  <frodo@sim.no>  (a3d34c30f0d6)
+
+	* src/Quarter/FocusHandler.cpp, src/Quarter/FocusHandler.h: new file.
+	* src/Quarter/FocusHandler.cpp, src/Quarter/FocusHandler.h,
+	src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.h:
+	COIN-131 send focusevents to the state machines
+
+2009-01-24 20:00 +0000  Frode Øijord  <frodo@sim.no>  (cbeae676c1d8)
+
+	* include/Quarter/QuarterWidget.h,
+	include/Quarter/eventhandlers/EventFilter.h,
+	src/Quarter/EventFilter.cpp, src/Quarter/QuarterWidget.cpp:
+	added API for adding and removing input devices
+
+2009-01-24 19:29 +0000  Frode Øijord  <frodo@sim.no>  (d3e16f2d24c3)
+
+	* include/Quarter/eventhandlers/EventHandler.h,
+	src/Quarter/EventHandler.cpp: deleted file.
+	* include/Quarter/eventhandlers/EventHandler.h,
+	src/Quarter/EventHandler.cpp:
+	remove unused files
+
+2009-01-24 19:21 +0000  Frode Øijord  <frodo@sim.no>  (a53095386eec)
+
+	* src/Quarter/QuarterWidget.cpp:
+	COIN-98 set navigationmode to NO_NAVIGATION while alt key is down to
+	make sure events are passed on to the scene graph
+
+2009-01-22 20:42 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (ba3eab7357c1)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Document and crossreference TransparencyType.
+
+2009-01-22 20:41 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (5fe5a49f0abc)
+
+	* Makefile.in, configure, html/Makefile.in, include/Makefile.in,
+	include/Quarter/Makefile.in, include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.in:
+	Bootstrap.
+
+2009-01-22 20:39 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (5343cb3e3f89)
+
+	* docs/quarter.doxygen.in:
+	Update doxygen configuration to import tags.
+
+2009-01-22 20:38 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (e6fd46bd9e15)
+
+	* configure.ac:
+	Support tags for crossreferencing of Qt and Coin.
+
+2009-01-22 16:39 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (d1760bdc9077)
+
+	* docs/quarter.doxygen.in, src/plugins/QuarterWidgetPlugin.cpp:
+	Some documentation.
+
+2009-01-22 16:14 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (fd4a06b684a8)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Overlyd defensive coding. We can hook up another target on the seek
+	and viewAll.
+
+2009-01-22 13:54 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (d79e38210070)
+
+	* configure, configure.ac:
+	Enable only doc generation. COIN-62
+
+2009-01-21 12:41 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (b45ed9211f2d)
+
+	* src/Quarter/QuarterP.cpp, src/Quarter/QuarterP.h,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h:
+	Kill a memory leak.
+
+2009-01-20 22:36 +0000  Peder Blekken  <pederb@sim.no>  (25b0763c4fe1)
+
+	* src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	Support for SoContextHandler::destructingContext().
+
+2009-01-19 12:05 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (9c77c4281e3f)
+
+	* src/plugins/QuarterWidgetPlugin.cpp:
+	Set default for designer.
+
+2009-01-17 16:23 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (986d5e19a1e3)
+
+	* cfg/doxy4win.pl, cfg/ltmain.sh:
+	Boostrap.
+
+2009-01-17 15:11 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (a7e2c2e0a78c)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.h, src/examples/MdiQuarterWidget.cpp,
+	src/examples/QuarterViewer.ui, src/examples/minimal.cpp,
+	src/examples/superimposition.cpp:
+	Make navigationModeFile a property of QuarterWidget.
+
+	NB: QuarterWidgets from now on has no default navigation mode, if
+	the property is not set.
+
+2009-01-17 14:55 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (5d968f3080e4)
+
+	* CMakeLists.txt, build/misc/sync-from-msvc6.sh, cfg/doxy4win.pl,
+	cfg/ltmain.sh, docs/doxygen/stylesheet.css,
+	include/Quarter/QuarterWidget.h, src/CMakeLists.txt,
+	src/Quarter/ContextMenu.cpp, src/Quarter/DragDropHandler.cpp,
+	src/Quarter/EventFilter.cpp, src/Quarter/EventHandler.cpp,
+	src/Quarter/ImageReader.cpp, src/Quarter/ImageReader.h,
+	src/Quarter/InputDevice.cpp, src/Quarter/InteractionMode.cpp,
+	src/Quarter/InteractionMode.h, src/Quarter/KeyboardP.cpp,
+	src/Quarter/Quarter.cpp, src/Quarter/QuarterP.h,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h, src/Quarter/SensorManager.cpp,
+	src/Quarter/SignalThread.cpp, src/Quarter/SignalThread.h,
+	src/examples/CMakeLists.txt, src/examples/MdiQuarterWidget.cpp,
+	src/examples/minimal.cpp, src/examples/superimposition.cpp,
+	src/plugins/CMakeLists.txt, src/plugins/QuarterWidgetPlugin.cpp:
+	Whitespace normalization.
+
+2009-01-17 14:53 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (57b09382da17)
+
+	* include/Quarter/Basic.h, include/Quarter/Quarter.h,
+	include/Quarter/QuarterWidget.h,
+	include/Quarter/devices/DeviceHandler.h,
+	include/Quarter/devices/InputDevice.h,
+	include/Quarter/devices/Keyboard.h, include/Quarter/devices/Mouse.h,
+	include/Quarter/eventhandlers/DragDropHandler.h,
+	include/Quarter/eventhandlers/EventFilter.h,
+	include/Quarter/eventhandlers/EventHandler.h,
+	src/Quarter/ContextMenu.cpp, src/Quarter/ContextMenu.h,
+	src/Quarter/DragDropHandler.cpp, src/Quarter/EventFilter.cpp,
+	src/Quarter/EventHandler.cpp, src/Quarter/ImageReader.cpp,
+	src/Quarter/ImageReader.h, src/Quarter/InputDevice.cpp,
+	src/Quarter/InteractionMode.h, src/Quarter/Keyboard.cpp,
+	src/Quarter/KeyboardP.cpp, src/Quarter/KeyboardP.h,
+	src/Quarter/Mouse.cpp, src/Quarter/Quarter.cpp,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h, src/Quarter/SensorManager.cpp,
+	src/Quarter/SensorManager.h, src/Quarter/SignalThread.cpp,
+	src/Quarter/SignalThread.h, src/examples/MdiMainWindow.cpp,
+	src/examples/MdiMainWindow.h, src/examples/MdiQuarterWidget.cpp,
+	src/examples/MdiQuarterWidget.h, src/examples/QuarterViewer.cpp,
+	src/examples/QuarterViewer.h, src/examples/directui.cpp,
+	src/examples/dynamicui.cpp, src/examples/examiner.cpp,
+	src/examples/inheritui.cpp, src/examples/mdi.cpp,
+	src/examples/minimal.cpp, src/examples/superimposition.cpp,
+	src/plugins/QuarterWidgetPlugin.cpp,
+	src/plugins/QuarterWidgetPlugin.h:
+	Update copyright header.
+
+2008-12-17 10:41 +0000  Frode Øijord  <frodo@sim.no>  (1a3b16fb9647)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/ContextMenu.cpp,
+	src/Quarter/ContextMenu.h, src/Quarter/InteractionMode.cpp,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h, src/plugins/QuarterWidgetPlugin.cpp:
+	added properties for StereoMode and RenderMode and made some
+	attempts at generalizing the hard-coded context menu.
+
+2008-12-09 11:15 +0000  Peder Blekken  <pederb@sim.no>  (bd3be1cd5102)
+
+	* include/Quarter/QuarterWidget.h:
+	Move redraw() to public slots.
+
+2008-12-09 10:12 +0000  Peder Blekken  <pederb@sim.no>  (ca21efaff0a5)
+
+	* src/examples/superimposition.cpp:
+	Improve the example a bit by creating a gradient background.
+
+2008-12-04 09:48 +0000  Peder Blekken  <pederb@sim.no>  (ce0bb23cfafa)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	Add a redraw() method, to make it possible to control when rendering
+	happens in the application.
+
+2008-11-27 15:32 +0000  Frode Øijord  <frodo@sim.no>  (e8968543ff26)
+
+	* src/Quarter/SensorManager.cpp:
+	use correct timeout interval for delaytimer
+
+2008-11-21 11:00 +0000  Frode Øijord  <frodo@sim.no>  (fde82adc501c)
+
+	* src/plugins/Makefile.am, src/plugins/Makefile.in:
+	build fix for distcheck target
+
+2008-11-21 10:54 +0000  Frode Øijord  <frodo@sim.no>  (68a41ecded26)
+
+	* Makefile.am, Makefile.in:
+	build fixes for dist target
+
+2008-11-20 14:31 +0000  Frode Øijord  <frodo@sim.no>  (717b6a4ccb9d)
+
+	* docs/quarter.doxygen.in, src/Quarter/DragDropHandler.cpp,
+	src/Quarter/InputDevice.cpp, src/Quarter/Keyboard.cpp,
+	src/Quarter/Mouse.cpp, src/Quarter/QuarterWidget.cpp:
+	couple of doc fixes
+
+2008-11-19 15:43 +0000  Frode Øijord  <frodo@sim.no>  (e1f52ebf515e)
+
+	* src/examples/MdiMainWindow.cpp:
+	support dropping multiple files in mdi example
+
+2008-11-19 15:33 +0000  Frode Øijord  <frodo@sim.no>  (198f8f239a46)
+
+	* src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	remove unused function
+
+2008-11-19 15:31 +0000  Frode Øijord  <frodo@sim.no>  (5a895cdbf8f9)
+
+	* src/Quarter/InteractionMode.cpp, src/Quarter/InteractionMode.h: new
+	file.
+	* src/Quarter/AltKeyHandler.cpp, src/Quarter/AltKeyHandler.h: deleted
+	file.
+	* include/Quarter/QuarterWidget.h, src/Quarter/AltKeyHandler.cpp,
+	src/Quarter/AltKeyHandler.h, src/Quarter/InteractionMode.cpp,
+	src/Quarter/InteractionMode.h, src/Quarter/Makefile.am,
+	src/Quarter/Makefile.in, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	misc interaction-mode fixes (still disabled)
+
+2008-11-14 10:31 +0000  Frode Øijord  <frodo@sim.no>  (a76e490da3ba)
+
+	* src/Quarter/QuarterWidget.cpp:
+	disable inclusion of header until build system is synced.
+
+2008-11-12 21:30 +0000  Tamer Fahmy  <tamer@sim.no>  (a1f9e3b221df)
+
+	* configure:
+	bootstrap.
+
+2008-11-12 21:30 +0000  Tamer Fahmy  <tamer@sim.no>  (b0f4efe5edcc)
+
+	* configure.ac:
+	allow to explicitly override the default pkgconfig search path.
+	(COIN-95)
+
+2008-11-12 13:22 +0000  Frode Øijord  <frodo@sim.no>  (c4a53ccc064b)
+
+	* src/Quarter/AltKeyHandler.cpp, src/Quarter/AltKeyHandler.h: new
+	file.
+	* aclocal.m4, cfg/gendsp.pl.in, configure,
+	include/Quarter/QuarterWidget.h, src/Quarter/AltKeyHandler.cpp,
+	src/Quarter/AltKeyHandler.h, src/Quarter/DragDropHandler.cpp,
+	src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/QuarterWidget.cpp:
+	COIN-98 added an event filter to implement an interaction mode when
+	alt is pressed. Not enabled yet
+
+2008-11-07 15:46 +0000  Frode Øijord  <frodo@sim.no>  (cca74485a9c7)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	COIN-81 provide a minimumSizeHint to prevent QuarterWidget being
+	squashed to nothing in Qt Designer
+
+2008-11-06 16:48 +0000  Lars J. Aas  <larsa@sim.no>  (63948dd1b436)
+
+	* build/msvc7/quarter1_install.vcproj,
+	build/msvc7/quarterwidgetplugin1_install.vcproj,
+	build/msvc8/quarter1_install.vcproj,
+	build/msvc8/quarterwidgetplugin1_install.vcproj,
+	build/msvc9/quarter1_install.vcproj,
+	build/msvc9/quarterwidgetplugin1_install.vcproj:
+	give correct script args
+
+2008-11-06 16:34 +0000  Lars J. Aas  <larsa@sim.no>  (701207889c1d)
+
+	* build/misc/install-sdk.bat:
+	Correct outputdir-paths for static libs
+
+2008-11-06 15:13 +0000  Lars J. Aas  <larsa@sim.no>  (83790f26a596)
+
+	* build/msvc6/minimal_example.dsp, build/msvc7/minimal_example.vcproj,
+	build/msvc8/minimal_example.vcproj,
+	build/msvc9/minimal_example.vcproj: new file.
+	* build/msvc6/minimal_example.dsp, build/msvc6/quarter1.dsp,
+	build/msvc6/quarter1.dsw, build/msvc6/quarterwidgetplugin1.dsp,
+	build/msvc7/minimal_example.vcproj, build/msvc7/quarter1.sln,
+	build/msvc7/quarter1.vcproj,
+	build/msvc7/quarterwidgetplugin1.vcproj,
+	build/msvc8/minimal_example.vcproj, build/msvc8/quarter1.sln,
+	build/msvc8/quarter1.vcproj, build/msvc8/quarter1_install.vcproj,
+	build/msvc8/quarter1_uninstall.vcproj,
+	build/msvc8/quarterwidgetplugin1.vcproj,
+	build/msvc8/quarterwidgetplugin1_install.vcproj,
+	build/msvc8/quarterwidgetplugin1_uninstall.vcproj,
+	build/msvc9/minimal_example.vcproj, build/msvc9/quarter1.sln,
+	build/msvc9/quarter1.vcproj, build/msvc9/quarter1_install.vcproj,
+	build/msvc9/quarter1_uninstall.vcproj,
+	build/msvc9/quarterwidgetplugin1.vcproj,
+	build/msvc9/quarterwidgetplugin1_install.vcproj,
+	build/msvc9/quarterwidgetplugin1_uninstall.vcproj:
+	Added minimal_example project
+
+2008-11-06 13:32 +0000  Lars J. Aas  <larsa@sim.no>  (c4e0644eef27)
+
+	* build/msvc6/quarter1.dsp, build/msvc7/quarter1.sln,
+	build/msvc7/quarter1.vcproj, build/msvc8/quarter1.sln,
+	build/msvc8/quarter1.vcproj, build/msvc8/quarter1_install.vcproj,
+	build/msvc8/quarter1_uninstall.vcproj,
+	build/msvc8/quarterwidgetplugin1.vcproj,
+	build/msvc8/quarterwidgetplugin1_install.vcproj,
+	build/msvc8/quarterwidgetplugin1_uninstall.vcproj,
+	build/msvc9/quarter1.sln, build/msvc9/quarter1.vcproj,
+	build/msvc9/quarter1_install.vcproj,
+	build/msvc9/quarter1_uninstall.vcproj,
+	build/msvc9/quarterwidgetplugin1.vcproj,
+	build/msvc9/quarterwidgetplugin1_install.vcproj,
+	build/msvc9/quarterwidgetplugin1_uninstall.vcproj,
+	include/Quarter/eventhandlers/DragDropHandler.h:
+	moc updates
+
+2008-11-06 13:11 +0000  Karin (kyrah) Kosina  <kyrah@sim.no>  (2155f9693b72)
+
+	* src/examples/superimposition.cpp:
+	Referencing superimposition scene root nodes is not necessary since
+	the rendermanager will do that when they are added.
+
+2008-11-04 13:56 +0000  Lars J. Aas  <larsa@sim.no>  (52fa8707ed68)
+
+	* build/misc/uninstall-headers.bat:
+	sync with structural changes
+
+2008-11-04 13:55 +0000  Lars J. Aas  <larsa@sim.no>  (9e7f07147c7a)
+
+	* build/misc/install-headers.bat, build/msvc6/quarter1.dsp,
+	build/msvc7/quarter1.sln, build/msvc7/quarter1.vcproj,
+	build/msvc8/quarter1.sln, build/msvc8/quarter1.vcproj,
+	build/msvc8/quarter1_install.vcproj,
+	build/msvc8/quarter1_uninstall.vcproj,
+	build/msvc8/quarterwidgetplugin1.vcproj,
+	build/msvc8/quarterwidgetplugin1_install.vcproj,
+	build/msvc8/quarterwidgetplugin1_uninstall.vcproj,
+	build/msvc9/quarter1.sln, build/msvc9/quarter1.vcproj,
+	build/msvc9/quarter1_install.vcproj,
+	build/msvc9/quarter1_uninstall.vcproj,
+	build/msvc9/quarterwidgetplugin1.vcproj,
+	build/msvc9/quarterwidgetplugin1_install.vcproj,
+	build/msvc9/quarterwidgetplugin1_uninstall.vcproj:
+	sync with structural changes
+
+2008-11-03 18:04 +0000  Frode Øijord  <frodo@sim.no>  (133f3d26164e)
+
+	* src/Quarter/DragDropHandler.cpp, src/Quarter/EventFilter.cpp,
+	src/Quarter/EventHandler.cpp, src/Quarter/InputDevice.cpp,
+	src/Quarter/Keyboard.cpp, src/Quarter/KeyboardP.cpp,
+	src/Quarter/KeyboardP.h, src/Quarter/Mouse.cpp: new file.
+	* src/Quarter/devices/InputDevice.cpp,
+	src/Quarter/devices/Keyboard.cpp, src/Quarter/devices/KeyboardP.cpp,
+	src/Quarter/devices/KeyboardP.h, src/Quarter/devices/Makefile.am,
+	src/Quarter/devices/Makefile.in, src/Quarter/devices/Mouse.cpp,
+	src/Quarter/eventhandlers/DragDropHandler.cpp,
+	src/Quarter/eventhandlers/EventFilter.cpp,
+	src/Quarter/eventhandlers/EventHandler.cpp,
+	src/Quarter/eventhandlers/Makefile.am,
+	src/Quarter/eventhandlers/Makefile.in: deleted file.
+	* configure, configure.ac, src/Quarter/DragDropHandler.cpp,
+	src/Quarter/EventFilter.cpp, src/Quarter/EventHandler.cpp,
+	src/Quarter/InputDevice.cpp, src/Quarter/Keyboard.cpp,
+	src/Quarter/KeyboardP.cpp, src/Quarter/KeyboardP.h,
+	src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/Mouse.cpp, src/Quarter/QuarterP.cpp,
+	src/Quarter/devices/InputDevice.cpp,
+	src/Quarter/devices/Keyboard.cpp, src/Quarter/devices/KeyboardP.cpp,
+	src/Quarter/devices/KeyboardP.h, src/Quarter/devices/Makefile.am,
+	src/Quarter/devices/Makefile.in, src/Quarter/devices/Mouse.cpp,
+	src/Quarter/eventhandlers/DragDropHandler.cpp,
+	src/Quarter/eventhandlers/EventFilter.cpp,
+	src/Quarter/eventhandlers/EventHandler.cpp,
+	src/Quarter/eventhandlers/Makefile.am,
+	src/Quarter/eventhandlers/Makefile.in:
+	flatten catalog structure
+
+2008-11-03 17:33 +0000  Frode Øijord  <frodo@sim.no>  (1b157cf271bd)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	added properties to control clearing of window and z-buffer
+
+2008-11-03 17:16 +0000  Frode Øijord  <frodo@sim.no>  (be1f202bdda8)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/ContextMenu.cpp,
+	src/Quarter/QuarterWidget.cpp:
+	transparencyType as Qt Property
+
+2008-11-03 16:45 +0000  Frode Øijord  <frodo@sim.no>  (2df2e97166b3)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	headlightEnabled as property, follow Qt naming scheme on methods
+
+2008-11-03 13:43 +0000  Frode Øijord  <frodo@sim.no>  (a40bd23b02e1)
+
+	* src/plugins/coinlogo.qrc: new file.
+	* src/plugins/Makefile.am, src/plugins/Makefile.in,
+	src/plugins/coinlogo.qrc:
+	compile the coin logo into the plugin to make it available as a
+	resource
+
+2008-10-31 16:10 +0000  Frode Øijord  <frodo@sim.no>  (732fe23ea733)
+
+	* configure, configure.ac:
+	don't add Coin_LIBS to both LDFLAGS and LIBS, it breaks static
+	builds on windows
+
+2008-10-31 13:59 +0000  Frode Øijord  <frodo@sim.no>  (595475235a25)
+
+	* src/Quarter/QuarterWidget.cpp:
+	remove some unused includes
+
+2008-10-31 13:41 +0000  Frode Øijord  <frodo@sim.no>  (d3829c2c6cc8)
+
+	* include/Quarter/devices/InputDevice.h,
+	include/Quarter/devices/Keyboard.h, include/Quarter/devices/Mouse.h,
+	include/Quarter/eventhandlers/EventFilter.h,
+	src/Quarter/devices/InputDevice.cpp,
+	src/Quarter/devices/Keyboard.cpp, src/Quarter/devices/KeyboardP.cpp,
+	src/Quarter/devices/KeyboardP.h, src/Quarter/devices/Mouse.cpp,
+	src/Quarter/eventhandlers/EventFilter.cpp: new file.
+	* include/Quarter/devices/DeviceManager.h,
+	include/Quarter/devices/KeyboardHandler.h,
+	include/Quarter/devices/MouseHandler.h,
+	include/Quarter/eventhandlers/EventManager.h,
+	src/Quarter/devices/DeviceHandler.cpp,
+	src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/KeyboardHandler.cpp,
+	src/Quarter/devices/KeyboardHandlerP.cpp,
+	src/Quarter/devices/KeyboardHandlerP.h,
+	src/Quarter/devices/MouseHandler.cpp,
+	src/Quarter/eventhandlers/EventManager.cpp: deleted file.
+	* aclocal.m4, configure, include/Quarter/QuarterWidget.h,
+	include/Quarter/devices/DeviceHandler.h,
+	include/Quarter/devices/DeviceManager.h,
+	include/Quarter/devices/InputDevice.h,
+	include/Quarter/devices/Keyboard.h,
+	include/Quarter/devices/KeyboardHandler.h,
+	include/Quarter/devices/Makefile.am,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/devices/Mouse.h,
+	include/Quarter/devices/MouseHandler.h,
+	include/Quarter/eventhandlers/DragDropHandler.h,
+	include/Quarter/eventhandlers/EventFilter.h,
+	include/Quarter/eventhandlers/EventManager.h,
+	include/Quarter/eventhandlers/Makefile.am,
+	include/Quarter/eventhandlers/Makefile.in,
+	src/Quarter/ContextMenu.cpp, src/Quarter/QuarterP.cpp,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h, src/Quarter/devices/DeviceHandler.cpp,
+	src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/InputDevice.cpp,
+	src/Quarter/devices/Keyboard.cpp,
+	src/Quarter/devices/KeyboardHandler.cpp,
+	src/Quarter/devices/KeyboardHandlerP.cpp,
+	src/Quarter/devices/KeyboardHandlerP.h,
+	src/Quarter/devices/KeyboardP.cpp, src/Quarter/devices/KeyboardP.h,
+	src/Quarter/devices/Makefile.am, src/Quarter/devices/Makefile.in,
+	src/Quarter/devices/Mouse.cpp, src/Quarter/devices/MouseHandler.cpp,
+	src/Quarter/eventhandlers/DragDropHandler.cpp,
+	src/Quarter/eventhandlers/EventFilter.cpp,
+	src/Quarter/eventhandlers/EventManager.cpp,
+	src/Quarter/eventhandlers/Makefile.am,
+	src/Quarter/eventhandlers/Makefile.in:
+	don't override QWidget::event(), install an event filter on
+	QuarterWidget instead. Get rid of DeviceManager and EventManager
+	classes + some renaming for clarity
+
+2008-10-24 12:36 +0000  Frode Øijord  <frodo@sim.no>  (e8a21c3a73f1)
+
+	* src/examples/MdiQuarterWidget.h:
+	pre-declare QGLWidget to avoid compile error
+
+2008-10-23 14:08 +0000  Marius Kintel  <kintel@sim.no>  (b45afb4d214a)
+
+	* build/qmake/Quarter.pro:
+	sync
+
+2008-10-23 09:04 +0000  Marius Kintel  <kintel@sim.no>  (50ebd085b1a5)
+
+	* src/examples/examiner.cpp:
+	Exit, not crash, on file-not-found
+
+2008-10-17 13:05 +0000  Frode Øijord  <frodo@sim.no>  (5347c508dc16)
+
+	* src/examples/MdiMainWindow.cpp, src/examples/MdiMainWindow.h,
+	src/examples/MdiQuarterWidget.cpp, src/examples/MdiQuarterWidget.h:
+	use QMdiArea instead of deprecated QWorkspace in mdi example
+
+2008-10-13 08:46 +0000  Peder Blekken  <pederb@sim.no>  (edde494dfb54)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Another bugfix for the recent paintGL() workaround.
+
+2008-10-10 14:42 +0000  Peder Blekken  <pederb@sim.no>  (b414726a4894)
+
+	* src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h:
+	Bugfix for recently introduced recursive rendering bug.
+
+2008-10-08 09:54 +0000  Peder Blekken  <pederb@sim.no>  (1e985f9561c3)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Workaround for paintGL() rendering problem.
+
+2008-10-02 23:33 +0000  Tamer Fahmy  <tamer@sim.no>  (329b1be11f98)
+
+	* aclocal.m4, configure:
+	bootstrap.
+
+2008-10-01 09:09 +0000  Tamer Fahmy  <tamer@sim.no>  (33392f6b79a6)
+
+	* configure, configure.ac:
+	do not expand ac_substed variables such as exec_prefix as otherwise
+	prefix overrides such as "make prefix=/foo install" break.
+
+2008-09-16 10:12 +0000  Lars J. Aas  <larsa@sim.no>  (15d315240b43)
+
+	* build/msvc6/quarterwidgetplugin1.dsp, build/msvc7/quarter1.sln,
+	build/msvc7/quarterwidgetplugin1.vcproj, build/msvc8/quarter1.sln,
+	build/msvc8/quarter1.vcproj, build/msvc8/quarter1_install.vcproj,
+	build/msvc8/quarter1_uninstall.vcproj,
+	build/msvc8/quarterwidgetplugin1.vcproj,
+	build/msvc8/quarterwidgetplugin1_install.vcproj,
+	build/msvc8/quarterwidgetplugin1_uninstall.vcproj,
+	build/msvc9/quarter1.sln, build/msvc9/quarter1.vcproj,
+	build/msvc9/quarter1_install.vcproj,
+	build/msvc9/quarter1_uninstall.vcproj,
+	build/msvc9/quarterwidgetplugin1.vcproj,
+	build/msvc9/quarterwidgetplugin1_install.vcproj,
+	build/msvc9/quarterwidgetplugin1_uninstall.vcproj:
+	Plugin build fixes
+
+2008-09-16 09:32 +0000  Lars J. Aas  <larsa@sim.no>  (086cb236552e)
+
+	* build/msvc6/quarterwidgetplugin1.dsp,
+	build/msvc6/quarterwidgetplugin1_install.dsp,
+	build/msvc6/quarterwidgetplugin1_uninstall.dsp,
+	build/msvc7/quarterwidgetplugin1.vcproj,
+	build/msvc7/quarterwidgetplugin1_install.vcproj,
+	build/msvc7/quarterwidgetplugin1_uninstall.vcproj,
+	build/msvc8/quarterwidgetplugin1.vcproj,
+	build/msvc8/quarterwidgetplugin1_install.vcproj,
+	build/msvc8/quarterwidgetplugin1_uninstall.vcproj,
+	build/msvc9/quarterwidgetplugin1.vcproj,
+	build/msvc9/quarterwidgetplugin1_install.vcproj,
+	build/msvc9/quarterwidgetplugin1_uninstall.vcproj: new file.
+	* build/msvc6/quarterplugin1.dsp,
+	build/msvc6/quarterplugin1_install.dsp,
+	build/msvc6/quarterplugin1_uninstall.dsp,
+	build/msvc7/quarterplugin1.vcproj,
+	build/msvc7/quarterplugin1_install.vcproj,
+	build/msvc7/quarterplugin1_uninstall.vcproj,
+	build/msvc8/quarterplugin1.vcproj,
+	build/msvc8/quarterplugin1_install.vcproj,
+	build/msvc8/quarterplugin1_uninstall.vcproj,
+	build/msvc9/quarterplugin1.vcproj,
+	build/msvc9/quarterplugin1_install.vcproj,
+	build/msvc9/quarterplugin1_uninstall.vcproj: deleted file.
+	* build/msvc6/quarter1.dsw, build/msvc6/quarterplugin1.dsp,
+	build/msvc6/quarterplugin1_install.dsp,
+	build/msvc6/quarterplugin1_uninstall.dsp,
+	build/msvc6/quarterwidgetplugin1.dsp,
+	build/msvc6/quarterwidgetplugin1_install.dsp,
+	build/msvc6/quarterwidgetplugin1_uninstall.dsp,
+	build/msvc7/quarter1.sln, build/msvc7/quarterplugin1.vcproj,
+	build/msvc7/quarterplugin1_install.vcproj,
+	build/msvc7/quarterplugin1_uninstall.vcproj,
+	build/msvc7/quarterwidgetplugin1.vcproj,
+	build/msvc7/quarterwidgetplugin1_install.vcproj,
+	build/msvc7/quarterwidgetplugin1_uninstall.vcproj,
+	build/msvc8/quarter1.sln, build/msvc8/quarter1.vcproj,
+	build/msvc8/quarter1_install.vcproj,
+	build/msvc8/quarter1_uninstall.vcproj,
+	build/msvc8/quarterplugin1.vcproj,
+	build/msvc8/quarterplugin1_install.vcproj,
+	build/msvc8/quarterplugin1_uninstall.vcproj,
+	build/msvc8/quarterwidgetplugin1.vcproj,
+	build/msvc8/quarterwidgetplugin1_install.vcproj,
+	build/msvc8/quarterwidgetplugin1_uninstall.vcproj,
+	build/msvc9/quarter1.sln, build/msvc9/quarter1.vcproj,
+	build/msvc9/quarter1_install.vcproj,
+	build/msvc9/quarter1_uninstall.vcproj,
+	build/msvc9/quarterplugin1.vcproj,
+	build/msvc9/quarterplugin1_install.vcproj,
+	build/msvc9/quarterplugin1_uninstall.vcproj,
+	build/msvc9/quarterwidgetplugin1.vcproj,
+	build/msvc9/quarterwidgetplugin1_install.vcproj,
+	build/msvc9/quarterwidgetplugin1_uninstall.vcproj:
+	rename quarterplugin project to quarterwidgetplugin
+
+2008-09-16 09:25 +0000  Lars J. Aas  <larsa@sim.no>  (8fb359f8cf42)
+
+	* build/misc/install-plugin.bat, build/misc/uninstall-plugin.bat,
+	build/msvc6/quarterplugin1_install.dsp,
+	build/msvc6/quarterplugin1_uninstall.dsp,
+	build/msvc7/quarterplugin1_install.vcproj,
+	build/msvc7/quarterplugin1_uninstall.vcproj,
+	build/msvc8/quarterplugin1_install.vcproj,
+	build/msvc8/quarterplugin1_uninstall.vcproj,
+	build/msvc9/quarterplugin1_install.vcproj,
+	build/msvc9/quarterplugin1_uninstall.vcproj: new file.
+	* build/misc/install-plugin.bat, build/misc/install-sdk.bat,
+	build/misc/uninstall-plugin.bat, build/msvc6/quarter1.dsw,
+	build/msvc6/quarterplugin1.dsp,
+	build/msvc6/quarterplugin1_install.dsp,
+	build/msvc6/quarterplugin1_uninstall.dsp, build/msvc7/quarter1.sln,
+	build/msvc7/quarterplugin1.vcproj,
+	build/msvc7/quarterplugin1_install.vcproj,
+	build/msvc7/quarterplugin1_uninstall.vcproj,
+	build/msvc8/quarter1.sln, build/msvc8/quarter1.vcproj,
+	build/msvc8/quarter1_install.vcproj,
+	build/msvc8/quarter1_uninstall.vcproj,
+	build/msvc8/quarterplugin1.vcproj,
+	build/msvc8/quarterplugin1_install.vcproj,
+	build/msvc8/quarterplugin1_uninstall.vcproj,
+	build/msvc9/quarter1.sln, build/msvc9/quarter1.vcproj,
+	build/msvc9/quarter1_install.vcproj,
+	build/msvc9/quarter1_uninstall.vcproj,
+	build/msvc9/quarterplugin1.vcproj,
+	build/msvc9/quarterplugin1_install.vcproj,
+	build/msvc9/quarterplugin1_uninstall.vcproj:
+	Quarter plugin project.
+
+2008-09-15 10:25 +0000  Lars J. Aas  <larsa@sim.no>  (e872f3833213)
+
+	* Makefile.am, Makefile.in:
+	dist fix
+
+2008-09-15 10:01 +0000  Lars J. Aas  <larsa@sim.no>  (9ef5fcfc0cc7)
+
+	* build/msvc8/config-debug.h, build/msvc8/config-release.h,
+	build/msvc8/config.h, build/msvc8/quarter1.sln,
+	build/msvc8/quarter1.vcproj, build/msvc8/quarter1_install.vcproj,
+	build/msvc8/quarter1_uninstall.vcproj,
+	build/msvc8/quarterplugin1.vcproj, build/msvc9/config-debug.h,
+	build/msvc9/config-release.h, build/msvc9/config.h,
+	build/msvc9/quarter1.sln, build/msvc9/quarter1.vcproj,
+	build/msvc9/quarter1_install.vcproj,
+	build/msvc9/quarter1_uninstall.vcproj,
+	build/msvc9/quarterplugin1.vcproj: new file.
+	* build/msvc8/config-debug.h, build/msvc8/config-release.h,
+	build/msvc8/config.h, build/msvc8/quarter1.sln,
+	build/msvc8/quarter1.vcproj, build/msvc8/quarter1_install.vcproj,
+	build/msvc8/quarter1_uninstall.vcproj,
+	build/msvc8/quarterplugin1.vcproj, build/msvc9/config-debug.h,
+	build/msvc9/config-release.h, build/msvc9/config.h,
+	build/msvc9/quarter1.sln, build/msvc9/quarter1.vcproj,
+	build/msvc9/quarter1_install.vcproj,
+	build/msvc9/quarter1_uninstall.vcproj,
+	build/msvc9/quarterplugin1.vcproj:
+	Visual Studio projects for MSVC8 and 9 (still no plugin or examples)
+
+2008-09-14 21:43 +0000  Lars J. Aas  <larsa@sim.no>  (eb7cf7f77f18)
+
+	* build/misc/create-directories.bat, build/misc/install-headers.bat,
+	build/misc/install-sdk.bat, build/misc/sync-from-msvc6.sh,
+	build/misc/uninstall-headers.bat, build/misc/uninstall-sdk.bat,
+	build/msvc6/config-debug.h, build/msvc6/config-release.h,
+	build/msvc6/config.h, build/msvc6/quarter1.dsp,
+	build/msvc6/quarter1.dsw, build/msvc6/quarter1_install.dsp,
+	build/msvc6/quarter1_uninstall.dsp, build/msvc6/quarterplugin1.dsp,
+	build/msvc7/config-debug.h, build/msvc7/config-release.h,
+	build/msvc7/config.h, build/msvc7/quarter1.sln,
+	build/msvc7/quarter1.vcproj, build/msvc7/quarter1_install.vcproj,
+	build/msvc7/quarter1_uninstall.vcproj,
+	build/msvc7/quarterplugin1.vcproj: new file.
+	* build/misc/create-directories.bat, build/misc/install-headers.bat,
+	build/misc/install-sdk.bat, build/misc/sync-from-msvc6.sh,
+	build/misc/uninstall-headers.bat, build/misc/uninstall-sdk.bat,
+	build/msvc6/config-debug.h, build/msvc6/config-release.h,
+	build/msvc6/config.h, build/msvc6/quarter1.dsp,
+	build/msvc6/quarter1.dsw, build/msvc6/quarter1_install.dsp,
+	build/msvc6/quarter1_uninstall.dsp, build/msvc6/quarterplugin1.dsp,
+	build/msvc7/config-debug.h, build/msvc7/config-release.h,
+	build/msvc7/config.h, build/msvc7/quarter1.sln,
+	build/msvc7/quarter1.vcproj, build/msvc7/quarter1_install.vcproj,
+	build/msvc7/quarter1_uninstall.vcproj,
+	build/msvc7/quarterplugin1.vcproj:
+	Visual Studio 6 and 7 project files for building Quarter (but not
+	the plugin yet)
+
+2008-09-12 14:26 +0000  Frode Øijord  <frodo@sim.no>  (fb58e7b0a71e)
+
+	* include/Quarter/QuarterApplication.h,
+	src/Quarter/QuarterApplication.cpp: deleted file.
+	* include/Quarter/Makefile.am, include/Quarter/Makefile.in,
+	include/Quarter/Quarter.h, include/Quarter/QuarterApplication.h,
+	src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/Quarter.cpp, src/Quarter/QuarterApplication.cpp,
+	src/examples/MdiMainWindow.cpp, src/examples/directui.cpp,
+	src/examples/dynamicui.cpp, src/examples/examiner.cpp,
+	src/examples/inheritui.cpp, src/examples/mdi.cpp,
+	src/examples/minimal.cpp, src/examples/superimposition.cpp:
+	removed QuarterApplication
+
+2008-09-10 12:44 +0000  Peder Blekken  <pederb@sim.no>  (93d5db0d0702)
+
+	* aclocal.m4, cfg/config.guess, cfg/config.sub, cfg/gendsp.pl.in,
+	configure, configure.ac:
+	Fix for static linking. Order of Qt libraries was wrong.
+
+2008-09-05 14:33 +0000  Eigil Samset  <eigils@sim.no>  (2c7750dc628e)
+
+	* src/Quarter/Quarter.cpp:
+	changed comment from SoQt to Quarter
+
+2008-09-01 13:49 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (6c633be6b7dc)
+
+	* CMakeLists.txt:
+	Switched to new SIMCmakeMacros repos.
+
+2008-08-17 20:57 +0000  Lars J. Aas  <larsa@sim.no>  (d45f5860a1df)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Remove use of obsoleted SoNavigationSystem in Coin
+
+2008-08-05 16:26 +0000  Marius Kintel  <kintel@sim.no>  (8c611ec5eb6a)
+
+	* src/plugins/QuarterWidgetPlugin.cpp:
+	Don't use a default tooltip; it leaks into the user's application
+
+2008-08-04 14:12 +0000  Tamer Fahmy  <tamer@sim.no>  (1b1d87ad6e8c)
+
+	* src/Quarter/SensorManager.cpp:
+	add missing SoRenderManager header include.
+
+2008-07-31 12:48 +0000  Marius Kintel  <kintel@sim.no>  (83ef18fdbda9)
+
+	* src/Quarter/ImageReader.cpp:
+	We require Coin-3 anyway
+
+2008-07-31 12:44 +0000  Marius Kintel  <kintel@sim.no>  (f8922cdc4e6b)
+
+	* src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h, src/Quarter/SensorManager.cpp:
+	Removed references to obsolete SoSceneManager
+
+2008-07-31 12:35 +0000  Marius Kintel  <kintel@sim.no>  (3ab4ba5b07c6)
+
+	* src/Quarter/QuarterP.cpp:
+	FIXME
+
+2008-07-31 12:35 +0000  Marius Kintel  <kintel@sim.no>  (7f410933eb45)
+
+	* src/Quarter/Quarter.cpp:
+	FIXME
+
+2008-07-30 14:25 +0000  Marius Kintel  <kintel@sim.no>  (7f312da19544)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	cleanup: Changed accessors of Qt properties to conform to Qt naming
+	scheme, moved renderCB static method to pimpl class, use C++ bool
+	instead of SbBool, use explicit constructors as per Qt standard
+
+2008-07-30 12:02 +0000  Marius Kintel  <kintel@sim.no>  (869adfa44e2a)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Memory leak FIXME, some some minor cleaning
+
+2008-07-29 23:37 +0000  Marius Kintel  <kintel@sim.no>  (ba6548ec5d76)
+
+	* docs/RELEASE.txt: new file.
+	* docs/RELEASE.txt, src/Quarter/CMakeLists.txt:
+	Jira: Coin-49
+
+2008-07-29 16:29 +0000  Marius Kintel  <kintel@sim.no>  (6b4a7e7eb0d7)
+
+	* src/unit-tests/events/EventTranslation.cpp, src/unit-
+	tests/events/EventTranslation.h, src/unit-tests/events/events.pro:
+	This was outdated
+
+2008-07-29 16:28 +0000  Marius Kintel  <kintel@sim.no>  (805dbeb092f3)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	bugfix: Camera must be set before the scenegraph since the
+	setSceneGraph() methods use the camera. Added removeStateMachine()
+	for more orthogonality.
+
+2008-07-29 16:27 +0000  Marius Kintel  <kintel@sim.no>  (3805a777a183)
+
+	* CMakeLists.txt:
+	Added FIXME
+
+2008-07-24 14:04 +0000  Marius Kintel  <kintel@sim.no>  (b19817c8ce94)
+
+	* CMakeLists.txt:
+	CMakeMacros issue fixed
+
+2008-07-24 14:01 +0000  Marius Kintel  <kintel@sim.no>  (e819af3610dd)
+
+	* src/Quarter/QuarterWidget.cpp:
+	minor doc fixes
+
+2008-07-24 14:01 +0000  Marius Kintel  <kintel@sim.no>  (013cef671e1d)
+
+	* src/plugins/QuarterWidgetPlugin.cpp:
+	minor doc fixes
+
+2008-07-23 15:11 +0000  Lars J. Aas  <larsa@sim.no>  (6295185761d1)
+
+	* src/Quarter/QuarterWidget.cpp:
+	C++ bool instead of SbBool
+
+2008-07-23 14:59 +0000  Lars J. Aas  <larsa@sim.no>  (6342562a5ab6)
+
+	* src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h:
+	Changes to initialization and cleanup code. Carry state across to
+	new SoRenderManager/SoEventManager instances. Depends on Coin
+	r12354.
+
+2008-07-22 13:54 +0000  Marius Kintel  <kintel@sim.no>  (ab5945e08b6a)
+
+	* build/qmake/Quarter.pro:
+	sync
+
+2008-07-21 17:33 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (c27282228a9b)
+
+	* docs/RELEASE.txt: deleted file.
+	* CMakeLists.txt, build/qmake/Quarter.pro, docs/RELEASE.txt,
+	src/Quarter/CMakeLists.txt:
+	Reverting changes by kintel.
+
+	Depending on a private repository.
+
+2008-07-21 16:13 +0000  Lars J. Aas  <larsa@sim.no>  (adf6469d4947)
+
+	* src/Quarter/ContextMenu.cpp:
+	trigger redraw when changing render modes
+
+2008-07-21 15:46 +0000  Marius Kintel  <kintel@sim.no>  (5056066c8273)
+
+	* CMakeLists.txt:
+	Fixed macro external
+
+2008-07-21 15:44 +0000  Marius Kintel  <kintel@sim.no>  (a49b000d3550)
+
+	* build/qmake/Quarter.pro:
+	sync
+
+2008-07-21 15:44 +0000  Marius Kintel  <kintel@sim.no>  (53bde1c932e9)
+
+	* src/Quarter/CMakeLists.txt:
+	FIXME
+
+2008-07-21 15:44 +0000  Marius Kintel  <kintel@sim.no>  (bccbd0e2f42a)
+
+	* docs/RELEASE.txt: new file.
+	* docs/RELEASE.txt:
+	
+
+2008-07-21 15:43 +0000  Marius Kintel  <kintel@sim.no>  (c1d822108ab6)
+
+	* CMakeMacros/Modules/FindCoin.cmake,
+	CMakeMacros/Modules/SimQtMacros.cmake: deleted file.
+	* CMakeMacros/Modules/FindCoin.cmake,
+	CMakeMacros/Modules/SimQtMacros.cmake:
+	Made CMakeMacros an external
+
+2008-07-16 14:49 +0000  Peder Blekken  <pederb@sim.no>  (41d619491414)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	Add a convenience method for adding a state machine.
+
+2008-07-08 14:53 +0000  Peder Blekken  <pederb@sim.no>  (91a1d4ba9c5e)
+
+	* src/Quarter/Quarter.cpp:
+	Change comment about some TGS Inventor cleanup functions.
+
+2008-07-07 16:34 +0000  Marius Kintel  <kintel@sim.no>  (6fe0aa929a8c)
+
+	* CMakeLists.txt:
+	Simplify and robustify header globbing
+
+2008-07-03 12:00 +0000  Lars J. Aas  <larsa@sim.no>  (fc4b2f0b1a03)
+
+	* src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/MouseHandler.cpp:
+	mouse position tracking bugfix
+
+2008-07-03 10:25 +0000  Terje Wiesener  <wiesener@sim.no>  (e4159ac8430b)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Make sure the cursor map is setup before the statemachine is
+	initialized
+
+2008-07-02 11:20 +0000  Terje Wiesener  <wiesener@sim.no>  (71dcd0c70f16)
+
+	* src/examples/minimal.cpp:
+	Compile fix
+
+2008-07-01 14:25 +0000  Peder Blekken  <pederb@sim.no>  (52c274683ace)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Actually implement the new constructor.
+
+2008-07-01 14:04 +0000  Peder Blekken  <pederb@sim.no>  (130dcf89820b)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	Add missing constructor.
+
+2008-07-01 13:03 +0000  Lars J. Aas  <larsa@sim.no>  (ae934108b045)
+
+	* src/examples/minimal.cpp:
+	Create QMainWindow for QuarterWidget so it behaves better.
+
+2008-06-25 13:41 +0000  Peder Blekken  <pederb@sim.no>  (67be72e598e8)
+
+	* src/examples/superimposition.cpp:
+	Add a background scene graph.
+
+2008-06-19 14:41 +0000  Lars J. Aas  <larsa@sim.no>  (83b06e1a8a3e)
+
+	* src/Quarter/QuarterWidget.cpp:
+	cleanup fix
+
+2008-06-17 15:55 +0000  Marius Kintel  <kintel@sim.no>  (d69abcf28503)
+
+	* build/qmake/Quarter.pro:
+	sync with recent changes
+
+2008-06-17 15:26 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (876ff1a87830)
+
+	* src/Quarter/QuarterP.cpp, src/Quarter/QuarterP.h: new file.
+	* include/Quarter/Quarter.h, include/Quarter/QuarterApplication.h,
+	src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/Quarter.cpp, src/Quarter/QuarterApplication.cpp,
+	src/Quarter/QuarterP.cpp, src/Quarter/QuarterP.h:
+	Some API changes.
+
+	Quarter does no longer define a public class, only a namespace.
+	Quarter now handles all initalization and destruction of resources.
+	Initalization of dependent resources is made optional and defaults
+	to old behaviour.
+
+2008-06-16 05:55 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (9d5aff4d5b1a)
+
+	* src/Quarter/Quarter.cpp:
+	Clean our house, so we may live and die another day.
+
+2008-06-12 17:59 +0000  Terje Wiesener  <wiesener@sim.no>  (1dd837b14ca4)
+
+	* configure, configure.ac:
+	Fix to make the Quarter plugin work when configuring with
+	--enable-qt-debug
+
+2008-06-12 15:27 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (6c63873d959a)
+
+	* src/Quarter/SensorManager.cpp:
+	Correct initalization sequence.
+
+2008-06-11 13:43 +0000  Lars J. Aas  <larsa@sim.no>  (96efe5cf10a0)
+
+	* src/Quarter/QuarterWidget.cpp:
+	remove some involuntarily commited debug code
+
+2008-06-11 13:40 +0000  Lars J. Aas  <larsa@sim.no>  (e51dfaf52707)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	make it possible to override the Coin managers with customized
+	managers
+
+2008-06-03 08:47 +0000  Øystein Hole  <oyshole@sim.no>  (6eb6dc15c2da)
+
+	* CMakeLists.txt:
+	Subversion revisioning is not working correctly in some cases. Drop
+	it for now.
+
+2008-06-02 14:11 +0000  Øystein Hole  <oyshole@sim.no>  (e523aa5b5d00)
+
+	* include/Quarter/Quarter.h, src/Quarter/Quarter.cpp,
+	src/Quarter/SensorManager.cpp, src/Quarter/SensorManager.h:
+	Added setTimerEpsilon. This makes it possible to achieve smooth
+	operations when developing interactive or animated applications for
+	browser plugins by setting the epsilon to 0,011s or greater.
+
+	Qt has a hardcoded switch on windows for QTimer objects with
+	intervals <=10ms. This makes the fastest timers behave erratically
+	in browsers when the scene's complexity is low enough that it can
+	actually calculate/render in 10ms or less.
+
+2008-06-02 14:06 +0000  Øystein Hole  <oyshole@sim.no>  (a5ea7f6b70d6)
+
+	* src/Quarter/CMakeLists.txt:
+	Glob in the CMakeCache so it can be found easily from vs-projects.
+
+2008-06-02 05:50 +0000  Øystein Hole  <oyshole@sim.no>  (0fcbc98e14c2)
+
+	* CMakeLists.txt:
+	Add new reg variable to NSIS package. remove obsolete code.
+
+2008-05-30 15:59 +0000  Lars Moastuen  <larsm@sim.no>  (a7a9f3324213)
+
+	* CMakeMacros/Modules/FindCoin.cmake:
+	Updated FindCoin.cmake
+
+2008-05-18 20:43 +0000  Øystein Hole  <oyshole@sim.no>  (8adaaba9ac1e)
+
+	* src/examples/CMakeLists.txt, src/plugins/CMakeLists.txt: new file.
+	* CMakeLists.txt, src/CMakeLists.txt, src/Quarter/CMakeLists.txt,
+	src/examples/CMakeLists.txt, src/plugins/CMakeLists.txt:
+	Updated CMake features. Support for building/installing/packaging
+	examples. Support for building/installing(not yet packaged install)
+	plugin for Qt Designer.
+
+2008-05-15 21:00 +0000  Øystein Hole  <oyshole@sim.no>  (0cd51c95ecbf)
+
+	* CMakeLists.txt, CMakeMacros/Modules/FindCoin.cmake,
+	src/Quarter/CMakeLists.txt:
+	Modified the CMake build system somewhat. Plx flame if it breaks on
+	your machine.
+
+	This should now generate usable builds/projects for static/dynamic *
+	debug/release on VS 2005/VS2008 and NMake based builds. Also
+	installs into choosable directory like it should.
+
+	Also added experimental CPack support just to test the features.
+
+	FIXME: Coin module and SIM macros should be a svn external to the
+	CMakeMacros repos (and maybe placed in the build dir?).
+
+2008-05-08 14:27 +0000  Karin (kyrah) Kosina  <kyrah@sim.no>  (10c3554002f4)
+
+	* configure, configure.ac:
+	Mac OS X detection fix. (Thanks to Johan Seland for reporting this
+	problem.)
+
+2008-05-08 09:22 +0000  Karin (kyrah) Kosina  <kyrah@sim.no>  (a02e5c6e7a6c)
+
+	* src/Quarter/Makefile.in, src/plugins/Makefile.in:
+	Bootstrap.
+
+2008-05-08 09:22 +0000  Karin (kyrah) Kosina  <kyrah@sim.no>  (1a1a9e7e7575)
+
+	* src/Quarter/Makefile.am, src/plugins/Makefile.am:
+	Mac OS X fix: build two-level namespace binaries. (Fixes unresolved
+	symbol crash w/Qt 4.4.)
+
+2008-05-07 07:34 +0000  Lars J. Aas  <larsa@sim.no>  (a48eb79d3351)
+
+	* src/Quarter/QuarterWidget.cpp:
+	include declaration
+
+2008-05-06 17:03 +0000  Tamer Fahmy  <tamer@sim.no>  (90be538b1781)
+
+	* src/Quarter/QuarterWidget.cpp:
+	remove header reference of old navigation system.
+
+2008-05-05 15:54 +0000  Lars J. Aas  <larsa@sim.no>  (c4b13f801965)
+
+	* src/Quarter/devices/MouseHandler.cpp:
+	cosmetics. help my weak eyes spot the :-operator.
+
+2008-05-05 15:44 +0000  Terje Wiesener  <wiesener@sim.no>  (c9a94451b898)
+
+	* src/Quarter/devices/MouseHandler.cpp:
+	Set the button-down state for mouse wheel events
+
+2008-05-04 16:48 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (45ba94f4b8a3)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Bugfix: Correcting the order of initalization.
+
+2008-04-16 15:04 +0000  Marius Kintel  <kintel@sim.no>  (709b1ded35b0)
+
+	* build/qmake/Quarter.pro:
+	sync
+
+2008-04-15 12:55 +0000  Peder Blekken  <pederb@sim.no>  (ac2be85d9006)
+
+	* src/Quarter/SensorManager.cpp:
+	Remove the callback from Coin before shutting down.
+
+2008-04-15 12:55 +0000  Peder Blekken  <pederb@sim.no>  (20ec71a93b1a)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Call doneCurrent() in renderCB.
+
+2008-04-11 23:36 +0000  autosvn  <autosvn@sim.no>  (d69c779549ff)
+
+	* src/CMakeLists.txt, src/Quarter/CMakeLists.txt:
+	Automatic Property adjustment
+
+2008-04-11 13:30 +0000  Lars Moastuen  <larsm@sim.no>  (193c98e7fb35)
+
+	* CMakeLists.txt, CMakeMacros/Modules/FindCoin.cmake,
+	CMakeMacros/Modules/SimQtMacros.cmake, src/CMakeLists.txt,
+	src/Quarter/CMakeLists.txt: new file.
+	* CMakeLists.txt, CMakeMacros/Modules/FindCoin.cmake,
+	CMakeMacros/Modules/SimQtMacros.cmake, src/CMakeLists.txt,
+	src/Quarter/CMakeLists.txt:
+	Added CMake support for Quarter. Work in progress, building plugins
+	and example is not supported yet.
+
+2008-04-11 02:01 +0000  Frode Øijord  <frodo@sim.no>  (e29443a0c2d3)
+
+	* configure, configure.ac:
+	a couple of minor fixes
+
+2008-04-11 01:11 +0000  Frode Øijord  <frodo@sim.no>  (53ed5e078221)
+
+	* configure, configure.ac:
+	Use qt designer plugin directory by default on all platforms unless
+	other plugin directory was specified
+
+2008-04-10 23:45 +0000  Frode Øijord  <frodo@sim.no>  (002f26ee90ee)
+
+	* configure, configure.ac:
+	allow user to override Quarter framework prefix to different
+	location that Inventor framework location
+
+2008-04-10 00:33 +0000  Frode Øijord  <frodo@sim.no>  (012c14c542eb)
+
+	* src/Quarter/QuarterWidgetP.cpp:
+	optimization
+
+2008-04-10 00:21 +0000  Frode Øijord  <frodo@sim.no>  (9787520b36dc)
+
+	* configure, configure.ac:
+	remove the --with-framework-prefix option
+
+2008-04-09 23:53 +0000  Frode Øijord  <frodo@sim.no>  (735ae1d4635a)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	added property for enabling/disabling context menu
+
+2008-04-09 00:59 +0000  Frode Øijord  <frodo@sim.no>  (e9208593832f)
+
+	* src/Quarter/QuarterWidget.cpp:
+	use the SbColor4f version of setBackgroundColor
+
+2008-04-05 11:54 +0000  Lars J. Aas  <larsa@sim.no>  (d8290b1a1674)
+
+	* src/Quarter/QuarterWidget.cpp:
+	support statemachines terminating and becoming inactive
+
+2008-04-03 19:03 +0000  Frode Øijord  <frodo@sim.no>  (5a060a6495b7)
+
+	* src/Quarter/QuarterWidget.cpp:
+	send 4D background color to Coin
+
+2008-04-03 15:06 +0000  Peder Blekken  <pederb@sim.no>  (0094a65101d8)
+
+	* src/Quarter/SignalThread.h:
+	Use Qt4 include style.
+
+2008-04-03 15:03 +0000  Peder Blekken  <pederb@sim.no>  (aa65d358cd2e)
+
+	* src/Quarter/SensorManager.cpp:
+	Code cleanup.
+
+2008-04-03 15:02 +0000  Peder Blekken  <pederb@sim.no>  (77dc234786d0)
+
+	* src/Quarter/SensorManager.cpp:
+	Don't start the signal thread before needed.
+
+2008-04-03 15:00 +0000  Peder Blekken  <pederb@sim.no>  (f77db0acf2be)
+
+	* src/Quarter/SignalThread.cpp, src/Quarter/SignalThread.h: new file.
+	* src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/SensorManager.cpp, src/Quarter/SensorManager.h,
+	src/Quarter/SignalThread.cpp, src/Quarter/SignalThread.h:
+	Multithread support. Make sure QTimers are only created in the
+	QApplication thread.
+
+2008-04-03 12:39 +0000  Frode Øijord  <frodo@sim.no>  (f5809dca0480)
+
+	* Makefile.am, Makefile.in:
+	added platform specific README files to dist
+
+2008-04-03 12:35 +0000  Frode Øijord  <frodo@sim.no>  (e5cd7b7dcbc4)
+
+	* README.MACOSX, README.WIN32: new file.
+	* AUTHORS, INSTALL, README, README.MACOSX, README.WIN32:
+	updated README and added a couple of platform-specific versions
+
+2008-04-02 18:17 +0000  Frode Øijord  <frodo@sim.no>  (f78c1b3e9d81)
+
+	* src/Quarter/QuarterWidget.cpp:
+	add some missing documentation
+
+2008-04-02 18:13 +0000  Frode Øijord  <frodo@sim.no>  (95687907f478)
+
+	* html/Makefile.am, html/Makefile.in:
+	install documentation files along with framework on Mac OS X
+
+2008-04-02 12:00 +0000  Frode Øijord  <frodo@sim.no>  (bb2d9a911dc2)
+
+	* src/Quarter/ContextMenu.cpp:
+	remove erroneous include
+
+2008-04-01 16:59 +0000  Frode Øijord  <frodo@sim.no>  (28e1f750c465)
+
+	* src/Quarter/QuarterWidgetP.cpp:
+	remove printf
+
+2008-04-01 16:58 +0000  Frode Øijord  <frodo@sim.no>  (acfb6f0fc597)
+
+	* src/Quarter/ContextMenu.cpp, src/Quarter/ContextMenu.h: new file.
+	* include/Quarter/eventhandlers/ContextMenuHandler.h,
+	src/Quarter/eventhandlers/ContextMenu.cpp,
+	src/Quarter/eventhandlers/ContextMenu.h,
+	src/Quarter/eventhandlers/ContextMenuHandler.cpp: deleted file.
+	* include/Quarter/devices/DeviceManager.h,
+	include/Quarter/eventhandlers/ContextMenuHandler.h,
+	include/Quarter/eventhandlers/Makefile.am,
+	include/Quarter/eventhandlers/Makefile.in,
+	src/Quarter/ContextMenu.cpp, src/Quarter/ContextMenu.h,
+	src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h, src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/eventhandlers/ContextMenu.cpp,
+	src/Quarter/eventhandlers/ContextMenu.h,
+	src/Quarter/eventhandlers/ContextMenuHandler.cpp,
+	src/Quarter/eventhandlers/Makefile.am,
+	src/Quarter/eventhandlers/Makefile.in:
+	get rid of the contextmenuhandler and trigger menu from statechange
+	callback
+
+2008-04-01 15:43 +0000  Frode Øijord  <frodo@sim.no>  (a7da0f807a9c)
+
+	* src/Quarter/QuarterWidgetP.cpp:
+	only change cursor if a cursor is defined for the given state
+
+2008-04-01 15:38 +0000  Frode Øijord  <frodo@sim.no>  (0ac5a8315fc6)
+
+	* include/Quarter/devices/DeviceHandler.h,
+	src/Quarter/devices/DeviceHandler.cpp,
+	src/Quarter/devices/KeyboardHandlerP.cpp,
+	src/Quarter/devices/MouseHandler.cpp,
+	src/Quarter/eventhandlers/ContextMenu.cpp,
+	src/Quarter/eventhandlers/ContextMenu.h,
+	src/Quarter/eventhandlers/ContextMenuHandler.cpp:
+	misc event fixes
+
+2008-04-01 14:13 +0000  Peder Blekken  <pederb@sim.no>  (6b4e6090e701)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Initialize state machine.
+
+2008-04-01 13:11 +0000  Frode Øijord  <frodo@sim.no>  (614d30f759df)
+
+	* src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/eventhandlers/ContextMenu.cpp,
+	src/Quarter/eventhandlers/ContextMenu.h:
+	cursor for interact state + menu entries for seek and view all
+
+2008-04-01 11:33 +0000  Frode Øijord  <frodo@sim.no>  (8f992dad92f5)
+
+	* src/Quarter/QuarterWidget.cpp:
+	add cursor for seek state
+
+2008-03-31 15:09 +0000  Frode Øijord  <frodo@sim.no>  (c2c9e95c46ff)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	SbName / QCursor mapping for navigation states
+
+2008-03-31 09:35 +0000  Frode Øijord  <frodo@sim.no>  (9761ee122827)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	rename to something more sensible
+
+2008-03-30 19:05 +0000  Frode Øijord  <frodo@sim.no>  (bd9b4c98eb11)
+
+	* src/Quarter/eventhandlers/ContextMenuHandler.cpp:
+	plug memory leak
+
+2008-03-30 18:47 +0000  Frode Øijord  <frodo@sim.no>  (2d1b5e03322c)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	user configurable cursor/navigation mode mapping
+
+2008-03-30 17:29 +0000  Frode Øijord  <frodo@sim.no>  (c2dd56fde8ef)
+
+	* src/Quarter/eventhandlers/ContextMenu.cpp:
+	let the navigation system know about popup menu events
+
+2008-03-30 17:01 +0000  Frode Øijord  <frodo@sim.no>  (cd809e0024e9)
+
+	* src/examples/QuarterViewer.ui:
+	remove tooltip from examples
+
+2008-03-28 17:14 +0000  Thomas Hammer  <thammer@sim.no>  (e4e0296d25b5)
+
+	* src/Quarter/Quarter.cpp:
+	Set self to NULL after delete, so init() can be called again
+
+2008-03-27 17:43 +0000  Lars J. Aas  <larsa@sim.no>  (24d4ea9a7196)
+
+	* src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h:
+	set up a state change callback (for pointer type updating)
+
+2008-03-27 14:03 +0000  Lars J. Aas  <larsa@sim.no>  (201afc1a2e7e)
+
+	* src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h:
+	use SCXML state machine navigation system instead of
+	SoNavigationSystem
+
+2008-03-26 16:38 +0000  Peder Blekken  <pederb@sim.no>  (485b1c24df10)
+
+	* src/Quarter/ImageReader.cpp, src/Quarter/ImageReader.h: new file.
+	* include/Quarter/QuarterApplication.h, src/Quarter/ImageReader.cpp,
+	src/Quarter/ImageReader.h, src/Quarter/Makefile.am,
+	src/Quarter/Makefile.in, src/Quarter/QuarterApplication.cpp:
+	Add ImageReader. We're now using Qt to load images.
+
+2008-03-26 14:34 +0000  Frode Øijord  <frodo@sim.no>  (2b21110c06c0)
+
+	* include/Quarter/devices/DeviceManager.h,
+	src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/KeyboardHandler.cpp,
+	src/Quarter/devices/KeyboardHandlerP.cpp,
+	src/Quarter/devices/KeyboardHandlerP.h:
+	cache the last mouse position in the device manager to allow other
+	devices to access it
+
+2008-03-25 12:33 +0000  Marius Kintel  <kintel@sim.no>  (3f9fb70cc894)
+
+	* build/qmake/Quarter.pro, build/qmake/QuarterWidgetPlugin.pro,
+	build/qmake/coin.pro: new file.
+	* build/qmake/Quarter.pro, build/qmake/QuarterWidgetPlugin.pro,
+	build/qmake/coin.pro:
+	qmake buildsystem (fallback while autotools build fails)
+
+2008-03-24 17:16 +0000  Frode Øijord  <frodo@sim.no>  (e913a25649ed)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.h:
+	give user access to context menu
+
+2008-03-24 14:58 +0000  Frode Øijord  <frodo@sim.no>  (ab0cbd45e5ee)
+
+	* src/Quarter/devices/KeyboardHandlerP.cpp,
+	src/Quarter/devices/KeyboardHandlerP.h:
+	bugfix: make sure arrow keys are handled on Mac OS X
+
+2008-03-24 14:07 +0000  Frode Øijord  <frodo@sim.no>  (a99c12ef810b)
+
+	* src/Quarter/eventhandlers/ContextMenu.cpp,
+	src/Quarter/eventhandlers/ContextMenu.h: new file.
+	* src/Quarter/eventhandlers/ContextMenuHandlerP.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.h: deleted file.
+	* config.h.in, configure, src/Quarter/eventhandlers/ContextMenu.cpp,
+	src/Quarter/eventhandlers/ContextMenu.h,
+	src/Quarter/eventhandlers/ContextMenuHandler.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.h,
+	src/Quarter/eventhandlers/Makefile.am,
+	src/Quarter/eventhandlers/Makefile.in:
+	renamed a couple of files
+
+2008-03-24 14:02 +0000  Frode Øijord  <frodo@sim.no>  (ac4a584aca0e)
+
+	* include/Quarter/eventhandlers/ContextMenuHandler.h,
+	src/Quarter/eventhandlers/ContextMenuHandler.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.h:
+	allow users to get a hold of the context menu
+
+2008-03-24 14:01 +0000  Frode Øijord  <frodo@sim.no>  (7cb9165c4e40)
+
+	* config.h.in, configure, configure.ac:
+	minor build fix
+
+2008-03-14 14:46 +0000  Peder Blekken  <pederb@sim.no>  (d428b2ae2c28)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Proper paintGL() handling.
+
+2008-03-14 13:20 +0000  Peder Blekken  <pederb@sim.no>  (8ac666fcac18)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Don't render in paintGL(), schedule a redraw instead.
+
+2008-02-23 19:22 +0000  Frode Øijord  <frodo@sim.no>  (fec8fff38089)
+
+	* aclocal.m4, configure, configure.ac:
+	move the --with-alternate check before the coin macro. Patch by
+	Thomas Hammer.
+
+2008-02-23 19:08 +0000  Frode Øijord  <frodo@sim.no>  (c71d4a505c8f)
+
+	* Makefile.am, Makefile.in:
+	add a couple of files that were missing from the dist target
+
+2008-02-23 19:07 +0000  Frode Øijord  <frodo@sim.no>  (3a118e360e22)
+
+	* src/Quarter/QuarterWidget.cpp:
+	typo
+
+2008-02-15 11:09 +0000  Frode Øijord  <frodo@sim.no>  (b0b0102a3e3e)
+
+	* src/examples/dynamicui.cpp, src/examples/examiner.cpp:
+	include path fix
+
+2008-01-07 09:01 +0000  Lars J. Aas  <larsa@sim.no>  (8835522fea73)
+
+	* src/examples/superimposition.cpp:
+	scrap duplicate includes
+
+2008-01-03 14:46 +0000  Lars J. Aas  <larsa@sim.no>  (4b5c15977401)
+
+	* src/examples/examiner.cpp:
+	remove the 'always-present' cone from the examiner example
+
+2007-12-12 15:54 +0000  Frode Øijord  <frodo@sim.no>  (ac7adad80878)
+
+	* aclocal.m4, configure:
+	bootstrap
+
+2007-12-12 15:53 +0000  Frode Øijord  <frodo@sim.no>  (9b4906f634fc)
+
+	* configure:
+	bootstrap
+
+2007-12-12 15:52 +0000  Frode Øijord  <frodo@sim.no>  (4b3aa52a3d18)
+
+	* configure.ac:
+	handle static debug qt builds on win32
+
+2007-12-10 13:19 +0000  Frode Øijord  <frodo@sim.no>  (fa40f91f4079)
+
+	* configure, configure.ac:
+	the build type settings are windows only
+
+2007-12-10 13:17 +0000  Frode Øijord  <frodo@sim.no>  (9becdc8bbc6f)
+
+	* configure, configure.ac:
+	make sure sim_ac_have_qt_framework is initialized when the QT m4
+	macro is not used
+
+2007-12-05 14:28 +0000  Lars J. Aas  <larsa@sim.no>  (ea185228e0b5)
+
+	* aclocal.m4, cfg/errors.txt, configure:
+	bootstrap
+
+2007-12-05 13:43 +0000  Marius Kintel  <kintel@sim.no>  (5b0322f52d67)
+
+	* src/plugins/QuarterWidgetPlugin.qrc, src/plugins/coinlogo.png: new
+	file.
+	* src/plugins/QuarterWidgetPlugin.cpp,
+	src/plugins/QuarterWidgetPlugin.qrc, src/plugins/coinlogo.png:
+	Use Coin logo in Designer
+
+2007-12-05 13:24 +0000  Lars J. Aas  <larsa@sim.no>  (d3dd4821a22b)
+
+	* configure:
+	ignore properties
+
+2007-12-05 12:06 +0000  Lars J. Aas  <larsa@sim.no>  (5dfeeb79a51c)
+
+	* configure, configure.ac:
+	evaluation order fix
+
+2007-12-05 10:45 +0000  Marius Kintel  <kintel@sim.no>  (01f0d60c14b6)
+
+	* Makefile.in, aclocal.m4, configure, html/Makefile.in,
+	include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/Quarter/devices/Makefile.in,
+	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.in:
+	bootstrap
+
+2007-12-05 10:45 +0000  Marius Kintel  <kintel@sim.no>  (1601cd870ed6)
+
+	* configure.ac, src/examples/Makefile.am, src/plugins/Makefile.am:
+	Temporary fix to better handle mixed framework builds
+
+2007-12-04 17:03 +0000  Terje Wiesener  <wiesener@sim.no>  (5bbd96ed86f2)
+
+	* src/Quarter/eventhandlers/DragDropHandler.cpp:
+	Fix crash in DragDropHandler
+
+2007-12-04 16:27 +0000  Frode Øijord  <frodo@sim.no>  (ccc58b024787)
+
+	* configure, configure.ac:
+	revert previous error, these flags should not have been touched
+
+2007-12-04 14:35 +0000  Frode Øijord  <frodo@sim.no>  (e2671e79ce9f)
+
+	* aclocal.m4, configure, configure.ac:
+	make it possible to strip symbol information from the libraries and
+	executables
+
+2007-12-04 14:00 +0000  Frode Øijord  <frodo@sim.no>  (d55ad380d413)
+
+	* Makefile.in, aclocal.m4, configure, html/Makefile.in,
+	include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/Quarter/devices/Makefile.in,
+	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.in:
+	bootstrap
+
+2007-12-04 13:57 +0000  Frode Øijord  <frodo@sim.no>  (5ade877079a7)
+
+	* configure.ac:
+	make sure asserts are stripped from release builds and set the
+	QUARTER_DEBUG define
+
+2007-12-04 13:13 +0000  Frode Øijord  <frodo@sim.no>  (8726f3eccf50)
+
+	* configure, configure.ac:
+	fixed typo that prevented dll's from containing debug info when
+	building in debug mode
+
+2007-12-01 01:06 +0000  Terje Wiesener  <wiesener@sim.no>  (6faf43f0f832)
+
+	* configure:
+	bootstrap
+
+2007-12-01 01:06 +0000  Terje Wiesener  <wiesener@sim.no>  (cc64379a258b)
+
+	* configure.ac:
+	fix test for qt plugin path on windows
+
+2007-11-30 17:41 +0000  Marius Kintel  <kintel@sim.no>  (5e204e997455)
+
+	* src/plugins/QuarterWidgetPlugin.cpp:
+	buglet: widget name is the instance variable name, not the class
+	name
+
+2007-11-29 18:32 +0000  Marius Kintel  <kintel@sim.no>  (26d238a18ad6)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	Added missing Qt::WindowFlags parameter to QuarterWidget constructor
+
+2007-11-26 14:47 +0000  Tamer Fahmy  <tamer@sim.no>  (42df4c400dd2)
+
+	* configure:
+	bootstrap.
+
+2007-11-26 14:46 +0000  Tamer Fahmy  <tamer@sim.no>  (33636adf8eb3)
+
+	* configure.ac:
+	by default install plugin into $libdir/designer by default on non-
+	Windows platforms. requires QT_PLUGIN_PATH to be set to $libdir for
+	non-default locations. provide
+	--with-qt-designer-plugin-path option to directly specify desired
+	location to override default.
+
+2007-11-26 12:21 +0000  Tamer Fahmy  <tamer@sim.no>  (12a15b7407d8)
+
+	* Quarter.pc.in:
+	remove URL entry to support older pkg-config versions
+
+2007-11-16 21:42 +0000  Frode Øijord  <frodo@sim.no>  (2a4e87cf9c03)
+
+	* configure, configure.ac:
+	misc reorganizing
+
+2007-11-16 20:26 +0000  Frode Øijord  <frodo@sim.no>  (5b032e6ba725)
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
+	html/Makefile.in, include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/Quarter/devices/Makefile.in,
+	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.am,
+	src/examples/Makefile.in, src/plugins/Makefile.in:
+	support for static .lib on win32
+
+2007-11-16 16:11 +0000  Frode Øijord  <frodo@sim.no>  (bf7302af72e8)
+
+	* aclocal.m4, configure:
+	bootstrap
+
+2007-11-16 13:54 +0000  Frode Øijord  <frodo@sim.no>  (d6f48fb56518)
+
+	* src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/plugins/Makefile.am, src/plugins/Makefile.in:
+	misc build fixes
+
+2007-11-15 16:51 +0000  Frode Øijord  <frodo@sim.no>  (3f3eab578bee)
+
+	* aclocal.m4, configure:
+	bootstrap
+
+2007-11-14 14:11 +0000  Frode Øijord  <frodo@sim.no>  (d3b6e768fc35)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	added a property for background color and changed the name of the
+	function that sets it
+
+2007-11-14 11:43 +0000  Frode Øijord  <frodo@sim.no>  (63f09ecce274)
+
+	* Makefile.am, Makefile.in, aclocal.m4, configure, configure.ac,
+	html/Makefile.in, include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/Quarter/devices/Makefile.in,
+	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.in:
+	added option --disable-build if you just want to generate doc
+
+2007-11-12 12:51 +0000  Frode Øijord  <frodo@sim.no>  (3d21659d1e2e)
+
+	* src/Quarter/QuarterWidget.cpp:
+	fixed the code style on qglClearColor function
+
+2007-11-10 00:28 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (db7f69fe90a5)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	Set the background color of a scene.
+
+2007-11-09 16:03 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (1f913cd46222)
+
+	* src/Quarter/eventhandlers/DragDropHandler.cpp:
+	Fixed bitwise and to short circuit and.
+
+2007-11-09 16:00 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (e239564b739d)
+
+	* include/Quarter/Quarter.h, include/Quarter/QuarterWidget.h,
+	include/Quarter/devices/DeviceHandler.h,
+	include/Quarter/devices/DeviceManager.h,
+	include/Quarter/devices/KeyboardHandler.h,
+	include/Quarter/devices/MouseHandler.h,
+	include/Quarter/eventhandlers/ContextMenuHandler.h,
+	include/Quarter/eventhandlers/DragDropHandler.h,
+	include/Quarter/eventhandlers/EventHandler.h,
+	include/Quarter/eventhandlers/EventManager.h,
+	src/Quarter/Quarter.cpp, src/Quarter/QuarterApplication.cpp,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h, src/Quarter/SensorManager.cpp,
+	src/Quarter/devices/DeviceHandler.cpp,
+	src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/KeyboardHandler.cpp,
+	src/Quarter/devices/KeyboardHandlerP.cpp,
+	src/Quarter/devices/KeyboardHandlerP.h,
+	src/Quarter/devices/MouseHandler.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.cpp,
+	src/Quarter/eventhandlers/DragDropHandler.cpp,
+	src/Quarter/eventhandlers/EventHandler.cpp,
+	src/Quarter/eventhandlers/EventManager.cpp,
+	src/examples/MdiMainWindow.cpp, src/examples/MdiQuarterWidget.cpp,
+	src/examples/QuarterViewer.cpp, src/examples/directui.cpp,
+	src/examples/dynamicui.cpp, src/examples/examiner.cpp,
+	src/examples/inheritui.cpp, src/examples/mdi.cpp,
+	src/examples/minimal.cpp, src/examples/superimposition.cpp,
+	src/plugins/QuarterWidgetPlugin.cpp,
+	src/plugins/QuarterWidgetPlugin.h, src/unit-
+	tests/events/EventTranslation.cpp:
+	Fixed whitespace contamination.
+
+2007-11-09 15:41 +0000  Pål-Robert Engnæs  <preng@sim.no>  (43dd495981bf)
+
+	* src/Quarter/eventhandlers/DragDropHandler.cpp:
+	Only 'file' URLs are supported, ignore other types. FIXME about
+	dropping text buffers on Vista.
+
+2007-11-05 10:17 +0000  Karin (kyrah) Kosina  <kyrah@sim.no>  (8f35dc86d873)
+
+	* configure.ac:
+	Fix for Qt-4 binary distribution on Mac OS X: Must explicitly link
+	against QtScript.framework.
+
+2007-11-02 15:40 +0000  Frode Øijord  <frodo@sim.no>  (a555ace0a18e)
+
+	* src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/eventhandlers/Makefile.am,
+	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.am,
+	src/examples/Makefile.in, src/plugins/Makefile.am,
+	src/plugins/Makefile.in:
+	make sure built sources are not included in dist
+
+2007-11-02 13:39 +0000  Frode Øijord  <frodo@sim.no>  (3bceca1bb98a)
+
+	* Makefile.am, Makefile.in:
+	include wrapmsvc and errors.txt in EXTRA_DIST
+
+2007-11-02 12:02 +0000  Frode Øijord  <frodo@sim.no>  (c3416998e950)
+
+	* aclocal.m4, configure, configure.ac:
+	if pkg-config check for coin failed, fall back on the normal coin
+	check, even if pkg-config check for Qt works.
+
+2007-10-31 12:07 +0000  Frode Øijord  <frodo@sim.no>  (820d8d774259)
+
+	* aclocal.m4, configure, configure.ac:
+	configure check for QtOpenGL instead of hardcoding it
+
+2007-10-31 12:06 +0000  Frode Øijord  <frodo@sim.no>  (c0027599a51c)
+
+	* src/examples/MdiMainWindow.cpp, src/examples/MdiMainWindow.h,
+	src/examples/MdiQuarterWidget.h:
+	qualify include paths with module name
+
+2007-10-31 09:57 +0000  Frode Øijord  <frodo@sim.no>  (4e53f61719aa)
+
+	* src/examples/MdiMainWindow.cpp, src/examples/MdiMainWindow.h:
+	added menu for tiling and cascading of windows
+
+2007-10-31 09:18 +0000  Frode Øijord  <frodo@sim.no>  (68326ff2b143)
+
+	* src/Quarter/QuarterApplication.cpp:
+	removed some garbage
+
+2007-10-30 16:13 +0000  Frode Øijord  <frodo@sim.no>  (a0008a1f5e80)
+
+	* src/examples/MdiMainWindow.cpp, src/examples/MdiMainWindow.h,
+	src/examples/MdiQuarterWidget.cpp, src/examples/MdiQuarterWidget.h,
+	src/examples/mdi.cpp: new file.
+	* docs/quarter.doxygen.in, src/Quarter/Quarter.cpp,
+	src/examples/Makefile.am, src/examples/Makefile.in,
+	src/examples/MdiMainWindow.cpp, src/examples/MdiMainWindow.h,
+	src/examples/MdiQuarterWidget.cpp, src/examples/MdiQuarterWidget.h,
+	src/examples/QuarterViewer.h, src/examples/mdi.cpp:
+	added a multiple document interface example
+
+2007-10-29 14:33 +0000  Frode Øijord  <frodo@sim.no>  (2957641458cc)
+
+	* src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.h:
+	keep a pointer to the user-defined scene graph and return that from
+	getSceneGraph()
+
+2007-10-29 10:33 +0000  Frode Øijord  <frodo@sim.no>  (d606f9fea53b)
+
+	* configure, configure.ac:
+	if build as framework, link with Inventor framework
+
+2007-10-24 15:39 +0000  Frode Øijord  <frodo@sim.no>  (f6ea45ed3aa6)
+
+	* Makefile.in, configure, configure.ac, html/Makefile.in,
+	include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/devices/Makefile.in,
+	src/Quarter/eventhandlers/Makefile.am,
+	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.am,
+	src/examples/Makefile.in, src/examples/dynamicui.cpp,
+	src/examples/examiner.cpp, src/plugins/Makefile.am,
+	src/plugins/Makefile.in:
+	misc win32 build fixes
+
+2007-10-24 12:36 +0000  Frode Øijord  <frodo@sim.no>  (9e8a0d2ab378)
+
+	* Makefile.in, aclocal.m4, configure, configure.ac, html/Makefile.in,
+	include/Makefile.in, include/Quarter/Makefile.am,
+	include/Quarter/Makefile.in, include/Quarter/devices/Makefile.am,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.am,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/devices/Makefile.in,
+	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.am,
+	src/examples/Makefile.in, src/plugins/Makefile.am,
+	src/plugins/Makefile.in:
+	added support for installation as Mac OS X framework
+
+2007-10-19 13:02 +0000  Frode Øijord  <frodo@sim.no>  (1a000482caac)
+
+	* configure, configure.ac:
+	Added some needed build flags for Qt Plugins on Mac OS X
+
+2007-10-17 15:14 +0000  Frode Øijord  <frodo@sim.no>  (fb89ef5ff1cc)
+
+	* include/Quarter/QuarterWidget.h,
+	include/Quarter/eventhandlers/EventManager.h,
+	src/Quarter/QuarterWidget.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.h,
+	src/Quarter/eventhandlers/EventManager.cpp:
+	add sub-menu for setting transparency type
+
+2007-10-09 11:16 +0000  Frode Øijord  <frodo@sim.no>  (66f23ee8b623)
+
+	* src/examples/examiner.cpp, src/examples/quarterviewer.qrc: new file.
+	* src/examples/dynamicui.qrc: deleted file.
+	* aclocal.m4, cfg/config.guess, cfg/config.sub, cfg/gendsp.pl.in,
+	configure, src/examples/Makefile.am, src/examples/Makefile.in,
+	src/examples/dynamicui.cpp, src/examples/dynamicui.qrc,
+	src/examples/examiner.cpp, src/examples/quarterviewer.qrc:
+	added examiner like viewer with loading of Inventor files to
+	examples
+
+2007-10-09 11:15 +0000  Frode Øijord  <frodo@sim.no>  (e52ad8d2d1b2)
+
+	* src/examples/inheritui.cpp:
+	typo
+
+2007-10-05 16:11 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (bb7d7fa3739a)
+
+	* include/Quarter/DropManager.h, src/Quarter/DropManager.cpp: deleted
+	file.
+	* include/Quarter/DropManager.h, include/Quarter/Makefile.am,
+	include/Quarter/QuarterWidget.h, src/Quarter/DropManager.cpp,
+	src/Quarter/Makefile.am, src/Quarter/QuarterWidget.cpp:
+	Reverting to 133. D&D already exists.
+
+2007-10-05 15:57 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (e7c40d97964e)
+
+	* src/Quarter/QuarterWidgetP.h:
+	Reverted erroneous commit of file which should have been left
+	unchanged.
+
+2007-10-05 15:54 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (88211aaf5de1)
+
+	* include/Quarter/DropManager.h, src/Quarter/DropManager.cpp: new
+	file.
+	* include/Quarter/DropManager.h, include/Quarter/Makefile.am,
+	include/Quarter/QuarterWidget.h, src/Quarter/DropManager.cpp,
+	src/Quarter/Makefile.am, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.h:
+	Added transparent Drag and Drop handling for Quarter.
+
+2007-09-04 12:13 +0000  Frode Øijord  <frodo@sim.no>  (a435c5190374)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	added method for returning the scene graph from QuarterWidget
+
+2007-09-04 09:14 +0000  Frode Øijord  <frodo@sim.no>  (623cec871ce6)
+
+	* src/plugins/QuarterWidgetPlugin.h:
+	can't use full include path here, the Q_INTERFACES macro does not
+	understand it
+
+2007-08-30 15:13 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (d87c09b3236b)
+
+	* src/Quarter/eventhandlers/ContextMenuHandler.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.h,
+	src/plugins/QuarterWidgetPlugin.cpp,
+	src/plugins/QuarterWidgetPlugin.h:
+	Use full Qt include paths to avoid configure/build problems.
+
+2007-08-30 14:15 +0000  Peder Blekken  <pederb@sim.no>  (dcc874893cc7)
+
+	* src/Quarter/eventhandlers/DragDropHandler.cpp:
+	More Qt include fixes
+
+2007-08-30 13:55 +0000  Peder Blekken  <pederb@sim.no>  (c0f26b65b1db)
+
+	* src/Quarter/devices/KeyboardHandlerP.h:
+	Compile fix.
+
+2007-08-30 13:15 +0000  Tamer Fahmy  <tamer@sim.no>  (563b285947f3)
+
+	* configure, configure.ac:
+	add missing 4 to QtXml.
+
+2007-08-30 13:09 +0000  Peder Blekken  <pederb@sim.no>  (0964862e3a4d)
+
+	* src/plugins/QuarterWidgetPlugin.cpp,
+	src/plugins/QuarterWidgetPlugin.h:
+	Bugfix. Detect when the GLcontext sharing widget is destroyed.
+
+2007-08-30 12:45 +0000  Tamer Fahmy  <tamer@sim.no>  (6f7697097558)
+
+	* configure, configure.ac:
+	Only append 4 to QtXml in the windows case.
+
+2007-08-30 12:23 +0000  Peder Blekken  <pederb@sim.no>  (e1757270e355)
+
+	* configure, configure.ac:
+	Manually add the QtXml library since we use that in Quarter.
+
+2007-08-30 12:15 +0000  Peder Blekken  <pederb@sim.no>  (eb39cf29b644)
+
+	* configure, configure.ac:
+	Qt plugin dir detection fix.
+
+2007-08-30 10:20 +0000  Peder Blekken  <pederb@sim.no>  (e417d7d6e985)
+
+	* include/Quarter/QuarterApplication.h,
+	include/Quarter/QuarterWidget.h,
+	include/Quarter/devices/DeviceManager.h,
+	include/Quarter/eventhandlers/EventManager.h,
+	src/Quarter/SensorManager.cpp, src/Quarter/SensorManager.h,
+	src/Quarter/devices/KeyboardHandler.cpp,
+	src/Quarter/devices/KeyboardHandlerP.cpp,
+	src/Quarter/devices/MouseHandler.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandler.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.cpp:
+	Use full Qt include paths to avoid configure/build problems.
+
+2007-08-30 10:09 +0000  Peder Blekken  <pederb@sim.no>  (142eec61003a)
+
+	* configure:
+	Use full path when including Qt header files.
+
+2007-08-30 10:08 +0000  Peder Blekken  <pederb@sim.no>  (0ae2010fae6f)
+
+	* configure.ac:
+	Use full path when including Qt header files.
+
+2007-08-29 20:04 +0000  Tamer Fahmy  <tamer@sim.no>  (f885ec41f809)
+
+	* configure, configure.ac:
+	Never question Bruce Dickinson! So more cowbell to allow conftest
+	for Qt designer path detection to execute without running into a
+	"Cannot mix incompatible Qt libraries" if another Qt version is
+	installed into the system. (reported by Jan Thomassen)
+
+2007-08-28 22:30 +0000  Tamer Fahmy  <tamer@sim.no>  (8c5f1f4a32e0)
+
+	* configure, configure.ac:
+	less cowbell...
+
+2007-08-28 17:16 +0000  Tamer Fahmy  <tamer@sim.no>  (29d040e6914d)
+
+	* Makefile.in, cfg/errors.txt, configure, html/Makefile.in,
+	include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/Quarter/devices/Makefile.in,
+	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.am, src/plugins/Makefile.in:
+	bootstrap.
+
+2007-08-28 17:16 +0000  Tamer Fahmy  <tamer@sim.no>  (54afa6c67e69)
+
+	* configure.ac:
+	robustify rcc pkg-config check (no path env influence) by existence
+	check of moc or uic directory prefix. Gather compiled in Qt Designer
+	plugins path through QUiLoader::pluginPaths().
+
+2007-08-01 14:59 +0000  Frode Øijord  <frodo@sim.no>  (aa2c7f8c2dfb)
+
+	* cfg/errors.txt, src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/devices/Makefile.am, src/Quarter/devices/Makefile.in,
+	src/Quarter/eventhandlers/Makefile.am,
+	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.am,
+	src/examples/Makefile.in, src/plugins/Makefile.am,
+	src/plugins/Makefile.in:
+	use QTDIR for windows builds
+
+2007-07-30 23:34 +0000  Tamer Fahmy  <tamer@sim.no>  (4e5b651a2257)
+
+	* configure:
+	bootstrap.
+
+2007-07-30 23:34 +0000  Tamer Fahmy  <tamer@sim.no>  (c1a3611caf7d)
+
+	* configure.ac:
+	Workaround for Qt4 packaging bug in Debian based distros: Fallback
+	to regular $PATH check, if moc_location/uic_location pkgconfig
+	variables point to a non-existing path.
+
+2007-07-30 12:48 +0000  Frode Øijord  <frodo@sim.no>  (8aef2b4648cc)
+
+	* docs/quarter.doxygen.in, src/Quarter/eventhandlers/EventHandler.cpp:
+	documentation update
+
+2007-07-29 02:08 +0000  Tamer Fahmy  <tamer@sim.no>  (a3dced27f0bd)
+
+	* Makefile.in, cfg/errors.txt, configure, html/Makefile.in,
+	include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/Quarter/devices/Makefile.in,
+	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.in:
+	bootstrap.
+
+2007-07-29 02:07 +0000  Tamer Fahmy  <tamer@sim.no>  (daed301439a1)
+
+	* Makefile.am, configure.ac:
+	gather moc and uic over pkg-config and add handling for Quarter.pc
+	deployment.
+
+2007-07-29 02:04 +0000  Tamer Fahmy  <tamer@sim.no>  (ea2b808929c8)
+
+	* Quarter.pc.in: new file.
+	* Quarter.pc.in:
+	initial Quarter metadata file.
+
+2007-07-29 01:30 +0000  Tamer Fahmy  <tamer@sim.no>  (88665d6aaf34)
+
+	* configure.ac:
+	adjust for same Coin name of pkg-config metadata file. Gather moc,
+	uic locations through pkg-config.
+
+2007-07-23 17:13 +0000  Tamer Fahmy  <tamer@sim.no>  (7d987c6c6f1d)
+
+	* configure:
+	bootstrap.
+
+2007-07-23 17:12 +0000  Tamer Fahmy  <tamer@sim.no>  (d113982bf483)
+
+	* configure.ac:
+	enable/disable for detection through pkg-config (default=yes). small
+	fixes for prefix and QTDIR env.
+
+2007-07-21 16:29 +0000  Tamer Fahmy  <tamer@sim.no>  (3cd757aef2ce)
+
+	* cfg/csubst.exe: new file.
+	* Makefile.in, aclocal.m4, cfg/csubst.exe, cfg/gendsp.pl.in,
+	cfg/wrapmsvc.exe, configure, html/Makefile.in, include/Makefile.in,
+	include/Quarter/Makefile.in, include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/Quarter/devices/Makefile.in,
+	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.in:
+	bootstrap.
+
+2007-07-21 16:29 +0000  Tamer Fahmy  <tamer@sim.no>  (f38f70988c0c)
+
+	* configure.ac:
+	use pkg-config for Coin and Qt4 detection with fallback to SIM
+	macros if pkgconfig is not found installed. couple of small fixes.
+
+2007-07-21 16:26 +0000  Tamer Fahmy  <tamer@sim.no>  (552cdf04cff4)
+
+	* src/Quarter/Makefile.am, src/Quarter/devices/Makefile.am,
+	src/Quarter/eventhandlers/Makefile.am, src/examples/Makefile.am,
+	src/plugins/Makefile.am:
+	remove usage of QTDIR environment variable in automake files.
+	various small fixes for missing includes.
+
+2007-07-05 15:57 +0000  Peder Blekken  <pederb@sim.no>  (ab7602fd2007)
+
+	* src/Quarter/QuarterWidget.cpp:
+	Set focus policy for widget.
+
+2007-07-05 14:00 +0000  Peder Blekken  <pederb@sim.no>  (8e1ee49c8d67)
+
+	* src/Quarter/Quarter.cpp:
+	Also initialize the Inventor interaction system.
+
+2007-07-05 13:34 +0000  Frode Øijord  <frodo@sim.no>  (eb0afb4880f3)
+
+	* src/Quarter/QuarterWidget.cpp:
+	only do a viewAll if no camera was present in the scene
+
+2007-07-05 13:26 +0000  Frode Øijord  <frodo@sim.no>  (837ab6ee8e11)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	setCamera method is pointless
+
+2007-07-05 13:21 +0000  Frode Øijord  <frodo@sim.no>  (f29425ba1748)
+
+	* src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.h:
+	the QuarterWidget should not maintain its own navigationsystem
+
+2007-07-05 11:39 +0000  Peder Blekken  <pederb@sim.no>  (958586a2f740)
+
+	* src/Quarter/SensorManager.cpp:
+	Bugfixes for sensor handling.
+
+2007-07-05 10:20 +0000  Peder Blekken  <pederb@sim.no>  (922561e8cc97)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	Set up correct cache context id for the default SoGLRenderAction.
+	Add a method for fetching the cache context id assigned to the
+	widget.
+
+2007-07-05 09:10 +0000  Peder Blekken  <pederb@sim.no>  (9ebac09ef0f0)
+
+	* src/plugins/QuarterWidgetPlugin.cpp:
+	Set up context sharing in plugin.
+
+2007-07-05 09:03 +0000  Peder Blekken  <pederb@sim.no>  (75c976fe4a50)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp:
+	Add support for cache context sharing.
+
+2007-07-04 16:29 +0000  Frode Øijord  <frodo@sim.no>  (aff16caa007f)
+
+	* src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h:
+	code simplification + small bugfix
+
+2007-07-04 12:58 +0000  Peder Blekken  <pederb@sim.no>  (f0791bd0cb1b)
+
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
+	Better superscene control.
+
+2007-07-03 15:58 +0000  Frode Øijord  <frodo@sim.no>  (342946221354)
+
+	* src/Quarter/SensorManager.cpp:
+	removed nutsnbolts reference
+
+2007-07-03 15:33 +0000  Frode Øijord  <frodo@sim.no>  (8d87088a850f)
+
+	* include/Quarter/QuarterWidget.h:
+	destructor should be virtual
+
+2007-07-03 12:52 +0000  Frode Øijord  <frodo@sim.no>  (8885976aca72)
+
+	* configure, configure.ac, include/Quarter/QuarterWidget.h,
+	src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/Quarter.cpp, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.h,
+	src/examples/Makefile.am, src/examples/Makefile.in,
+	src/examples/superimposition.cpp:
+	use the new RenderManager and EventManager
+
+2007-06-27 15:21 +0000  Peder Blekken  <pederb@sim.no>  (5cbe7b997b15)
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
+	html/Makefile.in, include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/Quarter/devices/Makefile.in,
+	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.in,
+	src/plugins/Makefile.in:
+	Attempt to fix mac os x configure prooblem.
+
+2007-06-20 16:00 +0000  Frode Øijord  <frodo@sim.no>  (c47c78c00bb0)
+
+	* src/Quarter/Makefile.in:
+	bootstrap
+
+2007-06-20 15:55 +0000  Frode Øijord  <frodo@sim.no>  (d07265f45901)
+
+	* src/Quarter/Makefile.am:
+	windows build fix
+
+2007-06-20 15:50 +0000  Frode Øijord  <frodo@sim.no>  (6f8edc3e555d)
+
+	* include/Quarter/eventhandlers/ContextMenuHandler.h,
+	include/Quarter/eventhandlers/DragDropHandler.h,
+	include/Quarter/eventhandlers/EventHandler.h,
+	include/Quarter/eventhandlers/EventManager.h,
+	include/Quarter/eventhandlers/Makefile.am,
+	include/Quarter/eventhandlers/Makefile.in,
+	src/Quarter/eventhandlers/ContextMenuHandler.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.h,
+	src/Quarter/eventhandlers/DragDropHandler.cpp,
+	src/Quarter/eventhandlers/EventHandler.cpp,
+	src/Quarter/eventhandlers/EventManager.cpp,
+	src/Quarter/eventhandlers/Makefile.am,
+	src/Quarter/eventhandlers/Makefile.in: new file.
+	* include/Quarter/devices/ContextMenuHandler.h,
+	include/Quarter/devices/DragDropHandler.h,
+	src/Quarter/devices/ContextMenuHandler.cpp,
+	src/Quarter/devices/ContextMenuHandlerP.cpp,
+	src/Quarter/devices/ContextMenuHandlerP.h,
+	src/Quarter/devices/DragDropHandler.cpp: deleted file.
+	* configure, configure.ac, include/Quarter/Makefile.am,
+	include/Quarter/Makefile.in,
+	include/Quarter/devices/ContextMenuHandler.h,
+	include/Quarter/devices/DragDropHandler.h,
+	include/Quarter/devices/Makefile.am,
+	include/Quarter/devices/Makefile.in,
+	include/Quarter/eventhandlers/ContextMenuHandler.h,
+	include/Quarter/eventhandlers/DragDropHandler.h,
+	include/Quarter/eventhandlers/EventHandler.h,
+	include/Quarter/eventhandlers/EventManager.h,
+	include/Quarter/eventhandlers/Makefile.am,
+	include/Quarter/eventhandlers/Makefile.in, src/Quarter/Makefile.am,
+	src/Quarter/Makefile.in, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.h,
+	src/Quarter/devices/ContextMenuHandler.cpp,
+	src/Quarter/devices/ContextMenuHandlerP.cpp,
+	src/Quarter/devices/ContextMenuHandlerP.h,
+	src/Quarter/devices/DragDropHandler.cpp,
+	src/Quarter/devices/Makefile.am, src/Quarter/devices/Makefile.in,
+	src/Quarter/eventhandlers/ContextMenuHandler.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.cpp,
+	src/Quarter/eventhandlers/ContextMenuHandlerP.h,
+	src/Quarter/eventhandlers/DragDropHandler.cpp,
+	src/Quarter/eventhandlers/EventHandler.cpp,
+	src/Quarter/eventhandlers/EventManager.cpp,
+	src/Quarter/eventhandlers/Makefile.am,
+	src/Quarter/eventhandlers/Makefile.in,
+	src/examples/QuarterViewer.ui:
+	misc refactoring + enabled the context menu and drag & drop by
+	default
+
+2007-06-19 15:02 +0000  Frode Øijord  <frodo@sim.no>  (c6ece14b4ba6)
+
+	* src/examples/superimposition.cpp: new file.
+	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
+	src/examples/Makefile.am, src/examples/Makefile.in,
+	src/examples/superimposition.cpp:
+	added example showing super-imposed scene
+
+2007-06-18 10:46 +0000  Frode Øijord  <frodo@sim.no>  (89d13961f45d)
+
+	* include/Quarter/devices/ContextMenuHandler.h,
+	src/Quarter/devices/ContextMenuHandler.cpp,
+	src/Quarter/devices/ContextMenuHandlerP.cpp,
+	src/Quarter/devices/ContextMenuHandlerP.h: new file.
+	* aclocal.m4, cfg/gendsp.pl.in, configure, configure.ac,
+	include/Quarter/devices/ContextMenuHandler.h,
+	include/Quarter/devices/Makefile.am,
+	include/Quarter/devices/Makefile.in, src/Quarter/Makefile.am,
+	src/Quarter/Makefile.in, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/devices/ContextMenuHandler.cpp,
+	src/Quarter/devices/ContextMenuHandlerP.cpp,
+	src/Quarter/devices/ContextMenuHandlerP.h,
+	src/Quarter/devices/KeyboardHandlerP.cpp,
+	src/Quarter/devices/Makefile.am, src/Quarter/devices/Makefile.in,
+	src/Quarter/devices/MouseHandler.cpp:
+	support for context menu + misc fixes
+
+2007-05-14 10:32 +0000  Frode Øijord  <frodo@sim.no>  (9466cce90024)
+
+	* docs/quarter.doxygen.in, include/Quarter/devices/DeviceHandler.h,
+	src/Quarter/Quarter.cpp, src/examples/directui.cpp,
+	src/examples/dynamicui.cpp, src/examples/inheritui.cpp,
+	src/examples/minimal.cpp, src/plugins/QuarterWidgetPlugin.cpp:
+	misc doc updates
+
+2007-05-09 14:41 +0000  Frode Øijord  <frodo@sim.no>  (e511b5dd69b6)
+
+	* configure, configure.ac:
+	don't bother with pdb files for each example, and just remove the
+	vc80.pdb file
+
+2007-05-09 14:13 +0000  Frode Øijord  <frodo@sim.no>  (6227934db5f3)
+
+	* configure, configure.ac:
+	small fix
+
+2007-05-09 14:12 +0000  Frode Øijord  <frodo@sim.no>  (83f97cdc6ce5)
+
+	* src/examples/Makefile.am, src/examples/Makefile.in:
+	include the qrc and ui file to the distribution archive
+
+2007-05-09 13:04 +0000  Frode Øijord  <frodo@sim.no>  (fb81496f2c6e)
+
+	* Quarter.pro, src/Quarter/Quarter.pro, src/examples/examples.pro,
+	src/examples/viewer.pro, src/examples/viewer.qrc,
+	src/plugins/plugins.pro, src/src.pro: deleted file.
+	* Quarter.pro, src/Quarter/Quarter.pro, src/examples/examples.pro,
+	src/examples/viewer.pro, src/examples/viewer.qrc,
+	src/plugins/plugins.pro, src/src.pro:
+	clean out some unused files
+
+2007-05-09 12:59 +0000  Frode Øijord  <frodo@sim.no>  (0920da6cc499)
+
+	* src/examples/QuarterViewer.cpp, src/examples/QuarterViewer.h,
+	src/examples/QuarterViewer.ui, src/examples/directui.cpp,
+	src/examples/dynamicui.cpp, src/examples/dynamicui.qrc,
+	src/examples/inheritui.cpp: new file.
+	* src/examples/viewer.cpp, src/examples/viewer.ui: deleted file.
+	* Makefile.in, configure, configure.ac, html/Makefile.in,
+	include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/Quarter/devices/Makefile.in,
+	src/examples/Makefile.am, src/examples/Makefile.in,
+	src/examples/QuarterViewer.cpp, src/examples/QuarterViewer.h,
+	src/examples/QuarterViewer.ui, src/examples/directui.cpp,
+	src/examples/dynamicui.cpp, src/examples/dynamicui.qrc,
+	src/examples/inheritui.cpp, src/examples/viewer.cpp,
+	src/examples/viewer.ui, src/plugins/Makefile.in,
+	src/plugins/QuarterWidgetPlugin.cpp:
+	reworked the examples to show the main ways of using the
+	QuarterWidget: from code only, dynamically loading ui file, using
+	uic to generate cpp code and create an ui directly, and finally
+	using uic to generate cpp code and create a gui by subclassing
+	generated code
+
+2007-05-09 10:02 +0000  Frode Øijord  <frodo@sim.no>  (836b8887ac30)
+
+	* cfg/doxy4win.pl, src/examples/minimal.cpp: new file.
+	* cfg/doxy4win.pl, docs/quarter.doxygen.in, src/Quarter/Quarter.cpp,
+	src/Quarter/QuarterApplication.cpp, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/devices/DeviceHandler.cpp,
+	src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/DragDropHandler.cpp,
+	src/Quarter/devices/KeyboardHandler.cpp,
+	src/Quarter/devices/MouseHandler.cpp, src/examples/Makefile.am,
+	src/examples/Makefile.in, src/examples/minimal.cpp,
+	src/plugins/QuarterWidgetPlugin.cpp:
+	added more doc and a minimal viewer example
+
+2007-05-08 14:34 +0000  Frode Øijord  <frodo@sim.no>  (bec597c6b41d)
+
+	* docs/doxygen/Coin_logo.png, docs/doxygen/footer.html,
+	docs/doxygen/header.html, docs/doxygen/stylesheet.css,
+	docs/quarter.doxygen.in, html/Makefile.am, html/Makefile.in: new
+	file.
+	* Makefile.am, Makefile.in, aclocal.m4, configure, configure.ac,
+	docs/doxygen/Coin_logo.png, docs/doxygen/footer.html,
+	docs/doxygen/header.html, docs/doxygen/stylesheet.css,
+	docs/quarter.doxygen.in, html/Makefile.am, html/Makefile.in,
+	include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in, src/Makefile.in,
+	src/Quarter/Makefile.in, src/Quarter/Quarter.cpp,
+	src/Quarter/QuarterApplication.cpp, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/devices/DeviceHandler.cpp,
+	src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/DragDropHandler.cpp,
+	src/Quarter/devices/KeyboardHandler.cpp,
+	src/Quarter/devices/Makefile.in,
+	src/Quarter/devices/MouseHandler.cpp, src/examples/Makefile.in,
+	src/examples/viewer.cpp, src/plugins/Makefile.am,
+	src/plugins/Makefile.in:
+	added the infrastructure needed for doxygen html doc generation
+
+2007-05-04 13:48 +0000  Frode Øijord  <frodo@sim.no>  (e3b5d66f1622)
+
+	* src/Quarter/Quarter.cpp, src/Quarter/devices/KeyboardHandlerP.cpp:
+	plugged a couple of memory leaks
+
+2007-05-03 15:24 +0000  Frode Øijord  <frodo@sim.no>  (be2b7e14f0bb)
+
+	* src/examples/Makefile.am, src/examples/Makefile.in:
+	qrc_viewer.cpp also depends on the .ui file
+
+2007-05-03 14:52 +0000  Frode Øijord  <frodo@sim.no>  (e6265c3b45c7)
+
+	* configure, configure.ac, src/Quarter/Makefile.am,
+	src/Quarter/Makefile.in, src/Quarter/QuarterWidget.cpp,
+	src/plugins/Makefile.am, src/plugins/Makefile.in:
+	misc fixes and more output in configuration summary
+
+2007-05-03 13:44 +0000  Frode Øijord  <frodo@sim.no>  (af6d99bb68c3)
+
+	* src/examples/viewer.qrc, src/examples/viewer.ui: new file.
+	* src/examples/quarterwidget.ui: deleted file.
+	* Makefile.in, configure, configure.ac, include/Makefile.in,
+	include/Quarter/Makefile.in, include/Quarter/devices/Makefile.in,
+	src/Makefile.in, src/Quarter/Makefile.in,
+	src/Quarter/devices/Makefile.in, src/examples/Makefile.am,
+	src/examples/Makefile.in, src/examples/quarterwidget.ui,
+	src/examples/viewer.cpp, src/examples/viewer.qrc,
+	src/examples/viewer.ui, src/plugins/Makefile.in:
+	embed ui file in executable
+
+2007-05-02 16:01 +0000  Frode Øijord  <frodo@sim.no>  (4fd66359fb77)
+
+	* configure, configure.ac, src/Quarter/Makefile.am,
+	src/Quarter/Makefile.in, src/examples/Makefile.am,
+	src/examples/Makefile.in, src/plugins/Makefile.am,
+	src/plugins/Makefile.in:
+	misc fixes
+
+2007-05-02 15:21 +0000  Frode Øijord  <frodo@sim.no>  (b234227cdb4c)
+
+	* configure, configure.ac:
+	some extra cppflags needed for the plugin to work
+
+2007-05-02 13:37 +0000  Frode Øijord  <frodo@sim.no>  (e6df1af3bec9)
+
+	* configure, configure.ac, src/plugins/Makefile.am,
+	src/plugins/Makefile.in:
+	make sure linking with quarter works even if it's not installed yet
+
+2007-05-02 12:03 +0000  Frode Øijord  <frodo@sim.no>  (dcee5a6c720d)
+
+	* Makefile.in, aclocal.m4, configure, configure.ac,
+	include/Makefile.in, include/Quarter/Makefile.in,
+	include/Quarter/devices/Makefile.in, src/Makefile.am,
+	src/Makefile.in, src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/devices/Makefile.am, src/Quarter/devices/Makefile.in,
+	src/examples/Makefile.am, src/examples/Makefile.in,
+	src/examples/examples.pro, src/examples/viewer.cpp,
+	src/plugins/Makefile.am, src/plugins/Makefile.in,
+	src/plugins/plugins.pro:
+	cygwin/msvc port of build scripts
+
+2007-04-26 23:34 +0000  autosvn  <autosvn@sim.no>  (0e4f59f9f98d)
+
+	* cfg/ltmain.sh:
+	Automatic Property adjustment
+
+2007-04-26 11:09 +0000  Frode Øijord  <frodo@sim.no>  (eceb38903e34)
+
+	* AUTHORS, COPYING, INSTALL, Makefile.am, Makefile.in, NEWS, README,
+	aclocal.m4, cfg/config.guess, cfg/config.sub, cfg/depcomp,
+	cfg/errors.txt, cfg/gendsp.pl.in, cfg/gendsp.sh.in, cfg/install-sh,
+	cfg/ltmain.sh, cfg/missing, cfg/mkinstalldirs, cfg/wrapmsvc.exe,
+	config.h.in, configure, configure.ac, include/Makefile.am,
+	include/Makefile.in, include/Quarter/Makefile.am,
+	include/Quarter/Makefile.in, include/Quarter/devices/Makefile.am,
+	include/Quarter/devices/Makefile.in, src/Makefile.am,
+	src/Makefile.in, src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/devices/Makefile.am, src/Quarter/devices/Makefile.in,
+	src/examples/Makefile.am, src/examples/Makefile.in,
+	src/plugins/Makefile.am, src/plugins/Makefile.in: new file.
+	* AUTHORS, COPYING, INSTALL, Makefile.am, Makefile.in, NEWS, README,
+	aclocal.m4, cfg/config.guess, cfg/config.sub, cfg/depcomp,
+	cfg/errors.txt, cfg/gendsp.pl.in, cfg/gendsp.sh.in, cfg/install-sh,
+	cfg/ltmain.sh, cfg/missing, cfg/mkinstalldirs, cfg/wrapmsvc.exe,
+	config.h.in, configure, configure.ac, include/Makefile.am,
+	include/Makefile.in, include/Quarter/Makefile.am,
+	include/Quarter/Makefile.in, include/Quarter/devices/Makefile.am,
+	include/Quarter/devices/Makefile.in, src/Makefile.am,
+	src/Makefile.in, src/Quarter/Makefile.am, src/Quarter/Makefile.in,
+	src/Quarter/devices/Makefile.am, src/Quarter/devices/Makefile.in,
+	src/examples/Makefile.am, src/examples/Makefile.in,
+	src/examples/quarterwidget.ui, src/plugins/Makefile.am,
+	src/plugins/Makefile.in:
+	added GNU build scripts
+
+2007-03-30 13:09 +0000  Frode Øijord  <frodo@sim.no>  (aa25bcf317c0)
+
+	* src/examples/quarterwidget.ui, src/plugins/QuarterWidgetPlugin.cpp,
+	src/plugins/QuarterWidgetPlugin.h:
+	namespace fix; use fully qualified names in plugin so that Qt
+	Designer is able to create an instance of the QuarterWidget
+
+2007-03-22 11:42 +0000  Frode Øijord  <frodo@sim.no>  (ea1b2e231134)
+
+	* include/Quarter/Quarter.h, include/Quarter/QuarterApplication.h,
+	include/Quarter/QuarterWidget.h,
+	include/Quarter/devices/DeviceHandler.h,
+	include/Quarter/devices/DeviceManager.h,
+	include/Quarter/devices/DragDropHandler.h,
+	include/Quarter/devices/KeyboardHandler.h,
+	include/Quarter/devices/MouseHandler.h, src/Quarter/Quarter.cpp,
+	src/Quarter/QuarterApplication.cpp, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h,
+	src/Quarter/SensorManager.cpp, src/Quarter/SensorManager.h,
+	src/Quarter/devices/DeviceHandler.cpp,
+	src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/DragDropHandler.cpp,
+	src/Quarter/devices/KeyboardHandler.cpp,
+	src/Quarter/devices/KeyboardHandlerP.cpp,
+	src/Quarter/devices/KeyboardHandlerP.h,
+	src/Quarter/devices/MouseHandler.cpp, src/examples/quarterwidget.ui,
+	src/examples/viewer.cpp, src/plugins/QuarterWidgetPlugin.cpp,
+	src/plugins/QuarterWidgetPlugin.h:
+	added namespace Quarter
+
+2007-03-12 14:58 +0000  Frode Øijord  <frodo@sim.no>  (c050dcaa21e0)
+
+	* src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h: new
+	file.
+	* include/Quarter/QuarterWidget.h, src/Quarter/Quarter.pro,
+	src/Quarter/QuarterWidget.cpp, src/Quarter/QuarterWidgetP.cpp,
+	src/Quarter/QuarterWidgetP.h:
+	refactoring/cleanup
+
+2007-03-12 09:46 +0000  Frode Øijord  <frodo@sim.no>  (44d8b4448a6c)
+
+	* include/Quarter/QuarterWidget.h:
+	remove some unused includes and declarations
+
+2007-03-12 09:46 +0000  Frode Øijord  <frodo@sim.no>  (0a8c83c30f14)
+
+	* src/unit-tests/events/EventTranslation.cpp, src/unit-
+	tests/events/EventTranslation.h, src/unit-tests/events/events.cpp,
+	src/unit-tests/events/events.pro: new file.
+	* src/unit-tests/events/EventTranslation.cpp, src/unit-
+	tests/events/EventTranslation.h, src/unit-tests/events/events.cpp,
+	src/unit-tests/events/events.pro:
+	unit test for keyboard mapping
+
+2007-03-12 09:44 +0000  Frode Øijord  <frodo@sim.no>  (d5fc23375518)
+
+	* src/Quarter/devices/KeyboardHandlerP.cpp:
+	remove unused mapping
+
+2007-03-08 12:47 +0000  Frode Øijord  <frodo@sim.no>  (5f3fee114a70)
+
+	* src/examples/examples.pro, src/plugins/plugins.pro:
+	couple of build fixes
+
+2007-03-07 17:18 +0000  Frode Øijord  <frodo@sim.no>  (5ad8dfde4d4f)
+
+	* include/Quarter/Basic.h, include/Quarter/Quarter.h,
+	include/Quarter/QuarterApplication.h,
+	include/Quarter/QuarterWidget.h,
+	include/Quarter/devices/DeviceHandler.h,
+	include/Quarter/devices/DeviceManager.h,
+	include/Quarter/devices/DragDropHandler.h,
+	include/Quarter/devices/KeyboardHandler.h,
+	include/Quarter/devices/MouseHandler.h,
+	src/Quarter/QuarterApplication.cpp, src/Quarter/QuarterWidget.cpp,
+	src/Quarter/SensorManager.cpp, src/Quarter/SensorManager.h,
+	src/Quarter/devices/DeviceHandler.cpp,
+	src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/DragDropHandler.cpp,
+	src/Quarter/devices/KeyboardHandler.cpp,
+	src/Quarter/devices/KeyboardHandlerP.cpp,
+	src/Quarter/devices/KeyboardHandlerP.h,
+	src/Quarter/devices/MouseHandler.cpp, src/examples/viewer.cpp,
+	src/plugins/QuarterWidgetPlugin.cpp,
+	src/plugins/QuarterWidgetPlugin.h:
+	update copyright headers
+
+2007-03-07 17:15 +0000  Frode Øijord  <frodo@sim.no>  (e62c232cf6b5)
+
+	* include/Quarter/devices/DeviceManager.h,
+	src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/DragDropHandler.cpp:
+	more renaming
+
+2007-03-07 17:12 +0000  Frode Øijord  <frodo@sim.no>  (5c09b7984111)
+
+	* src/plugins/QuarterWidgetPlugin.h:
+	rename a define
+
+2007-03-07 17:11 +0000  Frode Øijord  <frodo@sim.no>  (57d66302c5f0)
+
+	* include/Quarter/QuarterWidget.h:
+	rename a define
+
+2007-03-07 17:09 +0000  Frode Øijord  <frodo@sim.no>  (65b0def364c7)
+
+	* src/Quarter/QuarterWidget.cpp:
+	remeber to pass unhandled events on to Qt
+
+2007-03-07 17:07 +0000  Frode Øijord  <frodo@sim.no>  (ef9667b43c59)
+
+	* src/Quarter/QuarterWidget.cpp:
+	remove some unused includes
+
+2007-03-07 16:57 +0000  Frode Øijord  <frodo@sim.no>  (5820807e7335)
+
+	* include/Quarter/QuarterApplication.h,
+	include/Quarter/QuarterWidget.h, src/Quarter/QuarterApplication.cpp,
+	src/Quarter/QuarterWidget.cpp,
+	src/Quarter/devices/KeyboardHandlerP.cpp,
+	src/Quarter/devices/KeyboardHandlerP.h,
+	src/examples/quarterwidget.ui, src/plugins/QuarterWidgetPlugin.cpp,
+	src/plugins/QuarterWidgetPlugin.h: new file.
+	* include/Quarter/CoinApplication.h, include/Quarter/CoinWidget.h,
+	src/Quarter/CoinApplication.cpp, src/Quarter/CoinWidget.cpp,
+	src/examples/coinwidget.ui, src/plugins/CoinWidgetPlugin.cpp,
+	src/plugins/CoinWidgetPlugin.h: deleted file.
+	* include/Quarter/CoinApplication.h, include/Quarter/CoinWidget.h,
+	include/Quarter/QuarterApplication.h,
+	include/Quarter/QuarterWidget.h,
+	include/Quarter/devices/DeviceHandler.h,
+	include/Quarter/devices/DeviceManager.h,
+	include/Quarter/devices/DragDropHandler.h,
+	include/Quarter/devices/KeyboardHandler.h,
+	include/Quarter/devices/MouseHandler.h,
+	src/Quarter/CoinApplication.cpp, src/Quarter/CoinWidget.cpp,
+	src/Quarter/Quarter.pro, src/Quarter/QuarterApplication.cpp,
+	src/Quarter/QuarterWidget.cpp,
+	src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/DragDropHandler.cpp,
+	src/Quarter/devices/KeyboardHandler.cpp,
+	src/Quarter/devices/KeyboardHandlerP.cpp,
+	src/Quarter/devices/KeyboardHandlerP.h,
+	src/Quarter/devices/MouseHandler.cpp, src/examples/coinwidget.ui,
+	src/examples/quarterwidget.ui, src/examples/viewer.cpp,
+	src/plugins/CoinWidgetPlugin.cpp, src/plugins/CoinWidgetPlugin.h,
+	src/plugins/QuarterWidgetPlugin.cpp,
+	src/plugins/QuarterWidgetPlugin.h, src/plugins/plugins.pro:
+	misc renaming and cleaning
+
+2007-03-07 13:16 +0000  Frode Øijord  <frodo@sim.no>  (ddee9b22c195)
+
+	* src/Quarter/devices/DragDropHandler.cpp:
+	support for dragging and dropping text
+
+2007-03-07 11:03 +0000  Frode Øijord  <frodo@sim.no>  (e547830b284f)
+
+	* include/Quarter/devices/DragDropHandler.h,
+	src/Quarter/devices/DeviceHandler.cpp,
+	src/Quarter/devices/DragDropHandler.cpp: new file.
+	* include/Quarter/CoinWidget.h,
+	include/Quarter/devices/DeviceHandler.h,
+	include/Quarter/devices/DeviceManager.h,
+	include/Quarter/devices/DragDropHandler.h,
+	src/Quarter/CoinWidget.cpp, src/Quarter/Quarter.pro,
+	src/Quarter/devices/DeviceHandler.cpp,
+	src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/DragDropHandler.cpp, src/examples/viewer.cpp:
+	drag and drop implemented as a device handler
+
+2007-03-07 09:15 +0000  Frode Øijord  <frodo@sim.no>  (88f5dd0c4ca3)
+
+	* src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/KeyboardHandler.cpp,
+	src/Quarter/devices/MouseHandler.cpp: new file.
+	* src/Quarter/DeviceManager.cpp, src/Quarter/KeyboardHandler.cpp,
+	src/Quarter/MouseHandler.cpp: deleted file.
+	* src/Quarter/DeviceManager.cpp, src/Quarter/KeyboardHandler.cpp,
+	src/Quarter/MouseHandler.cpp, src/Quarter/Quarter.pro,
+	src/Quarter/devices/DeviceManager.cpp,
+	src/Quarter/devices/KeyboardHandler.cpp,
+	src/Quarter/devices/MouseHandler.cpp:
+	subdirectory for devices
+
+2007-03-07 09:13 +0000  Frode Øijord  <frodo@sim.no>  (c39bcd79b1c1)
+
+	* include/Quarter/devices/DeviceHandler.h,
+	include/Quarter/devices/DeviceManager.h,
+	include/Quarter/devices/KeyboardHandler.h,
+	include/Quarter/devices/MouseHandler.h: new file.
+	* include/Quarter/DeviceHandler.h, include/Quarter/DeviceManager.h,
+	include/Quarter/KeyboardHandler.h, include/Quarter/MouseHandler.h:
+	deleted file.
+	* include/Quarter/DeviceHandler.h, include/Quarter/DeviceManager.h,
+	include/Quarter/KeyboardHandler.h, include/Quarter/MouseHandler.h,
+	include/Quarter/devices/DeviceHandler.h,
+	include/Quarter/devices/DeviceManager.h,
+	include/Quarter/devices/KeyboardHandler.h,
+	include/Quarter/devices/MouseHandler.h, src/Quarter/CoinWidget.cpp,
+	src/Quarter/DeviceManager.cpp, src/Quarter/KeyboardHandler.cpp,
+	src/Quarter/MouseHandler.cpp, src/Quarter/Quarter.pro:
+	subdirectory for devices
+
+2007-03-07 09:02 +0000  Frode Øijord  <frodo@sim.no>  (1387bd8dc742)
+
+	* include/Quarter/DeviceManager.h: new file.
+	* src/Quarter/DeviceManager.h: deleted file.
+	* include/Quarter/CoinWidget.h, include/Quarter/DeviceManager.h,
+	src/Quarter/CoinWidget.cpp, src/Quarter/DeviceManager.cpp,
+	src/Quarter/DeviceManager.h, src/Quarter/Quarter.pro:
+	api for registering new devices
+
+2007-03-06 16:16 +0000  Frode Øijord  <frodo@sim.no>  (f8ebc67e5f5a)
+
+	* include/Quarter/Basic.h, include/Quarter/CoinApplication.h,
+	include/Quarter/CoinWidget.h, include/Quarter/DeviceHandler.h,
+	include/Quarter/Quarter.h, src/Quarter/CoinApplication.cpp,
+	src/Quarter/CoinWidget.cpp, src/Quarter/DeviceManager.cpp,
+	src/Quarter/DeviceManager.h, src/Quarter/SensorManager.cpp,
+	src/Quarter/SensorManager.h, src/examples/viewer.cpp,
+	src/plugins/CoinWidgetPlugin.cpp, src/plugins/CoinWidgetPlugin.h:
+	fix typo in copyright headers
+
+2007-03-06 16:11 +0000  Frode Øijord  <frodo@sim.no>  (7d44de45a862)
+
+	* include/Quarter/DeviceHandler.h, include/Quarter/KeyboardHandler.h,
+	include/Quarter/MouseHandler.h, src/Quarter/DeviceManager.cpp,
+	src/Quarter/DeviceManager.h, src/Quarter/KeyboardHandler.cpp,
+	src/Quarter/MouseHandler.cpp: new file.
+	* include/Quarter/CoinWidget.h, include/Quarter/DeviceHandler.h,
+	include/Quarter/KeyboardHandler.h, include/Quarter/MouseHandler.h,
+	src/Quarter/CoinWidget.cpp, src/Quarter/DeviceManager.cpp,
+	src/Quarter/DeviceManager.h, src/Quarter/KeyboardHandler.cpp,
+	src/Quarter/MouseHandler.cpp, src/Quarter/Quarter.pro,
+	src/examples/coinwidget.ui:
+	device based framework for event translation
+
+2007-03-05 13:11 +0000  Frode Øijord  <frodo@sim.no>  (978589f5478a)
+
+	* include/Quarter/CoinWidget.h, src/Quarter/CoinWidget.cpp,
+	src/examples/coinwidget.ui:
+	basic drag and drop support for inventor and vrml files
+
+2007-03-05 08:50 +0000  Frode Øijord  <frodo@sim.no>  (c30f70719013)
+
+	* Quarter.pro, include/Quarter/Basic.h,
+	include/Quarter/CoinApplication.h, include/Quarter/CoinWidget.h,
+	include/Quarter/Quarter.h, src/Quarter/CoinApplication.cpp,
+	src/Quarter/CoinWidget.cpp, src/Quarter/Quarter.cpp,
+	src/Quarter/Quarter.pro, src/Quarter/SensorManager.cpp,
+	src/Quarter/SensorManager.h, src/examples/coinwidget.ui,
+	src/examples/examples.pro, src/examples/viewer.cpp,
+	src/examples/viewer.pro, src/plugins/CoinWidgetPlugin.cpp,
+	src/plugins/CoinWidgetPlugin.h, src/plugins/plugins.pro,
+	src/src.pro: new file.
+	* Quarter.pro, include/Quarter/Basic.h,
+	include/Quarter/CoinApplication.h, include/Quarter/CoinWidget.h,
+	include/Quarter/Quarter.h, src/Quarter/CoinApplication.cpp,
+	src/Quarter/CoinWidget.cpp, src/Quarter/Quarter.cpp,
+	src/Quarter/Quarter.pro, src/Quarter/SensorManager.cpp,
+	src/Quarter/SensorManager.h, src/examples/coinwidget.ui,
+	src/examples/examples.pro, src/examples/viewer.cpp,
+	src/examples/viewer.pro, src/plugins/CoinWidgetPlugin.cpp,
+	src/plugins/CoinWidgetPlugin.h, src/plugins/plugins.pro,
+	src/src.pro:
+	the basic functionality...
+

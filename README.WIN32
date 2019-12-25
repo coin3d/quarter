@@ -1,6 +1,17 @@
-======================================================================
-==                  BUILDING QUARTER ON WINDOWS                     ==
-======================================================================
+============================================================================
+==                       BUILDING QUARTER ON WINDOWS                      ==
+============================================================================
+
+Building Quarter on Windows is done by using the CMake build configuration.
+Check out the detailed build instructions in the INSTALL file of the Coin
+installation directory.
+
+The Autotools build system is still maintained but at a significantly lower
+priority.
+
+============================================================================
+==            OLD INFORMATION ON BUILDING QUARTER ON WINDOWS              ==
+============================================================================
 
 Microsoft Visual Studio
 =======================

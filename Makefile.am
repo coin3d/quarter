@@ -22,6 +22,8 @@ EXTRA_DIST = \
         Quarter.pc.in \
         docs/quarter.doxygen.in \
         docs/doxygen/Coin_logo.png \
+        docs/ChangeLog.v1.0.0 \
+        docs/ChangeLog.v1.1.0 \
         cfg/wrapmsvc.exe \
         cfg/errors.txt \
         cfg/doxy4win.pl \

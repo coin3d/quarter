@@ -1,2 +1,19 @@
+Quarter 1.1.0 (2019-12-25):
+* new:
+  - Kongsberg Oil & Gas Technologies AS ended SoWin as a commercial product
+    and re-licensed it under the BSD 3-clause license as a service to the
+    user community.
+  - The build system has been migrated from GNU Autotools to CMake
+  - Added support for Qt5
+  - Added support for high DPI displays in Qt5
+  - New 3DConnexion Space Navigator support using the Spacenav opensource library
+  - Support for BitBucket and AppVeyor as continuous integration service providers
+
+* bugfixes:
+  - Always reinitialize SoRenderManager when GL context is (re-)initialized
+  - Avoid unnecessary redraws when moving window around. Fixes COIN-173
+  - Handle double click events
+  - Buffer went out of scope, while a reference was still held
+
 Quarter 1.0.0 (2009-01-26):
 - first proper release.
