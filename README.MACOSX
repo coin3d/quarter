@@ -1,6 +1,17 @@
-======================================================================
-==                  BUILDING QUARTER ON MAC OS X                    ==
-======================================================================
+============================================================================
+==                      BUILDING QUARTER ON MAC OS X                      ==
+============================================================================
+
+For building Quarter on macOS platform, you should in general follow the
+instructions in the INSTALL file.
+
+This file contains additional information about building Quarter on Mac OS X.
+For more information on getting started, known issues, and more, see
+https://bitbucket.org/Coin3D/coin/wiki/Mac%20information%20page.
+
+============================================================================
+==         OLD INFORMATION ON BUILDING QUARTER ON MAC OS X                ==
+============================================================================
 
 Building Quarter should be straightforward: ./configure && make &&
 sudo make install. See the file INSTALL for details. If any of these
