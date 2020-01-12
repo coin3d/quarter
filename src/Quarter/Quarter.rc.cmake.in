@@ -18,7 +18,7 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "Kongsberg Oil & Gas Technologies AS"
-            VALUE "FileDescription", "A Qt Gui-toolkit binding for Coin3D, 3D graphics rendering library - www.bitbucket.org/Coin3D"
+            VALUE "FileDescription", "A Qt Gui-toolkit binding for Coin3D, 3D graphics rendering library - www.github.com/coin3d"
             VALUE "FileVersion","@PROJECT_VERSION_MAJOR@, @PROJECT_VERSION_MINOR@, @PROJECT_VERSION_PATCH@, @QUARTER_BETA_VERSION@"
             VALUE "InternalName", "@PROJECT_NAME@"
             VALUE "LegalCopyright", "Copyright (c) @QUARTER_BUILD_YEAR@ Kongsberg Oil & Gas Technologies AS"
