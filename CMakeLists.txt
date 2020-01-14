@@ -66,6 +66,7 @@ cmake_dependent_option(QUARTER_BUILD_INTERNAL_DOCUMENTATION "Document internal c
 cmake_dependent_option(QUARTER_BUILD_DOC_MAN "Build So${Gui} man pages." OFF "QUARTER_BUILD_DOCUMENTATION" OFF)
 cmake_dependent_option(QUARTER_BUILD_DOC_QTHELP "Build QtHelp documentation." OFF "QUARTER_BUILD_DOCUMENTATION" OFF)
 cmake_dependent_option(QUARTER_BUILD_DOC_CHM "Build compressed HTML help manual (requires HTML help compiler)" OFF "QUARTER_BUILD_DOCUMENTATION" OFF)
+option(QUARTER_USE_CPACK "If enabled the cpack subrepo is mandatory" OFF)
 
 report_prepare(
   QUARTER_BUILD_SHARED_LIBS
@@ -298,4 +299,6 @@ install(EXPORT ${PROJECT_NAME}
 
 # ############################################################################
 # New CPACK section, please see the README file inside cpack.d directory.
-add_subdirectory(cpack.d)
+if (QUARTER_USE_CPACK)
+  add_subdirectory(cpack.d)
+endif()
