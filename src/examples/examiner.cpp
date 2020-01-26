@@ -33,7 +33,7 @@
 /*!
   \page examiner Examiner type Viewer
 
-  This example demonstrate how to create a simple viewer that can load
+  This example demonstrates how to create a simple viewer that can load
   Inventor files
 */
 

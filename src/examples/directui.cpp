@@ -33,8 +33,8 @@
 /*!
   \page directui A Direct Approach
 
-  This example demonstrate how to create a simple viewer without
-  subclassing the class generated from the ui file
+  This example demonstrates how to create a simple viewer without
+  subclassing the class generated from the UI file
 
 */
 

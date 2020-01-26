@@ -77,7 +77,7 @@ using namespace SIM::Coin3D::Quarter::QtDesigner;
 /*!
   \class SIM::Coin3D::Quarter::QtDesigner::QuarterWidgetPlugin QuarterWidgetPlugin.h
 
-  \brief The QuarterWidgetPlugin makes the QuarterWidget available to QT designer.
+  \brief The QuarterWidgetPlugin makes the QuarterWidget available to Qt Designer.
 */
 
 /*!
@@ -121,7 +121,7 @@ QuarterWidgetPlugin::initialize(QDesignerFormEditorInterface * formeditor)
 }
 
 /*!
-  \retval bool wether the initalize function has been called at least once.
+  \retval bool whether the initialize function has been called at least once.
 */
 bool
 QuarterWidgetPlugin::isInitialized(void) const
@@ -130,7 +130,7 @@ QuarterWidgetPlugin::isInitialized(void) const
 }
 
 /*!
-  Creates a QuarterWidget initialized for the formloader
+  Creates a QuarterWidget initialized for the form loader
 
   \see QDesignerFormEditorInterface::createWidget
 */

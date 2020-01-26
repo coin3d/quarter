@@ -41,8 +41,7 @@ using namespace SIM::Coin3D::Quarter;
   \class SIM::Coin3D::Quarter::InputDevice InputDevice.h Quarter/devices/InputDevice.h
 
   \brief The InputDevice class is the base class for devices such as
-  the Keyboard and Mouse. It can be subclassed to support other
-  devices.
+  keyboard and mouse. It can be subclassed to support other devices.
 */
 
 InputDevice::InputDevice(QuarterWidget* quart) :
@@ -52,9 +51,9 @@ InputDevice::InputDevice(QuarterWidget* quart) :
 }
 
 /*!
-  Sets the mouseposition
+  Sets the mouse position
 
-  \param[in] pos position of mouse in pixelcoordinates
+  \param[in] pos position of mouse in pixel coordinates
 */
 void
 InputDevice::setMousePosition(const SbVec2s & pos)
@@ -74,10 +73,10 @@ InputDevice::setWindowSize(const SbVec2s & size)
 }
 
 /*!
-  Transforms a qevent into an soevent
+  Transforms a QEvent into an SoEvent
 
-  \param[in,out] soevent the transformed event
-  \param[in] qevent incoming qevent
+  \param[in,out] SoEvent the transformed event
+  \param[in] QEvent incoming QEvent
 */
 void
 InputDevice::setModifiers(SoEvent * soevent, const QInputEvent * qevent)

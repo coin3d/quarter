@@ -33,8 +33,8 @@
 /*!
   \page dynamicui Dynamic Loading
 
-  This example demonstrate how to dynamically load a QuarterWidget
-  from a Qt Designer ui file.
+  This example demonstrates how to dynamically load a QuarterWidget
+  from a Qt Designer UI file.
 */
 
 #include <QtUiTools/QUiLoader>

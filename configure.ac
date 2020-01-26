@@ -13,7 +13,7 @@ m4_define([MAC_FRAMEWORK_VERSION_DEFAULT], [A])
 m4_define([MAC_DESIGNERPLUGINS_PREFIX_DEFAULT], [/Developer/Applications/Qt/plugins/designer])
 
 AC_INIT([Quarter], [QUARTER_MAJOR.QUARTER_MINOR.QUARTER_MICRO[]QUARTER_BETA],
-  [coin-bugs@coin3d.org])
+  [coin-support@coin3d.org])
 
 AC_CONFIG_SRCDIR(src/Quarter/Quarter.cpp)
 AC_CONFIG_AUX_DIR(cfg)

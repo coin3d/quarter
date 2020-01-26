@@ -95,7 +95,7 @@ DragDropHandler::~DragDropHandler()
 
 /*!
   Detects a QDragEnterEvent and if the event is the dropping of a
-  valid Inventor or VRML it opens the file, reads in the scenegraph
+  valid Inventor or VRML file it opens the file, reads in the scene graph
   and calls setSceneGraph on the QuarterWidget
  */
 bool
@@ -154,7 +154,7 @@ DragDropHandlerP::dropEvent(QDropEvent * event)
   root = SoDB::readAll(&in);
   if (root == NULL) return;
 
-  // set new scenegraph
+  // set new scene graph
   this->quarterwidget->setSceneGraph(root);
   this->quarterwidget->updateGL();
 }

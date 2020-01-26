@@ -34,7 +34,7 @@
   \class SIM::Coin3D::Quarter::QuarterWidget QuarterWidget.h Quarter/QuarterWidget.h
 
   \brief The QuarterWidget class is the main class in Quarter. It
-  provides a widget for Coin rendering. It provides scenegraph
+  provides a widget for Coin rendering. It provides scene graph
   management and event handling.
 
   If you want to modify the GL format for an existing QuarterWidget, you can
@@ -206,7 +206,7 @@ QuarterWidget::~QuarterWidget()
 /*!
   You can set the cursor you want to use for a given navigation
   state. See the Coin documentation on navigation for information
-  about available states
+  about available states.
 */
 void
 QuarterWidget::setStateCursor(const SbName & state, const QCursor & cursor)
@@ -219,7 +219,7 @@ QuarterWidget::setStateCursor(const SbName & state, const QCursor & cursor)
 /*!
   Maps a state to a cursor
 
-  \param[in] state Named state in the statemachine
+  \param[in] state Named state in the state machine
   \retval Cursor corresponding to the given state
 */
 QCursor
@@ -246,7 +246,7 @@ QuarterWidget::setHeadlightEnabled(bool onoff)
 }
 
 /*!
-  Returns true if the headlight is on, false if it is off
+  Returns true if the headlight is on, false if it is off.
 */
 bool
 QuarterWidget::headlightEnabled(void) const
@@ -270,7 +270,7 @@ QuarterWidget::getHeadlight(void)
 */
 
 /*!
-  Specify if you want the z buffer to be cleared before
+  Specify if you want the z-buffer to be cleared before
   redraw. This is on by default.
 */
 void
@@ -280,7 +280,7 @@ QuarterWidget::setClearZBuffer(bool onoff)
 }
 
 /*!
-  Returns true if the z buffer is cleared before rendering.
+  Returns true if the z-buffer is cleared before rendering.
 */
 bool
 QuarterWidget::clearZBuffer(void) const
@@ -322,7 +322,7 @@ QuarterWidget::clearWindow(void) const
 /*!
   Enable/disable interaction mode.
 
-  Specifies whether you may use the alt-key to enter interaction mode.
+  Specifies whether you may use the Alt-key to enter interaction mode.
 */
 void
 QuarterWidget::setInteractionModeEnabled(bool onoff)
@@ -472,7 +472,7 @@ QuarterWidget::devicePixelRatio(void) const
 }
 
 /*!
-  Sets the Inventor scenegraph to be rendered
+  Sets the Inventor scene graph to be rendered.
  */
 void
 QuarterWidget::setSceneGraph(SoNode * node)
@@ -517,7 +517,7 @@ QuarterWidget::setSceneGraph(SoNode * node)
 }
 
 /*!
-  Returns pointer to root of scene graph
+  Returns pointer to root of scene graph.
 */
 SoNode *
 QuarterWidget::getSceneGraph(void) const
@@ -607,7 +607,7 @@ QuarterWidget::setSoEventManager(SoEventManager * manager)
 }
 
 /*!
-  Returns a pointer to the event manager
+  Returns a pointer to the event manager.
 */
 SoEventManager *
 QuarterWidget::getSoEventManager(void) const
@@ -616,7 +616,7 @@ QuarterWidget::getSoEventManager(void) const
 }
 
 /*!
-  Returns a pointer to the event filter
+  Returns a pointer to the event filter.
  */
 EventFilter *
 QuarterWidget::getEventFilter(void) const
@@ -625,7 +625,7 @@ QuarterWidget::getEventFilter(void) const
 }
 
 /*!
-  Reposition the current camera to display the entire scene
+  Reposition the current camera to display the entire scene.
  */
 void
 QuarterWidget::viewAll(void)
@@ -642,7 +642,7 @@ QuarterWidget::viewAll(void)
 }
 
 /*!
-  Sets the current camera in seekmode, if supported by the underlying navigation system.
+  Sets the current camera in seek mode, if supported by the underlying navigation system.
   Camera typically seeks towards what the mouse is pointing at.
 */
 void
@@ -698,7 +698,7 @@ QuarterWidget::updateDevicePixelRatio(void) {
 }
 
 /*!
-  Overridden from QGLWidget to resize the Coin scenegraph
+  Overridden from QGLWidget to resize the Coin scene graph.
  */
 void
 QuarterWidget::resizeGL(int width, int height)
@@ -716,7 +716,7 @@ QuarterWidget::resizeGL(int width, int height)
 }
 
 /*!
-  Overridden from QGLWidget to render the scenegraph
+  Overridden from QGLWidget to render the scene graph.
 */
 void
 QuarterWidget::paintGL(void)
@@ -782,7 +782,7 @@ QuarterWidget::redraw(void)
 }
 
 /*!
-  Overridden from QGLWidget to render the scenegraph
+  Overridden from QGLWidget to render the scene graph.
  */
 void
 QuarterWidget::actualRedraw(void)
@@ -793,7 +793,7 @@ QuarterWidget::actualRedraw(void)
 
 
 /*!
-  Passes an event to the eventmanager.
+  Passes an event to the event manager.
 
   \param[in] event to pass
   \retval Returns true if the event was successfully processed
@@ -813,10 +813,10 @@ QuarterWidget::processSoEvent(const SoEvent * event)
 */
 
 /*!
-  Set backgroundcolor to a given QColor
+  Set background color to a given QColor
 
   Remember that QColors are given in integers between 0 and 255, as
-  opposed to SbColor4f which is in [0 ,1]. The default alpha value for
+  opposed to SbColor4f which is in [0, 1]. The default alpha value for
   a QColor is 255, but you'll probably want to set it to zero before
   using it as an OpenGL clear color.
  */
@@ -872,7 +872,7 @@ QuarterWidget::contextMenuEnabled(void) const
 */
 
 /*!
-  Controls the display of the contextmenu
+  Controls the display of the context menu
 
   \param[in] yes Context menu on?
 */
@@ -901,7 +901,7 @@ QuarterWidget::addStateMachine(SoScXMLStateMachine * statemachine)
 }
 
 /*!
-  Convenience method that removes a state machine to the current
+  Convenience method that removes a state machine from the current
   SoEventManager.
 
   \sa addStateMachine
@@ -960,12 +960,12 @@ QuarterWidget::renderModeActions(void) const
 /*!
   \property QuarterWidget::navigationModeFile
 
-  An url to a navigation mode file which is a scxml file which defines
+  An URL to a navigation mode file which is a scxml file which defines
   the possible states for the Coin navigation system
 
   Supports:
-  \li \b coin for internal coinresources
-  \li \b file for filesystem path to resources
+  \li \b coin for internal Coin resources
+  \li \b file for file system path to resources
 
   \sa scxml
 */
@@ -981,7 +981,7 @@ QuarterWidget::resetNavigationModeFile(void) {
 /*!
   Sets a navigation mode file. Supports the schemes "coin" and "file"
 
-  \param[in] url Url to the resource
+  \param[in] url URL to the resource
 */
 void
 QuarterWidget::setNavigationModeFile(const QUrl & url)
@@ -1080,7 +1080,7 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
 }
 
 /*!
-  \retval The current navigationModeFile
+  \retval The current navigation mode file
 */
 const QUrl &
 QuarterWidget::navigationModeFile(void) const

@@ -32,7 +32,7 @@
 
 /*!
   This example shows a minimal stand-alone
-  example of a QuarterViewer without the use of ui files
+  example of a QuarterViewer without the use of UI files
  */
 
 #include <QApplication>

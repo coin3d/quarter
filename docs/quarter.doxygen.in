@@ -162,8 +162,8 @@ TAB_SIZE               = 8
 # will result in a user-defined paragraph with heading "Side Effects:". 
 # You can put \n's in the value part of an alias to insert newlines.
 
-ALIASES                = "COIN=<a href=\"http://www.coin3d.org\">Coin</a>" \
-                         "QT=<a href=\"http://www.trolltech.com\">Qt</a>"
+ALIASES                = "COIN=<a href=\"https://github.com/coin3d/coin/\"><b>Coin</b></a>" \
+                         "QT=<a href=\"https://www.qt.io\"><b>Qt</b></a>"
 
 # Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your project consists of C 
 # sources only. Doxygen will then generate output that is more tailored for C. 
