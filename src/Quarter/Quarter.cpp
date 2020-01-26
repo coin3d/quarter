@@ -33,8 +33,8 @@
 /*! \mainpage
 
   Quarter is a light-weight glue library that provides seamless
-  integration between Systems in Motions's \COIN high-level 3D
-  visualization library and Trolltech's \QT 2D user interface
+  integration between Systems in Motion's \COIN high-level 3D
+  visualization library and the \QT 2D user interface
   library.
 
   \QT and \COIN is a perfect match since they are both open source,
@@ -44,22 +44,22 @@
 
   The functionality in Quarter revolves around QuarterWidget, a
   subclass of QGLWidget. This widget provides functionality for
-  rendering of Coin scenegraphs and translation of QEvents into
+  rendering of Coin scene graphs and translation of QEvents into
   SoEvents. Using this widget is as easy as using any other QWidget.
 
   \subpage QuarterWidgetPlugin
 
-  Quarter also comes with a plugin for Qt Designer, Trolltech's tool
+  Quarter also comes with a plugin for Qt Designer, a Qt tool
   for designing and building GUIs. Once you install Quarter, the
   QuarterWidget becomes accessible in Qt Designer, and you can include
   it in the user interfaces you create. The plugin facility also
-  provides you with the capability of dynamically loading ui files
+  provides you with the capability of dynamically loading UI files
   containing a QuarterWidget in your application.
 
   By using \COIN, \QT and Quarter to build your 3D graphics
   applications, you have the power to write software that is portable
-  across the whole range of UNIX, Linux, Microsoft Windows and Mac OS
-  X operating systems, from a 100% common codebase.
+  across the whole range of UNIX, Linux, Microsoft Windows, and Mac OS
+  X operating systems, from a 100% common code base.
 
   For a small, completely stand-alone usage example on how to
   initialize the library and set up a viewer instance window, see the
@@ -86,7 +86,7 @@
     Quarter::init();
 
     // Make a dead simple scene graph by using the Coin library, only
-    // containing a single yellow cone under the scenegraph root.
+    // containing a single yellow cone under the scene graph root.
     SoSeparator * root = new SoSeparator;
     root->ref();
 

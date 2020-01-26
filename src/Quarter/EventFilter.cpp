@@ -138,7 +138,7 @@ EventFilter::unregisterInputDevice(InputDevice * device)
 }
 
 /*! Translates Qt Events into Coin events and passes them on to the
-  event QuarterWidget for processing. If the event can not be
+  event QuarterWidget for processing. If the event cannot be
   translated or processed, it is forwarded to Qt and the method
   returns false.
  */
