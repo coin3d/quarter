@@ -27,7 +27,7 @@ MULTILINE_CPP_IS_BRIEF = NO
 INHERIT_DOCS           = YES
 SEPARATE_MEMBER_PAGES  = NO
 TAB_SIZE               = 8
-ALIASES                = "COIN=<a href=https://https://github.com/coin3d/coin><b>Coin</b></a>" \
+ALIASES                = "COIN=<a href=https://github.com/coin3d/coin><b>Coin</b></a>" \
                          "QT=<a href=http://www.qt.io><b>Qt</b></a>"
 TCL_SUBST              =
 OPTIMIZE_OUTPUT_FOR_C  = NO
