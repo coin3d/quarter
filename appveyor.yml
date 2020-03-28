@@ -180,7 +180,7 @@ before_build:
       DOWNLOAD_FILE_COIN=coin-$COIN_REPO_TAG_NAME-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
       echo download file $DOWNLOAD_FILE_COIN
       if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then
-        export DOWNLOAD_ADDRESS_COIN=https://github.com/coin3d/superglu/releases/download/v$COIN_VERSION/$DOWNLOAD_FILE_COIN
+        export DOWNLOAD_ADDRESS_COIN=https://github.com/coin3d/coin/releases/download/v$COIN_VERSION/$DOWNLOAD_FILE_COIN
       else
         RELEASE_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/coin/releases | jq '.[] | select(.name=="CI builds") | .id'`
         ASSET_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/coin/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_COIN "$DOWNLOAD_FILE_COIN" '.assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id'`
