@@ -1,44 +1,52 @@
-version: 1.0.1-{branch}-ci-{build}
+version: 1.1.0-{branch}-ci-{build}
 
 branches:
   only:
-  - default
+  - master
+  - /v\d*\.\d*\.\d*/
 
-#shallow clone does not work when subrepos are involved!
-#shallow_clone: true 
+# do not build feature branches with open pull requests
+skip_branch_with_pr: true
+
+#shallow clone does not work when submodules are involved!
+#shallow_clone: true
+
+matrix:
+  fast_finish: true # set this flag to immediately finish build once one of the jobs fails.
 
 environment:
-  BB_AUTH_STRING:
-    secure: IyP2dNdsGf1iao8XFeiu7R8Fk+ZWBYd4vJlHZv1XcLy6KWcwSxLtjHZsTUSoiV/e
-
+  COIN_VERSION: 4.0.0
+  SUPERGLU_VERSION: 1.3.0
+  GH_AUTH_TOKEN:
+    secure: 850frgRGZcc4Cljd2P7Ej68no4/kkl4EMB+DjnX725wcKBRJuFk/kGRdJGyKXd2u
   matrix:
-#    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
-#      CMAKE_GENERATOR: 'Unix Makefiles'
-#      CMAKE_PLATFORM: x86
-#      CMAKE_ARCH_FLAGS: -m32
-#      COMPILER_ID: gcc5
-#    #  QT_DIR: C:\Qt\5.10\msvc2015
-#
-#    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
-#      CMAKE_GENERATOR: 'Unix Makefiles'
-#      CMAKE_PLATFORM: x64
-#      CMAKE_ARCH_FLAGS: -m64
-#      COMPILER_ID: gcc5
-#    #  QT_DIR: C:\Qt\5.10\msvc2015
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x86
+      CMAKE_ARCH_FLAGS: -m32
+      COMPILER_ID: gcc
+      # QT_DIR: C:\Qt\5.10.1\msvc2015
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x64
+      CMAKE_ARCH_FLAGS: -m64
+      COMPILER_ID: gcc
+      # QT_DIR: C:\Qt\5.10.1\msvc2015
 
 #    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
 #      CMAKE_GENERATOR: 'Visual Studio 10 2010'
 #      CMAKE_ARCHITECTURE: Win32
 #      CMAKE_PLATFORM: x86
-#      COMPILER_ID: msvc14
-#      QT_DIR: C:\Qt\5.8.0\msvc2015
+#      COMPILER_ID: msvc10
+#      QT_DIR: C:\Qt\5.8.0\msvc2010
 #
 #    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
 #      CMAKE_GENERATOR: 'Visual Studio 10 2010'
 #      CMAKE_ARCHITECTURE: x64
 #      CMAKE_PLATFORM: x64
-#      COMPILER_ID: msvc14
-#      QT_DIR: C:\Qt\5.8.0\msvc2015_64
+#      COMPILER_ID: msvc10
+#      QT_DIR: C:\Qt\5.8.0\msvc2010_64
 
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       CMAKE_GENERATOR: 'Visual Studio 14 2015'
@@ -68,79 +76,120 @@ environment:
       COMPILER_ID: msvc15
       QT_DIR: C:\Qt\5.12\msvc2017_64
 
-#    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-#      CMAKE_GENERATOR: 'Visual Studio 16 2019'
-#      CMAKE_ARCHITECTURE: Win32
-#      CMAKE_PLATFORM: x86
-#      COMPILER_ID: msvc16
-#      QT_DIR: C:\Qt\5.13\msvc2017
-#
-#    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-#      CMAKE_GENERATOR: 'Visual Studio 16 2019'
-#      CMAKE_ARCHITECTURE: x64
-#      CMAKE_PLATFORM: x64
-#      COMPILER_ID: msvc16
-#      QT_DIR: C:\Qt\5.13\msvc2017_64
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      CMAKE_GENERATOR: 'Visual Studio 16 2019'
+      CMAKE_ARCHITECTURE: Win32
+      CMAKE_PLATFORM: x86
+      COMPILER_ID: msvc16
+      QT_DIR: C:\Qt\5.13\msvc2017
+      # according to https://forum.qt.io/topic/104123/qt-tools-and-versions-msvc-2019  VS2017 is binary compatible with VS2019 and therefore we use Qt 32-bit from msvc2017
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      CMAKE_GENERATOR: 'Visual Studio 16 2019'
+      CMAKE_ARCHITECTURE: x64
+      CMAKE_PLATFORM: x64
+      COMPILER_ID: msvc16
+      QT_DIR: C:\Qt\5.13\msvc2017_64
+      # according to https://forum.qt.io/topic/104123/qt-tools-and-versions-msvc-2019  VS2017 is binary compatible with VS2019 and therefore we use Qt 64-bit from msvc2017
 
 install:
   - sh: |
+      sudo apt-get -y update
+      cd $APPVEYOR_BUILD_FOLDER
       if [ "$CMAKE_PLATFORM" == "x86" ]
       then
-        sudo apt-get install freeglut3-dev:i386 -y
-        sudo apt-get install qt5-default:i386 -y
-        sudo apt-get install qttools5-dev:i386 -y
+        sudo apt-get -y install freeglut3-dev:i386 qt5-default:i386 qttools5-dev:i386
       elif [ "$CMAKE_PLATFORM" == "x64" ]
       then
-        sudo apt-get install freeglut3-dev -y
-        sudo apt-get install qt5-default -y
-        sudo apt-get install qttools5-dev -y
+        sudo apt-get -y install freeglut3-dev qt5-default qttools5-dev
       fi
-      sudo apt-get install doxygen -y
-      sudo apt-get install gcc-multilib -y
-      sudo apt-get install g++-multilib -y
+      sudo apt-get -y install doxygen gcc-multilib g++-multilib jq
   - sh: qtchooser -l
   - sh: which moc
   - sh: which uic
   - cmd: |
-      set PATH=%APPVEYOR_BUILD_FOLDER%\downloads\doxygen-1.8.14;%APPVEYOR_BUILD_FOLDER%\downloads\cmake-3.14.5-win64-x64\bin;%PATH%
+      choco install jq
+      rem Work around for outdated curl version giving problems with GitHub Authentication when redirected.
+      set PATH=%APPVEYOR_BUILD_FOLDER%\downloads\doxygen-1.8.14;C:\msys64\%COMPILER_ID%\bin;C:\msys64\usr\bin\;%PATH%
+      curl --version
+      cd %APPVEYOR_BUILD_FOLDER%
+  - git submodule update --init --recursive
 
+# Assumes that we use the vx.y.z tagging scheme (e.g. v1.3.0)
 before_build:
   - cmd: |
-      set BUILD_SOURCE_ARCHIVE=%APPVEYOR_PROJECT_NAME%-1.0.1-src.zip
+      set CI_REPO_TAG_NAME=latest
+      if defined APPVEYOR_REPO_TAG_NAME set CI_REPO_TAG_NAME=%APPVEYOR_REPO_TAG_NAME:~1%
+      set BUILD_SOURCE_ARCHIVE=%APPVEYOR_PROJECT_NAME%-%CI_REPO_TAG_NAME%-src.zip
       7z a -tzip %BUILD_SOURCE_ARCHIVE% %APPVEYOR_BUILD_FOLDER%
-      appveyor PushArtifact %BUILD_SOURCE_ARCHIVE%
       mkdir %APPVEYOR_BUILD_FOLDER%\downloads
       set DOWNLOAD_FILE_DOXYGEN=doxygen-1.8.14.windows.x64.bin.zip
-      set DOWNLOAD_ADDRESS_DOXYGEN=https://sourceforge.net/projects/doxygen/files/rel-1.8.14/%DOWNLOAD_FILE_DOXYGEN%
-      curl -fsSL -G -o "%DOWNLOAD_FILE_DOXYGEN%" "%DOWNLOAD_ADDRESS_DOXYGEN%"
+      appveyor DownloadFile https://sourceforge.net/projects/doxygen/files/rel-1.8.14/%DOWNLOAD_FILE_DOXYGEN% -FileName %DOWNLOAD_FILE_DOXYGEN%
       7z x %DOWNLOAD_FILE_DOXYGEN% -o%APPVEYOR_BUILD_FOLDER%\downloads\doxygen-1.8.14
       doxygen --version
-      set DOWNLOAD_FILE_SUPERGLU=superglu-1.3.0-%COMPILER_ID%-%CMAKE_PLATFORM%.zip
-      set DOWNLOAD_ADDRESS_SUPERGLU=https://bitbucket.org/Coin3D/superglu/downloads/%DOWNLOAD_FILE_SUPERGLU%
-      curl -fsSL -G -o "%DOWNLOAD_FILE_SUPERGLU%" "%DOWNLOAD_ADDRESS_SUPERGLU%"
-      set DOWNLOAD_FILE_COIN=coin-4.0.0-%COMPILER_ID%-%CMAKE_PLATFORM%.zip
-      set DOWNLOAD_ADDRESS_COIN=https://bitbucket.org/Coin3D/coin/downloads/%DOWNLOAD_FILE_COIN%
-      curl -fsSL -G -o "%DOWNLOAD_FILE_COIN%"     "%DOWNLOAD_ADDRESS_COIN%"
+      rem ##############
+      set SUPERGLU_REPO_TAG_NAME=latest
+      if defined APPVEYOR_REPO_TAG_NAME set SUPERGLU_REPO_TAG_NAME=%SUPERGLU_VERSION%
+      set DOWNLOAD_FILE_SUPERGLU=superglu-%SUPERGLU_REPO_TAG_NAME%-%COMPILER_ID%-%CMAKE_PLATFORM%.zip
+      echo download file %DOWNLOAD_FILE_SUPERGLU%
+      for /f %%i in ('curl -s -H "Authorization: token %GH_AUTH_TOKEN%" https://api.github.com/repos/coin3d/superglu/releases ^| jq -r ".[] | select(.name==\"CI builds\") | .id"') do set RELEASE_ID=%%i
+      for /f %%i in ('curl -s -H "Authorization: token %GH_AUTH_TOKEN%" https://api.github.com/repos/coin3d/superglu/releases/%RELEASE_ID% ^| jq -r --arg DOWNLOAD_FILE_SUPERGLU "%DOWNLOAD_FILE_SUPERGLU%" ".assets[] | select(.name==$DOWNLOAD_FILE_SUPERGLU) | .id"') do set ASSET_ID=%%i
+      set DOWNLOAD_ADDRESS_SUPERGLU=https://api.github.com/repos/coin3d/superglu/releases/assets/%ASSET_ID%
+      if defined APPVEYOR_REPO_TAG_NAME set DOWNLOAD_ADDRESS_SUPERGLU=https://github.com/coin3d/superglu/releases/tag/v%SUPERGLU_VERSION%/%DOWNLOAD_FILE_SUPERGLU%
+      curl -s -S -L -H "Authorization: token %GH_AUTH_TOKEN%" -H "Accept: application/octet-stream" -o %DOWNLOAD_FILE_SUPERGLU% %DOWNLOAD_ADDRESS_SUPERGLU%
       7z x %DOWNLOAD_FILE_SUPERGLU% -o%APPVEYOR_BUILD_FOLDER%\downloads
+      rem ##############
+      set COIN_REPO_TAG_NAME=latest
+      if defined APPVEYOR_REPO_TAG_NAME set COIN_REPO_TAG_NAME=%COIN_VERSION%
+      set DOWNLOAD_FILE_COIN=coin-%COIN_REPO_TAG_NAME%-%COMPILER_ID%-%CMAKE_PLATFORM%.zip
+      echo download file %DOWNLOAD_FILE_COIN%
+      for /f %%i in ('curl -s -H "Authorization: token %GH_AUTH_TOKEN%" https://api.github.com/repos/coin3d/coin/releases ^| jq -r ".[] | select(.name==\"CI builds\") | .id"') do set RELEASE_ID=%%i
+      for /f %%i in ('curl -s -H "Authorization: token %GH_AUTH_TOKEN%" https://api.github.com/repos/coin3d/coin/releases/%RELEASE_ID% ^| jq -r --arg DOWNLOAD_FILE_COIN "%DOWNLOAD_FILE_COIN%" ".assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id"') do set ASSET_ID=%%i
+      set DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/%ASSET_ID%
+      if defined APPVEYOR_REPO_TAG_NAME set DOWNLOAD_ADDRESS_COIN=https://github.com/coin3d/coin/releases/tag/v%COIN_VERSION%/%DOWNLOAD_FILE_COIN%
+      curl -s -S -L -H "Authorization: token %GH_AUTH_TOKEN%" -H "Accept: application/octet-stream" -o %DOWNLOAD_FILE_COIN% %DOWNLOAD_ADDRESS_COIN%
       7z x %DOWNLOAD_FILE_COIN%     -o%APPVEYOR_BUILD_FOLDER%\downloads
-      set DOWNLOAD_FILE_CMAKE=cmake-3.14.5-win64-x64.zip
-      set DOWNLOAD_ADDRESS_CMAKE=https://github.com/Kitware/CMake/releases/download/v3.14.5/%DOWNLOAD_FILE_CMAKE%
-      curl -fsSL -G -o "%DOWNLOAD_FILE_CMAKE%" "%DOWNLOAD_ADDRESS_CMAKE%"
-      7z x %DOWNLOAD_FILE_CMAKE%    -o%APPVEYOR_BUILD_FOLDER%\downloads
+      rem ##############
       cmake -H. -Bbuild -G "%CMAKE_GENERATOR%" -A %CMAKE_ARCHITECTURE% -DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%\Coin3D -DCMAKE_PREFIX_PATH=%APPVEYOR_BUILD_FOLDER%\downloads\Coin3D;%QT_DIR%
   - sh: |
-      BUILD_SOURCE_ARCHIVE=$APPVEYOR_PROJECT_NAME-1.0.1-src.tar.gz
-      tar -czvf $BUILD_SOURCE_ARCHIVE $APPVEYOR_BUILD_FOLDER/*
-      appveyor PushArtifact $BUILD_SOURCE_ARCHIVE
-      DOWNLOAD_FILE_SUPERGLU=superglu-1.3.0-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
-      DOWNLOAD_ADDRESS_SUPERGLU=https://bitbucket.org/Coin3D/superglu/downloads/$DOWNLOAD_FILE_SUPERGLU
-      curl -fsSL -G -o "$DOWNLOAD_FILE_SUPERGLU"  "$DOWNLOAD_ADDRESS_SUPERGLU"
-      DOWNLOAD_FILE_COIN=coin-4.0.0-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
-      DOWNLOAD_ADDRESS_COIN=https://bitbucket.org/Coin3D/coin/downloads/$DOWNLOAD_FILE_COIN
-      curl -fsSL -G -o "$DOWNLOAD_FILE_COIN"      "$DOWNLOAD_ADDRESS_COIN"
+      if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then export CI_REPO_TAG_NAME=${APPVEYOR_REPO_TAG_NAME:1}; else export CI_REPO_TAG_NAME=latest; fi
+      BUILD_SOURCE_ARCHIVE=$APPVEYOR_PROJECT_NAME-$CI_REPO_TAG_NAME-src.tar.gz
+      if [ ! -d "$APPVEYOR_BUILD_FOLDER/../$APPVEYOR_PROJECT_NAME" ]; then cp -r $APPVEYOR_BUILD_FOLDER $APPVEYOR_BUILD_FOLDER/../$APPVEYOR_PROJECT_NAME; fi
+      cd $APPVEYOR_BUILD_FOLDER/..
+      tar -czf $BUILD_SOURCE_ARCHIVE $APPVEYOR_PROJECT_NAME
+      mv $BUILD_SOURCE_ARCHIVE $APPVEYOR_BUILD_FOLDER
+      cd $APPVEYOR_BUILD_FOLDER
       mkdir $APPVEYOR_BUILD_FOLDER/downloads
-      tar -xzvf $DOWNLOAD_FILE_SUPERGLU -C $APPVEYOR_BUILD_FOLDER/downloads
-      tar -xzvf $DOWNLOAD_FILE_COIN     -C $APPVEYOR_BUILD_FOLDER/downloads
+      export COMPILER_ID=$APPVEYOR_BUILD_WORKER_IMAGE-$COMPILER_ID`$COMPILER_ID -dumpversion | tr '.' '\n'`
+      ###############
+      if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then export SUPERGLU_REPO_TAG_NAME=$SUPERGLU_VERSION; else export SUPERGLU_REPO_TAG_NAME=latest; fi
+      DOWNLOAD_FILE_SUPERGLU=superglu-$SUPERGLU_REPO_TAG_NAME-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
+      echo download file $DOWNLOAD_FILE_SUPERGLU
+      if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then
+        export DOWNLOAD_ADDRESS_SUPERGLU=https://github.com/coin3d/superglu/releases/download/v$SUPERGLU_VERSION/$DOWNLOAD_FILE_SUPERGLU
+      else
+        RELEASE_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/superglu/releases | jq '.[] | select(.name=="CI builds") | .id'`
+        ASSET_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/superglu/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_SUPERGLU "$DOWNLOAD_FILE_SUPERGLU" '.assets[] | select(.name==$DOWNLOAD_FILE_SUPERGLU) | .id'`
+        export DOWNLOAD_ADDRESS_SUPERGLU=https://api.github.com/repos/coin3d/superglu/releases/assets/$ASSET_ID
+      fi
+      echo download address $DOWNLOAD_ADDRESS_SUPERGLU
+      curl -s -S -L -H "Authorization: token $GH_AUTH_TOKEN" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_SUPERGLU $DOWNLOAD_ADDRESS_SUPERGLU
+      tar -xzf $DOWNLOAD_FILE_SUPERGLU -C $APPVEYOR_BUILD_FOLDER/downloads
+      ###############
+      if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then export COIN_REPO_TAG_NAME=$COIN_VERSION; else export COIN_REPO_TAG_NAME=latest; fi
+      DOWNLOAD_FILE_COIN=coin-$COIN_REPO_TAG_NAME-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
+      echo download file $DOWNLOAD_FILE_COIN
+      if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then
+        export DOWNLOAD_ADDRESS_COIN=https://github.com/coin3d/superglu/releases/download/v$COIN_VERSION/$DOWNLOAD_FILE_COIN
+      else
+        RELEASE_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/coin/releases | jq '.[] | select(.name=="CI builds") | .id'`
+        ASSET_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/coin/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_COIN "$DOWNLOAD_FILE_COIN" '.assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id'`
+        export DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/$ASSET_ID
+      fi
+      echo download address $DOWNLOAD_ADDRESS_COIN
+      curl -s -S -L -H "Authorization: token $GH_AUTH_TOKEN" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_COIN $DOWNLOAD_ADDRESS_COIN
+      tar -xzf $DOWNLOAD_FILE_COIN -C $APPVEYOR_BUILD_FOLDER/downloads
+      ###############
       export CFLAGS=$CMAKE_ARCH_FLAGS
       export CXXFLAGS=$CMAKE_ARCH_FLAGS
       cmake -H. -Bbuild_debug   -G "$CMAKE_GENERATOR" -DCMAKE_BUILD_TYPE=Debug   -DCMAKE_INSTALL_PREFIX=$APPVEYOR_BUILD_FOLDER/Coin3D -DCMAKE_PREFIX_PATH=$APPVEYOR_BUILD_FOLDER/downloads/Coin3D
@@ -160,14 +209,25 @@ build_script:
 after_build:
   - cmd: |
       cd %APPVEYOR_BUILD_FOLDER%
-      set BUILD_ARCHIVE=%APPVEYOR_PROJECT_NAME%-1.0.1-%COMPILER_ID%-%CMAKE_PLATFORM%.zip
+      set CI_REPO_TAG_NAME=latest
+      if defined APPVEYOR_REPO_TAG_NAME set CI_REPO_TAG_NAME=%APPVEYOR_REPO_TAG_NAME:~1%
+      set BUILD_ARCHIVE=%APPVEYOR_PROJECT_NAME%-%CI_REPO_TAG_NAME%-%COMPILER_ID%-%CMAKE_PLATFORM%.zip
       7z a -tzip %BUILD_ARCHIVE% Coin3D
-      appveyor PushArtifact %BUILD_ARCHIVE%
+      appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/%APPVEYOR_JOB_ID%/log -FileName %APPVEYOR_PROJECT_NAME%-%CI_REPO_TAG_NAME%-%COMPILER_ID%-%CMAKE_PLATFORM%.log
   - sh: |
       cd $APPVEYOR_BUILD_FOLDER
-      BUILD_ARCHIVE=$APPVEYOR_PROJECT_NAME-1.0.1-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
-      tar -czvf $BUILD_ARCHIVE Coin3D/*
-      appveyor PushArtifact $BUILD_ARCHIVE
+      if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then export CI_REPO_TAG_NAME=${APPVEYOR_REPO_TAG_NAME:1}; else export CI_REPO_TAG_NAME=latest; fi
+      BUILD_ARCHIVE=$APPVEYOR_PROJECT_NAME-$CI_REPO_TAG_NAME-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
+      tar -czf $BUILD_ARCHIVE Coin3D/*
+      appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/$APPVEYOR_JOB_ID/log -FileName $APPVEYOR_PROJECT_NAME-$CI_REPO_TAG_NAME-$COMPILER_ID-$CMAKE_PLATFORM.log
+
+artifacts:
+  - path: $(APPVEYOR_PROJECT_NAME)*.zip
+    name: CIArchives
+  - path: $(APPVEYOR_PROJECT_NAME)*.tar.gz
+    name: CIArchivesTGZ
+  - path: $(APPVEYOR_PROJECT_NAME)*.log
+    name: logs
 
 #test_script:
 #  - cmd: |
@@ -177,19 +237,38 @@ after_build:
 #      cd build_release
 #      ctest -C Release -VV
 
-on_success:
-  - cmd: |
-      cd %APPVEYOR_BUILD_FOLDER%
-      curl --user %BB_AUTH_STRING% https://api.bitbucket.org/2.0/repositories/Coin3D/quarter/downloads --form files=@%BUILD_ARCHIVE% --form files=@%BUILD_SOURCE_ARCHIVE%
-  - sh: |
-      cd $APPVEYOR_BUILD_FOLDER
-      curl --user $BB_AUTH_STRING  https://api.bitbucket.org/2.0/repositories/Coin3D/quarter/downloads --form files=\@$BUILD_ARCHIVE --form files=\@$BUILD_SOURCE_ARCHIVE
-
 notifications:
   - provider: Email
     to:
-    - '{{commitAuthorEmail}}'
-    - coin-support@coin3d.org
+      - '{{commitAuthorEmail}}'
+#      - coin-support@coin3d.org
     on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
+
+deploy:
+  # Deploy to GitHub Releases
+  - provider: GitHub
+    auth_token:
+      secure: 850frgRGZcc4Cljd2P7Ej68no4/kkl4EMB+DjnX725wcKBRJuFk/kGRdJGyKXd2u # your encrypted token from GitHub
+    artifact: CIArchives, CIArchivesTGZ, logs
+    tag: 'CI builds'
+    description: 'Results of CI builds for various platforms'
+    draft: false
+    prerelease: true
+    force_update: true
+    on:
+      branch: master                # release from master branch only
+
+  # Deploy to GitHub Releases
+  - provider: GitHub
+    auth_token:
+      secure: 850frgRGZcc4Cljd2P7Ej68no4/kkl4EMB+DjnX725wcKBRJuFk/kGRdJGyKXd2u # your encrypted token from GitHub
+    artifact: CIArchives, CIArchivesTGZ
+    tag: $(APPVEYOR_REPO_TAG_NAME)
+    description: 'Release build'
+    draft: true
+    prerelease: false
+    force_update: true
+    on:
+      appveyor_repo_tag: true       # deploy on tag push only
