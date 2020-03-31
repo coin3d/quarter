@@ -1,20 +1,19 @@
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+# If this directory is not explicitly included build fails with message "error: Undefined interface"
 if(Qt5_FOUND)
-  # If this directory is not explicitly included build fails with message "error: Undefined interface"
   include_directories(${Qt5Designer_INCLUDE_DIRS})
-  QT5_ADD_RESOURCES(ResourceSources QuarterWidgetPlugin.qrc coinlogo.qrc)
-  QT5_WRAP_CPP(MocHeaders QuarterWidgetPlugin.h)
 else()
-  # If this directory is not explicitly included build fails with message "error: Undefined interface"
   include_directories(${QtDesigner_INCLUDE_DIRS})
-  QT4_ADD_RESOURCES(ResourceSources QuarterWidgetPlugin.qrc coinlogo.qrc)
-  QT4_WRAP_CPP(MocHeaders QuarterWidgetPlugin.h)
 endif()
 
 # ############################################################################
 # Create the QtDesigner plugin
 # ############################################################################
 
-add_library(QuarterWidgetPlugin SHARED QuarterWidgetPlugin.cpp QuarterWidgetPlugin.h ${ResourceSources} ${MocHeaders})
+add_library(QuarterWidgetPlugin SHARED QuarterWidgetPlugin.cpp QuarterWidgetPlugin.h QuarterWidgetPlugin.qrc coinlogo.qrc)
 if(WIN32)
   configure_file(QuarterWidgetPlugin.rc.cmake.in QuarterWidgetPlugin.rc)
   target_sources(QuarterWidgetPlugin PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/QuarterWidgetPlugin.rc")
