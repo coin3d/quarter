@@ -1,0 +1,3 @@
+# Support GitHub linguist library to display right repository language
+Makefile.in linguist-generated
+Makefile.am linguist-generated
