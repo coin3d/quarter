@@ -118,77 +118,66 @@ install:
 # Assumes that we use the vx.y.z tagging scheme (e.g. v1.3.0)
 before_build:
   - cmd: |
-      set CI_REPO_TAG_NAME=latest
-      if defined APPVEYOR_REPO_TAG_NAME set CI_REPO_TAG_NAME=%APPVEYOR_REPO_TAG_NAME:~1%
-      set BUILD_SOURCE_ARCHIVE=%APPVEYOR_PROJECT_NAME%-%CI_REPO_TAG_NAME%-src.zip
-      7z a -tzip %BUILD_SOURCE_ARCHIVE% %APPVEYOR_BUILD_FOLDER%
+      if defined APPVEYOR_REPO_TAG_NAME (set CI_REPO_VERSION=%APPVEYOR_REPO_TAG_NAME:~1%) else (set CI_REPO_VERSION=latest)
+      set BUILD_SOURCE_ARCHIVE=%APPVEYOR_PROJECT_NAME%-%CI_REPO_VERSION%-src.zip
+      7z a -xr!*\.git/ -tzip %BUILD_SOURCE_ARCHIVE% %APPVEYOR_BUILD_FOLDER%
       mkdir %APPVEYOR_BUILD_FOLDER%\downloads
       set DOWNLOAD_FILE_DOXYGEN=doxygen-1.8.14.windows.x64.bin.zip
       appveyor DownloadFile https://sourceforge.net/projects/doxygen/files/rel-1.8.14/%DOWNLOAD_FILE_DOXYGEN% -FileName %DOWNLOAD_FILE_DOXYGEN%
       7z x %DOWNLOAD_FILE_DOXYGEN% -o%APPVEYOR_BUILD_FOLDER%\downloads\doxygen-1.8.14
       doxygen --version
       rem ##############
-      set SUPERGLU_REPO_TAG_NAME=latest
-      if defined APPVEYOR_REPO_TAG_NAME set SUPERGLU_REPO_TAG_NAME=%SUPERGLU_VERSION%
-      set DOWNLOAD_FILE_SUPERGLU=superglu-%SUPERGLU_REPO_TAG_NAME%-%COMPILER_ID%-%CMAKE_PLATFORM%.zip
-      echo download file %DOWNLOAD_FILE_SUPERGLU%
-      for /f %%i in ('curl -s -H "Authorization: token %GH_AUTH_TOKEN%" https://api.github.com/repos/coin3d/superglu/releases ^| jq -r ".[] | select(.name==\"CI builds\") | .id"') do set RELEASE_ID=%%i
+      if defined APPVEYOR_REPO_TAG_NAME (set SUPERGLU_REPO_VERSION=%SUPERGLU_VERSION%) else (set SUPERGLU_REPO_VERSION=latest)
+      if defined APPVEYOR_REPO_TAG_NAME (set SUPERGLU_REPO_TAG_NAME=superglu-%SUPERGLU_VERSION%) else (set SUPERGLU_REPO_TAG_NAME=CI-builds)
+      set DOWNLOAD_FILE_SUPERGLU=superglu-%SUPERGLU_REPO_VERSION%-%COMPILER_ID%-%CMAKE_PLATFORM%.zip
+      for /f %%i in ('curl -s -H "Authorization: token %GH_AUTH_TOKEN%" https://api.github.com/repos/coin3d/superglu/releases ^| jq -r --arg SUPERGLU_REPO_TAG_NAME "%SUPERGLU_REPO_TAG_NAME%" ".[] | select(.tag_name==$SUPERGLU_REPO_TAG_NAME) | .id"') do set RELEASE_ID=%%i
       for /f %%i in ('curl -s -H "Authorization: token %GH_AUTH_TOKEN%" https://api.github.com/repos/coin3d/superglu/releases/%RELEASE_ID% ^| jq -r --arg DOWNLOAD_FILE_SUPERGLU "%DOWNLOAD_FILE_SUPERGLU%" ".assets[] | select(.name==$DOWNLOAD_FILE_SUPERGLU) | .id"') do set ASSET_ID=%%i
       set DOWNLOAD_ADDRESS_SUPERGLU=https://api.github.com/repos/coin3d/superglu/releases/assets/%ASSET_ID%
-      if defined APPVEYOR_REPO_TAG_NAME set DOWNLOAD_ADDRESS_SUPERGLU=https://github.com/coin3d/superglu/releases/tag/v%SUPERGLU_VERSION%/%DOWNLOAD_FILE_SUPERGLU%
+      echo download file %DOWNLOAD_FILE_SUPERGLU% from address %DOWNLOAD_ADDRESS_SUPERGLU%
       curl -s -S -L -H "Authorization: token %GH_AUTH_TOKEN%" -H "Accept: application/octet-stream" -o %DOWNLOAD_FILE_SUPERGLU% %DOWNLOAD_ADDRESS_SUPERGLU%
       7z x %DOWNLOAD_FILE_SUPERGLU% -o%APPVEYOR_BUILD_FOLDER%\downloads
       rem ##############
-      set COIN_REPO_TAG_NAME=latest
-      if defined APPVEYOR_REPO_TAG_NAME set COIN_REPO_TAG_NAME=%COIN_VERSION%
-      set DOWNLOAD_FILE_COIN=coin-%COIN_REPO_TAG_NAME%-%COMPILER_ID%-%CMAKE_PLATFORM%.zip
-      echo download file %DOWNLOAD_FILE_COIN%
-      for /f %%i in ('curl -s -H "Authorization: token %GH_AUTH_TOKEN%" https://api.github.com/repos/coin3d/coin/releases ^| jq -r ".[] | select(.name==\"CI builds\") | .id"') do set RELEASE_ID=%%i
+      if defined APPVEYOR_REPO_TAG_NAME (set COIN_REPO_VERSION=%COIN_VERSION%) else (set COIN_REPO_VERSION=latest)
+      if defined APPVEYOR_REPO_TAG_NAME (set COIN_REPO_TAG_NAME=Coin-%COIN_VERSION%) else (set COIN_REPO_TAG_NAME=CI-builds)
+      set DOWNLOAD_FILE_COIN=coin-%COIN_REPO_VERSION%-%COMPILER_ID%-%CMAKE_PLATFORM%.zip
+      for /f %%i in ('curl -s -H "Authorization: token %GH_AUTH_TOKEN%" https://api.github.com/repos/coin3d/coin/releases ^| jq -r --arg COIN_REPO_TAG_NAME "%COIN_REPO_TAG_NAME%" ".[] | select(.tag_name==$COIN_REPO_TAG_NAME) | .id"') do set RELEASE_ID=%%i
       for /f %%i in ('curl -s -H "Authorization: token %GH_AUTH_TOKEN%" https://api.github.com/repos/coin3d/coin/releases/%RELEASE_ID% ^| jq -r --arg DOWNLOAD_FILE_COIN "%DOWNLOAD_FILE_COIN%" ".assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id"') do set ASSET_ID=%%i
       set DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/%ASSET_ID%
-      if defined APPVEYOR_REPO_TAG_NAME set DOWNLOAD_ADDRESS_COIN=https://github.com/coin3d/coin/releases/tag/v%COIN_VERSION%/%DOWNLOAD_FILE_COIN%
+      echo download file %DOWNLOAD_FILE_COIN% from address %DOWNLOAD_ADDRESS_COIN%
       curl -s -S -L -H "Authorization: token %GH_AUTH_TOKEN%" -H "Accept: application/octet-stream" -o %DOWNLOAD_FILE_COIN% %DOWNLOAD_ADDRESS_COIN%
       7z x %DOWNLOAD_FILE_COIN%     -o%APPVEYOR_BUILD_FOLDER%\downloads
       rem ##############
       cmake -H. -Bbuild -G "%CMAKE_GENERATOR%" -A %CMAKE_ARCHITECTURE% -DCMAKE_INSTALL_PREFIX=%APPVEYOR_BUILD_FOLDER%\Coin3D -DCMAKE_PREFIX_PATH=%APPVEYOR_BUILD_FOLDER%\downloads\Coin3D;%QT_DIR%
   - sh: |
-      if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then export CI_REPO_TAG_NAME=${APPVEYOR_REPO_TAG_NAME:1}; else export CI_REPO_TAG_NAME=latest; fi
-      BUILD_SOURCE_ARCHIVE=$APPVEYOR_PROJECT_NAME-$CI_REPO_TAG_NAME-src.tar.gz
+      if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export CI_REPO_VERSION=${APPVEYOR_REPO_TAG_NAME:1}; else export CI_REPO_VERSION=latest; fi
+      BUILD_SOURCE_ARCHIVE=$APPVEYOR_PROJECT_NAME-$CI_REPO_VERSION-src.tar.gz
       if [ ! -d "$APPVEYOR_BUILD_FOLDER/../$APPVEYOR_PROJECT_NAME" ]; then cp -r $APPVEYOR_BUILD_FOLDER $APPVEYOR_BUILD_FOLDER/../$APPVEYOR_PROJECT_NAME; fi
       cd $APPVEYOR_BUILD_FOLDER/..
-      tar -czf $BUILD_SOURCE_ARCHIVE $APPVEYOR_PROJECT_NAME
+      tar czf $BUILD_SOURCE_ARCHIVE --exclude .git $APPVEYOR_PROJECT_NAME
       mv $BUILD_SOURCE_ARCHIVE $APPVEYOR_BUILD_FOLDER
       cd $APPVEYOR_BUILD_FOLDER
       mkdir $APPVEYOR_BUILD_FOLDER/downloads
       export COMPILER_ID=$APPVEYOR_BUILD_WORKER_IMAGE-$COMPILER_ID`$COMPILER_ID -dumpversion | tr '.' '\n'`
       ###############
-      if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then export SUPERGLU_REPO_TAG_NAME=$SUPERGLU_VERSION; else export SUPERGLU_REPO_TAG_NAME=latest; fi
-      DOWNLOAD_FILE_SUPERGLU=superglu-$SUPERGLU_REPO_TAG_NAME-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
-      echo download file $DOWNLOAD_FILE_SUPERGLU
-      if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then
-        export DOWNLOAD_ADDRESS_SUPERGLU=https://github.com/coin3d/superglu/releases/download/v$SUPERGLU_VERSION/$DOWNLOAD_FILE_SUPERGLU
-      else
-        RELEASE_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/superglu/releases | jq '.[] | select(.name=="CI builds") | .id'`
-        ASSET_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/superglu/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_SUPERGLU "$DOWNLOAD_FILE_SUPERGLU" '.assets[] | select(.name==$DOWNLOAD_FILE_SUPERGLU) | .id'`
-        export DOWNLOAD_ADDRESS_SUPERGLU=https://api.github.com/repos/coin3d/superglu/releases/assets/$ASSET_ID
-      fi
-      echo download address $DOWNLOAD_ADDRESS_SUPERGLU
+      if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export SUPERGLU_REPO_VERSION=$SUPERGLU_VERSION; else export SUPERGLU_REPO_VERSION=latest; fi
+      if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export SUPERGLU_REPO_TAG_NAME=superglu-$SUPERGLU_VERSION; else export SUPERGLU_REPO_TAG_NAME=CI-builds; fi
+      DOWNLOAD_FILE_SUPERGLU=superglu-$SUPERGLU_REPO_VERSION-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
+      RELEASE_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/superglu/releases | jq -r --arg SUPERGLU_REPO_TAG_NAME "$SUPERGLU_REPO_TAG_NAME" '.[] | select(.tag_name==$SUPERGLU_REPO_TAG_NAME) | .id'`
+      ASSET_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/superglu/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_SUPERGLU "$DOWNLOAD_FILE_SUPERGLU" '.assets[] | select(.name==$DOWNLOAD_FILE_SUPERGLU) | .id'`
+      export DOWNLOAD_ADDRESS_SUPERGLU=https://api.github.com/repos/coin3d/superglu/releases/assets/$ASSET_ID
+      echo download file $DOWNLOAD_FILE_SUPERGLU from address $DOWNLOAD_ADDRESS_SUPERGLU
       curl -s -S -L -H "Authorization: token $GH_AUTH_TOKEN" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_SUPERGLU $DOWNLOAD_ADDRESS_SUPERGLU
-      tar -xzf $DOWNLOAD_FILE_SUPERGLU -C $APPVEYOR_BUILD_FOLDER/downloads
+      tar xzf $DOWNLOAD_FILE_SUPERGLU -C $APPVEYOR_BUILD_FOLDER/downloads
       ###############
-      if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then export COIN_REPO_TAG_NAME=$COIN_VERSION; else export COIN_REPO_TAG_NAME=latest; fi
-      DOWNLOAD_FILE_COIN=coin-$COIN_REPO_TAG_NAME-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
-      echo download file $DOWNLOAD_FILE_COIN
-      if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then
-        export DOWNLOAD_ADDRESS_COIN=https://github.com/coin3d/coin/releases/download/v$COIN_VERSION/$DOWNLOAD_FILE_COIN
-      else
-        RELEASE_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/coin/releases | jq '.[] | select(.name=="CI builds") | .id'`
-        ASSET_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/coin/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_COIN "$DOWNLOAD_FILE_COIN" '.assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id'`
-        export DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/$ASSET_ID
-      fi
-      echo download address $DOWNLOAD_ADDRESS_COIN
+      if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export COIN_REPO_VERSION=$COIN_VERSION; else export COIN_REPO_VERSION=latest; fi
+      if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export COIN_REPO_TAG_NAME=Coin-$COIN_VERSION; else export COIN_REPO_TAG_NAME=CI-builds; fi
+      DOWNLOAD_FILE_COIN=coin-$COIN_REPO_VERSION-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
+      RELEASE_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/coin/releases | jq -r --arg COIN_REPO_TAG_NAME "$COIN_REPO_TAG_NAME" '.[] | select(.tag_name==$COIN_REPO_TAG_NAME) | .id'`
+      ASSET_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/coin/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_COIN "$DOWNLOAD_FILE_COIN" '.assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id'`
+      export DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/$ASSET_ID
+      echo download file $DOWNLOAD_FILE_COIN from address $DOWNLOAD_ADDRESS_COIN
       curl -s -S -L -H "Authorization: token $GH_AUTH_TOKEN" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_COIN $DOWNLOAD_ADDRESS_COIN
-      tar -xzf $DOWNLOAD_FILE_COIN -C $APPVEYOR_BUILD_FOLDER/downloads
+      tar xzf $DOWNLOAD_FILE_COIN -C $APPVEYOR_BUILD_FOLDER/downloads
       ###############
       export CFLAGS=$CMAKE_ARCH_FLAGS
       export CXXFLAGS=$CMAKE_ARCH_FLAGS
@@ -197,7 +186,7 @@ before_build:
 
 build_script:
   - cmd: |
-      set BUILD_TOOL_OPTIONS=/nologo /verbosity:minimal /maxcpucount
+      set BUILD_TOOL_OPTIONS=/nologo /verbosity:minimal /maxcpucount /property:MultiProcessorCompilation=true;CL_MPCount=3
       cmake --build build --target INSTALL --config Debug   -- %BUILD_TOOL_OPTIONS%
       cmake --build build --target INSTALL --config Release -- %BUILD_TOOL_OPTIONS%
   - sh: |
@@ -209,17 +198,16 @@ build_script:
 after_build:
   - cmd: |
       cd %APPVEYOR_BUILD_FOLDER%
-      set CI_REPO_TAG_NAME=latest
-      if defined APPVEYOR_REPO_TAG_NAME set CI_REPO_TAG_NAME=%APPVEYOR_REPO_TAG_NAME:~1%
-      set BUILD_ARCHIVE=%APPVEYOR_PROJECT_NAME%-%CI_REPO_TAG_NAME%-%COMPILER_ID%-%CMAKE_PLATFORM%.zip
+      if defined APPVEYOR_REPO_TAG_NAME (set CI_REPO_VERSION=%APPVEYOR_REPO_TAG_NAME:~1%) else (set CI_REPO_VERSION=latest)
+      set BUILD_ARCHIVE=%APPVEYOR_PROJECT_NAME%-%CI_REPO_VERSION%-%COMPILER_ID%-%CMAKE_PLATFORM%.zip
       7z a -tzip %BUILD_ARCHIVE% Coin3D
-      appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/%APPVEYOR_JOB_ID%/log -FileName %APPVEYOR_PROJECT_NAME%-%CI_REPO_TAG_NAME%-%COMPILER_ID%-%CMAKE_PLATFORM%.log
+      appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/%APPVEYOR_JOB_ID%/log -FileName %APPVEYOR_PROJECT_NAME%-%CI_REPO_VERSION%-%COMPILER_ID%-%CMAKE_PLATFORM%.log
   - sh: |
       cd $APPVEYOR_BUILD_FOLDER
-      if [ -z "${APPVEYOR_REPO_TAG_NAME+x}" ]; then export CI_REPO_TAG_NAME=${APPVEYOR_REPO_TAG_NAME:1}; else export CI_REPO_TAG_NAME=latest; fi
-      BUILD_ARCHIVE=$APPVEYOR_PROJECT_NAME-$CI_REPO_TAG_NAME-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
-      tar -czf $BUILD_ARCHIVE Coin3D/*
-      appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/$APPVEYOR_JOB_ID/log -FileName $APPVEYOR_PROJECT_NAME-$CI_REPO_TAG_NAME-$COMPILER_ID-$CMAKE_PLATFORM.log
+      if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export CI_REPO_VERSION=${APPVEYOR_REPO_TAG_NAME:1}; else export CI_REPO_VERSION=latest; fi
+      BUILD_ARCHIVE=$APPVEYOR_PROJECT_NAME-$CI_REPO_VERSION-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
+      tar czf $BUILD_ARCHIVE Coin3D/*
+      appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/$APPVEYOR_JOB_ID/log -FileName $APPVEYOR_PROJECT_NAME-$CI_REPO_VERSION-$COMPILER_ID-$CMAKE_PLATFORM.log
 
 artifacts:
   - path: $(APPVEYOR_PROJECT_NAME)*.zip
@@ -241,7 +229,7 @@ notifications:
   - provider: Email
     to:
       - '{{commitAuthorEmail}}'
-#      - coin-support@coin3d.org
+      - coin-support@coin3d.org
     on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
@@ -258,7 +246,8 @@ deploy:
     prerelease: true
     force_update: true
     on:
-      branch: master                # release from master branch only
+      APPVEYOR_REPO_TAG: false      # deploy on untagged builds only
+#      branch: master                # release from master branch only
 
   # Deploy to GitHub Releases
   - provider: GitHub
@@ -268,7 +257,7 @@ deploy:
     tag: $(APPVEYOR_REPO_TAG_NAME)
     description: 'Release build'
     draft: true
-    prerelease: false
+    prerelease: true
     force_update: true
     on:
-      appveyor_repo_tag: true       # deploy on tag push only
+      APPVEYOR_REPO_TAG: true       # deploy on tag push only
