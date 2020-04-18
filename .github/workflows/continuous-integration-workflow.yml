@@ -1,0 +1,112 @@
+name: Continuous Integration Build
+
+on:
+  pull_request:
+    branches: [ master ]
+#  push:
+#    branches: [ master ]
+
+jobs:
+  ubuntu-build:
+    name: Ubuntu Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
+      - name: Create build directory and run CMake
+        run: |
+          sudo apt-get -y install freeglut3-dev qt5-default qttools5-dev
+          mkdir cmake_download_dir
+          DOWNLOAD_FILE_COIN=coin-latest-Ubuntu-gcc7-x64.tar.gz
+          RELEASE_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases | jq -r --arg COIN_REPO_TAG_NAME "CI-builds" '.[] | select(.tag_name==$COIN_REPO_TAG_NAME) | .id'`
+          ASSET_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_COIN "$DOWNLOAD_FILE_COIN" '.assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id'`
+          export DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/$ASSET_ID
+          echo download file $DOWNLOAD_FILE_COIN from address $DOWNLOAD_ADDRESS_COIN
+          curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_COIN $DOWNLOAD_ADDRESS_COIN
+          tar xzf $DOWNLOAD_FILE_COIN -C cmake_download_dir
+          cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH=cmake_download_dir/Coin3D
+      - name: Build project
+        run: |
+          sudo cmake --build cmake_build_dir --target install --config Release -- -j4
+          tar czf quarter-latest-Ubuntu-gcc7-x64.tar.gz cmake_install_dir/*
+      # - name: Run tests
+      #   run: |
+      #     cd cmake_build_dir
+      #     ctest -C Release -VV
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: Ubuntu-Artifacts
+          path: quarter-latest-Ubuntu-gcc7-x64.tar.gz
+        if: always()
+
+  windows-build:
+    name: Windows Build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+      - name: Create build directory and run CMake
+        shell: cmd
+        run: |
+          mkdir cmake_download_dir
+          set DOWNLOAD_FILE_COIN=coin-latest-msvc16-x64.zip
+          for /f %%i in ('curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases ^| jq -r --arg COIN_REPO_TAG_NAME "CI-builds" ".[] | select(.tag_name==$COIN_REPO_TAG_NAME) | .id"') do set RELEASE_ID=%%i
+          for /f %%i in ('curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases/%RELEASE_ID% ^| jq -r --arg DOWNLOAD_FILE_COIN "%DOWNLOAD_FILE_COIN%" ".assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id"') do set ASSET_ID=%%i
+          set DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/%ASSET_ID%
+          echo download file %DOWNLOAD_FILE_COIN% from address %DOWNLOAD_ADDRESS_COIN%
+          curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o %DOWNLOAD_FILE_COIN% %DOWNLOAD_ADDRESS_COIN%
+          7z x %DOWNLOAD_FILE_COIN% -ocmake_download_dir
+          cmake -S . -B cmake_build_dir -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH=cmake_download_dir/Coin3D
+      - name: Build project
+        run: |
+          cmake --build cmake_build_dir --target INSTALL --config Release -- /nologo /verbosity:minimal /maxcpucount:2 /property:MultiProcessorCompilation=true
+          7z a -tzip quarter-latest-msvc16-x64.zip cmake_install_dir
+      # - name: Run tests
+      #   run: |
+      #     cd cmake_build_dir
+      #     ctest -C Release -VV
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: Windows-Artifacts
+          path: quarter-latest-msvc16-x64.zip
+        if: always()
+
+  macos-build:
+    name: MacOS Build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
+      - name: Create build directory and run CMake
+        run: |
+          brew install qt5
+          mkdir cmake_download_dir
+          DOWNLOAD_FILE_COIN=coin-latest-macos-clang11-x64.tar.gz
+          RELEASE_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases | jq -r --arg COIN_REPO_TAG_NAME "CI-builds" '.[] | select(.tag_name==$COIN_REPO_TAG_NAME) | .id'`
+          ASSET_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_COIN "$DOWNLOAD_FILE_COIN" '.assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id'`
+          export DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/$ASSET_ID
+          echo download file $DOWNLOAD_FILE_COIN from address $DOWNLOAD_ADDRESS_COIN
+          curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_COIN $DOWNLOAD_ADDRESS_COIN
+          tar xzf $DOWNLOAD_FILE_COIN -C cmake_download_dir
+          cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH="cmake_download_dir/Coin3D;/usr/local/Cellar/qt/5.14.1"
+      - name: Build project
+        run: |
+          sudo cmake --build cmake_build_dir --target install --config Release -- -j4
+          tar czf quarter-latest-macos-clang11-x64.tar.gz cmake_install_dir/*
+      # - name: Run tests
+      #   run: |
+      #     cd cmake_build_dir
+      #     ctest -C Release -VV
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: MacOS-Artifacts
+          path: quarter-latest-macos-clang11-x64.tar.gz
+        if: always()
