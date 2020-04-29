@@ -13,10 +13,10 @@ htmldir=${docdir}/html
 Name: @PROJECT_NAME@
 Description: A Qt Gui widget for Coin
 Version: @PROJECT_VERSION@
-Requires: Coin, QtCore, QtGui, QtOpenGL, QtXml
+Requires: @QUARTER_PKG_DEPS@
 Conflicts:
-Libs: -L${libdir} -lQuarter @QUARTER_USE_LDFLAGS@ @QUARTER_USE_LIBS@
-Cflags: -I${includedir} @QUARTER_USE_CPPFLAGS@
+Libs: -L${libdir} @QUARTER_PKG_LIBS@
+Cflags: -I${includedir} @QUARTER_PKG_FLAGS@
 
 frameworkdir=@frameworkdir@
-qt_version=@QT_VERSION@
+qt_version=@QT_VERSION_MAJOR@.@QT_VERSION_MINOR@.@QT_VERSION_PATCH@

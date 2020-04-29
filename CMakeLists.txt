@@ -88,7 +88,9 @@ report_prepare(
 
 find_package(OpenGL REQUIRED)
 find_package(Coin REQUIRED)
-find_package(Spacenav)
+find_package(Spacenav QUIET)
+
+set(QUARTER_PKG_DEPS "Coin")
 
 if(QUARTER_USE_QT5)
   find_package(Qt5 COMPONENTS Widgets UiTools OpenGL Designer REQUIRED)
@@ -100,7 +102,7 @@ if(Qt5_FOUND)
   string(REGEX REPLACE "^([0-9]+)\\.[0-9]+\\.[0-9]+.*" "\\1" QT_VERSION_MAJOR "${Qt5Core_VERSION_STRING}")
   string(REGEX REPLACE "^[0-9]+\\.([0-9]+)\\.[0-9]+.*" "\\1" QT_VERSION_MINOR "${Qt5Core_VERSION_STRING}")
   string(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.([0-9]+).*" "\\1" QT_VERSION_PATCH "${Qt5Core_VERSION_STRING}")
-  set(PACKAGE_ADDITIONAL_REQUIREMENTS "Qt5Widgets, Qt5UiTools, Qt5OpenGL, Qt5Designer")
+  set(QUARTER_PKG_DEPS "${QUARTER_PKG_DEPS} Qt5Widgets Qt5UiTools Qt5OpenGL Qt5Designer")
 else()
   set(QT_USE_QTGUI true)
   set(QT_USE_QTDESIGNER true)
@@ -112,8 +114,11 @@ else()
   set(QUARTER_QT_TARGETS Qt4::QtGui Qt4::QtOpenGL)
   set(QUARTER_PLUGIN_QT_TARGETS Qt4::QtGui Qt4::QtUiTools Qt4::QtOpenGL Qt4::QtDesigner)
   include(${QT_USE_FILE})
-  set(PACKAGE_ADDITIONAL_REQUIREMENTS "QtGui, QtUiTools, QtOpenGL, QtDesigner")
+  set(QUARTER_PKG_DEPS "${QUARTER_PKG_DEPS} QtGui QtUiTools QtOpenGL QtDesigner")
 endif()
+
+set(QUARTER_PKG_LIBS "" CACHE INTERNAL "Link libraries for package config")
+set(QUARTER_PKG_FLAGS "" CACHE INTERNAL "Compilation flags for package config")
 
 # ##########################################################################
 # Setup build environment

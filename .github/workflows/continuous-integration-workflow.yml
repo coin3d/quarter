@@ -27,18 +27,15 @@ jobs:
           tar xzf $DOWNLOAD_FILE_COIN -C cmake_download_dir
           cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH=cmake_download_dir/Coin3D
       - name: Build project
-        run: |
-          sudo cmake --build cmake_build_dir --target install --config Release -- -j4
-          tar czf quarter-latest-Ubuntu-gcc7-x64.tar.gz cmake_install_dir/*
+        run: sudo cmake --build cmake_build_dir --target install --config Release -- -j4
       # - name: Run tests
-      #   run: |
-      #     cd cmake_build_dir
-      #     ctest -C Release -VV
+      #   working-directory: cmake_build_dir
+      #   run: ctest -C Release -VV
       - name: Create Artifacts
         uses: actions/upload-artifact@v1
         with:
           name: Ubuntu-Artifacts
-          path: quarter-latest-Ubuntu-gcc7-x64.tar.gz
+          path: cmake_install_dir/
         if: always()
 
   windows-build:
@@ -63,18 +60,15 @@ jobs:
           7z x %DOWNLOAD_FILE_COIN% -ocmake_download_dir
           cmake -S . -B cmake_build_dir -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH=cmake_download_dir/Coin3D
       - name: Build project
-        run: |
-          cmake --build cmake_build_dir --target INSTALL --config Release -- /nologo /verbosity:minimal /maxcpucount:2 /property:MultiProcessorCompilation=true
-          7z a -tzip quarter-latest-msvc16-x64.zip cmake_install_dir
+        run: cmake --build cmake_build_dir --target INSTALL --config Release -- /nologo /verbosity:minimal /maxcpucount:2 /property:MultiProcessorCompilation=true
       # - name: Run tests
-      #   run: |
-      #     cd cmake_build_dir
-      #     ctest -C Release -VV
+      #   working-directory: cmake_build_dir
+      #   run: ctest -C Release -VV
       - name: Create Artifacts
         uses: actions/upload-artifact@v1
         with:
           name: Windows-Artifacts
-          path: quarter-latest-msvc16-x64.zip
+          path: cmake_install_dir/
         if: always()
 
   macos-build:
@@ -97,16 +91,13 @@ jobs:
           tar xzf $DOWNLOAD_FILE_COIN -C cmake_download_dir
           cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH="cmake_download_dir/Coin3D;/usr/local/Cellar/qt/5.14.1"
       - name: Build project
-        run: |
-          sudo cmake --build cmake_build_dir --target install --config Release -- -j4
-          tar czf quarter-latest-macos-clang11-x64.tar.gz cmake_install_dir/*
+        run: sudo cmake --build cmake_build_dir --target install --config Release -- -j4
       # - name: Run tests
-      #   run: |
-      #     cd cmake_build_dir
-      #     ctest -C Release -VV
+      #   working-directory: cmake_build_dir
+      #   run: ctest -C Release -VV
       - name: Create Artifacts
         uses: actions/upload-artifact@v1
         with:
           name: MacOS-Artifacts
-          path: quarter-latest-macos-clang11-x64.tar.gz
+          path: cmake_install_dir/
         if: always()
