@@ -16,6 +16,7 @@ jobs:
         run: git submodule update --init --recursive
       - name: Create build directory and run CMake
         run: |
+          sudo apt-get -y update
           sudo apt-get -y install freeglut3-dev qt5-default qttools5-dev
           mkdir cmake_download_dir
           DOWNLOAD_FILE_COIN=coin-latest-Ubuntu-gcc7-x64.tar.gz
