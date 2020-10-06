@@ -93,7 +93,11 @@ find_package(Spacenav QUIET)
 set(QUARTER_PKG_DEPS "Coin")
 
 if(QUARTER_USE_QT5)
-  find_package(Qt5 COMPONENTS Widgets UiTools OpenGL Designer REQUIRED)
+  if(QUARTER_BUILD_PLUGIN)
+    find_package(Qt5 COMPONENTS Widgets UiTools OpenGL Designer REQUIRED)
+  else()
+    find_package(Qt5 COMPONENTS Widgets OpenGL REQUIRED)
+  endif()
 endif()
 
 if(Qt5_FOUND)
