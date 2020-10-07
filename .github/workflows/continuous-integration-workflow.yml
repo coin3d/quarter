@@ -90,7 +90,7 @@ jobs:
           echo download file $DOWNLOAD_FILE_COIN from address $DOWNLOAD_ADDRESS_COIN
           curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_COIN $DOWNLOAD_ADDRESS_COIN
           tar xzf $DOWNLOAD_FILE_COIN -C cmake_download_dir
-          cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH="cmake_download_dir/Coin3D;/usr/local/Cellar/qt/5.14.1"
+          cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH="cmake_download_dir/Coin3D;/usr/local/opt/qt5"
       - name: Build project
         run: sudo cmake --build cmake_build_dir --target install --config Release -- -j4
       # - name: Run tests
