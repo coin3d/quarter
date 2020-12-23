@@ -1,5 +1,5 @@
-Quarter 
-=======
+Coin3D Quarter 
+==============
 
 Introduction
 ------------
@@ -16,6 +16,15 @@ of QGLWidget. This widget provides functionality for rendering of Coin
 scenegraphs and translation of QEvents into SoEvents. Using this
 widget is as easy as using any other QWidget.
 
+How to install
+--------------
+
+See the file INSTALL for installation instructions, and the README.*
+files for platform-specific notes.
+
+How to use
+----------
+See Doxygen documentation: https://coin3d.github.io/Quarter/html/
 
 Release history
 ---------------
@@ -41,8 +50,3 @@ Quarter 1.1.0 (2019-12-25):
   - Handle double click events
   - Buffer went out of scope, while a reference was still held
 
-Installation
-------------
-
-See the file INSTALL for installation instructions, and the README.*
-files for platform-specific notes.
