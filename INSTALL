@@ -64,7 +64,7 @@ compiler for C/C++.
 All unixes have Bourne shells that are close enough to the POSIX
 standard to be usable, and in the odd case where the vendor shell does
 not cut it, you can install the GNU Bourne Again Shell (bash) as a
-replacement.  Many unixes have poor make implementations wihtout
+replacement.  Many unixes have poor make implementations without
 proper support for VPATH and other features that GNU Automake depend
 on.  If you experience problems during the build phase, you might want
 to try using GNU make instead of the vendor make program.  Make sure
