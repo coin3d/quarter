@@ -193,7 +193,7 @@ AC_ARG_WITH([framework],
   esac])
 
 
-# don't allow name to be overrided - just toggled on/off
+# don't allow name to be overridden - just toggled on/off
 sim_ac_framework_name="MAC_FRAMEWORK_NAME_DEFAULT"
 sim_ac_framework_prefix="MAC_FRAMEWORK_PREFIX_DEFAULT"
 sim_ac_framework_version="MAC_FRAMEWORK_VERSION_DEFAULT"
@@ -594,7 +594,7 @@ AC_ARG_WITH(
   [AC_HELP_STRING([--with-qt-designer-plugin-path=<path>],
                   [specify qt designer plugin path (must end with /designer)])],
   [QT_DESIGNER_PLUGIN_PATH=$withval]
-  SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path (overriden)], [$QT_DESIGNER_PLUGIN_PATH]),
+  SIM_AC_CONFIGURATION_SETTING([Qt Designer plugin path (overridden)], [$QT_DESIGNER_PLUGIN_PATH]),
   [QT_DESIGNER_PLUGIN_PATH=])
 
 
