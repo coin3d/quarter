@@ -979,7 +979,7 @@ QuarterWidget::resetNavigationModeFile(void) {
 }
 
 /*!
-  Sets a navigation mode file. Supports the schemes "coin" and "file"
+  Sets a navigation mode file. Supports the schemes "coin", "file", and "qrc"
 
   \param[in] url URL to the resource
 */
@@ -1007,7 +1007,9 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
   }
   else if (url.scheme()=="file")
     filename = url.toLocalFile();
-  else if (url.isEmpty()) {
+  else if (url.scheme()=="qrc") {       // qrc:///file -> :/file
+    filename = ":" +  url.path();
+  } else if (url.isEmpty()) {
     if (PRIVATE(this)->currentStateMachine) {
       this->removeStateMachine(PRIVATE(this)->currentStateMachine);
       delete PRIVATE(this)->currentStateMachine;
