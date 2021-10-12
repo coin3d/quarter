@@ -35,6 +35,7 @@
 #include <Quarter/eventhandlers/EventFilter.h>
 
 #include <QApplication>
+#include <QActionGroup>
 #include <QCursor>
 #include <QMenu>
 #include <QMap>
@@ -60,12 +61,20 @@ using namespace SIM::Coin3D::Quarter;
 class QuarterWidgetP_cachecontext {
 public:
   uint32_t id;
+#if QT_VERSION >= 0x060000
+  SbList <const QOpenGLWidget *> widgetlist;
+#else
   SbList <const QGLWidget *> widgetlist;
+#endif
 };
 
 static SbList <QuarterWidgetP_cachecontext *> * cachecontext_list = NULL;
 
+#if QT_VERSION >= 0x060000
+QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QOpenGLWidget * sharewidget)
+#else
 QuarterWidgetP::QuarterWidgetP(QuarterWidget * masterptr, const QGLWidget * sharewidget)
+#endif
 : master(masterptr),
   scene(NULL),
   eventfilter(NULL),
@@ -124,7 +133,11 @@ QuarterWidgetP::getCacheContextId(void) const
 }
 
 QuarterWidgetP_cachecontext *
+#if QT_VERSION >= 0x060000
+QuarterWidgetP::findCacheContext(QuarterWidget * widget, const QOpenGLWidget * sharewidget)
+#else
 QuarterWidgetP::findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget)
+#endif
 {
   if (cachecontext_list == NULL) {
     // FIXME: static memory leak
@@ -135,23 +148,37 @@ QuarterWidgetP::findCacheContext(QuarterWidget * widget, const QGLWidget * share
 
     for (int j = 0; j < cachecontext->widgetlist.getLength(); j++) {
       if (cachecontext->widgetlist[j] == sharewidget) {
+#if QT_VERSION >= 0x060000
+        cachecontext->widgetlist.append((const QOpenGLWidget*) widget);
+#else
         cachecontext->widgetlist.append((const QGLWidget*) widget);
+#endif
         return cachecontext;
       }
     }
   }
   QuarterWidgetP_cachecontext * cachecontext = new QuarterWidgetP_cachecontext;
   cachecontext->id = SoGLCacheContextElement::getUniqueCacheContext();
+#if QT_VERSION >= 0x060000
+  cachecontext->widgetlist.append((const QOpenGLWidget*) widget);
+#else
   cachecontext->widgetlist.append((const QGLWidget*) widget);
+#endif
   cachecontext_list->append(cachecontext);
 
   return cachecontext;
 }
 
 void
+#if QT_VERSION >= 0x060000
+QuarterWidgetP::removeFromCacheContext(QuarterWidgetP_cachecontext * context, const QOpenGLWidget * widget)
+{
+  context->widgetlist.removeItem((const QOpenGLWidget*) widget);
+#else
 QuarterWidgetP::removeFromCacheContext(QuarterWidgetP_cachecontext * context, const QGLWidget * widget)
 {
   context->widgetlist.removeItem((const QGLWidget*) widget);
+#endif
 
   if (context->widgetlist.getLength() == 0) { // last context in this share group?
     assert(cachecontext_list);
@@ -159,12 +186,20 @@ QuarterWidgetP::removeFromCacheContext(QuarterWidgetP_cachecontext * context, co
     for (int i = 0; i < cachecontext_list->getLength(); i++) {
       if ((*cachecontext_list)[i] == context) {
         // set the context while calling destructingContext() (might trigger OpenGL calls)
+#if QT_VERSION >= 0x060000
+        const_cast<QOpenGLWidget*> (widget)->makeCurrent();
+#else
         const_cast<QGLWidget*> (widget)->makeCurrent();
+#endif
         // fetch the cc_glglue context instance as a workaround for a bug fixed in Coin r12818
         (void) cc_glglue_instance(context->id);
         cachecontext_list->removeFast(i);
         SoContextHandler::destructingContext(context->id);
+#if QT_VERSION >= 0x060000
+        const_cast<QOpenGLWidget*> (widget)->doneCurrent();
+#else
         const_cast<QGLWidget*> (widget)->doneCurrent();
+#endif
         delete context;
         return;
       }

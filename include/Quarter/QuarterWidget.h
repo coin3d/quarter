@@ -39,9 +39,14 @@
 
 #include <QColor>
 #include <QUrl>
+#if QT_VERSION >= 0x060000
+#include <QOpenGLWidget>
+#else
 #include <QGLWidget>
+#endif
 #include <Quarter/Basic.h>
 
+class QAction;
 class QMenu;
 class SoNode;
 class SoEvent;
@@ -56,8 +61,13 @@ namespace SIM { namespace Coin3D { namespace Quarter {
 class EventFilter;
 const char DEFAULT_NAVIGATIONFILE []  = "coin:///scxml/navigation/examiner.xml";
 
+#if QT_VERSION >= 0x060000
+class QUARTER_DLL_API QuarterWidget : public QOpenGLWidget {
+  typedef QOpenGLWidget inherited;
+#else
 class QUARTER_DLL_API QuarterWidget : public QGLWidget {
   typedef QGLWidget inherited;
+#endif
   Q_OBJECT
 
   Q_PROPERTY(QUrl navigationModeFile READ navigationModeFile WRITE setNavigationModeFile RESET resetNavigationModeFile)
@@ -80,9 +90,19 @@ class QUARTER_DLL_API QuarterWidget : public QGLWidget {
 
 
 public:
-  explicit QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
-  explicit QuarterWidget(QGLContext * context, QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = 0);
-  explicit QuarterWidget(const QGLFormat & format, QWidget * parent = 0, const QGLWidget * shareWidget = 0, Qt::WindowFlags f = 0);
+#if QT_VERSION >= 0x060000
+  explicit QuarterWidget(QWidget * parent = 0, const QOpenGLWidget* sharewidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
+  explicit QuarterWidget(QOpenGLContext * context, QWidget * parent = 0, const QOpenGLWidget* sharewidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
+  explicit QuarterWidget(const QSurfaceFormat & format, QWidget * parent = 0, const QOpenGLWidget* shareWidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
+#elif QT_VERSION >= 0x050F00
+  explicit QuarterWidget(QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
+  explicit QuarterWidget(QGLContext * context, QWidget * parent = 0, const QGLWidget * sharewidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
+  explicit QuarterWidget(const QGLFormat & format, QWidget * parent = 0, const QGLWidget * shareWidget = 0, Qt::WindowFlags f = Qt::WindowFlags());
+#else
+  explicit QuarterWidget(QWidget* parent = 0, const QGLWidget* sharewidget = 0, Qt::WindowFlags f = 0);
+  explicit QuarterWidget(QGLContext* context, QWidget* parent = 0, const QGLWidget* sharewidget = 0, Qt::WindowFlags f = 0);
+  explicit QuarterWidget(const QGLFormat& format, QWidget* parent = 0, const QGLWidget* shareWidget = 0, Qt::WindowFlags f = 0);
+#endif
   virtual ~QuarterWidget();
 
   enum TransparencyType {
@@ -196,7 +216,11 @@ protected:
   virtual bool updateDevicePixelRatio(void);
 
 private:
-  void constructor(const QGLWidget * sharewidget);
+#if QT_VERSION >= 0x060000
+  void constructor(const QOpenGLWidget* sharewidget);
+#else
+  void constructor(const QGLWidget* sharewidget);
+#endif
   friend class QuarterWidgetP;
   class QuarterWidgetP * pimpl;
 };

@@ -58,6 +58,7 @@ include(GNUInstallDirs)
 # ############################################################################
 
 option(QUARTER_BUILD_SHARED_LIBS "Build shared libraries" ON)
+option(QUARTER_USE_QT6 "Prefer Qt6 over Qt5 if available" ON)
 option(QUARTER_USE_QT5 "Prefer Qt5 over Qt4 if available" ON)
 option(QUARTER_BUILD_PLUGIN "Build Quarter plugin for QT Designer" ON)
 option(QUARTER_BUILD_EXAMPLES "Build Quarter example applications" ON)
@@ -70,6 +71,7 @@ option(QUARTER_USE_CPACK "If enabled the cpack subrepo is mandatory" OFF)
 
 report_prepare(
   QUARTER_BUILD_SHARED_LIBS
+  QUARTER_USE_QT6
   QUARTER_USE_QT5
   QUARTER_BUILD_PLUGIN
   QUARTER_BUILD_EXAMPLES
@@ -92,17 +94,37 @@ find_package(Spacenav QUIET)
 
 set(QUARTER_PKG_DEPS "Coin")
 
-if(QUARTER_USE_QT5)
+if(QUARTER_USE_QT6)
   if(QUARTER_BUILD_PLUGIN)
-    find_package(Qt5 COMPONENTS Widgets UiTools OpenGL Designer REQUIRED)
+    find_package(Qt6 COMPONENTS Widgets UiTools OpenGL OpenGLWidgets Designer QUIET)
   else()
-    find_package(Qt5 COMPONENTS Widgets OpenGL REQUIRED)
+    find_package(Qt6 COMPONENTS Widgets UiTools OpenGL OpenGLWidgets QUIET)
   endif()
 endif()
 
-if(Qt5_FOUND)
-  set(QUARTER_QT_TARGETS Qt5::Widgets Qt5::OpenGL)
-  set(QUARTER_PLUGIN_QT_TARGETS Qt5::Widgets Qt5::UiTools Qt5::OpenGL Qt5::Designer)
+if(NOT Qt6_FOUND AND QUARTER_USE_QT5)
+  if(QUARTER_BUILD_PLUGIN)
+    find_package(Qt5 COMPONENTS Widgets UiTools OpenGL Designer QUIET)
+  else()
+    find_package(Qt5 COMPONENTS Widgets UiTools OpenGL QUIET)
+  endif()
+endif()
+
+if(NOT Qt6_FOUND AND NOT Qt5_FOUND)
+  set(QT_USE_IMPORTED_TARGETS ON)
+  find_package(Qt4 COMPONENTS QtCore QtGui QtOpenGL REQUIRED)
+endif()
+
+if(Qt6_FOUND)
+  set(QUARTER_QT_TARGETS Qt6::Widgets Qt6::UiTools Qt6::OpenGL Qt6::OpenGLWidgets)
+  set(QUARTER_PLUGIN_QT_TARGETS Qt6::Designer)
+  string(REGEX REPLACE "^([0-9]+)\\.[0-9]+\\.[0-9]+.*" "\\1" QT_VERSION_MAJOR "${Qt6Core_VERSION_STRING}")
+  string(REGEX REPLACE "^[0-9]+\\.([0-9]+)\\.[0-9]+.*" "\\1" QT_VERSION_MINOR "${Qt6Core_VERSION_STRING}")
+  string(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.([0-9]+).*" "\\1" QT_VERSION_PATCH "${Qt6Core_VERSION_STRING}")
+  set(QUARTER_PKG_DEPS "${QUARTER_PKG_DEPS} Qt6Widgets Qt6UiTools Qt6OpenGL Qt6OpenGLWidgets Qt6Designer")
+elseif(Qt5_FOUND)
+  set(QUARTER_QT_TARGETS Qt5::Widgets Qt5::UiTools Qt5::OpenGL)
+  set(QUARTER_PLUGIN_QT_TARGETS Qt5::Designer)
   string(REGEX REPLACE "^([0-9]+)\\.[0-9]+\\.[0-9]+.*" "\\1" QT_VERSION_MAJOR "${Qt5Core_VERSION_STRING}")
   string(REGEX REPLACE "^[0-9]+\\.([0-9]+)\\.[0-9]+.*" "\\1" QT_VERSION_MINOR "${Qt5Core_VERSION_STRING}")
   string(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.([0-9]+).*" "\\1" QT_VERSION_PATCH "${Qt5Core_VERSION_STRING}")
@@ -115,8 +137,8 @@ else()
   set(QT_USE_QTUITOOLS true)
   set(QT_USE_IMPORTED_TARGETS ON)
   find_package(Qt4 COMPONENTS QtGui QtUiTools QtOpenGL QtDesigner REQUIRED)
-  set(QUARTER_QT_TARGETS Qt4::QtGui Qt4::QtOpenGL)
-  set(QUARTER_PLUGIN_QT_TARGETS Qt4::QtGui Qt4::QtUiTools Qt4::QtOpenGL Qt4::QtDesigner)
+  set(QUARTER_QT_TARGETS Qt4::QtGui Qt4::QtUiTools Qt4::QtOpenGL)
+  set(QUARTER_PLUGIN_QT_TARGETS Qt4::QtDesigner)
   include(${QT_USE_FILE})
   set(QUARTER_PKG_DEPS "${QUARTER_PKG_DEPS} QtGui QtUiTools QtOpenGL QtDesigner")
 endif()

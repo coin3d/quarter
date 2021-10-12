@@ -10,7 +10,7 @@ target_link_libraries(Example PUBLIC Quarter)
 
 # Dynamic UI Loader example
 add_executable(DynamicUILoaderExample dynamicui.cpp quarterviewer.qrc)
-target_link_libraries(DynamicUILoaderExample PUBLIC Quarter ${QUARTER_PLUGIN_QT_TARGETS})
+target_link_libraries(DynamicUILoaderExample PUBLIC Quarter)
 
 # Direct UI loader example
 add_executable(DirectUILoaderExample directui.cpp QuarterViewer.ui)
@@ -18,7 +18,7 @@ target_link_libraries(DirectUILoaderExample PUBLIC Quarter)
 
 # Examiner example
 add_executable(ExaminerExample examiner.cpp quarterviewer.qrc)
-target_link_libraries(ExaminerExample PUBLIC Quarter ${QUARTER_PLUGIN_QT_TARGETS})
+target_link_libraries(ExaminerExample PUBLIC Quarter)
 
 # Inherit UI example
 add_executable(InheritUIExample inheritui.cpp
