@@ -124,28 +124,49 @@ using namespace SIM::Coin3D::Quarter;
 #define PRIVATE(obj) obj->pimpl
 
 /*! constructor */
+#if QT_VERSION >= 0x060000
+QuarterWidget::QuarterWidget(const QSurfaceFormat & format, QWidget * parent, const QOpenGLWidget* sharewidget, Qt::WindowFlags f)
+  : inherited(parent, f)
+{
+  this->setFormat(format);
+#else
 QuarterWidget::QuarterWidget(const QGLFormat & format, QWidget * parent, const QGLWidget * sharewidget, Qt::WindowFlags f)
   : inherited(format, parent, sharewidget, f)
 {
+#endif
   this->constructor(sharewidget);
 }
 
 /*! constructor */
+#if QT_VERSION >= 0x060000
+QuarterWidget::QuarterWidget(QWidget * parent, const QOpenGLWidget* sharewidget, Qt::WindowFlags f)
+  : inherited(parent, f)
+#else
 QuarterWidget::QuarterWidget(QWidget * parent, const QGLWidget * sharewidget, Qt::WindowFlags f)
   : inherited(parent, sharewidget, f)
+#endif
 {
   this->constructor(sharewidget);
 }
 
 /*! constructor */
+#if QT_VERSION >= 0x060000
+QuarterWidget::QuarterWidget(QOpenGLContext* context, QWidget * parent, const QOpenGLWidget * sharewidget, Qt::WindowFlags f)
+  : inherited(/*context, */parent, f)
+#else
 QuarterWidget::QuarterWidget(QGLContext * context, QWidget * parent, const QGLWidget * sharewidget, Qt::WindowFlags f)
   : inherited(context, parent, sharewidget, f)
+#endif
 {
   this->constructor(sharewidget);
 }
 
 void
-QuarterWidget::constructor(const QGLWidget * sharewidget)
+#if QT_VERSION >= 0x060000
+QuarterWidget::constructor(const QOpenGLWidget * sharewidget)
+#else
+QuarterWidget::constructor(const QGLWidget* sharewidget)
+#endif
 {
   PRIVATE(this) = new QuarterWidgetP(this, sharewidget);
 
@@ -778,7 +799,11 @@ QuarterWidget::redraw(void)
   // we're triggering the next paintGL(). Set a flag to remember this
   // to avoid that we process the delay queue in paintGL()
   PRIVATE(this)->processdelayqueue = false;
+#if (QT_VERSION >= 0x060000)
+  this->update();
+#else
   this->updateGL();
+#endif
 }
 
 /*!
@@ -979,7 +1004,7 @@ QuarterWidget::resetNavigationModeFile(void) {
 }
 
 /*!
-  Sets a navigation mode file. Supports the schemes "coin", "file", and "qrc"
+  Sets a navigation mode file. Supports the schemes "coin" and "file"
 
   \param[in] url URL to the resource
 */
@@ -1007,9 +1032,7 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
   }
   else if (url.scheme()=="file")
     filename = url.toLocalFile();
-  else if (url.scheme()=="qrc") {       // qrc:///file -> :/file
-    filename = ":" +  url.path();
-  } else if (url.isEmpty()) {
+  else if (url.isEmpty()) {
     if (PRIVATE(this)->currentStateMachine) {
       this->removeStateMachine(PRIVATE(this)->currentStateMachine);
       delete PRIVATE(this)->currentStateMachine;

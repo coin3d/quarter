@@ -144,7 +144,11 @@ const SoEvent *
 MouseP::mouseWheelEvent(QWheelEvent * event)
 {
   PUBLIC(this)->setModifiers(this->mousebutton, event);
+#if QT_VERSION >= 0x050E00
+  SbVec2s pos(event->position().x(), PUBLIC(this)->windowsize[1] - event->position().y() - 1);
+#else
   SbVec2s pos(event->pos().x(), PUBLIC(this)->windowsize[1] - event->pos().y() - 1);
+#endif
   // the following corrects for high-dpi displays (e.g., mac retina)
   pos *= publ->quarter->devicePixelRatio();
   this->location2->setPosition(pos);
@@ -155,9 +159,22 @@ MouseP::mouseWheelEvent(QWheelEvent * event)
   // the wheel was rotated forwards away from the user; a negative
   // value indicates that the wheel was rotated backwards toward the
   // user.
-  (event->delta() > 0) ?
-    this->mousebutton->setButton(SoMouseButtonEvent::BUTTON4) :
+#if QT_VERSION >= 0x050700
+  if (event->angleDelta().y() > 0)
+    this->mousebutton->setButton(event->inverted() ? SoMouseButtonEvent::BUTTON5 : SoMouseButtonEvent::BUTTON4);
+  else if (event->angleDelta().y() < 0)
+    this->mousebutton->setButton(event->inverted() ? SoMouseButtonEvent::BUTTON4 : SoMouseButtonEvent::BUTTON5);
+#elif QT_VERSION >= 0x050000
+  if (event->angleDelta().y() > 0)
+    this->mousebutton->setButton(SoMouseButtonEvent::BUTTON4);
+  else if (event->angleDelta().y() < 0)
     this->mousebutton->setButton(SoMouseButtonEvent::BUTTON5);
+#else
+  if (event->delta() > 0)
+    this->mousebutton->setButton(SoMouseButtonEvent::BUTTON4);
+  else if (event->delta() < 0)
+    this->mousebutton->setButton(SoMouseButtonEvent::BUTTON5);
+#endif // QT_VERSION
 
   this->mousebutton->setState(SoButtonEvent::DOWN);
   return this->mousebutton;
@@ -185,7 +202,11 @@ MouseP::mouseButtonEvent(QMouseEvent * event)
   case Qt::RightButton:
     this->mousebutton->setButton(SoMouseButtonEvent::BUTTON2);
     break;
+#if QT_VERSION >= 0x050F00
+  case Qt::MiddleButton:
+#else
   case Qt::MidButton:
+#endif
     this->mousebutton->setButton(SoMouseButtonEvent::BUTTON3);
     break;
   default:

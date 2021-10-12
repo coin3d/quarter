@@ -33,6 +33,7 @@
 
 #include "ContextMenu.h"
 
+#include <QActionGroup>
 #include <QMenu>
 
 #include <Inventor/SoEventManager.h>

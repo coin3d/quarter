@@ -45,7 +45,11 @@ class SoRenderManager;
 class SoEventManager;
 class SoDirectionalLight;
 class QuarterWidgetP_cachecontext;
-class QGLWidget;
+#if QT_VERSION >= 0x060000
+  class QOpenGLWidget;
+#else
+  class QGLWidget;
+#endif
 class QAction;
 class QActionGroup;
 class QMenu;
@@ -62,7 +66,11 @@ class ContextMenu;
 class QuarterWidgetP {
 public:
 
+#if QT_VERSION >= 0x060000
+  QuarterWidgetP(class QuarterWidget * master, const QOpenGLWidget * sharewidget);
+#else
   QuarterWidgetP(class QuarterWidget * master, const QGLWidget * sharewidget);
+#endif
   ~QuarterWidgetP();
 
   SoCamera * searchForCamera(SoNode * root);
@@ -112,8 +120,13 @@ public:
   static bool nativeEventFilter(void * message, long * result);
 
  private:
+#if QT_VERSION >= 0x060000
+  QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QOpenGLWidget * sharewidget);
+  static void removeFromCacheContext(QuarterWidgetP_cachecontext * context, const QOpenGLWidget* widget);
+#else
   QuarterWidgetP_cachecontext * findCacheContext(QuarterWidget * widget, const QGLWidget * sharewidget);
   static void removeFromCacheContext(QuarterWidgetP_cachecontext * context, const QGLWidget * widget);
+#endif
 };
 
 #endif // QUARTER_QUARTERWIDGETP_H
