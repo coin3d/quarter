@@ -81,16 +81,14 @@ environment:
       CMAKE_ARCHITECTURE: Win32
       CMAKE_PLATFORM: x86
       COMPILER_ID: msvc16
-      QT_DIR: C:\Qt\5.13\msvc2017
-      # according to https://forum.qt.io/topic/104123/qt-tools-and-versions-msvc-2019  VS2017 is binary compatible with VS2019 and therefore we use Qt 32-bit from msvc2017
+      QT_DIR: C:\Qt\5.15\msvc2019
 
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       CMAKE_GENERATOR: 'Visual Studio 16 2019'
       CMAKE_ARCHITECTURE: x64
       CMAKE_PLATFORM: x64
       COMPILER_ID: msvc16
-      QT_DIR: C:\Qt\5.13\msvc2017_64
-      # according to https://forum.qt.io/topic/104123/qt-tools-and-versions-msvc-2019  VS2017 is binary compatible with VS2019 and therefore we use Qt 64-bit from msvc2017
+      QT_DIR: C:\Qt\5.15\msvc2019_64
 
 install:
   - sh: |
