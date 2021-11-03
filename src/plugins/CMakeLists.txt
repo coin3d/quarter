@@ -33,20 +33,32 @@ if(QT_PLUGINS_DIR)
   install(TARGETS QuarterWidgetPlugin RUNTIME DESTINATION "${QT_PLUGINS_DIR}/designer")
 else()
   if(Qt6_FOUND)
-    # Call qmake to query the plugin installation directory.
+    # Get qmake location.
     get_target_property(QT_QMAKE_EXECUTABLE Qt6::qmake LOCATION)
-    execute_process(COMMAND ${QT_QMAKE_EXECUTABLE} -query QT_INSTALL_PLUGINS
-      OUTPUT_VARIABLE QT_INSTALL_PLUGINS OUTPUT_STRIP_TRAILING_WHITESPACE
-    )
   else()
-    # Call qmake to query the plugin installation directory.
+    # Get qmake location.
     get_target_property(QT_QMAKE_EXECUTABLE Qt5::qmake LOCATION)
-    execute_process(COMMAND ${QT_QMAKE_EXECUTABLE} -query QT_INSTALL_PLUGINS
-      OUTPUT_VARIABLE QT_INSTALL_PLUGINS OUTPUT_STRIP_TRAILING_WHITESPACE
-   )
+  endif()
+  # Call qmake to query the installation prefix.
+  execute_process(COMMAND ${QT_QMAKE_EXECUTABLE} -query QT_INSTALL_PREFIX
+    OUTPUT_VARIABLE QT_INSTALL_PREFIX OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+  # Call qmake to query the plugin installation directory.
+  execute_process(COMMAND ${QT_QMAKE_EXECUTABLE} -query QT_INSTALL_PLUGINS
+    OUTPUT_VARIABLE QT_INSTALL_PLUGINS OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+  # Compute relative plugin installation directory.
+  file(RELATIVE_PATH CMAKE_INSTALL_QTPLUGINSDIR_DEFAULT
+    "${QT_INSTALL_PREFIX}" "${QT_INSTALL_PLUGINS}"
+  )
+  # Set cache variable like in GNUInstallDirs module
+  if(NOT CMAKE_INSTALL_QTPLUGINSDIR)
+    set(CMAKE_INSTALL_QTPLUGINSDIR "${CMAKE_INSTALL_QTPLUGINSDIR_DEFAULT}"
+      CACHE PATH "Qt plugins (${CMAKE_INSTALL_QTPLUGINSDIR_DEFAULT})"
+    )
   endif()
   install(TARGETS QuarterWidgetPlugin
-    RUNTIME DESTINATION "${QT_INSTALL_PLUGINS}/designer" COMPONENT development
-    LIBRARY DESTINATION "${QT_INSTALL_PLUGINS}/designer" COMPONENT development
+    RUNTIME DESTINATION "${CMAKE_INSTALL_QTPLUGINSDIR}/designer" COMPONENT development
+    LIBRARY DESTINATION "${CMAKE_INSTALL_QTPLUGINSDIR}/designer" COMPONENT development
   )
 endif()
