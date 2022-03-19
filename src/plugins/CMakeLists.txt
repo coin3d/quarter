@@ -30,7 +30,10 @@ set_target_properties(QuarterWidgetPlugin PROPERTIES VERSION ${QUARTER_VERSION} 
 
 if(QT_PLUGINS_DIR)
   # Legacy FindQt4.
-  install(TARGETS QuarterWidgetPlugin RUNTIME DESTINATION "${QT_PLUGINS_DIR}/designer")
+  install(TARGETS QuarterWidgetPlugin
+    RUNTIME DESTINATION "${QT_PLUGINS_DIR}/designer"
+    LIBRARY DESTINATION "${QT_PLUGINS_DIR}/designer"
+  )
 else()
   if(Qt6_FOUND)
     # Get qmake location.
