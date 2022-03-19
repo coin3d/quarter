@@ -50,7 +50,7 @@
 #include <Inventor/nodes/SoSeparator.h>
 
 #include <Quarter/QuarterWidget.h>
-#include <stdlib.h>
+#include <cstdlib>
 
 namespace SIM { namespace Coin3D { namespace Quarter {
 

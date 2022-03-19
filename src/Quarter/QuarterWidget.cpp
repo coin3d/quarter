@@ -48,7 +48,7 @@
   \endcode
 */
 
-#include <assert.h>
+#include <cassert>
 
 #include <QEvent>
 #include <QDebug>
