@@ -20,13 +20,28 @@ environment:
   GH_AUTH_TOKEN:
     secure: 850frgRGZcc4Cljd2P7Ej68no4/kkl4EMB+DjnX725wcKBRJuFk/kGRdJGyKXd2u
   matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: macos-catalina
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x64
+      COMPILER_ID: clang
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: macos-bigsur
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x64
+      COMPILER_ID: clang
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x64
+      COMPILER_ID: clang
+#
 #    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
 #      CMAKE_GENERATOR: 'Unix Makefiles'
 #      CMAKE_PLATFORM: x86
 #      CMAKE_ARCH_FLAGS: -m32
 #      COMPILER_ID: gcc
 #      # QT_DIR: C:\Qt\5.10.1\msvc2015
-#
+
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
       CMAKE_GENERATOR: 'Unix Makefiles'
       CMAKE_PLATFORM: x64
@@ -46,14 +61,14 @@ environment:
 #      CMAKE_ARCHITECTURE: Win32
 #      CMAKE_PLATFORM: x86
 #      COMPILER_ID: msvc10
-#      QT_DIR: C:\Qt\5.8.0\msvc2010
+#      QT_DIR: C:\Qt\5.3\msvc2010
 #
 #    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
 #      CMAKE_GENERATOR: 'Visual Studio 10 2010'
 #      CMAKE_ARCHITECTURE: x64
 #      CMAKE_PLATFORM: x64
 #      COMPILER_ID: msvc10
-#      QT_DIR: C:\Qt\5.8.0\msvc2010_64
+#      QT_DIR: C:\Qt\5.3\msvc2010_64
 
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       CMAKE_GENERATOR: 'Visual Studio 14 2015'
@@ -113,19 +128,25 @@ environment:
 
 install:
   - sh: |
-      sudo apt-get -y update
-      cd $APPVEYOR_BUILD_FOLDER
-      if [ "$CMAKE_PLATFORM" == "x86" ]
+      if [ "$COMPILER_ID" = "clang" ]
       then
-        sudo apt-get -y install freeglut3-dev:i386 qt5-default:i386 qttools5-dev:i386
-      elif [ "$CMAKE_PLATFORM" == "x64" ]
-      then
-        sudo apt-get -y install freeglut3-dev qt5-default qttools5-dev
+        brew install jq
+        brew install qt5
+        export PATH=$PATH:$(brew --prefix qt5)/bin
+        export CMAKE_PREFIX_PATH=/usr/local/opt/qt5
+        #brew install doxygen
+      else
+        sudo apt-get -y update
+        if [ "$CMAKE_PLATFORM" = "x86" ]
+        then
+          sudo apt-get -y install freeglut3-dev:i386 qt5-default:i386 qttools5-dev:i386
+        elif [ "$CMAKE_PLATFORM" = "x64" ]
+        then
+          sudo apt-get -y install freeglut3-dev qt5-default qttools5-dev
+        fi
+        sudo apt-get -y install doxygen gcc-multilib g++-multilib jq
       fi
-      sudo apt-get -y install doxygen gcc-multilib g++-multilib jq
-  - sh: qtchooser -l
-  - sh: which moc
-  - sh: which uic
+      cd $APPVEYOR_BUILD_FOLDER
   - cmd: |
       choco install jq
       rem Work around for outdated curl version giving problems with GitHub Authentication when redirected.
@@ -180,17 +201,18 @@ before_build:
       md5sum -b $BUILD_SOURCE_ARCHIVE > $BUILD_SOURCE_ARCHIVE.md5
       sha256sum -b $BUILD_SOURCE_ARCHIVE > $BUILD_SOURCE_ARCHIVE.sha256
       mkdir $APPVEYOR_BUILD_FOLDER/downloads
-      export COMPILER_ID=$APPVEYOR_BUILD_WORKER_IMAGE-$COMPILER_ID`$COMPILER_ID -dumpversion | tr '.' '\n'`
+      if [ "$COMPILER_ID" != "clang" ]; then export COMPILER_ID=$APPVEYOR_BUILD_WORKER_IMAGE-$COMPILER_ID`$COMPILER_ID -dumpversion | tr '.' '\n'`; fi
+      if [ "$COMPILER_ID" = "clang" ]; then export COMPILER_ID=$APPVEYOR_BUILD_WORKER_IMAGE-$COMPILER_ID`$COMPILER_ID -v 2>&1 | grep version | sed 's/^.*version \([0-9]*\)\.[0-9]*\.[0-9]*.*$/\1/g'`; fi
       ###############
-      if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export SUPERGLU_REPO_VERSION=$SUPERGLU_VERSION; else export SUPERGLU_REPO_VERSION=latest; fi
-      if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export SUPERGLU_REPO_TAG_NAME=superglu-$SUPERGLU_VERSION; else export SUPERGLU_REPO_TAG_NAME=CI-builds; fi
-      DOWNLOAD_FILE_SUPERGLU=superglu-$SUPERGLU_REPO_VERSION-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
-      RELEASE_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/superglu/releases | jq -r --arg SUPERGLU_REPO_TAG_NAME "$SUPERGLU_REPO_TAG_NAME" '.[] | select(.tag_name==$SUPERGLU_REPO_TAG_NAME) | .id'`
-      ASSET_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/superglu/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_SUPERGLU "$DOWNLOAD_FILE_SUPERGLU" '.assets[] | select(.name==$DOWNLOAD_FILE_SUPERGLU) | .id'`
-      export DOWNLOAD_ADDRESS_SUPERGLU=https://api.github.com/repos/coin3d/superglu/releases/assets/$ASSET_ID
-      echo download file $DOWNLOAD_FILE_SUPERGLU from address $DOWNLOAD_ADDRESS_SUPERGLU
-      curl -s -S -L -H "Authorization: token $GH_AUTH_TOKEN" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_SUPERGLU $DOWNLOAD_ADDRESS_SUPERGLU
-      tar xzf $DOWNLOAD_FILE_SUPERGLU -C $APPVEYOR_BUILD_FOLDER/downloads
+      # if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export SUPERGLU_REPO_VERSION=$SUPERGLU_VERSION; else export SUPERGLU_REPO_VERSION=latest; fi
+      # if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export SUPERGLU_REPO_TAG_NAME=superglu-$SUPERGLU_VERSION; else export SUPERGLU_REPO_TAG_NAME=CI-builds; fi
+      # DOWNLOAD_FILE_SUPERGLU=superglu-$SUPERGLU_REPO_VERSION-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
+      # RELEASE_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/superglu/releases | jq -r --arg SUPERGLU_REPO_TAG_NAME "$SUPERGLU_REPO_TAG_NAME" '.[] | select(.tag_name==$SUPERGLU_REPO_TAG_NAME) | .id'`
+      # ASSET_ID=`curl -s -H "Authorization: token $GH_AUTH_TOKEN" https://api.github.com/repos/coin3d/superglu/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_SUPERGLU "$DOWNLOAD_FILE_SUPERGLU" '.assets[] | select(.name==$DOWNLOAD_FILE_SUPERGLU) | .id'`
+      # export DOWNLOAD_ADDRESS_SUPERGLU=https://api.github.com/repos/coin3d/superglu/releases/assets/$ASSET_ID
+      # echo download file $DOWNLOAD_FILE_SUPERGLU from address $DOWNLOAD_ADDRESS_SUPERGLU
+      # curl -s -S -L -H "Authorization: token $GH_AUTH_TOKEN" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_SUPERGLU $DOWNLOAD_ADDRESS_SUPERGLU
+      # tar xzf $DOWNLOAD_FILE_SUPERGLU -C $APPVEYOR_BUILD_FOLDER/downloads
       ###############
       if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export COIN_REPO_VERSION=$COIN_VERSION; else export COIN_REPO_VERSION=latest; fi
       if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export COIN_REPO_TAG_NAME=Coin-$COIN_VERSION; else export COIN_REPO_TAG_NAME=CI-builds; fi
@@ -204,7 +226,7 @@ before_build:
       ###############
       export CFLAGS=$CMAKE_ARCH_FLAGS
       export CXXFLAGS=$CMAKE_ARCH_FLAGS
-      cmake -H. -Bbuild_debug   -G "$CMAKE_GENERATOR" -DCMAKE_BUILD_TYPE=Debug   -DCMAKE_INSTALL_PREFIX=$APPVEYOR_BUILD_FOLDER/Coin3D -DCMAKE_PREFIX_PATH=$APPVEYOR_BUILD_FOLDER/downloads/Coin3D
+      #cmake -H. -Bbuild_debug   -G "$CMAKE_GENERATOR" -DCMAKE_BUILD_TYPE=Debug   -DCMAKE_INSTALL_PREFIX=$APPVEYOR_BUILD_FOLDER/Coin3D -DCMAKE_PREFIX_PATH=$APPVEYOR_BUILD_FOLDER/downloads/Coin3D
       cmake -H. -Bbuild_release -G "$CMAKE_GENERATOR" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$APPVEYOR_BUILD_FOLDER/Coin3D -DCMAKE_PREFIX_PATH=$APPVEYOR_BUILD_FOLDER/downloads/Coin3D
 
 build_script:
@@ -214,7 +236,7 @@ build_script:
       cmake --build build --target INSTALL --config Release -- %BUILD_TOOL_OPTIONS%
   - sh: |
       BUILD_TOOL_OPTIONS=-j4
-      sudo cmake --build build_debug   --target install --config Debug   -- $BUILD_TOOL_OPTIONS
+      #sudo cmake --build build_debug   --target install --config Debug   -- $BUILD_TOOL_OPTIONS
       sudo cmake --build build_release --target install --config Release -- $BUILD_TOOL_OPTIONS
 #      We need to use sudo command as we are trying to install to a Qt system directory. Without sudo it will not work!
 
@@ -229,6 +251,8 @@ after_build:
       appveyor DownloadFile https://ci.appveyor.com/api/buildjobs/%APPVEYOR_JOB_ID%/log -FileName %APPVEYOR_PROJECT_NAME%-%CI_REPO_VERSION%-%COMPILER_ID%-%CMAKE_PLATFORM%.log
   - sh: |
       cd $APPVEYOR_BUILD_FOLDER
+      if [ "$COMPILER_ID" != "clang" ]; then export COMPILER_ID=$APPVEYOR_BUILD_WORKER_IMAGE-$COMPILER_ID`$COMPILER_ID -dumpversion | tr '.' '\n'`; fi
+      if [ "$COMPILER_ID" = "clang" ]; then export COMPILER_ID=$APPVEYOR_BUILD_WORKER_IMAGE-$COMPILER_ID`$COMPILER_ID -v 2>&1 | grep version | sed 's/^.*version \([0-9]*\)\.[0-9]*\.[0-9]*.*$/\1/g'`; fi
       if [ -n "${APPVEYOR_REPO_TAG_NAME}" ]; then export CI_REPO_VERSION=${APPVEYOR_REPO_TAG_NAME:1}; else export CI_REPO_VERSION=latest; fi
       BUILD_ARCHIVE=$APPVEYOR_PROJECT_NAME-$CI_REPO_VERSION-$COMPILER_ID-$CMAKE_PLATFORM.tar.gz
       tar czf $BUILD_ARCHIVE Coin3D/*
