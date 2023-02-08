@@ -131,9 +131,7 @@ install:
       if [ "$COMPILER_ID" = "clang" ]
       then
         brew install jq
-        brew install qt5
-        export PATH=$PATH:$(brew --prefix qt5)/bin
-        export CMAKE_PREFIX_PATH=/usr/local/opt/qt5
+        export CMAKE_PREFIX_PATH=$HOME/Qt/5.15/clang_64
         #brew install doxygen
       else
         sudo apt-get -y update
