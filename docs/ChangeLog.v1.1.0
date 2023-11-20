@@ -313,7 +313,7 @@
 2018-10-17 21:11 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (255247783b8e <docissues>)
 
 	* CMakeLists.txt:
-	Added tag file for crossreferences.
+	Added tag file for cross-references.
 
 2018-10-17 21:09 +0200  Volker Enderlein  <volkerenderlein@hotmail.com>  (0fe1a5a812f3 <docissues>)
 
@@ -905,7 +905,7 @@
 	* configure.ac:
 	invoke AC_CANONICAL_SYSTEM before the msvc compiler check to get the
 	$host environment variable set, as otherwise the following wrapmsvc
-	check falsely bails out on not being run in a cygwin enviroment.
+	check falsely bails out on not being run in a cygwin environment.
 
 2010-02-28 15:15 +0100  Tamer Fahmy  <tamer@sim.no>  (02e1411ca421)
 
@@ -1066,7 +1066,7 @@
 
 	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
 	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
-	Avoid unneccessary redraws when moving window around. Fixes
+	Avoid unnecessary redraws when moving window around. Fixes
 	COIN-173.
 
 2009-08-24 10:44 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (71faf274171d)
@@ -1138,7 +1138,7 @@
 
 	* include/Quarter/QuarterWidget.h, src/Quarter/QuarterWidget.cpp,
 	src/Quarter/QuarterWidgetP.cpp, src/Quarter/QuarterWidgetP.h:
-	revert previous commit, not working as intented
+	revert previous commit, not working as intended
 
 2009-08-11 14:22 +0000  Terje Wiesener  <wiesener@sim.no>  (b47330c9dcec)
 

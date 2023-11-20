@@ -221,7 +221,7 @@
 2009-01-22 20:42 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (ba3eab7357c1)
 
 	* src/Quarter/QuarterWidget.cpp:
-	Document and crossreference TransparencyType.
+	Document and cross-reference TransparencyType.
 
 2009-01-22 20:41 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (5fe5a49f0abc)
 
@@ -278,7 +278,7 @@
 2009-01-17 16:23 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (986d5e19a1e3)
 
 	* cfg/doxy4win.pl, cfg/ltmain.sh:
-	Boostrap.
+	Bootstrap.
 
 2009-01-17 15:11 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (a7e2c2e0a78c)
 
@@ -1121,8 +1121,8 @@
 	Some API changes.
 
 	Quarter does no longer define a public class, only a namespace.
-	Quarter now handles all initalization and destruction of resources.
-	Initalization of dependent resources is made optional and defaults
+	Quarter now handles all initialization and destruction of resources.
+	Initialization of dependent resources is made optional and defaults
 	to old behaviour.
 
 2008-06-16 05:55 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (9d5aff4d5b1a)
@@ -1139,12 +1139,12 @@
 2008-06-12 15:27 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (6c63873d959a)
 
 	* src/Quarter/SensorManager.cpp:
-	Correct initalization sequence.
+	Correct initialization sequence.
 
 2008-06-11 13:43 +0000  Lars J. Aas  <larsa@sim.no>  (96efe5cf10a0)
 
 	* src/Quarter/QuarterWidget.cpp:
-	remove some involuntarily commited debug code
+	remove some involuntarily committed debug code
 
 2008-06-11 13:40 +0000  Lars J. Aas  <larsa@sim.no>  (e51dfaf52707)
 
@@ -1251,7 +1251,7 @@
 2008-05-04 16:48 +0000  Tom Fredrik Blenning Klaussen  <bfg@sim.no>  (45ba94f4b8a3)
 
 	* src/Quarter/QuarterWidget.cpp:
-	Bugfix: Correcting the order of initalization.
+	Bugfix: Correcting the order of initialization.
 
 2008-04-16 15:04 +0000  Marius Kintel  <kintel@sim.no>  (709b1ded35b0)
 
@@ -2298,7 +2298,7 @@
 	src/Quarter/Makefile.in, src/Quarter/devices/Makefile.in,
 	src/Quarter/eventhandlers/Makefile.in, src/examples/Makefile.in,
 	src/plugins/Makefile.in:
-	Attempt to fix mac os x configure prooblem.
+	Attempt to fix mac os x configure problem.
 
 2007-06-20 16:00 +0000  Frode Øijord  <frodo@sim.no>  (c47c78c00bb0)
 
@@ -2690,7 +2690,7 @@
 2007-03-07 17:09 +0000  Frode Øijord  <frodo@sim.no>  (65b0def364c7)
 
 	* src/Quarter/QuarterWidget.cpp:
-	remeber to pass unhandled events on to Qt
+	remember to pass unhandled events on to Qt
 
 2007-03-07 17:07 +0000  Frode Øijord  <frodo@sim.no>  (ef9667b43c59)
 
