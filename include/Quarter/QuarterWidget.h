@@ -41,6 +41,7 @@
 #include <QUrl>
 #if QT_VERSION >= 0x060000
 #include <QOpenGLWidget>
+#include <QOpenGLContext>
 #else
 #include <QGLWidget>
 #endif
