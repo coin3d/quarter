@@ -96,17 +96,17 @@ set(QUARTER_PKG_DEPS "Coin")
 
 if(QUARTER_USE_QT6)
   if(QUARTER_BUILD_PLUGIN)
-    find_package(Qt6 COMPONENTS Widgets UiTools OpenGL OpenGLWidgets Designer) #QUIET
+    find_package(Qt6 COMPONENTS Widgets UiTools OpenGL OpenGLWidgets Designer QUIET)
   else()
-    find_package(Qt6 COMPONENTS Widgets UiTools OpenGL OpenGLWidgets) #QUIET
+    find_package(Qt6 COMPONENTS Widgets UiTools OpenGL OpenGLWidgets QUIET)
   endif()
 endif()
 
 if(NOT Qt6_FOUND AND QUARTER_USE_QT5)
   if(QUARTER_BUILD_PLUGIN)
-    find_package(Qt5 COMPONENTS Widgets UiTools OpenGL Designer) #QUIET
+    find_package(Qt5 COMPONENTS Widgets UiTools OpenGL Designer QUIET)
   else()
-    find_package(Qt5 COMPONENTS Widgets UiTools OpenGL) #QUIET
+    find_package(Qt5 COMPONENTS Widgets UiTools OpenGL QUIET)
   endif()
 endif()
 
