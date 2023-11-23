@@ -1,0 +1,76 @@
+name: "CodeQL"
+
+on:
+  workflow_dispatch:  # Allow manual triggers
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  schedule:
+    - cron: '36 10 * * 4'
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    #strategy:
+    #  fail-fast: false
+    #  matrix:
+    #    language: [ 'c-cpp', 'python' ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Checkout submodules
+      run: git submodule update --init --recursive
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: c-cpp
+        config: |
+          #disable-default-queries: true
+          #queries:
+          #  - uses: security-and-quality
+          query-filters:
+            # Specifically hide the results of these queries.
+            - exclude:
+                id: cpp/assignment-does-not-return-this
+            - exclude:
+                id: cpp/fixme-comment
+            - exclude:
+                id: cpp/rule-of-two
+            - exclude:
+                id: cpp/use-of-goto
+        #config-file: ./lgtm.yml
+
+    #- name: Autobuild
+    #  uses: github/codeonfigureql-action/autobuild@v2
+
+    - name: Create build with CMake
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install freeglut3-dev qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools qttools5-dev-tools
+        mkdir cmake_download_dir
+        DOWNLOAD_FILE_COIN=coin-latest-Ubuntu2004-gcc9-x64.tar.gz
+        RELEASE_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases | jq -r --arg COIN_REPO_TAG_NAME "CI-builds" '.[] | select(.tag_name==$COIN_REPO_TAG_NAME) | .id'`
+        ASSET_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_COIN "$DOWNLOAD_FILE_COIN" '.assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id'`
+        export DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/$ASSET_ID
+        echo download file $DOWNLOAD_FILE_COIN from address $DOWNLOAD_ADDRESS_COIN
+        curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_COIN $DOWNLOAD_ADDRESS_COIN
+        tar xzf $DOWNLOAD_FILE_COIN -C cmake_download_dir
+        cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH=cmake_download_dir/Coin3D
+
+    - name: Build project with CMake
+      run: cmake --build cmake_build_dir --target all --config Release -- -j4
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      with:
+        category: "/language:c-cpp"
