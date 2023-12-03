@@ -15,7 +15,7 @@ matrix:
   fast_finish: true # set this flag to immediately finish build once one of the jobs fails.
 
 environment:
-  COIN_VERSION: 4.0.1
+  COIN_VERSION: 4.0.2
   SUPERGLU_VERSION: 1.3.1
   GH_AUTH_TOKEN:
     secure: 850frgRGZcc4Cljd2P7Ej68no4/kkl4EMB+DjnX725wcKBRJuFk/kGRdJGyKXd2u
@@ -42,7 +42,6 @@ environment:
 #      CMAKE_PLATFORM: x86
 #      CMAKE_ARCH_FLAGS: -m32
 #      COMPILER_ID: gcc
-#      # QT_DIR: C:\Qt\5.10.1\msvc2015
 
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
       CMAKE_GENERATOR: 'Unix Makefiles'
@@ -50,7 +49,6 @@ environment:
       CMAKE_ARCH_FLAGS: -m64
       COMPILER_ID: gcc
       QT_ID: Qt5
-      # QT_DIR: C:\Qt\5.10.1\msvc2015
 
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2004
       CMAKE_GENERATOR: 'Unix Makefiles'
@@ -58,7 +56,13 @@ environment:
       CMAKE_ARCH_FLAGS: -m64
       COMPILER_ID: gcc
       QT_ID: Qt5
-      # QT_DIR: C:\Qt\5.10.1\msvc2015
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2204
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x64
+      CMAKE_ARCH_FLAGS: -m64
+      COMPILER_ID: gcc
+      QT_ID: Qt5
 
 #    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
 #      CMAKE_GENERATOR: 'Visual Studio 10 2010'
