@@ -12,9 +12,10 @@ jobs:
     name: Ubuntu Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Checkout submodules
-        run: git submodule update --init --recursive
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Create build directory and run CMake
         run: |
           sudo apt-get -y update
@@ -34,7 +35,7 @@ jobs:
       #  run:  ctest -C Release -VV
       #  working-directory: cmake_build_dir
       - name: Create Artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: Ubuntu-Artifacts
           path: cmake_install_dir/
@@ -44,9 +45,10 @@ jobs:
     name: Windows Build
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Checkout submodules
-        run: git submodule update --init --recursive
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
       - name: Create build directory and run CMake
@@ -67,7 +69,7 @@ jobs:
       #  run:  ctest -C Release -VV
       #  working-directory: cmake_build_dir
       - name: Create Artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: Windows-Artifacts
           path: cmake_install_dir/
@@ -77,9 +79,10 @@ jobs:
     name: MacOS Build
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Checkout submodules
-        run: git submodule update --init --recursive
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Create build directory and run CMake
         run: |
           brew install qt5
@@ -98,7 +101,7 @@ jobs:
       #  run:  ctest -C Release -VV
       #  working-directory: cmake_build_dir
       - name: Create Artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: MacOS-Artifacts
           path: cmake_install_dir/
