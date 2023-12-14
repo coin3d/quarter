@@ -199,14 +199,8 @@ install:
         #brew install doxygen
       else
         sudo apt-get -y update
-        if [ "$CMAKE_PLATFORM" = "x86" ]
-        then
-          sudo apt-get -y install freeglut3-dev:i386 qt5-default:i386 qttools5-dev:i386
-        elif [ "$CMAKE_PLATFORM" = "x64" ]
-        then
-          sudo apt-get -y install freeglut3-dev qt5-default qttools5-dev
-        fi
-        sudo apt-get -y install doxygen gcc-multilib g++-multilib jq
+        sudo apt-get -y install freeglut3-dev qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools qttools5-dev
+        sudo apt-get -y install doxygen jq
       fi
       cd $APPVEYOR_BUILD_FOLDER
   - cmd: |
