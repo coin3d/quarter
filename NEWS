@@ -1,6 +1,22 @@
+Quarter 1.2.0 (2024-02-03):
+* new:
+  - Version control system has been changed from Mercurial to Git
+  - Home of Coin3d organization has been changed from https://bitbucket.org/Coin3D
+    to https://github.com/coin3d due to Bitbucket ending Mercurial support
+  - Added CI for macOS, Windows, and Ubuntu per GitHub actions to repository
+  - Added support for Qt6
+  - Support qrc:/// URL schemes for navigationModeFile
+
+* bugfixes:
+  - cpack.d was made optional and disabled by default (add -DQUARTER_USE_CPACK=ON
+    to the cmake commandline to enable it)
+  - Fixed numerous documentation issues
+  - Added QUARTER_BUILD_TESTS option to control building of test code (default: ON)
+  - Check for valid OpenGL context
+
 Quarter 1.1.0 (2019-12-25):
 * new:
-  - Kongsberg Oil & Gas Technologies AS ended SoWin as a commercial product
+  - Kongsberg Oil & Gas Technologies AS ended Quarter as a commercial product
     and re-licensed it under the BSD 3-clause license as a service to the
     user community.
   - The build system has been migrated from GNU Autotools to CMake
