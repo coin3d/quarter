@@ -1,5 +1,5 @@
 m4_define([QUARTER_MAJOR], [1])
-m4_define([QUARTER_MINOR], [1])
+m4_define([QUARTER_MINOR], [2])
 m4_define([QUARTER_MICRO], [0])
 m4_define([QUARTER_BETA], [])
 
