@@ -1,0 +1,514 @@
+2023-12-16 00:10:47 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (8eb8e4b)
+
+	Use latest download packages in CI. [skip ci]
+
+M	.github/workflows/codeql.yml
+M	.github/workflows/continuous-integration-workflow.yml
+
+2023-12-14 23:48:26 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (4157cef)
+
+	Update CI scripts. [skip ci]
+
+M	.github/workflows/codeql.yml
+
+2023-12-14 20:41:49 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (96d2bbe)
+
+	Fix changed Qt package name in Appveyor CI.
+
+M	appveyor.yml
+
+2023-12-13 21:17:12 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (386d70f)
+
+	Update CI workflow.
+
+M	.github/workflows/continuous-integration-workflow.yml
+
+2023-12-03 22:12:26 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (4b29529)
+
+	Update build matrix in AppVeyor script. [skip ci]
+
+M	appveyor.yml
+
+2023-12-03 22:11:13 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (68e0fd9)
+
+	Removed obsolete file. [skip ci]
+
+D	bitbucket-pipelines.yml
+
+2023-11-25 15:41:38 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (957e3d4)
+
+	Delete obsolete lgtm.yml [skip ci]
+
+D	lgtm.yml
+
+2023-11-24 00:00:24 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (456347f)
+
+	Revert previous changes to CMakeLists.txt [skip ci]
+
+M	CMakeLists.txt
+
+2023-11-23 23:58:51 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (2752c2b)
+
+	Update continuous-integration-workflow.yml with minimal dependencies [skip ci]
+
+M	.github/workflows/continuous-integration-workflow.yml
+
+2023-11-23 23:53:53 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (05887b5)
+
+	Update codeql.yml minimal dependencies [skip ci]
+
+M	.github/workflows/codeql.yml
+
+2023-11-23 23:47:18 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (5a0f75b)
+
+	Update codeql.yml dependencies for Qt [skip ci]
+
+M	.github/workflows/codeql.yml
+
+2023-11-23 23:33:46 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (6d3b0bc)
+
+	Update CMakeLists.txt for workflowtest [skip ci]
+
+M	CMakeLists.txt
+
+2023-11-23 23:28:26 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (6a2cb5e)
+
+	Add missing dependency to codeql.yml [skip ci]
+
+M	.github/workflows/codeql.yml
+
+2023-11-23 22:59:52 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (731b85c)
+
+	Update continuous-integration-workflow.yml [skip ci]
+
+M	.github/workflows/continuous-integration-workflow.yml
+
+2023-11-23 21:48:07 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (c7820df)
+
+	Added codeql.yml [skip ci]
+
+A	.github/workflows/codeql.yml
+
+2023-11-22 19:34:24 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (f4b440b)
+
+	Add missing default case.
+
+M	src/Quarter/FocusHandler.cpp
+
+2023-11-22 19:19:00 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (05c4c7e)
+
+	Add missing include for Qt6.
+
+M	include/Quarter/QuarterWidget.h
+
+2023-11-22 13:18:33 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (61342e5)
+
+	Update AppVeyor build matrix.
+
+M	appveyor.yml
+
+2023-11-21 00:13:05 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (3c9f6b0)
+
+	Fixed typos found with codespell.
+
+M	bitbucket-pipelines.yml
+M	cfg/depcomp
+M	docs/ChangeLog.v1.0.0
+M	docs/ChangeLog.v1.1.0
+M	docs/quarter.doxygen.in
+
+2023-11-21 00:12:54 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (57721b2)
+
+	Updated submodules.
+
+M	cpack.d
+
+2023-02-08 20:50:01 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (6b4955c)
+
+	remove brew qt5 installation in appveyor.yml
+
+M	appveyor.yml
+
+2023-02-05 20:12:48 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (886e611)
+
+	Update continuous-integration-workflow.yml
+
+M	.github/workflows/continuous-integration-workflow.yml
+
+2022-04-25 23:21:20 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (6297049)
+
+	Fix dependency lookup
+
+M	quarter-config.cmake.in
+
+2022-04-25 23:16:05 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (48b3e53)
+
+	Revert "Fix Qt6 dependency lookup"
+
+M	quarter-config.cmake.in
+
+2022-04-02 13:47:59 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (cb78404)
+
+	Fix duplicate name in artifact naming
+
+M	appveyor.yml
+
+2022-04-02 13:23:09 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (a56495f)
+
+	Add macOS to AppVeyor build matrix
+
+M	appveyor.yml
+
+2022-03-22 22:36:35 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (428952a)
+
+	Update github actions [skip ci]
+
+M	.github/workflows/continuous-integration-workflow.yml
+
+2022-03-21 20:52:03 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (979365b)
+
+	Add checksum calculation to CI
+
+M	appveyor.yml
+
+2022-03-19 22:01:17 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (b0a2df5)
+
+	Fix C include usage
+
+M	src/Quarter/DragDropHandler.cpp
+M	src/Quarter/QuarterWidget.cpp
+
+2022-03-19 21:54:37 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (446f295)
+
+	Fix Qt4 installation
+
+M	src/plugins/CMakeLists.txt
+
+2022-03-18 09:30:31 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (4ad75df)
+
+	Fix typo in AppVeyor CI
+
+M	appveyor.yml
+
+2022-03-17 21:28:08 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (cbea907)
+
+	Add further images to appveyor CI
+
+M	appveyor.yml
+
+2022-03-17 00:16:25 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (4d31a0d)
+
+	Add current images to appveyor CI
+
+M	appveyor.yml
+
+2022-03-16 23:22:25 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (ed7db7f)
+
+	Check for valid context
+
+M	src/Quarter/QuarterWidgetP.cpp
+
+2021-12-10 23:52:02 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (a597aa2)
+
+	Fix macOS issues wrt. QT_VERSION_CHECK
+
+M	src/plugins/QuarterWidgetPlugin.cpp
+M	src/plugins/QuarterWidgetPlugin.h
+
+2021-11-27 13:28:21 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (cbace47)
+
+	Fix Qt6 dependency lookup
+
+M	quarter-config.cmake.in
+
+2021-11-27 12:58:00 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (88a0293)
+
+	Fix typo
+
+M	CMakeLists.txt
+
+2021-11-04 13:11:09 +0300  Konstantin Podsvirov  <konstantin@podsvirov.pro> (0654e84)
+
+	Fix plugins destination: remove debug
+
+M	src/plugins/CMakeLists.txt
+
+2021-11-04 12:34:50 +0300  Konstantin Podsvirov  <konstantin@podsvirov.pro> (f45f9b8)
+
+	Fix plugins destination: more debug
+
+M	src/plugins/CMakeLists.txt
+
+2021-11-04 09:23:12 +0300  Konstantin Podsvirov  <konstantin@podsvirov.pro> (c0af39f)
+
+	Fix plugins destination: debug
+
+M	src/plugins/CMakeLists.txt
+
+2021-11-03 21:44:12 +0300  Konstantin Podsvirov  <konstantin@podsvirov.pro> (d5b1d29)
+
+	Fix plugins destination
+
+M	src/plugins/CMakeLists.txt
+
+2021-10-13 15:45:47 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (38982b1)
+
+	Update Qt version to 5.15 for AppVeyor CI
+
+M	appveyor.yml
+
+2021-10-12 23:43:14 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (275dd5f)
+
+	Add Qt6 support
+
+M	CMakeLists.txt
+M	include/Quarter/QuarterWidget.h
+M	src/Quarter/ContextMenu.cpp
+M	src/Quarter/DragDropHandler.cpp
+M	src/Quarter/EventFilter.cpp
+M	src/Quarter/Mouse.cpp
+M	src/Quarter/QuarterWidget.cpp
+M	src/Quarter/QuarterWidgetP.cpp
+M	src/Quarter/QuarterWidgetP.h
+M	src/examples/CMakeLists.txt
+M	src/examples/MdiMainWindow.cpp
+M	src/examples/MdiMainWindow.h
+M	src/examples/MdiQuarterWidget.cpp
+M	src/examples/MdiQuarterWidget.h
+M	src/plugins/CMakeLists.txt
+M	src/plugins/QuarterWidgetPlugin.cpp
+
+2021-07-04 17:41:51 +0200  Christian Dornhege  <c.dornhege@gmail.com> (7b7b92e)
+
+	Support qrc:/// URL schemes for navigationModeFile
+
+M	src/Quarter/QuarterWidget.cpp
+
+2021-06-23 05:44:23 -0400  luz paz  <luzpaz@users.noreply.github.com> (8be9be6)
+
+	Fix typos
+
+M	INSTALL
+M	aclocal.m4
+M	cfg/config.guess
+M	configure
+M	configure.ac
+
+2021-03-16 22:22:10 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (6a9d398)
+
+	Add LGTM static analysis configuration file
+
+A	lgtm.yml
+
+2021-01-16 15:35:14 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (862eafc)
+
+	Add checksum generation to CI script
+
+M	appveyor.yml
+
+2021-01-13 21:58:18 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (f5d4f83)
+
+	Fix for broken ABI version on .so link
+
+M	src/Quarter/CMakeLists.txt
+
+2020-12-23 18:10:23 +0200  John Yani  <361985+Vanuan@users.noreply.github.com> (3792c43)
+
+	Add a documentation link
+
+M	README.md
+
+2020-12-23 17:56:23 +0200  John Yani  <361985+Vanuan@users.noreply.github.com> (500d0f2)
+
+	Move README to GitHub format
+
+D	README
+A	README.md
+
+2020-12-05 21:43:55 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (52f9a26)
+
+	Fix for CMake 3.19.1 regression (#45)
+
+M	src/Quarter/CMakeLists.txt
+
+2020-10-07 12:10:46 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (c29b75b)
+
+	Update CI for macOS [skip ci]
+
+M	.github/workflows/continuous-integration-workflow.yml
+
+2020-10-06 20:36:59 +0200  Maciej Mrozowski  <reavertm@gmail.com> (7aa759b)
+
+	Make designer plugin more optional
+
+M	CMakeLists.txt
+
+2020-07-22 22:46:35 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (25ae2b6)
+
+	Update appveyor.yml
+
+M	appveyor.yml
+
+2020-07-22 22:25:15 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (5cc75ab)
+
+	Update continuous-integration-workflow.yml
+
+M	.github/workflows/continuous-integration-workflow.yml
+
+2020-04-29 22:46:09 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (b984445)
+
+	Fixed pkg-config generation.
+
+M	.github/workflows/continuous-integration-workflow.yml
+M	CMakeLists.txt
+M	Quarter.pc.cmake.in
+M	src/Quarter/CMakeLists.txt
+
+2020-04-29 22:00:02 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (b342f15)
+
+	Fix error in Qt version extraction regex.
+
+M	CMakeLists.txt
+
+2020-04-18 22:59:13 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (f1c580c)
+
+	Added Github Actions workflow (up to now for pull requests only). [skip ci]
+
+A	.github/workflows/continuous-integration-workflow.yml
+
+2020-04-14 19:57:01 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (1583581)
+
+	Fixed naming issues for build artifacts.
+
+M	appveyor.yml
+
+2020-04-13 22:43:59 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (d7876c6)
+
+	AppVeyor CI: Re-added compiler id.
+
+M	appveyor.yml
+
+2020-04-13 22:23:12 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (0a52079)
+
+	AppVeyor CI: Version control information from src package excluded. Enable to build tagged versions.
+
+M	appveyor.yml
+
+2020-04-11 17:25:29 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (4c5bf7b)
+
+	Added further files to exclude for repo language determination. [skip ci]
+
+M	.gitattributes
+
+2020-04-11 17:03:57 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (202d1dc)
+
+	Added further files to exclude for repo language determination. [skip ci]
+
+M	.gitattributes
+
+2020-04-11 17:00:15 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (9e5a2cb)
+
+	Added .gitattributes to display correct repo language. [skip ci]
+
+A	.gitattributes
+
+2020-03-31 23:23:57 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (caaaabc)
+
+	User CMake Autogen for MOC, UIC, RCC.
+
+M	src/Quarter/CMakeLists.txt
+M	src/examples/CMakeLists.txt
+M	src/plugins/CMakeLists.txt
+
+2020-03-28 22:23:38 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (1f32e84)
+
+	Fixed wrong download address in AppVeyor CI script.
+
+M	appveyor.yml
+
+2020-03-28 18:50:26 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (0e1896d)
+
+	Updated AppVeyor CI script.
+
+M	appveyor.yml
+
+2020-03-03 22:03:28 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (5989ad5)
+
+	Fixed crosslinking to Coin documentation.
+
+M	CMakeLists.txt
+
+2020-02-13 00:16:27 +0100  Giampiero Gabbiani  <giampiero@gabbiani.org> (244e6eb)
+
+	Aligned to last version of cpack.d
+
+M	cpack.d
+
+2020-01-31 20:35:14 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (1ff0ce5)
+
+	Fixed double https prefix.
+
+M	docs/quarter.doxygen.cmake.in
+
+2020-01-31 20:29:28 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (f10ebcb)
+
+	Fixed old repository address in documentation.
+
+M	docs/quarter.doxygen.cmake.in
+
+2020-01-26 19:08:57 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (b6a2c2d)
+
+	Updated submodules.
+
+M	cpack.d
+
+2020-01-26 19:08:37 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (1f739a8)
+
+	Fixed dozens of typos and incorrect wording in documentation.
+
+M	build/msvc6/config-debug.h
+M	build/msvc6/config-release.h
+M	build/msvc7/config-debug.h
+M	build/msvc7/config-release.h
+M	build/msvc8/config-debug.h
+M	build/msvc8/config-release.h
+M	build/msvc9/config-debug.h
+M	build/msvc9/config-release.h
+M	configure
+M	configure.ac
+M	docs/doxygen/header.html
+M	docs/quarter.doxygen.in
+M	src/Quarter/DragDropHandler.cpp
+M	src/Quarter/EventFilter.cpp
+M	src/Quarter/FocusHandler.cpp
+M	src/Quarter/InputDevice.cpp
+M	src/Quarter/Quarter.cpp
+M	src/Quarter/QuarterWidget.cpp
+M	src/examples/directui.cpp
+M	src/examples/dynamicui.cpp
+M	src/examples/examiner.cpp
+M	src/examples/inheritui.cpp
+M	src/examples/minimal.cpp
+M	src/examples/superimposition.cpp
+M	src/plugins/QuarterWidgetPlugin.cpp
+
+2020-01-26 19:08:30 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (ed42ae2)
+
+	Delete obsolete Mercurial files.
+
+D	.hgsub
+D	.hgsubstate
+
+2020-01-14 22:31:44 +0100  Giampiero Gabbiani  <giampiero@gabbiani.org> (3d38c20)
+
+	cpack.d is now optional
+
+M	CMakeLists.txt
+
+2020-01-12 21:58:00 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (c5b3e70)
+
+	Replaced references to BitBucket with GitHub.
+
+M	README.MACOSX
+M	src/Quarter/Quarter.rc.cmake.in
+M	src/plugins/QuarterWidgetPlugin.rc.cmake.in
