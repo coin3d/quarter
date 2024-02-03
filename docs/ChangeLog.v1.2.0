@@ -1,3 +1,30 @@
+2024-02-03 16:38:19 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (a316bec)
+
+	Bump version number
+
+M	CMakeLists.txt
+M	appveyor.yml
+M	configure
+M	configure.ac
+
+2024-02-03 16:35:27 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (3d984c9)
+
+	Update NEWS
+
+M	NEWS
+
+2024-02-03 16:34:40 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (b21a672)
+
+	Create ChangeLog for v1.2.0
+
+A	docs/ChangeLog.v1.2.0
+
+2024-02-03 16:31:33 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (d042a9f)
+
+	fix: Update ChangeLog creation command for git.
+
+M	ChangeLog
+
 2023-12-16 00:10:47 +0100  Volker Enderlein  <volkerenderlein@hotmail.com> (8eb8e4b)
 
 	Use latest download packages in CI. [skip ci]
@@ -378,7 +405,7 @@ A	.github/workflows/continuous-integration-workflow.yml
 
 2020-04-14 19:57:01 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (1583581)
 
-	Fixed naming issues for build artifacts.
+	Fixed naming issues for build artifaces.
 
 M	appveyor.yml
 
