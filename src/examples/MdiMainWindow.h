@@ -38,10 +38,11 @@
 
 class QString;
 #if QT_VERSION >= 0x060000
-class QOpenGLWidget;
+#define QUARTER_GL_WIDGET QOpenGLWidget
 #else
-class QGLWidget;
+#define QUARTER_GL_WIDGET QGLWidget
 #endif
+class QUARTER_GL_WIDGET;
 class QMdiArea;
 class QDropEvent;
 class QCloseEvent;
@@ -70,11 +71,7 @@ private:
   MdiQuarterWidget * findMdiChild(const QString & filename);
 
   QMdiArea * mdiarea;
-#if QT_VERSION >= 0x060000
-  QOpenGLWidget* firstwidget; // for context sharing
-#else
-  QGLWidget* firstwidget; // for context sharing
-#endif
+  QUARTER_GL_WIDGET * firstwidget; // for context sharing
 };
 
 #endif // QUARTER_MDI_MAINWINDOW_H

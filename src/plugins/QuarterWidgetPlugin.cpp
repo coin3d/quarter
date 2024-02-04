@@ -58,11 +58,7 @@ public:
   QuarterWidgetPluginP(void) {}
   bool initialized;
   bool manageactions;
-#if QT_VERSION >= 0x060000
-  QOpenGLWidget* firstwidget; // for context sharing
-#else
-  QGLWidget* firstwidget; // for context sharing
-#endif
+  QUARTER_GL_WIDGET* firstwidget; // for context sharing
   QDesignerFormEditorInterface * formeditor;
   QList<QAction *> transparencytypeactions;
 };

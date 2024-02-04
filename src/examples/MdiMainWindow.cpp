@@ -150,11 +150,7 @@ MdiMainWindow::createMdiChild(void)
   this->mdiarea->addSubWindow(widget);
 
   if (this->firstwidget == 0) {
-#if QT_VERSION >= 0x060000
-    this->firstwidget = (QOpenGLWidget *) widget->quarterWidget();
-#else
-    this->firstwidget = (QGLWidget*)widget->quarterWidget();
-#endif
+    this->firstwidget = (QUARTER_GL_WIDGET *) widget->quarterWidget();
   }
 
   return widget;

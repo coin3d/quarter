@@ -40,11 +40,7 @@ using namespace SIM::Coin3D::Quarter;
 #include <Inventor/SoInput.h>
 #include <Inventor/nodes/SoSeparator.h>
 
-#if QT_VERSION >= 0x060000
-MdiQuarterWidget::MdiQuarterWidget(QWidget * parent, const QOpenGLWidget * sharewidget)
-#else
-MdiQuarterWidget::MdiQuarterWidget(QWidget* parent, const QGLWidget* sharewidget)
-#endif
+MdiQuarterWidget::MdiQuarterWidget(QWidget * parent, const QUARTER_GL_WIDGET * sharewidget)
   : inherited(parent)
 {
   this->quarterwidget = new QuarterWidget(this, sharewidget);

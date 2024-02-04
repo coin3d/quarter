@@ -42,20 +42,17 @@ namespace SIM { namespace Coin3D { namespace Quarter {
 
 class QString;
 #if QT_VERSION >= 0x060000
-class QOpenGLWidget;
+#define QUARTER_GL_WIDGET QOpenGLWidget
 #else
-class QGLWidget;
+#define QUARTER_GL_WIDGET QGLWidget
 #endif
+class QUARTER_GL_WIDGET;
 using namespace SIM::Coin3D::Quarter;
 
 class MdiQuarterWidget : public QMdiSubWindow {
   typedef QMdiSubWindow inherited;
 public:
-#if QT_VERSION >= 0x060000
-  MdiQuarterWidget(QWidget * parent = 0, const QOpenGLWidget * sharewidget = 0);
-#else
-  MdiQuarterWidget(QWidget* parent = 0, const QGLWidget* sharewidget = 0);
-#endif
+  MdiQuarterWidget(QWidget * parent = 0, const QUARTER_GL_WIDGET * sharewidget = 0);
   ~MdiQuarterWidget();
 
   bool loadFile(const QString & filename);
