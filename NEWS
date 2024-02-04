@@ -1,3 +1,7 @@
+Quarter 1.2.1 (2024-02-04):
+* bugfixes:
+  - Fix crash of Qt Designer plugin
+
 Quarter 1.2.0 (2024-02-03):
 * new:
   - Version control system has been changed from Mercurial to Git
