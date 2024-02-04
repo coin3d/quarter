@@ -185,24 +185,33 @@ QuarterWidgetP::removeFromCacheContext(QuarterWidgetP_cachecontext * context, co
 
     for (int i = 0; i < cachecontext_list->getLength(); i++) {
       if ((*cachecontext_list)[i] == context) {
-        // set the context while calling destructingContext() (might trigger OpenGL calls)
-        if (widget->context()->isValid()) {
 #if QT_VERSION >= 0x060000
-          const_cast<QOpenGLWidget*> (widget)->makeCurrent();
+        QOpenGLContext* glcontext = widget->context();
 #else
-          const_cast<QGLWidget*> (widget)->makeCurrent();
+        QGLContext* glcontext = widget->context();
 #endif
+        if (glcontext) {
+          // set the context while calling destructingContext() (might trigger OpenGL calls)
+          if (glcontext->isValid()) {
+#if QT_VERSION >= 0x060000
+            const_cast<QOpenGLWidget*> (widget)->makeCurrent();
+#else
+            const_cast<QGLWidget*> (widget)->makeCurrent();
+#endif
+          }
+          // fetch the cc_glglue context instance as a workaround for a bug fixed in Coin r12818
+          (void) cc_glglue_instance(context->id);
         }
-        // fetch the cc_glglue context instance as a workaround for a bug fixed in Coin r12818
-        (void) cc_glglue_instance(context->id);
         cachecontext_list->removeFast(i);
         SoContextHandler::destructingContext(context->id);
-        if (widget->context()->isValid()) {
+        if (glcontext) {
+          if (glcontext->isValid()) {
 #if QT_VERSION >= 0x060000
-          const_cast<QOpenGLWidget*> (widget)->doneCurrent();
+            const_cast<QOpenGLWidget*> (widget)->doneCurrent();
 #else
-          const_cast<QGLWidget*> (widget)->doneCurrent();
+            const_cast<QGLWidget*> (widget)->doneCurrent();
 #endif
+          }
         }
         delete context;
         return;
@@ -362,4 +371,3 @@ QuarterWidgetP::nativeEventFilter(void * message, long * result)
 
   return false;
 }
-
