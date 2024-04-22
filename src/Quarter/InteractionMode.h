@@ -66,12 +66,15 @@ private:
   bool keyPressEvent(QKeyEvent * event);
   bool keyReleaseEvent(QKeyEvent * event);
   bool focusOutEvent(QFocusEvent * event);
+  void updateNavigationState();
 
   QCursor prevcursor;
   QuarterWidget * quarterwidget;
   bool altkeydown;
   SoEventManager::NavigationState prevnavstate;
   bool isenabled;
+  bool ison;
+  bool isinteractive;
 };
 
 }}} // namespace
