@@ -996,6 +996,24 @@ QuarterWidget::resetNavigationModeFile(void) {
   this->setNavigationModeFile(QUrl());
 }
 
+
+/**
+ * Sets up the default cursors for the widget.
+ */
+void QuarterWidget::setupDefaultCursors()
+{
+    this->setStateCursor("interact", Qt::ArrowCursor);
+    this->setStateCursor("idle", Qt::OpenHandCursor);
+#if QT_VERSION >= 0x040200
+    this->setStateCursor("rotate", Qt::ClosedHandCursor);
+#endif
+    this->setStateCursor("pan", Qt::SizeAllCursor);
+    this->setStateCursor("zoom", Qt::SizeVerCursor);
+    this->setStateCursor("dolly", Qt::SizeVerCursor);
+    this->setStateCursor("seek", Qt::CrossCursor);
+    this->setStateCursor("spin", Qt::OpenHandCursor);
+}
+
 /*!
   Sets a navigation mode file. Supports the schemes "coin" and "file"
 
@@ -1084,16 +1102,7 @@ QuarterWidget::setNavigationModeFile(const QUrl & url)
     // set up default cursors for the examiner navigation states
     //FIXME: It may be overly restrictive to not do this for arbitrary
     //navigation systems? - BFG 20090117
-    this->setStateCursor("interact", Qt::ArrowCursor);
-    this->setStateCursor("idle", Qt::OpenHandCursor);
-#if QT_VERSION >= 0x040200
-    this->setStateCursor("rotate", Qt::ClosedHandCursor);
-#endif
-    this->setStateCursor("pan", Qt::SizeAllCursor);
-    this->setStateCursor("zoom", Qt::SizeVerCursor);
-    this->setStateCursor("dolly", Qt::SizeVerCursor);
-    this->setStateCursor("seek", Qt::CrossCursor);
-    this->setStateCursor("spin", Qt::OpenHandCursor);
+    setupDefaultCursors();
   }
 }
 

@@ -146,6 +146,7 @@ public:
   void resetNavigationModeFile(void);
   void setNavigationModeFile(const QUrl & url = QUrl(DEFAULT_NAVIGATIONFILE));
   const QUrl & navigationModeFile(void) const;
+  void setupDefaultCursors();
 
   void setContextMenuEnabled(bool yes);
   bool contextMenuEnabled(void) const;
