@@ -4,6 +4,7 @@
 #include <QFocusEvent>
 #include <Quarter/QuarterWidget.h>
 
+
 /*
   Adjust how QuarterWidget reacts to alt key events
  */
@@ -20,6 +21,8 @@ InteractionMode::InteractionMode(QuarterWidget * quarterwidget)
     this->quarterwidget->getSoEventManager()->getNavigationState();
 
   this->isenabled = true;
+  this->ison = false;
+  this->isinteractive = false;
 }
 
 InteractionMode::~InteractionMode()
@@ -39,32 +42,47 @@ InteractionMode::enabled(void) const
   return this->isenabled;
 }
 
-void
-InteractionMode::setOn(bool on)
+void InteractionMode::setOn(bool on)
 {
   if (!this->isenabled) {
     return;
   }
 
-  SoEventManager * eventmanager = this->quarterwidget->getSoEventManager();
-
-  if (on) {
-    this->altkeydown = true;
-    this->prevnavstate = eventmanager->getNavigationState();
-    this->prevcursor = this->quarterwidget->cursor();
-    this->quarterwidget->setCursor(this->quarterwidget->stateCursor("interact"));
-    eventmanager->setNavigationState(SoEventManager::NO_NAVIGATION);
-  } else {
-    this->altkeydown = false;
-    this->quarterwidget->setCursor(this->prevcursor);
-    eventmanager->setNavigationState(this->prevnavstate);
-  }
+  this->ison = on;
+  updateNavigationState();
 }
 
-bool
-InteractionMode::on(void) const
+
+void InteractionMode::updateNavigationState()
 {
-  return this->altkeydown;
+	bool interactive = (this->ison != this->altkeydown);
+	if (interactive == this->isinteractive)
+	{
+		return;
+	}
+
+	SoEventManager *eventmanager = this->quarterwidget->getSoEventManager();
+	if (interactive)
+	{
+		this->prevnavstate = eventmanager->getNavigationState();
+		this->prevcursor = this->quarterwidget->cursor();
+		this->quarterwidget->setCursor(
+		    this->quarterwidget->stateCursor("interact"));
+		eventmanager->setNavigationState(SoEventManager::NO_NAVIGATION);
+	}
+	else
+	{
+		this->quarterwidget->setCursor(this->prevcursor);
+		eventmanager->setNavigationState(this->prevnavstate);
+	}
+
+	this->isinteractive = interactive;
+}
+
+
+bool InteractionMode::on(void) const
+{
+  return this->ison;
 }
 
 bool
@@ -101,7 +119,8 @@ InteractionMode::keyPressEvent(QKeyEvent * event)
     return false;
   }
 
-  this->setOn(true);
+  this->altkeydown = true;
+  updateNavigationState();
   return true;
 }
 
@@ -112,7 +131,8 @@ InteractionMode::keyReleaseEvent(QKeyEvent * event)
     return false;
   }
 
-  this->setOn(false);
+  this->altkeydown = false;
+  updateNavigationState();
   return true;
 }
 
