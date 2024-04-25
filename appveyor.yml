@@ -139,16 +139,16 @@ environment:
       CMAKE_ARCHITECTURE: x64
       CMAKE_PLATFORM: x64
       COMPILER_ID: msvc16
-      QT_ID: Qt6.4
-      QT_DIR: C:\Qt\6.4\msvc2019_64
+      QT_ID: Qt6.5
+      QT_DIR: C:\Qt\6.5\msvc2019_64
 
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       CMAKE_GENERATOR: 'Visual Studio 16 2019'
       CMAKE_ARCHITECTURE: x64
       CMAKE_PLATFORM: x64
       COMPILER_ID: msvc16
-      QT_ID: Qt6.5
-      QT_DIR: C:\Qt\6.5\msvc2019_64
+      QT_ID: Qt6.7
+      QT_DIR: C:\Qt\6.7\msvc2019_64
 
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       CMAKE_GENERATOR: 'Visual Studio 17 2022'
@@ -179,16 +179,16 @@ environment:
       CMAKE_ARCHITECTURE: x64
       CMAKE_PLATFORM: x64
       COMPILER_ID: msvc17
-      QT_ID: Qt6.4
-      QT_DIR: C:\Qt\6.4\msvc2019_64
+      QT_ID: Qt6.5
+      QT_DIR: C:\Qt\6.5\msvc2019_64
 
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       CMAKE_GENERATOR: 'Visual Studio 17 2022'
       CMAKE_ARCHITECTURE: x64
       CMAKE_PLATFORM: x64
       COMPILER_ID: msvc17
-      QT_ID: Qt6.5
-      QT_DIR: C:\Qt\6.5\msvc2019_64
+      QT_ID: Qt6.7
+      QT_DIR: C:\Qt\6.7\msvc2019_64
 
 install:
   - sh: |
