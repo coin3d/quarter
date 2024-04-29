@@ -6,7 +6,7 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = @PROJECT_NAME@
 PROJECT_NUMBER         = @PROJECT_VERSION@
-PROJECT_BRIEF          = A Coin3D Library
+PROJECT_BRIEF          = "A Coin3D Library"
 PROJECT_LOGO           = @CMAKE_SOURCE_DIR@/docs/doxygen/Coin_logo.png
 OUTPUT_DIRECTORY       =
 CREATE_SUBDIRS         = NO
@@ -319,7 +319,7 @@ SKIP_FUNCTION_MACROS   = YES
 # Configuration options related to external references
 #---------------------------------------------------------------------------
 TAGFILES               = @DOXYGEN_TAGFILES@
-GENERATE_TAGFILE       = @CMAKE_BINARY_DIR@/html/@PROJECT_NAME@-@PROJECT_VERSION_MAJOR@.tag
+GENERATE_TAGFILE       = @CMAKE_BINARY_DIR@/html_awesome/@PROJECT_NAME@-@PROJECT_VERSION_MAJOR@.tag
 ALLEXTERNALS           = NO
 EXTERNAL_GROUPS        = YES
 EXTERNAL_PAGES         = YES
