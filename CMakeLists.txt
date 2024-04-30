@@ -315,10 +315,13 @@ if(QUARTER_BUILD_AWESOME_DOCUMENTATION)
   set(DOXYGEN_EXTRACT_PRIVATE NO)
   set(DOXYGEN_WARN_IF_UNDOCUMENTED YES)
   set(DOXYGEN_EXCLUDE)
+  set(GITHUB_LINK "https://github.com/coin3d/quarter")
 
   set(DOXYFILE_AWESOME "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile_awesome")
+  set(HTML_HEADER_AWESOME "${CMAKE_CURRENT_BINARY_DIR}/header_awesome.html")
   set(DOXYGEN_OUTPUT_AWESOME "${CMAKE_BINARY_DIR}/html_awesome/index.html")
   configure_file("${CMAKE_SOURCE_DIR}/docs/quarter.doxygen.awesome.cmake.in" ${DOXYFILE_AWESOME} @ONLY)
+  configure_file("${CMAKE_SOURCE_DIR}/docs/doxygen-awesome/header.html.cmake.in" ${HTML_HEADER_AWESOME} @ONLY)
 
 # ############################################################################
 # Setup documentation targets
