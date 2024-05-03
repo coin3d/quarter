@@ -336,7 +336,7 @@ if(QUARTER_BUILD_AWESOME_DOCUMENTATION)
   set(HTML_HEADER_AWESOME "${CMAKE_CURRENT_BINARY_DIR}/header_awesome.html")
   set(DOXYGEN_OUTPUT_AWESOME "${CMAKE_BINARY_DIR}/html_awesome/index.html")
   configure_file("${CMAKE_SOURCE_DIR}/docs/quarter.doxygen.awesome.cmake.in" ${DOXYFILE_AWESOME} @ONLY)
-  configure_file("${CMAKE_SOURCE_DIR}/docs/doxygen-awesome/header.html.cmake.in" ${HTML_HEADER_AWESOME} @ONLY)
+  configure_file("${CMAKE_SOURCE_DIR}/docs/doxygen-awesome/doxygen-custom/header.html.cmake.in" ${HTML_HEADER_AWESOME} @ONLY)
 
 # ############################################################################
 # Setup documentation targets
