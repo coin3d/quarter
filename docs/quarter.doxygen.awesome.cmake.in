@@ -6,7 +6,7 @@
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = @PROJECT_NAME@
 PROJECT_NUMBER         = @PROJECT_VERSION@
-PROJECT_BRIEF          = "A Coin3D Library"
+PROJECT_BRIEF          = "Coin3D GUI binding for Qt"
 PROJECT_LOGO           = @CMAKE_SOURCE_DIR@/docs/doxygen/Coin_logo.png
 OUTPUT_DIRECTORY       =
 CREATE_SUBDIRS         = NO
