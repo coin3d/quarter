@@ -159,10 +159,19 @@ MouseP::mouseWheelEvent(QWheelEvent * event)
   // the wheel was rotated forwards away from the user; a negative
   // value indicates that the wheel was rotated backwards toward the
   // user.
+
 #if QT_VERSION >= 0x050700
-  if (event->angleDelta().y() > 0)
+  // this is a workaround for QTBUG-91556
+  // the ALT key reverses the wheel event axis - that means, if ALT key is
+  // pressed, the X axis is used for the wheel event, otherwise the Y axis
+  int AngleDelta = event->angleDelta().y();
+  if (this->mousebutton->wasAltDown() && AngleDelta == 0)
+  {
+    AngleDelta = event->angleDelta().x();
+  }
+  if (AngleDelta > 0)
     this->mousebutton->setButton(event->inverted() ? SoMouseButtonEvent::BUTTON5 : SoMouseButtonEvent::BUTTON4);
-  else if (event->angleDelta().y() < 0)
+  else if (AngleDelta < 0)
     this->mousebutton->setButton(event->inverted() ? SoMouseButtonEvent::BUTTON4 : SoMouseButtonEvent::BUTTON5);
 #elif QT_VERSION >= 0x050000
   if (event->angleDelta().y() > 0)
