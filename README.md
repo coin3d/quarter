@@ -24,7 +24,7 @@ files for platform-specific notes.
 
 How to use
 ----------
-See Doxygen documentation: https://coin3d.github.io/Quarter/
+See Doxygen documentation: https://coin3d.github.io/quarter/
 
 Release history
 ---------------
