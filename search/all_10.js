@@ -1,8 +1,28 @@
 var searchData=
 [
-  ['tooltip_84',['toolTip',['../classSIM_1_1Coin3D_1_1Quarter_1_1QtDesigner_1_1QuarterWidgetPlugin.html#a6ad003731c66860fb28616eb9ae8103b',1,'SIM::Coin3D::Quarter::QtDesigner::QuarterWidgetPlugin']]],
-  ['translateevent_85',['translateEvent',['../classSIM_1_1Coin3D_1_1Quarter_1_1InputDevice.html#aac54f3035883e5863de97cad553f746a',1,'SIM::Coin3D::Quarter::InputDevice::translateEvent()'],['../classSIM_1_1Coin3D_1_1Quarter_1_1Keyboard.html#a31208dd88fbdc4077110d8dbf107ab24',1,'SIM::Coin3D::Quarter::Keyboard::translateEvent()'],['../classSIM_1_1Coin3D_1_1Quarter_1_1Mouse.html#a9180c69c1206faef175b834bf24959d4',1,'SIM::Coin3D::Quarter::Mouse::translateEvent()']]],
-  ['transparencytype_86',['transparencyType',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a14bc819ce956f2c46d16529481f86f50',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
-  ['transparencytype_87',['TransparencyType',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a4220d0627d62da6826c9ba253834235a',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
-  ['transparencytypeactions_88',['transparencyTypeActions',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a02c307803b076805daf9aef99d036751',1,'SIM::Coin3D::Quarter::QuarterWidget']]]
+  ['seek_0',['seek',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#ae8cfe1ef246cfc6ecb9bde42a549df46',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setbackgroundcolor_1',['setBackgroundColor',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a03329e432d48d84b8ab302f03a86b529',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setclearwindow_2',['setClearWindow',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#aba71abee195202c2ae4537e4f5d9f323',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setclearzbuffer_3',['setClearZBuffer',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a02fe56e2e0102710b9ad03e23754d6b2',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setcontextmenuenabled_4',['setContextMenuEnabled',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#aefdc98dd6f87a15b4be10dc54a4b0011',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setheadlightenabled_5',['setHeadlightEnabled',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a2afa5ba22eb1026655db3110ddb27f6a',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setinteractionmodeenabled_6',['setInteractionModeEnabled',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#ab8466bfa7e7a35258c9fe8c7afcd0163',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setinteractionmodeon_7',['setInteractionModeOn',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a43595dc1964dd625fa322ec3f40c297a',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setmodifiers_8',['setModifiers',['../classSIM_1_1Coin3D_1_1Quarter_1_1InputDevice.html#a46a3ef34cab6504f4ef8c373c92ce658',1,'SIM::Coin3D::Quarter::InputDevice']]],
+  ['setmouseposition_9',['setMousePosition',['../classSIM_1_1Coin3D_1_1Quarter_1_1InputDevice.html#a5214a65dc89ec9f8d4fca7b460bf5c79',1,'SIM::Coin3D::Quarter::InputDevice']]],
+  ['setnavigationmodefile_10',['setNavigationModeFile',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a963600c84147e0383a15a5d1561f1c6f',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setrendermode_11',['setRenderMode',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#ab1b8a0893b64c3b65f3076116aa0da15',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setscenegraph_12',['setSceneGraph',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a139a778aec869feeb2e717fdf3b31398',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setsoeventmanager_13',['setSoEventManager',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a145cdbd0420c500e0811f0d8b1ffd609',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setsorendermanager_14',['setSoRenderManager',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#af761f2ff44ce49e3ea16917874e245ef',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setstatecursor_15',['setStateCursor',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a9b7a4a63d2ac2cf5e9d00d186d4c9040',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setstereomode_16',['setStereoMode',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a74015c6561c7b41d2e166281dfb28cc5',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['settransparencytype_17',['setTransparencyType',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#aa26faba2ba8946ce171ba0c9e02a1371',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setupdefaultcursors_18',['setupDefaultCursors',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a098ce1b4efc8a057a857e465584db956',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['setwindowsize_19',['setWindowSize',['../classSIM_1_1Coin3D_1_1Quarter_1_1InputDevice.html#ac9692eb5eb6634ec2dbfb47940536c43',1,'SIM::Coin3D::Quarter::InputDevice']]],
+  ['single_20inheritance_20',['Single Inheritance',['../inheritui.html',1,'examples']]],
+  ['statecursor_21',['stateCursor',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a80890203f283335d623c727309244a0a',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['stereomode_22',['StereoMode',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a262bd9c0c6af1be3cfc361dcc4a68449',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['stereomode_23',['stereoMode',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#abbca6299bc65bebcbe11ffd90b358198',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['stereomodeactions_24',['stereoModeActions',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#ab233005e2b8fe67da7db5302e2cf905c',1,'SIM::Coin3D::Quarter::QuarterWidget']]]
 ];

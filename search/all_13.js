@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['whatsthis_91',['whatsThis',['../classSIM_1_1Coin3D_1_1Quarter_1_1QtDesigner_1_1QuarterWidgetPlugin.html#a502686c80c87e43741a68a3407107e27',1,'SIM::Coin3D::Quarter::QtDesigner::QuarterWidgetPlugin']]],
-  ['windowsize_92',['windowsize',['../classSIM_1_1Coin3D_1_1Quarter_1_1InputDevice.html#af849e02d9cc9e2489f28540b41566fb8',1,'SIM::Coin3D::Quarter::InputDevice']]]
+  ['viewall_0',['viewAll',['../classSIM_1_1Coin3D_1_1Quarter_1_1QuarterWidget.html#a37bdd7451e8c8287e2d6674512462c1e',1,'SIM::Coin3D::Quarter::QuarterWidget']]],
+  ['viewer_1',['Examiner type Viewer',['../examiner.html',1,'examples']]]
 ];

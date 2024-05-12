@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
-<tagfile doxygen_version="1.9.1">
+<tagfile doxygen_version="1.10.0" doxygen_gitid="ebc57c6dd303a980bd19dd74b8b61c8f3f5180ca">
   <compound kind="class">
     <name>SIM::Coin3D::Quarter::DragDropHandler</name>
     <filename>classSIM_1_1Coin3D_1_1Quarter_1_1DragDropHandler.html</filename>
@@ -85,7 +85,7 @@
       <type>virtual const SoEvent *</type>
       <name>translateEvent</name>
       <anchorfile>classSIM_1_1Coin3D_1_1Quarter_1_1InputDevice.html</anchorfile>
-      <anchor>aac54f3035883e5863de97cad553f746a</anchor>
+      <anchor>a1efc41b8a64682d6973f133941154cd6</anchor>
       <arglist>(QEvent *event)=0</arglist>
     </member>
     <member kind="variable" protection="protected">
@@ -651,6 +651,11 @@
     <name>examples</name>
     <title>More Examples</title>
     <filename>examples.html</filename>
+    <subpage>directui.html</subpage>
+    <subpage>dynamicui.html</subpage>
+    <subpage>inheritui.html</subpage>
+    <subpage>mdi.html</subpage>
+    <subpage>examiner.html</subpage>
   </compound>
   <compound kind="page">
     <name>QuarterWidgetPlugin</name>
@@ -684,7 +689,9 @@
   </compound>
   <compound kind="page">
     <name>index</name>
-    <title></title>
+    <title>Quarter</title>
     <filename>index.html</filename>
+    <subpage>QuarterWidgetPlugin.html</subpage>
+    <subpage>examples.html</subpage>
   </compound>
 </tagfile>

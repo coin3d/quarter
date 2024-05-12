@@ -8,7 +8,7 @@ var annotated_dup =
           ] ],
           [ "DragDropHandler", "classSIM_1_1Coin3D_1_1Quarter_1_1DragDropHandler.html", "classSIM_1_1Coin3D_1_1Quarter_1_1DragDropHandler" ],
           [ "EventFilter", "classSIM_1_1Coin3D_1_1Quarter_1_1EventFilter.html", "classSIM_1_1Coin3D_1_1Quarter_1_1EventFilter" ],
-          [ "FocusHandler", "classSIM_1_1Coin3D_1_1Quarter_1_1FocusHandler.html", "classSIM_1_1Coin3D_1_1Quarter_1_1FocusHandler" ],
+          [ "FocusHandler", "classSIM_1_1Coin3D_1_1Quarter_1_1FocusHandler.html", null ],
           [ "InputDevice", "classSIM_1_1Coin3D_1_1Quarter_1_1InputDevice.html", "classSIM_1_1Coin3D_1_1Quarter_1_1InputDevice" ],
           [ "Keyboard", "classSIM_1_1Coin3D_1_1Quarter_1_1Keyboard.html", "classSIM_1_1Coin3D_1_1Quarter_1_1Keyboard" ],
           [ "Mouse", "classSIM_1_1Coin3D_1_1Quarter_1_1Mouse.html", "classSIM_1_1Coin3D_1_1Quarter_1_1Mouse" ],
