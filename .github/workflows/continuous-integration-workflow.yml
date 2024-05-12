@@ -4,8 +4,8 @@ on:
   workflow_dispatch:  # Allow manual triggers
   pull_request:
     branches: [ master ]
-  push:
-    branches: [ master ]
+  #push:
+  #  branches: [ master ]
 
 jobs:
   ubuntu-build:
@@ -28,7 +28,7 @@ jobs:
           echo download file $DOWNLOAD_FILE_COIN from address $DOWNLOAD_ADDRESS_COIN
           curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_COIN $DOWNLOAD_ADDRESS_COIN
           tar xzf $DOWNLOAD_FILE_COIN -C cmake_download_dir
-          cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH=cmake_download_dir/Coin3D -DQUARTER_BUILD_AWESOME_DOCUMENTATION=ON
+          cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH=cmake_download_dir/Coin3D
       - name: Build project
         run: sudo cmake --build cmake_build_dir --target install --config Release -- -j4
       #- name: Run tests
@@ -40,12 +40,6 @@ jobs:
           name: Ubuntu-Artifacts
           path: cmake_install_dir/
         if: always()
-      - name: Deploy Awesome Dcoumentation to Github Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: cmake_build_dir/html_awesome
-        if: github.event_name != 'pull_request'
 
   windows-build:
     name: Windows Build
