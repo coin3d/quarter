@@ -1,3 +1,12 @@
+Quarter 1.2.2 (2024-09-04):
+* new:
+  - Added support for building modern styled documentation
+  - Added function setupDefaultCursors() to allow users with a custom navigation file to set default cursors quickly
+* bugfixes:
+  - Implemented workaround for Qt bug QTBUG-91556 - reversed QWheelEvent axis when ALT key is pressed
+  - Fixed bug that caused SoEventManager::NO_NAVIGATION even if interaction mode is finished
+  - ALT key is now a toggle key that temporary switches the current mode (nav or interaction) to the other mode
+
 Quarter 1.2.1 (2024-02-04):
 * bugfixes:
   - Fix crash of Qt Designer plugin

@@ -1,0 +1,210 @@
+2024-09-04 21:09:56 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (a84fc75)
+
+	Bump version number.
+
+M	CMakeLists.txt
+M	Makefile.am
+M	Makefile.in
+M	appveyor.yml
+M	configure
+M	configure.ac
+
+2024-05-12 21:21:38 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (1cd08d1)
+
+	fix: Separate documentation and CI workflows
+
+M	.github/workflows/continuous-integration-workflow.yml
+A	.github/workflows/documentation-workflow.yml
+
+2024-05-06 11:29:15 +0200  Uwe Kindler  <uwe_kindler@web.de> (8aac42e)
+
+	Implemented workaround for Qt bug QTBUG-91556 - reversed QWheelEvent axis when ALT key is pressed
+
+M	src/Quarter/Mouse.cpp
+
+2024-05-06 19:22:04 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (fdbb95f)
+
+	Update continuous-integration-workflow.yml
+
+M	.github/workflows/continuous-integration-workflow.yml
+
+2024-05-06 19:09:30 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (b8920c1)
+
+	Update README.md
+
+M	README.md
+
+2024-05-06 19:08:58 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (91ef0ae)
+
+	Update README.md
+
+M	README.md
+
+2024-05-05 14:18:52 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (6ec4f75)
+
+	Added awesome doc publishing to CI [skip ci]
+
+M	.github/workflows/continuous-integration-workflow.yml
+
+2024-05-03 13:15:02 +0200  Uwe Kindler  <uwe_kindler@web.de> (08fcc2b)
+
+	Stripped comments from quarter.doxygen.awesome.cmake.in file
+
+M	docs/quarter.doxygen.awesome.cmake.in
+
+2024-05-03 12:22:56 +0200  Uwe Kindler  <uwe_kindler@web.de> (c79888d)
+
+	Updated quarter.doxygen.awesome.cmake.in to doxygen 1.10 and activates sorting of class members
+
+M	docs/quarter.doxygen.awesome.cmake.in
+
+2024-05-03 11:52:04 +0200  Uwe Kindler  <uwe_kindler@web.de> (dd6b596)
+
+	Updated brief description
+
+M	docs/quarter.doxygen.awesome.cmake.in
+
+2024-05-03 09:51:21 +0200  Uwe Kindler  <uwe_kindler@web.de> (dd4533c)
+
+	Updated modern doxygen documentation to use coin3d specific fork of doxygen-awesome project
+
+M	.gitmodules
+M	CMakeLists.txt
+A	docs/doxygen-awesome
+M	docs/quarter.doxygen.awesome.cmake.in
+
+2024-05-03 09:35:29 +0200  Uwe Kindler  <uwe_kindler@web.de> (2280543)
+
+	Removed doxygen-awesome submodule
+
+M	.gitmodules
+D	docs/doxygen-awesome/header.html.cmake.in
+D	docs/doxygen-awesome/submodule
+
+2024-04-30 08:56:52 +0200  Uwe Kindler  <uwe_kindler@web.de> (b5852e5)
+
+	Added option to add submodules as needed
+
+M	CMakeLists.txt
+
+2024-04-30 08:38:14 +0200  Uwe Kindler  <uwe_kindler@web.de> (814b777)
+
+	Changed doxygen awesome documentation to install doxygen-awesome as submodule
+
+M	.gitmodules
+M	CMakeLists.txt
+D	docs/doxygen-awesome/LICENSE
+D	docs/doxygen-awesome/Makefile
+D	docs/doxygen-awesome/README.md
+D	docs/doxygen-awesome/doxygen-awesome-darkmode-toggle.js
+D	docs/doxygen-awesome/doxygen-awesome-fragment-copy-button.js
+D	docs/doxygen-awesome/doxygen-awesome-interactive-toc.js
+D	docs/doxygen-awesome/doxygen-awesome-paragraph-link.js
+D	docs/doxygen-awesome/doxygen-awesome-sidebar-only-darkmode-toggle.css
+D	docs/doxygen-awesome/doxygen-awesome-sidebar-only.css
+D	docs/doxygen-awesome/doxygen-awesome-tabs.js
+D	docs/doxygen-awesome/doxygen-awesome.css
+D	docs/doxygen-awesome/doxygen-custom/custom-alternative.css
+D	docs/doxygen-awesome/doxygen-custom/custom.css
+D	docs/doxygen-awesome/doxygen-custom/toggle-alternative-theme.js
+R097	docs/doxygen-awesome/doxygen-custom/header.html	docs/doxygen-awesome/header.html.cmake.in
+D	docs/doxygen-awesome/logo.drawio.svg
+D	docs/doxygen-awesome/package.json
+A	docs/doxygen-awesome/submodule
+M	docs/quarter.doxygen.awesome.cmake.in
+
+2024-04-30 08:11:44 +0200  Uwe Kindler  <uwe_kindler@web.de> (b8627ba)
+
+	Renamed doxyygen-awesome-css into doxygen-awesome
+
+R100	docs/doxygen-awesome-css/LICENSE	docs/doxygen-awesome/LICENSE
+R100	docs/doxygen-awesome-css/Makefile	docs/doxygen-awesome/Makefile
+R100	docs/doxygen-awesome-css/README.md	docs/doxygen-awesome/README.md
+R100	docs/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js	docs/doxygen-awesome/doxygen-awesome-darkmode-toggle.js
+R100	docs/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js	docs/doxygen-awesome/doxygen-awesome-fragment-copy-button.js
+R100	docs/doxygen-awesome-css/doxygen-awesome-interactive-toc.js	docs/doxygen-awesome/doxygen-awesome-interactive-toc.js
+R100	docs/doxygen-awesome-css/doxygen-awesome-paragraph-link.js	docs/doxygen-awesome/doxygen-awesome-paragraph-link.js
+R100	docs/doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css	docs/doxygen-awesome/doxygen-awesome-sidebar-only-darkmode-toggle.css
+R100	docs/doxygen-awesome-css/doxygen-awesome-sidebar-only.css	docs/doxygen-awesome/doxygen-awesome-sidebar-only.css
+R100	docs/doxygen-awesome-css/doxygen-awesome-tabs.js	docs/doxygen-awesome/doxygen-awesome-tabs.js
+R100	docs/doxygen-awesome-css/doxygen-awesome.css	docs/doxygen-awesome/doxygen-awesome.css
+R100	docs/doxygen-awesome-css/doxygen-custom/custom-alternative.css	docs/doxygen-awesome/doxygen-custom/custom-alternative.css
+R100	docs/doxygen-awesome-css/doxygen-custom/custom.css	docs/doxygen-awesome/doxygen-custom/custom.css
+R100	docs/doxygen-awesome-css/doxygen-custom/header.html	docs/doxygen-awesome/doxygen-custom/header.html
+R100	docs/doxygen-awesome-css/doxygen-custom/toggle-alternative-theme.js	docs/doxygen-awesome/doxygen-custom/toggle-alternative-theme.js
+R100	docs/doxygen-awesome-css/logo.drawio.svg	docs/doxygen-awesome/logo.drawio.svg
+R100	docs/doxygen-awesome-css/package.json	docs/doxygen-awesome/package.json
+
+2024-04-29 09:20:33 +0200  Uwe Kindler  <uwe_kindler@web.de> (f480b85)
+
+	Documentation: fixed brief description and tag file
+
+M	docs/quarter.doxygen.awesome.cmake.in
+
+2024-04-24 09:36:37 +0200  Uwe Kindler  <uwe_kindler@web.de> (cba101a)
+
+	Added modern style Doxygen Awesome documentation
+
+M	CMakeLists.txt
+A	docs/doxygen-awesome-css/LICENSE
+A	docs/doxygen-awesome-css/Makefile
+A	docs/doxygen-awesome-css/README.md
+A	docs/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js
+A	docs/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js
+A	docs/doxygen-awesome-css/doxygen-awesome-interactive-toc.js
+A	docs/doxygen-awesome-css/doxygen-awesome-paragraph-link.js
+A	docs/doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css
+A	docs/doxygen-awesome-css/doxygen-awesome-sidebar-only.css
+A	docs/doxygen-awesome-css/doxygen-awesome-tabs.js
+A	docs/doxygen-awesome-css/doxygen-awesome.css
+A	docs/doxygen-awesome-css/doxygen-custom/custom-alternative.css
+A	docs/doxygen-awesome-css/doxygen-custom/custom.css
+A	docs/doxygen-awesome-css/doxygen-custom/header.html
+A	docs/doxygen-awesome-css/doxygen-custom/toggle-alternative-theme.js
+A	docs/doxygen-awesome-css/logo.drawio.svg
+A	docs/doxygen-awesome-css/package.json
+A	docs/quarter.doxygen.awesome.cmake.in
+
+2024-04-22 09:20:43 +0200  Uwe Kindler  <uwe_kindler@web.de> (55779ce)
+
+	Fixed bug in InteractionMode and improved it - fixed bug that caused SoEventManager::NO_NAVIGATION even if interaction mode is finished - ALT key is now a toggle key that temporary switches the current mode (nav or interaction) to the other mode
+
+M	src/Quarter/InteractionMode.cpp
+M	src/Quarter/InteractionMode.h
+
+2024-04-25 22:38:14 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (b7586df)
+
+	Update appveyor.yml test only Qt LTS versions and latest
+
+M	appveyor.yml
+
+2024-04-25 22:27:06 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (d0dedff)
+
+	Update continuous-integration-workflow.yml to stay with macos-12
+
+M	.github/workflows/continuous-integration-workflow.yml
+
+2024-04-25 22:15:49 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (ca272a5)
+
+	Update continuous-integration-workflow.yml
+
+M	.github/workflows/continuous-integration-workflow.yml
+
+2024-04-25 21:54:00 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (e05c934)
+
+	Update continuous-integration-workflow.yml
+
+M	.github/workflows/continuous-integration-workflow.yml
+
+2024-04-22 09:16:42 +0200  Uwe Kindler  <uwe_kindler@web.de> (84b21c5)
+
+	Added function setupDefaultCursors() to allow users with a custom navigation file to set default cursors quickly
+
+M	include/Quarter/QuarterWidget.h
+M	src/Quarter/QuarterWidget.cpp
+
+2024-04-25 20:34:39 +0200  Volker Enderlein  <volkerenderlein@hotmail.com> (f0b59a5)
+
+	Update continuous-integration-workflow.yml
+
+M	.github/workflows/continuous-integration-workflow.yml
