@@ -24,6 +24,9 @@ EXTRA_DIST = \
         docs/doxygen/Coin_logo.png \
         docs/ChangeLog.v1.0.0 \
         docs/ChangeLog.v1.1.0 \
+        docs/ChangeLog.v1.2.0 \
+        docs/ChangeLog.v1.2.1 \
+        docs/ChangeLog.v1.2.2 \
         cfg/wrapmsvc.exe \
         cfg/errors.txt \
         cfg/doxy4win.pl \
