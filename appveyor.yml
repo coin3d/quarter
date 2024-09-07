@@ -25,17 +25,47 @@ environment:
 #      CMAKE_PLATFORM: x64
 #      COMPILER_ID: clang
 #
-    - APPVEYOR_BUILD_WORKER_IMAGE: macos-bigsur
-      CMAKE_GENERATOR: 'Unix Makefiles'
-      CMAKE_PLATFORM: x64
-      COMPILER_ID: clang
-      QT_ID: Qt5.15
+#    - APPVEYOR_BUILD_WORKER_IMAGE: macos-bigsur
+#      CMAKE_GENERATOR: 'Unix Makefiles'
+#      CMAKE_PLATFORM: x64
+#      COMPILER_ID: clang
+#      QT_VERSION: 5.15
 
     - APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
       CMAKE_GENERATOR: 'Unix Makefiles'
       CMAKE_PLATFORM: x64
       COMPILER_ID: clang
-      QT_ID: Qt5.15
+      QT_VERSION: 5.15
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: macos-monterey
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x64
+      COMPILER_ID: clang
+      QT_VERSION: 6.6
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: macos-ventura
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x64
+      COMPILER_ID: clang
+      QT_VERSION: 5.15
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: macos-ventura
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x64
+      COMPILER_ID: clang
+      QT_VERSION: 6.6
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: macos-sonoma
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x64
+      COMPILER_ID: clang
+      QT_VERSION: 5.15
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: macos-sonoma
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x64
+      COMPILER_ID: clang
+      QT_VERSION: 6.6
 #
 #    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu1804
 #      CMAKE_GENERATOR: 'Unix Makefiles'
@@ -48,21 +78,35 @@ environment:
       CMAKE_PLATFORM: x64
       CMAKE_ARCH_FLAGS: -m64
       COMPILER_ID: gcc
-      QT_ID: Qt5
+      QT_VERSION: 5.15
 
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2004
       CMAKE_GENERATOR: 'Unix Makefiles'
       CMAKE_PLATFORM: x64
       CMAKE_ARCH_FLAGS: -m64
       COMPILER_ID: gcc
-      QT_ID: Qt5
+      QT_VERSION: 5.15
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2004
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x64
+      CMAKE_ARCH_FLAGS: -m64
+      COMPILER_ID: gcc
+      QT_VERSION: 6.7
 
     - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2204
       CMAKE_GENERATOR: 'Unix Makefiles'
       CMAKE_PLATFORM: x64
       CMAKE_ARCH_FLAGS: -m64
       COMPILER_ID: gcc
-      QT_ID: Qt5
+      QT_VERSION: 5.15
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2204
+      CMAKE_GENERATOR: 'Unix Makefiles'
+      CMAKE_PLATFORM: x64
+      CMAKE_ARCH_FLAGS: -m64
+      COMPILER_ID: gcc
+      QT_VERSION: 6.7
 
 #    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
 #      CMAKE_GENERATOR: 'Visual Studio 10 2010'
@@ -195,13 +239,20 @@ install:
       if [ "$COMPILER_ID" = "clang" ]
       then
         brew install jq
-        export CMAKE_PREFIX_PATH=$HOME/Qt/5.15/clang_64
+        if [ "$QT_VERSION" = "5.15" ]
+        then
+          export QT_DIR=$HOME/Qt/$QT_VERSION/clang_64
+        else
+          export QT_DIR=$HOME/Qt/$QT_VERSION/macos
+        fi
         #brew install doxygen
       else
         sudo apt-get -y update
-        sudo apt-get -y install freeglut3-dev qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools qttools5-dev
+        sudo apt-get -y install freeglut3-dev
         sudo apt-get -y install doxygen jq
+        export QT_DIR=$HOME/Qt/$QT_VERSION/gcc_64
       fi
+      export QT_ID=Qt$QT_VERSION
       cd $APPVEYOR_BUILD_FOLDER
   - cmd: |
       choco install jq
@@ -278,8 +329,8 @@ before_build:
       ###############
       export CFLAGS=$CMAKE_ARCH_FLAGS
       export CXXFLAGS=$CMAKE_ARCH_FLAGS
-      #cmake -H. -Bbuild_debug   -G "$CMAKE_GENERATOR" -DCMAKE_BUILD_TYPE=Debug   -DCMAKE_INSTALL_PREFIX=$APPVEYOR_BUILD_FOLDER/Coin3D -DCMAKE_PREFIX_PATH=$APPVEYOR_BUILD_FOLDER/downloads/Coin3D
-      cmake -H. -Bbuild_release -G "$CMAKE_GENERATOR" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$APPVEYOR_BUILD_FOLDER/Coin3D -DCMAKE_PREFIX_PATH=$APPVEYOR_BUILD_FOLDER/downloads/Coin3D
+      #cmake -H. -Bbuild_debug   -G "$CMAKE_GENERATOR" -DCMAKE_BUILD_TYPE=Debug   -DCMAKE_INSTALL_PREFIX=$APPVEYOR_BUILD_FOLDER/Coin3D -DCMAKE_PREFIX_PATH="$APPVEYOR_BUILD_FOLDER/downloads/Coin3D;$QT_DIR"
+      cmake -H. -Bbuild_release -G "$CMAKE_GENERATOR" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$APPVEYOR_BUILD_FOLDER/Coin3D -DCMAKE_PREFIX_PATH="$APPVEYOR_BUILD_FOLDER/downloads/Coin3D;$QT_DIR"
 
 build_script:
   - cmd: |
