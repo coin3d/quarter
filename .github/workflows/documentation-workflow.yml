@@ -20,7 +20,7 @@ jobs:
           sudo apt-get -y update
           sudo apt-get -y install gcc-13 doxygen graphviz freeglut3-dev qtbase5-dev qttools5-dev
           mkdir cmake_download_dir
-          DOWNLOAD_FILE_COIN=coin-latest-Ubuntu2204-gcc11-x64.tar.gz
+          DOWNLOAD_FILE_COIN=coin-latest-Ubuntu2204-gcc13-x64.tar.gz
           RELEASE_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases | jq -r --arg COIN_REPO_TAG_NAME "CI-builds" '.[] | select(.tag_name==$COIN_REPO_TAG_NAME) | .id'`
           ASSET_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_COIN "$DOWNLOAD_FILE_COIN" '.assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id'`
           export DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/$ASSET_ID
