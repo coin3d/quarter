@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.0...3.29)
 
 function(report_prepare)
   set(multiValueArgs IF_APPLE IF_WIN32)
