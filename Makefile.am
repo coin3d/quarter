@@ -27,6 +27,7 @@ EXTRA_DIST = \
         docs/ChangeLog.v1.2.0 \
         docs/ChangeLog.v1.2.1 \
         docs/ChangeLog.v1.2.2 \
+        docs/ChangeLog.v1.2.3 \
         cfg/wrapmsvc.exe \
         cfg/errors.txt \
         cfg/doxy4win.pl \
