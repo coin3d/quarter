@@ -1,3 +1,7 @@
+Quarter 1.2.3 (2025-06-26):
+* bugfixes:
+  - Updated cmake_minimum_required command to support CMake >= 3.30
+
 Quarter 1.2.2 (2024-09-04):
 * new:
   - Added support for building modern styled documentation
